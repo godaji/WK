@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>6004 공항버스 시간표</title>
+<style>
+:root{
+  --bg:#0f1115;--panel:#161922;--line:#2a2e38;
+  --txt:#f2efe6;--sub:#9aa0aa;
+  --amber:#e0a84e;--gold:#ffd34e;--green:#34c759;--red:#ff6b6b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--txt);min-height:100vh;
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  font-size:15px;line-height:1.5}
+a{color:var(--amber);text-decoration:none}
+
+/* ── 헤더 ── */
+.hdr{display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px 10px;border-bottom:1px solid var(--line);
+  background:var(--panel);position:sticky;top:0;z-index:10}
+.hdr-title{display:flex;align-items:center;gap:8px}
+.hdr-num{font-size:22px;font-weight:800;color:var(--gold);
+  font-family:"JetBrains Mono","D2Coding",monospace}
+.hdr-name{font-size:13px;color:var(--sub)}
+.hdr-time{font-family:"JetBrains Mono","D2Coding",monospace;
+  font-size:18px;color:var(--amber);font-weight:700}
+
+/* ── 방향 탭 ── */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--line)}
+.tab{flex:1;text-align:center;padding:11px 8px;font-size:14px;font-weight:600;
+  cursor:pointer;border-bottom:3px solid transparent;transition:all .18s;
+  background:none;border-top:none;border-left:none;border-right:none;
+  color:var(--sub)}
+.tab.on{color:var(--gold);border-bottom-color:var(--amber)}
+.tab-icon{font-size:16px;margin-right:4px}
+
+/* ── 터미널 서브탭 ── */
+.subtabs{display:flex;gap:6px;padding:10px 16px 6px;
+  background:rgba(22,25,34,.5)}
+.subtab{padding:5px 14px;border-radius:20px;font-size:13px;font-weight:600;
+  cursor:pointer;border:1px solid var(--line);color:var(--sub);background:none;
+  transition:all .15s}
+.subtab.on{color:var(--gold);border-color:var(--amber);background:rgba(224,168,78,.10)}
+#subtab-row{display:none}
+
+/* ── 다음 버스 카드 ── */
+.next-section{padding:14px 16px 10px;background:rgba(22,25,34,.8)}
+.next-label{font-size:12px;color:var(--sub);font-weight:600;
+  text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.next-cards{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;
+  scrollbar-width:none}
+.next-cards::-webkit-scrollbar{display:none}
+.next-card{flex:0 0 auto;min-width:90px;background:var(--panel);
+  border:1px solid var(--line);border-radius:10px;padding:10px 12px;
+  text-align:center}
+.next-card.first{border-color:var(--amber);background:rgba(224,168,78,.10)}
+.next-card .nc-time{font-family:"JetBrains Mono","D2Coding",monospace;
+  font-size:20px;font-weight:800;color:var(--gold)}
+.next-card.first .nc-time{color:var(--amber)}
+.next-card .nc-min{font-size:12px;color:var(--sub);margin-top:2px}
+.next-card.first .nc-min{color:var(--txt)}
+.no-bus{padding:12px 0;color:var(--sub);font-size:14px}
+
+/* ── 시간표 ── */
+.tbl-section{padding:12px 16px}
+.tbl-head{font-size:12px;color:var(--sub);font-weight:600;
+  letter-spacing:.06em;margin-bottom:8px}
+.timetable{display:flex;flex-wrap:wrap;gap:6px}
+.t-chip{font-family:"JetBrains Mono","D2Coding",monospace;
+  font-size:14px;padding:6px 10px;border-radius:7px;
+  background:var(--panel);border:1px solid var(--line);color:var(--txt)}
+.t-chip.past{color:var(--sub);opacity:.55}
+.t-chip.next-one{border-color:var(--amber);color:var(--amber);
+  background:rgba(224,168,78,.12);font-weight:700}
+
+/* ── 노선 정류장 ── */
+.stops-section{padding:0 16px 12px}
+details{border:1px solid var(--line);border-radius:10px;overflow:hidden;
+  margin-bottom:10px}
+details[open]{border-color:rgba(224,168,78,.4)}
+summary{list-style:none;padding:11px 14px;cursor:pointer;
+  font-size:14px;font-weight:600;color:var(--txt);
+  background:var(--panel);display:flex;align-items:center;gap:8px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"▾";margin-left:auto;color:var(--sub)}
+details[open] summary::after{content:"▴"}
+.stops-list{padding:10px 14px;display:flex;flex-direction:column;gap:0}
+.stop-row{display:flex;align-items:flex-start;gap:10px;padding:6px 0;
+  border-bottom:1px solid rgba(42,46,56,.6);font-size:13px}
+.stop-row:last-child{border-bottom:none}
+.stop-dot{width:8px;height:8px;border-radius:50%;background:var(--sub);
+  flex-shrink:0;margin-top:4px}
+.stop-dot.highlight{background:var(--amber);width:10px;height:10px;margin-top:3px}
+.stop-name{color:var(--txt)}
+.stop-name.me{color:var(--amber);font-weight:700}
+.stop-tag{font-size:11.5px;color:var(--sub)}
+
+/* ── 요금 정보 ── */
+.fare-bar{margin:0 16px 14px;padding:10px 14px;
+  background:rgba(255,211,78,.06);border:1px solid rgba(224,168,78,.3);
+  border-radius:10px;font-size:13px;display:flex;gap:16px;flex-wrap:wrap}
+.fare-item .fare-label{color:var(--sub);font-size:12px}
+.fare-item .fare-price{color:var(--gold);font-weight:700;
+  font-family:"JetBrains Mono","D2Coding",monospace}
+
+/* ── 하단 메모 ── */
+.foot-note{padding:10px 16px 20px;font-size:12px;color:var(--sub);line-height:1.6}
+.foot-note a{font-size:12px}
+.divider{height:1px;background:var(--line);margin:8px 0}
+</style>
+</head>
+<body>
+
+<!-- 헤더 -->
+<div class="hdr">
+  <div class="hdr-title">
+    <div class="hdr-num">6004</div>
+    <div class="hdr-name">인천공항 리무진</div>
+  </div>
+  <div class="hdr-time" id="clock">--:--</div>
+</div>
+
+<!-- 방향 탭 -->
+<div class="tabs" role="tablist">
+  <button class="tab on" id="tab-to" role="tab" aria-selected="true" onclick="switchDir('to')">
+    <span class="tab-icon">✈️</span>공항가는길
+  </button>
+  <button class="tab" id="tab-from" role="tab" aria-selected="false" onclick="switchDir('from')">
+    <span class="tab-icon">🏠</span>집에 가는길
+  </button>
+</div>
+
+<!-- 터미널 서브탭 (집에 가는길) -->
+<div id="subtab-row" class="subtabs">
+  <button class="subtab on" id="subtab-t2" onclick="switchTerminal('t2')">T2 출발</button>
+  <button class="subtab" id="subtab-t1" onclick="switchTerminal('t1')">T1 출발</button>
+</div>
+
+<!-- 다음 버스 -->
+<div class="next-section">
+  <div class="next-label" id="next-label">다음 버스</div>
+  <div class="next-cards" id="next-cards"></div>
+</div>
+
+<div class="divider" style="margin:0"></div>
+
+<!-- 전체 시간표 -->
+<div class="tbl-section">
+  <div class="tbl-head" id="tbl-head">전체 시간표</div>
+  <div class="timetable" id="timetable"></div>
+</div>
+
+<div class="divider" style="margin:0 16px"></div>
+
+<!-- 노선 정류장 -->
+<div class="stops-section">
+  <details id="stops-detail">
+    <summary>🗺️ 경유 정류장</summary>
+    <div class="stops-list" id="stops-list"></div>
+  </details>
+</div>
+
+<!-- 요금 -->
+<div class="fare-bar">
+  <div class="fare-item">
+    <div class="fare-label">성인</div>
+    <div class="fare-price">17,000원</div>
+  </div>
+  <div class="fare-item">
+    <div class="fare-label">어린이</div>
+    <div class="fare-price">12,000원</div>
+  </div>
+</div>
+
+<!-- 하단 메모 -->
+<div class="foot-note">
+  운행 시간은 교통 상황·날씨에 따라 변경될 수 있습니다.<br>
+  <span id="boarding-note">시흥유통센터 중앙버스전용차로 (정류장 번호 18014) 승차</span><br>
+  <span style="color:#6b7080">출처: <a href="https://airportlimousine.co.kr/sub/sub01.php?cat_no=10" target="_blank">airportlimousine.co.kr</a> · 2026-07-04 수집</span>
+</div>
+
+<script>
+// ── 데이터 ──
+const DATA = {
+  to: {
+    label: "다음 버스 (시흥유통센터 출발)",
+    tblHead: "시흥유통센터 출발 시간표 (→ 인천공항)",
+    boardingNote: "시흥유통센터 중앙버스전용차로 (정류장 18014) 승차",
+    times: [
+      "04:37","04:54",
+      "05:14","05:34","05:54",
+      "06:24","06:57",
+      "07:32",
+      "08:02","08:32",
+      "09:02","09:42",
+      "10:22",
+      "11:02","11:32",
+      "12:02","12:32",
+      "13:02","13:32",
+      "14:02","14:32",
+      "15:02","15:32",
+      "16:12","16:52",
+      "17:32",
+      "18:12","18:52",
+      "19:32",
+      "20:07","20:42"
+    ],
+    stops: [
+      {name:"가산디지털단지역", tag:"기점"},
+      {name:"패션단지", tag:""},
+      {name:"디지털단지오거리", tag:""},
+      {name:"디지털1단지", tag:""},
+      {name:"롯데시티호텔구로", tag:""},
+      {name:"포포인츠바이쉐라톤 서울구로", tag:""},
+      {name:"문성초등학교", tag:""},
+      {name:"금천우체국", tag:""},
+      {name:"말미고개", tag:"금천소방서"},
+      {name:"금천구청", tag:"금천경찰서"},
+      {name:"시흥사거리", tag:""},
+      {name:"박미삼거리", tag:""},
+      {name:"시흥유통센터", tag:"승차 정류장", me:true},
+      {name:"석수역", tag:""},
+      {name:"광명KTX역", tag:""},
+      {name:"인천공항 1터미널", tag:"3층 9번"},
+      {name:"인천공항 2터미널", tag:"3층 8번 · 종점"},
+    ]
+  },
+  from: {
+    t2: {
+      label: "다음 버스 (인천공항 T2 출발)",
+      tblHead: "인천공항 T2 출발 시간표 (→ 시흥유통센터)",
+      boardingNote: "T2 지하1층 26번 승차홈 · 매표소에서 발권 후 탑승",
+      times: [
+        "06:49",
+        "07:24",
+        "08:04","08:44",
+        "09:19","09:44",
+        "10:19","10:49",
+        "11:19","11:49",
+        "12:19","12:49",
+        "13:29",
+        "14:04","14:44",
+        "15:19","15:54",
+        "16:29","16:59",
+        "17:34",
+        "18:09","18:34",
+        "19:09","19:39",
+        "20:04","20:39",
+        "21:09","21:39",
+        "22:09","22:44"
+      ]
+    },
+    t1: {
+      label: "다음 버스 (인천공항 T1 출발)",
+      tblHead: "인천공항 T1 출발 시간표 (→ 시흥유통센터)",
+      boardingNote: "T1 1층 6B-1번 정류장 · 매표소에서 발권 후 탑승",
+      times: [
+        "07:09","07:44",
+        "08:24",
+        "09:04","09:39",
+        "10:04","10:39",
+        "11:09","11:39",
+        "12:09","12:39",
+        "13:09","13:49",
+        "14:24",
+        "15:04","15:39",
+        "16:14","16:49",
+        "17:19","17:54",
+        "18:29","18:54",
+        "19:29","19:59",
+        "20:24","20:59",
+        "21:29","21:59",
+        "22:29",
+        "23:04"
+      ]
+    },
+    stops: [
+      {name:"인천공항 2터미널", tag:"지하1층 26번홈 · 기점"},
+      {name:"인천공항 1터미널", tag:"1층 6B-1번"},
+      {name:"광명KTX역", tag:""},
+      {name:"석수역", tag:""},
+      {name:"시흥유통센터", tag:"하차 정류장", me:true},
+      {name:"박미삼거리", tag:""},
+      {name:"시흥사거리", tag:""},
+      {name:"금천구청", tag:"금천경찰서"},
+      {name:"말미고개", tag:"금천소방서"},
+      {name:"금천우체국", tag:""},
+      {name:"문성초등학교", tag:""},
+      {name:"포포인츠바이쉐라톤 서울구로", tag:""},
+      {name:"롯데시티호텔구로", tag:""},
+      {name:"디지털1단지", tag:""},
+      {name:"디지털단지오거리", tag:""},
+      {name:"패션단지", tag:""},
+      {name:"가산디지털단지역", tag:"종점"},
+    ]
+  }
+};
+
+let dir = 'to';
+let terminal = 't2';
+
+function toMin(t){
+  const [h,m] = t.split(':').map(Number);
+  return h*60+m;
+}
+function nowMin(){
+  const n = new Date();
+  return n.getHours()*60+n.getMinutes();
+}
+function pad2(n){return String(n).padStart(2,'0')}
+function fmtClock(){
+  const n=new Date();
+  return pad2(n.getHours())+':'+pad2(n.getMinutes());
+}
+
+function currentTimes(){
+  if(dir==='to') return DATA.to.times;
+  return DATA.from[terminal].times;
+}
+function currentMeta(){
+  if(dir==='to') return DATA.to;
+  return DATA.from[terminal];
+}
+
+function renderNextCards(times){
+  const nm = nowMin();
+  const nexts = times.filter(t => toMin(t) > nm).slice(0,4);
+  const el = document.getElementById('next-cards');
+  if(nexts.length === 0){
+    el.innerHTML = '<div class="no-bus">오늘 버스 운행이 종료되었습니다.</div>';
+    return;
+  }
+  el.innerHTML = nexts.map((t,i) => {
+    const diff = toMin(t) - nm;
+    const diffStr = diff === 0 ? '지금' : diff + '분 후';
+    return `<div class="next-card${i===0?' first':''}">
+      <div class="nc-time">${t}</div>
+      <div class="nc-min">${diffStr}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderTimetable(times){
+  const nm = nowMin();
+  const nextIdx = times.findIndex(t => toMin(t) > nm);
+  const el = document.getElementById('timetable');
+  el.innerHTML = times.map((t,i) => {
+    let cls = 't-chip';
+    if(toMin(t) < nm) cls += ' past';
+    else if(i === nextIdx) cls += ' next-one';
+    return `<div class="${cls}">${t}</div>`;
+  }).join('');
+}
+
+function renderStops(stops){
+  const el = document.getElementById('stops-list');
+  el.innerHTML = stops.map((s,i) => {
+    const isHL = s.me || i===0 || i===stops.length-1;
+    return `<div class="stop-row">
+      <div class="stop-dot${isHL?' highlight':''}"></div>
+      <div>
+        <div class="stop-name${s.me?' me':''}">${s.name}</div>
+        ${s.tag?`<div class="stop-tag">${s.tag}</div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function render(){
+  const meta = currentMeta();
+  const times = currentTimes();
+  const stops = dir==='to' ? DATA.to.stops : DATA.from.stops;
+
+  document.getElementById('next-label').textContent = meta.label;
+  document.getElementById('tbl-head').textContent = meta.tblHead;
+  document.getElementById('boarding-note').textContent = meta.boardingNote;
+  renderNextCards(times);
+  renderTimetable(times);
+  renderStops(stops);
+}
+
+function switchDir(newDir){
+  dir = newDir;
+  document.getElementById('tab-to').classList.toggle('on', dir==='to');
+  document.getElementById('tab-from').classList.toggle('on', dir==='from');
+  document.getElementById('tab-to').setAttribute('aria-selected', dir==='to');
+  document.getElementById('tab-from').setAttribute('aria-selected', dir==='from');
+  document.getElementById('subtab-row').style.display = dir==='from' ? 'flex' : 'none';
+  render();
+}
+
+function switchTerminal(t){
+  terminal = t;
+  document.getElementById('subtab-t2').classList.toggle('on', t==='t2');
+  document.getElementById('subtab-t1').classList.toggle('on', t==='t1');
+  render();
+}
+
+// ── 시계 ──
+function tick(){
+  document.getElementById('clock').textContent = fmtClock();
+  render();
+}
+tick();
+setInterval(tick, 30000); // 30초마다 갱신
+</script>
+</body>
+</html>
