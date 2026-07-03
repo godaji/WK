@@ -72,10 +72,21 @@ CHROME_FLAGS = [
     "--disable-blink-features=AutomationControlled", "--lang=ko-KR",
     f"--user-agent={CHROME_UA}",
 ]
-DEFAULT_CHROME_BIN = str(
-    Path.home() / ".cache/ms-playwright/chromium_headless_shell-1223"
-    "/chrome-headless-shell-linux64/chrome-headless-shell"
-)
+def _default_chrome_bin() -> str:
+    """playwright chromium_headless_shell 캐시에서 최신 버전을 자동 탐지."""
+    base = Path.home() / ".cache" / "ms-playwright"
+    if base.exists():
+        candidates = sorted(base.glob("chromium_headless_shell-*"), reverse=True)
+        for c in candidates:
+            bin_path = c / "chrome-headless-shell-linux64" / "chrome-headless-shell"
+            if bin_path.exists():
+                return str(bin_path)
+    # 고정 폴백(버전은 playwright install 시 갱신)
+    return str(base / "chromium_headless_shell-1228"
+               / "chrome-headless-shell-linux64" / "chrome-headless-shell")
+
+
+DEFAULT_CHROME_BIN = _default_chrome_bin()
 DEFAULT_LD_PATH = "/tmp/pwlibs/extracted/usr/lib/x86_64-linux-gnu"
 
 ASSET_DIR = Path(__file__).resolve().parents[2] / "assets" / "ssg_dutyfree"
