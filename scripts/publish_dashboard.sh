@@ -12,8 +12,8 @@
 
 set -euo pipefail
 
-WK="${WK_ROOT:-/mnt/c/Users/shhon/Desktop/WK}"
-PUB="${CASKCODE_PUBLISH:-/mnt/c/Users/shhon/Desktop/caskcode-publish}"
+WK="${WK_ROOT:-/home/dudaji/work/WK}"
+PUB="${CASKCODE_PUBLISH:-/home/dudaji/work/caskcode-publish}"
 SRC="$WK/deploy/dashboard"
 DEST="$PUB/dashboard"
 DEPLOY_KEY="${CASKCODE_DEPLOY_KEY:-$HOME/.ssh/caskcode_deploy_key}"

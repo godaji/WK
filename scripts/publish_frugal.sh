@@ -22,8 +22,8 @@
 #   4) 변경 있으면 commit + push(라이브). --dry-run 이면 push 없이 미리보기.
 set -euo pipefail
 
-WK="${WK_ROOT:-/mnt/c/Users/shhon/Desktop/WK}"
-PUB="${CASKCODE_PUBLISH:-/mnt/c/Users/shhon/Desktop/caskcode-publish}"
+WK="${WK_ROOT:-/home/dudaji/work/WK}"
+PUB="${CASKCODE_PUBLISH:-/home/dudaji/work/caskcode-publish}"
 SRC="$WK/apps/frugal"
 APP="dj"          # 배포 슬러그 — /CaskCode/$APP/ (CMPA-365). 바꾸려면 이 한 줄 + 블로그 링크.
 OLD="frugal"      # 구 경로(리다이렉트 유지)
