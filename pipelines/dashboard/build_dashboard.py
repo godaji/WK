@@ -246,8 +246,10 @@ def listings_min_by_name():
             continue
         cur = out.get(nm)
         if cur is None or p < cur["price"]:
+            tpid = (r.get("top_product_id") or "").strip()
             out[nm] = {"price": p, "seller": (r.get("셀러명") or "").strip(),
-                       "region": (r.get("지역") or "").strip()}
+                       "region": (r.get("지역") or "").strip(),
+                       "ds_url": f"https://dailyshot.co/m/item/{tpid}" if tpid else None}
     return out
 
 
@@ -544,9 +546,10 @@ def build_rows():
             page_price = dn[0] if dn else None
             actual_price = min(best["price"], page_price) if page_price else best["price"]
             return {"price": actual_price, "seller": best["seller"],
-                    "region": best["region"], "located": True}
+                    "region": best["region"], "located": True,
+                    "ds_url": best.get("ds_url")}
         if dn:
-            return {"price": dn[0], "seller": None, "region": None, "located": False}
+            return {"price": dn[0], "seller": None, "region": None, "located": False, "ds_url": None}
         return None
 
     def primary_of(cid):
@@ -703,6 +706,7 @@ def build_rows():
             "ds2_seller": dsd["seller"] if dsd else None,
             "ds2_region": dsd["region"] if dsd else None,
             "ds2_located": dsd["located"] if dsd else False,
+            "ds2_url": dsd.get("ds_url") if dsd else None,
             "df_krw": dm["df_krw"] if dm else None,
             "df_sname": dm["df_sname"] if dm else None,
             "df_url": dm["df_url"] if dm else None,
@@ -963,9 +967,9 @@ def _retail_cell(r):
         sub += f' · {html.escape(r["ds2_region"])}'
     # 비교 가능할 때: 더 싼 쪽은 흰색(muted 제거), 비싼 쪽은 회색 유지
     retail_wins = r["df_per100"] is not None and not r.get("df_win")
-    p100_cls = "" if retail_wins else ' class="muted"'
-    cell = (f'<b>{_won(price)}</b> <small class="muted">/{vtag}</small>{arrow}'
-            f'<br><small{p100_cls}>{p100:,}원/100ml · {sub}</small>')
+    sub_cls = "sub" if retail_wins else "sub muted"
+    cell = (f'<b>{_won(price)}</b> <small class="muted vol">({vtag})</small>{arrow}'
+            f'<br><small class="{sub_cls}">{p100:,}원/100ml · {sub}</small>')
     # CMPA-557: 물리매장이 1차일 때, 데일리샷이 더 싸면 위치(셀러+지역)와 함께 보조 노출.
     # 온라인이라 매장이 멀 수 있음을 💻 라벨로 암시.
     if r.get("ds2_show"):
@@ -1012,8 +1016,9 @@ def _df_cell(r):
         if dr is not None:
             sign = "▲" if dr > 0 else "▼"
             arrow = f' <span class="chg {"up" if dr > 0 else "dn"}">{sign}{abs(dr):.0f}%p</span>'
-    return (f'<b>{_won(r["df_krw"])}</b> <small class="muted">/ {vtag}</small>{arrow}'
-            f'<br><small{p100_cls}>{p100:,}원/100ml · {sub}</small>')
+    df_sub_cls = "sub" if r.get("df_win") else "sub muted"
+    return (f'<b>{_won(r["df_krw"])}</b> <small class="muted vol">({vtag})</small>{arrow}'
+            f'<br><small class="{df_sub_cls}">{p100:,}원/100ml · {sub}</small>')
 
 
 def render_html(rows, meta, log, snapshot_rel=None):
@@ -1068,13 +1073,34 @@ def render_html(rows, meta, log, snapshot_rel=None):
         if badges:
             name_cell += f'<div class="badges">{badges}</div>'
         dfview = "df" if savings_sv > 0 else "retail"
+        # 카드 링크: 신라면세 우선, 없으면 데일리샷
+        card_url = html.escape(r.get("df_url") or r.get("ds2_url") or "")
+        # 서브라인: 면세 X% 할인 · 소매최저 트레이더스
+        src_short = (r.get("retail_src") or "").replace("(온라인)", "").strip()
+        sub_parts = []
+        if mrate_f is not None and mrate_f > 0:
+            sub_parts.append(f'마일리지 {mrate_f:.0f}%')
+        if src_short:
+            sub_parts.append(f'소매최저 {src_short}')  # html.escape applied once below
+        sub_line = html.escape(' · '.join(sub_parts)) if sub_parts else ""
+        # 100ml당 면세/소매 비율 (CMPA-763 보드 피드백)
+        retail_p100_val = round(r["retail_price"] / (r.get("retail_vol") or 700) * 100) if r.get("retail_price") else None
+        df_p100_val = r.get("df_per100")
+        if retail_p100_val and df_p100_val:
+            ratio_pct = round(df_p100_val / retail_p100_val * 100)
+            ratio_cls = "chg dn" if ratio_pct < 100 else "chg up"  # 초록/빨강
+            ratio_html = f'<span class="{ratio_cls}">면세{ratio_pct}%</span>'
+        else:
+            ratio_html = ""
         tr.append(
-            f'<tr data-dfview="{dfview}">'
+            f'<tr data-dfview="{dfview}" data-card-url="{card_url}">'
             f'<td data-label="위스키" data-sort-val="{html.escape(r["name"])}">{name_cell}</td>'
             f'<td data-label="소매최저가" data-sort-val="{retail_price_sv}">{_retail_cell(r)}</td>'
             f'<td data-label="면세최저가" data-sort-val="{df_krw_sv}">{_df_cell(r)}</td>'
-            f'<td data-label="면세할인율" data-sort-val="{mrate_sv}">{mrate_html}</td>'
+            f'<td data-label="마일리지율" data-sort-val="{mrate_sv}">{mrate_html}</td>'
             f'<td data-label="소매가-면세가" data-sort-val="{savings_sv}">{savings_html}</td>'
+            f'<td class="ratio-cell">{ratio_html}</td>'
+            f'<td class="card-sub">{sub_line}</td>'
             "</tr>"
         )
 
@@ -1125,16 +1151,29 @@ b{color:var(--gold)}
 small{font-size:11.5px}
 .muted{color:var(--sub)}
 a.src-link{color:var(--sub);text-decoration:underline dotted;text-underline-offset:2px}
+/* 카드 서브라인·비율셀(모바일 전용) — 데스크톱에서 숨김 */
+td.card-sub,td.ratio-cell{display:none}
+/* 카드 링크 있으면 포인터 */
+tr[data-card-url]:not([data-card-url=""]){cursor:pointer}
 .badges{margin-top:5px;display:flex;flex-wrap:wrap;gap:4px}
 .bdg{font-size:11px;border-radius:5px;padding:1px 6px;white-space:nowrap;
 border:1px solid var(--line)}
 .bdg.win{background:rgba(52,199,89,.18);color:var(--green);border-color:var(--green)}
 th[data-col]{cursor:pointer}
 th[data-col]:hover{background:rgba(224,168,78,.12)}
-.filter-bar{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.filter-bar{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap}
 .fbtn{background:var(--panel);border:1px solid var(--line);color:var(--sub);
 border-radius:6px;padding:6px 14px;font-size:13px;cursor:pointer;white-space:nowrap}
 .fbtn.active{background:rgba(224,168,78,.18);color:var(--amber);border-color:var(--amber);font-weight:700}
+.search-bar{margin-bottom:10px}
+.search-input{width:100%;background:var(--panel);border:1px solid var(--line);
+color:var(--txt);border-radius:6px;padding:8px 12px;font-size:14px;outline:none}
+.search-input::placeholder{color:var(--sub)}
+.search-input:focus{border-color:var(--amber)}
+.show-more{display:block;width:100%;margin-top:10px;background:var(--panel);
+border:1px solid var(--line);color:var(--sub);border-radius:6px;padding:9px;
+font-size:13px;cursor:pointer;text-align:center}
+.show-more:hover{border-color:var(--amber);color:var(--amber)}
 .bdg.ov{background:rgba(224,168,78,.14);color:var(--amber)}
 .bdg.new{background:rgba(52,199,89,.16);color:var(--green);border-color:var(--green)}
 .chg.dn{color:var(--green)}
@@ -1148,26 +1187,40 @@ padding:8px 10px;font-size:13px;color:var(--sub)}
 .foot{margin-top:30px;padding-top:14px;border-top:1px solid var(--line);
 color:var(--sub);font-size:12px}
 code{word-break:break-all;overflow-wrap:anywhere}
-/* 모바일 우선(CMPA-255): 좁은 화면은 행을 카드로 접는다(가로스크롤/숨김 없음) */
+/* 모바일 우선(CMPA-255 · CMPA-763): 2줄 카드 — 이름+뱃지 / 소매·면세·할인율 */
 @media(max-width:640px){
-  table,thead,tbody,th,td,tr{display:block}
+  body{font-size:13px}
+  table,thead,tbody{display:block}
   thead{position:absolute;left:-9999px}
-  tr{margin:0 0 12px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
-  td{border:0;border-bottom:1px solid var(--line);padding:8px 12px;
-     display:flex;justify-content:space-between;gap:12px}
-  td:last-child{border-bottom:0}
-  td::before{content:attr(data-label);color:var(--amber);font-weight:700;
-     flex:0 0 38%;font-size:12px}
-  /* 멀티라인 가격 셀(소매최저가·면세최저가·소매가-면세가)은 라벨을 위에 두고 값을 카드
-     전체폭으로 — 좁은 폭(360px)에서 데일리샷 보조줄·출처·수집일이 잘리지 않게(CMPA-557·CLAUDE.md). */
-  td[data-label="소매최저가"],td[data-label="면세최저가"],td[data-label="소매가-면세가"]{
-     flex-direction:column;align-items:stretch;gap:3px}
-  td[data-label="소매최저가"]::before,td[data-label="면세최저가"]::before,
-  td[data-label="소매가-면세가"]::before{flex:none;font-size:12px}
-  td[data-label="위스키"]{flex-direction:column;background:rgba(224,168,78,.06)}
+  th{display:none}
+  /* tr: flex-wrap으로 2줄 배치 */
+  tr{display:flex;flex-wrap:wrap;align-items:center;
+     margin:0 0 5px;border:1px solid var(--line);border-radius:8px;
+     padding:5px 10px;gap:1px 0;overflow:hidden}
+  /* td 기본: 숨김 (필요한 것만 켬) */
+  td{display:none;border:0;padding:0}
+  /* 가격 셀 small: .sub(상세줄) 숨김, .vol(용량) 표시 */
+  td small{display:none}
+  td small.vol{display:inline;font-size:11px}
+  /* 위스키명: 전체폭, 이름+뱃지 가로 한 줄 */
+  td[data-label="위스키"]{
+    display:flex;flex:0 0 100%;flex-wrap:wrap;align-items:center;gap:4px;
+    font-weight:700;color:var(--gold);font-size:13px;padding-bottom:2px}
   td[data-label="위스키"]::before{display:none}
-  td[data-label="위스키"]{font-weight:700;color:var(--gold);font-size:15px}
-  .badges{margin-top:6px}
+  td[data-label="위스키"] br{display:none}
+  /* 소매·면세: 같은 줄, inline-flex로 <br> 무력화 */
+  td[data-label="소매최저가"],
+  td[data-label="면세최저가"]{display:inline-flex;align-items:center;font-size:12px;color:var(--txt)}
+  td[data-label="소매최저가"]::before{content:"소매 ";color:var(--sub);font-size:10px}
+  td[data-label="면세최저가"]::before{content:" · 면세 ";color:var(--sub);font-size:10px}
+  /* 마일리지율·소매가-면세가: 서브라인으로 이동, 직접 표시 안 함 */
+  td[data-label="마일리지율"],td[data-label="소매가-면세가"]{display:none}
+  /* 비율셀: 가격줄 오른쪽 끝 (margin-left:auto로 밀기) */
+  td.ratio-cell{display:inline-flex;align-items:center;margin-left:auto;font-size:11px;font-weight:700}
+  /* 서브라인(3번째 줄): 전체폭 회색 */
+  td.card-sub{display:block;flex:0 0 100%;font-size:11px;color:var(--sub);padding-top:1px}
+  .badges{display:flex;flex-wrap:wrap;gap:2px}
+  .bdg{font-size:10px;padding:1px 4px}
 }
 """
 
@@ -1187,30 +1240,40 @@ code{word-break:break-all;overflow-wrap:anywhere}
   · 신라면세 수집: <b>{df_meta.get("sdate") if df_meta else "—"}</b>
   · 표시 {len(rows)}종 (소매 수집 {sum(1 for r in rows if r["retail_price"] is not None)}종 /
   신라면세 매칭 {sum(1 for r in rows if r["df_krw"] is not None)}종){fx_note}
-  <br>가격은 '수집일 기준값'입니다(현재 이 순간의 값이 아닙니다 · CMPA-156). 소매최저가는
-  면세·해외를 제외한 국내 소매가입니다(CMPA-321). 소매·면세 모두 100ml당 단가로 공정 비교
-  가능합니다(용량 다른 경우에도).</p>
+  </p>
 
   <h2>현재 가격 상태</h2>
   <div class="filter-bar">
     <button class="fbtn active" data-fview="cheap" onclick="filterView('cheap')">💰 소매최저가↓</button>
     <button class="fbtn" data-fview="df" onclick="filterView('df')">🏆 면세유리 보기</button>
     <button class="fbtn" data-fview="retail" onclick="filterView('retail')">🛒 소매유리 보기</button>
-    <button class="fbtn" data-fview="mrate" onclick="filterView('mrate')">면세할인율↓</button>
+    <button class="fbtn" data-fview="mrate" onclick="filterView('mrate')">마일리지율↓</button>
     <button class="fbtn" data-fview="name" onclick="filterView('name')">이름순</button>
+  </div>
+  <div class="search-bar">
+    <input id="name-search" class="search-input" type="search" placeholder="위스키 이름 검색..." autocomplete="off">
+  </div>
+  <div class="filter-bar" id="price-filter-bar">
+    <button class="fbtn" data-pmin="0" data-pmax="50000">5만↓</button>
+    <button class="fbtn" data-pmin="50000" data-pmax="100000">5~10만</button>
+    <button class="fbtn" data-pmin="100000" data-pmax="150000">10~15만</button>
+    <button class="fbtn" data-pmin="150000" data-pmax="200000">15~20만</button>
+    <button class="fbtn" data-pmin="200000" data-pmax="300000">20~30만</button>
+    <button class="fbtn" data-pmin="300000" data-pmax="Infinity">30만+</button>
   </div>
   <table id="main-table">
     <thead><tr>
       <th data-col="0">위스키 이름</th>
       <th data-col="1">소매최저가</th>
       <th data-col="2">면세최저가</th>
-      <th data-col="3">면세할인율</th>
+      <th data-col="3">마일리지율</th>
       <th data-col="4" data-sort-dir="desc">소매가-면세가 ▼</th>
     </tr></thead>
     <tbody>
       {''.join(tr)}
     </tbody>
   </table>
+  <button id="show-more-btn" class="show-more" style="display:none"></button>
 
   <h2>범례 (라벨/뱃지)</h2>
   <ul class="legend">{legend}</ul>
@@ -1246,6 +1309,11 @@ code{word-break:break-all;overflow-wrap:anywhere}
   if(!tbl) return;
   var ths = tbl.querySelectorAll('thead th');
   var sortCol = 4, sortAsc = false;
+  var displayCount = 20;  // 기본 20건 표시 (CMPA-763)
+  var searchQuery = '';
+  var activePriceRange = null;  // [min, max] or null
+  var sortedRows = [];
+
   function indicator(col, asc) {{
     ths.forEach(function(th,i) {{
       var base = th.textContent.replace(/ [▲▼]$/, '');
@@ -1253,6 +1321,44 @@ code{word-break:break-all;overflow-wrap:anywhere}
       else th.textContent = base;
     }});
   }}
+
+  function nameOf(r) {{
+    var c = r.children[0];
+    return c ? (c.getAttribute('data-sort-val') || c.textContent || '') : '';
+  }}
+
+  function applyView() {{
+    var tbody = tbl.querySelector('tbody');
+    var q = searchQuery.trim().toLowerCase();
+    var visible = sortedRows.filter(function(r) {{
+      if(q && nameOf(r).toLowerCase().indexOf(q) < 0) return false;
+      if(activePriceRange) {{
+        var pc = r.children[1];  // td[소매최저가]
+        var pv = pc ? parseFloat(pc.getAttribute('data-sort-val')) : NaN;
+        if(isNaN(pv) || pv < 0) return false;  // 소매가 없으면 가격 필터에서 제외
+        if(pv < activePriceRange[0] || pv >= activePriceRange[1]) return false;
+      }}
+      return true;
+    }});
+    // 검색/가격필터 중에는 결과 전체 표시, 아니면 displayCount 제한
+    var hasFilter = q || activePriceRange;
+    var limit = hasFilter ? visible.length : displayCount;
+    sortedRows.forEach(function(r) {{ r.style.display = 'none'; tbody.appendChild(r); }});
+    visible.forEach(function(r, i) {{
+      r.style.display = (i < limit) ? '' : 'none';
+    }});
+    var btn = document.getElementById('show-more-btn');
+    if(btn) {{
+      var remaining = visible.length - limit;
+      if(!hasFilter && remaining > 0) {{
+        btn.textContent = remaining + '건 더 보기';
+        btn.style.display = '';
+      }} else {{
+        btn.style.display = 'none';
+      }}
+    }}
+  }}
+
   function sortBy(col, forcedAsc) {{
     if(forcedAsc !== undefined) {{
       sortCol = col; sortAsc = forcedAsc;
@@ -1263,7 +1369,6 @@ code{word-break:break-all;overflow-wrap:anywhere}
     }}
     var tbody = tbl.querySelector('tbody');
     var rows = Array.from(tbody.querySelectorAll('tr'));
-    rows.forEach(function(r) {{ r.style.display = ''; }});  // 필터 숨김 해제
     var isText = (col === 0);
     rows.sort(function(a, b) {{
       var av = a.children[col] ? a.children[col].getAttribute('data-sort-val') : '';
@@ -1284,26 +1389,72 @@ code{word-break:break-all;overflow-wrap:anywhere}
       }}
       return sortAsc ? cmp : -cmp;
     }});
-    rows.forEach(function(r) {{ tbody.appendChild(r); }});
+    sortedRows = rows;
+    displayCount = 20;  // 정렬 변경 시 표시 건수 리셋
+    applyView();
     indicator(col, sortAsc);
   }}
+
   window.filterView = function(view) {{
-    document.querySelectorAll('.fbtn').forEach(function(b) {{
+    document.querySelectorAll('[data-fview]').forEach(function(b) {{
       b.classList.toggle('active', b.dataset.fview === view);
     }});
     // 버튼은 정렬 숏컷
     if(view === 'cheap') sortBy(1, true);  // 소매최저가 오름차순(싼값 먼저)
     else if(view === 'df') sortBy(4, false);
     else if(view === 'retail') sortBy(4, true);
-    else if(view === 'mrate') sortBy(3, false);  // 면세할인율↓ 높은순
+    else if(view === 'mrate') sortBy(3, false);  // 마일리지율↓ 높은순
     else if(view === 'name') sortBy(0, true);
     else sortBy(1, true);
   }};
+
   ths.forEach(function(th, i) {{
     th.style.cursor = 'pointer';
     th.style.userSelect = 'none';
     th.addEventListener('click', function() {{ sortBy(i); }});
   }});
+
+  var searchInput = document.getElementById('name-search');
+  if(searchInput) {{
+    searchInput.addEventListener('input', function() {{
+      searchQuery = this.value;
+      applyView();
+    }});
+  }}
+
+  var showMoreBtn = document.getElementById('show-more-btn');
+  if(showMoreBtn) {{
+    showMoreBtn.addEventListener('click', function() {{
+      displayCount += 20;
+      applyView();
+    }});
+  }}
+
+  // 가격 필터 버튼 (CMPA-763)
+  document.querySelectorAll('#price-filter-bar .fbtn').forEach(function(btn) {{
+    btn.addEventListener('click', function() {{
+      var pmin = parseFloat(this.dataset.pmin);
+      var pmax = this.dataset.pmax === 'Infinity' ? Infinity : parseFloat(this.dataset.pmax);
+      var same = activePriceRange && activePriceRange[0]===pmin && activePriceRange[1]===pmax;
+      activePriceRange = same ? null : [pmin, pmax];
+      document.querySelectorAll('#price-filter-bar .fbtn').forEach(function(b) {{
+        var bmin = parseFloat(b.dataset.pmin);
+        var bmax = b.dataset.pmax === 'Infinity' ? Infinity : parseFloat(b.dataset.pmax);
+        b.classList.toggle('active', !same && bmin===pmin && bmax===pmax);
+      }});
+      displayCount = 20;
+      applyView();
+    }});
+  }});
+
+  // 카드 클릭 → 신라면세/데일리샷 링크 (CMPA-763)
+  tbl.querySelector('tbody').addEventListener('click', function(e) {{
+    var tr = e.target.closest('tr');
+    if(!tr) return;
+    var url = tr.dataset.cardUrl;
+    if(url) window.open(url, '_blank', 'noopener');
+  }});
+
   filterView('cheap');  // 기본값: 소매최저가 오름차순(싼값 먼저) (CMPA-671)
 }})();
 </script>
