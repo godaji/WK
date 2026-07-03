@@ -1,0 +1,51 @@
+{
+  "data_date": "2026-06-29",
+  "fingerprint": "c4c0d2f78f5b3cd8890108f6e2fc6418e01b995f3df48553fcbc45df74852621",
+  "gen_date": "2026-06-29",
+  "history": [
+    {
+      "data_date": "2026-06-01",
+      "fingerprint": "f2eab879c5885178ae69f7e2435317a6f4a3e71387e2925056838b969aeb4be8",
+      "gen_date": "2026-06-09",
+      "report": "reports/whisky-price/2026-06_위스키가격리포트_2026-06-09.md"
+    },
+    {
+      "data_date": "2026-06-01",
+      "fingerprint": "a4c635c496ccfa5b61d7171a56ae0dec1bce642789a044f84efb8b23a349c54e",
+      "gen_date": "2026-06-13",
+      "report": "reports/whisky-price/2026-06_위스키가격리포트_2026-06-13.md"
+    },
+    {
+      "data_date": "2026-06-01",
+      "fingerprint": "0a72efab2a4a9349c1091354980295ba4dc84d7ba3494316c1b10db5566c8be8",
+      "gen_date": "2026-06-14",
+      "report": "reports/whisky-price/2026-06_위스키가격리포트_2026-06-14.md"
+    },
+    {
+      "data_date": "2026-06-01",
+      "fingerprint": "f9aebd95e1573b94f5579a91dce555f608eb6e5060aefaeca691aec9b06fe0eb",
+      "gen_date": "2026-06-15",
+      "report": "reports/whisky-price/2026-06_위스키가격리포트_2026-06-15.md"
+    },
+    {
+      "data_date": "2026-06-01",
+      "fingerprint": "84dd1eea2c1235f041d9259c09c4a4a766f6aab0e62439b219f99355fb011d3e",
+      "gen_date": "2026-06-16",
+      "report": "reports/whisky-price/2026-06_위스키가격리포트_2026-06-16.md"
+    },
+    {
+      "data_date": "2026-06-22",
+      "fingerprint": "0df966e74a5e7ef1e82d632f5a31002139f9dad2e3c798dee0024af06b485c19",
+      "gen_date": "2026-06-22",
+      "report": "reports/whisky-price/2026-06_위스키가격리포트_2026-06-22.md"
+    },
+    {
+      "data_date": "2026-06-29",
+      "fingerprint": "c4c0d2f78f5b3cd8890108f6e2fc6418e01b995f3df48553fcbc45df74852621",
+      "gen_date": "2026-06-29",
+      "report": "reports/whisky-price/2026-06_위스키가격리포트_2026-06-29.md"
+    }
+  ],
+  "report": "reports/whisky-price/2026-06_위스키가격리포트_2026-06-29.md",
+  "updated_at": "2026-06-29"
+}

@@ -1,0 +1,25 @@
+{
+  "source": "emart.ssg.com",
+  "store_label": "이마트(SSG)",
+  "queries": [
+    "위스키",
+    "양주"
+  ],
+  "pages": 1,
+  "stats": {
+    "queries": {
+      "위스키": 8,
+      "양주": 0
+    },
+    "items_seen": 71,
+    "bottles": 8,
+    "quarantined": 0,
+    "non_bottle": 63,
+    "http_fail": 0
+  },
+  "collected_date": "2026-06-18",
+  "rows_written": 0,
+  "month_file": "2026-06.csv",
+  "snapshot": "data/whisky-prices/_runs/2026-06__run2026-06-18.csv",
+  "traders_channel_separable": false
+}

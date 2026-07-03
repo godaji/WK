@@ -1,0 +1,25 @@
+{
+  "date": "2026-05-30",
+  "fx_twd_krw": 47.9489,
+  "fx_source": "open.er-api.com",
+  "sources": {
+    "my9買酒網(Shopify)": 789,
+    "橡木桶drinks(HTML)": 29
+  },
+  "drinks_html_parser": {
+    "candidates": 72,
+    "fetched": 72,
+    "parsed_name": 72,
+    "priced": 32,
+    "whisky_rows": 29,
+    "brand_candidates": 31,
+    "brand_whisky": 29,
+    "sweep_candidates": 41,
+    "sweep_whisky": 0
+  },
+  "drinks_html_price_extract_pct": 44.4,
+  "drinks_brand_targeted_whisky_pct": 93.5,
+  "drinks_blind_sweep_whisky_pct": 0.0,
+  "total_rows": 818,
+  "output": "data/whisky-prices/2026-05_tw_whisky_poc.csv"
+}

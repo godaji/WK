@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="CaskCode">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#161922"/>
+      <stop offset="1" stop-color="#0f1115"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#ffd34e"/>
+      <stop offset="1" stop-color="#e0a84e"/>
+    </linearGradient>
+  </defs>
+  <!-- iOS: 불투명 풀블리드 배경 (투명 코너 금지) — iOS가 코너를 둥글게 처리 -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <rect x="96" y="104" width="320" height="16" rx="8" fill="#e0a84e" opacity="0.28"/>
+  <rect x="96" y="392" width="320" height="16" rx="8" fill="#e0a84e" opacity="0.28"/>
+  <polyline points="166,170 266,256 166,342" fill="none" stroke="url(#gold)"
+            stroke-width="42" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="276" y="320" width="100" height="34" rx="17" fill="url(#gold)"/>
+</svg>

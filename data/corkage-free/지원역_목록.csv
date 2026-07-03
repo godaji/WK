@@ -1,0 +1,17 @@
+﻿# 마지막갱신일,2026-06-02
+# 다음갱신예정일,2026-09-02,(분기=3개월 주기 = 마지막+3개월)
+station,lat,lng,식당수,인당비용행수,status,생성일,csv경로,md경로,html경로,source
+강남역,37.497942,127.027621,91,91,live,2026-05-31,data/corkage-free/강남역_콜키지프리.csv,reports/corkage-free/강남역_콜키지프리.md,reports/corkage-free/강남역_콜키지프리.html,find_corkage_free.py + estimate_per_person_map.py
+여의도역,37.52162,126.924191,39,39,live,2026-05-31,data/corkage-free/여의도역_콜키지프리.csv,reports/corkage-free/여의도역_콜키지프리.md,reports/corkage-free/여의도역_콜키지프리.html,find_corkage_free.py + estimate_per_person_map.py
+신논현역,37.504658,127.025127,32,32,live,2026-05-31,data/corkage-free/신논현역_콜키지프리.csv,reports/corkage-free/신논현역_콜키지프리.md,reports/corkage-free/신논현역_콜키지프리.html,find_corkage_free.py + estimate_per_person_map.py
+합정역,37.549463,126.913739,32,32,live,2026-05-31,data/corkage-free/합정역_콜키지프리.csv,reports/corkage-free/합정역_콜키지프리.md,reports/corkage-free/합정역_콜키지프리.html,find_corkage_free.py + estimate_per_person_map.py
+마포역,37.539669,126.945905,31,31,live,2026-05-31,data/corkage-free/마포역_콜키지프리.csv,reports/corkage-free/마포역_콜키지프리.md,reports/corkage-free/마포역_콜키지프리.html,find_corkage_free.py + estimate_per_person_map.py
+명동역,37.560989,126.986325,16,16,live,2026-06-02,data/corkage-free/명동역_콜키지프리.csv,reports/corkage-free/명동역_콜키지프리.md,reports/corkage-free/명동역_콜키지프리.html,find_corkage_free.py + estimate_per_person_map.py
+삼성역,37.508844,127.06316,0,0,candidate,,,,,"STATION_COORDS (좌표만 준비, 미생성)"
+서울역,37.554648,126.972559,0,0,candidate,,,,,"STATION_COORDS (좌표만 준비, 미생성)"
+선릉역,37.504503,127.049008,0,0,candidate,,,,,"STATION_COORDS (좌표만 준비, 미생성)"
+성수역,37.544581,127.055961,0,0,candidate,,,,,"STATION_COORDS (좌표만 준비, 미생성)"
+역삼역,37.500622,127.036456,0,0,candidate,,,,,"STATION_COORDS (좌표만 준비, 미생성)"
+잠실역,37.513302,127.100165,0,0,candidate,,,,,"STATION_COORDS (좌표만 준비, 미생성)"
+판교역,37.394761,127.111217,0,0,candidate,,,,,"STATION_COORDS (좌표만 준비, 미생성)"
+홍대입구역,37.557527,126.924191,0,0,candidate,,,,,"STATION_COORDS (좌표만 준비, 미생성)"

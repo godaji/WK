@@ -1,0 +1,9 @@
+﻿날짜,통화,KRW_per_1단위,USD_per_1단위_역수참고,소스,수집URL
+2026-05-30,HKD,192.266214,7.836332,open.er-api.com (USD base cross-rate),https://open.er-api.com/v6/latest/USD
+2026-05-30,JPY,9.460043,159.265864,open.er-api.com (USD base cross-rate),https://open.er-api.com/v6/latest/USD
+2026-05-31,HKD,192.283674,7.836224,open.er-api.com (USD base cross-rate),https://open.er-api.com/v6/latest/USD
+2026-05-31,JPY,9.461918,159.246559,open.er-api.com (USD base cross-rate),https://open.er-api.com/v6/latest/USD
+2026-06-01,HKD,192.277903,7.836719,open.er-api.com (USD base cross-rate),https://open.er-api.com/v6/latest/USD
+2026-06-01,JPY,9.456754,159.338809,open.er-api.com (USD base cross-rate),https://open.er-api.com/v6/latest/USD
+2026-06-07,HKD,197.261865,7.834907,open.er-api.com (USD base cross-rate),https://open.er-api.com/v6/latest/USD
+2026-06-07,JPY,9.650807,160.144985,open.er-api.com (USD base cross-rate),https://open.er-api.com/v6/latest/USD

@@ -1,0 +1,5 @@
+year,volume_bottles_millions,value_gbp_millions,value_note,source,source_url,collected_date,notes
+2019,1300,4900,GBP millions,SWA Facts & Figures,https://www.scotch-whisky.org.uk/industry-insights/facts-figures/,2026-06-10,SWA 2019 기준; 4.4% 성장 기록
+2022,,6000+,GBP millions (over 6bn stated),SWA Facts & Figures,https://www.scotch-whisky.org.uk/industry-insights/facts-figures/,2026-06-10,SWA 2022 기준; 정확한 병 수 미기재
+2023,1350,5600,GBP millions,SWA Facts & Figures,https://www.scotch-whisky.org.uk/industry-insights/facts-figures/,2026-06-10,SWA 2023 기준
+2025,1300,5360,GBP millions,SWA Facts & Figures,https://www.scotch-whisky.org.uk/industry-insights/facts-figures/,2026-06-10,SWA 2025 기준; 초당 43병 출하 = 연간 13억 병 환산

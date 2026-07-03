@@ -1,0 +1,17 @@
+﻿술이름,가격_KRW,위치,가져온날짜,출처,신뢰도,비고
+글렌모렌지 오리지널 10년 700ml,88800,트레이더스,2026-06-01,WebSearch(다수 소매)+로라주막 교차확인,중,"오리지널 10년; 두 출처 모두 88,800 일치(가격 안정). 라이트·과일 입문용 가성비"
+발베니 12년 더블우드 700ml,96800,트레이더스,2026-06-01,CocoScan(653/670)·로라주막,중,"전용잔 동봉가; 04월 CocoScan 96,800과 동일 유지(가격 안정)"
+글렌피딕 15년 솔레라 700ml,99800,트레이더스,2026-06-01,"CocoScan(670, 04월)·재확인",낮음,"전용잔2 동봉; 04월가 유지 추정, 6월 현장 재확인 필요"
+페이머스 그라우스 1L,34980,트레이더스,2026-06-01,로라주막 블로그(무날짜),낮음,1L 가성비 입문 블렌디드; 타 소매 43~45k 대비 저렴하나 무날짜 블로그라 재확인 필요
+글렌피딕 12년 700ml,84800,트레이더스,2026-06-01,WebSearch(다수)↔로라주막 충돌,낮음,"표준 12년 84,800 우세; 로라주막 64,800은 이벤트가/구가 가능성, 재확인 필요"
+라가불린 8년 700ml,99800,트레이더스,2026-06-01,"로라주막↔과거가 89,800",낮음,"아일라 피티드 입문; 가격 상승분 미확정, 6월 현장 재확인 필요"
+탈리스커 스톰 700ml,92800,트레이더스,2026-06-01,"로라주막↔과거가 64,000",낮음,NAS 피티드; 과거가 대비 차이 커 재확인 필요(다출처 미확인)
+잭다니엘 싱글배럴 잔패키지,102900,코스트코,2026-06-01,WebScrape(costcome.com(코스트컴)),중,"정본=w066(잭다니엘 No.7); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/jack-daniels-single-barr/"
+잭다니엘 테네시 위스키 1L 잔패키지,57900,코스트코,2026-06-01,WebScrape(costcome.com(코스트컴)),중,"정본=w066(잭다니엘 No.7); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/jack-daniels-1l-vap/"
+발렌타인 17년산,136900,코스트코,2026-06-01,WebScrape(costcome.com(코스트컴)),중,"코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/ballantines-17yo-whiskey/"
+커클랜드 15년 하일랜드 싱글몰트 위스키,133900,코스트코,2026-06-01,WebScrape(costcome.com(코스트컴)),중,"코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-15-years-highland-single-malt-whiskey/"
+더 글렌리벳 15년 싱글몰트 위스키,106900,코스트코,2026-06-01,WebScrape(costcome.com(코스트컴)),중,"정본=w002(글렌리벳 15년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/the-glenlivet-15yo/"
+조니워커 블랙라벨 12년 700,40790,코스트코,2026-06-01,WebScrape(costcome.com(코스트컴)),중,"정본=w050(조니워커 블랙라벨 12년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/johnnie-walker-black-700ml/"
+시바스리갈 12년산,63900,코스트코,2026-06-01,WebScrape(costcome.com(코스트컴)),중,"정본=w048(시바스 리갈 12년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/chivas-regal-12yo/"
+커클랜드 시그니처 스카치 위스키 1.75L,32490,코스트코,2026-06-01,WebScrape(costcome.com(코스트컴)),중,"코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-blended-scotch-whiskey-1-75l-costco-price-summary/"
+커클랜드 시그니처 캐나디안 위스키 1.75L,34990,코스트코,2026-06-01,WebScrape(costcome.com(코스트컴)),중,"코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-canadian-whiskey-1-75l-costco-price-summary/"

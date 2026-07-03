@@ -1,0 +1,89 @@
+﻿id,name_ko,name_en,brand,category,origin,age,abv,volume_ml,price_krw_low,price_krw_high,channels,confidence,notes
+w001,글렌리벳 12년,The Glenlivet 12 Year Old,Glenlivet,싱글몰트,스코틀랜드-스페이사이드,12,40,700,54900,69800,트레이더스;코스트코;데일리샷,high,첫 싱글몰트 표준. 1L 행사판 존재
+w002,글렌리벳 15년,The Glenlivet 15 Year Old French Oak Reserve,Glenlivet,싱글몰트,스코틀랜드-스페이사이드,15,40,700,94800,95900,트레이더스;코스트코,high,트레이더스·코스트코 교차확인
+w003,글렌리벳 17년 스몰배치,The Glenlivet 17 Year Old Small Batch,Glenlivet,싱글몰트,스코틀랜드-스페이사이드,17,,700,229800,229800,트레이더스,med,위스키픽 ASR
+w004,글렌리벳 19년 스몰배치,The Glenlivet 19 Year Old Small Batch,Glenlivet,싱글몰트,스코틀랜드-스페이사이드,19,,700,349800,349800,트레이더스,med,위스키픽 ASR
+w005,글렌피딕 12년,Glenfiddich 12 Year Old,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,12,40,700,59000,84800,트레이더스;데일리샷,high,세계 판매 1위 싱글몰트
+w006,글렌피딕 14년 버번배럴,Glenfiddich 14 Year Old Bourbon Barrel Reserve,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,14,,700,99800,99800,트레이더스,med,원자료 '법원 캐스크'=버번배럴 OCR 추정
+w007,글렌피딕 15년,Glenfiddich 15 Year Old Solera,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,15,40,700,99800,99800,트레이더스,high,
+w008,발베니 12년 더블우드,The Balvenie DoubleWood 12 Year Old,Balvenie,싱글몰트,스코틀랜드-스페이사이드,12,40,700,96800,99000,트레이더스;코스트코;데일리샷,high,셰리캐스크 마감 명작
+w009,발베니 14년 캐리비안 캐스크,The Balvenie Caribbean Cask 14 Year Old,Balvenie,싱글몰트,스코틀랜드-스페이사이드,14,43,700,139800,139800,트레이더스,high,
+w010,아벨라워 12년 더블캐스크,Aberlour 12 Year Old Double Cask Matured,Aberlour,싱글몰트,스코틀랜드-스페이사이드,12,40,700,70000,80000,코스트코;데일리샷,high,셰리 입문 정석
+w011,아벨라워 아부나흐,Aberlour A'bunadh,Aberlour,싱글몰트,스코틀랜드-스페이사이드,NAS,60,700,235800,235800,트레이더스,med,캐스크 스트렝스 셰리. 원자료 '아브나르 쉐리케스크'
+w012,맥캘란 12년 더블캐스크,The Macallan Double Cask 12 Year Old,Macallan,싱글몰트,스코틀랜드-스페이사이드,12,40,700,90000,99800,트레이더스;코스트코,high,
+w013,글렌그란트 12년,The Glen Grant 12 Year Old,Glen Grant,싱글몰트,스코틀랜드-스페이사이드,12,43,700,59400,59800,트레이더스,high,
+w014,글렌그란트 15년,The Glen Grant 15 Year Old,Glen Grant,싱글몰트,스코틀랜드-스페이사이드,15,50,700,97800,97800,트레이더스,high,
+w015,글렌그란트 익스플로레이션 No.1,The Glen Grant Exploration No.1,Glen Grant,싱글몰트,스코틀랜드-스페이사이드,NAS,,700,99800,99800,트레이더스,med,위스키픽 ASR
+w016,탐두 15년,Tamdhu 15 Year Old,Tamdhu,싱글몰트,스코틀랜드-스페이사이드,15,46,700,169800,169800,트레이더스,med,셰리. 위스키픽 ASR
+w017,벤리악 10년,BenRiach The Original Ten,BenRiach,싱글몰트,스코틀랜드-스페이사이드,10,43,700,49940,49940,트레이더스,med,원자료 '벤니학'. 위스키픽 ASR
+w018,글렌드로낙 12년,The GlenDronach 12 Year Old Original,GlenDronach,싱글몰트,스코틀랜드-하이랜드,12,43,700,79800,82800,트레이더스,high,셰리. 잔 증정 패키지 존재
+w019,오반 14년,Oban 14 Year Old,Oban,싱글몰트,스코틀랜드-하이랜드,14,43,700,99800,99800,트레이더스,high,잔 2개 포함
+w020,글렌모렌지 12년,Glenmorangie 12 Year Old,Glenmorangie,싱글몰트,스코틀랜드-하이랜드,12,43,700,69800,69800,트레이더스,med,익스프레션(라산타 등) 확인 필요
+w021,글렌모렌지 15년,Glenmorangie 15 Year Old,Glenmorangie,싱글몰트,스코틀랜드-하이랜드,15,43,700,97800,97800,트레이더스,med,
+w022,글렌모렌지 익스플로전 No.1,Glenmorangie Explosion No.1,Glenmorangie,싱글몰트,스코틀랜드-하이랜드,NAS,,700,99800,99800,트레이더스,low,제품명 음차 추정-재확인
+w023,달모어 12년,The Dalmore 12 Year Old,Dalmore,싱글몰트,스코틀랜드-하이랜드,12,40,700,99800,99800,트레이더스,high,
+w024,달모어 2005 빈티지,The Dalmore 2005 Vintage,Dalmore,싱글몰트,스코틀랜드-하이랜드,,,700,670800,670800,트레이더스,low,고가·가격 OCR 재확인 필요
+w025,클라이넬리시 14년,Clynelish 14 Year Old,Clynelish,싱글몰트,스코틀랜드-하이랜드,14,46,700,79400,84800,트레이더스,high,
+w026,로얄 브라클라 12년,Royal Brackla 12 Year Old,Royal Brackla,싱글몰트,스코틀랜드-하이랜드,12,40,700,89800,89800,트레이더스,high,
+w027,에버펠디 16년,Aberfeldy 16 Year Old,Aberfeldy,싱글몰트,스코틀랜드-하이랜드,16,40,700,75800,75800,트레이더스,med,원자료 '에버펠 16년'
+w028,글렌고인 캐스크 스트렝스 배치171,Glengoyne Cask Strength Batch 171,Glengoyne,싱글몰트,스코틀랜드-하이랜드,NAS,59,700,149800,149800,트레이더스,low,원자료 '블렌고인 CS 171'
+w029,글렌글라사 샌드엔드,Glenglassaugh Sandend,Glenglassaugh,싱글몰트,스코틀랜드-하이랜드,NAS,50,700,79800,79800,트레이더스,med,원자료 '글렌라사 샌드엔드'
+w030,글렌글라사 포트소이,Glenglassaugh Portsoy,Glenglassaugh,싱글몰트,스코틀랜드-하이랜드,NAS,49,700,89800,89800,트레이더스,med,원자료 '글렌라사 포트소이'
+w031,아란 셰리 캐스크,Arran Sherry Cask,Arran,싱글몰트,스코틀랜드-아일랜드(아란),NAS,55,700,99800,99800,트레이더스,med,
+w032,탈리스커 10년,Talisker 10 Year Old,Talisker,싱글몰트,스코틀랜드-아일랜드(스카이),10,45.8,700,69800,69800,트레이더스,high,해풍·페퍼리 스모키
+w033,탈리스커 9년,Talisker 9 Year Old,Talisker,싱글몰트,스코틀랜드-아일랜드(스카이),9,,700,25980,25980,트레이더스,low,행사/소용량 추정-재확인
+w034,탈리스커 와일더 시즈,Talisker Wilder Seas,Talisker,싱글몰트,스코틀랜드-아일랜드(스카이),NAS,48.6,700,69400,74800,트레이더스,low,원자료 '와일드 블루'-제품명 재확인
+w035,라프로익 10년,Laphroaig 10 Year Old,Laphroaig,싱글몰트,스코틀랜드-아일라,10,43,700,69800,79800,트레이더스;데일리샷,high,피트 아이콘. 트레이더스 행사 최저가
+w036,라가불린 11년 오퍼맨 스위트피트,Lagavulin 11 Year Old Offerman Edition Sweet Peat,Lagavulin,싱글몰트,스코틀랜드-아일라,11,46,700,89800,89800,트레이더스,med,
+w037,오큰토션 10년,Auchentoshan 10 Year Old,Auchentoshan,싱글몰트,스코틀랜드-로우랜드,10,40,700,74800,74800,트레이더스,med,
+w038,글렌킨치 12년,Glenkinchie 12 Year Old,Glenkinchie,싱글몰트,스코틀랜드-로우랜드,12,43,700,59800,59800,트레이더스,med,위스키픽 ASR
+w039,스트라스클라이드 1990 31년 (옥타브),Duncan Taylor The Octave Strathclyde 1990 31 Year Old,Duncan Taylor,싱글그레인,스코틀랜드,31,,700,69800,69800,트레이더스,low,독립병입 추정·가격 OCR 재확인
+w040,뱅크홀 싱글몰트,Bankhall Single Malt,Bankhall,싱글몰트,미상,NAS,,700,29940,37980,트레이더스,low,음차 추정-브랜드/영문 재확인
+w041,몽키숄더,Monkey Shoulder,Monkey Shoulder,블렌디드몰트,스코틀랜드-스페이사이드,NAS,40,700,44980,50000,트레이더스;데일리샷,high,"몰트 블렌딩, 하이볼 애용"
+w042,조니워커 그린라벨 15년,Johnnie Walker Green Label 15 Year Old,Johnnie Walker,블렌디드몰트,스코틀랜드,15,43,700,67800,74800,트레이더스,high,
+w043,발렌타인 파이니스트,Ballantine's Finest,Ballantine's,블렌디드,스코틀랜드,NAS,40,700,25000,30000,트레이더스;이마트;데일리샷,high,블렌디드 입문 표준
+w044,발렌타인 10년,Ballantine's 10 Year Old,Ballantine's,블렌디드,스코틀랜드,10,40,700,39980,39980,트레이더스,high,
+w045,발렌타인 12년,Ballantine's 12 Year Old,Ballantine's,블렌디드,스코틀랜드,12,40,700,42000,42000,데일리샷,med,통상가 추정
+w046,발렌타인 싱글몰트 15년,Ballantine's Single Malt 15 Year Old,Ballantine's,싱글몰트,스코틀랜드,15,40,700,94800,94800,트레이더스,med,
+w047,발렌타인 21년,Ballantine's 21 Year Old,Ballantine's,블렌디드,스코틀랜드,21,40,700,224800,224800,트레이더스,high,
+w048,시바스 리갈 12년,Chivas Regal 12 Year Old,Chivas Regal,블렌디드,스코틀랜드,12,40,700,38000,38000,데일리샷,med,통상가 추정
+w049,조니워커 레드라벨,Johnnie Walker Red Label,Johnnie Walker,블렌디드,스코틀랜드,NAS,40,700,47980,54800,트레이더스,high,주로 1.75L 대용량
+w050,조니워커 블랙라벨 12년,Johnnie Walker Black Label 12 Year Old,Johnnie Walker,블렌디드,스코틀랜드,12,40,700,39980,53900,트레이더스;데일리샷,high,블렌디드 완성형
+w051,조니워커 더블블랙,Johnnie Walker Double Black,Johnnie Walker,블렌디드,스코틀랜드,NAS,40,700,59800,59800,트레이더스,high,스모키 강화
+w052,조니워커 블랙 루비,Johnnie Walker Black Ruby,Johnnie Walker,블렌디드,스코틀랜드,NAS,40,700,44800,54800,트레이더스,med,
+w053,조니워커 블루라벨,Johnnie Walker Blue Label,Johnnie Walker,블렌디드,스코틀랜드,NAS,40,700,189800,259800,트레이더스,high,
+w054,페이머스 그라우스,The Famous Grouse,The Famous Grouse,블렌디드,스코틀랜드,NAS,40,700,24900,25800,이마트;데일리샷,high,1L 가성비 하이볼 베이스
+w055,듀어스 12년,Dewar's 12 Year Old,Dewar's,블렌디드,스코틀랜드,12,40,700,39980,45980,트레이더스,high,'퍼스트필 버번캐스크' 변형 포함
+w056,듀어스 15년,Dewar's 15 Year Old,Dewar's,블렌디드,스코틀랜드,15,40,700,59400,59400,트레이더스,high,'파이노크 스페셜 리저브' 표기 변형 포함
+w057,듀어스 18년,Dewar's 18 Year Old,Dewar's,블렌디드,스코틀랜드,18,40,700,99800,99800,트레이더스,high,
+w058,커티삭 프로히비션,Cutty Sark Prohibition,Cutty Sark,블렌디드,스코틀랜드,NAS,50,700,39940,39940,트레이더스,med,원자료 '쿠티삭/커티삭'
+w059,로얄 살루트 21년,Royal Salute 21 Year Old,Royal Salute,블렌디드,스코틀랜드,21,40,700,179800,279800,트레이더스,high,그레인 에디션 변형 포함
+w060,노마드 아웃랜드 셰리 피니시,Nomad Outland Whisky Sherry Cask Finish,Nomad,블렌디드,스코틀랜드/스페인숙성,NAS,41.3,700,49980,49980,트레이더스,med,
+w061,제임슨,Jameson Standard,Jameson,블렌디드,아일랜드,NAS,40,700,27980,36000,트레이더스;이마트;데일리샷,high,아이리시 입문 만능
+w062,부쉬밀 15년 싱글몰트,Bushmills 15 Year Old Single Malt,Bushmills,싱글몰트,아일랜드,15,43,700,99800,99800,트레이더스,med,
+w063,골든블루 다이아몬드,Golden Blue Diamond,Golden Blue,기타(국산 위스키류),한국,NAS,36.5,450,39980,39980,트레이더스,high,국산 기타재제주(위스키류)
+w064,골든블루 사피루스,Golden Blue Sapphirus,Golden Blue,기타(국산 위스키류),한국,NAS,35,450,28980,28980,트레이더스,high,국산 기타재제주(위스키류)
+w065,짐빔 화이트,Jim Beam White Label,Jim Beam,버번,미국-켄터키,NAS,40,700,22000,27980,트레이더스;이마트;데일리샷,high,원자료 '진빔' 표기 포함. 버번 입문 최저가
+w066,잭다니엘 No.7,Jack Daniel's Old No.7,Jack Daniel's,테네시,미국-테네시,NAS,40,700,34980,39980,트레이더스,high,'테네시 전용잔 패키지' 동일품
+w067,잭다니엘 애플,Jack Daniel's Apple,Jack Daniel's,플레이버드,미국-테네시,NAS,35,700,37980,39980,트레이더스,high,가향(애플) 리큐어형
+w068,잭다니엘 라이,Jack Daniel's Tennessee Rye,Jack Daniel's,라이,미국-테네시,NAS,45,700,39980,39980,트레이더스,high,
+w069,버팔로 트레이스,Buffalo Trace,Buffalo Trace,버번,미국-켄터키,NAS,40,700,49800,49980,트레이더스,high,버번 가성비
+w070,1792 스몰배치,1792 Small Batch,1792,버번,미국-켄터키,NAS,46.85,700,39980,44980,트레이더스,high,
+w071,메이커스 마크,Maker's Mark,Maker's Mark,버번,미국-켄터키,NAS,45,700,,,트레이더스,low,가격 ASR 오류-재확인
+w072,우드포드 리저브,Woodford Reserve,Woodford Reserve,버번,미국-켄터키,NAS,43.2,700,83900,83900,코스트코,med,리서치 출처
+w073,와일드터키 8년,Wild Turkey 8 Year Old,Wild Turkey,버번,미국-켄터키,8,50.5,1000,,,트레이더스,low,가격 OCR 오류-재확인
+w074,와일드터키 레어브리드,Wild Turkey Rare Breed,Wild Turkey,버번,미국-켄터키,NAS,58.4,700,79800,79800,트레이더스,high,
+w075,와일드터키 켄터키 스피릿 싱글배럴,Wild Turkey Kentucky Spirit Single Barrel,Wild Turkey,버번,미국-켄터키,NAS,50.5,700,69400,69400,트레이더스,med,
+w076,이글 레어 10년,Eagle Rare 10 Year Old,Eagle Rare,버번,미국-켄터키,10,45,700,69800,69800,트레이더스,med,원자료 '이글레어 10년'
+w077,러셀스 리저브 싱글배럴,Russell's Reserve Single Barrel,Russell's Reserve,버번,미국-켄터키,NAS,55,750,89400,99800,트레이더스,high,
+w078,포 로지스 싱글배럴,Four Roses Single Barrel,Four Roses,버번,미국-켄터키,NAS,50,750,82800,82800,트레이더스,med,원자료 '포로지스'
+w079,포 로지스 스몰배치 셀렉트,Four Roses Small Batch Select,Four Roses,버번,미국-켄터키,NAS,52,750,116800,116800,트레이더스,med,원자료 '호로지스'
+w080,에반 윌리엄스 블랙,Evan Williams Black Label,Evan Williams,버번,미국-켄터키,NAS,43,700,29980,33980,트레이더스,high,1L/1.75L 변형 포함
+w081,에반 윌리엄스 12년,Evan Williams 12 Year Old,Evan Williams,버번,미국-켄터키,12,50.5,750,99800,99800,트레이더스,med,
+w082,에반 윌리엄스 14년,Evan Williams 14 Year Old,Evan Williams,버번,미국-켄터키,14,53.5,750,89400,89400,트레이더스,med,
+w083,산토리 가쿠빈,Suntory Whisky Kakubin,Suntory,블렌디드,일본,NAS,40,700,32980,39800,트레이더스,high,하이볼 대표
+w084,카발란 디스틸러리 셀렉트,Kavalan Distillery Select Single Malt,Kavalan,싱글몰트,대만,NAS,40,700,69800,69800,트레이더스,high,
+w085,글렌드로(?) 오드 투 더 밸리,(unverified) 'Ode to the Valley',미상,싱글몰트,스코틀랜드(추정),NAS,,700,89400,89400,트레이더스,low,ASR 음차 '더 글렌드로'-브랜드/영문 미확정·재확인
+w086,글렌드로(?) 오드 투 더 엠버스,(unverified) 'Ode to the Embers',미상,싱글몰트,스코틀랜드(추정),NAS,,700,99400,99400,트레이더스,low,ASR 음차-브랜드/영문 미확정·재확인
+w087,글렌드로(?) 오드 투 더 다크,(unverified) 'Ode to the Dark',미상,싱글몰트,스코틀랜드(추정),NAS,,700,159800,159800,트레이더스,low,ASR 음차-브랜드/영문 미확정·재확인
+w088,탈리스만 9년 포르투기즈 캐스크,Talisman 9 Year Old Portuguese Cask,Talisman,블렌디드,스코틀랜드(추정),9,,700,25980,25980,트레이더스,low,음차 추정-재확인

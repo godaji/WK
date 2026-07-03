@@ -1,0 +1,898 @@
+[
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/2330",
+    "floor_krw": 57000,
+    "name": "글렌리벳 12년",
+    "product_id": "w001"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/1649",
+    "floor_krw": 86000,
+    "name": "글렌리벳 15년",
+    "product_id": "w002"
+  },
+  {
+    "collected_at": "2026-06-16",
+    "dailyshot_url": null,
+    "floor_krw": 229800,
+    "name": "글렌리벳 17년 스몰배치",
+    "product_id": "w003"
+  },
+  {
+    "collected_at": "2026-06-16",
+    "dailyshot_url": "https://dailyshot.co/m/item/34653",
+    "floor_krw": 349800,
+    "name": "글렌리벳 19년 스몰배치",
+    "product_id": "w004"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/2329",
+    "floor_krw": 59000,
+    "name": "글렌피딕 12년",
+    "product_id": "w005"
+  },
+  {
+    "collected_at": "2026-06-16",
+    "dailyshot_url": "https://dailyshot.co/m/item/22707",
+    "floor_krw": 89800,
+    "name": "글렌피딕 14년 버번배럴",
+    "product_id": "w006"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/1650",
+    "floor_krw": 92000,
+    "name": "글렌피딕 15년",
+    "product_id": "w007"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/3190",
+    "floor_krw": 94000,
+    "name": "발베니 12년 더블우드",
+    "product_id": "w008"
+  },
+  {
+    "collected_at": "2026-05-05",
+    "dailyshot_url": "https://dailyshot.co/m/item/1652",
+    "floor_krw": 134900,
+    "name": "발베니 14년 캐리비안 캐스크",
+    "product_id": "w009"
+  },
+  {
+    "collected_at": "2026-05-27",
+    "dailyshot_url": null,
+    "floor_krw": 235800,
+    "name": "아벨라워 아부나흐",
+    "product_id": "w011"
+  },
+  {
+    "collected_at": "2026-05-30",
+    "dailyshot_url": "https://dailyshot.co/m/item/29166",
+    "floor_krw": 90000,
+    "name": "맥캘란 12년 더블캐스크",
+    "product_id": "w012"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/3155",
+    "floor_krw": 57000,
+    "name": "글렌그란트 12년",
+    "product_id": "w013"
+  },
+  {
+    "collected_at": "2026-06-01",
+    "dailyshot_url": "https://dailyshot.co/m/item/4307",
+    "floor_krw": 89400,
+    "name": "글렌그란트 15년",
+    "product_id": "w014"
+  },
+  {
+    "collected_at": "2026-05-13",
+    "dailyshot_url": null,
+    "floor_krw": 79800,
+    "name": "글렌그란트 익스플로레이션 No.1",
+    "product_id": "w015"
+  },
+  {
+    "collected_at": "2026-06-16",
+    "dailyshot_url": "https://dailyshot.co/m/item/5397",
+    "floor_krw": 169800,
+    "name": "탐두 15년",
+    "product_id": "w016"
+  },
+  {
+    "collected_at": "2026-06-01",
+    "dailyshot_url": null,
+    "floor_krw": 49940,
+    "name": "벤리악 10년",
+    "product_id": "w017"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/23310",
+    "floor_krw": 73000,
+    "name": "글렌드로낙 12년",
+    "product_id": "w018"
+  },
+  {
+    "collected_at": "2026-04-19",
+    "dailyshot_url": "https://dailyshot.co/m/item/3242",
+    "floor_krw": 89400,
+    "name": "오반 14년",
+    "product_id": "w019"
+  },
+  {
+    "collected_at": "2026-06-19",
+    "dailyshot_url": "https://dailyshot.co/m/item/26311",
+    "floor_krw": 66000,
+    "name": "글렌모렌지 12년",
+    "product_id": "w020"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/29554",
+    "floor_krw": 97000,
+    "name": "글렌모렌지 15년",
+    "product_id": "w021"
+  },
+  {
+    "collected_at": "2026-04-13",
+    "dailyshot_url": null,
+    "floor_krw": 99800,
+    "name": "글렌모렌지 익스플로전 No.1",
+    "product_id": "w022"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/3167",
+    "floor_krw": 99000,
+    "name": "달모어 12년",
+    "product_id": "w023"
+  },
+  {
+    "collected_at": "2026-04-13",
+    "dailyshot_url": "https://dailyshot.co/m/item/5485",
+    "floor_krw": 670800,
+    "name": "달모어 2005 빈티지",
+    "product_id": "w024"
+  },
+  {
+    "collected_at": "2026-04-13",
+    "dailyshot_url": null,
+    "floor_krw": 79400,
+    "name": "클라이넬리시 14년",
+    "product_id": "w025"
+  },
+  {
+    "collected_at": "2026-05-15",
+    "dailyshot_url": "https://dailyshot.co/m/item/7329",
+    "floor_krw": 82900,
+    "name": "로얄 브라클라 12년",
+    "product_id": "w026"
+  },
+  {
+    "collected_at": "2026-05-27",
+    "dailyshot_url": "https://dailyshot.co/m/item/32847",
+    "floor_krw": 75800,
+    "name": "에버펠디 16년",
+    "product_id": "w027"
+  },
+  {
+    "collected_at": "2026-06-01",
+    "dailyshot_url": null,
+    "floor_krw": 149800,
+    "name": "글렌고인 캐스크 스트렝스 배치171",
+    "product_id": "w028"
+  },
+  {
+    "collected_at": "2026-06-16",
+    "dailyshot_url": null,
+    "floor_krw": 79800,
+    "name": "글렌글라사 샌드엔드",
+    "product_id": "w029"
+  },
+  {
+    "collected_at": "2026-05-27",
+    "dailyshot_url": null,
+    "floor_krw": 89800,
+    "name": "글렌글라사 포트소이",
+    "product_id": "w030"
+  },
+  {
+    "collected_at": "2026-06-16",
+    "dailyshot_url": "https://dailyshot.co/m/item/4353",
+    "floor_krw": 99800,
+    "name": "아란 셰리 캐스크",
+    "product_id": "w031"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/1961",
+    "floor_krw": 66800,
+    "name": "탈리스커 10년",
+    "product_id": "w032"
+  },
+  {
+    "collected_at": "2026-04-13",
+    "dailyshot_url": null,
+    "floor_krw": 25980,
+    "name": "탈리스커 9년",
+    "product_id": "w033"
+  },
+  {
+    "collected_at": "2026-04-23",
+    "dailyshot_url": null,
+    "floor_krw": 137900,
+    "name": "탈리스커 와일더 시즈",
+    "product_id": "w034"
+  },
+  {
+    "collected_at": "2026-05-27",
+    "dailyshot_url": "https://dailyshot.co/m/item/12972",
+    "floor_krw": 69800,
+    "name": "라프로익 10년",
+    "product_id": "w035"
+  },
+  {
+    "collected_at": "2026-06-16",
+    "dailyshot_url": "https://dailyshot.co/m/item/33217",
+    "floor_krw": 79800,
+    "name": "라가불린 11년 오퍼맨 스위트피트",
+    "product_id": "w036"
+  },
+  {
+    "collected_at": "2026-04-13",
+    "dailyshot_url": null,
+    "floor_krw": 74800,
+    "name": "오큰토션 10년",
+    "product_id": "w037"
+  },
+  {
+    "collected_at": "2026-06-16",
+    "dailyshot_url": null,
+    "floor_krw": 59800,
+    "name": "글렌킨치 12년",
+    "product_id": "w038"
+  },
+  {
+    "collected_at": "2026-05-27",
+    "dailyshot_url": null,
+    "floor_krw": 69800,
+    "name": "스트라스클라이드 1990 31년 (옥타브)",
+    "product_id": "w039"
+  },
+  {
+    "collected_at": "2026-06-16",
+    "dailyshot_url": null,
+    "floor_krw": 29940,
+    "name": "뱅크홀 싱글몰트",
+    "product_id": "w040"
+  },
+  {
+    "collected_at": "2026-05-05",
+    "dailyshot_url": "https://dailyshot.co/m/item/3211",
+    "floor_krw": 42290,
+    "name": "몽키숄더",
+    "product_id": "w041"
+  },
+  {
+    "collected_at": "2026-04-25",
+    "dailyshot_url": "https://dailyshot.co/m/item/4888",
+    "floor_krw": 65900,
+    "name": "조니워커 그린라벨 15년",
+    "product_id": "w042"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/6066",
+    "floor_krw": 24900,
+    "name": "발렌타인 파이니스트",
+    "product_id": "w043"
+  },
+  {
+    "collected_at": "2026-04-23",
+    "dailyshot_url": "https://dailyshot.co/m/item/28927",
+    "floor_krw": 25800,
+    "name": "발렌타인 10년",
+    "product_id": "w044"
+  },
+  {
+    "collected_at": "2026-04-23",
+    "dailyshot_url": null,
+    "floor_krw": 85900,
+    "name": "발렌타인 12년",
+    "product_id": "w045"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/25654",
+    "floor_krw": 87000,
+    "name": "발렌타인 싱글몰트 15년",
+    "product_id": "w046"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/7130",
+    "floor_krw": 167000,
+    "name": "발렌타인 21년",
+    "product_id": "w047"
+  },
+  {
+    "collected_at": "2026-06-01",
+    "dailyshot_url": null,
+    "floor_krw": 63900,
+    "name": "시바스 리갈 12년",
+    "product_id": "w048"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/3181",
+    "floor_krw": 21900,
+    "name": "조니워커 레드라벨",
+    "product_id": "w049"
+  },
+  {
+    "collected_at": "2026-04-25",
+    "dailyshot_url": "https://dailyshot.co/m/item/2460",
+    "floor_krw": 36990,
+    "name": "조니워커 블랙라벨 12년",
+    "product_id": "w050"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/3249",
+    "floor_krw": 44000,
+    "name": "조니워커 더블블랙",
+    "product_id": "w051"
+  },
+  {
+    "collected_at": "2026-05-27",
+    "dailyshot_url": "https://dailyshot.co/m/item/25990",
+    "floor_krw": 44800,
+    "name": "조니워커 블랙 루비",
+    "product_id": "w052"
+  },
+  {
+    "collected_at": "2026-04-13",
+    "dailyshot_url": "https://dailyshot.co/m/item/5749",
+    "floor_krw": 189800,
+    "name": "조니워커 블루라벨",
+    "product_id": "w053"
+  },
+  {
+    "collected_at": "2026-04-23",
+    "dailyshot_url": null,
+    "floor_krw": 19800,
+    "name": "페이머스 그라우스",
+    "product_id": "w054"
+  },
+  {
+    "collected_at": "2026-04-01",
+    "dailyshot_url": "https://dailyshot.co/m/item/3695",
+    "floor_krw": 34980,
+    "name": "듀어스 12년",
+    "product_id": "w055"
+  },
+  {
+    "collected_at": "2026-06-16",
+    "dailyshot_url": "https://dailyshot.co/m/item/6778",
+    "floor_krw": 59400,
+    "name": "듀어스 15년",
+    "product_id": "w056"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/4781",
+    "floor_krw": 99000,
+    "name": "듀어스 18년",
+    "product_id": "w057"
+  },
+  {
+    "collected_at": "2026-06-16",
+    "dailyshot_url": null,
+    "floor_krw": 39800,
+    "name": "커티삭 프로히비션",
+    "product_id": "w058"
+  },
+  {
+    "collected_at": "2026-06-16",
+    "dailyshot_url": "https://dailyshot.co/m/item/3208",
+    "floor_krw": 179800,
+    "name": "로얄 살루트 21년",
+    "product_id": "w059"
+  },
+  {
+    "collected_at": "2026-06-16",
+    "dailyshot_url": null,
+    "floor_krw": 49980,
+    "name": "노마드 아웃랜드 셰리 피니시",
+    "product_id": "w060"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/2731",
+    "floor_krw": 26500,
+    "name": "제임슨",
+    "product_id": "w061"
+  },
+  {
+    "collected_at": "2026-06-16",
+    "dailyshot_url": null,
+    "floor_krw": 99800,
+    "name": "부쉬밀 15년 싱글몰트",
+    "product_id": "w062"
+  },
+  {
+    "collected_at": "2026-04-03",
+    "dailyshot_url": "https://dailyshot.co/m/item/4975",
+    "floor_krw": 39980,
+    "name": "골든블루 다이아몬드",
+    "product_id": "w063"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/24358",
+    "floor_krw": 25200,
+    "name": "골든블루 사피루스",
+    "product_id": "w064"
+  },
+  {
+    "collected_at": "2026-03-11",
+    "dailyshot_url": "https://dailyshot.co/m/item/4887",
+    "floor_krw": 19800,
+    "name": "짐빔 화이트",
+    "product_id": "w065"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/2576",
+    "floor_krw": 33900,
+    "name": "잭다니엘 No.7",
+    "product_id": "w066"
+  },
+  {
+    "collected_at": "2026-04-23",
+    "dailyshot_url": "https://dailyshot.co/m/item/18031",
+    "floor_krw": 37100,
+    "name": "잭다니엘 애플",
+    "product_id": "w067"
+  },
+  {
+    "collected_at": "2026-04-13",
+    "dailyshot_url": "https://dailyshot.co/m/item/30048",
+    "floor_krw": 39980,
+    "name": "잭다니엘 라이",
+    "product_id": "w068"
+  },
+  {
+    "collected_at": "2026-04-23",
+    "dailyshot_url": "https://dailyshot.co/m/item/10104",
+    "floor_krw": 38800,
+    "name": "버팔로 트레이스",
+    "product_id": "w069"
+  },
+  {
+    "collected_at": "2026-06-09",
+    "dailyshot_url": "https://dailyshot.co/m/item/14532",
+    "floor_krw": 39980,
+    "name": "1792 스몰배치",
+    "product_id": "w070"
+  },
+  {
+    "collected_at": "2026-06-16",
+    "dailyshot_url": null,
+    "floor_krw": 49980,
+    "name": "메이커스 마크",
+    "product_id": "w071"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/3243",
+    "floor_krw": 58000,
+    "name": "우드포드 리저브",
+    "product_id": "w072"
+  },
+  {
+    "collected_at": "2026-05-20",
+    "dailyshot_url": null,
+    "floor_krw": 49980,
+    "name": "와일드터키 8년",
+    "product_id": "w073"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/19596",
+    "floor_krw": 69000,
+    "name": "와일드터키 레어브리드",
+    "product_id": "w074"
+  },
+  {
+    "collected_at": "2026-06-09",
+    "dailyshot_url": "https://dailyshot.co/m/item/15332",
+    "floor_krw": 69400,
+    "name": "와일드터키 켄터키 스피릿 싱글배럴",
+    "product_id": "w075"
+  },
+  {
+    "collected_at": "2026-06-09",
+    "dailyshot_url": "https://dailyshot.co/m/item/11566",
+    "floor_krw": 69800,
+    "name": "이글 레어 10년",
+    "product_id": "w076"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/15504",
+    "floor_krw": 89000,
+    "name": "러셀스 리저브 싱글배럴",
+    "product_id": "w077"
+  },
+  {
+    "collected_at": "2026-05-19",
+    "dailyshot_url": null,
+    "floor_krw": 59800,
+    "name": "포 로지스 싱글배럴",
+    "product_id": "w078"
+  },
+  {
+    "collected_at": "2026-06-16",
+    "dailyshot_url": "https://dailyshot.co/m/item/10349",
+    "floor_krw": 116800,
+    "name": "포 로지스 스몰배치 셀렉트",
+    "product_id": "w079"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/5495",
+    "floor_krw": 24000,
+    "name": "에반 윌리엄스 블랙",
+    "product_id": "w080"
+  },
+  {
+    "collected_at": "2026-06-16",
+    "dailyshot_url": "https://dailyshot.co/m/item/21095",
+    "floor_krw": 79800,
+    "name": "에반 윌리엄스 12년",
+    "product_id": "w081"
+  },
+  {
+    "collected_at": "2026-04-13",
+    "dailyshot_url": null,
+    "floor_krw": 89400,
+    "name": "에반 윌리엄스 14년",
+    "product_id": "w082"
+  },
+  {
+    "collected_at": "2026-05-15",
+    "dailyshot_url": "https://dailyshot.co/m/item/2981",
+    "floor_krw": 27690,
+    "name": "산토리 가쿠빈",
+    "product_id": "w083"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/3256",
+    "floor_krw": 68900,
+    "name": "카발란 디스틸러리 셀렉트",
+    "product_id": "w084"
+  },
+  {
+    "collected_at": "2026-06-16",
+    "dailyshot_url": null,
+    "floor_krw": 89400,
+    "name": "글렌드로낙 오드 투 더 밸리",
+    "product_id": "w085"
+  },
+  {
+    "collected_at": "2026-06-01",
+    "dailyshot_url": null,
+    "floor_krw": 99400,
+    "name": "글렌드로낙 오드 투 더 엠버스",
+    "product_id": "w086"
+  },
+  {
+    "collected_at": "2026-05-27",
+    "dailyshot_url": null,
+    "floor_krw": 159800,
+    "name": "글렌드로낙 오드 투 더 다크",
+    "product_id": "w087"
+  },
+  {
+    "collected_at": "2026-05-19",
+    "dailyshot_url": "https://dailyshot.co/m/item/11181",
+    "floor_krw": 16980,
+    "name": "탈리스만 9년 포르투기즈 캐스크",
+    "product_id": "w088"
+  },
+  {
+    "collected_at": "2026-06-16",
+    "dailyshot_url": "https://dailyshot.co/m/item/30543",
+    "floor_krw": 69400,
+    "name": "탈리스커 와일드 블루",
+    "product_id": "w089"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/5395",
+    "floor_krw": 95000,
+    "name": "발렌타인 17년",
+    "product_id": "w090"
+  },
+  {
+    "collected_at": "2026-04-23",
+    "dailyshot_url": "https://dailyshot.co/m/item/6520",
+    "floor_krw": 49800,
+    "name": "잭다니엘 허니",
+    "product_id": "w091"
+  },
+  {
+    "collected_at": "2026-06-16",
+    "dailyshot_url": null,
+    "floor_krw": 169800,
+    "name": "발렌타인 싱글몰트 글렌버기 16년",
+    "product_id": "w092"
+  },
+  {
+    "collected_at": "2026-05-19",
+    "dailyshot_url": "https://dailyshot.co/m/item/4312",
+    "floor_krw": 119400,
+    "name": "글렌파클라스 15년",
+    "product_id": "w093"
+  },
+  {
+    "collected_at": "2026-05-15",
+    "dailyshot_url": null,
+    "floor_krw": 69900,
+    "name": "글렌피딕 12년 셰리 캐스크",
+    "product_id": "w094"
+  },
+  {
+    "collected_at": "2026-04-01",
+    "dailyshot_url": "https://dailyshot.co/m/item/12141",
+    "floor_krw": 59400,
+    "name": "러셀스 리저브 10년",
+    "product_id": "w095"
+  },
+  {
+    "collected_at": "2026-05-19",
+    "dailyshot_url": "https://dailyshot.co/m/item/23695",
+    "floor_krw": 89800,
+    "name": "글렌알라키 10년 루비 포트",
+    "product_id": "w096"
+  },
+  {
+    "collected_at": "2026-04-14",
+    "dailyshot_url": "https://dailyshot.co/m/item/4675",
+    "floor_krw": 79400,
+    "name": "주라 18년",
+    "product_id": "w097"
+  },
+  {
+    "collected_at": "2026-06-01",
+    "dailyshot_url": null,
+    "floor_krw": 133900,
+    "name": "커클랜드 15년 하일랜드 싱글몰트",
+    "product_id": "w098"
+  },
+  {
+    "collected_at": "2026-06-01",
+    "dailyshot_url": null,
+    "floor_krw": 34990,
+    "name": "커클랜드 시그니처 캐나디안",
+    "product_id": "w100"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/26316",
+    "floor_krw": 47500,
+    "name": "라프로익 오크 셀렉트",
+    "product_id": "w102"
+  },
+  {
+    "collected_at": "2026-03-11",
+    "dailyshot_url": null,
+    "floor_krw": 69800,
+    "name": "린도어스 1494 코어",
+    "product_id": "w103"
+  },
+  {
+    "collected_at": "2026-05-20",
+    "dailyshot_url": null,
+    "floor_krw": 119800,
+    "name": "맥캘란 셰리 오크 12년",
+    "product_id": "w104"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/6910",
+    "floor_krw": 245000,
+    "name": "발베니 16년 프렌치 오크",
+    "product_id": "w105"
+  },
+  {
+    "collected_at": "2026-06-20",
+    "dailyshot_url": "https://dailyshot.co/m/item/2624",
+    "floor_krw": 15400,
+    "name": "벨즈",
+    "product_id": "w106"
+  },
+  {
+    "collected_at": "2026-04-01",
+    "dailyshot_url": null,
+    "floor_krw": 44940,
+    "name": "부쉬밀 10년 싱글몰트",
+    "product_id": "w107"
+  },
+  {
+    "collected_at": "2026-03-11",
+    "dailyshot_url": null,
+    "floor_krw": 59400,
+    "name": "부쉬밀 12년 싱글몰트",
+    "product_id": "w108"
+  },
+  {
+    "collected_at": "2026-03-11",
+    "dailyshot_url": null,
+    "floor_krw": 19800,
+    "name": "블랙보트",
+    "product_id": "w109"
+  },
+  {
+    "collected_at": "2026-03-11",
+    "dailyshot_url": null,
+    "floor_krw": 69800,
+    "name": "에반 윌리엄스 싱글배럴",
+    "product_id": "w110"
+  },
+  {
+    "collected_at": "2026-03-11",
+    "dailyshot_url": null,
+    "floor_krw": 31800,
+    "name": "에반 윌리엄스 BIB",
+    "product_id": "w111"
+  },
+  {
+    "collected_at": "2026-03-16",
+    "dailyshot_url": null,
+    "floor_krw": 62900,
+    "name": "커클랜드 바틀드 인 본드 버번",
+    "product_id": "w112"
+  },
+  {
+    "collected_at": "2026-03-11",
+    "dailyshot_url": "https://dailyshot.co/m/item/3802",
+    "floor_krw": 53400,
+    "name": "코발 밀레",
+    "product_id": "w113"
+  },
+  {
+    "collected_at": "2026-03-11",
+    "dailyshot_url": null,
+    "floor_krw": 53400,
+    "name": "코발 라이",
+    "product_id": "w114"
+  },
+  {
+    "collected_at": "2026-04-23",
+    "dailyshot_url": null,
+    "floor_krw": 256600,
+    "name": "글렌피딕 18년",
+    "product_id": "w115"
+  },
+  {
+    "collected_at": "2026-04-23",
+    "dailyshot_url": null,
+    "floor_krw": 78000,
+    "name": "주라 10년",
+    "product_id": "w116"
+  },
+  {
+    "collected_at": "2026-04-23",
+    "dailyshot_url": null,
+    "floor_krw": 89900,
+    "name": "주라 12년 셰리 캐스크",
+    "product_id": "w117"
+  },
+  {
+    "collected_at": "2026-04-23",
+    "dailyshot_url": null,
+    "floor_krw": 99800,
+    "name": "탈리스커 디스틸러스 에디션",
+    "product_id": "w118"
+  },
+  {
+    "collected_at": "2026-04-23",
+    "dailyshot_url": null,
+    "floor_krw": 16800,
+    "name": "그란츠 트리플 우드",
+    "product_id": "w119"
+  },
+  {
+    "collected_at": "2026-04-23",
+    "dailyshot_url": null,
+    "floor_krw": 74000,
+    "name": "글렌그란트 아보랄리스",
+    "product_id": "w120"
+  },
+  {
+    "collected_at": "2026-04-23",
+    "dailyshot_url": null,
+    "floor_krw": 67100,
+    "name": "네이키드 몰트",
+    "product_id": "w121"
+  },
+  {
+    "collected_at": "2026-04-23",
+    "dailyshot_url": null,
+    "floor_krw": 47500,
+    "name": "듀어스 캐리비안 스무스 8년",
+    "product_id": "w122"
+  },
+  {
+    "collected_at": "2026-04-23",
+    "dailyshot_url": null,
+    "floor_krw": 25800,
+    "name": "라벨 5",
+    "product_id": "w123"
+  },
+  {
+    "collected_at": "2026-04-23",
+    "dailyshot_url": null,
+    "floor_krw": 267500,
+    "name": "발렌타인 싱글몰트 글렌버기 18년",
+    "product_id": "w124"
+  },
+  {
+    "collected_at": "2026-04-23",
+    "dailyshot_url": null,
+    "floor_krw": 78500,
+    "name": "발렌타인 마스터즈",
+    "product_id": "w125"
+  },
+  {
+    "collected_at": "2026-04-23",
+    "dailyshot_url": null,
+    "floor_krw": 76100,
+    "name": "스모크헤드 오리지널",
+    "product_id": "w126"
+  },
+  {
+    "collected_at": "2026-04-23",
+    "dailyshot_url": null,
+    "floor_krw": 45800,
+    "name": "스카치블루 17년",
+    "product_id": "w127"
+  },
+  {
+    "collected_at": "2026-04-23",
+    "dailyshot_url": null,
+    "floor_krw": 27900,
+    "name": "스카치블루 클래식",
+    "product_id": "w128"
+  },
+  {
+    "collected_at": "2026-04-23",
+    "dailyshot_url": null,
+    "floor_krw": 24800,
+    "name": "윈저 12년",
+    "product_id": "w129"
+  },
+  {
+    "collected_at": "2026-04-23",
+    "dailyshot_url": null,
+    "floor_krw": 15800,
+    "name": "칼라일",
+    "product_id": "w130"
+  },
+  {
+    "collected_at": "2026-05-15",
+    "dailyshot_url": null,
+    "floor_krw": 144900,
+    "name": "달모어 12년 셰리캐스크",
+    "product_id": "w146"
+  }
+]

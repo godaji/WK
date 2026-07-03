@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<!-- 모바일 우선: 360~390px. viewport-fit=cover + safe-area, 더블탭 줌 방지 -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<!-- 보드 발행 게이트 c7405e7d: 스테이징 noindex 유지 (Jekyll layout 우회 정적 파일이라 직접 명시) -->
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#3a2a1a">
+<meta name="description" content="절약 행동을 1탭으로 적립해 목표 위스키 실시간 최저가까지 진행률로 보는 개인용 적금 앱.">
+<title>캐스크 적금 — Dram Jar</title>
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./icons/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="캐스크 적금">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div id="app">
+  <!-- ===== 목표(적금통) 카드 (상단) ===== -->
+  <section class="card goal" id="goalCard" aria-label="목표 위스키 적금통">
+    <!-- 활성 목표 없음 → 새 적금통 만들기 -->
+    <div class="goal-create" id="goalCreate" hidden>
+      <p class="gc-lead">목표 위스키를 정하면<br>절약이 그 병을 위한 <b>적금통</b>이 됩니다.</p>
+      <button class="gc-cta" id="createGoalBtn" type="button">🎯 목표 정하기</button>
+      <p class="gc-cabinet-hint" id="gcCabinetHint" hidden></p>
+    </div>
+    <!-- 활성 목표(적금통) -->
+    <div class="goal-body" id="goalBody" hidden>
+      <div class="goal-head">
+        <button class="goal-pick" id="goalPick" type="button" aria-haspopup="dialog">
+          <span class="goal-name" id="goalName">—</span>
+          <span class="goal-chev" aria-hidden="true">바꾸기 ▾</span>
+        </button>
+      </div>
+      <div class="progress-wrap" aria-hidden="true">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
+      <div class="goal-stats">
+        <div class="pct" id="goalPct">0%</div>
+        <div class="remain">남은 금액 <strong id="goalRemain">—</strong></div>
+      </div>
+      <div class="goal-floor">
+        현재 국내 최저가 <strong id="goalFloor">—</strong>
+        <span class="floor-date" id="goalCollected"></span>
+      </div>
+      <div class="goal-cta-row" id="goalAchieved" hidden>
+        <a class="cta-buy" id="ctaBuy" href="#" target="_blank" rel="noopener">🥃 사러 가기</a>
+        <button class="cta-redeem" id="ctaRedeem" type="button">구매 완료 · 다음 목표 →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 적립금 합계 (중단) ===== -->
+  <section class="card total" aria-label="적립금 합계">
+    <div class="total-label" id="totalLabel">이 적금통에 모은 돈</div>
+    <div class="total-amount"><span id="totalAmount">0</span><span class="won">원</span></div>
+    <div class="total-sub">
+      <span>이번 주 <strong id="weekAmount">0</strong></span>
+      <span>이번 달 <strong id="monthAmount">0</strong></span>
+      <button class="cabinet-open" id="cabinetOpen" type="button" hidden>🏆 <strong id="cabinetCount">0</strong></button>
+    </div>
+    <button class="undo-last" id="undoLast" type="button" hidden>↺ 방금 적립 되돌리기</button>
+  </section>
+
+  <!-- ===== 절약 항목 버튼 그리드 (하단 엄지존) ===== -->
+  <section class="grid-wrap" aria-label="절약 항목">
+    <div class="grid-head">
+      <span class="grid-hint">탭해서 적립 · 길게 눌러 단가 수정</span>
+      <div class="grid-head-actions">
+        <!-- 매뉴얼: 새 창(탭)으로 사용법 블로그 글 열기 -->
+        <a class="manual-open" id="manualOpen"
+           href="https://godaji.github.io/CaskCode/2026/06/14/frugal-app-guide/"
+           target="_blank" rel="noopener">📖 사용법</a>
+        <button class="history-open" id="historyOpen" type="button">🧾 내역</button>
+      </div>
+    </div>
+    <div class="grid" id="itemGrid"></div>
+  </section>
+
+  <!-- ===== 홈 화면에 추가 (A2HS / PWA install) — 평소 숨김, 설치 가능 시 노출 ===== -->
+  <button class="install-btn" id="installBtn" type="button" hidden>📲 홈 화면에 추가</button>
+</div>
+
+<!-- ===== 토스트 ===== -->
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<!-- ===== 목표 위스키 선택 시트 ===== -->
+<div class="sheet-backdrop" id="goalSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="목표 위스키 선택">
+    <div class="sheet-head"><span>목표 위스키</span><button class="sheet-close" data-close="goalSheet" type="button">✕</button></div>
+    <div class="sheet-body" id="goalList"></div>
+  </div>
+</div>
+
+<!-- ===== 단가 편집 시트 ===== -->
+<div class="sheet-backdrop" id="rateSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="단가 편집">
+    <div class="sheet-head"><span id="rateTitle">단가 편집</span><button class="sheet-close" data-close="rateSheet" type="button">✕</button></div>
+    <div class="sheet-body">
+      <div class="stepper">
+        <button class="step-btn" id="rateMinus" type="button" aria-label="감소">－</button>
+        <div class="step-val"><span id="rateVal">0</span><span class="won">원</span></div>
+        <button class="step-btn" id="ratePlus" type="button" aria-label="증가">＋</button>
+      </div>
+      <button class="sheet-save" id="rateSave" type="button">저장</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 완료한 목표(캐비닛) 시트 ===== -->
+<div class="sheet-backdrop" id="cabinetSheet" hidden>
+  <div class="sheet tall" role="dialog" aria-modal="true" aria-label="완료한 목표">
+    <div class="sheet-head"><span>🏆 모은 캐비닛</span><button class="sheet-close" data-close="cabinetSheet" type="button">✕</button></div>
+    <div class="sheet-body" id="cabinetList"></div>
+  </div>
+</div>
+
+<!-- ===== iOS 홈 화면에 추가 안내 시트 (Safari는 beforeinstallprompt 미발생) ===== -->
+<div class="sheet-backdrop" id="iosInstallSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="홈 화면에 추가 안내">
+    <div class="sheet-head"><span>📲 홈 화면에 추가</span><button class="sheet-close" data-close="iosInstallSheet" type="button">✕</button></div>
+    <div class="sheet-body">
+      <p class="ios-lead">Safari에서 두 번 탭하면 바탕화면 앱처럼 쓸 수 있어요.</p>
+      <ol class="ios-steps">
+        <li>화면 하단의 <b>공유 버튼</b> <span class="ios-share" aria-hidden="true">⬆️</span> 을 누르세요.</li>
+        <li>메뉴를 내려 <b>‘홈 화면에 추가’</b> 를 선택하세요.</li>
+        <li>오른쪽 위 <b>‘추가’</b> 를 누르면 끝.</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 히스토리 시트 ===== -->
+<div class="sheet-backdrop" id="historySheet" hidden>
+  <div class="sheet tall" role="dialog" aria-modal="true" aria-label="적립 내역">
+    <div class="sheet-head"><span>적립 내역</span><button class="sheet-close" data-close="historySheet" type="button">✕</button></div>
+    <div class="sheet-body" id="historyList"></div>
+  </div>
+</div>
+
+<script src="./app.js"></script>
+</body>
+</html>

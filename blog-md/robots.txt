@@ -1,0 +1,11 @@
+---
+# CMPA-270: 선택 noindex go-live (보드 승인 2026-06-09).
+# 실효 게이트=페이지별 robots 메타(default.html 기본값=noindex,nofollow).
+# layout:none — 전역 defaults(layout:default)가 robots.txt 를 HTML 로 감싸지 않게.
+layout: none
+permalink: /robots.txt
+sitemap: false
+---
+User-agent: *
+Allow: /
+Sitemap: https://godaji.github.io/CaskCode/sitemap.xml

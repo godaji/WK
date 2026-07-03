@@ -1,0 +1,31 @@
+{
+  "run_date": "2026-06-14",
+  "run_dir": "runs/2026-06-14",
+  "assets": {
+    "marts": [
+      "runs/2026-06-14/marts/2026-06_dailyshot.csv"
+    ],
+    "dailyshot": [
+      "runs/2026-06-14/dailyshot/2026-06_dailyshot.csv"
+    ],
+    "overseas": [
+      "runs/2026-06-14/overseas/2026-06_hk_whisky_poc.csv",
+      "runs/2026-06-14/overseas/fx_snapshot.csv",
+      "runs/2026-06-14/overseas/fx_latest.json"
+    ],
+    "normalized": [
+      "runs/2026-06-14/normalized/normalized_prices.csv",
+      "runs/2026-06-14/normalized/normalized_all_rows.csv",
+      "runs/2026-06-14/normalized/master-sku.csv",
+      "runs/2026-06-14/normalized/whisky-aliases.csv"
+    ],
+    "reports": [
+      "runs/2026-06-14/reports/2026-06_위스키가격리포트_2026-06-14.md",
+      "runs/2026-06-14/reports/CMPA-31_정규화검증리포트.md"
+    ]
+  },
+  "copied": 11,
+  "missing": [
+    "data/whisky-prices/*_jp_shopify_poc.csv"
+  ]
+}

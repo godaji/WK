@@ -1,0 +1,46 @@
+---
+layout: default
+---
+<h1>{{ page.title }}</h1>
+{% if page.date %}<p class="when">{{ page.date | date: "%Y-%m-%d" }}</p>{% endif %}
+{% if page.byline %}<p class="byline">by {{ page.byline }}</p>{% elsif page.categories contains 'tasting' %}<p class="byline">by CaskCode</p>{% else %}<p class="byline">by Dram</p>{% endif %}
+{{ content }}
+{% assign _cs = page.series %}
+{% if _cs == nil or _cs == '' %}
+  {% if page.kind == 'patch' %}{% assign _cs = 'shilla-patch' %}
+  {% elsif page.kind == 'base' %}{% assign _cs = 'price-base' %}
+  {% else %}{% assign _cs = page.categories | first %}{% endif %}
+{% endif %}
+{% assign _series = '' | split: '' %}
+{% for p in site.posts %}
+  {% assign _ps = p.series %}
+  {% if _ps == nil or _ps == '' %}
+    {% if p.kind == 'patch' %}{% assign _ps = 'shilla-patch' %}
+    {% elsif p.kind == 'base' %}{% assign _ps = 'price-base' %}
+    {% else %}{% assign _ps = p.categories | first %}{% endif %}
+  {% endif %}
+  {% if _ps == _cs %}{% assign _series = _series | push: p %}{% endif %}
+{% endfor %}
+{% assign _idx = -1 %}
+{% for p in _series %}{% if p.url == page.url %}{% assign _idx = forloop.index0 %}{% break %}{% endif %}{% endfor %}
+{% assign _prev = nil %}{% assign _next = nil %}
+{% if _idx >= 0 %}
+  {% assign _pi = _idx | plus: 1 %}{% assign _ni = _idx | minus: 1 %}
+  {% if _pi < _series.size %}{% assign _prev = _series[_pi] %}{% endif %}
+  {% if _ni >= 0 %}{% assign _next = _series[_ni] %}{% endif %}
+{% endif %}
+{% case _cs %}
+  {% when 'shilla-patch' %}{% assign _slabel = '신라면세 가격변동' %}
+  {% when 'price-base' %}{% assign _slabel = '면세 가성비 본편' %}
+  {% when 'wprice' %}{% assign _slabel = '위스키 가격정보' %}
+  {% when 'tasting' %}{% assign _slabel = '구매/시음/숙성 노트' %}
+  {% when 'data' %}{% assign _slabel = '데이터 분석' %}
+  {% when 'dev' %}{% assign _slabel = '개발' %}
+  {% else %}{% assign _slabel = nil %}{% endcase %}
+{% if _prev or _next %}
+{% if _slabel %}<p class="pn-series">📚 {{ _slabel }} 시리즈</p>{% endif %}
+<nav class="post-nav">
+  {% if _prev %}<a class="pn-link pn-prev" href="{{ _prev.url | relative_url }}"><span class="pn-dir">← 이전 글</span><span class="pn-t">{{ _prev.title }}</span></a>{% else %}<span class="pn-link pn-empty"></span>{% endif %}
+  {% if _next %}<a class="pn-link pn-next" href="{{ _next.url | relative_url }}"><span class="pn-dir">다음 글 →</span><span class="pn-t">{{ _next.title }}</span></a>{% else %}<span class="pn-link pn-empty"></span>{% endif %}
+</nav>
+{% endif %}

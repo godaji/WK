@@ -1,0 +1,18 @@
+{
+  // ─── 블로그 글쓰기: 스크린샷 붙여넣기(Ctrl/Cmd+V) → 자동으로 이미지 파일 저장 ───
+  // CMPA-223 (보드 요청). VSCode 에서 blog-md/_posts(또는 _drafts) 의 .md 를 열고
+  // 캡처 이미지를 본문에 붙여넣으면, 이미지가 blog-md/assets/img/<글파일명>/ 에 저장되고
+  // 마크다운 이미지 링크가 자동 삽입된다.
+  "markdown.editor.filePaste.enabled": true,
+  "markdown.editor.filePaste.copyIntoWorkspace": "mediaFiles",
+
+  // destination 키 = 현재 문서 경로 glob, 값 = 복사 위치.
+  //   값이 '/' 로 시작하면 워크스페이스 루트 기준, 아니면 '현재 문서 폴더' 기준.
+  //   '../assets/img/...' 는 문서(_posts/ 또는 _drafts/) 기준 → 항상 blog-md/assets/img/ 로 떨어진다.
+  //   (WK 를 열든 blog-md 를 열든 동일하게 동작 — 보드 원안의 images/ 대신 Jekyll 이 실제 서빙하는
+  //    assets/img/ 로 보냄. _posts/images/ 는 Jekyll 이 발행하지 않아 라이브에서 깨짐.)
+  "markdown.copyFiles.destination": {
+    "**/_posts/**/*": "../assets/img/${documentBaseName}/",
+    "**/_drafts/**/*": "../assets/img/${documentBaseName}/"
+  }
+}

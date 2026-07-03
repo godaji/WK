@@ -1,0 +1,6 @@
+# 영상 다운로드·프레임·crop 은 재생성 가능한 무거운 임시 산출물 — 커밋 제외.
+# (E2E 증거용 manifest.csv·result.csv·sample_crops 는 예외로 명시 추적)
+_demo/*/frames/*.jpg
+_demo/*/crops/*.jpg
+_demo/*/*.mp4
+_demo/*/*.webm

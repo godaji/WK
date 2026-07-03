@@ -1,0 +1,33 @@
+{
+  "run_date": "2026-06-11",
+  "run_dir": "runs/2026-06-11",
+  "assets": {
+    "shilla_data": [
+      "runs/2026-06-11/shilla_data/구매추천_CMPA134_2026-06-11.csv",
+      "runs/2026-06-11/shilla_data/면세_국내최저대비_저렴_2026-06-11.csv",
+      "runs/2026-06-11/shilla_data/면세_매력도_매칭_2026-06-11.csv",
+      "runs/2026-06-11/shilla_data/신라면세_버번위스키_TOP_2026-06-11.csv",
+      "runs/2026-06-11/shilla_data/신라면세_버번위스키_매력도_2026-06-11.csv",
+      "runs/2026-06-11/shilla_data/신라면세_셰리위스키_TOP_2026-06-11.csv",
+      "runs/2026-06-11/shilla_data/신라면세_셰리위스키_매력도_2026-06-11.csv",
+      "runs/2026-06-11/shilla_data/신라면세_위스키_2026-06-11.csv",
+      "runs/2026-06-11/shilla_data/신라면세_주류전체_2026-06-11.csv",
+      "runs/2026-06-11/shilla_data/신라면세_피트위스키_2026-06-11.csv",
+      "runs/2026-06-11/shilla_data/신라면세_피트위스키_TOP20_2026-06-11.csv",
+      "runs/2026-06-11/shilla_data/신라면세_피트위스키_매력도_2026-06-11.csv",
+      "runs/2026-06-11/shilla_data/신라면세_피트위스키_원화구간_2026-06-11.csv",
+      "runs/2026-06-11/shilla_data/신라면세_피트위스키_해외비교_2026-06-11_v2.csv",
+      "runs/2026-06-11/shilla_data/예산대별_TOP_2026-06-11.csv"
+    ],
+    "shilla_report": [
+      "runs/2026-06-11/shilla_report/가격변동_2026-06-10_to_2026-06-11.md",
+      "runs/2026-06-11/shilla_report/면세_가성비_매력도_2026-06-11.md",
+      "runs/2026-06-11/shilla_report/면세_국내최저대비_저렴_2026-06-11.md",
+      "runs/2026-06-11/shilla_report/면세위스키_리포트_2026-06-11.html",
+      "runs/2026-06-11/shilla_report/예산대별_TOP_2026-06-11.md",
+      "runs/2026-06-11/shilla_report/피트위스키_리포트_2026-06-11.md"
+    ]
+  },
+  "copied": 21,
+  "missing": []
+}

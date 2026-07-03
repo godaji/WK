@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Whisky Tasting · 2026.06.04 (목)</title>
+<meta name="description" content="합정 위스키 테이스팅 2026.06.04 (목) — 20 ml × 10 드램, 피티드 & 셰리">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0f1115;color:#e8eaed;
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+ line-height:1.55;font-size:16px;-webkit-text-size-adjust:100%}
+.wrap{max-width:680px;margin:0 auto;padding:28px 18px 72px}
+header{text-align:center;margin-bottom:18px}
+.kicker{letter-spacing:.28em;font-size:.72rem;color:#9aa0aa;text-transform:uppercase}
+h1{font-size:1.7rem;margin:.25em 0 .1em;color:#e8eaed}
+h1 .gold{color:#e0a84e}
+.sub{color:#9aa0aa;font-size:.92rem;margin:.2em 0}
+.flight-line{display:inline-block;margin-top:.5em;padding:.25em .8em;border:1px solid #2a2e37;border-radius:999px;
+ color:#cfd3da;font-size:.82rem}
+.tabs{position:sticky;top:0;z-index:5;display:flex;gap:8px;margin:8px 0 14px;
+ padding:10px 0 12px;background:#0f1115;box-shadow:0 8px 12px -8px #0f1115}
+.tab{flex:1;padding:11px 8px;border:1px solid #2a2e37;background:#161922;color:#cfd3da;
+ border-radius:12px;font-size:.95rem;font-weight:600;cursor:pointer}
+.tab.active{background:#e0a84e;color:#1a1205;border-color:#e0a84e}
+.flight{display:none}
+.flight.active{display:block}
+.blurb{color:#b6bcc6;font-size:.9rem;background:#141821;border-left:3px solid #e0a84e;
+ padding:10px 13px;border-radius:0 8px 8px 0;margin:0 0 18px}
+.sec{color:#e0a84e;font-size:1.05rem;letter-spacing:.04em;margin:1.5em 0 .2em;
+ border-bottom:1px solid #2a2e37;padding-bottom:.3em;scroll-margin-top:6px}
+.sec .seng{color:#8a909a;font-size:.76rem;font-weight:500;letter-spacing:.04em}
+.sechint{color:#8a909a;font-size:.82rem;margin:.1em 0 1em}
+.howto{background:#141821;border:1px solid #2a2e37;border-radius:14px;padding:15px 16px;margin:8px 0 6px}
+.howto .ht-title{color:#e0a84e;font-weight:700;font-size:.98rem;margin-bottom:.5em}
+.howto p{margin:.45em 0;color:#cdd2da;font-size:.92rem}
+.howto ol{margin:.6em 0;padding-left:1.3em}
+.howto li{margin:.6em 0;color:#cdd2da;font-size:.92rem;line-height:1.6}
+.howto b{color:#f0d9a8}
+.howto .ht-hint{color:#7fd1b9;font-weight:600;margin-top:.7em}
+.card{background:#141821;border:1px solid #20242e;border-radius:14px;padding:14px 15px;margin:10px 0}
+.card.finale{border-color:#e0a84e;background:#1a1812;box-shadow:0 0 0 1px #e0a84e33}
+.chead{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.cno{color:#6b7280;font-variant-numeric:tabular-nums;font-weight:700;font-size:.9rem;min-width:1.6em}
+.cname{font-weight:700;font-size:1.05rem;flex:1 1 60%}
+.cabv{color:#e0a84e;font-size:.85rem;font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
+.badge{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.04em;color:#1a1205;
+ background:#e0a84e;border-radius:6px;padding:1px 7px;vertical-align:middle}
+.cmeta{color:#9aa0aa;font-size:.82rem;margin:.25em 0 .5em}
+.cnotes{color:#cdd2da;font-size:.9rem}
+.seclabel{color:#e0a84e;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+ text-align:center;margin:34px 0 2px}
+.venue{background:#141821;border:1px solid #20242e;border-radius:16px;overflow:hidden;margin:8px 0 4px}
+.venue .map{width:100%;height:auto;display:block;background:#10141c}
+.venue .vbody{padding:15px 16px 17px}
+.vname{font-size:1.2rem;font-weight:700}
+.varea{color:#e0a84e;font-size:.82rem;margin:.15em 0 .5em}
+.vaddr{color:#b6bcc6;font-size:.9rem}
+.vbtns{display:flex;gap:8px;margin-top:13px}
+.btn{flex:1;text-align:center;padding:12px;border-radius:11px;text-decoration:none;font-weight:600;font-size:.92rem}
+.btn.primary{background:#03c75a;color:#06210f}
+.btn.ghost{border:1px solid #2a2e37;color:#cfd3da}
+.btn:active{opacity:.85}
+.note{margin:26px 0 0;color:#8a909a;font-size:.8rem;text-align:center;line-height:1.7}
+footer{margin-top:30px;text-align:center;color:#5b616b;font-size:.75rem}
+</style>
+</head>
+<body><div class="wrap">
+<header>
+  <div class="kicker">Whisky Night · 합정</div>
+  <h1>The <span class="gold">Collection</span></h1>
+  <p class="sub">2026.06.04 (목) · 합정 · 서교동 · 제이원빌딩</p>
+  <span class="flight-line">20 ml × 10 Drams</span>
+</header>
+
+<div class="seclabel">장소 · Venue</div>
+<div class="venue">
+  <svg class="map" viewBox="0 0 600 360" role="img"
+ aria-label="양화로(합정역↔홍대입구) 약도: 합정역 3번 출구에서 두다지 회사(제이원빌딩)까지" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="360" fill="#10141c"/>
+  <!-- 방위 -->
+  <g transform="translate(46,48)">
+    <line x1="0" y1="15" x2="0" y2="-12" stroke="#9aa0aa" stroke-width="2"/>
+    <polygon points="0,-20 -5,-9 5,-9" fill="#9aa0aa"/>
+    <text x="0" y="33" fill="#9aa0aa" font-size="13" text-anchor="middle">N</text>
+  </g>
+  <!-- 양화로 = 합정↔홍대 메인도로 -->
+  <path d="M55 300 Q300 200 552 100" stroke="#39414e" stroke-width="28" fill="none" stroke-linecap="round"/>
+  <path d="M55 300 Q300 200 552 100" stroke="#5b6675" stroke-width="2.5" stroke-dasharray="13 13" fill="none"/>
+  <text x="402" y="138" fill="#aeb6c2" font-size="15" font-weight="700" text-anchor="middle"
+   transform="rotate(-21 402 138)">양화로</text>
+  <text x="402" y="156" fill="#7c8492" font-size="11" text-anchor="middle"
+   transform="rotate(-21 402 156)">합정 ↔ 홍대 메인도로</text>
+  <!-- 도보 경로: 3번 출구 → 회사 -->
+  <path d="M166 258 Q232 286 298 260" stroke="#7fd1b9" stroke-width="3.5"
+   stroke-dasharray="2 10" stroke-linecap="round" fill="none"/>
+  <text x="214" y="302" fill="#7fd1b9" font-size="13" font-weight="600" text-anchor="middle">도보 약 5분 · 450m</text>
+  <!-- 합정역 -->
+  <g transform="translate(104,278)">
+    <circle r="22" fill="#10141c" stroke="#2db400" stroke-width="5"/>
+    <text x="0" y="7" fill="#2db400" font-size="19" font-weight="800" text-anchor="middle">M</text>
+    <text x="0" y="49" fill="#e8eaed" font-size="15" font-weight="700" text-anchor="middle">합정역</text>
+    <text x="0" y="67" fill="#9aa0aa" font-size="11" text-anchor="middle">2 · 6호선</text>
+  </g>
+  <!-- 홍대입구역 -->
+  <g transform="translate(524,108)">
+    <circle r="22" fill="#10141c" stroke="#2db400" stroke-width="5"/>
+    <text x="0" y="7" fill="#2db400" font-size="19" font-weight="800" text-anchor="middle">M</text>
+    <text x="0" y="49" fill="#e8eaed" font-size="15" font-weight="700" text-anchor="middle">홍대입구역</text>
+    <text x="0" y="67" fill="#9aa0aa" font-size="11" text-anchor="middle">홍대 방면</text>
+  </g>
+  <!-- 3번 출구 -->
+  <g transform="translate(165,255)">
+    <rect x="-19" y="-16" width="38" height="32" rx="7" fill="#e0a84e"/>
+    <text x="0" y="7" fill="#1a1205" font-size="17" font-weight="800" text-anchor="middle">3</text>
+    <text x="0" y="-24" fill="#e0a84e" font-size="12" font-weight="700" text-anchor="middle">3번 출구</text>
+  </g>
+  <!-- 회사 핀 (라벨은 오른쪽 빈 공간으로) -->
+  <g transform="translate(300,258)">
+    <path d="M0 6 C -15 -13 -15 -30 0 -38 C 15 -30 15 -13 0 6 Z" fill="#e0584e" stroke="#fff" stroke-width="1.6"/>
+    <circle cx="0" cy="-24" r="6" fill="#fff"/>
+    <text x="14" y="-13" fill="#e8eaed" font-size="15" font-weight="700">두다지 (회사)</text>
+    <text x="14" y="4" fill="#9aa0aa" font-size="12">제이원빌딩 1층</text>
+  </g>
+</svg>
+  <div class="vbody">
+    <div class="vname">제이원빌딩</div>
+    <div class="varea">합정 · 서교동</div>
+    <div class="vaddr">서울 마포구 서교동 395-143</div>
+    <div class="vbtns">
+      <a class="btn primary" href="https://naver.me/x1m0L9p4" target="_blank" rel="noopener">📍 네이버 지도</a>
+      <a class="btn ghost" href="#menu">메뉴 보기 ↓</a>
+    </div>
+  </div>
+</div>
+
+<div class="seclabel" id="menu">메뉴 · Tasting Menu</div>
+
+<div class="howto">
+  <div class="ht-title">🥃 오늘의 테이스팅 안내</div>
+  <p>오늘 시음은 <b>두 파트</b>로 진행됩니다.</p>
+  <ol>
+    <li><b>다 함께 — 듀어스 키몰트 &amp; 듀어스</b><br>
+      먼저 모두 같이 듀어스의 키몰트 3종과 그것이 어우러진 블렌드 ‘듀어스’를 차례로 음미합니다.
+      원액에서 블렌드로 이어지는 여정을 함께 느껴봐요.</li>
+    <li><b>취향대로 — 피트 or 셰리</b><br>
+      이후엔 입맛 따라 나뉩니다. <b>스모키한 피트</b>가 좋으시면 🔥 피티드,
+      <b>달콤한 셰리·과실</b>이 좋으시면 🍷 셰리 플라이트로 이어집니다.</li>
+  </ol>
+  <p class="ht-hint">아래 PART 1을 먼저 보시고, PART 2에서 원하시는 탭을 선택하세요 👇</p>
+</div>
+
+<h3 class="sec">PART 1 · 다 함께 <span class="seng">Dewar's Family</span></h3>
+<p class="sechint">올트모어 → 아버펠디 → 로얄 브라크라 → 듀어스 : 원액에서 블렌드로 거슬러 올라가는 여정</p>
+<div class="card">
+  <div class="chead">
+    <span class="cno">01</span>
+    <span class="cname">올트모어 18 <span class="badge">Key Malt</span></span>
+    <span class="cabv">46% ABV</span>
+  </div>
+  <div class="cmeta">Speyside · Single Malt</div>
+  <div class="cnotes">서양배 · 청사과 · 바닐라 · 허브. 피트 없는 깔끔한 스페이사이드. 마스터 블렌더들의 비밀 원액 — 듀어스의 뼈대</div>
+</div>
+<div class="card">
+  <div class="chead">
+    <span class="cno">02</span>
+    <span class="cname">아버펠디 16 <span class="badge">Key Malt</span></span>
+    <span class="cabv">40% ABV</span>
+  </div>
+  <div class="cmeta">Highland · Single Malt</div>
+  <div class="cnotes">버번 후 올로로소 셰리 캐스크 피니시. 꿀 · 시트러스 · 정향 · 과일케이크 · 다크초콜릿. 01보다 달콤하고 풍성한 하이랜드</div>
+</div>
+<div class="card">
+  <div class="chead">
+    <span class="cno">03</span>
+    <span class="cname">로얄 브라크라 12 <span class="badge">Key Malt</span></span>
+    <span class="cabv">46% ABV</span>
+  </div>
+  <div class="cmeta">Highland · Single Malt</div>
+  <div class="cnotes">1833년 영국 왕실 칙허 1호 증류소. 올로로소 셰리 피니시. 달콤한 과실 · 견과류 · 다크초콜릿. NCF 내추럴 컬러</div>
+</div>
+<div class="card">
+  <div class="chead">
+    <span class="cno">04</span>
+    <span class="cname">듀어스 15 · 로얄32 스킨 </span>
+    <span class="cabv">40% ABV</span>
+  </div>
+  <div class="cmeta">Speyside · Blend</div>
+  <div class="cnotes">앞 세 원액이 만나 완성되는 블렌드. 각각의 향이 어떻게 하나로 녹아드는지 느껴보세요 — 꿀 · 바닐라 · 부드러운 오크</div>
+</div>
+
+<h3 class="sec" id="part2">PART 2 · 취향대로 <span class="seng">Choose Your Path</span></h3>
+<div class="tabs">
+<button class="tab active" data-target="flight-peated">🔥 PEATED</button>
+<button class="tab" data-target="flight-sherry">🍷 SHERRY &amp; FRUIT</button>
+</div>
+
+<section class="flight active" id="flight-peated">
+  <p class="blurb">피트(이탄) 스모키 계열. 입문용 탈리스커에서 108 PPM 옥토모어까지, 그리고 산삼 인퓨전 피티드 피날레.</p>
+  <div class="card">
+  <div class="chead">
+    <span class="cno">05</span>
+    <span class="cname">탈리스커 10 </span>
+    <span class="cabv">45.8% ABV</span>
+  </div>
+  <div class="cmeta">Isle of Skye · Single Malt</div>
+  <div class="cnotes">피트 입문의 교과서. 바다 짠맛 · 스모키 피트 · 후추 스파이시 · 달콤한 긴 여운. 2008 세계 최고 위스키 수상</div>
+</div>
+<div class="card">
+  <div class="chead">
+    <span class="cno">06</span>
+    <span class="cname">탈리스커 와일드블루 </span>
+    <span class="cabv">48% ABV</span>
+  </div>
+  <div class="cmeta">Isle of Skye · Limited Edition</div>
+  <div class="cnotes">남아프리카 레드 와인 캐스크 16개월 피니시. 건포도 · 무화과 · 스모크. 탈리스커 최초 와인 캐스크 — 같은 DNA, 더 달콤한 변주</div>
+</div>
+<div class="card">
+  <div class="chead">
+    <span class="cno">07</span>
+    <span class="cname">아드벡 10 </span>
+    <span class="cabv">46% ABV</span>
+  </div>
+  <div class="cmeta">Islay · Single Malt</div>
+  <div class="cnotes">아일라 피트의 왕. 라임 · 레몬 · 다크초콜릿 · 훈제향 · 요오드. 강렬하지만 의외로 달콤한 피니시</div>
+</div>
+<div class="card">
+  <div class="chead">
+    <span class="cno">08</span>
+    <span class="cname">라프로익 PX </span>
+    <span class="cabv">48% ABV</span>
+  </div>
+  <div class="cmeta">Islay · Single Malt</div>
+  <div class="cnotes">버번 → 쿼터캐스크 → PX 셰리 3단 숙성. 셰리의 강렬한 단맛 위로 은은한 피트. 아일라에서 가장 달콤한 피트</div>
+</div>
+<div class="card">
+  <div class="chead">
+    <span class="cno">09</span>
+    <span class="cname">옥토모어 15.1 <span class="badge">108 PPM</span></span>
+    <span class="cabv">59.1% ABV</span>
+  </div>
+  <div class="cmeta">Islay · Bruichladdich · Cask Strength</div>
+  <div class="cnotes">세계에서 가장 피티한 위스키. 108 PPM. 퍼스트필 + 리차 버번 캐스크. 압도적 스모크 속 캐러멜과 바닐라</div>
+</div>
+<div class="card finale">
+  <div class="chead">
+    <span class="cno">10</span>
+    <span class="cname">합정쉐리 피티드 <span class="badge">★ Finale</span></span>
+    <span class="cabv">59% ABV</span>
+  </div>
+  <div class="cmeta">Homemade · Finale</div>
+  <div class="cnotes">합정동 · 루비포트 시즈닝 오크통 · 산삼 인퓨전. 기원 피티드 원액을 루비포트 시즈닝 오크통에 직접 숙성. 오크통 안에 산삼 한 뿌리가 함께 잠들어 있습니다. 스모키한 피트 위로 포트의 달콤함, 그리고 산삼의 깊고 이국적인 여운 — 세상에 단 하나뿐인 한 잔</div>
+</div>
+</section>
+<section class="flight" id="flight-sherry">
+  <p class="blurb">셰리 · 과실 계열. 한국 싱글몰트 기원부터 글렌드로낙 21년 셰리의 정점, 직접 숙성한 합정쉐리 피날레.</p>
+  <div class="card">
+  <div class="chead">
+    <span class="cno">05</span>
+    <span class="cname">기원 호랑이 </span>
+    <span class="cabv">46% ABV</span>
+  </div>
+  <div class="cmeta">Namyangju · Korean Single Malt</div>
+  <div class="cnotes">한국 최초 싱글몰트. 셰리 + 와인 캐스크. 농익은 과일 · 꿀 · 카라멜 · 버터스카치. SF 국제주류품평회 더블골드 수상</div>
+</div>
+<div class="card">
+  <div class="chead">
+    <span class="cno">06</span>
+    <span class="cname">맥켈란 12 </span>
+    <span class="cabv">40% ABV</span>
+  </div>
+  <div class="cmeta">Speyside · Single Malt</div>
+  <div class="cnotes">셰리 오크 캐스크의 교과서. 말린 과일 · 오렌지 · 구운 견과류 · 바닐라 · 초콜릿. 부드럽고 균형 잡힌 스페이사이드의 클래식</div>
+</div>
+<div class="card">
+  <div class="chead">
+    <span class="cno">07</span>
+    <span class="cname">부나하벤 12 </span>
+    <span class="cabv">46.3% ABV</span>
+  </div>
+  <div class="cmeta">Islay · Single Malt · Unpeated</div>
+  <div class="cnotes">아일라의 이단아 — 피트 없음. 셰리 · 다크초콜릿 · 해초 · 짭조름한 미네랄. 바다를 피트 없이 담아낸 독특한 아일라</div>
+</div>
+<div class="card">
+  <div class="chead">
+    <span class="cno">08</span>
+    <span class="cname">더 글렌드로낙 21 · Parliament </span>
+    <span class="cabv">48% ABV</span>
+  </div>
+  <div class="cmeta">Highland · Single Malt</div>
+  <div class="cnotes">올로로소 + PX 셰리 풀 매추레이션 21년. 블랙베리 · 자두 · 오렌지 · 시나몬. 셰리 세계의 정점 — 깊고 긴 여운</div>
+</div>
+<div class="card">
+  <div class="chead">
+    <span class="cno">09</span>
+    <span class="cname">아벨라워 아브나흐 · CS </span>
+    <span class="cabv">58–62% ABV</span>
+  </div>
+  <div class="cmeta">Speyside · Cask Strength</div>
+  <div class="cnotes">올로로소 셰리 캐스크 스트렝스. 오렌지 · 블랙체리 · 다크초콜릿 · 이국적 향신료. 원액 그대로 — 물 몇 방울 권장</div>
+</div>
+<div class="card finale">
+  <div class="chead">
+    <span class="cno">10</span>
+    <span class="cname">합정쉐리 <span class="badge">★ Finale</span></span>
+    <span class="cabv">?? % ABV</span>
+  </div>
+  <div class="cmeta">Homemade · Finale</div>
+  <div class="cnotes">합정동 · 직접 숙성 · 단 한 오크통. 오늘 자리의 주인이 직접 오크통에 숙성시킨 세상에 단 하나뿐인 위스키. 스코틀랜드의 거장들을 따라온 여정의 끝, 합정에서 완성됩니다</div>
+</div>
+</section>
+
+<p class="note">고도수(55%+) 제품은 소량의 물을 더하면 풍미가 열립니다 · 다음 잔 전 입 안을 물로 헹궈주세요 · 각 20 ml</p>
+
+<footer>2026.06.04 (목) · Tasting Flight 10 Drams &nbsp;·&nbsp; 즐거운 한 잔 되세요 🥃</footer>
+</div>
+<script>
+document.querySelectorAll('.tab').forEach(function(t){
+  t.addEventListener('click',function(){
+    document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active')});
+    document.querySelectorAll('.flight').forEach(function(x){x.classList.remove('active')});
+    t.classList.add('active');
+    document.getElementById(t.dataset.target).classList.add('active');
+    var p2=document.getElementById('part2');
+    if(p2) p2.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+</script>
+</body>
+</html>

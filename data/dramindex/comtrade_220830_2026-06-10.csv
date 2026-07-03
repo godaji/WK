@@ -1,0 +1,6 @@
+reporter_country,reporter_code,partner_country,partner_code,year,flow,total_netWgt_kg,total_trade_value_usd,data_coverage,collected_date,notes
+United Kingdom,826,World (all partners),0,2020,X,236891489,1482947294.73,aggregate,2026-06-10,UN Comtrade public preview API; top partners by value: Netherlands(702) $320.9M Singapore(702) $238.0M Japan(490) $186.4M China(156) $144.5M Spain(724) $124.3M
+United Kingdom,826,World (all partners),0,2021,X,1156748544,13918476523.38,aggregate,2026-06-10,UN Comtrade public preview API; note: 2021 netWgt unusually high likely due to aggregation method; top partners: USA(842) $1.13B France(251) $544.1M India(699) $344.6M Germany(276) $210.2M Latvia(428) $222.6M
+United Kingdom,826,World (all partners),0,2022,X,106864936,2627489623.89,aggregate,2026-06-10,UN Comtrade public preview API; top partners: USA(842) $1.27B India(699) $344.6M France(251) $607.6M Vietnam(704) $90.7M Dominican Republic(214) $102.2M
+United Kingdom,826,World (all partners),0,2023,X,188627273,1623189754.97,aggregate,2026-06-10,UN Comtrade public preview API; top partners by value: Japan(490) $386.7M Netherlands(528) $163.9M India(699) $271.0M Mexico(484) $141.4M Korea(410) $139.6M Australia(36) $139.4M
+United Kingdom,826,World (all partners),0,2024,X,112869613,1048567892.85,aggregate,2026-06-10,UN Comtrade public preview API; 2024 data may be partial year

@@ -1,0 +1,11 @@
+fiscal_year,fiscal_year_end,reporting_currency,net_sales_m,operating_profit_m,net_income_m,eps,source,notes,collected_date
+FY2016,2016-06-30,GBP,10485,2841,2362,0.895 GBP,"Diageo FY2016 20-F SEC EDGAR CIK 835403 accession 0001193125-16-676099 (filed 2016-08-09); 5-yr summary table","EPS 89.5p basic. Profit for year = total group profit incl. minority",2026-06-10
+FY2017,2017-06-30,GBP,12050,3559,2772,1.060 GBP,"Diageo FY2017 20-F SEC EDGAR CIK 835403 accession 0001193125-17-250792 (filed 2017-08-08); 5-yr summary table","EPS 106.0p basic. Net sales +15% driven by FX tailwind from sterling depreciation post-Brexit",2026-06-10
+FY2018,2018-06-30,GBP,12163,3691,3144,1.217 GBP,"Diageo FY2018 20-F SEC EDGAR CIK 835403 accession 0001193125-18-239093 (filed 2018-08-06); 5-yr summary table","EPS 121.7p basic. Strong organic growth across all regions",2026-06-10
+FY2019,2019-06-30,GBP,12867,4042,3337,1.307 GBP,"Diageo FY2019 20-F SEC EDGAR CIK 835403 accession 0000835403-19-000005 (filed 2019-08-05); 5-yr summary table","EPS 130.7p basic. Record operating profit pre-COVID",2026-06-10
+FY2020,2020-06-30,GBP,11752,2137,1454,0.601 GBP,"Diageo FY2020 prelim results; SEC EDGAR 6-K CIK 835403","COVID-19 impact year; EPS 60.1p basic. Pre-exceptional EPS 109.4p",2026-06-10
+FY2021,2021-06-30,GBP,12733,3731,2799,1.138 GBP,"Diageo FY2021 prelim results; SEC EDGAR 6-K (a8350g.htm)","Strong recovery: net sales +8.3% organic +16.0%; EPS 113.8p basic",2026-06-10
+FY2022,2022-06-30,GBP,15452,4409,1661,1.402 GBP,"Diageo FY2022 prelim results; SEC EDGAR 6-K (a0058u.htm)","Net sales +21.4%; EPS 140.2p basic. Net income lower due to exceptionals",2026-06-10
+FY2023,2023-06-30,GBP,17113,4632,2088,1.649 GBP,"Diageo FY2023 prelim results press release; SEC EDGAR 6-K (a8156h.htm)","Net sales +10.7% reported; organic +6.5%; EPS 164.9p basic",2026-06-10
+FY2024,2024-06-30,USD,20269,6001,N/A,1.732 USD,"Diageo FY2024 prelim results; Investegate RNS 8337083; SEC EDGAR 6-K (a2929y.htm)","Diageo switched presentation currency to USD from FY2023; net income not confirmed; EPS 173.2 cents basic",2026-06-10
+FY2025,2025-06-30,USD,20245,4335,2538,1.059 USD,"Diageo FY2025 prelim results press release; SEC EDGAR 6-K CIK 835403","Op profit -27.8% due to impairment+restructuring charges; organic net sales +1.7%; EPS 105.9 cents basic",2026-06-10

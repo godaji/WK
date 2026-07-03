@@ -1,0 +1,313 @@
+:root{--bg:#0f1115;--panel:#161922;--line:#2a2e38;--txt:#f2efe6;--sub:#9aa0aa;--amber:#e0a84e;--gold:#ffd34e;--green:#34c759;--red:#ff6b6b;--side:248px;--read:1040px}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--txt);
+font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.65;font-size:16px}
+a{color:var(--amber);text-decoration:none}
+a:hover{text-decoration:underline}
+/* ── Satellite 시그니처: 별이 흐르는 배경(CSS만·결정론·JS 0) ── */
+.stars{position:fixed;inset:0;z-index:-1;background:var(--bg);overflow:hidden}
+.stars::before,.stars::after{content:"";position:absolute;inset:-50%;
+background-image:radial-gradient(1.4px 1.4px at 20% 30%,#fff 50%,transparent),
+radial-gradient(1.2px 1.2px at 70% 60%,#cfd3da 50%,transparent),
+radial-gradient(1.6px 1.6px at 45% 80%,var(--amber) 50%,transparent),
+radial-gradient(1px 1px at 85% 25%,#fff 50%,transparent),
+radial-gradient(1.3px 1.3px at 33% 50%,#aab 50%,transparent),
+radial-gradient(1.1px 1.1px at 60% 15%,#fff 50%,transparent);
+background-size:340px 340px;opacity:.5;
+animation:drift 90s linear infinite}
+.stars::after{background-size:520px 520px;opacity:.3;animation-duration:160s}
+@keyframes drift{from{transform:translateY(0)}to{transform:translateY(-340px)}}
+@media (prefers-reduced-motion:reduce){.stars::before,.stars::after{animation:none}}
+/* ── 좌측 프로필 사이드바 ── */
+.app{display:block}
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--side);overflow-y:auto;
+background:linear-gradient(180deg,var(--panel),rgba(15,17,21,.96));
+border-right:1px solid var(--line);box-shadow:4px 0 18px rgba(0,0,0,.35);
+text-align:center;padding:26px 16px 18px;z-index:2}
+.avatar{display:flex;align-items:center;justify-content:center;width:96px;height:96px;
+margin:6px auto 14px;border-radius:50%;background:radial-gradient(circle at 35% 30%,
+var(--gold),var(--amber) 70%);color:#1a1300;font-size:42px;line-height:1;
+box-shadow:0 0 0 6px rgba(224,168,78,.18),0 6px 18px rgba(0,0,0,.4);
+transition:box-shadow .3s}
+.avatar:hover{box-shadow:0 0 0 4px var(--amber),0 6px 18px rgba(0,0,0,.5);text-decoration:none}
+.sidebar .flap{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:20px;font-weight:800;letter-spacing:.14em;
+color:var(--gold)}
+.sidebar .flap .dot{color:var(--amber)}
+.sidebar .handle{color:var(--sub);font-size:12.5px;margin-top:5px}
+.snav{list-style:none;padding:0;margin:18px 0;display:flex;flex-direction:column;gap:2px}
+.snav a{display:block;padding:9px 12px;border-radius:8px;color:var(--txt);font-size:14px;
+text-align:left}
+.snav a:hover{background:rgba(224,168,78,.12);color:var(--gold);text-decoration:none}
+.side-foot{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);
+color:var(--sub);font-size:11.5px;text-align:left}
+.side-foot .about{color:#cfd3da;margin-bottom:8px}
+.side-foot .gate{color:var(--red);font-weight:700}
+/* ── 메인: 터미널 윈도우 카드 ── */
+.content{margin-left:var(--side);padding:34px 22px 72px;
+display:flex;flex-direction:column;align-items:center}
+.window{width:100%;max-width:var(--read);background:rgba(22,25,34,.92);
+border:1px solid var(--line);border-radius:14px;overflow:hidden;
+box-shadow:0 12px 40px rgba(0,0,0,.45);backdrop-filter:blur(2px)}
+.titlebar{display:flex;gap:8px;align-items:center;padding:11px 15px;
+background:rgba(0,0,0,.25);border-bottom:1px solid var(--line)}
+.tdot{width:12px;height:12px;border-radius:50%}
+.tdot.r{background:#f86158}.tdot.y{background:#fbbf2d}.tdot.g{background:#2acb45}
+.titlebar .name{margin-left:8px;font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:12px;color:var(--sub)}
+/* 본문 글꼴 — 보드 2026-06-29 "글 폰트가 너무 크다"(2차) → 16px 상속 → 14px 로 축소.
+   웹 본문 표준은 보통 15~16px(브라우저 기본 16px)이라 14px 는 '조밀한' 축에 속한다.
+   가독성상 본문은 ~13.5px 아래로는 권장하지 않음(표/blockquote 13.5 와 충돌·잔글씨화).
+   표(13.5)·blockquote(13.5)·제목(h1~h3 별도)·홈 카드(explicit)는 각자 크기 유지. */
+.post{padding:22px 24px 26px;font-size:14px;line-height:1.6}
+.sub{color:var(--sub);font-size:12.5px}
+.post h1{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:22px;margin:18px 0 6px;color:var(--txt)}
+.post h2{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:16px;color:var(--amber);margin:26px 0 10px}
+.post h3{font-size:15.5px;margin:16px 0 4px;color:var(--txt)}
+.post p{margin:8px 0}
+.post strong{color:var(--gold)}
+.post del{color:var(--sub)}
+/* CMPA-292 보드: 데스크톱 넓은 화면에서 세로 사진이 읽기폭(1040px)만큼 커지는 문제 →
+   이미지 max-width를 480px로 캡(min(100%,480px)). 좁은 모바일은 100%라 안 넘침. 가운데 정렬.
+   이 규칙은 .post img 전역이라 앞으로의 모든 블로그 글 그림에 자동 적용된다. */
+.post img{display:block;max-width:min(100%,480px);height:auto;margin:12px auto;
+border-radius:8px;border:1px solid var(--line)}
+.post blockquote{background:rgba(224,168,78,.10);border-left:3px solid var(--amber);
+color:#d9d2c2;font-size:13.5px;padding:9px 12px;border-radius:6px;margin:12px 0}
+/* CMPA-256 모바일 우선: 좁은 화면(≈360px)에서 표가 넓어져도 글을 가리지 않게
+   가로 스크롤 폴백을 보장(overflow-x:auto). overflow:hidden 금지(글 잘림 금지). */
+.post table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;border-collapse:collapse;width:100%;margin:12px 0;font-size:13.5px}
+.post th,.post td{border:1px solid var(--line);padding:6px 9px;text-align:left;word-break:keep-all}
+.post th{background:var(--panel);color:var(--amber);font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace}
+.post hr{border:0;border-top:1px solid var(--line);margin:22px 0}
+.post ul{padding-left:18px}
+.post li{margin:4px 0}
+.post code{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:12.5px;background:rgba(0,0,0,.3);
+padding:1px 5px;border-radius:4px}
+.archive{list-style:none;padding:0;margin:8px 0}
+.archive li{padding:10px 0;border-bottom:1px solid var(--line)}
+.archive .when{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;color:var(--amber);font-weight:700;margin-right:6px}
+.badge{display:inline-block;font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-weight:800;font-size:11.5px;
+padding:2px 9px;border-radius:999px;margin-left:6px}
+.badge.instant{background:rgba(255,211,78,.16);color:var(--gold)}
+.badge.digest{background:rgba(154,160,170,.16);color:var(--sub)}
+.foot{width:100%;max-width:var(--read);margin-top:26px;padding-top:16px;
+border-top:1px solid var(--line);color:var(--sub);font-size:12.5px}
+.foot .about{margin:8px 0;color:#cfd3da}
+.foot .gate{color:var(--red);font-weight:700;margin-top:8px}
+.back{display:inline-block;margin:0 0 8px;font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:13px}
+/* ── 홈 허브: 2기둥 카드(💻 Code / 🥃 Cask) — CMPA-192 ── */
+.hub{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0 6px}
+.pillar-card{display:flex;flex-direction:column;background:rgba(15,17,21,.55);
+border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px;
+color:var(--txt);transition:border-color .2s,transform .2s,box-shadow .2s}
+.pillar-card:hover{border-color:var(--amber);transform:translateY(-2px);
+box-shadow:0 8px 22px rgba(0,0,0,.4);text-decoration:none}
+.pc-emoji{font-size:34px;line-height:1}
+.pc-head{display:flex;align-items:baseline;gap:8px;margin:8px 0 2px;flex-wrap:wrap}
+.pc-title{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:19px;font-weight:800;color:var(--gold)}
+.pc-tag{font-size:12.5px;color:var(--sub)}
+.pc-desc{font-size:13px;color:#cfd3da;margin:4px 0 8px}
+.pc-count{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:12px;color:var(--amber);font-weight:700}
+.pc-prev{list-style:none;padding:0;margin:8px 0 12px;font-size:12.5px;color:var(--sub)}
+.pc-prev li{padding:3px 0;border-bottom:1px solid rgba(42,46,56,.6)}
+.pc-prev .when{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;color:var(--amber);margin-right:5px}
+.pc-go{margin-top:auto;font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:13px;color:var(--gold);font-weight:700}
+/* ── 홈 ① 시그니처 핀(🏆 본편 큰 카드) — CMPA-196 ── */
+.pin{display:flex;flex-direction:column;gap:7px;margin:18px 0 14px;
+padding:18px 20px;border:1.5px solid var(--amber);border-radius:14px;
+background:linear-gradient(180deg,rgba(224,168,78,.10),rgba(15,17,21,.55));
+transition:transform .2s,box-shadow .2s}
+.pin:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(224,168,78,.20)}
+.pin .badge.pin-badge{align-self:flex-start;margin-left:0;
+background:rgba(224,168,78,.18);color:var(--gold)}
+.pin .pin-title{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:18px;font-weight:800;
+color:var(--gold);line-height:1.4}
+.pin .pin-title:hover{text-decoration:underline}
+.pin .pin-date{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:12px;color:var(--amber)}
+/* ── 홈 ② 최신 가격 패치 띠(⚡) — CMPA-196 ── */
+.patch-strip{display:flex;align-items:center;flex-wrap:wrap;gap:7px;
+margin:0 0 14px;padding:9px 14px;border-radius:10px;font-size:13px;
+background:rgba(255,211,78,.08);border:1px solid rgba(224,168,78,.35)}
+.patch-strip .ps-flag{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-weight:800;color:var(--gold)}
+.patch-strip .ps-date{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:12px;color:var(--sub)}
+.patch-strip .ps-title{color:var(--txt);font-weight:600}
+.patch-strip .ps-title:hover{color:var(--gold);text-decoration:underline}
+/* ── 홈 섹션 머리말(🆕 읽을거리 / 📊 가격 모아보기) — CMPA-294 ── */
+.sec-head{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:13px;font-weight:800;color:var(--gold);
+letter-spacing:.2px;margin:18px 0 8px}
+/* ── 홈 ② 읽을거리 피드(시음·데이터분석·개발 — 💻/🥃 칩) — CMPA-294 ── */
+.latest-feed{list-style:none;padding:0;margin:0 0 6px}
+/* 🆕 읽을거리 피드 — 본문(16px) 상속이라 모바일에서 제목이 두 줄로 깨짐(보드 2026-06-29).
+   글꼴을 줄여 한 줄에 더 들어오게 한다(날짜는 flex-shrink:0 로 제목에 공간 양보). */
+.latest-feed li{display:flex;align-items:baseline;gap:7px;padding:7px 0;
+border-bottom:1px solid var(--line);font-size:13px;line-height:1.45}
+.latest-feed li a{color:var(--txt)}
+.latest-feed .chip{font-size:13px;line-height:1;flex-shrink:0}
+.latest-feed .when{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;color:var(--amber);font-weight:700;font-size:11px;flex-shrink:0}
+/* 최신 데이터 리포트 레일(CMPA-388) — 케이던스 꼬리표(일간/주간/월간)를 행 끝으로.
+   flex-shrink:0 로 좁은 폭에서도 안 뭉개짐, margin-left:auto 로 우측 정렬. */
+.latest-feed .rail-cad{margin-left:auto;flex-shrink:0;font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:10.5px;
+font-weight:700;color:var(--sub);background:rgba(224,168,78,.12);
+border:1px solid rgba(224,168,78,.3);border-radius:999px;padding:1px 7px}
+/* ── 홈 ③ 가격 모아보기(아코디언: 신라면세 가격변동 / 위스키 가격리포트) — CMPA-294 ──
+   클릭하면 <details> 가 열리며 최신순 목록 펼침. JS 0(네이티브 details). */
+.price-groups{display:flex;flex-direction:column;gap:10px;margin:0 0 20px}
+.pg-acc{border:1px solid rgba(224,168,78,.35);border-radius:11px;
+background:rgba(255,211,78,.06);overflow:hidden}
+.pg-acc[open]{border-color:var(--amber)}
+.pg-acc summary{display:flex;align-items:center;gap:10px;padding:13px 15px;
+cursor:pointer;list-style:none;user-select:none}
+.pg-acc summary::-webkit-details-marker{display:none}
+.pg-acc summary:hover .pg-title{text-decoration:underline}
+.pg-emoji{font-size:24px;line-height:1}
+.pg-title{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:15px;font-weight:800;color:var(--gold)}
+.pg-meta{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:12px;color:var(--sub)}
+.pg-caret{margin-left:auto;color:var(--gold);font-size:13px;transition:transform .2s}
+.pg-acc[open] .pg-caret{transform:rotate(180deg)}
+.pg-list{list-style:none;margin:0;padding:0 15px 10px}
+.pg-list li{display:flex;align-items:baseline;gap:8px;padding:7px 0;
+border-top:1px solid rgba(42,46,56,.6);font-size:13.5px}
+.pg-list .when{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;color:var(--amber);font-weight:700;font-size:12px;flex-shrink:0}
+.pg-list a{color:var(--txt)}
+.pg-list a:hover{color:var(--gold);text-decoration:underline}
+.pg-bk{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:11px;color:var(--gold);flex-shrink:0}
+/* ── CMPA-370: 글 작성자 byline (제목·날짜 아래 보조 텍스트) ── */
+.byline{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;color:var(--sub);font-size:11.5px;margin:2px 0 6px}
+/* ── 글 하단 이전/다음 글 네비 — CMPA-294 보드 후속(목록 왕복 제거) ── */
+/* CMPA-301: 시리즈(같은 카테고리) 내 이동 라벨 + 같은 시리즈 prev/next. */
+.pn-series{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:11.5px;font-weight:700;color:var(--sub);
+margin:26px 0 0;letter-spacing:.02em}
+.pn-series + .post-nav{margin-top:8px}
+.post-nav{display:flex;gap:10px;margin:26px 0 4px;flex-wrap:wrap}
+.pn-link{flex:1 1 0;min-width:180px;display:flex;flex-direction:column;gap:3px;
+padding:11px 14px;border:1px solid var(--line);border-radius:10px;
+background:rgba(15,17,21,.55);color:var(--txt);
+transition:border-color .2s,transform .2s,box-shadow .2s}
+a.pn-link:hover{border-color:var(--amber);transform:translateY(-2px);
+box-shadow:0 8px 22px rgba(0,0,0,.4);text-decoration:none}
+.pn-next{text-align:right;align-items:flex-end}
+.pn-dir{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:11.5px;font-weight:700;color:var(--amber)}
+.pn-t{font-size:13.5px;color:var(--txt);font-weight:600;line-height:1.4}
+.pn-empty{border:0;background:none;box-shadow:none;pointer-events:none}
+/* ── 홈 대시보드 진입 CTA 버튼 (CMPA-505) ── */
+.dash-cta{display:flex;align-items:center;gap:12px;padding:14px 18px;margin:0 0 10px;
+border:1.5px solid var(--gold);border-radius:12px;background:rgba(255,211,78,.07);
+color:var(--gold);font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:14.5px;font-weight:800;text-decoration:none;transition:background .18s}
+.dash-cta:last-of-type{margin-bottom:22px}
+.dash-cta:hover{background:rgba(255,211,78,.15);text-decoration:none;color:var(--gold)}
+.dash-cta .dash-sub{font-size:11.5px;font-weight:400;color:var(--sub);margin-left:auto;flex-shrink:0}
+/* ── 홈 🔥 이번주 핫딜 카드 (CMPA-644) — 최신 주간 로그의 핫딜 모음을 메인에 노출 ── */
+.hotdeal-card{display:block;padding:13px 15px;margin:0 0 22px;border:1.5px solid var(--gold);
+border-radius:12px;background:rgba(255,211,78,.07);color:var(--txt);text-decoration:none;transition:background .18s}
+.hotdeal-card:hover{background:rgba(255,211,78,.14);text-decoration:none}
+.hotdeal-card .hd-head{display:flex;align-items:baseline;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.hotdeal-card .hd-title{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:13.5px;font-weight:800;color:var(--gold)}
+.hotdeal-card .hd-when{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:11px;color:var(--sub);margin-left:auto;flex-shrink:0}
+.hotdeal-list{list-style:none;padding:0;margin:0 0 8px}
+.hotdeal-list li{display:flex;align-items:baseline;gap:6px;padding:5px 0;
+border-top:1px solid rgba(42,46,56,.6);font-size:12.5px;color:var(--txt);line-height:1.45}
+.hotdeal-list li:first-child{border-top:0}
+.hotdeal-list .hd-fire{flex-shrink:0}
+.hotdeal-card .hd-more{display:inline-block;font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:12px;font-weight:700;color:var(--gold)}
+/* ── 홈 최상단 🕰️ 오랜만의 큰 인하 카드 (CMPA-644 보드: 최상단) — 앰버/시계 강조 ── */
+.rare-wrap{margin:0 0 22px}
+.rare-card{display:block;padding:13px 15px;border:1.5px solid var(--amber);border-radius:12px;
+background:rgba(224,168,78,.09);color:var(--txt);text-decoration:none;transition:background .18s}
+.rare-card:hover{background:rgba(224,168,78,.16);text-decoration:none}
+.rare-card .rare-head{display:flex;align-items:baseline;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.rare-card .rare-title{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:13.5px;font-weight:800;color:var(--amber)}
+.rare-card .rare-when{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:11px;color:var(--sub);margin-left:auto;flex-shrink:0}
+.rare-list{list-style:none;padding:0;margin:0 0 8px}
+.rare-list li{display:flex;align-items:baseline;gap:6px;padding:5px 0;
+border-top:1px solid rgba(42,46,56,.6);font-size:12.5px;color:var(--txt);line-height:1.45}
+.rare-list li:first-child{border-top:0}
+.rare-list .rare-mark{flex-shrink:0}
+.rare-card .rare-more{display:inline-block;font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:12px;font-weight:700;color:var(--amber)}
+/* ── 🗓️ 업데이트 로그(릴리스 노트) 카드 — 홈 맨 아래(CMPA-687) ── rare/hotdeal 패턴 동형 */
+.cl-wrap{margin:0 0 22px}
+.cl-card{display:block;padding:13px 15px;border:1px solid var(--line);border-radius:12px;
+background:rgba(255,211,78,.05);color:var(--txt);text-decoration:none;transition:background .18s}
+.cl-card:hover{background:rgba(255,211,78,.11);text-decoration:none}
+.cl-card .cl-head{display:flex;align-items:baseline;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.cl-card .cl-title{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:13.5px;font-weight:800;color:var(--gold)}
+.cl-card .cl-when{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:11px;color:var(--sub);margin-left:auto;flex-shrink:0}
+.cl-list{list-style:none;padding:0;margin:0 0 8px}
+.cl-list li{display:flex;align-items:baseline;gap:6px;padding:5px 0;
+border-top:1px solid rgba(42,46,56,.6);font-size:12.5px;color:var(--txt);line-height:1.45}
+.cl-list li:first-child{border-top:0}
+.cl-list .cl-ic{flex-shrink:0}
+.cl-card .cl-more{display:inline-block;font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:12px;font-weight:700;color:var(--gold)}
+/* ── 💱 면세 vs 국내 gap 텍스트 캐러셀 — 홈 상단(CMPA-693 보드 2026-06-29) ──
+   기본 = line 1 정적 노출, JS(모션 허용)면 4s 자동회전·호버/포커스 일시정지.
+   prefers-reduced-motion(또는 JS 미동작) = 전체 정적 목록(글 안 숨김). 외부 의존 0. */
+.gapc-wrap{margin:0 0 18px;border:1px solid rgba(255,211,78,.30);border-radius:12px;
+padding:11px 14px;background:linear-gradient(180deg,rgba(255,211,78,.06),rgba(15,17,21,.30))}
+.gapc-head{display:flex;align-items:baseline;gap:8px;margin-bottom:7px;flex-wrap:wrap}
+.gapc-title{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:13px;font-weight:800;color:var(--gold)}
+.gapc-when{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:11px;color:var(--sub);margin-left:auto;flex-shrink:0}
+.gapc-lnk{display:block;color:var(--txt);text-decoration:none}
+.gapc-lnk:hover{text-decoration:none;color:inherit}
+.gapc-track{list-style:none;margin:0;padding:0}
+/* 회전=세로 전환(한 줄씩), 긴 줄은 marquee=가로 흐름(보드 2026-06-29). 기본 1번째 줄 정적. */
+.gapc-item{display:none;font-size:13px;line-height:1.6;color:var(--txt)}
+.gapc-txt{display:inline-block;white-space:nowrap}
+.gapc-track .gapc-item:first-child{display:block;white-space:normal}
+.gapc-track .gapc-item:first-child .gapc-txt{white-space:normal}
+.gapc-track.gapc-on .gapc-item{display:none;white-space:nowrap;overflow:hidden}
+.gapc-track.gapc-on .gapc-item.gapc-cur{display:block;animation:gapcfade .5s ease}
+.gapc-track.gapc-on .gapc-item.gapc-marq .gapc-txt{animation:gapcmarq var(--marq-dur,8s) ease-in-out infinite alternate}
+@keyframes gapcfade{from{opacity:0}to{opacity:1}}
+@keyframes gapcmarq{from{transform:translateX(0)}to{transform:translateX(var(--marq-shift,0))}}
+.gapc-more{display:inline-block;margin-top:5px;font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:11.5px;
+font-weight:700;color:var(--gold)}
+/* 모션 최소화 시 회전·marquee 끄고 전체 정적 목록(줄바꿈 허용·글 안 숨김 — CLAUDE.md). */
+@media (prefers-reduced-motion:reduce){
+.gapc-item,.gapc-track.gapc-on .gapc-item{display:block !important;white-space:normal !important;
+overflow:visible !important;animation:none !important;padding:5px 0;
+border-top:1px solid rgba(42,46,56,.55)}
+.gapc-txt{white-space:normal !important;animation:none !important;transform:none !important}
+.gapc-track .gapc-item:first-child{border-top:0}
+}
+/* ── 홈 구매상황 2대 축 패널(🛫 면세점 / 🛒 마트) — CMPA-673 보드 2026-06-28 ──
+   보드: 면세점/마트가 두 개의 큰 축이니 섹션을 또렷이 구분. 각 축을 색이 다른
+   테두리 패널로 묶어 한눈에 두 블록으로 읽히게 한다. (면세=하늘색, 마트=초록색) */
+.buy-section{border:1px solid var(--line);border-radius:14px;padding:14px 14px 6px;margin:0 0 18px}
+.buy-section.df{border-color:rgba(122,182,240,.45);background:linear-gradient(180deg,rgba(122,182,240,.08),rgba(15,17,21,.30))}
+.buy-section.mart{border-color:rgba(94,212,122,.42);background:linear-gradient(180deg,rgba(94,212,122,.07),rgba(15,17,21,.30))}
+.bs-head{display:flex;align-items:center;gap:11px;margin:2px 0 12px}
+.bs-ic{font-size:26px;line-height:1;flex-shrink:0}
+.bs-txt{display:flex;flex-direction:column;min-width:0}
+.bs-title{font-family:"JetBrains Mono","D2Coding","SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:16px;font-weight:800;line-height:1.25}
+.buy-section.df .bs-title{color:#8ec2f5}
+.buy-section.mart .bs-title{color:#6fdc8c}
+.bs-sub{font-size:12px;color:var(--sub);margin-top:2px;line-height:1.35}
+.buy-section .dash-cta,.buy-section .dash-cta:last-of-type{margin:0 0 8px}
+.buy-section .rare-wrap,.buy-section .hotdeal-wrap{margin:0 0 8px}
+.buy-section .sec-head{margin:10px 0 6px}
+/* ── 반응형: 좁은 화면이면 사이드바를 상단 배너로 ── */
+@media (max-width:820px){
+.sidebar{position:static;width:auto;height:auto;bottom:auto;border-right:0;
+border-bottom:1px solid var(--line);box-shadow:0 4px 12px rgba(0,0,0,.3);
+padding:20px 16px 14px}
+.avatar{width:72px;height:72px;font-size:32px}
+.snav{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:4px;margin:12px 0 6px}
+.snav a{text-align:center}
+.side-foot{text-align:center}
+/* CMPA-673 보드: 모바일에서 버려지는 좌우 마진을 줄여 본문 width 를 최대로 쓴다.
+   .content(7px)+.window border(1px)+.post(12px) = 한쪽 20px 만 인셋(글이 가장자리에
+   닿지 않는 최소). 데스크톱 값(.content 22/14·.post 24)은 그대로 두고 모바일만 좁힌다. */
+.content{margin-left:0;padding:16px 7px 56px}
+.post{padding:18px 12px 22px}
+.buy-section{padding:11px 9px 3px}
+.hub{grid-template-columns:1fr}
+.post-nav{flex-direction:column}
+/* CMPA-667: 좁은 화면에선 메인 CTA 카드를 세로로 쌓아 제목이 한 글자씩 잘리지 않게 한다.
+   base 규칙의 flex row + .dash-sub flex-shrink:0 가 제목을 1글자 폭으로 짜부라뜨리던 문제 수정. */
+.dash-cta{flex-direction:column;align-items:flex-start;gap:5px;line-height:1.4}
+.dash-cta .dash-sub{margin-left:0;font-size:12px}
+.sec-head{font-size:13.5px;line-height:1.45}
+/* 🆕 읽을거리: 모바일에서 제목 두 줄 깨짐 완화(보드 2026-06-29) — 글꼴·여백 한 단계 더 축소. */
+.latest-feed li{font-size:12px;gap:6px;padding:6px 0}
+.latest-feed .chip{font-size:12px}
+.latest-feed .when{font-size:10.5px}
+}

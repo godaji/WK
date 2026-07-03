@@ -1,0 +1,40 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+.venv/
+venv/
+env/
+
+# --- Secrets / credentials (safety net — never commit) ---
+.env
+.env.*
+*.key
+*.pem
+*secret*
+*credential*
+*token*.json
+
+# --- OS / editor junk ---
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/*
+!.vscode/settings.json
+
+# --- Logs / temp ---
+*.log
+*.tmp
+tmp/
+
+# --- 보드 소통 보고서 (로컬 단일수신함, git 추적 제외) — CMPA-223 ---
+# review/ 는 보드(사람)가 로컬에서 읽는 보고서 누적함이지 코드 산출물이 아니다.
+# 규약 문서(README)만 추적 유지하고 누적 보고서는 git 에 올리지 않는다.
+review/
+!review/README.md

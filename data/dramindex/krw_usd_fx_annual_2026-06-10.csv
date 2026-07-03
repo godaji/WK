@@ -1,0 +1,11 @@
+year,krw_per_usd_jan_start,krw_per_usd_year_end,date_jan_ref,date_end_ref,source,collected_date,notes
+2015,1106.24,1176.43,2015-01-02,2015-12-31,frankfurter.dev (ECB reference rates),2026-06-10,Jan=2015-01-02 year-open; End=2015-12-31 year-close
+2016,1190.92,1204.21,2016-01-04,2016-12-30,frankfurter.dev (ECB reference rates),2026-06-10,Jan=2016-01-04 year-open; End=2016-12-30 year-close
+2017,1206.96,1066.96,2017-01-03,2017-12-29,frankfurter.dev (ECB reference rates),2026-06-10,Jan=2017-01-03 year-open; End=2017-12-29 year-close; KRW strengthened ~11.6% vs USD in 2017
+2018,1062.24,1116.10,2018-01-02,2018-12-31,frankfurter.dev (ECB reference rates),2026-06-10,Jan=2018-01-02 year-open; End=2018-12-31 year-close
+2019,1121.80,1153.89,2019-01-02,2019-12-31,frankfurter.dev (ECB reference rates),2026-06-10,Jan=2019-01-02 year-open; End=2019-12-31 year-close
+2020,1159.87,1088.75,2020-01-02,2020-12-31,frankfurter.dev (ECB reference rates),2026-06-10,Jan=2020-01-02 year-open; End=2020-12-31 year-close; KRW strengthened in 2020
+2021,1083.30,1188.75,2021-01-04,2021-12-31,frankfurter.dev (ECB reference rates),2026-06-10,Jan=2021-01-04 year-open; End=2021-12-31 year-close; KRW weakened ~9.7% in 2021
+2022,1192.78,1260.16,2022-01-03,2022-12-30,frankfurter.dev (ECB reference rates),2026-06-10,Jan=2022-01-03 year-open; End=2022-12-30 year-close; KRW weakened further (USD strength cycle)
+2023,1270.99,1297.43,2023-01-02,2023-12-29,frankfurter.dev (ECB reference rates),2026-06-10,Jan=2023-01-02 year-open; End=2023-12-29 year-close; continued USD strength
+2024,1313.23,1474.78,2024-01-02,2024-12-31,frankfurter.dev (ECB reference rates),2026-06-10,Jan=2024-01-02 year-open; End=2024-12-31 year-close; KRW hit multi-year lows in Dec 2024; +12.3% depreciation YTD

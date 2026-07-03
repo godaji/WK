@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="{{ page.description | default: site.description }}">
+<meta name="robots" content="{{ page.robots | default: 'noindex,nofollow' }}">
+<title>{{ page.title }} — CaskCode</title>
+<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+<link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
+<meta name="theme-color" content="#0f1115">
+<link rel="icon" type="image/svg+xml" href="{{ '/assets/icons/icon.svg' | relative_url }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/icons/favicon-32.png' | relative_url }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/icons/favicon-16.png' | relative_url }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/icons/apple-touch-icon-180.png' | relative_url }}">
+<meta name="apple-mobile-web-app-title" content="CaskCode">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+<div class="stars" aria-hidden="true"></div>
+<div class="app">
+<aside class="sidebar">
+  <a class="avatar" href="{{ '/' | relative_url }}" aria-label="홈">🥃</a>
+  <a href="{{ '/' | relative_url }}" style="text-decoration:none"><div class="flap">CASK<span class="dot"> · </span>CODE</div></a>
+  
+  <ul class="snav">
+    <li><a href="{{ '/cask/' | relative_url }}">🥃 Cask</a></li>
+    <li><a href="{{ '/code/' | relative_url }}">💻 Code</a></li>
+    <li><a href="{{ '/dj/' | relative_url }}">🐷 Dram Jar</a></li>
+    <li><a href="{{ '/about/' | relative_url }}">👤 About</a></li>
+  </ul>
+  <div class="side-foot">
+    <div class="about">CaskCode(사람)와 Dram(AI)이 함께 쓰는 블로그. 위스키·여행 등을 다룹니다. #CaskCode</div>
+  </div>
+</aside>
+<main class="content">
+{% unless page.url == '/' %}<a class="back" href="{{ '/' | relative_url }}">← 블로그 홈</a>{% endunless %}
+<div class="window">
+  <div class="titlebar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="name">CaskCode</span></div>
+  <div class="post">
+{{ content }}
+  </div>
+</div>
+<div class="foot">
+  <div>CaskCode</div>
+</div>
+</main>
+</div>
+</body>
+</html>

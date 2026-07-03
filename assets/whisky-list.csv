@@ -1,0 +1,280 @@
+﻿id,name_ko,name_en,brand,category,origin,age,abv,volume_ml,price_krw_low,price_krw_high,channels,confidence,notes
+w001,글렌리벳 12년,The Glenlivet 12 Year Old,Glenlivet,싱글몰트,스코틀랜드-스페이사이드,12,40,700,54900,69800,트레이더스;코스트코;데일리샷,high,첫 싱글몰트 표준. 1L 행사판 존재
+w002,글렌리벳 15년,The Glenlivet 15 Year Old French Oak Reserve,Glenlivet,싱글몰트,스코틀랜드-스페이사이드,15,40,700,94800,95900,트레이더스;코스트코,high,트레이더스·코스트코 교차확인
+w003,글렌리벳 17년 스몰배치,The Glenlivet 17 Year Old Small Batch,Glenlivet,싱글몰트,스코틀랜드-스페이사이드,17,,700,229800,229800,트레이더스,med,위스키픽 ASR
+w004,글렌리벳 19년 스몰배치,The Glenlivet 19 Year Old Small Batch,Glenlivet,싱글몰트,스코틀랜드-스페이사이드,19,,700,349800,349800,트레이더스,med,위스키픽 ASR
+w005,글렌피딕 12년,Glenfiddich 12 Year Old,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,12,40,700,59000,84800,트레이더스;데일리샷,high,세계 판매 1위 싱글몰트
+w006,글렌피딕 14년 버번배럴,Glenfiddich 14 Year Old Bourbon Barrel Reserve,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,14,,700,99800,99800,트레이더스,med,원자료 '법원 캐스크'=버번배럴 OCR 추정
+w007,글렌피딕 15년,Glenfiddich 15 Year Old Solera,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,15,40,700,99800,99800,트레이더스,high,
+w008,발베니 12년 더블우드,The Balvenie DoubleWood 12 Year Old,Balvenie,싱글몰트,스코틀랜드-스페이사이드,12,40,700,96800,99000,트레이더스;코스트코;데일리샷,high,셰리캐스크 마감 명작
+w009,발베니 14년 캐리비안 캐스크,The Balvenie Caribbean Cask 14 Year Old,Balvenie,싱글몰트,스코틀랜드-스페이사이드,14,43,700,139800,139800,트레이더스,high,
+w010,아벨라워 12년 더블캐스크,Aberlour 12 Year Old Double Cask Matured,Aberlour,싱글몰트,스코틀랜드-스페이사이드,12,40,700,70000,80000,코스트코;데일리샷,high,셰리 입문 정석
+w011,아벨라워 아부나흐,Aberlour A'bunadh,Aberlour,싱글몰트,스코틀랜드-스페이사이드,NAS,60,700,235800,235800,트레이더스,med,캐스크 스트렝스 셰리. 원자료 '아브나르 쉐리케스크'
+w012,맥캘란 12년 더블캐스크,The Macallan Double Cask 12 Year Old,Macallan,싱글몰트,스코틀랜드-스페이사이드,12,40,700,90000,99800,트레이더스;코스트코,high,
+w013,글렌그란트 12년,The Glen Grant 12 Year Old,Glen Grant,싱글몰트,스코틀랜드-스페이사이드,12,43,700,59400,59800,트레이더스,high,
+w014,글렌그란트 15년,The Glen Grant 15 Year Old,Glen Grant,싱글몰트,스코틀랜드-스페이사이드,15,50,700,97800,97800,트레이더스,high,
+w015,글렌그란트 익스플로레이션 No.1,The Glen Grant Exploration No.1,Glen Grant,싱글몰트,스코틀랜드-스페이사이드,NAS,,700,99800,99800,트레이더스,med,위스키픽 ASR
+w016,탐두 15년,Tamdhu 15 Year Old,Tamdhu,싱글몰트,스코틀랜드-스페이사이드,15,46,700,169800,169800,트레이더스,med,셰리. 위스키픽 ASR
+w017,벤리악 10년,BenRiach The Original Ten,BenRiach,싱글몰트,스코틀랜드-스페이사이드,10,43,700,49940,49940,트레이더스,med,원자료 '벤니학'. 위스키픽 ASR
+w018,글렌드로낙 12년,The GlenDronach 12 Year Old Original,GlenDronach,싱글몰트,스코틀랜드-하이랜드,12,43,700,79800,82800,트레이더스,high,셰리. 잔 증정 패키지 존재
+w019,오반 14년,Oban 14 Year Old,Oban,싱글몰트,스코틀랜드-하이랜드,14,43,700,99800,99800,트레이더스,high,잔 2개 포함
+w020,글렌모렌지 12년,Glenmorangie 12 Year Old,Glenmorangie,싱글몰트,스코틀랜드-하이랜드,12,43,700,69800,69800,트레이더스,med,익스프레션(라산타 등) 확인 필요
+w021,글렌모렌지 15년,Glenmorangie 15 Year Old,Glenmorangie,싱글몰트,스코틀랜드-하이랜드,15,43,700,97800,97800,트레이더스,med,
+w022,글렌모렌지 익스플로전 No.1,Glenmorangie Explosion No.1,Glenmorangie,싱글몰트,스코틀랜드-하이랜드,NAS,,700,99800,99800,트레이더스,low,제품명 음차 추정-재확인
+w023,달모어 12년,The Dalmore 12 Year Old,Dalmore,싱글몰트,스코틀랜드-하이랜드,12,40,700,99800,99800,트레이더스,high,
+w024,달모어 2005 빈티지,The Dalmore 2005 Vintage,Dalmore,싱글몰트,스코틀랜드-하이랜드,,,700,670800,670800,트레이더스,low,고가·가격 OCR 재확인 필요
+w025,클라이넬리시 14년,Clynelish 14 Year Old,Clynelish,싱글몰트,스코틀랜드-하이랜드,14,46,700,79400,84800,트레이더스,high,
+w026,로얄 브라클라 12년,Royal Brackla 12 Year Old,Royal Brackla,싱글몰트,스코틀랜드-하이랜드,12,40,700,89800,89800,트레이더스,high,
+w027,에버펠디 16년,Aberfeldy 16 Year Old,Aberfeldy,싱글몰트,스코틀랜드-하이랜드,16,40,700,75800,75800,트레이더스,med,원자료 '에버펠 16년'
+w028,글렌고인 캐스크 스트렝스 배치171,Glengoyne Cask Strength Batch 171,Glengoyne,싱글몰트,스코틀랜드-하이랜드,NAS,59,700,149800,149800,트레이더스,low,원자료 '블렌고인 CS 171'
+w029,글렌글라사 샌드엔드,Glenglassaugh Sandend,Glenglassaugh,싱글몰트,스코틀랜드-하이랜드,NAS,50,700,79800,79800,트레이더스,med,원자료 '글렌라사 샌드엔드'
+w030,글렌글라사 포트소이,Glenglassaugh Portsoy,Glenglassaugh,싱글몰트,스코틀랜드-하이랜드,NAS,49,700,89800,89800,트레이더스,med,원자료 '글렌라사 포트소이'
+w031,아란 셰리 캐스크,Arran Sherry Cask,Arran,싱글몰트,스코틀랜드-아일랜드(아란),NAS,55,700,99800,99800,트레이더스,med,
+w032,탈리스커 10년,Talisker 10 Year Old,Talisker,싱글몰트,스코틀랜드-아일랜드(스카이),10,45.8,700,69800,69800,트레이더스,high,해풍·페퍼리 스모키
+w033,탈리스커 9년,Talisker 9 Year Old,Talisker,싱글몰트,스코틀랜드-아일랜드(스카이),9,,700,25980,25980,트레이더스,low,행사/소용량 추정-재확인
+w034,탈리스커 와일더 시즈,Talisker Wilder Seas,Talisker,싱글몰트,스코틀랜드-아일랜드(스카이),NAS,48.6,700,69400,74800,트레이더스,low,원자료 '와일드 블루'-제품명 재확인
+w035,라프로익 10년,Laphroaig 10 Year Old,Laphroaig,싱글몰트,스코틀랜드-아일라,10,43,700,69800,79800,트레이더스;데일리샷,high,피트 아이콘. 트레이더스 행사 최저가
+w036,라가불린 11년 오퍼맨 스위트피트,Lagavulin 11 Year Old Offerman Edition Sweet Peat,Lagavulin,싱글몰트,스코틀랜드-아일라,11,46,700,89800,89800,트레이더스,med,
+w037,오큰토션 10년,Auchentoshan 10 Year Old,Auchentoshan,싱글몰트,스코틀랜드-로우랜드,10,40,700,74800,74800,트레이더스,med,
+w038,글렌킨치 12년,Glenkinchie 12 Year Old,Glenkinchie,싱글몰트,스코틀랜드-로우랜드,12,43,700,59800,59800,트레이더스,med,위스키픽 ASR
+w039,스트라스클라이드 1990 31년 (옥타브),Duncan Taylor The Octave Strathclyde 1990 31 Year Old,Duncan Taylor,싱글그레인,스코틀랜드,31,,700,69800,69800,트레이더스,low,독립병입 추정·가격 OCR 재확인
+w040,뱅크홀 싱글몰트,Bankhall Single Malt,Bankhall,싱글몰트,미상,NAS,,700,29940,37980,트레이더스,low,음차 추정-브랜드/영문 재확인
+w041,몽키숄더,Monkey Shoulder,Monkey Shoulder,블렌디드몰트,스코틀랜드-스페이사이드,NAS,40,700,44980,50000,트레이더스;데일리샷,high,"몰트 블렌딩, 하이볼 애용"
+w042,조니워커 그린라벨 15년,Johnnie Walker Green Label 15 Year Old,Johnnie Walker,블렌디드몰트,스코틀랜드,15,43,700,67800,74800,트레이더스,high,
+w043,발렌타인 파이니스트,Ballantine's Finest,Ballantine's,블렌디드,스코틀랜드,NAS,40,700,25000,30000,트레이더스;이마트;데일리샷,high,블렌디드 입문 표준
+w044,발렌타인 10년,Ballantine's 10 Year Old,Ballantine's,블렌디드,스코틀랜드,10,40,700,39980,39980,트레이더스,high,
+w045,발렌타인 12년,Ballantine's 12 Year Old,Ballantine's,블렌디드,스코틀랜드,12,40,700,42000,42000,데일리샷,med,통상가 추정
+w046,발렌타인 싱글몰트 15년,Ballantine's Single Malt 15 Year Old,Ballantine's,싱글몰트,스코틀랜드,15,40,700,94800,94800,트레이더스,med,
+w047,발렌타인 21년,Ballantine's 21 Year Old,Ballantine's,블렌디드,스코틀랜드,21,40,700,224800,224800,트레이더스,high,
+w048,시바스 리갈 12년,Chivas Regal 12 Year Old,Chivas Regal,블렌디드,스코틀랜드,12,40,700,38000,38000,데일리샷,med,통상가 추정
+w049,조니워커 레드라벨,Johnnie Walker Red Label,Johnnie Walker,블렌디드,스코틀랜드,NAS,40,700,47980,54800,트레이더스,high,주로 1.75L 대용량
+w050,조니워커 블랙라벨 12년,Johnnie Walker Black Label 12 Year Old,Johnnie Walker,블렌디드,스코틀랜드,12,40,700,39980,53900,트레이더스;데일리샷,high,블렌디드 완성형
+w051,조니워커 더블블랙,Johnnie Walker Double Black,Johnnie Walker,블렌디드,스코틀랜드,NAS,40,700,59800,59800,트레이더스,high,스모키 강화
+w052,조니워커 블랙 루비,Johnnie Walker Black Ruby,Johnnie Walker,블렌디드,스코틀랜드,NAS,40,700,44800,54800,트레이더스,med,
+w053,조니워커 블루라벨,Johnnie Walker Blue Label,Johnnie Walker,블렌디드,스코틀랜드,NAS,40,700,189800,259800,트레이더스,high,
+w054,페이머스 그라우스,The Famous Grouse,The Famous Grouse,블렌디드,스코틀랜드,NAS,40,700,24900,25800,이마트;데일리샷,high,1L 가성비 하이볼 베이스
+w055,듀어스 12년,Dewar's 12 Year Old,Dewar's,블렌디드,스코틀랜드,12,40,700,39980,45980,트레이더스,high,'퍼스트필 버번캐스크' 변형 포함
+w056,듀어스 15년,Dewar's 15 Year Old,Dewar's,블렌디드,스코틀랜드,15,40,700,59400,59400,트레이더스,high,'파이노크 스페셜 리저브' 표기 변형 포함
+w057,듀어스 18년,Dewar's 18 Year Old,Dewar's,블렌디드,스코틀랜드,18,40,700,99800,99800,트레이더스,high,
+w058,커티삭 프로히비션,Cutty Sark Prohibition,Cutty Sark,블렌디드,스코틀랜드,NAS,50,700,39940,39940,트레이더스,med,원자료 '쿠티삭/커티삭'
+w059,로얄 살루트 21년,Royal Salute 21 Year Old,Royal Salute,블렌디드,스코틀랜드,21,40,700,179800,279800,트레이더스,high,그레인 에디션 변형 포함
+w060,노마드 아웃랜드 셰리 피니시,Nomad Outland Whisky Sherry Cask Finish,Nomad,블렌디드,스코틀랜드/스페인숙성,NAS,41.3,700,49980,49980,트레이더스,med,
+w061,제임슨,Jameson Standard,Jameson,블렌디드,아일랜드,NAS,40,700,27980,36000,트레이더스;이마트;데일리샷,high,아이리시 입문 만능
+w062,부쉬밀 15년 싱글몰트,Bushmills 15 Year Old Single Malt,Bushmills,싱글몰트,아일랜드,15,43,700,99800,99800,트레이더스,med,
+w063,골든블루 다이아몬드,Golden Blue Diamond,Golden Blue,기타(국산 위스키류),한국,NAS,36.5,450,39980,39980,트레이더스,high,국산 기타재제주(위스키류)
+w064,골든블루 사피루스,Golden Blue Sapphirus,Golden Blue,기타(국산 위스키류),한국,NAS,35,450,28980,28980,트레이더스,high,국산 기타재제주(위스키류)
+w065,짐빔 화이트,Jim Beam White Label,Jim Beam,버번,미국-켄터키,NAS,40,700,22000,27980,트레이더스;이마트;데일리샷,high,원자료 '진빔' 표기 포함. 버번 입문 최저가
+w066,잭다니엘 No.7,Jack Daniel's Old No.7,Jack Daniel's,테네시,미국-테네시,NAS,40,700,34980,39980,트레이더스,high,'테네시 전용잔 패키지' 동일품
+w067,잭다니엘 애플,Jack Daniel's Apple,Jack Daniel's,플레이버드,미국-테네시,NAS,35,700,37980,39980,트레이더스,high,가향(애플) 리큐어형
+w068,잭다니엘 라이,Jack Daniel's Tennessee Rye,Jack Daniel's,라이,미국-테네시,NAS,45,700,39980,39980,트레이더스,high,
+w069,버팔로 트레이스,Buffalo Trace,Buffalo Trace,버번,미국-켄터키,NAS,40,700,49800,49980,트레이더스,high,버번 가성비
+w070,1792 스몰배치,1792 Small Batch,1792,버번,미국-켄터키,NAS,46.85,700,39980,44980,트레이더스,high,
+w071,메이커스 마크,Maker's Mark,Maker's Mark,버번,미국-켄터키,NAS,45,700,,,트레이더스,low,가격 ASR 오류-재확인
+w072,우드포드 리저브,Woodford Reserve,Woodford Reserve,버번,미국-켄터키,NAS,43.2,700,83900,83900,코스트코,med,리서치 출처
+w073,와일드터키 8년,Wild Turkey 8 Year Old,Wild Turkey,버번,미국-켄터키,8,50.5,1000,,,트레이더스,low,가격 OCR 오류-재확인
+w074,와일드터키 레어브리드,Wild Turkey Rare Breed,Wild Turkey,버번,미국-켄터키,NAS,58.4,700,79800,79800,트레이더스,high,
+w075,와일드터키 켄터키 스피릿 싱글배럴,Wild Turkey Kentucky Spirit Single Barrel,Wild Turkey,버번,미국-켄터키,NAS,50.5,700,69400,69400,트레이더스,med,
+w076,이글 레어 10년,Eagle Rare 10 Year Old,Eagle Rare,버번,미국-켄터키,10,45,700,69800,69800,트레이더스,med,원자료 '이글레어 10년'
+w077,러셀스 리저브 싱글배럴,Russell's Reserve Single Barrel,Russell's Reserve,버번,미국-켄터키,NAS,55,750,89400,99800,트레이더스,high,
+w078,포 로지스 싱글배럴,Four Roses Single Barrel,Four Roses,버번,미국-켄터키,NAS,50,750,82800,82800,트레이더스,med,원자료 '포로지스'
+w079,포 로지스 스몰배치 셀렉트,Four Roses Small Batch Select,Four Roses,버번,미국-켄터키,NAS,52,750,116800,116800,트레이더스,med,원자료 '호로지스'
+w080,에반 윌리엄스 블랙,Evan Williams Black Label,Evan Williams,버번,미국-켄터키,NAS,43,700,29980,33980,트레이더스,high,1L/1.75L 변형 포함
+w081,에반 윌리엄스 12년,Evan Williams 12 Year Old,Evan Williams,버번,미국-켄터키,12,50.5,750,99800,99800,트레이더스,med,
+w082,에반 윌리엄스 14년,Evan Williams 14 Year Old,Evan Williams,버번,미국-켄터키,14,53.5,750,89400,89400,트레이더스,med,
+w083,산토리 가쿠빈,Suntory Whisky Kakubin,Suntory,블렌디드,일본,NAS,40,700,32980,39800,트레이더스,high,하이볼 대표
+w084,카발란 디스틸러리 셀렉트,Kavalan Distillery Select Single Malt,Kavalan,싱글몰트,대만,NAS,40,700,69800,69800,트레이더스,high,
+w085,글렌드로낙 오드 투 더 밸리,(unverified) 'Ode to the Valley',GlenDronach,싱글몰트,스코틀랜드(추정),NAS,,700,89400,89400,트레이더스,low,ASR 음차·브랜드 확정(보드 CMPA-514)·영문 미확정
+w086,글렌드로낙 오드 투 더 엠버스,(unverified) 'Ode to the Embers',GlenDronach,싱글몰트,스코틀랜드(추정),NAS,,700,99400,99400,트레이더스,low,ASR 음차·브랜드 확정(보드 CMPA-514)·영문 미확정
+w087,글렌드로낙 오드 투 더 다크,(unverified) 'Ode to the Dark',GlenDronach,싱글몰트,스코틀랜드(추정),NAS,,700,159800,159800,트레이더스,low,ASR 음차·브랜드 확정(보드 CMPA-514)·영문 미확정
+w088,탈리스만 9년 포르투기즈 캐스크,Talisman 9 Year Old Portuguese Cask,Talisman,블렌디드,스코틀랜드(추정),9,,700,25980,25980,트레이더스,low,음차 추정-재확인
+w089,탈리스커 와일드 블루,Talisker Wild (name_en 미확정),Talisker,싱글몰트,스코틀랜드-스카이,,,700,69400,109000,데일리샷;트레이더스,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w090,발렌타인 17년,Ballantine's 17 Year Old,Ballantine's,블렌디드,스코틀랜드,17,,700,99081,168300,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w091,잭다니엘 허니,Jack Daniel's Tennessee Honey,Jack Daniel's,리큐르(위스키베이스),미국,,,700,16500,98000,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w092,발렌타인 싱글몰트 글렌버기 16년,Ballantine's Single Malt Glenburgie 16,Ballantine's,싱글몰트,스코틀랜드-스페이사이드,16,,700,169800,169800,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w093,글렌파클라스 15년,Glenfarclas 15 Year Old,Glenfarclas,싱글몰트,스코틀랜드-스페이사이드,15,,700,107739,119400,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w094,글렌피딕 12년 셰리 캐스크,Glenfiddich 12 Year Old Sherry Cask,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,12,,700,69900,69900,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w095,러셀스 리저브 10년,Russell's Reserve 10 Year Old,Russell's Reserve,버번,미국,10,,750,59400,99000,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w096,글렌알라키 10년 루비 포트,GlenAllachie 10 Year Old Ruby Port Wood Finish,GlenAllachie,싱글몰트,스코틀랜드-스페이사이드,10,,700,89800,185000,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w097,주라 18년,Jura 18 Year Old,Jura,싱글몰트,스코틀랜드-아일랜드(섬),18,,700,79400,142000,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w098,커클랜드 15년 하일랜드 싱글몰트,Kirkland Signature Highland Single Malt 15,Kirkland,싱글몰트,스코틀랜드-하일랜드,15,,700,133900,133900,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w099,커클랜드 시그니처 스카치,Kirkland Signature Blended Scotch,Kirkland,블렌디드,스코틀랜드,,,1750,32490,32490,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w100,커클랜드 시그니처 캐나디안,Kirkland Signature Canadian Whisky,Kirkland,캐나디안,캐나다,,,1750,34990,34990,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w101,글렌파클라스 12년,Glenfarclas 12 Year Old,Glenfarclas,싱글몰트,스코틀랜드-스페이사이드,12,,700,69400,69400,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w102,라프로익 오크 셀렉트,Laphroaig Select / Oak Select,Laphroaig,싱글몰트,스코틀랜드-아일라,,,700,48000,69800,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w103,린도어스 1494 코어,Lindores Abbey MCDXCIV Core,Lindores Abbey,싱글몰트,스코틀랜드-로우랜드,,,700,69800,69800,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w104,맥캘란 셰리 오크 12년,Macallan Sherry Oak 12 Year Old,The Macallan,싱글몰트,스코틀랜드-스페이사이드,12,,700,119800,119800,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w105,발베니 16년 프렌치 오크,Balvenie 16 Year Old French Oak,Balvenie,싱글몰트,스코틀랜드-스페이사이드,16,,700,249800,259000,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w106,벨즈,Bell's Original,Bell's,블렌디드,스코틀랜드,,,700,17790,19900,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w107,부쉬밀 10년 싱글몰트,Bushmills 10 Year Old Single Malt,Bushmills,싱글몰트,아일랜드,10,,700,44940,44940,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w108,부쉬밀 12년 싱글몰트,Bushmills 12 Year Old Single Malt,Bushmills,싱글몰트,아일랜드,12,,700,59400,59400,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w109,블랙보트,Black Bottle,Black Bottle,블렌디드,스코틀랜드,,,700,19800,19800,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w110,에반 윌리엄스 싱글배럴,Evan Williams Single Barrel,Evan Williams,버번,미국,,,700,69800,69800,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w111,에반 윌리엄스 BIB,Evan Williams Bottled-in-Bond,Evan Williams,버번,미국,,,700,31800,31800,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w112,커클랜드 바틀드 인 본드 버번,Kirkland Bottled-in-Bond Bourbon,Kirkland,버번,미국,,,700,62900,62900,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w113,코발 밀레,Koval Millet,Koval,싱글그레인,미국,,,700,53400,99000,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w114,코발 라이,Koval Rye,Koval,라이,미국,,,700,53400,53400,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w115,글렌피딕 18년,Glenfiddich 18 Year Old,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,18,,700,256600,256600,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w116,주라 10년,Jura 10 Year Old,Jura,싱글몰트,스코틀랜드-아일랜드(섬),10,,700,78000,78000,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w117,주라 12년 셰리 캐스크,Jura 12 Year Old Sherry Cask,Jura,싱글몰트,스코틀랜드-아일랜드(섬),12,,700,89900,89900,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w118,탈리스커 디스틸러스 에디션,Talisker Distillers Edition,Talisker,싱글몰트,스코틀랜드-스카이,,,700,99800,99800,데일리샷,med,CMPA-170 bottom-up(CEO승인 2026-06-07)
+w119,그란츠 트리플 우드,Grant's Triple Wood,Grant's,블렌디드,스코틀랜드,,,700,16800,16800,데일리샷,high,CMPA-170 pass-2 web검증(CEO승인 2026-06-07)
+w120,글렌그란트 아보랄리스,Glen Grant Arboralis,Glen Grant,싱글몰트,스코틀랜드-스페이사이드,,,700,74000,74000,데일리샷,high,CMPA-170 pass-2 web검증(CEO승인 2026-06-07)
+w121,네이키드 몰트,The Naked Malt,The Naked Malt,블렌디드몰트,스코틀랜드,,,700,67100,67100,데일리샷,high,CMPA-170 pass-2 web검증(CEO승인 2026-06-07)
+w122,듀어스 캐리비안 스무스 8년,Dewar's Caribbean Smooth 8,Dewar's,블렌디드,스코틀랜드,8,,700,47500,47500,데일리샷,high,CMPA-170 pass-2 web검증(CEO승인 2026-06-07)
+w123,라벨 5,Label 5,Label 5,블렌디드,스코틀랜드,,,700,25800,25800,데일리샷,high,CMPA-170 pass-2 web검증(CEO승인 2026-06-07)
+w124,발렌타인 싱글몰트 글렌버기 18년,Ballantine's Single Malt Glenburgie 18,Ballantine's,싱글몰트,스코틀랜드-스페이사이드,18,,700,267500,267500,데일리샷,high,CMPA-170 pass-2 web검증(CEO승인 2026-06-07)
+w125,발렌타인 마스터즈,Ballantine's Master's,Ballantine's,블렌디드,스코틀랜드,,,700,78500,78500,데일리샷,high,CMPA-170 pass-2 web검증(CEO승인 2026-06-07)
+w126,스모크헤드 오리지널,Smokehead,Smokehead,싱글몰트,스코틀랜드-아일라,,,700,76100,76100,데일리샷,high,CMPA-170 pass-2 web검증(CEO승인 2026-06-07)
+w127,스카치블루 17년,Scotch Blue 17,Scotch Blue,블렌디드,스코틀랜드(한국시장),17,,450,45800,45800,데일리샷,high,CMPA-170 pass-2 web검증(CEO승인 2026-06-07)
+w128,스카치블루 클래식,Scotch Blue Classic,Scotch Blue,블렌디드,스코틀랜드(한국시장),,,700,27900,27900,데일리샷,high,CMPA-170 pass-2 web검증(CEO승인 2026-06-07)
+w129,윈저 12년,Windsor 12,Windsor,블렌디드,스코틀랜드(한국시장),12,,500,24800,24800,데일리샷,high,CMPA-170 pass-2 web검증(CEO승인 2026-06-07)
+w130,칼라일,Carlyle,Carlyle,블렌디드,스코틀랜드,,,700,15800,15800,데일리샷,high,CMPA-170 pass-2 web검증(CEO승인 2026-06-07)
+w146,달모어 12년 셰리캐스크,The Dalmore 12 Year Old Sherry Cask Select,Dalmore,싱글몰트,스코틀랜드-하이랜드,12,,700,144900,144900,코스트코,high,CMPA-170 board 머지요청 분리(2026-06-07); w023 plain과 구분
+w147,글렌버기 15년,Glenburgie 15 Year Old,Glenburgie,싱글몰트,스코틀랜드,15,,700,120000,190000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w148,코퍼독,Copper Dog,Copper Dog,블렌디드,스코틀랜드,NAS,,700,40000,60000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w149,발블레어 12년,Balblair 12 Year Old,Balblair,싱글몰트,스코틀랜드,12,,700,80000,130000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w150,믹터스 US1 아메리칸,Michter's US1 American Whiskey,Michter's,아메리칸,미국,NAS,,700,90000,220000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w151,제퍼슨 버번,Jefferson's Bourbon,Jefferson's,버번,미국,NAS,,700,45000,90000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w152,베이커스 7년,Baker's 7 Year Old,Baker's,버번,미국,7,,700,80000,160000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w153,글렌터너 헤리티지 더블우드,Glen Turner Heritage Double Wood,Glen Turner,싱글몰트,스코틀랜드,NAS,,700,30000,160000,youtube,low,CMPA-491 유튜브OCR 격리 복구 추가
+w154,글렌모레이 10년,Glen Moray 10 Year Old,Glen Moray,싱글몰트,스코틀랜드,10,,700,35000,160000,youtube,low,CMPA-491 유튜브OCR 격리 복구 추가
+w155,닛카 프론티어,Nikka Frontier,Nikka,블렌디드,일본,NAS,,700,45000,90000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w156,마쓰이 산인,Matsui Sanin,Matsui,블렌디드,일본,NAS,,700,80000,180000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w157,올드파 12년,Old Parr 12 Year Old,Old Parr,블렌디드,스코틀랜드,12,,700,35000,70000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w158,하이랜드파크 12년,Highland Park 12 Year Old,Highland Park,싱글몰트,스코틀랜드,12,,700,60000,190000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w159,레드브레스트 15년,Redbreast 15 Year Old,Redbreast,싱글몰트,아일랜드,15,,700,100000,230000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w160,스트라스밀 12년,Strathmill 12 Year Old,Strathmill,싱글몰트,스코틀랜드,12,,700,100000,230000,youtube,low,CMPA-491 유튜브OCR 격리 복구 추가
+w161,카발란 솔리스트,Kavalan Solist,Kavalan,싱글몰트,대만,NAS,,700,200000,700000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w162,아드벡 우가달,Ardbeg Uigeadail,Ardbeg,싱글몰트,스코틀랜드,NAS,,700,100000,220000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w163,탐나불린 셰리캐스크,Tamnavulin Sherry Cask Edition,Tamnavulin,싱글몰트,스코틀랜드,NAS,,700,30000,60000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w164,탐나불린 소비뇽블랑,Tamnavulin Sauvignon Blanc,Tamnavulin,싱글몰트,스코틀랜드,NAS,,700,30000,60000,youtube,low,CMPA-491 유튜브OCR 격리 복구 추가
+w165,제임슨 블랙배럴,Jameson Black Barrel,Jameson,블렌디드,아일랜드,NAS,,700,40000,75000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w166,포 로지스 버번,Four Roses Bourbon,Four Roses,버번,미국,NAS,,700,40000,75000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w167,오큰토션 쓰리우드,Auchentoshan Three Wood,Auchentoshan,싱글몰트,스코틀랜드,NAS,,700,80000,130000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w168,부쉬밀 오리지널,Bushmills Original,Bushmills,블렌디드,아일랜드,NAS,,700,20000,60000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w169,글렌드로낙 18년,GlenDronach 18 Year Old Allardice,GlenDronach,싱글몰트,스코틀랜드,18,,700,150000,320000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w170,맥캘란 셰리오크 18년,The Macallan Sherry Oak 18 Years Old,Macallan,싱글몰트,스코틀랜드,18,,700,400000,650000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w171,아벨라워 16년,Aberlour 16 Year Old,Aberlour,싱글몰트,스코틀랜드,16,,700,90000,170000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w172,로얄 브라클라 21년,Royal Brackla 21 Year Old,Royal Brackla,싱글몰트,스코틀랜드,21,,700,250000,400000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w173,에버펠디 21년,Aberfeldy 21 Year Old,Aberfeldy,싱글몰트,스코틀랜드,21,,700,200000,360000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w174,시바스 리갈 18년,Chivas Regal 18 Year Old,Chivas Regal,블렌디드,스코틀랜드,18,,700,80000,150000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w175,조니워커 18년,Johnnie Walker 18 Year Old,Johnnie Walker,블렌디드,스코틀랜드,18,,700,90000,190000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w176,보모어 18년,Bowmore 18 Year Old,Bowmore,싱글몰트,스코틀랜드,18,,700,150000,350000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w177,벤로막 15년,Benromach 15 Year Old,Benromach,싱글몰트,스코틀랜드,15,,700,100000,200000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w178,몰트락 20년,Mortlach 20 Year Old,Mortlach,싱글몰트,스코틀랜드,20,,700,300000,600000,youtube,med,CMPA-491 유튜브OCR 격리 복구 추가
+w179,발렌타인 30년 리스테이지,Ballantine's 30 Year Old Restage,Ballantine's,블렌디드,스코틀랜드,30,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w180,발베니 18년 셰리 캐스크,Balvenie 18 Sherry Cask,Balvenie,싱글몰트,스코틀랜드-스페이사이드,18,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w181,발베니 40년 레어 매리지,Balvenie 40 Rare Marriages,Balvenie,싱글몰트,스코틀랜드-스페이사이드,40,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w182,발베니 40년 Y3,Balvenie 40 Y3,Balvenie,싱글몰트,스코틀랜드-스페이사이드,40,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w183,로얄살루트 32년,Royal Salute 32 Year Old,Royal Salute,블렌디드,스코틀랜드,32,,500,,,신라면세,med,CMPA-522 면세 canonical 등록
+w184,글렌피딕 22년 그랑 코르테스,Glenfiddich 22 Gran Cortes,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,22,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w185,조니워커 블루라벨,Johnnie Walker Blue Label,Johnnie Walker,블렌디드,스코틀랜드,,,1000,,,신라면세,med,CMPA-522 면세 canonical 등록
+w186,발베니 15년 마데이라 캐스크,Balvenie 15 Madeira Cask,Balvenie,싱글몰트,스코틀랜드-스페이사이드,15,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w187,발렌타인 40년,Ballantine's 40 Year Old,Ballantine's,블렌디드,스코틀랜드,40,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w188,로얄살루트 25년,Royal Salute 25 Year Old,Royal Salute,블렌디드,스코틀랜드,25,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w189,발베니 12년 골든 캐스크,Balvenie 12 Golden Cask,Balvenie,싱글몰트,스코틀랜드-스페이사이드,12,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w190,글렌피딕 21년,Glenfiddich 21 Year Old,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,21,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w191,글렌피딕 18년 Vat4 퍼페추얼,Glenfiddich 18 Vat4 Perpetual,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,18,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w192,듀어스 18년,Dewar's 18 Year Old,Dewar's,블렌디드,스코틀랜드,18,,1000,,,신라면세,med,CMPA-522 면세 canonical 등록
+w193,조니워커 XR 21년,Johnnie Walker XR 21,Johnnie Walker,블렌디드,스코틀랜드,21,,750,,,신라면세,med,CMPA-522 면세 canonical 등록
+w194,글렌피딕 23년 그랑 크뤼,Glenfiddich 23 Grand Cru,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,23,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w195,조니워커 엑스오디네어,Johnnie Walker Xordinaire,Johnnie Walker,블렌디드,스코틀랜드,,,750,,,신라면세,med,CMPA-522 면세 canonical 등록
+w196,발렌타인 23년 아메리칸 오크,Ballantine's 23 American Oak Casks,Ballantine's,블렌디드,스코틀랜드,23,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w197,발베니 25년 레어 매리지,Balvenie 25 Rare Marriage,Balvenie,싱글몰트,스코틀랜드-스페이사이드,25,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w198,발렌타인 18년 글렌버기,Ballantine's 18 Glenburgie,Ballantine's,싱글몰트,스코틀랜드-스페이사이드,18,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w199,글렌피딕 30년,Glenfiddich 30 Year Old,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,30,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w200,로얄살루트 21년 루나 뉴이어 2026,Royal Salute 21 Lunar New Year 2026,Royal Salute,블렌디드,스코틀랜드,21,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w201,조니워커 킹조지 5세,Johnnie Walker King George V,Johnnie Walker,블렌디드,스코틀랜드,,,750,,,신라면세,med,CMPA-522 면세 canonical 등록
+w202,발베니 19년 위크 오브 피트,Balvenie 19 Week of Peat,Balvenie,싱글몰트,스코틀랜드-스페이사이드,19,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w203,글렌피딕 15년 Vat3 퍼페추얼,Glenfiddich 15 Vat3 Perpetual,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,15,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w204,발베니 12년 몬틸라,Balvenie 12 Montilla,Balvenie,싱글몰트,스코틀랜드-스페이사이드,12,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w205,듀어스 더블더블 36년,Dewar's Double Double 36,Dewar's,블렌디드,스코틀랜드,36,,500,,,신라면세,med,CMPA-522 면세 canonical 등록
+w206,듀어스 더블더블 30년,Dewar's Double Double 30,Dewar's,블렌디드,스코틀랜드,30,,500,,,신라면세,med,CMPA-522 면세 canonical 등록
+w207,발베니 21년 포트우드,Balvenie 21 PortWood,Balvenie,싱글몰트,스코틀랜드-스페이사이드,21,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w208,로얄살루트 21년 피티드 블렌드,Royal Salute 21 Peated Blend,Royal Salute,블렌디드,스코틀랜드,21,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w209,글렌피딕 26년,Glenfiddich 26 Grande Couronne,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,26,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w210,발베니 클래식 VAP,Balvenie Classic VAP,Balvenie,싱글몰트,스코틀랜드-스페이사이드,,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w211,시크릿 스페이사이드 글렌키스 21년,Secret Speyside Glen Keith 21,Glen Keith,싱글몰트,스코틀랜드-스페이사이드,21,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w212,조니워커 골드 리저브,Johnnie Walker Gold Label Reserve,Johnnie Walker,블렌디드,스코틀랜드,,,1000,,,신라면세,med,CMPA-522 면세 canonical 등록
+w213,글렌피딕 23년 그랑크뤼 슬림팩,Glenfiddich 23 Grand Cru,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,23,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w214,더 글렌리벳 16년,The Glenlivet 16 Year Old,Glenlivet,싱글몰트,스코틀랜드-스페이사이드,16,,1000,,,신라면세,med,CMPA-522 면세 canonical 등록
+w215,발베니 11년 헝가리안 캐스크,Balvenie 11 Hungarian Cask,Balvenie,싱글몰트,스코틀랜드-스페이사이드,11,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w216,발렌타인 23년 글렌타우커스,Ballantine's 23 Glentauchers,Ballantine's,싱글몰트,스코틀랜드-스페이사이드,23,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w217,시크릿 스페이사이드 글렌키스 25년,Secret Speyside Glen Keith 25,Glen Keith,싱글몰트,스코틀랜드-스페이사이드,25,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w218,발렌타인 21년 아티스트 에디션 5,Ballantine's 21 Artist Edition 5,Ballantine's,블렌디드,스코틀랜드,21,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w219,아벨라워 16년,Aberlour 16 Year Old,Aberlour,싱글몰트,스코틀랜드-스페이사이드,16,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w220,시크릿 스페이사이드 카퍼도닉 18년 피티드,Secret Speyside Caperdonich 18 Peated,Caperdonich,싱글몰트,스코틀랜드-스페이사이드,18,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w221,클라이넬리시 10년 스페셜 릴리즈 FY24,Clynelish 10 Special Release FY24,Clynelish,싱글몰트,스코틀랜드-하이랜드,10,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w222,발렌타인 25년 글렌버기,Ballantine's 25 Glenburgie,Ballantine's,싱글몰트,스코틀랜드-스페이사이드,25,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w223,더 글렌리벳 21년,The Glenlivet 21 Year Old,Glenlivet,싱글몰트,스코틀랜드-스페이사이드,21,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w224,듀어스 더블더블 26년,Dewar's Double Double 26,Dewar's,블렌디드,스코틀랜드,26,,500,,,신라면세,med,CMPA-522 면세 canonical 등록
+w225,시크릿 스페이사이드 카퍼도닉 21년,Secret Speyside Caperdonich 21,Caperdonich,싱글몰트,스코틀랜드-스페이사이드,21,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w226,로얄살루트 21년 해리스 리드 에디션,Royal Salute 21 Harris Reed Edition,Royal Salute,블렌디드,스코틀랜드,21,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w227,아벨라워 13년,Aberlour 13 Year Old,Aberlour,싱글몰트,스코틀랜드-스페이사이드,13,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w228,발베니 13년 리필 포트캐스크,Balvenie 13 Refill Port Cask,Balvenie,싱글몰트,스코틀랜드-스페이사이드,13,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w229,발베니 18년 PX 셰리 캐스크 빅토 응아이 에디션,Balvenie 18 PX Sherry Cask Victo Ngai,Balvenie,싱글몰트,스코틀랜드-스페이사이드,18,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w230,듀어스 16년,Dewar's 16 Year Old,Dewar's,블렌디드,스코틀랜드,16,,1000,,,신라면세,med,CMPA-522 면세 canonical 등록
+w231,아벨라워 18년,Aberlour 18 Year Old,Aberlour,싱글몰트,스코틀랜드-스페이사이드,18,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w232,로얄살루트 21년 빈티지 블렌디드,Royal Salute 21 Vintage Blended,Royal Salute,블렌디드,스코틀랜드,21,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w233,시크릿 스페이사이드 카퍼도닉 21년 피티드,Secret Speyside Caperdonich 21 Peated,Caperdonich,싱글몰트,스코틀랜드-스페이사이드,21,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w234,글렌피딕 21년 CNY 2026 리미티드 에디션,Glenfiddich 21 CNY 2026 Limited Edition,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,21,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w235,듀어스 더블더블 20년,Dewar's Double Double 20,Dewar's,블렌디드,스코틀랜드,20,,500,,,신라면세,med,CMPA-522 면세 canonical 등록
+w236,더 글렌리벳 19년,The Glenlivet 19 Year Old,Glenlivet,싱글몰트,스코틀랜드-스페이사이드,19,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w237,더 글렌리벳 14년,The Glenlivet 14 Year Old,Glenlivet,싱글몰트,스코틀랜드-스페이사이드,14,,1000,,,신라면세,med,CMPA-522 면세 canonical 등록
+w238,글렌피딕 Vat 1 퍼페추얼 컬렉션,Glenfiddich Vat 1 Perpetual Collection,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,,,1000,,,신라면세,med,CMPA-522 면세 canonical 등록
+w239,시크릿 스페이사이드 롱몬 18년,Secret Speyside Longmorn 18,Longmorn,싱글몰트,스코틀랜드-스페이사이드,18,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w240,글렌리벳 TGL TCM 레어 캐스크,The Glenlivet Triple Cask Matured Rare Cask,Glenlivet,싱글몰트,스코틀랜드-스페이사이드,,,1000,,,신라면세,med,CMPA-522 면세 canonical 등록
+w241,글렌피딕 18년 벳4 퍼페츄얼 IGL CNY,Glenfiddich 18 Vat4 Perpetual CNY,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,18,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w242,발베니 스토리즈 크리에이션 클래식,Balvenie Stories Creation Classic,Balvenie,싱글몰트,스코틀랜드-스페이사이드,,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w243,탈리스커 다크 스톰,Talisker Dark Storm,Talisker,싱글몰트,스코틀랜드-스카이,,,1000,,,신라면세,med,CMPA-522 면세 canonical 등록
+w244,탈리스커 써지,Talisker Surge,Talisker,싱글몰트,스코틀랜드-스카이,,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w245,글렌피딕 XX,Glenfiddich Project XX,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w246,아벨라워 수타인,Aberlour A'bunadh Suthainn,Aberlour,싱글몰트,스코틀랜드-스페이사이드,,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w247,스카파 스키렌,Scapa Skiren,Scapa,싱글몰트,스코틀랜드-오크니,,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w248,조니워커 블랙 트리플 캐스크,Johnnie Walker Black Triple Cask,Johnnie Walker,블렌디드,스코틀랜드,,,1000,,,신라면세,med,CMPA-522 면세 canonical 등록
+w249,엔젤스 엔비 플래그십,Angel's Envy Flagship,Angel's Envy,버번,미국-켄터키,,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w250,조니워커 레드라벨,Johnnie Walker Red Label,Johnnie Walker,블렌디드,스코틀랜드,,,1000,,,신라면세,med,CMPA-522 면세 canonical 등록
+w251,발베니 15년 마데이라 캐스크 빅토 응아이 에디션,Balvenie 15 Madeira Cask Victo Ngai,Balvenie,싱글몰트,스코틀랜드-스페이사이드,15,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w252,더 글렌리벳 40년,The Glenlivet 40 Year Old,Glenlivet,싱글몰트,스코틀랜드-스페이사이드,40,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w253,로얄살루트 55년 타임시리즈,Royal Salute 55 Time Series,Royal Salute,블렌디드,스코틀랜드,55,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w254,로얄살루트 52년,Royal Salute 52 Year Old,Royal Salute,블렌디드,스코틀랜드,52,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w255,로얄살루트 찰스 3세 대관식 에디션,Royal Salute King Charles III Coronation Edition,Royal Salute,블렌디드,스코틀랜드,,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w256,더 글렌리벳 트리플 캐스크 머추어드,The Glenlivet Triple Cask Matured,Glenlivet,싱글몰트,스코틀랜드-스페이사이드,,,1000,,,신라면세,med,CMPA-522 면세 canonical 등록
+w257,발렌타인 40년 마스터 콜렉션 챕터 2,Ballantine's 40 Master Collection Chapter 2,Ballantine's,블렌디드,스코틀랜드,40,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w258,발렌타인 21년 글렌버기,Ballantine's 21 Glenburgie,Ballantine's,싱글몰트,스코틀랜드-스페이사이드,21,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w259,글렌피딕 19년 애스턴 마틴 F1,Glenfiddich 19 Aston Martin F1,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,19,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w260,글렌피딕 18년 Vat4 페스티브,Glenfiddich 18 Vat4 IGL Festive,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,18,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w261,더 디콘,The Deacon,The Deacon,블렌디드,스코틀랜드,,,1000,,,신라면세,med,CMPA-522 면세 canonical 등록
+w262,엔젤스 엔비 스몰,Angel's Envy Small,Angel's Envy,버번,미국-켄터키,,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w263,글렌피딕 50년 타임시리즈,Glenfiddich 50 Time Series,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,50,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w264,글렌피딕 40년,Glenfiddich 40 Year Old,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,40,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w265,로얄살루트 62년 건 살루트 오리지널 리저브,Royal Salute 62 Gun Salute Original Reserve,Royal Salute,블렌디드,스코틀랜드,62,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w266,로얄살루트 62년 건 살루트 피티드 리저브,Royal Salute 62 Gun Salute Peated Reserve,Royal Salute,블렌디드,스코틀랜드,62,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w267,글렌피딕 39년 1985 캐스크,Glenfiddich 39 1985 Cask,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,39,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w268,더 글렌리벳 그라운드브레이커 컬렉션,The Glenlivet Groundbreaker Collection,Glenlivet,싱글몰트,스코틀랜드-스페이사이드,,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w269,더 글렌리벳 캐스크메이커스,The Glenlivet Caskmakers,Glenlivet,싱글몰트,스코틀랜드-스페이사이드,,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w270,로얄살루트 마이애미 폴로 에디션,Royal Salute Miami Polo Edition,Royal Salute,블렌디드,스코틀랜드,,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w271,듀어스 25년,Dewar's 25 Year Old,Dewar's,블렌디드,스코틀랜드,25,,750,,,신라면세,med,CMPA-522 면세 canonical 등록
+w272,크라이겔라키 33년,Craigellachie 33,Craigellachie,싱글몰트,스코틀랜드-스페이사이드,33,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w273,듀어스 더블더블 21년 스톤 토스티드,Dewar's Double Double 21 Stone Toasted,Dewar's,블렌디드,스코틀랜드,21,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w274,로즈아일 12년 스페셜 릴리즈 FY24,Roseisle 12 Special Release FY24,Roseisle,싱글몰트,스코틀랜드-스페이사이드,12,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w275,발렌타인 23년 골든 아워,Ballantine's 23 Golden Hour,Ballantine's,블렌디드,스코틀랜드,23,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w276,올트모어 18년,Aultmore 18 Year Old,Aultmore,싱글몰트,스코틀랜드-스페이사이드,18,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w277,듀어스 더블더블 27년,Dewar's Double Double 27,Dewar's,블렌디드,스코틀랜드,27,,500,,,신라면세,med,CMPA-522 면세 canonical 등록
+w278,듀어스 더블더블 21년 미즈나라 캐스크,Dewar's Double Double 21 Mizunara Cask,Dewar's,블렌디드,스코틀랜드,21,,500,,,신라면세,med,CMPA-522 면세 canonical 등록
+w279,발베니 30년 레어 매리지,Balvenie 30 Rare Marriage,Balvenie,싱글몰트,스코틀랜드-스페이사이드,30,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w280,글렌피딕 Vat 2 퍼페추얼 컬렉션,Glenfiddich Vat 2 Perpetual Collection,Glenfiddich,싱글몰트,스코틀랜드-스페이사이드,,,1000,,,신라면세,med,CMPA-522 면세 canonical 등록
+w281,글렌리벳 TGL TCM DR,The Glenlivet Triple Cask Matured DR,Glenlivet,싱글몰트,스코틀랜드-스페이사이드,,,1000,,,신라면세,med,CMPA-522 면세 canonical 등록
+w282,스카파 글란사,Scapa Glansa,Scapa,싱글몰트,스코틀랜드-오크니,,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+w283,시크릿 스페이사이드 롱몬 23년,Secret Speyside Longmorn 23,Longmorn,싱글몰트,스코틀랜드-스페이사이드,23,,700,,,신라면세,med,CMPA-522 면세 canonical 등록
+
+w284,발베니 12년 아메리칸 오크,The Balvenie American Oak 12 Year Old,Balvenie,싱글몰트,스코틀랜드-스페이사이드,12,43,700,115900,115900,코스트코,high,코스트코 전용 발베니 버번 배럴 숙성 12년
+w285,커클랜드 시그니처 아일레이 싱글몰트,Kirkland Signature Islay Single Malt Scotch Whisky,Kirkland,싱글몰트,스코틀랜드-아일레이,,,700,95900,95900,코스트코,med,CMPA-711 코스트코 신상 반영 — 아일레이 싱글몰트 (costcome.com 06-30)
+w286,벤리악 Quarter Cask Classic 1000ml,BenRiach Quarter Cask Classic,BenRiach,싱글몰트,스코틀랜드-스페이사이드,,46,1000,,,신라면세,med,CMPA-734 벤리악 전수조사 — 버번배럴+쿼터캐스크 추가숙성 NAS 언피티드 46%
+w287,벤리악 Quarter Cask Peated 1000ml,BenRiach Quarter Cask Peated,BenRiach,싱글몰트,스코틀랜드-스페이사이드,,46,1000,,,신라면세,med,CMPA-734 벤리악 전수조사 — 피티드 쿼터캐스크 NAS 46%
+w288,벤리악 트리플 디스틸드 10년 1000ml,BenRiach Triple Distilled 10 Year Old,BenRiach,싱글몰트,스코틀랜드-스페이사이드,10,46,1000,,,신라면세,med,CMPA-734 벤리악 전수조사 — 3회 증류 10년
+w289,벤리악 트리플 디스틸드 25년 700ml,BenRiach Triple Distilled 25 Year Old,BenRiach,싱글몰트,스코틀랜드-스페이사이드,25,,700,,,신라면세,med,CMPA-734 벤리악 전수조사 — 3회 증류 25년
+w290,벤리악 25년 1997 캐스크 에디션 700ml,BenRiach 1997 Cask Edition 25 Year Old,BenRiach,싱글몰트,스코틀랜드-스페이사이드,25,,700,,,신라면세,med,CMPA-734 벤리악 전수조사 — 1997년 증류 빈티지 캐스크
+w291,벤리악 30년 700ml,BenRiach The Thirty,BenRiach,싱글몰트,스코틀랜드-스페이사이드,30,46,700,,,신라면세,med,CMPA-734 벤리악 전수조사
+w292,벤리악 40년 700ml,BenRiach The Forty,BenRiach,싱글몰트,스코틀랜드-스페이사이드,40,,700,,,신라면세,med,CMPA-734 벤리악 전수조사
+w293,벤리악 50년 1966 700ml,BenRiach 1966 50 Year Old,BenRiach,싱글몰트,스코틀랜드-스페이사이드,50,,700,,,신라면세,med,CMPA-734 벤리악 전수조사 — 1966년 증류

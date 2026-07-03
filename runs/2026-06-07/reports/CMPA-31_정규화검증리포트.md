@@ -1,0 +1,88 @@
+# CMPA-31 데이터 정규화·검증 리포트
+
+> `scripts/normalize_dataset.py` 1회 실행 결과. 재실행 가능. 수집 4종(유튜브/마트웹·데일리샷·해외) raw → 정본 위스키 id 정규화·클렌징.
+
+- 입력 raw 행: **4,938**  ·  distinct raw 표기: **4,547**
+- 정규화(병합) 후 정본 SKU 수: **129** (whisky-list.csv 89종 중)
+- 통합 데이터셋(clean 단품) 행: **842**
+- 오염행 제거(과거평균 ⅓~3배 밖): **76**
+
+> ⚠️ 신뢰도: 국내(한글) 매칭은 명시적 사전(match/not) 기반 고신뢰. 해외 매칭(87행, reason=`en`)은 name_en 브랜드+년수 토큰 휴리스틱이라 보조(advisory) 신뢰도 — 리포트 본표 반영 전 스팟체크 권장. 모호(후보 2개↑)는 미매칭 처리.
+
+## 소스별 정규화/제외 집계
+
+| 소스 | 입력스킵 | matched | unmatched | 비위스키제외 | 비단품제외 | 가격결측 | 오염제거 |
+|---|--:|--:|--:|--:|--:|--:|--:|
+| youtube_martweb | 0 | 669 | 39 | 17 | 7 | 0 | 5 |
+| dailyshot | 130 | 94 | 1 | 0 | 0 | 0 | 3 |
+| overseas | 0 | 155 | 3,901 | 0 | 23 | 0 | 68 |
+| **합계** | 130 | 918 | 3,941 | 17 | 30 | 0 | 76 |
+
+## 표기변형 병합 예시 (raw 표기 ≥ 3종 → 1 SKU)
+
+- **[w123] 라벨 5** ← 20종: `Glenburgie 2004 Distillery Labels by Gordon & MacPhail Single Malt Scotch Whisky`, `Ichiro's Malt & Grain Premium World Blended Whisky (Black Leaf Label)`, `Johnnie Walker (early 1990s ABV 43%) Blue Label Blended Scotch Whisky`, `Johnnie Walker - Blue Label, 40%, 75cl`, `Johnnie Walker Black Label "Extra Special" 1970's Release Scotch Whisky`, `Johnnie Walker Blue Label Scotch Blended Whisky (1000ml)` …
+- **[w035] 라프로익 10년** ← 19종: `Laphroaig - 10y, 43%`, `Laphroaig - 10y, Cask Strength, Batch 14, 58.6%`, `Laphroaig 10 Year Old`, `Laphroaig 10 Year Old Cask Strength Batch 017`, `Laphroaig 10 Year Old Cask Strength Batch 9 Single Malt Islay Whisky`, `Laphroaig 10 Year Old Sherry Oak Finish` …
+- **[w066] 잭다니엘 No.7** ← 17종: `잭 다니에 700ml`, `잭 다니엘스 200ml`, `잭 다니엘스 테네시 위스키 1L`, `잭다니스 1L`, `잭다니엘`, `잭다니엘 No.7` …
+- **[w012] 맥캘란 12년 더블캐스크** ← 17종: `Macallan - Double Cask, 12y, 2018 release, 40%`, `Macallan - Double Cask, 12y, 2025 release, 40%`, `【正規輸入品】 ザ マッカラン シェリーオーク 12年 40% 700ml 箱付 シングルモルト スコッチ ウイスキー`, `ザ マッカラン 12年 700ml (旧ボトル)`, `ザ マッカラン 12年 シングルモルト シェリーオーク 40% 700ml 箱なし スコッチ ウイスキー アウトレット`, `ザ マッカラン 12年 シングルモルト シェリーオーク 40% 700ml 箱付 スコッチ ウイスキー` …
+- **[w053] 조니워커 블루라벨** ← 14종: `조니어커 블루`, `조니워커 블로라 750ml`, `조니워커 블루`, `조니워커 블루 500ml`, `조니워커 블루 700ml`, `조니워커 블루 750ml` …
+- **[w065] 짐빔 화이트** ← 12종: `진빈 법원 유스키 1L`, `진빔`, `진빔 1L`, `진빔 700ml`, `진빔 버유스키 1L`, `진빔 법원이스키 1L` …
+- **[w067] 잭다니엘 애플** ← 11종: `잭 다니엘스 애플 1L`, `잭 다니엘스 애플 200ml`, `잭 다니엘스 애플 500mml`, `잭다니에스 애플 1L`, `잭다니엘 애플`, `잭다니엘 애플 1L` …
+- **[w018] 글렌드로낙 12년** ← 11종: `GlenDronach - 12y, Original, 43%`, `GlenDronach Original 12 Years Old Single Malt Scotch Whisky`, `グレンドロナック 12年`, `ザ グレンドロナック 12年 43% 700ml 箱付 シングルモルト スコッチ ウイスキー`, `글랜드로 12년 700ml`, `글랜드로 오드 to투더 엠버스 700ml` …
+- **[w050] 조니워커 블랙라벨 12년** ← 10종: `【世界五大ウイスキー】スコッチウイスキー  ジョニーウォーカー ブラックラベル12年《瓶 お得な1L×1本》`, `조니어커 블랙`, `조니워커 블랙`, `조니워커 블랙 1.75L`, `조니워커 블랙 200ml`, `조니워커 블랙 700ml` …
+- **[w042] 조니워커 그린라벨 15년** ← 10종: `ジョニーウォーカー グリーンラベル 15年 700ml 43%`, `조니어 그린`, `조니워커 그린`, `조니워커 그린 15년`, `조니워커 그린 700ml`, `조니워커 그린납` …
+- **[w008] 발베니 12년 더블우드** ← 10종: `ザ バルヴェニー 12年 ダブルウッド 40% 700ml 箱付 シングルモルト スコッチ ウイスキー`, `ザ バルヴェニー ダブルウッド 12年`, `발베니 12년`, `발베니 12년 700ml`, `발베니 12년 더블 우드 700ml`, `발베니 12년 더블로드 700ml` …
+- **[w102] 라프로익 오크 셀렉트** ← 9종: `John Milroy - Laphroaig 18 Year Old 1997 Tiger's Finest Selection Cask 32`, `Laphroaig - Select Cask, 40%`, `Laphroaig 24 Year Old Warehouse 1 Selected Casks 62, 64, 65 & 66`, `Laphroaig SELECT 200 Years Anniversary Islay Single Malt Scotch Whisky`, `Laphroaig SELECT Single Malt Islay Scotch Whisky`, `Laphroaig Select` …
+
+## 미매칭 raw 표기 (3959종) — 마스터 SKU 확장 후보
+
+> 정본 미등록이거나 해외(영문/중문) 매칭 규칙 밖. 무리한 병합 대신 미매칭으로 남김(서로 다른 제품 오병합 방지 원칙).
+
+- `"Around the World in 12 Days" Whiskies Advent Calendar Set`
+- `"Around the World in 24 Days" Spirits Advent Calendar Set`
+- `"Around the World in 24 Days" Whiskies Advent Calendar Set A`
+- `"Bespoke" Make Your Own Whisky & Spirits Set (2 x Full Bottles)`
+- `"Kanosuke Japanese Whisky Tasting" at Mizunara: The Library on 24 Nov, 4PM`
+- `"Meet the Founders"  Dinner with the Founders in Call me AL (July 11th, 7pm-9pm)`
+- `"Unfold The Tamras Gin Story" Masterclass with The Founder at PDT's Sunday School (July 16th, 4pm-6pm)`
+- `"Whisky Blending Workshop" at Mizunara: The Library on 23 Feb,  4PM`
+- `"Whisky Blind Tasting Challenge" at Mizunara: The Library on 10 Nov, 4PM`
+- `*PRE-ORDER 預訂* Kowloon Spirits  - Single Malt Whiskey Exclusive Barrel, 750ml`
+- `114オールド グランダッド(ワールド)`
+- `1776 波本威士忌`
+- `1776 裸麥威士忌`
+- `1本のみ【正規品シングルモルトウイスキー】シークレット スペイサイド  『 ロングモーン 25年 700ml 箱入 』`
+- `Aberfeldy - Single Malt Scotch Whisky 12y, 40%, 75cl`
+- `Aberfeldy 12 Years Old Single Malt Scotch Whisky`
+- `Aberfeldy 23 Year Old 2001 Hand Filled Oloroso Sherry Cask 500058`
+- `Aberlour 12 Year Old 2010 Distillery Reserve Collection Single Cask 91955`
+- `Aberlour 16 Years Old Double Cask Matured Single Malt Scotch Whisky`
+- `Aberlour 18 Year Old Double Sherry Cask Finish`
+- `Aberlour A'bunadh Batch 67 Single Malt Scotch Whisky`
+- `Aberlour A'bunadh Batch 80`
+- `Abyss Whisky Bar "7 Course Chinese Food Pairing x Kilchoman Islay Whisky" with Peter Wills on April 15th 2023 @ 7:30 p.m.`
+- `Adelphi - Dailuaine 10 Year Old 2015 Cask 300973`
+- `Adelphi - Inchgower 14 Year Old 2010 Cask 809891`
+- `Adelphi - Islay (Caol Ila) 10y, Single Malt Whisky, 46%,70cl, 1800B`
+- `Adelphi - Loyal Old Mature Private Stock, Blended Scotch Whisky, 40%, 70cl`
+- `Adelphi - Private Stock Reserve 8y, Peated blend, 46%, 70cl, 1800B`
+- `Adelphi - Speyside (Glen Elgin) 10y, Single Malt Whisky, 46%,70cl, 1800B`
+- `Adelphi - The Kincardine, Single Malt Scotch + Indian Whisky 7y, 52.9%, 820b`
+- `Adelphi Limited - Benrinnes 33y, 1984, 57.3%, 395b`
+- `Adelphi Limited - Breath of Speyside 30y, 1992, 50.3%, 194b`
+- `Adelphi Limited - Bunnahabhain 23y, 1998, 53.5%, 587b, IB Single Malt Scotch Whisky`
+- `Adelphi Limited - Glen Grant 22y, 1985, 62.1%, 64b, IB Single Malt Scotch Whisky`
+- `Adelphi Limited - Glen Grant 28y, 1992, 52.5%, 185b`
+- `Adelphi Limited - Miltonduff 36y, 1981, 51.8%, 138b`
+- `Adelphi Limited - Mortlach 25y, 1993, 56.1%, 385b`
+- `Adelphi Limited - Mortlach 36y, 1986, 51.4%, 176b`
+- `Adelphi Limited - Teaninich 34y, 1983, 44%, 190b`
+- `Adelphi Selection - Ardmore 8y Refill Oloroso Butt, 2016, 59.7%, 632b`
+- … 외 3919종 (전체는 `assets/whisky-aliases.csv` status=unmatched)
+
+## 산출물
+
+- `data/whisky-prices/normalized/normalized_prices.csv` — 정규화된 통합 데이터셋(clean 단품)
+- `data/whisky-prices/normalized/normalized_all_rows.csv` — 전수 행(제외/오염 사유 포함, 감사용)
+- `assets/master-sku.csv` — 마스터 SKU 사전(정본 id별 별칭수·행수·마켓·가격대)
+- `assets/whisky-aliases.csv` — 별칭 사전(raw→정본 id, 전 소스 전수)
+

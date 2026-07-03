@@ -1,0 +1,42 @@
+{
+  "run_date": "2026-06-06",
+  "run_dir": "runs/2026-06-06",
+  "assets": {
+    "shilla_data": [
+      "runs/2026-06-06/shilla_data/구매추천_CMPA134_2026-06-06.csv",
+      "runs/2026-06-06/shilla_data/리포트_가격_2026-06-06.json",
+      "runs/2026-06-06/shilla_data/면세_vs_데일리샷_2026-06-06.csv",
+      "runs/2026-06-06/shilla_data/면세_vs_데일리샷_가성비_2026-06-06.csv",
+      "runs/2026-06-06/shilla_data/면세_국내최저대비_저렴_2026-06-06.csv",
+      "runs/2026-06-06/shilla_data/면세_매력도_매칭_2026-06-06.csv",
+      "runs/2026-06-06/shilla_data/신라면세_버번위스키_TOP_2026-06-06.csv",
+      "runs/2026-06-06/shilla_data/신라면세_버번위스키_매력도_2026-06-06.csv",
+      "runs/2026-06-06/shilla_data/신라면세_셰리위스키_TOP_2026-06-06.csv",
+      "runs/2026-06-06/shilla_data/신라면세_셰리위스키_매력도_2026-06-06.csv",
+      "runs/2026-06-06/shilla_data/신라면세_위스키_2026-06-06.csv",
+      "runs/2026-06-06/shilla_data/신라면세_주류전체_2026-06-06.csv",
+      "runs/2026-06-06/shilla_data/신라면세_피트위스키_100불이하_2026-06-06.csv",
+      "runs/2026-06-06/shilla_data/신라면세_피트위스키_2026-06-06.csv",
+      "runs/2026-06-06/shilla_data/신라면세_피트위스키_TOP20_2026-06-06.csv",
+      "runs/2026-06-06/shilla_data/신라면세_피트위스키_매력도_2026-06-06.csv",
+      "runs/2026-06-06/shilla_data/신라면세_피트위스키_원화구간_2026-06-06.csv",
+      "runs/2026-06-06/shilla_data/신라면세_피트위스키_해외비교_2026-06-06.csv",
+      "runs/2026-06-06/shilla_data/신라면세_피트위스키_해외비교_2026-06-06_v2.csv",
+      "runs/2026-06-06/shilla_data/예산대별_TOP_2026-06-06.csv"
+    ],
+    "shilla_report": [
+      "runs/2026-06-06/shilla_report/draft_면세위스키_진짜싼것vs함정_2026-06-06.md",
+      "runs/2026-06-06/shilla_report/가격변동_2026-06-06_to_2026-06-07.md",
+      "runs/2026-06-06/shilla_report/구매추천_CMPA134_2026-06-06.md",
+      "runs/2026-06-06/shilla_report/면세_vs_데일리샷_가성비_2026-06-06.md",
+      "runs/2026-06-06/shilla_report/면세_가성비_매력도_2026-06-06.md",
+      "runs/2026-06-06/shilla_report/면세_국내최저대비_저렴_2026-06-06.md",
+      "runs/2026-06-06/shilla_report/면세위스키_리포트_2026-06-06.html",
+      "runs/2026-06-06/shilla_report/예산대별_TOP_2026-06-06.md",
+      "runs/2026-06-06/shilla_report/콘텐츠초안_면세위스키_2026-06-06.md",
+      "runs/2026-06-06/shilla_report/피트위스키_리포트_2026-06-06.md"
+    ]
+  },
+  "copied": 30,
+  "missing": []
+}

@@ -1,0 +1,66 @@
+# CaskCode → GitHub Pages 배포 (CMPA-188)
+# godaji/CaskCode 프로젝트 사이트: https://godaji.github.io/CaskCode/
+#
+# 왜 Actions 빌드인가: Satellite 테마(jekyll-theme-satellite)가 jekyll-loading-lazy
+# 에 의존 → 네이티브 Pages(Jekyll 3.9 화이트리스트)에선 빌드 불가. 그래서 Jekyll 4.x
+# 를 bundler 로 직접 빌드한다(CMPA-183 분석 결론). 현재는 테마 미적용(자체 _layouts)
+# 상태로 인프라 우선 배포 — 테마 확정 시 Gemfile 주석 해제 후 재배포만 하면 된다.
+#
+# 시크릿: 저장소 내장 GITHUB_TOKEN 만 사용(외부 시크릿 불필요).
+# 색인: noindex 게이트 유지 — 각 페이지 layout 의 meta robots 기본값이 noindex,nofollow,
+#       robots.txt 가 Disallow: / . 보드 go-live(게이트 c7405e7d) 전까지 색인 금지.
+name: Deploy CaskCode to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# 내장 토큰에 Pages 배포 권한 부여(외부 시크릿 없음).
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 동시 배포 1개로 직렬화(진행 중 배포는 취소하지 않음).
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true   # Gemfile 기반 의존성 설치 + 캐시
+
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Build with Jekyll
+        # configure-pages 가 주입하는 base_path(=/CaskCode)로 baseurl 을 덮어써
+        # 프로젝트 사이트 경로를 정확히 맞춘다(_config.yml baseurl 과 동일값).
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        env:
+          JEKYLL_ENV: production
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

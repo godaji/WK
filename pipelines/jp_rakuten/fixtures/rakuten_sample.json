@@ -1,0 +1,925 @@
+{
+  "_about": "Recorded-SHAPE fixture of Rakuten Ichiba Item Search API (IchibaItem/Search/20220601, format=json). Field names/types mirror the real API. Each Item carries an extra '_gt' (ground-truth canonical bottle, or null for non-bottle noise) used ONLY by the self-grading harness; the parser never reads '_gt'. Prices are plausible JPY (tax-incl, as Rakuten returns). NOT live data — for internal R&D pipeline validation only (CMPA-7 frame).",
+  "queries": [
+    {
+      "keyword": "サントリー 山崎",
+      "response": {
+        "count": 4123,
+        "page": 1,
+        "first": 1,
+        "last": 6,
+        "hits": 6,
+        "pageCount": 100,
+        "Items": [
+          {
+            "Item": {
+              "itemName": "サントリー シングルモルト ウイスキー 山崎 NV 700ml 43%",
+              "itemPrice": 13800,
+              "shopName": "リカーショップ大山",
+              "itemUrl": "https://item.rakuten.co.jp/oyama/yamazaki-nv/",
+              "itemCode": "oyama:10000123",
+              "_gt": {
+                "brand": "yamazaki",
+                "age": null,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "【正規品】サントリー 山崎12年 シングルモルト 700ml 箱付",
+              "itemPrice": 34800,
+              "shopName": "酒のSAKAI",
+              "itemUrl": "https://item.rakuten.co.jp/sakai/yamazaki12/",
+              "itemCode": "sakai:551200",
+              "_gt": {
+                "brand": "yamazaki",
+                "age": 12,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "サントリー 山崎18年 シングルモルト ウイスキー 700ml 43% 箱なし",
+              "itemPrice": 148000,
+              "shopName": "ウイスキー専門 信濃屋",
+              "itemUrl": "https://item.rakuten.co.jp/shinanoya/yamazaki18/",
+              "itemCode": "shinanoya:88120",
+              "_gt": {
+                "brand": "yamazaki",
+                "age": 18,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "山崎 ミニチュア 50ml ウイスキー お試し",
+              "itemPrice": 2980,
+              "shopName": "ミニボトル館",
+              "itemUrl": "https://item.rakuten.co.jp/mini/yamazaki50/",
+              "itemCode": "mini:50ml-y",
+              "_gt": {
+                "brand": "yamazaki",
+                "age": null,
+                "volume_ml": 50
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "【空瓶】山崎18年 空きボトル ディスプレイ用 700ml",
+              "itemPrice": 4500,
+              "shopName": "リサイクルびん市場",
+              "itemUrl": "https://item.rakuten.co.jp/recycle/empty-y18/",
+              "itemCode": "recycle:emp1",
+              "_gt": null
+            }
+          },
+          {
+            "Item": {
+              "itemName": "ウイスキーグラス 山崎ロゴ入り タンブラー 2脚セット",
+              "itemPrice": 3200,
+              "shopName": "酒器の店",
+              "itemUrl": "https://item.rakuten.co.jp/glass/yamazaki-glass/",
+              "itemCode": "glass:y2",
+              "_gt": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "keyword": "サントリー 白州",
+      "response": {
+        "count": 2890,
+        "page": 1,
+        "first": 1,
+        "last": 4,
+        "hits": 4,
+        "pageCount": 100,
+        "Items": [
+          {
+            "Item": {
+              "itemName": "サントリー シングルモルト ウイスキー 白州 NV 700ml 43% 送料無料",
+              "itemPrice": 12500,
+              "shopName": "リカーショップ大山",
+              "itemUrl": "https://item.rakuten.co.jp/oyama/hakushu-nv/",
+              "itemCode": "oyama:10000222",
+              "_gt": {
+                "brand": "hakushu",
+                "age": null,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "白州12年 シングルモルト 700ml 箱付き 正規",
+              "itemPrice": 39800,
+              "shopName": "酒のSAKAI",
+              "itemUrl": "https://item.rakuten.co.jp/sakai/hakushu12/",
+              "itemCode": "sakai:551300",
+              "_gt": {
+                "brand": "hakushu",
+                "age": 12,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "白州 NV 350ml ハーフボトル",
+              "itemPrice": 7800,
+              "shopName": "ウイスキー専門 信濃屋",
+              "itemUrl": "https://item.rakuten.co.jp/shinanoya/hakushu350/",
+              "itemCode": "shinanoya:88230",
+              "_gt": {
+                "brand": "hakushu",
+                "age": null,
+                "volume_ml": 350
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "白州 12年・山崎12年 飲み比べ 2本セット 各700ml",
+              "itemPrice": 78000,
+              "shopName": "ギフト酒店",
+              "itemUrl": "https://item.rakuten.co.jp/gift/set-h12y12/",
+              "itemCode": "gift:set2",
+              "_gt": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "keyword": "サントリー 響",
+      "response": {
+        "count": 3551,
+        "page": 1,
+        "first": 1,
+        "last": 5,
+        "hits": 5,
+        "pageCount": 100,
+        "Items": [
+          {
+            "Item": {
+              "itemName": "サントリー ウイスキー 響 JAPANESE HARMONY 700ml 43% 箱なし",
+              "itemPrice": 16800,
+              "shopName": "リカーズハセガワ",
+              "itemUrl": "https://item.rakuten.co.jp/hasegawa/hibiki-jh/",
+              "itemCode": "hasegawa:7001",
+              "_gt": {
+                "brand": "hibiki",
+                "age": null,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "響17年 ブレンデッドウイスキー 700ml 43% 箱付 【正規品】",
+              "itemPrice": 198000,
+              "shopName": "酒のSAKAI",
+              "itemUrl": "https://item.rakuten.co.jp/sakai/hibiki17/",
+              "itemCode": "sakai:551400",
+              "_gt": {
+                "brand": "hibiki",
+                "age": 17,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "響21年 ブレンデッド 700ml 箱・冊子付",
+              "itemPrice": 360000,
+              "shopName": "ウイスキー専門 信濃屋",
+              "itemUrl": "https://item.rakuten.co.jp/shinanoya/hibiki21/",
+              "itemCode": "shinanoya:88340",
+              "_gt": {
+                "brand": "hibiki",
+                "age": 21,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "響 JAPANESE HARMONY マスターズセレクト 700ml",
+              "itemPrice": 22800,
+              "shopName": "リカーズハセガワ",
+              "itemUrl": "https://item.rakuten.co.jp/hasegawa/hibiki-ms/",
+              "itemCode": "hasegawa:7002",
+              "_gt": {
+                "brand": "hibiki",
+                "age": null,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "響 ロゴ入り 木製コースター 5枚セット ノベルティ",
+              "itemPrice": 1800,
+              "shopName": "酒器の店",
+              "itemUrl": "https://item.rakuten.co.jp/glass/hibiki-coaster/",
+              "itemCode": "glass:hc5",
+              "_gt": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "keyword": "ニッカ 竹鶴",
+      "response": {
+        "count": 1980,
+        "page": 1,
+        "first": 1,
+        "last": 3,
+        "hits": 3,
+        "pageCount": 100,
+        "Items": [
+          {
+            "Item": {
+              "itemName": "ニッカ 竹鶴 ピュアモルト 700ml 43% 箱なし",
+              "itemPrice": 9800,
+              "shopName": "リカーマウンテン楽天市場店",
+              "itemUrl": "https://item.rakuten.co.jp/likaman/taketsuru-pm/",
+              "itemCode": "likaman:tk-pm",
+              "_gt": {
+                "brand": "taketsuru",
+                "age": null,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "竹鶴17年 ピュアモルト 旧ボトル 700ml",
+              "itemPrice": 88000,
+              "shopName": "オールドボトル専門店",
+              "itemUrl": "https://item.rakuten.co.jp/oldbottle/taketsuru17/",
+              "itemCode": "oldbottle:tk17",
+              "_gt": {
+                "brand": "taketsuru",
+                "age": 17,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "竹鶴ピュアモルト 180ml 飲みきりサイズ",
+              "itemPrice": 2480,
+              "shopName": "ミニボトル館",
+              "itemUrl": "https://item.rakuten.co.jp/mini/taketsuru180/",
+              "itemCode": "mini:tk180",
+              "_gt": {
+                "brand": "taketsuru",
+                "age": null,
+                "volume_ml": 180
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "keyword": "ニッカ 余市",
+      "response": {
+        "count": 1450,
+        "page": 1,
+        "first": 1,
+        "last": 3,
+        "hits": 3,
+        "pageCount": 100,
+        "Items": [
+          {
+            "Item": {
+              "itemName": "ニッカ シングルモルト 余市 NV 700ml 45% 箱付",
+              "itemPrice": 11800,
+              "shopName": "リカーマウンテン楽天市場店",
+              "itemUrl": "https://item.rakuten.co.jp/likaman/yoichi-nv/",
+              "itemCode": "likaman:yo-nv",
+              "_gt": {
+                "brand": "yoichi",
+                "age": null,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "余市10年 シングルモルト 旧 700ml",
+              "itemPrice": 49800,
+              "shopName": "オールドボトル専門店",
+              "itemUrl": "https://item.rakuten.co.jp/oldbottle/yoichi10/",
+              "itemCode": "oldbottle:yo10",
+              "_gt": {
+                "brand": "yoichi",
+                "age": 10,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "ニッカ 余市 ブレンダーズチョイス 限定 500ml",
+              "itemPrice": 16500,
+              "shopName": "ウイスキー専門 信濃屋",
+              "itemUrl": "https://item.rakuten.co.jp/shinanoya/yoichi-bc/",
+              "itemCode": "shinanoya:88450",
+              "_gt": {
+                "brand": "yoichi",
+                "age": null,
+                "volume_ml": 500
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "keyword": "ニッカ 宮城峡",
+      "response": {
+        "count": 1120,
+        "page": 1,
+        "first": 1,
+        "last": 2,
+        "hits": 2,
+        "pageCount": 100,
+        "Items": [
+          {
+            "Item": {
+              "itemName": "ニッカ シングルモルト 宮城峡 NV 700ml 45%",
+              "itemPrice": 11500,
+              "shopName": "リカーマウンテン楽天市場店",
+              "itemUrl": "https://item.rakuten.co.jp/likaman/miyagikyo-nv/",
+              "itemCode": "likaman:mg-nv",
+              "_gt": {
+                "brand": "miyagikyo",
+                "age": null,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "宮城峡 アップル ぬいぐるみ マスコット グッズ",
+              "itemPrice": 1500,
+              "shopName": "酒器の店",
+              "itemUrl": "https://item.rakuten.co.jp/glass/miyagikyo-toy/",
+              "itemCode": "glass:mg-toy",
+              "_gt": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "keyword": "ニッカ フロムザバレル",
+      "response": {
+        "count": 980,
+        "page": 1,
+        "first": 1,
+        "last": 2,
+        "hits": 2,
+        "pageCount": 100,
+        "Items": [
+          {
+            "Item": {
+              "itemName": "ニッカ フロム・ザ・バレル 500ml 51.4% 送料無料",
+              "itemPrice": 4280,
+              "shopName": "リカーズハセガワ",
+              "itemUrl": "https://item.rakuten.co.jp/hasegawa/from-the-barrel/",
+              "itemCode": "hasegawa:ftb",
+              "_gt": {
+                "brand": "nikka_from_the_barrel",
+                "age": null,
+                "volume_ml": 500
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "ニッカ フロムザバレル 500ml 6本セット まとめ買い",
+              "itemPrice": 25200,
+              "shopName": "ケース販売の酒店",
+              "itemUrl": "https://item.rakuten.co.jp/case/ftb-6/",
+              "itemCode": "case:ftb6",
+              "_gt": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "keyword": "ニッカ セッション",
+      "response": {
+        "count": 760,
+        "page": 1,
+        "first": 1,
+        "last": 1,
+        "hits": 1,
+        "pageCount": 100,
+        "Items": [
+          {
+            "Item": {
+              "itemName": "ニッカ セッション ブレンデッドモルト 700ml 43%",
+              "itemPrice": 4980,
+              "shopName": "リカーマウンテン楽天市場店",
+              "itemUrl": "https://item.rakuten.co.jp/likaman/nikka-session/",
+              "itemCode": "likaman:session",
+              "_gt": {
+                "brand": "nikka_session",
+                "age": null,
+                "volume_ml": 700
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "keyword": "ニッカ カフェグレーン",
+      "response": {
+        "count": 540,
+        "page": 1,
+        "first": 1,
+        "last": 1,
+        "hits": 1,
+        "pageCount": 100,
+        "Items": [
+          {
+            "Item": {
+              "itemName": "ニッカ カフェグレーン 700ml 45% 箱なし",
+              "itemPrice": 6280,
+              "shopName": "リカーズハセガワ",
+              "itemUrl": "https://item.rakuten.co.jp/hasegawa/coffey-grain/",
+              "itemCode": "hasegawa:coffey",
+              "_gt": {
+                "brand": "nikka_coffey_grain",
+                "age": null,
+                "volume_ml": 700
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "keyword": "サントリー 知多",
+      "response": {
+        "count": 1340,
+        "page": 1,
+        "first": 1,
+        "last": 2,
+        "hits": 2,
+        "pageCount": 100,
+        "Items": [
+          {
+            "Item": {
+              "itemName": "サントリー シングルグレーン 知多 700ml 43%",
+              "itemPrice": 4180,
+              "shopName": "リカーマウンテン楽天市場店",
+              "itemUrl": "https://item.rakuten.co.jp/likaman/chita/",
+              "itemCode": "likaman:chita",
+              "_gt": {
+                "brand": "chita",
+                "age": null,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "知多 ハイボール 缶 350ml×24本 ケース",
+              "itemPrice": 5760,
+              "shopName": "ケース販売の酒店",
+              "itemUrl": "https://item.rakuten.co.jp/case/chita-hiball/",
+              "itemCode": "case:chita-can",
+              "_gt": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "keyword": "キリン 富士",
+      "response": {
+        "count": 870,
+        "page": 1,
+        "first": 1,
+        "last": 2,
+        "hits": 2,
+        "pageCount": 100,
+        "Items": [
+          {
+            "Item": {
+              "itemName": "キリン シングルグレーン ジャパニーズウイスキー 富士 700ml 46%",
+              "itemPrice": 5480,
+              "shopName": "酒のSAKAI",
+              "itemUrl": "https://item.rakuten.co.jp/sakai/fuji-sg/",
+              "itemCode": "sakai:fuji-sg",
+              "_gt": {
+                "brand": "fuji",
+                "age": null,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "富士山麓 シグニチャーブレンド 700ml 50%",
+              "itemPrice": 6980,
+              "shopName": "酒のSAKAI",
+              "itemUrl": "https://item.rakuten.co.jp/sakai/fujisanroku/",
+              "itemCode": "sakai:fsr",
+              "_gt": {
+                "brand": "fuji",
+                "age": null,
+                "volume_ml": 700
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "keyword": "イチローズモルト",
+      "response": {
+        "count": 690,
+        "page": 1,
+        "first": 1,
+        "last": 2,
+        "hits": 2,
+        "pageCount": 100,
+        "Items": [
+          {
+            "Item": {
+              "itemName": "イチローズモルト ＆グレーン ホワイトラベル 700ml 46%",
+              "itemPrice": 5280,
+              "shopName": "ウイスキー専門 信濃屋",
+              "itemUrl": "https://item.rakuten.co.jp/shinanoya/ichiros-white/",
+              "itemCode": "shinanoya:ich-w",
+              "_gt": {
+                "brand": "ichiros_malt",
+                "age": null,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "イチローズモルト MWR ミズナラウッドリザーブ 700ml 46.5%",
+              "itemPrice": 18800,
+              "shopName": "ウイスキー専門 信濃屋",
+              "itemUrl": "https://item.rakuten.co.jp/shinanoya/ichiros-mwr/",
+              "itemCode": "shinanoya:ich-mwr",
+              "_gt": {
+                "brand": "ichiros_malt",
+                "age": null,
+                "volume_ml": 700
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "keyword": "マルス 駒ヶ岳",
+      "response": {
+        "count": 410,
+        "page": 1,
+        "first": 1,
+        "last": 2,
+        "hits": 2,
+        "pageCount": 100,
+        "Items": [
+          {
+            "Item": {
+              "itemName": "マルス シングルモルト 駒ヶ岳 リミテッドエディション 700ml 50%",
+              "itemPrice": 9800,
+              "shopName": "リカーズハセガワ",
+              "itemUrl": "https://item.rakuten.co.jp/hasegawa/komagatake/",
+              "itemCode": "hasegawa:koma",
+              "_gt": {
+                "brand": "mars_komagatake",
+                "age": null,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "本坊酒造 駒ヶ岳 関連 Tシャツ Mサイズ",
+              "itemPrice": 3300,
+              "shopName": "酒器の店",
+              "itemUrl": "https://item.rakuten.co.jp/glass/koma-tshirt/",
+              "itemCode": "glass:koma-t",
+              "_gt": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "keyword": "厚岸 ウイスキー",
+      "response": {
+        "count": 360,
+        "page": 1,
+        "first": 1,
+        "last": 2,
+        "hits": 2,
+        "pageCount": 100,
+        "Items": [
+          {
+            "Item": {
+              "itemName": "厚岸 シングルモルト ジャパニーズウイスキー 二十四節気 700ml",
+              "itemPrice": 26800,
+              "shopName": "オールドボトル専門店",
+              "itemUrl": "https://item.rakuten.co.jp/oldbottle/akkeshi/",
+              "itemCode": "oldbottle:akk",
+              "_gt": {
+                "brand": "akkeshi",
+                "age": null,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "厚岸 ブレンデッド ウイスキー 200ml ミニ",
+              "itemPrice": 4800,
+              "shopName": "ミニボトル館",
+              "itemUrl": "https://item.rakuten.co.jp/mini/akkeshi200/",
+              "itemCode": "mini:akk200",
+              "_gt": {
+                "brand": "akkeshi",
+                "age": null,
+                "volume_ml": 200
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "keyword": "サントリー 角瓶",
+      "response": {
+        "count": 5200,
+        "page": 1,
+        "first": 1,
+        "last": 2,
+        "hits": 2,
+        "pageCount": 100,
+        "Items": [
+          {
+            "Item": {
+              "itemName": "サントリー ウイスキー 角瓶 700ml 40%",
+              "itemPrice": 1780,
+              "shopName": "リカーマウンテン楽天市場店",
+              "itemUrl": "https://item.rakuten.co.jp/likaman/kakubin/",
+              "itemCode": "likaman:kaku",
+              "_gt": {
+                "brand": "kakubin",
+                "age": null,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "角瓶 ハイボール用 1920ml 大容量 ペット",
+              "itemPrice": 3680,
+              "shopName": "業務用酒店",
+              "itemUrl": "https://item.rakuten.co.jp/gyomu/kakubin-1920/",
+              "itemCode": "gyomu:kaku19",
+              "_gt": {
+                "brand": "kakubin",
+                "age": null,
+                "volume_ml": 1920
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "keyword": "サントリー 季 TOKI",
+      "response": {
+        "count": 1880,
+        "page": 1,
+        "first": 1,
+        "last": 3,
+        "hits": 3,
+        "pageCount": 100,
+        "Items": [
+          {
+            "Item": {
+              "itemName": "サントリー ウイスキー 季 TOKI 700ml 43%",
+              "itemPrice": 3180,
+              "shopName": "リカーマウンテン楽天市場店",
+              "itemUrl": "https://item.rakuten.co.jp/likaman:toki/",
+              "itemCode": "likaman:toki",
+              "_gt": {
+                "brand": "toki",
+                "age": null,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "SUNTORY 季 TOKI 700ml 化粧箱付",
+              "itemPrice": 3680,
+              "shopName": "酒のSAKAI",
+              "itemUrl": "https://item.rakuten.co.jp/sakai:toki2/",
+              "itemCode": "sakai:toki2",
+              "_gt": {
+                "brand": "toki",
+                "age": null,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "サントリー 季 TOKI ロゴ入り ハイボールグラス 2脚",
+              "itemPrice": 2400,
+              "shopName": "酒器の店",
+              "itemUrl": "https://item.rakuten.co.jp/glass:toki/",
+              "itemCode": "glass:toki",
+              "_gt": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "keyword": "ニッカ デイズ",
+      "response": {
+        "count": 640,
+        "page": 1,
+        "first": 1,
+        "last": 2,
+        "hits": 2,
+        "pageCount": 100,
+        "Items": [
+          {
+            "Item": {
+              "itemName": "ニッカ デイズ 700ml ブレンデッドウイスキー",
+              "itemPrice": 1780,
+              "shopName": "リカーズハセガワ",
+              "itemUrl": "https://item.rakuten.co.jp/hasegawa:days/",
+              "itemCode": "hasegawa:days",
+              "_gt": {
+                "brand": "nikka_days",
+                "age": null,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "ニッカ デイズ 180ml ミニボトル",
+              "itemPrice": 780,
+              "shopName": "ミニボトル館",
+              "itemUrl": "https://item.rakuten.co.jp/mini:days180/",
+              "itemCode": "mini:days180",
+              "_gt": {
+                "brand": "nikka_days",
+                "age": null,
+                "volume_ml": 180
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "keyword": "マツイ 倉吉",
+      "response": {
+        "count": 920,
+        "page": 1,
+        "first": 1,
+        "last": 2,
+        "hits": 2,
+        "pageCount": 100,
+        "Items": [
+          {
+            "Item": {
+              "itemName": "マツイ 倉吉 ピュアモルト 8年 700ml 43%",
+              "itemPrice": 13200,
+              "shopName": "ウイスキー専門 信濃屋",
+              "itemUrl": "https://item.rakuten.co.jp/shinanoya:kura8/",
+              "itemCode": "shinanoya:kura8",
+              "_gt": {
+                "brand": "kurayoshi",
+                "age": 8,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "松井 倉吉 シングルモルト NV 700ml",
+              "itemPrice": 9800,
+              "shopName": "酒のSAKAI",
+              "itemUrl": "https://item.rakuten.co.jp/sakai:kuranv/",
+              "itemCode": "sakai:kuranv",
+              "_gt": {
+                "brand": "kurayoshi",
+                "age": null,
+                "volume_ml": 700
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "keyword": "明石 ホワイトオーク",
+      "response": {
+        "count": 540,
+        "page": 1,
+        "first": 1,
+        "last": 2,
+        "hits": 2,
+        "pageCount": 100,
+        "Items": [
+          {
+            "Item": {
+              "itemName": "江井ヶ嶋 あかし ホワイトオーク シングルモルト 500ml 46%",
+              "itemPrice": 6800,
+              "shopName": "リカーズハセガワ",
+              "itemUrl": "https://item.rakuten.co.jp/hasegawa:akashi/",
+              "itemCode": "hasegawa:akashi",
+              "_gt": {
+                "brand": "akashi",
+                "age": null,
+                "volume_ml": 500
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "明石 ホワイトオーク ブレンデッド 500ml",
+              "itemPrice": 2980,
+              "shopName": "酒のSAKAI",
+              "itemUrl": "https://item.rakuten.co.jp/sakai:akashiwo/",
+              "itemCode": "sakai:akashiwo",
+              "_gt": {
+                "brand": "akashi",
+                "age": null,
+                "volume_ml": 500
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "keyword": "マルス 津貫",
+      "response": {
+        "count": 330,
+        "page": 1,
+        "first": 1,
+        "last": 2,
+        "hits": 2,
+        "pageCount": 100,
+        "Items": [
+          {
+            "Item": {
+              "itemName": "マルス 津貫 ザ ファースト シングルモルト 700ml",
+              "itemPrice": 16500,
+              "shopName": "ウイスキー専門 信濃屋",
+              "itemUrl": "https://item.rakuten.co.jp/shinanoya:tsunuki/",
+              "itemCode": "shinanoya:tsunuki",
+              "_gt": {
+                "brand": "tsunuki",
+                "age": null,
+                "volume_ml": 700
+              }
+            }
+          },
+          {
+            "Item": {
+              "itemName": "マルス 津貫 蒸溜所限定ボトル 木製ギフトセット",
+              "itemPrice": 24800,
+              "shopName": "ギフト酒店",
+              "itemUrl": "https://item.rakuten.co.jp/gift:tsunukiset/",
+              "itemCode": "gift:tsunukiset",
+              "_gt": null
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

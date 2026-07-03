@@ -1,0 +1,129 @@
+# 위스키 가격 인텔리전스 — 자산 계약 (Asset Contract) · T1(헌법급)
+#
+# 이 파일은 CMPA-161 "자산 규약 프로토콜"의 파일럿 1건이다.
+# 출처: 부모 이슈 CMPA-161 proposal 문서 §6 의 샘플 yaml 을 정본 계약으로 확정한 것.
+#
+# ⚠️ 계약 = 이 자산의 헌법. 에이전트는 이 파일을 임의로 수정 금지(CMPA-161 §4).
+#    변경이 필요하면 이슈로 '제안'만 하고, CEO 승인(파괴변경은 CEO+보드)으로만 version bump.
+#
+# ⚠️ proposal §6 은 '실제 코드 기반' 이상화 placeholder 를 일부 포함했다. CMPA-162 지시
+#    "실제 코드/CSV 의 현재 컬럼명과 정확히 일치(추측 금지)" 에 따라 schema/path/meta 를
+#    라이브 산출물에 스냅했다. proposal §6 대비 divergence 는 change_log 와 CEO 검수 코멘트에 명시.
+
+asset: whisky-price-intelligence
+tier: T1
+version: 1.1.0
+owner: DataEngineer            # CMPA-162 지시(proposal §6 의 'CTO' 를 위임 담당자로 확정)
+last_approved_by: CEO
+approved_at: 2026-06-07
+entrypoint: scripts/run_whisky_price_pipeline.py
+
+# ── ① INPUT 프로토콜 ───────────────────────────────────────────────────────
+input:
+  sources:                                   # 화이트리스트 — 여기 없는 소스는 적재 금지
+    - id: overseas                           # FX + 홍콩 + 일본 Shopify
+      path: pipelines/overseas/collect_overseas.py
+      required: true
+    - id: dailyshot                          # 국내 최저가 핵심 신호
+      path: pipelines/dailyshot/crawl_dailyshot.py
+      required: true
+    - id: costco_web
+      path: pipelines/costco_web/collect_costco_web.py
+      required: false
+    - id: youtube_whiskeypick                # @whiskeypick(위스키픽) — 트레이더스 2채널 중 하나(@whiskeypick+@whiskeykey, CMPA-160). 싼디/@SSanD3 아님(CMPA-154)
+      path: pipelines/youtube_traders/collect_traders_prices.py
+      required: false
+      note: ASR per-IP 429 → ≥60분 페이싱, 자체 cron 유지. 주간루틴 2순위(@whiskeykey 1순위 페이싱 만료후 교차검증)
+    - id: youtube_whiskeykey                 # @whiskeykey(위스키키) — CMPA-160 보드승인 2026-06-07. @whiskeypick(위스키픽)과 다른 채널(혼동주의)
+      path: pipelines/youtube_traders/collect_traders_prices.py
+      required: false
+      note: ASR per-IP 429 → ≥60분 페이싱. 주간루틴 1순위(@whiskeypick 는 페이싱 만료후 2순위 교차검증)
+  required_fields: [name, price, currency, collected_date]   # 입력 소스가 제공해야 하는 논리 필드
+  collected_date_required: true              # CMPA-156: 수집날짜 메타 누락 금지
+  freshness:
+    domestic_rollover_gate: "국내 마트 월초 행수 ≥ max(40, 직전월×0.5) 일 때만 월 롤오버 (CMPA-116/155)"
+
+# ── ② RUN 프로토콜 ─────────────────────────────────────────────────────────
+run:
+  ordering: [collect, normalize, report]     # CMPA-98 레이스 차단 — 순서 강제
+  concurrency_policy: skip_if_active         # 동시 재실행 시 스킵 (CMPA-99 공유집계 충돌 방지)
+  failure:
+    collect: warn_continue                   # 개별 소스 429/장애가 리포트 재생성을 막지 않음(--strict면 hard-fail)
+    normalize: hard_fail
+    report: hard_fail
+  idempotent: true                           # --skip-crawl 재실행 안전
+
+# ── ③ OUTPUT 프로토콜 ──────────────────────────────────────────────────────
+output:
+  artifacts:
+    - id: normalized_all
+      path: data/whisky-prices/normalized/normalized_all_rows.csv
+      encoding: utf-8-sig                    # ⚠️ 파일 선두 BOM 있음 — 헤더 파싱 시 utf-8-sig
+      # 실제 헤더(CMPA-162: 직접 읽어 맞춤). proposal §6 의 [canonical_id,name,source,price_krw,
+      # collected_date] 는 이상화 placeholder 였음 → 라이브 컬럼명으로 스냅:
+      #   name→canonical_name_ko · source→source_family · collected_date→date
+      schema:
+        - canonical_id
+        - canonical_name_ko
+        - raw_name
+        - volume_ml
+        - non_unit
+        - price_krw
+        - market                             # CMPA-160: 트레이더스 전국 동일가 → 지점명 제거, 항상 '트레이더스'(후속 market 포맷 invariant 시 전제). 컬럼명 무변→검증기 무영향
+        - channel
+        - date
+        - source_family
+        - source_file
+        - status
+        - exclude_reason
+    - id: monthly_report
+      # 실제 정본 경로(CMPA-45): reports/whisky-price(단수)/<month>_위스키가격리포트_<gen-date>.md
+      # proposal §6 의 reports/whisky-prices/<month>.md 는 placeholder 였음.
+      path: "reports/whisky-price/<month>_위스키가격리포트_<gen-date>.md"
+      # glob 은 _위스키가격리포트_ 뒤에 'YYYY-MM-DD' 가 바로 오는 정본만 매칭한다.
+      # → 배포본(_배포본_…)·편의포인터(_latest)는 제외하고 라이브 정본 리포트만 검증.
+      glob: "reports/whisky-price/*_위스키가격리포트_[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9].md"
+      resolve: latest_by_filename            # 파일명 사전순 최신 = 최신 월·최신 생성일 정본
+      required_meta:                         # CMPA-156/45: 리포트가 반드시 박아야 하는 날짜 메타
+        - key: report_date
+          marker: "리포트 생성일"             # <sub>… · 리포트 생성일 YYYY-MM-DD (KST)</sub>
+          pattern: '\d{4}-\d{2}-\d{2}'
+        - key: collected_date
+          marker: "데이터 기준일"             # <sub>데이터 기준일 YYYY-MM-DD · …</sub>
+          pattern: '\d{4}-\d{2}-\d{2}'
+  invariants:
+    - id: regression_zero
+      rule: "회귀=0: 기존 행 정규화 매칭 수 비감소(설명 없는 감소 금지)"
+      machine_check: false                   # 과거 baseline 비교 필요 → 이 검증기 범위 밖(파이프라인 회귀단계가 담당)
+    - id: totals_tokens_static
+      rule: "totals 토큰 라이브 금지: 홍콩 1,829 / 일본 1,435 하드코딩 유지 (CMPA-155 회귀 방지)"
+      machine_check: true
+      artifact: monthly_report
+      must_contain: ["1,829", "1,435"]       # 리포트 본문에 두 토큰이 그대로 살아 있어야 PASS
+  publish_gate: c7405e7d                     # 외부 배포는 보드 게이트(이 검증기는 배포를 발행하지 않음)
+
+# ── 변경 이력 ──────────────────────────────────────────────────────────────
+change_log:
+  - version: 1.1.0
+    date: 2026-06-07
+    by: DataEngineer
+    approved_by: CEO
+    note: >
+      INPUT 화이트리스트에 트레이더스 2번째 라이브 ASR 소스 youtube_whiskeykey(@whiskeykey, 위스키키)
+      추가 — CMPA-160 보드승인 2026-06-07("위스키키로 해보자"), 엔진 CHANNELS active=True,
+      주간루틴 0de186c4 rev5 1순위. 기존 youtube_whiskeypick 주석을 "@whiskeypick 하나뿐"에서
+      "2채널(@whiskeypick+@whiskeykey)"로 정정. 비파괴 additive(소스 추가) — INPUT 화이트리스트는
+      check_contract.py 가 런타임 강제하지 않으므로 OUTPUT 검증 회귀=0(PASS 유지). market 컬럼 의미를
+      '항상 트레이더스(전국 동일가, 지점명 제거)'로 주석 기록(스키마 컬럼명 무변→검증기 무영향, 후속
+      market 포맷 invariant 전제). CMPA-161 §4 비파괴 → CEO version bump 승인.
+  - version: 1.0.0
+    date: 2026-06-07
+    by: DataEngineer
+    approved_by: CEO
+    note: >
+      CMPA-161 Phase 1 파일럿 정본화. proposal §6 샘플을 라이브 코드/CSV 에 스냅.
+      divergence(CEO 검수 대상): owner CTO→DataEngineer(위임), CSV schema 를 실제 13컬럼
+      헤더로 확정(name/source/collected_date → canonical_name_ko/source_family/date),
+      monthly_report 경로 whisky-prices/<month>.md → whisky-price/<month>_위스키가격리포트_<date>.md,
+      required_meta 에 collected_date 추가 + marker/pattern 으로 기계검증 가능화,
+      invariants 를 id/machine_check 구조로 확장(회귀=0 은 baseline 필요로 machine_check:false).

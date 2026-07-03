@@ -1,0 +1,18 @@
+{
+  "fx_jpy_krw": 9.460043,
+  "collect_date": "2026-05-30",
+  "queries": 20,
+  "items_total": 50,
+  "parsed_bottle": 40,
+  "parsed_noise": 10,
+  "parsed_none": 0,
+  "csv_rows": 40,
+  "snapshot": "/mnt/c/Users/shhon/Desktop/WK/data/whisky-prices/jp/_runs/2026-05_jp_rakuten_poc__run2026-05-30.csv",
+  "raw_hit_rate": 0.8,
+  "bottle_recall": 1.0,
+  "brand_accuracy": 1.0,
+  "volume_accuracy": 1.0,
+  "noise_precision": 1.0,
+  "noise_recall": 1.0,
+  "tax_multiplier": 2.5555
+}

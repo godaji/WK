@@ -1,0 +1,12 @@
+{
+  "source": "costcome.com(코스트컴)",
+  "category_url": "https://costcome.com/category/item/whiskey/",
+  "articles_seen": 18,
+  "rows_collected": 10,
+  "articles_unparsed": 6,
+  "rows_quarantined": 2,
+  "rows_written": 10,
+  "month_file": "2026-06.csv",
+  "collected_date": "2026-06-30",
+  "snapshot": "data/whisky-prices/_runs/2026-06__run2026-06-30.csv"
+}

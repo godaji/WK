@@ -1,0 +1,344 @@
+{
+  "k3GQq_-rD1k": {
+    "date": "2026-06-08",
+    "channel": "@whiskeypick",
+    "title": "트레이더스 위스키 가격 정보 (2026. 06. 08. 트레이더스 구월점)",
+    "input_rows": 23,
+    "accepted": 8,
+    "quarantined": 14,
+    "processed_at": "2026-06-16"
+  },
+  "PI6s6wIHdKw": {
+    "date": "2026-05-20",
+    "channel": "@whiskeykey",
+    "title": "판매중인 모든 트레이더스 위스키 가격 정보(26년5월20일)",
+    "input_rows": 62,
+    "accepted": 40,
+    "quarantined": 18,
+    "processed_at": "2026-06-19"
+  },
+  "ys-tP7cGnMM": {
+    "date": "2026-04-02",
+    "channel": "@whiskeykey",
+    "title": "I'll tell you all the Costco whiskey price information (April 2, 2026)",
+    "input_rows": 2,
+    "accepted": 0,
+    "quarantined": 2,
+    "processed_at": "2026-06-16"
+  },
+  "aPVZJ6-loUI": {
+    "date": "2026-04-07",
+    "channel": "@whiskeykey",
+    "title": "I’ll tell you all the Costco whiskey price information (April 7, 2026)",
+    "input_rows": 4,
+    "accepted": 0,
+    "quarantined": 4,
+    "processed_at": "2026-06-16"
+  },
+  "mBH4Xqtr1YU": {
+    "date": "2026-04-07",
+    "channel": "@whiskeykey",
+    "title": "판매중인 모든 트레이더스 위스키 가격 정보(26년4월7일)",
+    "input_rows": 69,
+    "accepted": 54,
+    "quarantined": 16,
+    "processed_at": "2026-06-19"
+  },
+  "TBWtMYYU52E": {
+    "date": "2026-04-13",
+    "channel": "@whiskeykey",
+    "title": "I'll tell you all the Costco whiskey price information (April 13, 2026)",
+    "input_rows": 1,
+    "accepted": 0,
+    "quarantined": 1,
+    "processed_at": "2026-06-16"
+  },
+  "a9gHtD7E9AY": {
+    "date": "2026-06-16",
+    "channel": "@whiskeypick",
+    "title": "코스트코 위스키 가격 정보 (2026. 06. 16. 코스트코 송도점)",
+    "input_rows": 6,
+    "accepted": 0,
+    "quarantined": 6,
+    "processed_at": "2026-06-16"
+  },
+  "I8pxUTDSqiw": {
+    "date": "2026-06-13",
+    "channel": "@whiskeypick",
+    "title": "[위스키 성지] 우성 그린 마트 위스키 가격 정보 (2026. 06. 13)",
+    "input_rows": 44,
+    "accepted": 5,
+    "quarantined": 39,
+    "processed_at": "2026-06-16"
+  },
+  "GTnHWxwFsTc": {
+    "date": "2026-06-09",
+    "channel": "@whiskeykey",
+    "title": "판매중인 모든 트레이더스 위스키 가격 정보(26년6월9일)",
+    "input_rows": 65,
+    "accepted": 41,
+    "quarantined": 16,
+    "processed_at": "2026-06-19"
+  },
+  "tBvB1B87FZk": {
+    "date": "2026-06-09",
+    "channel": "@whiskeykey",
+    "title": "코스트코 위스키 가격 정보 전부 알려드려요(26년6월9일)",
+    "input_rows": 43,
+    "accepted": 5,
+    "quarantined": 38,
+    "processed_at": "2026-06-21"
+  },
+  "AHC6A7ukkrM": {
+    "date": "2026-06-01",
+    "channel": "@whiskeykey",
+    "title": "I ll tell you all the Costco whiskey price information (June 1, 2026)",
+    "input_rows": 6,
+    "accepted": 3,
+    "quarantined": 0,
+    "processed_at": "2026-06-20"
+  },
+  "dMF5i15ucJQ": {
+    "date": "2026-06-01",
+    "channel": "@whiskeykey",
+    "title": "판매중인 모든 트레이더스 위스키 가격 정보(26년6월1일)",
+    "input_rows": 67,
+    "accepted": 51,
+    "quarantined": 13,
+    "processed_at": "2026-06-19"
+  },
+  "KNvhsGbAdvY": {
+    "date": "2026-06-16",
+    "channel": "@whiskeykey",
+    "title": "All Traders Whiskey Prices (June 16, '26)",
+    "input_rows": 71,
+    "accepted": 48,
+    "quarantined": 0,
+    "processed_at": "2026-06-19"
+  },
+  "10D-R05-sSU": {
+    "date": "2026-05-30",
+    "channel": "@whiskeypick",
+    "title": "Costco Whiskey Price Information (May 30, 2026, Costco Songdo Branch)",
+    "input_rows": 6,
+    "accepted": 0,
+    "quarantined": 6,
+    "processed_at": "2026-06-18"
+  },
+  "HH8XhSDL9YY": {
+    "date": "2026-06-16",
+    "channel": "@whiskeykey",
+    "title": "I’ll tell you all the Costco whiskey price information (June 16, 2026)",
+    "input_rows": 1,
+    "accepted": 0,
+    "quarantined": 1,
+    "processed_at": "2026-06-19"
+  },
+  "nYUtBO0v7vI": {
+    "date": "2026-05-27",
+    "channel": "@whiskeypick",
+    "title": "Traders Whiskey Price Information (05/27/2026, Traders Guwol Branch)",
+    "input_rows": 18,
+    "accepted": 6,
+    "quarantined": 12,
+    "processed_at": "2026-06-19"
+  },
+  "ofBlOQDrUL0": {
+    "date": "2026-04-20",
+    "channel": "@whiskeykey",
+    "title": "I'll tell you all the Costco whiskey price information (April 20, 2026)",
+    "input_rows": 48,
+    "accepted": 4,
+    "quarantined": 44,
+    "processed_at": "2026-06-20"
+  },
+  "1iGtaA_QLRk": {
+    "date": "2026-05-04",
+    "channel": "@whiskeykey",
+    "title": "I'll tell you all the Costco whiskey price information (May 4, 2026)",
+    "input_rows": 48,
+    "accepted": 4,
+    "quarantined": 44,
+    "processed_at": "2026-06-20"
+  },
+  "S3YrdtxmRX4": {
+    "date": "2026-05-05",
+    "channel": "@whiskeypick",
+    "title": "Costco Whiskey Price Information (May 5, 2026, Costco Songdo Branch)",
+    "input_rows": 4,
+    "accepted": 1,
+    "quarantined": 3,
+    "processed_at": "2026-06-20"
+  },
+  "mOQYp7EJ8GE": {
+    "date": "2026-05-15",
+    "channel": "@whiskeypick",
+    "title": "Costco Whiskey Price Information (May 15, 2026, Costco Songdo Branch)",
+    "input_rows": 0,
+    "accepted": 0,
+    "quarantined": 0,
+    "processed_at": "2026-06-20"
+  },
+  "HxTIqsmL008": {
+    "date": "2026-05-20",
+    "channel": "@whiskeykey",
+    "title": "Costco Whiskey Price Guide: Everything You Need to Know (May 20, '26)",
+    "input_rows": 49,
+    "accepted": 4,
+    "quarantined": 44,
+    "processed_at": "2026-06-20"
+  },
+  "B4AR1ItQvAo": {
+    "date": "2026-05-25",
+    "channel": "@whiskeykey",
+    "title": "All Costco Whisky Prices Revealed (May 25, 2026)",
+    "input_rows": 53,
+    "accepted": 5,
+    "quarantined": 48,
+    "processed_at": "2026-06-20"
+  },
+  "-t-Q7jSi14g": {
+    "date": "2026-04-28",
+    "channel": "@whiskeykey",
+    "title": "I'll tell you all the Costco whiskey price information (April 28, 2026)",
+    "input_rows": 50,
+    "accepted": 7,
+    "quarantined": 43,
+    "processed_at": "2026-06-20"
+  },
+  "3Cxa6iOEbxY": {
+    "date": "2026-06-06",
+    "channel": "@whiskeypick",
+    "title": "[위스키성지] 우성 식자재 마트 위스키 가격 정보 (2026. 06. 06.)",
+    "input_rows": 59,
+    "accepted": 0,
+    "quarantined": 0,
+    "processed_at": "2026-06-20"
+  },
+  "JM7Vc6j0J44": {
+    "date": "2026-05-26",
+    "channel": "@whiskeykey",
+    "title": "Every Whisky Price at Traders (May 26, 2026)",
+    "input_rows": 64,
+    "accepted": 33,
+    "quarantined": 29,
+    "processed_at": "2026-06-20"
+  },
+  "eA5_Nd4QGYM": {
+    "date": "2026-05-19",
+    "channel": "@whiskeypick",
+    "title": "Four Roses Single Barrel for 59,800 KRW! Traders Whiskey Price Update (05/19/2026, Traders Ansan ...",
+    "input_rows": 8,
+    "accepted": 5,
+    "quarantined": 3,
+    "processed_at": "2026-06-21"
+  },
+  "zQT7MeJP60g": {
+    "date": "2026-05-13",
+    "channel": "@whiskeypick",
+    "title": "Traders Whiskey Price Information (May 13, 2026, Traders Guwol Branch)",
+    "input_rows": 7,
+    "accepted": 0,
+    "quarantined": 7,
+    "processed_at": "2026-06-21"
+  },
+  "QeGCpiC3ewI": {
+    "date": "2026-05-11",
+    "channel": "@whiskeykey",
+    "title": "Price information for all Traders whiskies on sale (May 11, 2026)",
+    "input_rows": 66,
+    "accepted": 38,
+    "quarantined": 27,
+    "processed_at": "2026-06-22"
+  },
+  "NjmXN3IY9CE": {
+    "date": "2026-05-04",
+    "channel": "@whiskeypick",
+    "title": "Traders Whiskey Price Information (May 4, 2026, Traders Guwol Branch)",
+    "input_rows": 20,
+    "accepted": 11,
+    "quarantined": 9,
+    "processed_at": "2026-06-22"
+  },
+  "7g3YR_98FLY": {
+    "date": "2026-06-22",
+    "channel": "@whiskeypick",
+    "title": "Traders Whiskey Price Guide (June 22, 2026, Traders Guwol Branch)",
+    "input_rows": 20,
+    "accepted": 11,
+    "quarantined": 9,
+    "processed_at": "2026-06-23"
+  },
+  "hn8oAKzoptM": {
+    "date": "2026-05-04",
+    "channel": "@whiskeykey",
+    "title": "All Traders Whisky Price Information (May 4, '26)",
+    "input_rows": 75,
+    "accepted": 30,
+    "quarantined": 37,
+    "processed_at": "2026-06-23"
+  },
+  "awsJBAzS3Fc": {
+    "date": "2026-04-28",
+    "channel": "@whiskeykey",
+    "title": "Price information for all Traders whiskies on sale (April 28, 2026)",
+    "input_rows": 63,
+    "accepted": 34,
+    "quarantined": 28,
+    "processed_at": "2026-06-24"
+  },
+  "KoaUsHp5By8": {
+    "date": "2026-04-20",
+    "channel": "@whiskeykey",
+    "title": "Price information for all Traders whiskies on sale (April 20, 2026)",
+    "input_rows": 67,
+    "accepted": 36,
+    "quarantined": 31,
+    "processed_at": "2026-06-24"
+  },
+  "-D-Ix2Uw31o": {
+    "date": "2026-04-13",
+    "channel": "@whiskeykey",
+    "title": "Price information for all Traders whiskies currently on sale (April 13, 2026)",
+    "input_rows": 68,
+    "accepted": 36,
+    "quarantined": 31,
+    "processed_at": "2026-06-25"
+  },
+  "s0ESVt5HqgY": {
+    "date": "2026-06-25",
+    "channel": "@whiskeypick",
+    "title": "[위스키성지] 우성 식자재 마트 위스키 가격 정보 (2026. 06. 25.)",
+    "input_rows": 74,
+    "accepted": 0,
+    "quarantined": 0,
+    "processed_at": "2026-06-26"
+  },
+  "Yce2Z9qVmgY": {
+    "date": "2026-06-30",
+    "channel": "@whiskeykey",
+    "title": "Every Trader Joe's Whiskey Price (June 30, 2026)",
+    "input_rows": 75,
+    "accepted": 34,
+    "quarantined": 40,
+    "processed_at": "2026-07-01"
+  },
+  "0Xh1zGsfPZE": {
+    "date": "2026-07-03",
+    "channel": "@whiskeykey",
+    "title": "I'll share all the Costco whiskey price information (6/30/26)",
+    "input_rows": 36,
+    "accepted": 5,
+    "quarantined": 31,
+    "processed_at": "2026-07-03"
+  },
+  "rL4ZnobknPk": {
+    "date": "2026-07-02",
+    "channel": "@whiskeypick",
+    "title": "이마트 위스키 가격 정보 (2026. 07. 02. 이마트 연수점)",
+    "input_rows": 6,
+    "accepted": 0,
+    "quarantined": 6,
+    "processed_at": "2026-07-03"
+  }
+}

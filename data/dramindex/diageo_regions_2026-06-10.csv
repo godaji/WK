@@ -1,0 +1,31 @@
+fiscal_year,fiscal_year_end,reporting_currency,region,net_sales_m,share_pct,yoy_growth_pct,notes,source,collected_date
+FY2020,2020-06-30,GBP,North America,4636,39.5,N/A,"~39.5% of total £11752m; est from % share","Diageo FY2020 20-F; % share from SEC EDGAR filing",2026-06-10
+FY2020,2020-06-30,GBP,Europe & Turkey,2575,21.9,N/A,"~21.9% of total £11752m; est from % share","Diageo FY2020 20-F; % share from SEC EDGAR filing",2026-06-10
+FY2020,2020-06-30,GBP,Asia Pacific,2268,19.3,N/A,"~19.3% of total £11752m; est from % share","Diageo FY2020 20-F; % share from SEC EDGAR filing",2026-06-10
+FY2020,2020-06-30,GBP,Africa,1352,11.5,N/A,"~11.5% of total £11752m; est from % share","Diageo FY2020 20-F; % share from SEC EDGAR filing",2026-06-10
+FY2020,2020-06-30,GBP,Latin America & Caribbean,916,7.8,N/A,"~7.8% of total £11752m; est from % share","Diageo FY2020 20-F; % share from SEC EDGAR filing",2026-06-10
+FY2021,2021-06-30,GBP,North America,5209,40.9,+12.4,"Actual reported figure","SEC EDGAR 6-K / Diageo FY2021 prelim results",2026-06-10
+FY2021,2021-06-30,GBP,Europe & Turkey,2558,20.1,N/A,"Actual reported figure","SEC EDGAR 6-K / Diageo FY2021 prelim results",2026-06-10
+FY2021,2021-06-30,GBP,Asia Pacific,2488,19.5,N/A,"Actual reported figure","SEC EDGAR 6-K / Diageo FY2021 prelim results",2026-06-10
+FY2021,2021-06-30,GBP,Africa,1412,11.1,N/A,"Actual reported figure","SEC EDGAR 6-K / Diageo FY2021 prelim results",2026-06-10
+FY2021,2021-06-30,GBP,Latin America & Caribbean,1046,8.2,N/A,"Actual reported figure","SEC EDGAR 6-K / Diageo FY2021 prelim results",2026-06-10
+FY2022,2022-06-30,GBP,North America,6095,39.5,+17.0,"Reported net sales after FX/HY adjustments","Diageo FY2022 prelim results; SEC EDGAR 6-K (a0058u.htm)",2026-06-10
+FY2022,2022-06-30,GBP,Europe & Turkey,3212,20.8,+25.6,"Reported net sales after FX/HY adjustments; includes SC&P allocation","Diageo FY2022 prelim results; SEC EDGAR 6-K (a0058u.htm)",2026-06-10
+FY2022,2022-06-30,GBP,Asia Pacific,2884,18.7,+15.9,"Reported net sales after FX/HY adjustments","Diageo FY2022 prelim results; SEC EDGAR 6-K (a0058u.htm)",2026-06-10
+FY2022,2022-06-30,GBP,Africa,1682,10.9,+19.1,"Reported net sales after FX/HY adjustments","Diageo FY2022 prelim results; SEC EDGAR 6-K (a0058u.htm)",2026-06-10
+FY2022,2022-06-30,GBP,Latin America & Caribbean,1525,9.9,+45.8,"Reported net sales after FX/HY adjustments; hyperinflation boost","Diageo FY2022 prelim results; SEC EDGAR 6-K (a0058u.htm)",2026-06-10
+FY2023,2023-06-30,GBP,North America,N/A,N/A,+11.0,"Regional £ figure not confirmed; group total £17113m; organic growth rates available","Diageo FY2023 prelim press release; spirits-business.com",2026-06-10
+FY2023,2023-06-30,GBP,Europe & Turkey,N/A,N/A,+11.0,"Double-digit growth reported","Diageo FY2023 prelim press release",2026-06-10
+FY2023,2023-06-30,GBP,Asia Pacific,N/A,N/A,+11.0,"Double-digit growth reported","Diageo FY2023 prelim press release",2026-06-10
+FY2023,2023-06-30,GBP,Africa,N/A,N/A,+1.0,"Flat growth in Africa","Diageo FY2023 prelim press release",2026-06-10
+FY2023,2023-06-30,GBP,Latin America & Caribbean,N/A,N/A,+18.0,"Strongest organic growth; LAC ~11% of group","Diageo FY2023 prelim press release",2026-06-10
+FY2024,2024-06-30,USD,North America,7908,39.0,-2.5,"Net sales $7908m confirmed from quarterly table; organic growth -2.5%","Diageo historical quarterly net sales; Investegate RNS 8844711; organic from prelim press release",2026-06-10
+FY2024,2024-06-30,USD,Europe & Turkey,4804,23.7,N/A,"Net sales $4804m confirmed from quarterly table; positive organic growth (individual % not confirmed)","Diageo historical quarterly net sales; Investegate RNS 8844711",2026-06-10
+FY2024,2024-06-30,USD,Asia Pacific,3817,18.8,N/A,"Net sales $3817m confirmed from quarterly table; positive organic growth; China a drag","Diageo historical quarterly net sales; Investegate RNS 8844711",2026-06-10
+FY2024,2024-06-30,USD,Africa,1778,8.8,N/A,"Net sales $1778m confirmed from quarterly table; positive organic growth","Diageo historical quarterly net sales; Investegate RNS 8844711",2026-06-10
+FY2024,2024-06-30,USD,Latin America & Caribbean,1839,9.1,-21.1,"Net sales $1839m confirmed from quarterly table; organic -21.1% — biggest drag on group","Diageo historical quarterly net sales; Investegate RNS 8844711; organic from prelim press release",2026-06-10
+FY2025,2025-06-30,USD,North America,N/A,~39,N/A,"FY25 9M=$5998m (from Q3 F26 filing comparatives); Q4 not broken out; N/A for annual region total","SEC EDGAR 6-K Q3 FY2026 comparatives; stocktitan.net",2026-06-10
+FY2025,2025-06-30,USD,Europe & Turkey,N/A,~22,N/A,"FY25 9M=$3530m (from Q3 F26 filing comparatives)","SEC EDGAR 6-K Q3 FY2026 comparatives",2026-06-10
+FY2025,2025-06-30,USD,Asia Pacific,N/A,~19,N/A,"FY25 9M=$2913m; China white spirits dragged group -2.5%; India +7.1%","SEC EDGAR 6-K Q3 FY2026 comparatives; WebSearch synthesis",2026-06-10
+FY2025,2025-06-30,USD,Africa,N/A,~8,N/A,"FY25 9M=$1313m","SEC EDGAR 6-K Q3 FY2026 comparatives",2026-06-10
+FY2025,2025-06-30,USD,Latin America & Caribbean,N/A,~9,N/A,"FY25 9M=$1428m","SEC EDGAR 6-K Q3 FY2026 comparatives",2026-06-10

@@ -1,0 +1,128 @@
+﻿술이름,가격_KRW,위치,가져온날짜,출처,신뢰도,비고
+글렌모렌지 오리지널 10년 700ml,88800,트레이더스,2026-06-01,WebSearch(다수 소매)+로라주막 교차확인,중,"오리지널 10년; 두 출처 모두 88,800 일치(가격 안정). 라이트·과일 입문용 가성비"
+발베니 12년 더블우드 700ml,96800,트레이더스,2026-06-01,CocoScan(653/670)·로라주막,중,"전용잔 동봉가; 04월 CocoScan 96,800과 동일 유지(가격 안정)"
+글렌피딕 15년 솔레라 700ml,99800,트레이더스,2026-06-01,"CocoScan(670, 04월)·재확인",낮음,"전용잔2 동봉; 04월가 유지 추정, 6월 현장 재확인 필요"
+페이머스 그라우스 1L,34980,트레이더스,2026-06-01,로라주막 블로그(무날짜),낮음,1L 가성비 입문 블렌디드; 타 소매 43~45k 대비 저렴하나 무날짜 블로그라 재확인 필요
+글렌피딕 12년 700ml,84800,트레이더스,2026-06-01,WebSearch(다수)↔로라주막 충돌,낮음,"표준 12년 84,800 우세; 로라주막 64,800은 이벤트가/구가 가능성, 재확인 필요"
+라가불린 8년 700ml,99800,트레이더스,2026-06-01,"로라주막↔과거가 89,800",낮음,"아일라 피티드 입문; 가격 상승분 미확정, 6월 현장 재확인 필요"
+탈리스커 스톰 700ml,92800,트레이더스,2026-06-01,"로라주막↔과거가 64,000",낮음,NAS 피티드; 과거가 대비 차이 커 재확인 필요(다출처 미확인)
+발렌타인 17년산,136900,코스트코,2026-06-01,WebScrape(costcome.com(코스트컴)),중,"코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/ballantines-17yo-whiskey/"
+커클랜드 15년 하일랜드 싱글몰트 위스키,133900,코스트코,2026-06-01,WebScrape(costcome.com(코스트컴)),중,"코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-15-years-highland-single-malt-whiskey/"
+더 글렌리벳 15년 싱글몰트 위스키,106900,코스트코,2026-06-01,WebScrape(costcome.com(코스트컴)),중,"정본=w002(글렌리벳 15년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/the-glenlivet-15yo/"
+조니워커 블랙라벨 12년 700,40790,코스트코,2026-06-01,WebScrape(costcome.com(코스트컴)),중,"정본=w050(조니워커 블랙라벨 12년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/johnnie-walker-black-700ml/"
+시바스리갈 12년산,63900,코스트코,2026-06-01,WebScrape(costcome.com(코스트컴)),중,"정본=w048(시바스 리갈 12년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/chivas-regal-12yo/"
+커클랜드 시그니처 스카치 위스키 1.75L,32490,코스트코,2026-06-01,WebScrape(costcome.com(코스트컴)),중,"코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-blended-scotch-whiskey-1-75l-costco-price-summary/"
+커클랜드 시그니처 캐나디안 위스키 1.75L,34990,코스트코,2026-06-01,WebScrape(costcome.com(코스트컴)),중,"코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-canadian-whiskey-1-75l-costco-price-summary/"
+골든 블루 사피루스,28980,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 0:30,중,id=w064
+글랜 글라사 샌드엔드,99800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 0:36,중,
+글랜란트 12년,59400,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 0:42,중,
+글랜란트 15년,89400,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 0:48,중,
+글랜드로 오드트 더더밸리,89400,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 0:56,중,
+글랜드러 오드더 엠버스,99400,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 1:01,중,
+글랜립의 15년,94800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 1:06,중,
+글랜킨치 12년,59800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 1:12,중,
+글랜피딕 12년,69800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 1:18,중,
+글랜피딕 14년,99800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 1:24,중,
+글램피닉 15년,99800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 1:30,중,
+노마드 아울랜드 쉐리 피니시,49980,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 1:38,중,id=w060
+달모어 12년,99800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 1:42,중,id=w023
+듀어스 12년,39980,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 1:48,중,id=w055
+듀어스 15년,59400,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 1:54,중,id=w056
+라가블린 11년,89800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 2:00,중,
+러셀 리저브 싱글 배럴,89400,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 2:07,중,id=w077
+맥켈란 12년 더블 캐스크,94800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 2:14,중,
+메이커스 마크,49980,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 2:18,중,id=w071
+몽키 숄더,49980,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 2:24,중,id=w041
+발렌타인 17년 말본 리미티드 에디션,149800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 2:39,중,
+발베니 12년,96800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 2:42,중,id=w008
+뱅크홀,29940,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 2:48,중,id=w040
+벤 10년,49940,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 3:00,중,
+부심일 15년,99800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 3:06,중,
+산토리 각쿠빈,29980,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 3:12,중,id=w083
+아란 쉐리케스크,99800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 3:18,중,id=w031
+에반 윌리엄스 12년,99800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 3:24,중,id=w081
+에반 윌리엄스 BIB 12주년 에디션,39980,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 3:33,중,
+에반 윌리엄스 블랙 1l,29980,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 3:38,중,id=w080
+와일드 터키 레어브리드,79800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 3:44,중,id=w074
+와일드 터키 캔터키 스피릿 싱글 배럴,69400,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 3:51,중,id=w075
+이글레어 10년,69800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 3:54,중,id=w076
+일라이저 크레이그 스몰 배치,79400,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 4:02,중,
+제임슨,27980,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 4:18,중,id=w061
+조니어 그린,69800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 4:24,중,
+조니어 레드 1.75l,49940,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 4:32,중,
+조니어 블랙 루비,54800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 4:36,중,
+조니어커 블랙,44980,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 4:42,중,
+진빔,19980,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 4:48,중,id=w065
+카발란 디스틸러리 셀렉트 싱글 몰트,69800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 4:56,중,id=w084
+칼라 1 블렌디드 스카치 위스키,23980,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 5:02,중,
+커티 프로이비션,39980,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 5:06,중,
+클라인엘리시 14년,84800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 5:14,중,
+탈리스만 9년,25980,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 5:18,중,id=w088
+탈리스만 위스키 1l,69800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 5:30,중,id=w088
+탈리스커 와일드 블루,69400,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 5:36,중,
+바카디 모이또,21980,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 5:48,중,
+앱솔루트,25980,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 6:12,중,
+업타운 마가리타,24980,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 6:18,중,
+페로네 리몬첼,29980,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 6:24,중,
+피치트리,25980,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 6:30,중,
+글랜고인 CS 배치 11,149800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 6:50,중,id=w028
+글랜립의 17년 스몰 배치 2,229800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 6:57,중,
+글랜립의 19년 스몰 배치,349800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 7:02,중,
+로얄 살루트 21년 그레인,179800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 7:14,중,id=w059
+발렌타인 싱글램버이 16년,169800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 7:21,중,
+아벨라오 아브나우 쉐리케스 퀘디션,235800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 7:27,중,
+조니어커 블루,259800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 7:30,중,
+탐두 15년,169800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 7:36,중,id=w016
+포로지스 스몰 배치 셀렉트,116800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 7:44,중,id=w079
+1792 스몰 배치,39980,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 0:24,중,id=w070
+레미마틴 VSOP,79800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 5:45,중,
+글랭글라사 포트소이,109800,트레이더스,2026-06-01,유튜브 @위스키키 / dMF5i15ucJQ @ 6:36,중,
+조니워커 블루라벨 750ml,308000,이마트(SSG),2026-06-16,WebScrape(emart.ssg.com),상,"정본=w053(조니워커 블루라벨); itemId=1000727226217; 채널=이마트/shpp31; 100ml당 41,067원; https://emart.ssg.com/item/itemView.ssg?itemId=1000727226217&siteNo=6001&salestrNo=2014"
+블랙 앤 화이트 700ml,9900,이마트(SSG),2026-06-16,WebScrape(emart.ssg.com),상,"itemId=1000663028563; 채널=이마트/shpp31; 100ml당 1,414원; https://emart.ssg.com/item/itemView.ssg?itemId=1000663028563&siteNo=6001&salestrNo=2014"
+저스트 포 하이브 리제르바,6980,이마트(SSG),2026-06-16,WebScrape(emart.ssg.com),상,itemId=1000719295877; 채널=이마트/shpp31; 100ml당 931원; https://emart.ssg.com/item/itemView.ssg?itemId=1000719295877&siteNo=6001&salestrNo=2014
+산토리 가쿠빈 700ml,39800,이마트(SSG),2026-06-16,WebScrape(emart.ssg.com),상,"정본=w083(산토리 가쿠빈); itemId=1000664946027; 채널=이마트/shpp31; 100ml당 5,686원; https://emart.ssg.com/item/itemView.ssg?itemId=1000664946027&siteNo=6001&salestrNo=2014"
+버팔로 트레이스 750ml,49800,이마트(SSG),2026-06-16,WebScrape(emart.ssg.com),상,"정본=w069(버팔로 트레이스); itemId=1000674730432; 채널=이마트/shpp31; 100ml당 6,640원; https://emart.ssg.com/item/itemView.ssg?itemId=1000674730432&siteNo=6001&salestrNo=2014"
+조니워커 블랙 루비 700ml,64800,이마트(SSG),2026-06-16,WebScrape(emart.ssg.com),상,"정본=w052(조니워커 블랙 루비); itemId=1000675902523; 채널=이마트/shpp31; 100ml당 9,257원; https://emart.ssg.com/item/itemView.ssg?itemId=1000675902523&siteNo=6001&salestrNo=2014"
+커티삭 프로히비션 700ml,39800,이마트(SSG),2026-06-16,WebScrape(emart.ssg.com),상,"정본=w058(커티삭 프로히비션); itemId=1000648312953; 채널=이마트/shpp31; 100ml당 5,686원; https://emart.ssg.com/item/itemView.ssg?itemId=1000648312953&siteNo=6001&salestrNo=2014"
+니카 프롬 더 배럴 500ml,69800,이마트(SSG),2026-06-16,WebScrape(emart.ssg.com),상,"itemId=1000727226205; 채널=이마트/shpp31; 100ml당 13,960원; https://emart.ssg.com/item/itemView.ssg?itemId=1000727226205&siteNo=6001&salestrNo=2014"
+더 글렌그란트 15년 700ml,149800,이마트(SSG),2026-06-16,WebScrape(emart.ssg.com),상,"정본=w014(글렌그란트 15년); itemId=1000631449292; 채널=이마트/shpp31; 100ml당 21,400원; https://emart.ssg.com/item/itemView.ssg?itemId=1000631449292&siteNo=6001&salestrNo=2084"
+발렌타인 17년산,136900,코스트코,2026-06-20,WebScrape(costcome.com(코스트컴)),중,"정본=w090(발렌타인 17년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/ballantines-17yo-whiskey/"
+커클랜드 15년 하일랜드 싱글몰트 위스키,133900,코스트코,2026-06-20,WebScrape(costcome.com(코스트컴)),중,"정본=w098(커클랜드 15년 하일랜드 싱글몰트); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-15-years-highland-single-malt-whiskey/"
+커클랜드 시그니처 아일레이 싱글몰트 위스키,95900,코스트코,2026-06-20,WebScrape(costcome.com(코스트컴)),중,"코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-islay-single-malt-whiskey/"
+벨즈 블렌디드 위스키,20990,코스트코,2026-06-20,WebScrape(costcome.com(코스트컴)),중,"정본=w106(벨즈); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/bells-blended-scotch-whisky/"
+더 글렌리벳 15년 싱글몰트 위스키,106900,코스트코,2026-06-20,WebScrape(costcome.com(코스트컴)),중,"정본=w002(글렌리벳 15년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/the-glenlivet-15yo/"
+조니워커 블랙라벨 12년 700,40790,코스트코,2026-06-20,WebScrape(costcome.com(코스트컴)),중,"정본=w050(조니워커 블랙라벨 12년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/johnnie-walker-black-700ml/"
+시바스리갈 12년산,63900,코스트코,2026-06-20,WebScrape(costcome.com(코스트컴)),중,"정본=w048(시바스 리갈 12년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/chivas-regal-12yo/"
+커클랜드 시그니처 스카치 위스키 1.75L,32490,코스트코,2026-06-20,WebScrape(costcome.com(코스트컴)),중,"코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-blended-scotch-whiskey-1-75l-costco-price-summary/"
+커클랜드 시그니처 캐나디안 위스키 1.75L,34990,코스트코,2026-06-20,WebScrape(costcome.com(코스트컴)),중,"정본=w100(커클랜드 시그니처 캐나디안); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-canadian-whiskey-1-75l-costco-price-summary/"
+잭다니엘 테네시 애플 위스키 1L,57900,코스트코,2026-06-20,WebScrape(costcome.com(코스트컴)),중,"정본=w067(잭다니엘 애플); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/jack-daniels-tennessee-apple-whiskey-costco-sales-price-and-features-summary/"
+발렌타인 17년산,136900,코스트코,2026-06-21,WebScrape(costcome.com(코스트컴)),중,"정본=w090(발렌타인 17년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/ballantines-17yo-whiskey/"
+커클랜드 15년 하일랜드 싱글몰트 위스키,133900,코스트코,2026-06-21,WebScrape(costcome.com(코스트컴)),중,"정본=w098(커클랜드 15년 하일랜드 싱글몰트); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-15-years-highland-single-malt-whiskey/"
+커클랜드 시그니처 아일레이 싱글몰트 위스키,95900,코스트코,2026-06-21,WebScrape(costcome.com(코스트컴)),중,"코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-islay-single-malt-whiskey/"
+벨즈 블렌디드 위스키,20990,코스트코,2026-06-21,WebScrape(costcome.com(코스트컴)),중,"정본=w106(벨즈); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/bells-blended-scotch-whisky/"
+더 글렌리벳 15년 싱글몰트 위스키,106900,코스트코,2026-06-21,WebScrape(costcome.com(코스트컴)),중,"정본=w002(글렌리벳 15년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/the-glenlivet-15yo/"
+조니워커 블랙라벨 12년 700,40790,코스트코,2026-06-21,WebScrape(costcome.com(코스트컴)),중,"정본=w050(조니워커 블랙라벨 12년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/johnnie-walker-black-700ml/"
+시바스리갈 12년산,63900,코스트코,2026-06-21,WebScrape(costcome.com(코스트컴)),중,"정본=w048(시바스 리갈 12년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/chivas-regal-12yo/"
+커클랜드 시그니처 스카치 위스키 1.75L,32490,코스트코,2026-06-21,WebScrape(costcome.com(코스트컴)),중,"코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-blended-scotch-whiskey-1-75l-costco-price-summary/"
+커클랜드 시그니처 캐나디안 위스키 1.75L,34990,코스트코,2026-06-21,WebScrape(costcome.com(코스트컴)),중,"정본=w100(커클랜드 시그니처 캐나디안); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-canadian-whiskey-1-75l-costco-price-summary/"
+잭다니엘 테네시 애플 위스키 1L,57900,코스트코,2026-06-21,WebScrape(costcome.com(코스트컴)),중,"정본=w067(잭다니엘 애플); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/jack-daniels-tennessee-apple-whiskey-costco-sales-price-and-features-summary/"
+발렌타인 17년산,136900,코스트코,2026-06-22,WebScrape(costcome.com(코스트컴)),중,"정본=w090(발렌타인 17년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/ballantines-17yo-whiskey/"
+커클랜드 15년 하일랜드 싱글몰트 위스키,133900,코스트코,2026-06-22,WebScrape(costcome.com(코스트컴)),중,"정본=w098(커클랜드 15년 하일랜드 싱글몰트); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-15-years-highland-single-malt-whiskey/"
+커클랜드 시그니처 아일레이 싱글몰트 위스키,95900,코스트코,2026-06-22,WebScrape(costcome.com(코스트컴)),중,"코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-islay-single-malt-whiskey/"
+벨즈 블렌디드 위스키,20990,코스트코,2026-06-22,WebScrape(costcome.com(코스트컴)),중,"정본=w106(벨즈); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/bells-blended-scotch-whisky/"
+더 글렌리벳 15년 싱글몰트 위스키,106900,코스트코,2026-06-22,WebScrape(costcome.com(코스트컴)),중,"정본=w002(글렌리벳 15년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/the-glenlivet-15yo/"
+조니워커 블랙라벨 12년 700,40790,코스트코,2026-06-22,WebScrape(costcome.com(코스트컴)),중,"정본=w050(조니워커 블랙라벨 12년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/johnnie-walker-black-700ml/"
+시바스리갈 12년산,63900,코스트코,2026-06-22,WebScrape(costcome.com(코스트컴)),중,"정본=w048(시바스 리갈 12년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/chivas-regal-12yo/"
+커클랜드 시그니처 스카치 위스키 1.75L,32490,코스트코,2026-06-22,WebScrape(costcome.com(코스트컴)),중,"코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-blended-scotch-whiskey-1-75l-costco-price-summary/"
+커클랜드 시그니처 캐나디안 위스키 1.75L,34990,코스트코,2026-06-22,WebScrape(costcome.com(코스트컴)),중,"정본=w100(커클랜드 시그니처 캐나디안); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-canadian-whiskey-1-75l-costco-price-summary/"
+잭다니엘 테네시 애플 위스키 1L,57900,코스트코,2026-06-22,WebScrape(costcome.com(코스트컴)),중,"정본=w067(잭다니엘 애플); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/jack-daniels-tennessee-apple-whiskey-costco-sales-price-and-features-summary/"
+발렌타인 17년산,136900,코스트코,2026-06-29,WebScrape(costcome.com(코스트컴)),중,"정본=w090(발렌타인 17년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/ballantines-17yo-whiskey/"
+커클랜드 15년 하일랜드 싱글몰트 위스키,133900,코스트코,2026-06-29,WebScrape(costcome.com(코스트컴)),중,"정본=w098(커클랜드 15년 하일랜드 싱글몰트); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-15-years-highland-single-malt-whiskey/"
+커클랜드 시그니처 아일레이 싱글몰트 위스키,95900,코스트코,2026-06-29,WebScrape(costcome.com(코스트컴)),중,"코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-islay-single-malt-whiskey/"
+벨즈 블렌디드 위스키,20990,코스트코,2026-06-29,WebScrape(costcome.com(코스트컴)),중,"정본=w106(벨즈); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/bells-blended-scotch-whisky/"
+더 글렌리벳 15년 싱글몰트 위스키,106900,코스트코,2026-06-29,WebScrape(costcome.com(코스트컴)),중,"정본=w002(글렌리벳 15년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/the-glenlivet-15yo/"
+조니워커 블랙라벨 12년 700,40790,코스트코,2026-06-29,WebScrape(costcome.com(코스트컴)),중,"정본=w050(조니워커 블랙라벨 12년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/johnnie-walker-black-700ml/"
+시바스리갈 12년산,63900,코스트코,2026-06-29,WebScrape(costcome.com(코스트컴)),중,"정본=w048(시바스 리갈 12년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/chivas-regal-12yo/"
+커클랜드 시그니처 스카치 위스키 1.75L,32490,코스트코,2026-06-29,WebScrape(costcome.com(코스트컴)),중,"코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-blended-scotch-whiskey-1-75l-costco-price-summary/"
+커클랜드 시그니처 캐나디안 위스키 1.75L,34990,코스트코,2026-06-29,WebScrape(costcome.com(코스트컴)),중,"정본=w100(커클랜드 시그니처 캐나디안); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-canadian-whiskey-1-75l-costco-price-summary/"
+잭다니엘 테네시 애플 위스키 1L,57900,코스트코,2026-06-29,WebScrape(costcome.com(코스트컴)),중,"정본=w067(잭다니엘 애플); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/jack-daniels-tennessee-apple-whiskey-costco-sales-price-and-features-summary/"

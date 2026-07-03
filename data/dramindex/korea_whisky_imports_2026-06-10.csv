@@ -1,0 +1,10 @@
+year,reporter_country,flow,qty_kg,trade_value_usd,data_source,data_coverage,collected_date,notes
+2016,Korea,M,21028844,166122522,UN Comtrade public preview API,world_aggregate_partner0,2026-06-10,HS 220830; partner=0 row is world aggregate; confirmed against individual partner sum (21028845 kg)
+2017,Korea,M,19292987,146723152,UN Comtrade public preview API,partial_31_partners,2026-06-10,HS 220830; 31 partner rows; UK(826)=$143.1M = ~97% of value; small partners may be missing
+2018,Korea,M,19656340,153020349,UN Comtrade public preview API,partial_31_partners,2026-06-10,HS 220830; 31 partner rows; UK(826)=$144.0M = ~94% of value; small partners may be missing
+2019,Korea,M,19836000,,Korea Customs Service (관세청),official,2026-06-10,HS 220830; source: Korea Economic Daily / USDA GAIN report; trade value not found in search results
+2020,Korea,M,15923000,132460000,Korea Customs Service (관세청),official,2026-06-10,HS 220830; COVID demand decline; source: Financial News 2024-10-15
+2021,Korea,M,15662000,175340000,Korea Customs Service (관세청),official,2026-06-10,HS 220830; still below pre-COVID; source: Korea Economic Daily Dec 2022
+2022,Korea,M,27038000,266840000,Korea Customs Service (관세청),official,2026-06-10,HS 220830; +72.6% YoY in volume; highball/MZ trend; source: Financial News 2024-10-15
+2023,Korea,M,30586000,259570000,Korea Customs Service (관세청),official,2026-06-10,HS 220830; record high volume; value fell 2.7% despite +13.1% volume = price mix shift to cheaper products
+2024,Korea,M,27441000,249210000,Korea Customs Service (관세청),official,2026-06-10,HS 220830; -10.3% volume YoY; -4.0% value YoY; economic slowdown + political uncertainty
