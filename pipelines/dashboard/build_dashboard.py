@@ -1099,7 +1099,7 @@ def render_html(rows, meta, log, snapshot_rel=None):
             f'<td data-label="면세최저가" data-sort-val="{df_krw_sv}">{_df_cell(r)}</td>'
             f'<td data-label="마일리지율" data-sort-val="{mrate_sv}">{mrate_html}</td>'
             f'<td data-label="소매가-면세가" data-sort-val="{savings_sv}">{savings_html}</td>'
-            f'<td class="ratio-cell">{ratio_html}</td>'
+            f'<td class="ratio-cell" data-sort-val="{ratio_pct if (retail_p100_val and df_p100_val) else -1}">{ratio_html}</td>'
             f'<td class="card-sub">{sub_line}</td>'
             "</tr>"
         )
@@ -1399,10 +1399,10 @@ code{word-break:break-all;overflow-wrap:anywhere}
     document.querySelectorAll('[data-fview]').forEach(function(b) {{
       b.classList.toggle('active', b.dataset.fview === view);
     }});
-    // 버튼은 정렬 숏컷
-    if(view === 'cheap') sortBy(1, true);  // 소매최저가 오름차순(싼값 먼저)
-    else if(view === 'df') sortBy(4, false);
-    else if(view === 'retail') sortBy(4, true);
+    // 버튼은 정렬 숏컷 (CMPA-768: 소매/면세유리는 ratio-cell 기준 정렬)
+    if(view === 'cheap') sortBy(1, true);   // 소매최저가 오름차순
+    else if(view === 'df') sortBy(5, true);   // 소매가/면세가 비율 오름차순 (작은값=면세이득 큰것 먼저)
+    else if(view === 'retail') sortBy(5, false);  // 소매가/면세가 비율 내림차순 (큰값=소매이득 큰것 먼저)
     else if(view === 'mrate') sortBy(3, false);  // 마일리지율↓ 높은순
     else if(view === 'name') sortBy(0, true);
     else sortBy(1, true);
