@@ -816,7 +816,6 @@ def assemble_snapshot(rows, meta, log):
             },
             "badges": {
                 "hotdeal": r["hot"], "dutyfree_win": r.get("df_win", False),
-                "retail_win": bool(r.get("retail_price") and r.get("df_per100") and not r.get("df_win")),
                 "hk_cheaper": r["hk_cheaper"],
                 "jp_cheaper": r["jp_cheaper"], "new": r["is_new"],
             },
@@ -863,7 +862,6 @@ def assemble_snapshot(rows, meta, log):
                 "dutyfree_matched": sum(1 for r in rows if r["df_krw"] is not None),
                 "hotdeal": sum(1 for r in rows if r["hot"]),
                 "dutyfree_win": sum(1 for r in rows if r.get("df_win")),
-                "retail_win": sum(1 for r in rows if r.get("retail_price") and r.get("df_per100") and not r.get("df_win")),
                 "hk_cheaper": sum(1 for r in rows if r["hk_cheaper"]),
                 "jp_cheaper": sum(1 for r in rows if r["jp_cheaper"]),
                 "new": sum(1 for r in rows if r["is_new"]),
@@ -923,12 +921,6 @@ def _badges(r):
         dp = r["df_per100"]
         save_pct = round((rp - dp) / rp * 100)
         out.append(f'<span class="bdg win" title="면세 100ml {_won(dp)} &lt; 소매 100ml {_won(rp)} ({save_pct:+d}%)">🏆 면세↓</span>')
-    # 소매(마트) 이득 배지 — 면세보다 소매가 100ml 단가가 더 쌀 때 (CMPA-768)
-    if (r.get("retail_price") and r.get("df_per100") and not r.get("df_win")):
-        rp = round(r["retail_price"] / (r.get("retail_vol") or 700) * 100)
-        dp = int(r["df_per100"])
-        save_pct = round((dp - rp) / dp * 100)
-        out.append(f'<span class="bdg mart-win" title="소매 100ml {_won(rp)} &lt; 면세 100ml {_won(dp)} ({save_pct:+d}% 저렴)">🛒 소매↓</span>')
     if r["hk_cheaper"]:
         out.append(f'<span class="bdg ov" title="홍콩 현지가 {_won(r["hk_krw"])} &lt; 국내최저">🇭🇰↓</span>')
     if r["jp_cheaper"]:
@@ -1039,7 +1031,6 @@ def render_html(rows, meta, log, snapshot_rel=None):
 
     # 라벨 동작 카운트
     n_win = sum(1 for r in rows if r.get("df_win"))
-    n_retail_win = sum(1 for r in rows if r.get("retail_price") and r.get("df_per100") and not r.get("df_win"))
     n_hk = sum(1 for r in rows if r["hk_cheaper"])
     n_jp = sum(1 for r in rows if r["jp_cheaper"])
     n_new = sum(1 for r in rows if r["is_new"])
@@ -1088,7 +1079,7 @@ def render_html(rows, meta, log, snapshot_rel=None):
         src_short = (r.get("retail_src") or "").replace("(온라인)", "").strip()
         sub_parts = []
         if mrate_f is not None and mrate_f > 0:
-            sub_parts.append(f'면세할인 {mrate_f:.0f}%')
+            sub_parts.append(f'마일리지 {mrate_f:.0f}%')
         if src_short:
             sub_parts.append(f'소매최저 {src_short}')  # html.escape applied once below
         sub_line = html.escape(' · '.join(sub_parts)) if sub_parts else ""
@@ -1098,16 +1089,15 @@ def render_html(rows, meta, log, snapshot_rel=None):
         if retail_p100_val and df_p100_val:
             ratio_pct = round(df_p100_val / retail_p100_val * 100)
             ratio_cls = "chg dn" if ratio_pct < 100 else "chg up"  # 초록/빨강
-            ratio_html = f'<span class="{ratio_cls}">소매가/면세가 {ratio_pct}%</span>'
+            ratio_html = f'<span class="{ratio_cls}">면세{ratio_pct}%</span>'
         else:
             ratio_html = ""
-        retail_win_attr = ' data-retail-win="1"' if (-9999 < savings_sv < 0) else ""
         tr.append(
-            f'<tr data-dfview="{dfview}" data-card-url="{card_url}"{retail_win_attr}>'
+            f'<tr data-dfview="{dfview}" data-card-url="{card_url}">'
             f'<td data-label="위스키" data-sort-val="{html.escape(r["name"])}">{name_cell}</td>'
             f'<td data-label="소매최저가" data-sort-val="{retail_price_sv}">{_retail_cell(r)}</td>'
             f'<td data-label="면세최저가" data-sort-val="{df_krw_sv}">{_df_cell(r)}</td>'
-            f'<td data-label="면세할인율" data-sort-val="{mrate_sv}">{mrate_html}</td>'
+            f'<td data-label="마일리지율" data-sort-val="{mrate_sv}">{mrate_html}</td>'
             f'<td data-label="소매가-면세가" data-sort-val="{savings_sv}">{savings_html}</td>'
             f'<td class="ratio-cell">{ratio_html}</td>'
             f'<td class="card-sub">{sub_line}</td>'
@@ -1124,7 +1114,6 @@ def render_html(rows, meta, log, snapshot_rel=None):
 
     legend_items = [
         ("🏆 면세↓", f"면세 100ml 단가 < 소매 100ml 단가 (용량 정규화 비교) — 동작 {n_win}건"),
-        ("🛒 소매↓", f"소매 100ml 단가 < 면세 100ml 단가 (마트가 이득) — 동작 {n_retail_win}건"),
         ("🇭🇰↓", f"홍콩 현지가 < 국내최저(표준용량) — 동작 {n_hk}건"),
         ("🇯🇵↓", f"일본 현지가 < 국내최저(표준용량) — 동작 {n_jp}건"),
         ("🆕 new", f"가장 최근 수집일({gl})에 갱신된 품목 — 동작 {n_new}건"),
@@ -1187,7 +1176,6 @@ font-size:13px;cursor:pointer;text-align:center}
 .show-more:hover{border-color:var(--amber);color:var(--amber)}
 .bdg.ov{background:rgba(224,168,78,.14);color:var(--amber)}
 .bdg.new{background:rgba(52,199,89,.16);color:var(--green);border-color:var(--green)}
-.bdg.mart-win{background:rgba(100,210,255,.16);color:#64d2ff;border-color:#64d2ff}
 .chg.dn{color:var(--green)}
 .chg.up{color:var(--red)}
 .ds-line{color:var(--amber)}
@@ -1225,8 +1213,8 @@ code{word-break:break-all;overflow-wrap:anywhere}
   td[data-label="면세최저가"]{display:inline-flex;align-items:center;font-size:12px;color:var(--txt)}
   td[data-label="소매최저가"]::before{content:"소매 ";color:var(--sub);font-size:10px}
   td[data-label="면세최저가"]::before{content:" · 면세 ";color:var(--sub);font-size:10px}
-  /* 면세할인율·소매가-면세가: 서브라인으로 이동, 직접 표시 안 함 */
-  td[data-label="면세할인율"],td[data-label="소매가-면세가"]{display:none}
+  /* 마일리지율·소매가-면세가: 서브라인으로 이동, 직접 표시 안 함 */
+  td[data-label="마일리지율"],td[data-label="소매가-면세가"]{display:none}
   /* 비율셀: 가격줄 오른쪽 끝 (margin-left:auto로 밀기) */
   td.ratio-cell{display:inline-flex;align-items:center;margin-left:auto;font-size:11px;font-weight:700}
   /* 서브라인(3번째 줄): 전체폭 회색 */
@@ -1242,12 +1230,12 @@ code{word-break:break-all;overflow-wrap:anywhere}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>소매기준 위스키 대시보드 — CaskCode</title>
+<title>위스키 가격 대시보드 — CaskCode</title>
 <style>{css}</style>
 </head>
 <body>
 <div class="wrap">
-  <h1>🥃 소매기준 위스키 대시보드</h1>
+  <h1>🥃 위스키 가격 대시보드</h1>
   <p class="sub">📅 소매 최신 수집: <b>{gl}</b>
   · 신라면세 수집: <b>{df_meta.get("sdate") if df_meta else "—"}</b>
   · 표시 {len(rows)}종 (소매 수집 {sum(1 for r in rows if r["retail_price"] is not None)}종 /
@@ -1258,8 +1246,8 @@ code{word-break:break-all;overflow-wrap:anywhere}
   <div class="filter-bar">
     <button class="fbtn active" data-fview="cheap" onclick="filterView('cheap')">💰 소매최저가↓</button>
     <button class="fbtn" data-fview="df" onclick="filterView('df')">🏆 면세유리 보기</button>
-    <button class="fbtn" data-fview="retail" onclick="filterView('retail')">🛒 마트 이득만</button>
-    <button class="fbtn" data-fview="mrate" onclick="filterView('mrate')">면세할인율↓</button>
+    <button class="fbtn" data-fview="retail" onclick="filterView('retail')">🛒 소매유리 보기</button>
+    <button class="fbtn" data-fview="mrate" onclick="filterView('mrate')">마일리지율↓</button>
     <button class="fbtn" data-fview="name" onclick="filterView('name')">이름순</button>
   </div>
   <div class="search-bar">
@@ -1278,7 +1266,7 @@ code{word-break:break-all;overflow-wrap:anywhere}
       <th data-col="0">위스키 이름</th>
       <th data-col="1">소매최저가</th>
       <th data-col="2">면세최저가</th>
-      <th data-col="3">면세할인율</th>
+      <th data-col="3">마일리지율</th>
       <th data-col="4" data-sort-dir="desc">소매가-면세가 ▼</th>
     </tr></thead>
     <tbody>
@@ -1324,7 +1312,6 @@ code{word-break:break-all;overflow-wrap:anywhere}
   var displayCount = 20;  // 기본 20건 표시 (CMPA-763)
   var searchQuery = '';
   var activePriceRange = null;  // [min, max] or null
-  var retailWinOnly = false;  // 소매↓만 보기 필터 (CMPA-768)
   var sortedRows = [];
 
   function indicator(col, asc) {{
@@ -1344,7 +1331,6 @@ code{word-break:break-all;overflow-wrap:anywhere}
     var tbody = tbl.querySelector('tbody');
     var q = searchQuery.trim().toLowerCase();
     var visible = sortedRows.filter(function(r) {{
-      if(retailWinOnly && r.dataset.retailWin !== '1') return false;
       if(q && nameOf(r).toLowerCase().indexOf(q) < 0) return false;
       if(activePriceRange) {{
         var pc = r.children[1];  // td[소매최저가]
@@ -1413,14 +1399,11 @@ code{word-break:break-all;overflow-wrap:anywhere}
     document.querySelectorAll('[data-fview]').forEach(function(b) {{
       b.classList.toggle('active', b.dataset.fview === view);
     }});
-    // 소매↓ 뷰: data-retail-win="1" 행만 필터 (CMPA-768); 나머지 뷰는 전체 표시
-    retailWinOnly = (view === 'retail');
-    displayCount = 20;
     // 버튼은 정렬 숏컷
     if(view === 'cheap') sortBy(1, true);  // 소매최저가 오름차순(싼값 먼저)
     else if(view === 'df') sortBy(4, false);
     else if(view === 'retail') sortBy(4, true);
-    else if(view === 'mrate') sortBy(3, false);  // 면세할인율↓ 높은순
+    else if(view === 'mrate') sortBy(3, false);  // 마일리지율↓ 높은순
     else if(view === 'name') sortBy(0, true);
     else sortBy(1, true);
   }};
@@ -1472,7 +1455,7 @@ code{word-break:break-all;overflow-wrap:anywhere}
     if(url) window.open(url, '_blank', 'noopener');
   }});
 
-  filterView('cheap');  // 기본값: 소매최저가↓ — '마트 이득만' 필터 신설로 변경 (CMPA-768)
+  filterView('cheap');  // 기본값: 소매최저가 오름차순(싼값 먼저) (CMPA-671)
 }})();
 </script>
 </body>
