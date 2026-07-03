@@ -1801,9 +1801,8 @@ robots: "index,follow"
 
 면세점이 항상 가장 싸지는 않습니다. **트레이더스·코스트코 같은 마트나 국내 온라인(데일리샷)에서 면세가보다 싸거나 비슷하게** 살 수 있는 위스키를 모았습니다. 면세 한도(1인 2병·$400)를 다른 술에 쓰고 싶을 때, 이 목록은 **굳이 면세점을 기다리지 않아도 되는** 위스키입니다.
 
-> **국내 최저가** = 데일리샷·트레이더스·코스트코 중 100ml당 최저가의 실제 판매가(괄호=출처, 🛒=마트). 면세와 용량이 다르면 `·750ml`처럼 병기. **(데일리샷)**은 눌러서 상품 페이지로.
-> **면세 최저가** = 신라·롯데·신세계 중 최저(괄호=면세점). **국내 vs 면세(100ml당)** = 같은 100ml 기준으로 국내가 면세보다 얼마나 싼지(양수=국내가 이득, `≈ 비슷`=차이 작음).
-> 💡 제품명을 누르면 스토리·맛 노트가 있는 경우 펼쳐집니다.
+> **상세 표기** — `국내`: 데일리샷·트레이더스·코스트코 중 100ml당 최저가(괄호=출처, 🛒=마트, 용량이 다르면 `·750ml` 병기). `면세`: 신라·롯데·신세계 중 최저. 마지막 줄 = 100ml 기준 국내·면세 비교(양수=국내가 이득, `≈ 비슷`=차이 작음). **(데일리샷)** 은 눌러서 상품 페이지로.
+> 💡 위스키 이름을 누르면 스토리·맛 노트가 있는 경우 펼쳐집니다.
 > 국내 수집일: {dom_dates_str}. 환율 1 USD = 1,545원 단일 적용. 면세가는 출국·면세한도 조건의 '수집일 기준'값입니다.
 
 ---
@@ -1813,20 +1812,22 @@ robots: "index,follow"
     if not rows:
         lines.append('\n*이번 수집에서는 해당 제품이 없습니다.*\n')
     else:
+        # 2-column 모바일 우선 레이아웃 (CMPA-769): (위스키, 상세)
+        # 상세 = 국내최저 / 면세최저 / 100ml당 비교 + 용량 — <br>로 줄바꿈
         h = ('<table><thead><tr>'
-             '<th>제품</th><th>국내 최저가</th><th>면세 최저가</th>'
-             '<th>국내 vs 면세 (100ml당)</th><th>용량</th>'
+             '<th>위스키</th><th>상세</th>'
              '</tr></thead><tbody>')
         body = []
         for it in rows:
-            duty_str = f"<strong>${it['min_usd']:,.2f} / ₩{it['min_krw']:,}</strong> ({it['min_shop']})"
+            dom_line = f"국내 {retail(it)}"
+            duty_line = (f"면세 <strong>${it['min_usd']:,.2f} / "
+                         f"₩{it['min_krw']:,}</strong> ({it['min_shop']})")
+            adv_line = f"{adv_cell(it['adv100'])} · {it['vol']}ml"
+            detail = f"{dom_line}<br>{duty_line}<br>{adv_line}"
             body.append(
                 '<tr>'
                 f"<td>{story_cell_html(it['name'], story_idx)}</td>"
-                f"<td>{retail(it)}</td>"
-                f"<td>{duty_str}</td>"
-                f"<td>{adv_cell(it['adv100'])}</td>"
-                f"<td>{it['vol']}ml</td>"
+                f"<td style='font-size:.93em'>{detail}</td>"
                 '</tr>')
         lines.append(h + ''.join(body) + '</tbody></table>')
         lines.append('')
