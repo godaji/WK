@@ -42,13 +42,14 @@
       "dutyfree_matched": 100,
       "hotdeal": 0,
       "dutyfree_win": 29,
+      "retail_win": 4,
       "hk_cheaper": 2,
       "jp_cheaper": 16,
       "new": 151
     },
     "change_windows": {
       "dailyshot": {
-        "latest": "2026-07-03_am",
+        "latest": "2026-07-03_pm",
         "prev": "2026-07-02_am"
       },
       "shilla": {
@@ -66,8 +67,8 @@
     },
     {
       "key_label": "유튜브 OCR (트레이더스 현장가)",
-      "last_collected": "2026-06-30",
-      "items": 34,
+      "last_collected": "2026-07-03",
+      "items": 5,
       "status": "성공"
     },
     {
@@ -143,6 +144,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -192,6 +194,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -238,6 +241,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -278,6 +282,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -324,6 +329,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -370,6 +376,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -416,6 +423,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -456,6 +464,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -496,6 +505,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": true,
         "new": true
@@ -536,6 +546,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -582,6 +593,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -628,6 +640,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -677,6 +690,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -723,6 +737,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -769,6 +784,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": true,
         "new": true
@@ -815,6 +831,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -861,6 +878,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -901,6 +919,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -947,6 +966,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": true,
         "new": true
@@ -993,6 +1013,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": true,
         "new": true
@@ -1039,6 +1060,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": true,
         "new": true
@@ -1085,6 +1107,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": true,
         "new": true
@@ -1131,6 +1154,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -1177,6 +1201,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": true,
         "new": true
@@ -1223,6 +1248,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -1269,6 +1295,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -1309,6 +1336,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -1358,6 +1386,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -1404,6 +1433,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": true,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -1450,6 +1480,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": true,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -1496,6 +1527,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": true,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -1542,6 +1574,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": true,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -1563,8 +1596,8 @@
       },
       "dailyshot": {
         "price_krw": 99000,
-        "seller": "리쿼하우스",
-        "region": "서울 강남구",
+        "seller": "국밥쟁이&오렌지보틀 강남역점",
+        "region": "서울 서초구",
         "located": true,
         "cheaper_than_physical": true
       },
@@ -1588,6 +1621,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": true,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -1626,6 +1660,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": true,
         "new": true
@@ -1658,6 +1693,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": false
@@ -1696,6 +1732,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -1734,6 +1771,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -1772,6 +1810,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -1810,6 +1849,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -1848,6 +1888,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -1886,6 +1927,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": true,
         "new": true
@@ -1918,6 +1960,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": false
@@ -1956,6 +1999,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": true,
         "jp_cheaper": false,
         "new": true
@@ -1988,6 +2032,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": false
@@ -2026,6 +2071,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": true,
         "jp_cheaper": true,
         "new": true
@@ -2064,6 +2110,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -2102,6 +2149,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": true,
         "new": true
@@ -2140,6 +2188,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": true,
         "new": true
@@ -2178,6 +2227,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -2210,6 +2260,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": true,
         "new": false
@@ -2242,6 +2293,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": false
@@ -2280,6 +2332,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -2323,6 +2376,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": true,
         "new": true
@@ -2361,6 +2415,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -2393,6 +2448,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -2425,6 +2481,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": false
@@ -2457,6 +2514,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": false
@@ -2495,6 +2553,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": true,
         "new": true
@@ -2533,6 +2592,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -2554,8 +2614,8 @@
       },
       "dailyshot": {
         "price_krw": 87000,
-        "seller": "국밥쟁이&오렌지보틀 강남역점",
-        "region": "서울 서초구",
+        "seller": "리쿼하우스",
+        "region": "서울 강남구",
         "located": true,
         "cheaper_than_physical": false
       },
@@ -2571,6 +2631,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": true,
         "new": true
@@ -2609,6 +2670,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -2647,6 +2709,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -2685,6 +2748,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -2717,6 +2781,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": false
@@ -2749,6 +2814,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -2781,6 +2847,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -2819,6 +2886,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -2851,6 +2919,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -2889,6 +2958,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -2927,6 +2997,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -2965,6 +3036,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -2997,6 +3069,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": false
@@ -3035,6 +3108,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -3073,6 +3147,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -3111,6 +3186,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -3143,6 +3219,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": false
@@ -3181,6 +3258,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -3219,6 +3297,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -3246,7 +3325,12 @@
         "cheaper_than_physical": false
       },
       "dutyfree": null,
-      "retail_change": null,
+      "retail_change": {
+        "direction": "up",
+        "delta_krw": 21000,
+        "pct": 23.6,
+        "matched_name": "에반 윌리엄스 12년"
+      },
       "dutyfree_change": null,
       "overseas": {
         "hk_local_krw": null,
@@ -3257,6 +3341,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -3278,8 +3363,8 @@
       },
       "dailyshot": {
         "price_krw": 29800,
-        "seller": "리쿼하우스",
-        "region": "서울 강남구",
+        "seller": "국밥쟁이&오렌지보틀 강남역점",
+        "region": "서울 서초구",
         "located": true,
         "cheaper_than_physical": true
       },
@@ -3295,6 +3380,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -3333,6 +3419,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -3365,6 +3452,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": false
@@ -3397,6 +3485,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": false
@@ -3429,6 +3518,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": false
@@ -3461,6 +3551,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -3499,6 +3590,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -3531,6 +3623,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -3569,6 +3662,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -3590,7 +3684,7 @@
       },
       "dailyshot": {
         "price_krw": 119800,
-        "seller": "이마트24 역삼승리점",
+        "seller": "CU 강남푸르지오점",
         "region": "서울특별시 강남구",
         "located": true,
         "cheaper_than_physical": false
@@ -3607,6 +3701,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -3639,6 +3734,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -3671,6 +3767,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -3703,6 +3800,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -3741,6 +3839,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -3779,6 +3878,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -3817,6 +3917,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -3849,6 +3950,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": false
@@ -3887,6 +3989,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -3919,6 +4022,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": false
@@ -3951,6 +4055,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -3991,6 +4096,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4031,6 +4137,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4071,6 +4178,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4114,6 +4222,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4154,6 +4263,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4197,6 +4307,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4237,6 +4348,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4277,6 +4389,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4317,6 +4430,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4357,6 +4471,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4397,6 +4512,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4440,6 +4556,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4480,6 +4597,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4520,6 +4638,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4560,6 +4679,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4600,6 +4720,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4640,6 +4761,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4680,6 +4802,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4720,6 +4843,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4760,6 +4884,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4800,6 +4925,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4840,6 +4966,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4880,6 +5007,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4923,6 +5051,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -4963,6 +5092,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5003,6 +5133,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5043,6 +5174,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5083,6 +5215,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5123,6 +5256,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5163,6 +5297,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5203,6 +5338,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5243,6 +5379,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5283,6 +5420,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5323,6 +5461,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5363,6 +5502,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5403,6 +5543,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5443,6 +5584,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5483,6 +5625,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5523,6 +5666,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5563,6 +5707,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5603,6 +5748,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5643,6 +5789,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5683,6 +5830,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5723,6 +5871,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5763,6 +5912,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5803,6 +5953,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5843,6 +5994,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5883,6 +6035,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5923,6 +6076,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -5963,6 +6117,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -6003,6 +6158,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -6043,6 +6199,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -6083,6 +6240,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -6123,6 +6281,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -6163,6 +6322,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -6203,6 +6363,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -6243,6 +6404,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -6283,6 +6445,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -6323,6 +6486,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -6363,6 +6527,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -6403,6 +6568,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -6443,6 +6609,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -6483,6 +6650,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -6523,6 +6691,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -6563,6 +6732,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -6603,6 +6773,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
@@ -6643,6 +6814,7 @@
       "badges": {
         "hotdeal": false,
         "dutyfree_win": false,
+        "retail_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
         "new": true
