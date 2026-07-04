@@ -201,7 +201,6 @@ strong{font-variant-numeric:tabular-nums;}
   min-height:60px;padding:6px 12px 6px 0;margin-bottom:8px;border-radius:14px;
   background:var(--card);border:1px solid var(--line);}
 .pick-row.sel{border-color:var(--gold);}
-.pick-row.tried-item{opacity:.4;}
 .pr-main{flex:1;min-height:52px;display:flex;justify-content:space-between;align-items:center;
   gap:10px;padding:4px 0 4px 12px;text-align:left;}
 .pr-main:active{opacity:.7;}
@@ -209,9 +208,13 @@ strong{font-variant-numeric:tabular-nums;}
 .pr-main .pr-floor{font-size:13px;color:var(--gold);font-variant-numeric:tabular-nums;white-space:nowrap;}
 .pr-main .pr-date{font-size:11px;color:var(--muted);}
 .pr-tried{flex:none;width:40px;min-height:40px;border-radius:10px;
-  background:var(--card2);border:1px solid var(--line);color:var(--muted);font-size:13px;font-weight:700;}
-.pr-tried.on{border-color:var(--ok);color:var(--ok);}
+  background:var(--card2);border:1px solid var(--line);color:var(--muted);font-size:15px;font-weight:700;}
+.pr-tried.on{border-color:var(--gold);color:var(--gold);}
 .pr-tried:active{transform:scale(.92);}
+
+/* 목표 선택 시트 섹션 헤더 */
+.goal-section-head{font-size:12px;font-weight:700;color:var(--muted);
+  padding:10px 4px 4px;margin-bottom:4px;border-bottom:1px solid var(--line);}
 
 /* 단가 스테퍼 */
 .stepper{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:8px 0 16px;}

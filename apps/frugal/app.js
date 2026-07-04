@@ -30,7 +30,7 @@
   // ── 상태 ──
   // state = { activeJar:{id,productId,name,createdAt,savings:[{ts,itemId,amount}]}|null,
   //           cabinet:[{id,productId,name,createdAt,redeemedAt,savedTotal,floorAtRedeem}],
-  //           itemRates:{}, tried:[productId,...], triedFilter:bool }
+  //           itemRates:{}, starred:[productId,...], starOnlyFilter:bool }
   let state = load();
   let floors = [];     // whisky_floor.json
   let rateEdit = null; // {itemId, value}
@@ -44,8 +44,8 @@
         s.activeJar = normJar(s.activeJar);
         s.cabinet = Array.isArray(s.cabinet) ? s.cabinet : [];
         s.itemRates = s.itemRates || {};
-        s.tried = Array.isArray(s.tried) ? s.tried : [];
-        s.triedFilter = !!s.triedFilter;
+        s.starred = Array.isArray(s.starred) ? s.starred : [];
+        s.starOnlyFilter = !!s.starOnlyFilter;
         return s;
       }
       // v1 → v2 마이그레이션(기존 사용자 데이터 보존)
@@ -55,10 +55,10 @@
           ? { id: uid(), productId: old.goal.productId, name: old.goal.name,
               createdAt: Date.now(), savings: Array.isArray(old.savings) ? old.savings : [] }
           : null;
-        return { activeJar: jar, cabinet: [], itemRates: old.itemRates || {}, tried: [], triedFilter: false };
+        return { activeJar: jar, cabinet: [], itemRates: old.itemRates || {}, starred: [], starOnlyFilter: false };
       }
     } catch (e) { /* 손상 시 초기화 */ }
-    return { activeJar: null, cabinet: [], itemRates: {}, tried: [], triedFilter: false };
+    return { activeJar: null, cabinet: [], itemRates: {}, starred: [], starOnlyFilter: false };
   }
   function normJar(j) {
     if (!j || !j.productId) return null;
@@ -297,20 +297,20 @@
     });
   }
 
-  // ── 마셔봤어 토글 ──
-  function toggleTried(pid){
-    const idx = state.tried.indexOf(pid);
-    if (idx >= 0) state.tried.splice(idx, 1);
-    else state.tried.push(pid);
+  // ── 관심 토글 ──
+  function toggleStarred(pid){
+    const idx = state.starred.indexOf(pid);
+    if (idx >= 0) state.starred.splice(idx, 1);
+    else state.starred.push(pid);
     save();
     renderGoalList();
     _syncSettingsCount();
     vibrate(8);
   }
 
-  // ── 필터 토글 ──
-  function toggleTriedFilter(){
-    state.triedFilter = !state.triedFilter;
+  // ── 관심만 보기 필터 토글 ──
+  function toggleStarFilter(){
+    state.starOnlyFilter = !state.starOnlyFilter;
     save();
     _syncFilterBtn();
     renderGoalList();
@@ -318,7 +318,7 @@
   function _syncFilterBtn(){
     const btn = $('filterUntriedBtn');
     if (!btn) return;
-    btn.classList.toggle('on', state.triedFilter);
+    btn.classList.toggle('on', state.starOnlyFilter);
   }
 
   // ── 목표 선택 시트 ──
@@ -327,19 +327,15 @@
     box.innerHTML = '';
     if (!floors.length){ box.innerHTML = '<p class="hist-empty">floor 데이터를 불러오지 못했습니다.</p>'; return; }
     const curId = jar() ? jar().productId : null;
-    const visible = state.triedFilter
-      ? floors.filter(f => !state.tried.includes(String(f.product_id)))
-      : floors;
-    if (!visible.length){
-      box.innerHTML = '<p class="hist-empty">마셔본 것을 모두 빼면 남은 위스키가 없어요.</p>';
-      return;
-    }
-    visible.forEach(f => {
-      const tried = state.tried.includes(String(f.product_id));
+
+    const starredFloors = floors.filter(f => state.starred.includes(String(f.product_id)));
+    const restFloors = floors.filter(f => !state.starred.includes(String(f.product_id)));
+
+    function addPickRow(f){
+      const pid = String(f.product_id);
+      const isStarred = state.starred.includes(pid);
       const wrap = document.createElement('div');
-      wrap.className = 'pick-row'
-        + (String(curId)===String(f.product_id) ? ' sel' : '')
-        + (tried ? ' tried-item' : '');
+      wrap.className = 'pick-row' + (String(curId)===pid ? ' sel' : '');
 
       const mainBtn = document.createElement('button');
       mainBtn.type = 'button';
@@ -350,25 +346,46 @@
         `<span class="pr-floor">${won(f.floor_krw)}</span>`;
       mainBtn.addEventListener('click', () => setGoal(f));
 
-      const triedBtn = document.createElement('button');
-      triedBtn.type = 'button';
-      triedBtn.className = 'pr-tried' + (tried ? ' on' : '');
-      triedBtn.setAttribute('aria-label', tried ? '안 마셔봄으로 변경' : '마셔봤어요');
-      triedBtn.textContent = tried ? '✓' : '—';
-      triedBtn.addEventListener('click', () => toggleTried(String(f.product_id)));
+      const starBtn = document.createElement('button');
+      starBtn.type = 'button';
+      starBtn.className = 'pr-tried' + (isStarred ? ' on' : '');
+      starBtn.setAttribute('aria-label', isStarred ? '관심 해제' : '관심 추가');
+      starBtn.textContent = isStarred ? '⭐' : '☆';
+      starBtn.addEventListener('click', () => toggleStarred(pid));
 
       wrap.appendChild(mainBtn);
-      wrap.appendChild(triedBtn);
+      wrap.appendChild(starBtn);
       box.appendChild(wrap);
-    });
+    }
+
+    function addSectionHead(text){
+      const h = document.createElement('div');
+      h.className = 'goal-section-head';
+      h.textContent = text;
+      box.appendChild(h);
+    }
+
+    if (starredFloors.length){
+      addSectionHead(`⭐ 관심 목록 (${starredFloors.length})`);
+      starredFloors.forEach(addPickRow);
+    }
+
+    if (!state.starOnlyFilter){
+      if (restFloors.length){
+        if (starredFloors.length) addSectionHead('전체');
+        restFloors.forEach(addPickRow);
+      }
+    } else if (!starredFloors.length){
+      box.innerHTML = '<p class="hist-empty">관심 목록이 비었어요.<br>⚙️ 설정에서 위스키를 골라보세요.</p>';
+    }
   }
 
-  // ── 설정 시트: 마셔본 위스키 관리 ──
+  // ── 설정 시트: 관심 위스키 관리 ──
   let _settQuery = '';
 
   function _syncSettingsCount(){
     const el = $('settTriedCount');
-    if (el) el.textContent = state.tried.length + '종';
+    if (el) el.textContent = state.starred.length + '종';
   }
 
   function renderSettingsSheet(){
@@ -384,7 +401,7 @@
     }
     list.forEach(f => {
       const pid = String(f.product_id);
-      const tried = state.tried.includes(pid);
+      const isStarred = state.starred.includes(pid);
       const row = document.createElement('div');
       row.className = 'sett-row';
       const nameEl = document.createElement('span');
@@ -392,14 +409,15 @@
       nameEl.textContent = f.name;
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = 'sr-tried' + (tried ? ' on' : '');
-      btn.setAttribute('aria-label', tried ? '마셔봤어요 취소' : '마셔봤어요');
-      btn.textContent = tried ? '✓' : '—';
+      btn.className = 'sr-tried' + (isStarred ? ' on' : '');
+      btn.setAttribute('aria-label', isStarred ? '관심 해제' : '관심 추가');
+      btn.textContent = isStarred ? '⭐' : '☆';
       btn.addEventListener('click', () => {
-        toggleTried(pid);
-        btn.classList.toggle('on');
-        btn.textContent = state.tried.includes(pid) ? '✓' : '—';
-        btn.setAttribute('aria-label', state.tried.includes(pid) ? '마셔봤어요 취소' : '마셔봤어요');
+        toggleStarred(pid);
+        const nowStarred = state.starred.includes(pid);
+        btn.classList.toggle('on', nowStarred);
+        btn.textContent = nowStarred ? '⭐' : '☆';
+        btn.setAttribute('aria-label', nowStarred ? '관심 해제' : '관심 추가');
       });
       row.appendChild(nameEl);
       row.appendChild(btn);
@@ -541,7 +559,7 @@
     bindGridGestures();
     $('createGoalBtn').addEventListener('click', () => { renderGoalList(); openSheet('goalSheet'); _syncFilterBtn(); });
     $('goalPick').addEventListener('click', () => { renderGoalList(); openSheet('goalSheet'); _syncFilterBtn(); });
-    $('filterUntriedBtn').addEventListener('click', toggleTriedFilter);
+    $('filterUntriedBtn').addEventListener('click', toggleStarFilter);
     $('ctaRedeem').addEventListener('click', redeem);
     $('undoLast').addEventListener('click', undoLast);
     $('historyOpen').addEventListener('click', () => { renderHistory(); openSheet('historySheet'); });
