@@ -1,5 +1,5 @@
 /* 캐스크 적금 서비스워커 — 설치/오프라인(앱셸 캐시) */
-const CACHE = 'dramjar-v6';  // CMPA-408: 합성 마우스 이벤트 더블 적립 가드 — app.js 갱신 위해 캐시 버전 업
+const CACHE = 'dramjar-v7';  // CMPA-777: 관심 목록 전환 — app.js/style.css/index.html 갱신
 const SHELL = [
   './',
   './index.html',
