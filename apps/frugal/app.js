@@ -30,7 +30,7 @@
   // ── 상태 ──
   // state = { activeJar:{id,productId,name,createdAt,savings:[{ts,itemId,amount}]}|null,
   //           cabinet:[{id,productId,name,createdAt,redeemedAt,savedTotal,floorAtRedeem}],
-  //           itemRates:{} }
+  //           itemRates:{}, tried:[productId,...], triedFilter:bool }
   let state = load();
   let floors = [];     // whisky_floor.json
   let rateEdit = null; // {itemId, value}
@@ -44,6 +44,8 @@
         s.activeJar = normJar(s.activeJar);
         s.cabinet = Array.isArray(s.cabinet) ? s.cabinet : [];
         s.itemRates = s.itemRates || {};
+        s.tried = Array.isArray(s.tried) ? s.tried : [];
+        s.triedFilter = !!s.triedFilter;
         return s;
       }
       // v1 → v2 마이그레이션(기존 사용자 데이터 보존)
@@ -53,10 +55,10 @@
           ? { id: uid(), productId: old.goal.productId, name: old.goal.name,
               createdAt: Date.now(), savings: Array.isArray(old.savings) ? old.savings : [] }
           : null;
-        return { activeJar: jar, cabinet: [], itemRates: old.itemRates || {} };
+        return { activeJar: jar, cabinet: [], itemRates: old.itemRates || {}, tried: [], triedFilter: false };
       }
     } catch (e) { /* 손상 시 초기화 */ }
-    return { activeJar: null, cabinet: [], itemRates: {} };
+    return { activeJar: null, cabinet: [], itemRates: {}, tried: [], triedFilter: false };
   }
   function normJar(j) {
     if (!j || !j.productId) return null;
@@ -295,21 +297,68 @@
     });
   }
 
+  // ── 마셔봤어 토글 ──
+  function toggleTried(pid){
+    const idx = state.tried.indexOf(pid);
+    if (idx >= 0) state.tried.splice(idx, 1);
+    else state.tried.push(pid);
+    save();
+    renderGoalList();
+    vibrate(8);
+  }
+
+  // ── 필터 토글 ──
+  function toggleTriedFilter(){
+    state.triedFilter = !state.triedFilter;
+    save();
+    _syncFilterBtn();
+    renderGoalList();
+  }
+  function _syncFilterBtn(){
+    const btn = $('filterUntriedBtn');
+    if (!btn) return;
+    btn.classList.toggle('on', state.triedFilter);
+  }
+
   // ── 목표 선택 시트 ──
   function renderGoalList(){
     const box = $('goalList');
     box.innerHTML = '';
     if (!floors.length){ box.innerHTML = '<p class="hist-empty">floor 데이터를 불러오지 못했습니다.</p>'; return; }
     const curId = jar() ? jar().productId : null;
-    floors.forEach(f => {
-      const row = document.createElement('button');
-      row.type = 'button';
-      row.className = 'pick-row' + (String(curId)===String(f.product_id) ? ' sel' : '');
-      row.innerHTML =
-        `<span><span class="pr-name">${f.name}</span><br><span class="pr-date">${f.collected_at||''} 기준</span></span>` +
+    const visible = state.triedFilter
+      ? floors.filter(f => !state.tried.includes(String(f.product_id)))
+      : floors;
+    if (!visible.length){
+      box.innerHTML = '<p class="hist-empty">마셔본 것을 모두 빼면 남은 위스키가 없어요.</p>';
+      return;
+    }
+    visible.forEach(f => {
+      const tried = state.tried.includes(String(f.product_id));
+      const wrap = document.createElement('div');
+      wrap.className = 'pick-row'
+        + (String(curId)===String(f.product_id) ? ' sel' : '')
+        + (tried ? ' tried-item' : '');
+
+      const mainBtn = document.createElement('button');
+      mainBtn.type = 'button';
+      mainBtn.className = 'pr-main';
+      const dateLabel = f.collected_at ? f.collected_at + ' 기준' : '참고가';
+      mainBtn.innerHTML =
+        `<span><span class="pr-name">${f.name}</span><br><span class="pr-date">${dateLabel}</span></span>` +
         `<span class="pr-floor">${won(f.floor_krw)}</span>`;
-      row.addEventListener('click', () => setGoal(f));
-      box.appendChild(row);
+      mainBtn.addEventListener('click', () => setGoal(f));
+
+      const triedBtn = document.createElement('button');
+      triedBtn.type = 'button';
+      triedBtn.className = 'pr-tried' + (tried ? ' on' : '');
+      triedBtn.setAttribute('aria-label', tried ? '안 마셔봄으로 변경' : '마셔봤어요');
+      triedBtn.textContent = tried ? '✓' : '—';
+      triedBtn.addEventListener('click', () => toggleTried(String(f.product_id)));
+
+      wrap.appendChild(mainBtn);
+      wrap.appendChild(triedBtn);
+      box.appendChild(wrap);
     });
   }
 
@@ -444,8 +493,9 @@
 
   function bind(){
     bindGridGestures();
-    $('createGoalBtn').addEventListener('click', () => { renderGoalList(); openSheet('goalSheet'); });
-    $('goalPick').addEventListener('click', () => { renderGoalList(); openSheet('goalSheet'); });
+    $('createGoalBtn').addEventListener('click', () => { renderGoalList(); openSheet('goalSheet'); _syncFilterBtn(); });
+    $('goalPick').addEventListener('click', () => { renderGoalList(); openSheet('goalSheet'); _syncFilterBtn(); });
+    $('filterUntriedBtn').addEventListener('click', toggleTriedFilter);
     $('ctaRedeem').addEventListener('click', redeem);
     $('undoLast').addEventListener('click', undoLast);
     $('historyOpen').addEventListener('click', () => { renderHistory(); openSheet('historySheet'); });
@@ -478,6 +528,7 @@
     renderTotal();
     renderGoal();
     bind();
+    _syncFilterBtn();
     setupInstall();
     loadFloors();
     if ('serviceWorker' in navigator){

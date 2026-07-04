@@ -141,6 +141,27 @@ def build(live=False):
     if live:
         _fold_live(agg)
 
+    # ── 폴백: whisky-list.csv 에만 있고 agg 에 없는 항목(price_krw_low 있는 것) ──
+    # 정규화 DB 에 수집 이력이 없어도 참고가로 앱에 표시. collected_at = "" 로 구분.
+    wl_path = os.path.join(ROOT, "assets", "whisky-list.csv")
+    stat["wl_fallback"] = 0
+    if os.path.exists(wl_path):
+        for r in csv.DictReader(open(wl_path, encoding="utf-8-sig")):
+            cid = r.get("id", "").strip()
+            low = r.get("price_krw_low", "").strip()
+            if cid and low and cid not in agg:
+                try:
+                    price = float(low)
+                except ValueError:
+                    continue
+                if price <= 0:
+                    continue
+                name = r.get("name_ko", "").strip()
+                if name:
+                    agg[cid] = {"name": name, "floor": price, "date": "",
+                                "channel": "참고가(whisky-list)"}
+                    stat["wl_fallback"] += 1
+
     # 레코드 조립
     out, no_url = [], 0
     for cid in sorted(agg):
@@ -219,16 +240,18 @@ def main():
     print(f"  ✅ 면세/해외 market 행 floor 반영: {stat['dutyfree_market_rows']} "
           f"(normalized 에 KR/KR-DS 만 존재 → 면세 구조적 0)")
     print(f"  ✅ dirty 제외(CMPA-345): {stat['dirty_skipped']}건")
+    print(f"  whisky-list.csv 참고가 폴백: {stat.get('wl_fallback', 0)}건")
     print(f"  데일리샷 링크 있음 {with_url} / 없음 {stat['no_dailyshot_url']}")
 
-    # 스키마 자가검증
+    # 스키마 자가검증 (collected_at 은 참고가 항목에서 "" 허용)
     REQ = {"product_id", "name", "floor_krw", "collected_at", "dailyshot_url"}
     bad = [r for r in records if set(r) != REQ or not isinstance(r["floor_krw"], int)
-           or r["floor_krw"] <= 0 or not r["collected_at"]]
+           or r["floor_krw"] <= 0]
     if bad:
         print(f"  ❌ 스키마 위반 {len(bad)}건 (예: {bad[0]})", file=sys.stderr)
         sys.exit(1)
-    print("  ✅ 스키마 검증 통과(모든 원소 5필드, floor_krw>0, collected_at 존재)")
+    ref_count = sum(1 for r in records if not r["collected_at"])
+    print(f"  ✅ 스키마 검증 통과(모든 원소 5필드, floor_krw>0; 참고가={ref_count}건 collected_at empty)")
 
 
 if __name__ == "__main__":

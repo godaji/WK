@@ -90,7 +90,13 @@
 <!-- ===== 목표 위스키 선택 시트 ===== -->
 <div class="sheet-backdrop" id="goalSheet" hidden>
   <div class="sheet" role="dialog" aria-modal="true" aria-label="목표 위스키 선택">
-    <div class="sheet-head"><span>목표 위스키</span><button class="sheet-close" data-close="goalSheet" type="button">✕</button></div>
+    <div class="sheet-head">
+      <span>목표 위스키</span>
+      <div class="sheet-head-end">
+        <button id="filterUntriedBtn" class="filter-tog" type="button">안 먹어본 것만</button>
+        <button class="sheet-close" data-close="goalSheet" type="button">✕</button>
+      </div>
+    </div>
     <div class="sheet-body" id="goalList"></div>
   </div>
 </div>
