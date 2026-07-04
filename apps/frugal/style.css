@@ -235,3 +235,32 @@ strong{font-variant-numeric:tabular-nums;}
   background:#3a2a1a;border:1px solid var(--line);color:var(--muted);font-size:18px;}
 .hist-row .hu:active{transform:scale(.92);color:var(--text);}
 .hist-empty{color:var(--muted);text-align:center;padding:30px 0;font-size:14px;}
+
+/* ===== 설정 버튼 ===== */
+.settings-open{min-height:36px;padding:0 10px;border-radius:18px;
+  background:var(--card);border:1px solid var(--line);color:var(--muted);font-size:16px;}
+.settings-open:active{transform:scale(.97);}
+
+/* ===== 설정 시트 ===== */
+.sett-section-head{display:flex;align-items:center;justify-content:space-between;
+  margin:0 0 8px;padding:4px 2px 8px;border-bottom:1px solid var(--line);}
+.sett-section-title{font-size:14px;font-weight:700;color:var(--gold);}
+.sett-tried-count{font-size:13px;color:var(--muted);}
+.sett-search{
+  display:block;width:100%;min-height:40px;
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  color:var(--text);font-size:14px;padding:0 12px;margin-bottom:10px;
+  outline:none;
+}
+.sett-search:focus{border-color:var(--gold);}
+.sett-search::placeholder{color:var(--muted);}
+/* reset webkit search cancel button */
+.sett-search::-webkit-search-cancel-button{-webkit-appearance:none;}
+.sett-row{display:flex;align-items:center;gap:8px;
+  min-height:44px;padding:4px 4px 4px 12px;margin-bottom:4px;border-radius:10px;
+  background:var(--card);border:1px solid var(--line);}
+.sett-row .sr-name{flex:1;font-size:14px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.sett-row .sr-tried{flex:none;min-width:40px;min-height:36px;border-radius:8px;
+  background:var(--card2);border:1px solid var(--line);color:var(--muted);font-size:13px;font-weight:700;}
+.sett-row .sr-tried.on{border-color:var(--ok);color:var(--ok);}
+.sett-row .sr-tried:active{transform:scale(.92);}

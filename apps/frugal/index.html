@@ -75,6 +75,7 @@
            href="https://godaji.github.io/CaskCode/2026/06/14/frugal-app-guide/"
            target="_blank" rel="noopener">📖 사용법</a>
         <button class="history-open" id="historyOpen" type="button">🧾 내역</button>
+        <button class="settings-open" id="settingsOpen" type="button">⚙️</button>
       </div>
     </div>
     <div class="grid" id="itemGrid"></div>
@@ -135,6 +136,24 @@
         <li>메뉴를 내려 <b>‘홈 화면에 추가’</b> 를 선택하세요.</li>
         <li>오른쪽 위 <b>‘추가’</b> 를 누르면 끝.</li>
       </ol>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 설정 시트 ===== -->
+<div class="sheet-backdrop" id="settingsSheet" hidden>
+  <div class="sheet tall" role="dialog" aria-modal="true" aria-label="설정">
+    <div class="sheet-head">
+      <span>⚙️ 설정</span>
+      <button class="sheet-close" data-close="settingsSheet" type="button">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div class="sett-section-head">
+        <span class="sett-section-title">마셔본 위스키</span>
+        <span class="sett-tried-count" id="settTriedCount">0종</span>
+      </div>
+      <input class="sett-search" id="settSearch" type="search" placeholder="위스키 이름 검색…" autocomplete="off">
+      <div id="settTriedList"></div>
     </div>
   </div>
 </div>

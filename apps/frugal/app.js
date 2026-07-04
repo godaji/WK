@@ -304,6 +304,7 @@
     else state.tried.push(pid);
     save();
     renderGoalList();
+    _syncSettingsCount();
     vibrate(8);
   }
 
@@ -360,6 +361,51 @@
       wrap.appendChild(triedBtn);
       box.appendChild(wrap);
     });
+  }
+
+  // ── 설정 시트: 마셔본 위스키 관리 ──
+  let _settQuery = '';
+
+  function _syncSettingsCount(){
+    const el = $('settTriedCount');
+    if (el) el.textContent = state.tried.length + '종';
+  }
+
+  function renderSettingsSheet(){
+    const box = $('settTriedList');
+    box.innerHTML = '';
+    const q = _settQuery.trim().toLowerCase();
+    const list = q
+      ? floors.filter(f => f.name.toLowerCase().includes(q))
+      : floors;
+    if (!list.length){
+      box.innerHTML = '<p class="hist-empty">검색 결과가 없어요.</p>';
+      return;
+    }
+    list.forEach(f => {
+      const pid = String(f.product_id);
+      const tried = state.tried.includes(pid);
+      const row = document.createElement('div');
+      row.className = 'sett-row';
+      const nameEl = document.createElement('span');
+      nameEl.className = 'sr-name';
+      nameEl.textContent = f.name;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'sr-tried' + (tried ? ' on' : '');
+      btn.setAttribute('aria-label', tried ? '마셔봤어요 취소' : '마셔봤어요');
+      btn.textContent = tried ? '✓' : '—';
+      btn.addEventListener('click', () => {
+        toggleTried(pid);
+        btn.classList.toggle('on');
+        btn.textContent = state.tried.includes(pid) ? '✓' : '—';
+        btn.setAttribute('aria-label', state.tried.includes(pid) ? '마셔봤어요 취소' : '마셔봤어요');
+      });
+      row.appendChild(nameEl);
+      row.appendChild(btn);
+      box.appendChild(row);
+    });
+    _syncSettingsCount();
   }
 
   // ── 캐비닛(완료한 목표) 시트 ──
@@ -499,6 +545,15 @@
     $('ctaRedeem').addEventListener('click', redeem);
     $('undoLast').addEventListener('click', undoLast);
     $('historyOpen').addEventListener('click', () => { renderHistory(); openSheet('historySheet'); });
+    $('settingsOpen').addEventListener('click', () => {
+      _settQuery = '';
+      const inp = $('settSearch'); if (inp) inp.value = '';
+      renderSettingsSheet(); openSheet('settingsSheet');
+    });
+    $('settSearch').addEventListener('input', e => {
+      _settQuery = e.target.value;
+      renderSettingsSheet();
+    });
     $('cabinetOpen').addEventListener('click', () => { renderCabinet(); openSheet('cabinetSheet'); });
     $('rateMinus').addEventListener('click', () => stepRate(-500));
     $('ratePlus').addEventListener('click', () => stepRate(500));
@@ -529,6 +584,7 @@
     renderGoal();
     bind();
     _syncFilterBtn();
+    _syncSettingsCount();
     setupInstall();
     loadFloors();
     if ('serviceWorker' in navigator){
