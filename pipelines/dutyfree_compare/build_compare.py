@@ -1489,6 +1489,122 @@ def _carousel_front_matter(date_str):
     return "\n".join(out) + "\n"
 
 
+def _top10_from_csv(csv_path):
+    """CSV 파일에서 가격대별 Top 10 제품명 집합을 반환.
+
+    build_blog_md 의 브래킷/정렬 로직과 동일하게 재현해 날짜 간 entry/exit 비교에 사용.
+    Returns: {bracket_name: set_of_product_names}  (파일 없으면 빈 dict)
+    """
+    EXCH = 1545.3
+    BRACKETS = [
+        ('10만원 이하',   0,       100000),
+        ('10~15만원',  100000,   150000),
+        ('15~20만원',  150000,   200000),
+        ('20~30만원',  200000,   300000),
+        ('30~50만원',  300000,   500000),
+    ]
+    from collections import defaultdict
+    if not csv_path or not os.path.exists(csv_path):
+        return {}
+    rows_by_bracket = defaultdict(list)
+    try:
+        with open(csv_path, encoding='utf-8-sig') as f:
+            for r in csv.DictReader(f):
+                prices = {}
+                for s in ('신라', '롯데', '신세계'):
+                    v = r.get(f'{s}_USD', '')
+                    try:
+                        prices[s] = float(v) if v not in ('', None) else None
+                    except (ValueError, TypeError):
+                        prices[s] = None
+                vals = {s: v for s, v in prices.items() if v is not None}
+                if not vals:
+                    continue
+                min_usd = min(vals.values())
+                min_krw = min_usd * EXCH
+                dp100_raw = r.get('국내최저_₩100ml', '')
+                duty100_raw = r.get('면세최저_₩100ml', '')
+                try:
+                    dp100 = float(dp100_raw) if dp100_raw not in ('', None) else None
+                except (ValueError, TypeError):
+                    dp100 = None
+                try:
+                    duty100 = float(duty100_raw) if duty100_raw not in ('', None) else None
+                except (ValueError, TypeError):
+                    duty100 = None
+                save_p100 = int(round(dp100 - duty100)) if (dp100 is not None and duty100 is not None) else None
+                for bname, lo, hi in BRACKETS:
+                    if lo <= min_krw < hi:
+                        rows_by_bracket[bname].append((r['제품명'], save_p100))
+                        break
+    except Exception:
+        return {}
+    result = {}
+    for bname, _lo, _hi in BRACKETS:
+        items = sorted(
+            rows_by_bracket[bname],
+            key=lambda x: (x[1] is not None, x[1] if x[1] is not None else 0),
+            reverse=True)[:10]
+        result[bname] = {nm for nm, _ in items}
+    return result
+
+
+def _rolling_entry_exit(date_str, outdir, rolling_days=7):
+    """당일 포함 최근 rolling_days 일의 Top 10 진입/아웃 로그를 반환.
+
+    Returns: list of {date, entries: {bracket: [names]}, exits: {bracket: [names]}}
+    날짜 내림차순(최신 먼저). 비교 대상(직전 날)이 없으면 항목 없음.
+    """
+    import glob as _glob
+    pat = os.path.join(outdir, "면세점_100ml_가격비교_*.csv")
+    files = sorted(
+        [f for f in _glob.glob(pat) if re.search(r"\d{4}-\d{2}-\d{2}", os.path.basename(f))],
+        key=lambda f: re.search(r"(\d{4}-\d{2}-\d{2})", os.path.basename(f)).group(1))
+    # date_str 기준 과거 rolling_days+1 일치 파일만 사용(비교용 직전 날 포함)
+    try:
+        cutoff = (datetime.date.fromisoformat(date_str) - datetime.timedelta(days=rolling_days + 1)).isoformat()
+    except Exception:
+        cutoff = ""
+    relevant = [f for f in files
+                if re.search(r"(\d{4}-\d{2}-\d{2})", os.path.basename(f)).group(1) >= cutoff]
+
+    # 날짜 → Top10 집합 캐시
+    cache = {}
+    for f in relevant:
+        d = re.search(r"(\d{4}-\d{2}-\d{2})", os.path.basename(f)).group(1)
+        cache[d] = _top10_from_csv(f)
+
+    dates_sorted = sorted(cache.keys(), reverse=True)
+    # 오늘 기준 최근 rolling_days 일
+    result = []
+    for i, d in enumerate(dates_sorted):
+        if d > date_str:
+            continue
+        if len(result) >= rolling_days:
+            break
+        # 직전 날(날짜순 다음 항목)
+        prev_d = dates_sorted[i + 1] if i + 1 < len(dates_sorted) else None
+        curr_top10 = cache[d]
+        prev_top10 = cache.get(prev_d, {}) if prev_d else {}
+        if not prev_d:
+            # 직전 기준 없으면 진입/아웃 비교 불가 — 건너뜀
+            continue
+        entries = {}
+        exits = {}
+        for bname in set(list(curr_top10.keys()) + list(prev_top10.keys())):
+            curr_set = curr_top10.get(bname, set())
+            prev_set = prev_top10.get(bname, set())
+            ent = sorted(curr_set - prev_set)
+            ext = sorted(prev_set - curr_set)
+            if ent:
+                entries[bname] = ent
+            if ext:
+                exits[bname] = ext
+        if entries or exits:
+            result.append({'date': d, 'entries': entries, 'exits': exits, 'prev_date': prev_d})
+    return result
+
+
 def build_blog_md(both, date_str, blog_dir=None, crawl_stats=None):
     """면세 가격 비교 주간 로그 MD 생성.
 
@@ -1682,6 +1798,37 @@ robots: "index,follow"
     lotte_n = stats['롯데']['count']
     ssg_n = stats['신세계']['count']
 
+    # 진입/아웃 롤링 로그 계산 (CMPA-789)
+    _outdir = os.path.join(ROOT, 'reports', 'dutyfree-compare')
+    _rolling = _rolling_entry_exit(date_str, _outdir, rolling_days=7)
+
+    def _entry_exit_md(entry_exit_item):
+        """진입/아웃 항목 하나를 Markdown 블록으로 렌더."""
+        parts = []
+        entries = entry_exit_item.get('entries', {})
+        exits = entry_exit_item.get('exits', {})
+        prev_d = entry_exit_item.get('prev_date')
+        prev_note = f" (직전: {prev_d})" if prev_d else ""
+        if entries:
+            parts.append(f"\n**🔼 Top 10 새 진입{prev_note}**\n")
+            for bname in ('10만원 이하', '10~15만원', '15~20만원', '20~30만원', '30~50만원'):
+                nms = entries.get(bname)
+                if nms:
+                    for nm in nms:
+                        parts.append(f"- [{bname}] {nm}")
+        if exits:
+            parts.append(f"\n**🔽 Top 10 아웃{prev_note}**\n")
+            for bname in ('10만원 이하', '10~15만원', '15~20만원', '20~30만원', '30~50만원'):
+                nms = exits.get(bname)
+                if nms:
+                    for nm in nms:
+                        parts.append(f"- [{bname}] {nm}")
+        return '\n'.join(parts)
+
+    # 오늘 섹션
+    today_log = next((x for x in _rolling if x['date'] == date_str), None)
+    today_entry_exit_md = _entry_exit_md(today_log) if today_log else ''
+
     lines.append(f'''
 ## 📅 {date_str} — 수집 ({shilla_d} 신라 · {lotte_d} 롯데 · {ssg_d} 신세계)
 
@@ -1695,8 +1842,19 @@ robots: "index,follow"
 
 - 세 면세점 동시 비교 가능: **{total_matched}종** (3곳 모두 있는 제품: {all3}종)
 - 가격차 10% 초과 제품: 위 가격대별 Top 10 표 참고
-
+{today_entry_exit_md}
 *by Dram · CaskCode*
+''')
+
+    # 롤링 과거 로그 (오늘 제외, 최신→과거)
+    past_logs = [x for x in _rolling if x['date'] != date_str]
+    for lg in past_logs:
+        ee_md = _entry_exit_md(lg)
+        if not ee_md.strip():
+            continue
+        lines.append(f'''
+## 📅 {lg["date"]} — 과거 로그
+{ee_md}
 ''')
 
     md = '\n'.join(lines)
