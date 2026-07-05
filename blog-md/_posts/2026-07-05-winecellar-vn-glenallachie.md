@@ -2,8 +2,8 @@
 layout: post
 title: "베트남 winecellar.vn — 글렌알라키 공식 수입사, 한국 대비 가격 정리"
 date: 2026-07-05 16:00:00 +0900
-categories: [price]
-kind: price
+categories: [wprice]
+kind: wprice
 byline: CaskCode
 excerpt: "베트남 winecellar.vn은 GlenAllachie Distillers의 공식 독점 수입사다. 글렌알라키 10년 CS는 신라면세보다도 싸고, 한국 시중가 대비 25% 저렴하다. 국내에서 구하기 어려운 MacNair's Lum Reek도 취급한다."
 robots: "index,follow"
