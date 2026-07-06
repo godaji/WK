@@ -1,5 +1,5 @@
 {
-  "asof": "2026-06-29",
+  "asof": "2026-07-06",
   "steps": {
     "fx": {
       "ok": true
@@ -8,28 +8,28 @@
       "label": "hk",
       "returncode": 0,
       "ok": true,
-      "tail": "[Caskells] whisky rows: 412\n[TheRareMalt] whisky rows: 679\n[Mizunara] whisky rows: 830\nWROTE 1921 rows -> /mnt/c/Users/shhon/Desktop/WK/data/whisky-prices/2026-06_hk_whisky_poc.csv\nSNAPSHOT -> /mnt/c/Users/shhon/Desktop/WK/data/whisky-prices/_runs/2026-06_hk_whisky_poc__run2026-06-29.csv",
-      "rows": 1921
+      "tail": "[Caskells] whisky rows: 412\n[TheRareMalt] whisky rows: 647\n[Mizunara] whisky rows: 831\nWROTE 1890 rows -> /home/dudaji/work/WK/data/whisky-prices/2026-07_hk_whisky_poc.csv\nSNAPSHOT -> /home/dudaji/work/WK/data/whisky-prices/_runs/2026-07_hk_whisky_poc__run2026-07-06.csv",
+      "rows": 1890
     },
     "jp": {
       "label": "jp",
       "returncode": 0,
       "ok": true,
-      "tail": "[酒類ドットコム(syurui)] whisky rows: 573\n[SAKE People] whisky rows: 495\n[酒庫住田屋(sumidaya)] whisky rows: 337\nWROTE 1405 rows -> /mnt/c/Users/shhon/Desktop/WK/data/whisky-prices/jp/2026-06_jp_shopify_poc.csv  (fx 1JPY=9.501545 KRW)\nSNAPSHOT -> /mnt/c/Users/shhon/Desktop/WK/data/whisky-prices/jp/_runs/2026-06_jp_shopify_poc__run2026-06-29.csv",
-      "rows": 1405,
+      "tail": "[酒類ドットコム(syurui)] whisky rows: 572\n[SAKE People] whisky rows: 487\n[酒庫住田屋(sumidaya)] whisky rows: 336\nWROTE 1395 rows -> /home/dudaji/work/WK/data/whisky-prices/jp/2026-07_jp_shopify_poc.csv  (fx 1JPY=9.503477 KRW)\nSNAPSHOT -> /home/dudaji/work/WK/data/whisky-prices/jp/_runs/2026-07_jp_shopify_poc__run2026-07-06.csv",
+      "rows": 1395,
       "mode": "LIVE"
     }
   },
   "outputs": {
     "fx_snapshot_csv": "data/whisky-prices/fx/fx_snapshot.csv",
     "fx_latest_json": "data/whisky-prices/fx/fx_latest.json",
-    "hk_csv": "data/whisky-prices/2026-06_hk_whisky_poc.csv",
-    "jp_csv": "data/whisky-prices/jp/2026-06_jp_shopify_poc.csv"
+    "hk_csv": "data/whisky-prices/2026-07_hk_whisky_poc.csv",
+    "jp_csv": "data/whisky-prices/jp/2026-07_jp_shopify_poc.csv"
   },
   "fx": {
-    "asof": "2026-06-28",
-    "HKD_KRW": 195.9365,
-    "JPY_KRW": 9.501545,
+    "asof": "2026-07-05",
+    "HKD_KRW": 195.408619,
+    "JPY_KRW": 9.503477,
     "source": "open.er-api.com (USD base cross-rate)"
   }
 }
