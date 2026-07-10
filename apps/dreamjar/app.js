@@ -110,6 +110,67 @@
     _toastTimer = setTimeout(() => { el.classList.remove('show'); setTimeout(() => { el.hidden = true; }, 220); }, 2000);
   }
 
+  // ── 되돌리기 토스트 ──
+  let _undoTimer   = null;
+  let _undoCountdown = null;
+  let _undoState   = null;  // { jarId, entryId, amount }
+
+  function showUndoToast(jarId, entryId, amount) {
+    _undoState = { jarId, entryId, amount };
+    const el    = $('undoToast');
+    const label = $('undoToastLabel');
+    const btn   = $('undoToastBtn');
+    let sec = 5;
+    label.textContent = `+${won(amount)} 적립`;
+    btn.textContent = `되돌리기 (${sec}초)`;
+    el.hidden = false;
+    el.classList.add('show');
+    if (_undoTimer)    clearTimeout(_undoTimer);
+    if (_undoCountdown) clearInterval(_undoCountdown);
+    _undoCountdown = setInterval(() => {
+      sec -= 1;
+      if (sec <= 0) { clearInterval(_undoCountdown); _undoCountdown = null; }
+      else btn.textContent = `되돌리기 (${sec}초)`;
+    }, 1000);
+    _undoTimer = setTimeout(() => { dismissUndoToast(); }, 5000);
+  }
+
+  function dismissUndoToast() {
+    if (_undoTimer)    { clearTimeout(_undoTimer); _undoTimer = null; }
+    if (_undoCountdown){ clearInterval(_undoCountdown); _undoCountdown = null; }
+    _undoState = null;
+    const el = $('undoToast');
+    if (!el) return;
+    el.classList.remove('show');
+    setTimeout(() => { el.hidden = true; }, 220);
+  }
+
+  if ($('undoToastBtn')) {
+    $('undoToastBtn').addEventListener('click', async () => {
+      const state = _undoState;
+      if (!state) return;
+      dismissUndoToast();
+      try {
+        await apiFetch({ action: 'deleteEntry', params: { jarId: state.jarId, entryId: state.entryId } });
+        // 잔액 롤백
+        if (currentJar && currentJar.jarId === state.jarId) {
+          currentJar.currentAmount = Math.max(0, (currentJar.currentAmount || 0) - state.amount);
+          $('jarDetailAmount').textContent = won(currentJar.currentAmount);
+        }
+        cachedJars = [];
+        toast('적립이 취소되었습니다.');
+        // 이력 재로드
+        try {
+          const histData = await apiFetch({ query: 'getJarHistory', params: { jarId: state.jarId } });
+          renderJarHistory((histData && histData.history) || []);
+          renderControlSection(currentJar, (histData && histData.history || []).filter(r => r.type === 'entry'));
+        } catch { /* 무시 */ }
+      } catch (err) {
+        toast('되돌리기 실패: ' + err.message);
+      }
+    });
+  }
+
   // ── API 레이어 ──
 
   /**
@@ -268,6 +329,24 @@
       MOCK_DONATIONS_OUT.push({ donationId: donId, fromJarId: params.fromJarId, toJarId: params.toJarId, requestAmount: params.amount, feeRate, feeAmount, netAmount, createdAt: ts });
       MOCK_DONATIONS_IN.push({ donationId: donId, toJarId: params.toJarId, fromJarId: params.fromJarId, netAmount, createdAt: ts });
       return Promise.resolve({ donationId: donId, feeRate, feeAmount, netAmount });
+    }
+
+    // S4: deleteEntry — 적립 되돌리기
+    if (action === 'deleteEntry') {
+      const { jarId, entryId } = params;
+      if (jarId && MOCK_ENTRIES[jarId]) {
+        const idx = MOCK_ENTRIES[jarId].findIndex(e => e.entryId === entryId);
+        if (idx >= 0) {
+          const removed = MOCK_ENTRIES[jarId].splice(idx, 1)[0];
+          const jar = MOCK_JARS.find(j => j.jarId === jarId);
+          if (jar && removed) {
+            jar.currentAmount = Math.max(0, (jar.currentAmount || 0) - (Number(removed.amount) || 0));
+            jar.entryCount = Math.max(0, (jar.entryCount || 1) - 1);
+          }
+          return Promise.resolve({ deleted: true });
+        }
+      }
+      return Promise.resolve({ deleted: false });
     }
 
     // S4: setControl — 멤버의 Control 설정
@@ -821,10 +900,30 @@ ${predHtml}`;
     if (!listEl) return;
     listEl.innerHTML = html;
     listEl.querySelectorAll('.reward-btn:not([disabled])').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const item = ctrl.items.find(i => i.id === btn.dataset.itemId);
-        if (item) onRewardTap(item);
+      const item = ctrl.items.find(i => i.id === btn.dataset.itemId);
+      if (!item) return;
+      // 탭 → 즉시 적립
+      btn.addEventListener('click', () => onRewardTap(item));
+      // 길게 누르기 → 상세 옵션 모달
+      let _lp = null;
+      btn.addEventListener('pointerdown', () => {
+        _lp = setTimeout(() => {
+          _lp = null;
+          if (item.subtype === 'per_day') openRoutineOptions(item);
+          else if (item.subtype === 'session') {
+            _pendingItem = item;
+            $('routinePickerTitle').textContent = item.label;
+            $('sessionCount').textContent = '1';
+            document.querySelectorAll('.rt-tab-btn').forEach(b => { b.hidden = (b.dataset.rtTab !== 'rt-session'); });
+            switchRoutineTab('rt-session');
+            openSheet('routineSheet');
+          } else onRewardTap(item);
+        }, 500);
       });
+      const cancelLp = () => { if (_lp) { clearTimeout(_lp); _lp = null; } };
+      btn.addEventListener('pointerup',     cancelLp);
+      btn.addEventListener('pointercancel', cancelLp);
+      btn.addEventListener('pointermove',   cancelLp);
     });
   }
 
@@ -862,31 +961,60 @@ ${predHtml}`;
     }
   }
 
+  // 즉시 적립 (확인 모달 없이) + 되돌리기 토스트
+  async function addEntryImmediate(amount, note) {
+    const jar = currentJar;
+    if (!jar) return;
+    try {
+      const res = await apiFetch({ action: 'addEntry', params: { jarId: jar.jarId, userId, amount, note } });
+      jar.currentAmount = (jar.currentAmount || 0) + amount;
+      $('jarDetailAmount').textContent = won(jar.currentAmount);
+      cachedJars = [];
+      showUndoToast(jar.jarId, res && res.entryId, amount);
+      // 이력 재로드
+      try {
+        const histData = await apiFetch({ query: 'getJarHistory', params: { jarId: jar.jarId } });
+        renderJarHistory((histData && histData.history) || []);
+        renderControlSection(jar, (histData && histData.history || []).filter(r => r.type === 'entry'));
+        cachedEntries[jar.jarId] = (histData && histData.history) || [];
+      } catch { /* 무시 */ }
+    } catch (err) {
+      toast('적립 실패: ' + err.message);
+    }
+  }
+
+  // per_day 길게 누르기 → 날짜/금액 옵션 시트 열기
+  function openRoutineOptions(item) {
+    _pendingItem = item;
+    $('routinePickerTitle').textContent = item.label;
+    $('rtTodayDesc').textContent = won(item.amount) + ' 적립';
+    $('routineDateInput').value = todayStr();
+    document.querySelectorAll('.rt-tab-btn').forEach(b => { b.hidden = (b.dataset.rtTab === 'rt-session'); });
+    switchRoutineTab('rt-today');
+    openSheet('routineSheet');
+  }
+
   function onRewardTap(item) {
     _pendingItem = item;
     if (item.subtype === 'tier') {
+      // 티어 선택 필요 → 모달 유지
       $('tierPickerTitle').textContent = item.label;
       renderTierButtons(item);
       openSheet('tierPickerSheet');
     } else if (item.subtype === 'threshold') {
+      // 점수 입력 필요 → 모달 유지
       $('scorePickerTitle').textContent = item.label + ' 점수 입력';
       $('scoreInput').value = '';
       openSheet('scoreInputSheet');
     } else if (item.subtype === 'per_day') {
-      $('routinePickerTitle').textContent = item.label;
-      $('rtTodayDesc').textContent = won(item.amount) + ' 적립';
-      $('routineDateInput').value = todayStr();
-      document.querySelectorAll('.rt-tab-btn').forEach(b => { b.hidden = (b.dataset.rtTab === 'rt-session'); });
-      switchRoutineTab('rt-today');
-      openSheet('routineSheet');
+      // 탭 → 오늘 즉시 적립 (길게 누르기로 날짜/금액 변경)
+      addEntryImmediate(item.amount, `[${item.id}] ${item.label} (${todayStr()})`);
     } else if (item.subtype === 'session') {
-      $('routinePickerTitle').textContent = item.label;
-      $('sessionCount').textContent = '1';
-      document.querySelectorAll('.rt-tab-btn').forEach(b => { b.hidden = (b.dataset.rtTab !== 'rt-session'); });
-      switchRoutineTab('rt-session');
-      openSheet('routineSheet');
+      // 탭 → 1세션 즉시 적립 (길게 누르기로 세션 수 변경)
+      addEntryImmediate(item.amount, `[${item.id}] ${item.label} × 1회`);
     } else {
-      showEntryConfirm(item.amount, item.label, `[${item.id}] ${item.label}`);
+      // milestone.once 등 → 즉시 적립
+      addEntryImmediate(item.amount, `[${item.id}] ${item.label}`);
     }
   }
 

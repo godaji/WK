@@ -212,6 +212,28 @@ input, select { font-family: inherit; }
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+/* 되돌리기 토스트 — 탭 즉시 적립 후 5초 undo 바 */
+.undo-toast {
+  position: fixed;
+  left: 12px; right: 12px;
+  bottom: calc(var(--nav-h) + var(--safe-bot) + 10px);
+  background: var(--card2); border: 1px solid var(--line);
+  border-radius: 14px; padding: 12px 14px;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  z-index: 51; box-shadow: 0 6px 20px rgba(0,0,0,.4);
+  opacity: 0; transform: translateY(12px);
+  transition: opacity .2s, transform .2s;
+  pointer-events: none;
+}
+.undo-toast.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.undo-toast-label { font-size: 14px; font-weight: 600; color: var(--text); flex: 1; }
+.undo-toast-btn {
+  flex: none; padding: 7px 14px;
+  background: var(--accent); border-radius: 20px;
+  font-size: 13px; font-weight: 700; color: #fff;
+  min-height: 36px;
+}
+
 /* ===== 바텀시트 ===== */
 .sheet-backdrop {
   position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 60;
@@ -554,7 +576,8 @@ input, select { font-family: inherit; }
   text-align: left; cursor: pointer;
   transition: background .15s;
 }
-.reward-btn:active { background: var(--card2); }
+.reward-btn:active { background: var(--card2); transform: scale(.97); }
+.reward-btn.tapping { background: var(--card2); opacity: .7; }
 .reward-btn.is-done {
   opacity: .45; pointer-events: none;
 }

@@ -133,6 +133,12 @@
 <!-- ===== 토스트 ===== -->
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
+<!-- ===== 되돌리기 토스트 (S4 즉시 적립 후 5초 undo) ===== -->
+<div class="undo-toast" id="undoToast" hidden>
+  <span class="undo-toast-label" id="undoToastLabel"></span>
+  <button class="undo-toast-btn" id="undoToastBtn" type="button"></button>
+</div>
+
 <!-- ===== Jar 상세 시트 ===== -->
 <div class="sheet-backdrop" id="jarDetailSheet" hidden>
   <div class="sheet tall" role="dialog" aria-modal="true" aria-label="Jar 상세">
