@@ -1,5 +1,6 @@
-/* DreamJar — 모바일 우선 PWA 스타일
-   설계 기준 폭: 360~390px. 탭 네비, 카드 리스트, 폼. */
+/* DreamJar — 단일 화면 PWA 스타일
+   설계 기준 폭: 360~390px.
+   탭 네비 없음. JAR 섹션 + CONTROL 섹션 + HISTORY 섹션. */
 
 :root {
   --bg:       #0f0f1a;
@@ -15,7 +16,7 @@
   --tap:      48px;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bot: env(safe-area-inset-bottom, 0px);
-  --nav-h:    60px;
+  --header-h: 56px;
 }
 
 *, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -77,132 +78,168 @@ input, select { font-family: inherit; }
 }
 .sf-save:active { transform: scale(.98); }
 
-/* ===== 메인 앱 ===== */
-#mainApp:not([hidden]) { display: flex; flex-direction: column; height: 100%; }
-
-/* 탭 컨텐츠 */
-.tab-content {
-  flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch;
-  padding: calc(var(--safe-top) + 12px) 14px calc(var(--nav-h) + var(--safe-bot) + 16px);
-  max-width: 480px; width: 100%; margin: 0 auto;
+/* ===== 메인 앱 (단일 화면) ===== */
+#mainApp:not([hidden]) {
+  display: flex; flex-direction: column;
+  height: 100%;
+  padding-top: calc(var(--safe-top) + var(--header-h));
 }
 
-/* 페이지 헤더 */
-.page-head {
+/* ── 앱 헤더 ── */
+.app-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: calc(var(--safe-top) + var(--header-h));
+  padding-top: var(--safe-top);
+  background: var(--bg2);
+  border-bottom: 1px solid var(--line);
   display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 16px;
+  padding-left: 16px; padding-right: 10px;
+  z-index: 20;
 }
-.page-title { font-size: 20px; font-weight: 800; }
+.app-header-title {
+  font-size: 18px; font-weight: 800;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 .btn-icon {
   width: var(--tap); height: var(--tap); border-radius: 50%;
   background: var(--card2); border: 1px solid var(--line);
-  font-size: 22px; font-weight: 700; color: var(--accent2);
+  font-size: 20px;
   display: flex; align-items: center; justify-content: center;
 }
 .btn-icon:active { transform: scale(.92); }
 
-/* Jar 목록 */
-.jar-list { display: flex; flex-direction: column; gap: 10px; }
-.jar-card {
-  display: flex; align-items: center; gap: 14px;
-  min-height: 72px; padding: 14px 16px;
-  background: var(--card); border: 1px solid var(--line); border-radius: 16px;
-  text-align: left;
+/* ── 스크롤 영역 ── */
+.main-scroll {
+  flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  padding: 14px 14px calc(var(--safe-bot) + 20px);
+  max-width: 480px; width: 100%; margin: 0 auto;
 }
-.jar-card:active { transform: scale(.98); background: var(--card2); }
-.jar-card-icon { font-size: 28px; flex: none; }
-.jar-card-body { flex: 1; min-width: 0; }
-.jar-card-name { font-size: 16px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.jar-card-meta { font-size: 13px; color: var(--muted); margin-top: 3px; }
-.jar-card-amount { font-size: 15px; font-weight: 700; color: var(--accent2); flex: none; }
 
-/* 빈 상태 */
-.empty-state { text-align: center; padding: 48px 16px; }
-.empty-icon { font-size: 56px; line-height: 1; margin-bottom: 16px; }
-.empty-msg { font-size: 15px; color: var(--muted); line-height: 1.7; margin: 0 0 24px; }
+/* ── 섹션 카드 ── */
+.section-card {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 18px; padding: 16px;
+  margin-bottom: 12px;
+}
+.section-label {
+  font-size: 11px; font-weight: 800; color: var(--muted);
+  letter-spacing: .07em; text-transform: uppercase;
+  margin-bottom: 12px;
+}
 
-/* 공통 CTA 버튼 */
+/* ── JAR 섹션 ── */
+.jar-title-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; margin-bottom: 10px;
+}
+.jar-name {
+  font-size: 17px; font-weight: 800; color: var(--text);
+  flex: 1; min-width: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.btn-change {
+  flex: none;
+  padding: 6px 14px;
+  background: var(--card2); border-radius: 8px;
+  font-size: 13px; font-weight: 600; color: var(--accent2);
+  min-height: 36px;
+}
+.btn-change:active { opacity: .8; }
+.jar-amounts {
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px;
+  font-size: 14px; margin-bottom: 10px;
+}
+.jar-cur  { font-size: 22px; font-weight: 900; color: var(--accent2); }
+.jar-sep  { color: var(--muted); font-size: 16px; margin: 0 4px; }
+.jar-goal { color: var(--muted); font-size: 16px; }
+.jar-progress-wrap {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 10px;
+}
+.jar-progress {
+  flex: 1; height: 8px;
+  background: var(--bg); border-radius: 4px; overflow: hidden;
+}
+.jar-progress-bar {
+  height: 100%; border-radius: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transition: width .4s ease;
+}
+.jar-progress-pct {
+  font-size: 13px; font-weight: 800; color: var(--accent2);
+  white-space: nowrap; flex: none;
+}
+.jar-prediction {
+  font-size: 13px; color: var(--accent2);
+  background: rgba(124, 111, 247, .12);
+  border-radius: 10px; padding: 9px 12px;
+  line-height: 1.5;
+}
+.jar-prediction:empty { display: none; }
+.jar-prediction.achieved {
+  color: #f5d47b;
+  background: rgba(245, 212, 123, .12);
+}
+.jar-empty-msg {
+  font-size: 14px; color: var(--muted); margin: 0 0 14px; text-align: center;
+}
+.jar-loading-msg {
+  font-size: 14px; color: var(--muted); text-align: center; padding: 8px 0;
+}
+
+/* ── CONTROL 섹션 ── */
+.ctrl-title-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; margin-bottom: 12px;
+}
+.ctrl-name {
+  font-size: 16px; font-weight: 700; color: var(--text);
+  flex: 1; min-width: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.ctrl-empty-msg {
+  font-size: 14px; color: var(--muted); text-align: center; padding: 8px 0;
+}
+
+/* ── 보상 항목 그리드 ── */
+.reward-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.reward-btn {
+  display: flex; flex-direction: column; align-items: flex-start;
+  gap: 4px;
+  background: var(--card2); border: 1px solid var(--line);
+  border-radius: 12px; padding: 12px 12px 10px;
+  min-height: 72px;
+  text-align: left; cursor: pointer;
+  transition: background .15s;
+}
+.reward-btn:active { background: var(--bg2); transform: scale(.97); }
+.reward-btn.is-done { opacity: .45; pointer-events: none; }
+.rb-icon   { font-size: 18px; line-height: 1; }
+.rb-label  { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.3; }
+.rb-amount { font-size: 12px; color: var(--accent2); font-weight: 700; }
+.rb-done-badge { font-size: 11px; color: var(--ok); font-weight: 700; }
+
+/* ===== 공통 CTA 버튼 ===== */
 .btn-cta {
-  display: block; width: 100%; min-height: 54px; border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; min-height: 54px; border-radius: 16px;
   background: linear-gradient(90deg, var(--accent), var(--accent2));
   color: #fff; font-size: 17px; font-weight: 800;
-  display: flex; align-items: center; justify-content: center;
 }
 .btn-cta:active { transform: scale(.98); }
-
-/* 적립 폼 */
-.earn-form { display: flex; flex-direction: column; gap: 18px; }
-.ef-field { display: flex; flex-direction: column; gap: 6px; }
-.ef-label { font-size: 13px; font-weight: 700; color: var(--muted); }
-.ef-optional { font-weight: 400; opacity: .7; }
-.ef-input, .ef-select {
-  min-height: 50px;
-  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
-  color: var(--text); font-size: 16px; padding: 0 16px;
-  outline: none; -webkit-appearance: none; appearance: none; width: 100%;
-}
-.ef-input:focus, .ef-select:focus { border-color: var(--accent); }
-.ef-input::placeholder { color: var(--muted); opacity: .6; }
-.ef-input::-webkit-outer-spin-button,
-.ef-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-.ef-input[type=number] { -moz-appearance: textfield; }
-.ef-amount-wrap { display: flex; align-items: center; gap: 8px; }
-.ef-amount-wrap .ef-input { flex: 1; }
-.ef-won { font-size: 16px; color: var(--muted); flex: none; }
-/* select 화살표 (커스텀) */
-.ef-select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238884a8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 14px center;
-  padding-right: 36px;
-}
-
-/* 설정 */
-.settings-body { display: flex; flex-direction: column; gap: 8px; }
-.sett-section { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px; margin-bottom: 4px; }
-.sett-section-title { font-size: 13px; font-weight: 700; color: var(--accent2); margin-bottom: 14px; }
-.sett-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
-.sett-field:last-child { margin-bottom: 0; }
-.sett-label { font-size: 13px; font-weight: 700; color: var(--muted); }
-.sett-input {
-  width: 100%; min-height: 50px;
-  background: var(--bg2); border: 1px solid var(--line); border-radius: 12px;
-  color: var(--text); font-size: 16px; padding: 0 14px;
-  outline: none; -webkit-appearance: none; appearance: none;
-}
-.sett-input:focus { border-color: var(--accent); }
-.sett-input::placeholder { color: var(--muted); opacity: .5; }
-.sett-hint { margin: 6px 2px 0; font-size: 12px; color: var(--muted); line-height: 1.4; }
-.settings-body .btn-cta { margin-top: 8px; }
-
-/* ===== 탭 네비게이션 ===== */
-.tab-nav {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  height: calc(var(--nav-h) + var(--safe-bot));
-  padding-bottom: var(--safe-bot);
-  background: var(--bg2);
-  border-top: 1px solid var(--line);
-  display: flex;
-  z-index: 20;
-}
-.tab-btn {
-  flex: 1;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 3px;
-  color: var(--muted);
-  min-height: var(--nav-h);
-  transition: color .15s;
-}
-.tab-btn.active { color: var(--accent2); }
-.tab-btn:active { opacity: .7; }
-.tab-icon { font-size: 22px; line-height: 1; }
-.tab-label { font-size: 11px; font-weight: 600; }
+.btn-cta:disabled { opacity: .5; }
 
 /* ===== 토스트 ===== */
 .toast {
   position: fixed;
-  left: 50%; bottom: calc(var(--nav-h) + var(--safe-bot) + 12px);
+  left: 50%; bottom: calc(var(--safe-bot) + 16px);
   transform: translateX(-50%) translateY(20px);
   background: var(--accent); color: #fff; font-weight: 800; font-size: 15px;
   padding: 11px 20px; border-radius: 30px;
@@ -212,11 +249,11 @@ input, select { font-family: inherit; }
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* 되돌리기 토스트 — 탭 즉시 적립 후 5초 undo 바 */
+/* ===== 되돌리기 토스트 ===== */
 .undo-toast {
   position: fixed;
   left: 12px; right: 12px;
-  bottom: calc(var(--nav-h) + var(--safe-bot) + 10px);
+  bottom: calc(var(--safe-bot) + 14px);
   background: var(--card2); border: 1px solid var(--line);
   border-radius: 14px; padding: 12px 14px;
   display: flex; align-items: center; justify-content: space-between; gap: 10px;
@@ -244,11 +281,10 @@ input, select { font-family: inherit; }
   width: 100%; max-width: 480px;
   background: var(--bg2);
   border-radius: 20px 20px 0 0; border-top: 1px solid var(--line);
-  max-height: 80vh; display: flex; flex-direction: column;
+  max-height: 86vh; display: flex; flex-direction: column;
   padding-bottom: calc(var(--safe-bot) + 8px);
   animation: slideUp .22s ease;
 }
-.sheet.tall { max-height: 88vh; }
 @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 .sheet-head {
   display: flex; justify-content: space-between; align-items: center;
@@ -264,31 +300,100 @@ input, select { font-family: inherit; }
 .sheet-close:active { color: var(--text); }
 .sheet-body { padding: 16px 16px 20px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
 
-/* Jar 상세 시트 */
-.jd-stat-row { display: flex; gap: 12px; margin-bottom: 16px; }
-.jd-stat {
-  flex: 1; background: var(--card); border: 1px solid var(--line); border-radius: 14px;
-  padding: 14px 12px; text-align: center;
+/* ── 설정 시트 ── */
+.sett-section {
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+  padding: 16px; margin-bottom: 12px;
 }
-.jd-stat-label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
-.jd-stat-val { font-size: 18px; font-weight: 800; color: var(--accent2); }
-.jd-desc { font-size: 14px; color: var(--muted); margin-bottom: 18px; line-height: 1.6; }
-.jd-entries-head { font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 10px; }
-.entry-row {
-  display: flex; align-items: center; gap: 10px;
-  min-height: 52px; padding: 8px 12px; margin-bottom: 6px;
-  background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+.sett-section-title { font-size: 13px; font-weight: 700; color: var(--accent2); margin-bottom: 14px; }
+.sett-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.sett-field:last-child { margin-bottom: 0; }
+.sett-label { font-size: 13px; font-weight: 700; color: var(--muted); }
+.sett-input {
+  width: 100%; min-height: 50px;
+  background: var(--bg2); border: 1px solid var(--line); border-radius: 12px;
+  color: var(--text); font-size: 16px; padding: 0 14px;
+  outline: none; -webkit-appearance: none; appearance: none;
 }
-.entry-row .er-note { flex: 1; font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.entry-row .er-note-empty { color: var(--muted); }
-.entry-row .er-amt { font-size: 14px; font-weight: 700; color: var(--accent2); flex: none; }
-.entry-row .er-date { font-size: 11px; color: var(--muted); flex: none; }
-.jd-entries-empty { font-size: 14px; color: var(--muted); text-align: center; padding: 20px 0; }
+.sett-input:focus { border-color: var(--accent); }
+.sett-input::placeholder { color: var(--muted); opacity: .5; }
+.sett-hint { margin: 6px 2px 4px; font-size: 12px; color: var(--muted); line-height: 1.4; }
+.sett-divider { height: 1px; background: var(--line); margin: 14px 0; }
 
-/* Jar 만들기 폼 */
+/* 설정 시트 내 Jar 목록 */
+.sett-jar-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+.sett-jar-loading { font-size: 13px; color: var(--muted); margin: 0; }
+.sett-jar-item {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--bg2); border: 1px solid var(--line); border-radius: 12px;
+  padding: 12px 14px; gap: 10px;
+}
+.sett-jar-item-name {
+  font-size: 14px; font-weight: 600; flex: 1; min-width: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.sett-jar-item-amt { font-size: 13px; color: var(--accent2); font-weight: 700; flex: none; }
+
+/* sync status */
+.sett-sync-status { font-size: 12px; color: var(--muted); margin: 0 0 4px; }
+
+/* ── Jar 선택 피커 ── */
+.jar-picker-list { display: flex; flex-direction: column; gap: 8px; }
+.jar-picker-section-title {
+  font-size: 12px; font-weight: 800; color: var(--muted);
+  letter-spacing: .05em; text-transform: uppercase;
+  margin: 14px 0 6px 2px;
+}
+.jar-picker-section-title:first-child { margin-top: 0; }
+.jar-picker-item {
+  display: block; width: 100%; text-align: left; cursor: pointer;
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  padding: 14px 16px;
+  transition: background .15s;
+}
+.jar-picker-item:active { background: var(--card2); }
+.jar-picker-item.active { border-color: var(--accent); }
+.jpi-name {
+  font-size: 15px; font-weight: 700; color: var(--text);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  margin-bottom: 6px;
+}
+.jpi-progress-wrap {
+  height: 5px; background: var(--bg); border-radius: 3px; overflow: hidden; margin-bottom: 6px;
+}
+.jpi-progress-bar {
+  height: 100%; border-radius: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+}
+.jpi-amounts {
+  display: flex; align-items: baseline; gap: 2px; font-size: 13px;
+}
+.jpi-cur  { font-weight: 700; color: var(--accent2); }
+.jpi-sep  { color: var(--muted); margin: 0 3px; }
+.jpi-goal { color: var(--muted); }
+.jpi-pct  { margin-left: 6px; font-size: 11px; font-weight: 700; color: var(--accent2); opacity: .8; }
+
+/* ── Control 선택 피커 ── */
+.cp-item {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 14px; padding: 16px 14px; width: 100%;
+  text-align: left; cursor: pointer;
+  transition: background .15s; margin-bottom: 8px;
+}
+.cp-item:last-child { margin-bottom: 0; }
+.cp-item:active { background: var(--card2); }
+.cp-item.active { border-color: var(--accent); }
+.cp-emoji { font-size: 28px; flex: none; line-height: 1; }
+.cp-body  { flex: 1; min-width: 0; }
+.cp-name  { font-size: 15px; font-weight: 700; color: var(--text); display: block; margin-bottom: 2px; }
+.cp-desc  { font-size: 12px; color: var(--muted); display: block; }
+
+/* ── Jar 만들기 폼 ── */
 .cj-field { margin-bottom: 16px; }
 .cj-label { display: block; font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
 .cj-optional { font-weight: 400; opacity: .7; }
+.cj-unit { font-weight: 400; font-size: 12px; color: var(--muted); opacity: .8; margin-left: 4px; }
 .cj-input {
   display: block; width: 100%; min-height: 50px;
   background: var(--card); border: 1px solid var(--line); border-radius: 14px;
@@ -297,15 +402,17 @@ input, select { font-family: inherit; }
 }
 .cj-input:focus { border-color: var(--accent); }
 .cj-input::placeholder { color: var(--muted); opacity: .6; }
-.sheet-body .btn-cta { margin-top: 6px; }
+.cj-input::-webkit-outer-spin-button,
+.cj-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.cj-input[type=number] { -moz-appearance: textfield; }
 
-/* ===== join section (홈 탭 — 다른 Jar 참여) ===== */
-.join-section { margin-top: 24px; }
+/* ── join section (설정 시트 내) ── */
+.join-section { margin-top: 14px; }
 .join-section-title { font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 10px; }
 .join-row { display: flex; gap: 8px; }
 .join-input {
   flex: 1; min-height: 48px;
-  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  background: var(--bg); border: 1px solid var(--line); border-radius: 14px;
   color: var(--text); font-size: 15px; padding: 0 14px;
   outline: none; -webkit-appearance: none; appearance: none;
 }
@@ -317,314 +424,16 @@ input, select { font-family: inherit; }
 }
 .btn-join:active { opacity: .8; }
 
-/* ===== 기부 (S5) ===== */
-/* 기부 버튼 — Jar 상세 시트 안 */
-.btn-donate {
-  display: flex; align-items: center; justify-content: center; gap: 6px;
-  width: 100%; min-height: 52px; border-radius: 16px; margin-bottom: 18px;
-  background: linear-gradient(90deg, #e67e22, #f39c12);
-  color: #fff; font-size: 17px; font-weight: 800;
-}
-.btn-donate:active { transform: scale(.98); }
-
-/* 기부 폼 필드 */
-.dn-field { margin-bottom: 16px; }
-.dn-label { display: block; font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
-.dn-input, .dn-select {
-  display: block; width: 100%; min-height: 50px;
-  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
-  color: var(--text); font-size: 16px; padding: 0 16px;
-  outline: none; -webkit-appearance: none; appearance: none;
-}
-.dn-input:focus, .dn-select:focus { border-color: var(--accent); }
-.dn-input::placeholder { color: var(--muted); opacity: .6; }
-.dn-input::-webkit-outer-spin-button,
-.dn-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-.dn-input[type=number] { -moz-appearance: textfield; }
-.dn-select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238884a8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 14px center;
-  padding-right: 36px;
-}
-
-/* 기부 대상 라벨 */
-.donate-target-label {
-  font-size: 14px; color: var(--muted); margin-bottom: 18px; line-height: 1.5;
-}
-
-/* 너구리 경고 배너 */
-.donate-preview-banner {
-  background: rgba(230, 126, 34, 0.12);
-  border-left: 3px solid #e67e22;
-  border-radius: 10px;
-  padding: 12px 14px;
-  font-size: 13px; color: #f39c12; line-height: 1.6;
-  margin: 14px 0 18px;
-}
-
-/* 너구리 결과 */
-.raccoon-result { text-align: center; padding: 8px 0 4px; }
-.raccoon-emoji { font-size: 56px; line-height: 1; margin-bottom: 14px; }
-.raccoon-headline {
-  font-size: 17px; font-weight: 800; color: #f39c12; margin-bottom: 12px;
-  line-height: 1.4;
-}
-.raccoon-detail { font-size: 14px; color: var(--muted); line-height: 1.8; margin-bottom: 8px; }
-.raccoon-net { font-size: 22px; font-weight: 800; color: var(--accent2); margin-top: 12px; }
-
-/* 이력 행 — donation 타입 */
-.entry-row.donation-in  { border-left: 3px solid #f39c12; }
-.entry-row.donation-out { border-left: 3px solid #e74c3c; }
-.entry-row .er-amt.neg  { color: #e74c3c; }
-
-/* ===== S3: 새 Jar 카드 레이아웃 ===== */
-/* .jar-card 를 블록 레이아웃으로 전환 */
-.jar-card {
-  display: block !important;
-  padding: 14px 16px;
-}
-.jar-card:active { transform: scale(.98); background: var(--card2); }
-
-/* 섹션 구분 제목 (내 Jar / 참여 중인 Jar) */
-.jar-section-title {
-  font-size: 12px; font-weight: 800; color: var(--muted);
-  letter-spacing: .05em; text-transform: uppercase;
-  margin: 20px 0 8px 2px;
-}
-.jar-section-title:first-child { margin-top: 0; }
-
-/* Jar 카드 내부 요소 */
-.jc-name {
-  font-size: 16px; font-weight: 700;
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  margin-bottom: 10px;
-}
-
-/* 진행률 바 */
-.jc-progress-wrap {
-  height: 6px; background: var(--bg); border-radius: 4px;
-  overflow: hidden; margin-bottom: 8px;
-}
-.jc-progress-bar {
-  height: 100%; border-radius: 4px;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  transition: width .4s ease;
-}
-
-/* 금액 행 */
-.jc-amounts {
-  display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px;
-  font-size: 14px; margin-bottom: 4px;
-}
-.jc-cur  { font-weight: 800; color: var(--accent2); }
-.jc-sep  { color: var(--muted); }
-.jc-goal { color: var(--muted); }
-.jc-pct  { margin-left: 6px; font-size: 12px; font-weight: 700; color: var(--accent2); opacity: .8; }
-
-/* 달성 예측 */
-.jc-pred {
-  font-size: 12px; color: var(--muted);
-  margin-top: 6px; line-height: 1.4;
-}
-
-/* Jar 만들기 폼 — 목표금액 단위 */
-.cj-unit { font-weight: 400; font-size: 12px; color: var(--muted); opacity: .8; margin-left: 4px; }
-.cj-input::-webkit-outer-spin-button,
-.cj-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-.cj-input[type=number] { -moz-appearance: textfield; }
-
-/* 이력 행 (새 getHistory 포맷) */
-.jde-row {
-  display: flex; align-items: flex-start; justify-content: space-between; gap: 8px;
-  padding: 10px 12px; margin-bottom: 6px;
-  background: var(--card); border: 1px solid var(--line); border-radius: 12px;
-}
-.jde-left  { flex: 1; min-width: 0; }
-.jde-note  { font-size: 14px; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.jde-date  { font-size: 11px; color: var(--muted); display: block; margin-top: 3px; }
-.jde-amount { font-size: 14px; font-weight: 700; flex: none; align-self: center; }
-.jde-plus  { color: var(--accent2); }
-.jde-minus { color: #e74c3c; }
-
-/* 상태 메시지 */
-.loading-msg, .error-msg, .empty-msg {
-  font-size: 14px; color: var(--muted);
-  text-align: center; padding: 20px 0; line-height: 1.6;
-}
-.error-msg { color: #e74c3c; }
-
-/* ===== S6: Jar 상세 — 진행률·예측·이력 타임라인 ===== */
-
-/* 진행률 바 */
-.jd-progress-wrap {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 12px;
-}
-.jd-progress {
-  flex: 1; height: 8px;
-  background: var(--bg); border-radius: 4px; overflow: hidden;
-}
-.jd-progress-bar {
-  height: 100%; border-radius: 4px;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  transition: width .4s ease;
-}
-.jd-progress-pct {
-  font-size: 13px; font-weight: 800; color: var(--accent2);
-  white-space: nowrap; flex: none;
-}
-
-/* 달성 예측 */
-.jd-prediction {
-  font-size: 14px; color: var(--accent2);
-  background: rgba(124, 111, 247, .12);
-  border-radius: 10px; padding: 10px 14px;
-  margin-bottom: 14px; line-height: 1.5;
-}
-.jd-prediction:empty { display: none; }
-.jd-prediction.achieved {
-  color: #f5d47b;
-  background: rgba(245, 212, 123, .12);
-}
-
-/* 섹션 헤더 (멤버별 기여 / 적립 이력) */
-.jd-section-head {
-  font-size: 12px; font-weight: 800; color: var(--muted);
-  letter-spacing: .05em; text-transform: uppercase;
-  margin: 18px 0 10px;
-}
-
-/* 멤버별 기여 소계 */
-.jd-subtotals { display: flex; flex-direction: column; gap: 6px; margin-bottom: 4px; }
-.jd-subtotal-row {
-  display: flex; align-items: center; justify-content: space-between;
-  background: var(--card); border: 1px solid var(--line);
-  border-radius: 10px; padding: 10px 14px;
-}
-.jd-sub-name { font-size: 14px; }
-.jd-sub-amt  { font-size: 14px; font-weight: 800; color: var(--accent2); }
-
-/* 이력 타임라인 행 */
-.jd-entry-row {
-  display: flex; align-items: center; justify-content: space-between; gap: 10px;
-  padding: 11px 0; border-bottom: 1px solid var(--line);
-}
-.jd-entry-row:last-child { border-bottom: none; }
-.jde-left { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
-.jde-label {
-  font-size: 14px; color: var(--text);
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-}
-.jde-contributor { font-size: 12px; color: var(--muted); }
-.jde-date        { font-size: 11px; color: var(--muted); }
-.jde-amount {
-  font-size: 15px; font-weight: 800; color: var(--accent2);
-  white-space: nowrap; flex: none;
-}
-
-/* 이력 없을 때 */
-.jd-entries-empty {
-  font-size: 14px; color: var(--muted);
-  text-align: center; padding: 24px 0; line-height: 1.6;
-}
-
-/* ===== S4: Control 섹션 + 보상 적립 UI ===== */
-
-/* Control 섹션 — Jar 상세 내 */
-.jd-section {
-  border-top: 1px solid var(--line);
-  padding: 14px 0 10px;
-}
-.jd-section-title {
-  font-size: 12px; font-weight: 800; color: var(--muted);
-  letter-spacing: .05em; text-transform: uppercase;
-  margin-bottom: 10px;
-}
-.jd-ctrl-row {
-  display: flex; align-items: center; justify-content: space-between; gap: 10px;
-}
-.jd-ctrl-name {
-  font-size: 15px; font-weight: 600; color: var(--text);
-  flex: 1; min-width: 0;
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-}
-.jd-ctrl-btn {
-  flex: none;
-  padding: 6px 14px;
-  background: var(--card2); border-radius: 8px;
-  font-size: 13px; font-weight: 600; color: var(--accent2);
-  min-height: 36px;
-}
-
-/* 보상 항목 섹션 */
-#jdRewardSection { padding-top: 4px; }
-.jd-reward-list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-  margin-top: 8px;
-}
-
-/* 보상 버튼 카드 */
-.reward-btn {
-  display: flex; flex-direction: column; align-items: flex-start;
-  gap: 4px;
-  background: var(--card); border: 1px solid var(--line);
-  border-radius: 12px; padding: 12px 12px 10px;
-  min-height: 72px;
-  text-align: left; cursor: pointer;
-  transition: background .15s;
-}
-.reward-btn:active { background: var(--card2); transform: scale(.97); }
-.reward-btn.tapping { background: var(--card2); opacity: .7; }
-.reward-btn.is-done {
-  opacity: .45; pointer-events: none;
-}
-.rb-icon  { font-size: 18px; line-height: 1; }
-.rb-label {
-  font-size: 13px; font-weight: 600; color: var(--text);
-  line-height: 1.3;
-}
-.rb-amount {
-  font-size: 12px; color: var(--accent2);
-  font-weight: 700;
-}
-.rb-done-badge {
-  font-size: 11px; color: var(--ok);
-  font-weight: 700;
-}
-
-/* ── Control 선택 피커 ── */
-.cp-list {
-  display: flex; flex-direction: column; gap: 10px;
-  padding-top: 6px;
-}
-.cp-item {
-  display: flex; align-items: center; gap: 14px;
-  background: var(--card); border: 1px solid var(--line);
-  border-radius: 14px; padding: 16px 14px;
-  text-align: left; cursor: pointer;
-  transition: background .15s;
-}
-.cp-item:active { background: var(--card2); }
-.cp-emoji { font-size: 28px; flex: none; line-height: 1; }
-.cp-body  { flex: 1; min-width: 0; }
-.cp-name  { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
-.cp-desc  { font-size: 12px; color: var(--muted); }
-
-/* ── 티어 선택 피커 ── */
-.tier-btn-list {
-  display: flex; flex-direction: column; gap: 8px;
-  padding-top: 6px;
-}
+/* ── 티어 선택 ── */
 .tier-select-btn {
   display: flex; align-items: center; justify-content: space-between;
   background: var(--card); border: 1px solid var(--line);
   border-radius: 12px; padding: 14px 16px;
   min-height: var(--tap); text-align: left; cursor: pointer;
+  width: 100%; margin-bottom: 8px;
   transition: background .15s;
 }
+.tier-select-btn:last-child { margin-bottom: 0; }
 .tier-select-btn:active { background: var(--card2); }
 .tier-btn-label  { font-size: 15px; font-weight: 600; color: var(--text); }
 .tier-btn-amount { font-size: 15px; font-weight: 800; color: var(--accent2); }
@@ -645,10 +454,7 @@ input, select { font-family: inherit; }
 }
 .si-input:focus { border-color: var(--accent); }
 .si-input::-webkit-inner-spin-button { display: none; }
-.si-hint {
-  font-size: 12px; color: var(--muted); line-height: 1.5;
-  margin-bottom: 4px;
-}
+.si-hint { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 4px; }
 
 /* ── 루틴 날짜·세션 탭 ── */
 .rt-tabs {
@@ -661,10 +467,8 @@ input, select { font-family: inherit; }
   border-bottom: 2px solid transparent;
   transition: color .15s, border-color .15s;
 }
-.rt-tab-btn.active {
-  color: var(--accent2); border-bottom-color: var(--accent2);
-}
-/* .rt-tab-content visibility is controlled via [hidden] attribute in JS */
+.rt-tab-btn.active { color: var(--accent2); border-bottom-color: var(--accent2); }
+.rt-desc { font-size: 15px; color: var(--text); margin: 0 0 16px; font-weight: 600; }
 
 /* 세션 수 조절 */
 .session-wrap {
@@ -694,3 +498,31 @@ input, select { font-family: inherit; }
   font-size: 38px; font-weight: 900; color: var(--accent2);
   letter-spacing: -.02em;
 }
+
+/* sheet-body .btn-cta margin */
+.sheet-body .btn-cta { margin-top: 6px; }
+
+/* ── 내역 섹션 ── */
+.hist-row {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 10px; padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+}
+.hist-row:last-child { border-bottom: none; }
+.hist-left { flex: 1; min-width: 0; }
+.hist-label {
+  font-size: 13px; font-weight: 600; color: var(--text);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  margin-bottom: 3px;
+}
+.hist-date { font-size: 11px; color: var(--muted); }
+.hist-pending { color: var(--accent2); font-size: 9px; vertical-align: middle; }
+.hist-right { display: flex; align-items: center; gap: 8px; flex: none; }
+.hist-amount { font-size: 13px; font-weight: 800; color: var(--accent2); white-space: nowrap; }
+.hist-del-btn {
+  min-width: 36px; min-height: 36px; border-radius: 8px;
+  background: var(--card2); font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+}
+.hist-del-btn:active { opacity: .7; }
+.hist-empty { font-size: 13px; color: var(--muted); text-align: center; padding: 12px 0; margin: 0; }
