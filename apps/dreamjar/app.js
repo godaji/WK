@@ -543,10 +543,14 @@
           const serverEntries = (histData.history || [])
             .filter(r => r.type === 'entry')
             .map(e => ({ entryId: e.id, amount: e.amount, note: e.label, createdAt: e.date, synced: true }));
-          // Merge: server entries + still-unsynced local entries (not yet pushed)
+          // Filter out entries that are pending local deletion (not yet confirmed by server)
+          const stillPendingDel = localPendingDel();
+          const pendingDelIds = new Set(stillPendingDel.map(p => p.entryId));
+          const filteredServerEntries = serverEntries.filter(e => !pendingDelIds.has(e.entryId));
+          // Merge: filtered server entries + still-unsynced local entries (not yet pushed)
           const localE = allEntriesMap[currentJar.jarId] || [];
           const stillUnsynced = localE.filter(e => !e.synced);
-          const merged = [...serverEntries, ...stillUnsynced].sort((a, b) => (b.createdAt > a.createdAt ? 1 : -1));
+          const merged = [...filteredServerEntries, ...stillUnsynced].sort((a, b) => (b.createdAt > a.createdAt ? 1 : -1));
           saveLocalEntries(currentJar.jarId, merged);
           entryRows = merged;
         } catch { /* use existing local */ }
