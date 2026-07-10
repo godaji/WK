@@ -70,6 +70,9 @@
           <span class="jar-progress-pct" id="mainJarProgressPct">0%</span>
         </div>
         <div class="jar-prediction" id="mainJarPrediction"></div>
+        <div class="jar-sync-info" id="jarSyncInfo" hidden></div>
+        <button class="btn-donate" id="donateBtn" type="button" hidden>🦝 기부하기</button>
+        <button class="btn-history" id="historyBtn" type="button">내역보기</button>
       </div>
 
       <!-- Jar 없음 -->
@@ -96,6 +99,7 @@
         </div>
         <div id="mainRewardSection" hidden>
           <div class="reward-list" id="mainRewardList"></div>
+          <button class="btn-manual-entry" id="manualEntryBtn" type="button">✏️ 직접 입력하기</button>
         </div>
       </div>
 
@@ -103,12 +107,6 @@
       <div id="controlEmpty" hidden>
         <p class="ctrl-empty-msg">먼저 Jar를 선택하세요.</p>
       </div>
-    </div>
-
-    <!-- HISTORY 섹션 -->
-    <div class="section-card" id="historySection" hidden>
-      <div class="section-label">내역</div>
-      <div id="historyList"></div>
     </div>
 
   </div><!-- /main-scroll -->
@@ -328,6 +326,77 @@
         <div class="ec-amount" id="confirmAmount"></div>
       </div>
       <button id="entryConfirmBtn" class="btn-cta" type="button">적립하기</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 직접 입력 시트 ===== -->
+<div class="sheet-backdrop" id="manualEntrySheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="직접 입력">
+    <div class="sheet-head">
+      <span>직접 입력</span>
+      <button class="sheet-close" data-close="manualEntrySheet" type="button">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div class="cj-field">
+        <label class="cj-label" for="meNote">항목 이름</label>
+        <input id="meNote" class="cj-input" type="text" placeholder="예: 아침 운동" maxlength="80" autocomplete="off">
+      </div>
+      <div class="cj-field">
+        <label class="cj-label" for="meAmount">금액 <span class="cj-unit">원</span></label>
+        <input id="meAmount" class="cj-input" type="number" placeholder="예: 5000" min="1" inputmode="numeric">
+      </div>
+      <button id="meSubmitBtn" class="btn-cta" type="button">적립하기</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 내역 시트 ===== -->
+<div class="sheet-backdrop" id="historySheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="내역">
+    <div class="sheet-head">
+      <span>내역</span>
+      <button class="sheet-close" data-close="historySheet" type="button">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div id="historyList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 기부 시트 ===== -->
+<div class="sheet-backdrop" id="donateSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="기부하기">
+    <div class="sheet-head">
+      <span>🦝 기부하기</span>
+      <button class="sheet-close" data-close="donateSheet" type="button">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div class="donate-info">
+        <div class="donate-from" id="donateFrom"></div>
+        <div class="donate-arrow">→</div>
+        <div class="donate-to" id="donateTo"></div>
+      </div>
+      <div class="cj-field">
+        <label class="cj-label" for="donateAmount">기부 금액 <span class="cj-unit">원</span></label>
+        <input id="donateAmount" class="cj-input" type="number" placeholder="예: 10000" min="1" inputmode="numeric">
+      </div>
+      <p class="sett-hint">🦝 너구리사장이 0~50% 수수료를 랜덤으로 떼갑니다.</p>
+      <button id="donateSubmitBtn" class="btn-cta" type="button">기부하기</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 기부 결과 시트 ===== -->
+<div class="sheet-backdrop" id="donateResultSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="기부 결과">
+    <div class="sheet-head">
+      <span>🦝 기부 결과</span>
+      <button class="sheet-close" data-close="donateResultSheet" type="button">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div id="donateResultBody"></div>
+      <button class="btn-cta sheet-close" data-close="donateResultSheet" type="button" style="margin-top:16px">확인</button>
     </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 /**
- * DreamJar — Google Apps Script 백엔드
+ * DreamJar — Google Apps Script 백엔드 (dreamjar2에서 승격)
  *
  * 배포 전 아래 SPREADSHEET_ID 를 실제 값으로 교체하세요.
  * (Google Sheets URL에서 /d/ 와 /edit 사이의 문자열)
@@ -159,25 +159,53 @@ function handleJoinJar(p) {
   return jsonOk({ memberId: memberId });
 }
 
-/** jar_members 에서 특정 멤버의 controlId 갱신 */
+/** jar_members 에서 특정 멤버의 controlId 갱신
+ *  1) memberId 있으면 memberId로 탐색
+ *  2) memberId 없으면 jarId + userId로 탐색 (구형 Jar 하위 호환)
+ *  3) 행이 없으면 자동 추가 (owner 역할) */
 function handleSetControl(p) {
   var sh = sheet(SHEET.JAR_MEMBERS);
   var cols = headers(sh);
   var memberIdx = cols.indexOf('memberId');
   var controlIdx = cols.indexOf('controlId');
+  var jarIdx = cols.indexOf('jarId');
+  var userIdx = cols.indexOf('userId');
   if (memberIdx < 0 || controlIdx < 0) return jsonErr('jar_members 헤더 오류');
 
   var last = sh.getLastRow();
-  if (last <= 1) return jsonErr('멤버를 찾을 수 없습니다: ' + p.memberId);
+  var data = last > 1 ? sh.getRange(2, 1, last - 1, cols.length).getValues() : [];
 
-  var data = sh.getRange(2, 1, last - 1, cols.length).getValues();
-  for (var i = 0; i < data.length; i++) {
-    if (data[i][memberIdx] === p.memberId) {
-      sh.getRange(i + 2, controlIdx + 1).setValue(p.controlId || '');
-      return jsonOk({ updated: true });
+  // 1. memberId로 찾기
+  if (p.memberId) {
+    for (var i = 0; i < data.length; i++) {
+      if (data[i][memberIdx] === p.memberId) {
+        sh.getRange(i + 2, controlIdx + 1).setValue(p.controlId || '');
+        return jsonOk({ updated: true });
+      }
     }
   }
-  return jsonErr('멤버를 찾을 수 없습니다: ' + p.memberId);
+
+  // 2. jarId + userId 폴백 (memberId 없는 구형 Jar)
+  if (p.jarId && p.userId && jarIdx >= 0 && userIdx >= 0) {
+    for (var j = 0; j < data.length; j++) {
+      if (data[j][jarIdx] === p.jarId && data[j][userIdx] === p.userId) {
+        sh.getRange(j + 2, controlIdx + 1).setValue(p.controlId || '');
+        return jsonOk({ updated: true });
+      }
+    }
+    // 행이 없으면 owner 행 자동 생성
+    appendRow(SHEET.JAR_MEMBERS, {
+      memberId:  newId('m'),
+      jarId:     p.jarId,
+      userId:    p.userId,
+      role:      'owner',
+      controlId: p.controlId || '',
+      joinedAt:  now(),
+    });
+    return jsonOk({ updated: true });
+  }
+
+  return jsonErr('멤버를 찾을 수 없습니다: ' + (p.memberId || p.jarId || ''));
 }
 
 /** controls 시트에 신규 Control 생성 */
