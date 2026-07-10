@@ -128,7 +128,7 @@
         // POST
         const res = await fetch(scriptUrl, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'text/plain' },
           body: JSON.stringify({ action, ...params }),
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
