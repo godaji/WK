@@ -4,7 +4,7 @@
  * 배포 전 아래 SPREADSHEET_ID 를 실제 값으로 교체하세요.
  * (Google Sheets URL에서 /d/ 와 /edit 사이의 문자열)
  */
-var SPREADSHEET_ID = 'YOUR_SPREADSHEET_ID_HERE';
+var SPREADSHEET_ID = '14aUcea8p-LWS9TcscIIryZQXg6JAfwDavttDquKHGHc';
 
 // ─── 시트 이름 상수 ───────────────────────────────────────────────────────────
 var SHEET = {
