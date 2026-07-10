@@ -99,6 +99,7 @@ function doPost(e) {
     if (action === 'addEntry')      return handleAddEntry(payload);
     if (action === 'deleteEntry')   return handleDeleteEntry(payload);
     if (action === 'donate')        return handleDonate(payload);
+    if (action === 'archiveJar')   return handleArchiveJar(payload);
 
     return jsonErr('알 수 없는 action: ' + action);
   } catch (err) {
@@ -292,6 +293,44 @@ function handleDonate(p) {
   });
 }
 
+/**
+ * Jar 아카이브 (soft delete)
+ * jars 시트에서 jarId에 해당하는 행의 archived, archivedAt 컬럼 갱신
+ */
+function handleArchiveJar(p) {
+  var jarId = p.jarId;
+  if (!jarId) return jsonErr('jarId 필요');
+
+  var sh = sheet(SHEET.JARS);
+  var cols = headers(sh);
+  var jarIdx = cols.indexOf('jarId');
+  var archIdx = cols.indexOf('archived');
+  var archAtIdx = cols.indexOf('archivedAt');
+
+  if (jarIdx < 0) return jsonErr('jars 시트에 jarId 컬럼 없음');
+  // archived/archivedAt 컬럼이 없으면 자동 추가
+  if (archIdx < 0) {
+    archIdx = cols.length;
+    sh.getRange(1, archIdx + 1).setValue('archived');
+  }
+  if (archAtIdx < 0) {
+    archAtIdx = archIdx + 1;
+    if (cols.length <= archAtIdx) {
+      sh.getRange(1, archAtIdx + 1).setValue('archivedAt');
+    }
+  }
+
+  var last = sh.getLastRow();
+  for (var r = 2; r <= last; r++) {
+    if (sh.getRange(r, jarIdx + 1).getValue() === jarId) {
+      sh.getRange(r, archIdx + 1).setValue(true);
+      sh.getRange(r, archAtIdx + 1).setValue(now());
+      return jsonOk({ archived: true });
+    }
+  }
+  return jsonErr('Jar를 찾을 수 없습니다: ' + jarId);
+}
+
 // ─── doGet ───────────────────────────────────────────────────────────────────
 
 /**
@@ -324,7 +363,9 @@ function handleGetJarsByUser(p) {
   var userId = p.userId;
   if (!userId) return jsonErr('userId 필요');
 
-  var allJars = readAll(SHEET.JARS);
+  var allJars = readAll(SHEET.JARS).filter(function(j) {
+    return j.archived !== true && j.archived !== 'TRUE' && j.archived !== 'true';
+  });
   var jarsMap = {};
   allJars.forEach(function(j) { jarsMap[j.jarId] = j; });
 
@@ -575,7 +616,7 @@ function initSheets() {
     },
     {
       name: SHEET.JARS,
-      cols: ['jarId', 'name', 'description', 'ownerId', 'goalAmount', 'controlId', 'createdAt'],
+      cols: ['jarId', 'name', 'description', 'ownerId', 'goalAmount', 'controlId', 'createdAt', 'archived', 'archivedAt'],
     },
     {
       name: SHEET.JAR_MEMBERS,

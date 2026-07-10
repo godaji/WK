@@ -604,3 +604,21 @@ input, select { font-family: inherit; }
 .dr-row:last-child { border-bottom: none; }
 .dr-fee { color: var(--muted); }
 .dr-net { font-weight: 800; font-size: 16px; color: var(--accent2); }
+
+/* ── Jar 삭제 ── */
+.btn-danger { background: linear-gradient(90deg, #e04040, #c03030); }
+.btn-cancel { background: var(--card2); border: 1px solid var(--line); }
+.del-jar-name { font-size: 17px; font-weight: 700; text-align: center; margin: 0 0 8px; }
+.del-jar-msg { font-size: 14px; color: var(--muted); text-align: center; margin: 0 0 20px; line-height: 1.5; }
+.jar-picker-row {
+  display: flex; align-items: center; gap: 8px;
+}
+.jar-picker-row .jar-picker-item { flex: 1; min-width: 0; }
+.jar-picker-del-btn {
+  flex: none;
+  width: 40px; height: 40px; border-radius: 10px;
+  background: var(--card2); border: 1px solid var(--line);
+  font-size: 18px;
+  display: flex; align-items: center; justify-content: center;
+}
+.jar-picker-del-btn:active { opacity: .7; background: #e04040; }

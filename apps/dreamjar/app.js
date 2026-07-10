@@ -13,6 +13,7 @@
   const KEY_ENTRIES    = 'dreamjar.entries';     // JSON: {jarId: [{entryId, amount, note, createdAt, synced}]}
   const KEY_PENDING_DEL = 'dreamjar.pendingDel'; // JSON: [{entryId, jarId}]
   const KEY_PENDING_CTRL = 'dreamjar.pendingCtrl'; // JSON: [{jarId, memberId, controlId}]
+  const KEY_PENDING_ARCHIVE = 'dreamjar.pendingArchive'; // JSON: [{jarId}]
   const KEY_LAST_SYNC  = 'dreamjar.lastSync';    // ISO timestamp string
 
   // ── localStorage 헬퍼 ──
@@ -31,6 +32,11 @@
   function savePendingDel(list) { localStorage.setItem(KEY_PENDING_DEL, JSON.stringify(list)); }
   function localPendingCtrl() { return JSON.parse(localStorage.getItem(KEY_PENDING_CTRL) || '[]'); }
   function savePendingCtrl(list) { localStorage.setItem(KEY_PENDING_CTRL, JSON.stringify(list)); }
+  function localPendingArchive() { return JSON.parse(localStorage.getItem(KEY_PENDING_ARCHIVE) || '[]'); }
+  function savePendingArchive(list) { localStorage.setItem(KEY_PENDING_ARCHIVE, JSON.stringify(list)); }
+
+  /** 활성(아카이브되지 않은) Jar만 반환 */
+  function activeJars(jars) { return jars.filter(j => !j.archived); }
 
   // ── 상태 ──
   let userId    = localStorage.getItem(KEY_USER_ID) || '';
@@ -315,6 +321,11 @@
       if (toJar) toJar.currentAmount = (toJar.currentAmount || 0) + netAmount;
       return Promise.resolve({ donationId: donation.donationId, feeRate, feeAmount, netAmount });
     }
+    if (action === 'archiveJar') {
+      const mj = MOCK_JARS.find(j => j.jarId === params.jarId);
+      if (mj) { mj.archived = true; mj.archivedAt = new Date().toISOString(); }
+      return Promise.resolve({ archived: true });
+    }
     if (action === 'joinJar') return Promise.resolve({ memberId: 'm-' + Date.now() });
     if (action === 'registerUser') return Promise.resolve({ userId: params.userId || userId });
     return Promise.resolve({});
@@ -394,7 +405,7 @@
 
   function loadSettJarList() {
     const listEl = $('settJarList');
-    const jars = localJars();
+    const jars = activeJars(localJars());
     if (!jars || jars.length === 0) {
       listEl.innerHTML = '<p class="sett-jar-loading">Jar가 없어요.</p>';
       return;
@@ -478,6 +489,16 @@
       }
       savePendingCtrl(remainingCtrl);
 
+      // 1c. Push pending archive (jar deletions)
+      const pendingArchive = localPendingArchive();
+      const remainingArchive = [];
+      for (const pa of pendingArchive) {
+        try {
+          await apiFetchReal({ action: 'archiveJar', params: { jarId: pa.jarId } });
+        } catch { remainingArchive.push(pa); }
+      }
+      savePendingArchive(remainingArchive);
+
       // 2. Execute pending deletes
       const pendingDel = localPendingDel();
       const remainingDel = [];
@@ -490,7 +511,7 @@
       // 3. Pull fresh jars from server
       const freshJars = await apiFetchReal({ query: 'getJarsByUser', params: { userId } }) || [];
       saveLocalJars(freshJars);
-      cachedJars = freshJars;
+      cachedJars = activeJars(freshJars);
 
       // 4. For active jar, pull server history and merge
       if (currentJar) {
@@ -556,7 +577,7 @@
     const joined = cachedJars.filter(j => j.ownerId !== userId);
 
     let html = '';
-    function appendSect(title, list) {
+    function appendSect(title, list, showDel) {
       if (!list.length) return;
       html += `<div class="jar-picker-section-title">${escHtml(title)}</div>`;
       list.forEach(jar => {
@@ -569,27 +590,40 @@
           : '';
         const goalText = goal > 0 ? won(goal) : '목표 미설정';
         const pctHtml  = goal > 0 ? `<span class="jpi-pct">${pct}%</span>` : '';
-        html += `<button class="jar-picker-item${isActive ? ' active' : ''}" data-jar-id="${escHtml(jar.jarId)}" type="button">
-          <div class="jpi-name">${escHtml(jar.name || '(이름 없음)')}</div>
-          ${progressHtml}
-          <div class="jpi-amounts">
-            <span class="jpi-cur">${won(cur)}</span>
-            <span class="jpi-sep"> / </span>
-            <span class="jpi-goal">${goalText}</span>
-            ${pctHtml}
-          </div>
-        </button>`;
+        const delHtml  = showDel
+          ? `<button class="jar-picker-del-btn" data-del-jar-id="${escHtml(jar.jarId)}" type="button" aria-label="삭제">🗑️</button>`
+          : '';
+        html += `<div class="jar-picker-row">
+          <button class="jar-picker-item${isActive ? ' active' : ''}" data-jar-id="${escHtml(jar.jarId)}" type="button">
+            <div class="jpi-name">${escHtml(jar.name || '(이름 없음)')}</div>
+            ${progressHtml}
+            <div class="jpi-amounts">
+              <span class="jpi-cur">${won(cur)}</span>
+              <span class="jpi-sep"> / </span>
+              <span class="jpi-goal">${goalText}</span>
+              ${pctHtml}
+            </div>
+          </button>
+          ${delHtml}
+        </div>`;
       });
     }
 
-    appendSect('내 Jar', owned);
-    appendSect('참여 중인 Jar', joined);
+    appendSect('내 Jar', owned, true);
+    appendSect('참여 중인 Jar', joined, false);
     listEl.innerHTML = html;
 
     listEl.querySelectorAll('.jar-picker-item').forEach(btn => {
       btn.addEventListener('click', () => {
         const jar = cachedJars.find(j => j.jarId === btn.dataset.jarId);
         if (jar) onJarSelect(jar);
+      });
+    });
+
+    listEl.querySelectorAll('.jar-picker-del-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openDeleteJarConfirm(btn.dataset.delJarId);
       });
     });
   }
@@ -960,6 +994,65 @@
     toast('삭제됐어요.');
   }
 
+  // ── Jar 아카이브 (삭제) ──
+  function archiveJarLocal(jarId) {
+    const jars = localJars();
+    const j = jars.find(j => j.jarId === jarId);
+    if (!j) return;
+    j.archived = true;
+    j.archivedAt = new Date().toISOString();
+    saveLocalJars(jars);
+
+    // Mock 모드에서도 플래그 설정
+    if (isMock()) {
+      const mj = MOCK_JARS.find(m => m.jarId === jarId);
+      if (mj) { mj.archived = true; mj.archivedAt = j.archivedAt; }
+    }
+
+    // pending archive 큐에 추가 (중복 제거)
+    const pending = localPendingArchive().filter(p => p.jarId !== jarId);
+    pending.push({ jarId });
+    savePendingArchive(pending);
+
+    // 캐시 갱신
+    cachedJars = activeJars(localJars());
+
+    // 다른 Jar로 전환
+    if (currentJar && currentJar.jarId === jarId) {
+      if (cachedJars.length > 0) {
+        onJarSelect(cachedJars[0]);
+      } else {
+        currentJar = null;
+        localStorage.removeItem(KEY_ACTIVE_JAR);
+        $('jarDisplay').hidden = true;
+        $('jarEmpty').hidden   = false;
+        $('controlDisplay').hidden = true;
+        $('controlEmpty').hidden   = false;
+      }
+    }
+
+    toast('Jar를 삭제했어요.');
+  }
+
+  // 삭제 확인 시트 핸들러
+  let _deleteTargetJarId = null;
+
+  function openDeleteJarConfirm(jarId) {
+    const jar = localJars().find(j => j.jarId === jarId);
+    if (!jar) return;
+    _deleteTargetJarId = jarId;
+    $('delJarName').textContent = jar.name || '(이름 없음)';
+    openSheet('deleteJarConfirmSheet');
+  }
+
+  $('delJarConfirmBtn').addEventListener('click', () => {
+    if (!_deleteTargetJarId) return;
+    closeSheet('deleteJarConfirmSheet');
+    closeSheet('jarPickerSheet');
+    archiveJarLocal(_deleteTargetJarId);
+    _deleteTargetJarId = null;
+  });
+
   // ── 내역 섹션 렌더 ──
   function displayNote(note) {
     if (!note) return '적립';
@@ -1028,7 +1121,7 @@
       const lj = jars.find(j => j.jarId === myJar.jarId);
       if (lj) { lj.currentAmount = myJar.currentAmount; saveLocalJars(jars); }
       if (currentJar.jarId === myJar.jarId) updateJarDisplay(myJar);
-      cachedJars = localJars();
+      cachedJars = activeJars(localJars());
     } catch (err) {
       toast('기부 실패: ' + err.message);
     } finally {
@@ -1200,7 +1293,7 @@
     $('controlEmpty').hidden   = false;
     // historySection removed (history is now in a sheet)
 
-    cachedJars = localJars();
+    cachedJars = activeJars(localJars());
 
     if (!cachedJars || cachedJars.length === 0) {
       if (isMock()) {
@@ -1213,7 +1306,7 @@
         Object.entries(MOCK_ENTRIES).forEach(([jarId, entries]) => {
           saveLocalEntries(jarId, entries);
         });
-        cachedJars = mockJars;
+        cachedJars = activeJars(mockJars);
       } else if (scriptUrl) {
         // 로컬 데이터 없음 — 서버에서 한 번 자동 로드
         toast('로컬 데이터 없음. 서버에서 불러오는 중…');

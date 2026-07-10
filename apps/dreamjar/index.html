@@ -401,6 +401,22 @@
   </div>
 </div>
 
+<!-- ===== Jar 삭제 확인 시트 ===== -->
+<div class="sheet-backdrop" id="deleteJarConfirmSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="Jar 삭제">
+    <div class="sheet-head">
+      <span>Jar 삭제</span>
+      <button class="sheet-close" data-close="deleteJarConfirmSheet" type="button">✕</button>
+    </div>
+    <div class="sheet-body">
+      <p class="del-jar-name" id="delJarName"></p>
+      <p class="del-jar-msg">이 Jar를 삭제할까요?<br>적립 내역은 보존됩니다.</p>
+      <button id="delJarConfirmBtn" class="btn-cta btn-danger" type="button">삭제</button>
+      <button class="btn-cta btn-cancel" data-close="deleteJarConfirmSheet" type="button" style="margin-top:8px">취소</button>
+    </div>
+  </div>
+</div>
+
 <script src="./app.js"></script>
 </body>
 </html>
