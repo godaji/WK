@@ -7,7 +7,6 @@
 
   // ── 스토리지 키 ──
   const KEY_USER_ID    = 'dreamjar.userId';
-  const KEY_SCRIPT_URL = 'dreamjar.scriptUrl';
   const KEY_ACTIVE_JAR = 'dreamjar.activeJarId';
   const KEY_JARS       = 'dreamjar.jars';       // JSON: [{jarId, name, goalAmount, currentAmount, ...}]
   const KEY_ENTRIES    = 'dreamjar.entries';     // JSON: {jarId: [{entryId, amount, note, createdAt, synced}]}
@@ -41,8 +40,6 @@
 
   // ── 상태 ──
   let userId    = localStorage.getItem(KEY_USER_ID) || '';
-  const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx1SF3djcB9kEnpbI_MltdPvtYS7p7ADZ1tnXVKoVTqUtsEgFFy2l11Qxo1TQc0DuSc/exec';
-  let scriptUrl = localStorage.getItem(KEY_SCRIPT_URL) || DEFAULT_SCRIPT_URL;
 
   // 캐시
   let cachedJars   = [];   // [{jarId, name, currentAmount, goalAmount, ...}]
@@ -120,7 +117,7 @@
   const KRW = new Intl.NumberFormat('ko-KR');
   const won = n => KRW.format(Math.round(n || 0)) + '원';
   const hasSupabase = () => typeof window.DreamJarSupabase !== 'undefined';
-  const isMock = () => !hasSupabase() && !scriptUrl;
+  const isMock = () => !hasSupabase();
 
   function todayStr() {
     const d = new Date();
@@ -199,40 +196,12 @@
   }
 
   async function apiFetchReal({ action, query, params = {} }) {
-    // CMPA-893: Supabase backend (drop-in replacement)
-    if (hasSupabase()) {
-      try {
-        return await DreamJarSupabase.api({ action, query, params });
-      } catch (err) {
-        console.error('[DreamJar] Supabase 오류:', err);
-        throw err;
-      }
-    }
-    // Legacy Apps Script fallback
-    if (!scriptUrl) throw new Error('백엔드가 설정되지 않았어요.');
+    // CMPA-893: Supabase backend
+    if (!hasSupabase()) throw new Error('Supabase가 로드되지 않았어요.');
     try {
-      if (action) {
-        const res = await fetch(scriptUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain' },
-          body: JSON.stringify({ action, ...params }),
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const json = await res.json();
-        if (!json.ok) throw new Error(json.error || '서버 오류');
-        return json.data;
-      } else {
-        const url = new URL(scriptUrl);
-        url.searchParams.set('query', query);
-        Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
-        const res = await fetch(url.toString());
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const json = await res.json();
-        if (!json.ok) throw new Error(json.error || '서버 오류');
-        return json.data;
-      }
+      return await DreamJarSupabase.api({ action, query, params });
     } catch (err) {
-      console.error('[DreamJar] apiFetch 오류:', err);
+      console.error('[DreamJar] Supabase 오류:', err);
       throw err;
     }
   }
@@ -431,7 +400,7 @@
   $('logoutBtn').addEventListener('click', () => {
     if (!confirm('로그아웃하시겠습니까?\n로컬 데이터가 모두 삭제됩니다.')) return;
     // localStorage에서 dreamjar 관련 키 모두 삭제
-    [KEY_USER_ID, KEY_SCRIPT_URL, KEY_ACTIVE_JAR, KEY_JARS, KEY_ENTRIES,
+    [KEY_USER_ID, KEY_ACTIVE_JAR, KEY_JARS, KEY_ENTRIES,
      KEY_PENDING_DEL, KEY_PENDING_CTRL, KEY_PENDING_ARCHIVE, KEY_LAST_SYNC,
      KEY_SERVER_MODIFIED
     ].forEach(k => localStorage.removeItem(k));
@@ -440,7 +409,6 @@
     currentJar = null;
     entryRows  = [];
     userId     = '';
-    scriptUrl  = DEFAULT_SCRIPT_URL;
     // 설정 시트 닫고 초기 설정 화면으로
     closeSheet('settingsSheet');
     showSetup();
@@ -516,15 +484,17 @@
   });
 
   // ── 서버 동기화 ──
+  let _bgSyncTimer = null;
+  let _syncInProgress = false;
+
   async function syncWithServer(silent = false) {
     if (isMock()) {
       if (!silent) toast('샘플 데이터 모드에서는 동기화가 지원되지 않습니다.');
       return;
     }
-    if (!scriptUrl) {
-      if (!silent) toast('Apps Script URL이 설정되지 않았어요.');
-      return;
-    }
+    // Guard against re-entrancy (background sync + manual sync overlap)
+    if (_syncInProgress && silent) return;
+    _syncInProgress = true;
 
     const syncBtn = $('syncBtn');
     if (syncBtn) { syncBtn.disabled = true; syncBtn.textContent = '동기화 중…'; }
@@ -727,10 +697,45 @@
       if (!silent) toast('동기화 실패: ' + err.message);
       throw err;
     } finally {
+      _syncInProgress = false;
       if (syncBtn) { syncBtn.disabled = false; syncBtn.textContent = '서버 동기화'; }
       if (hdrSync) { hdrSync.classList.remove('syncing'); hdrSync.disabled = false; }
     }
   }
+
+  // ── Background Sync ──
+
+  /** Debounced background sync — call after any local mutation that creates divergence. */
+  function scheduleBackgroundSync() {
+    if (isMock()) return;
+    if (_bgSyncTimer) clearTimeout(_bgSyncTimer);
+    _bgSyncTimer = setTimeout(async () => {
+      _bgSyncTimer = null;
+      if (_syncInProgress) return;
+      try { await syncWithServer(true); }
+      catch { /* silent — manual sync still works */ }
+    }, 1500);
+  }
+
+  // Sync on visibility change (app comes back to foreground)
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState !== 'visible') return;
+    if (isMock()) return;
+    // Check if there are pending local changes
+    const allE = JSON.parse(localStorage.getItem(KEY_ENTRIES) || '{}');
+    const hasUnsynced = Object.values(allE).some(entries => entries.some(e => !e.synced));
+    const hasPending = hasUnsynced ||
+      localPendingDel().length > 0 ||
+      localPendingCtrl().length > 0 ||
+      localPendingArchive().length > 0;
+    if (hasPending) { scheduleBackgroundSync(); return; }
+    // If no pending changes, sync if stale (>5 min since last sync)
+    const lastSync = localStorage.getItem(KEY_LAST_SYNC);
+    const staleMs = 5 * 60 * 1000;
+    if (!lastSync || (Date.now() - new Date(lastSync).getTime()) > staleMs) {
+      scheduleBackgroundSync();
+    }
+  });
 
   // ── Jar 선택 시트 ──
   $('jarChangeBtn').addEventListener('click', openJarPicker);
@@ -813,7 +818,7 @@
     renderHistorySection(jar.jarId);
 
     // Pull server history for selected jar (merge with local unsynced)
-    if (scriptUrl && !isMock()) {
+    if (!isMock()) {
       try {
         const histData = await apiFetchReal({ query: 'getJarHistory', params: { jarId: jar.jarId } });
         const serverEntries = (histData.history || [])
@@ -1156,6 +1161,7 @@
     closeSheet('controlPickerSheet');
     renderControlSection(jar, entryRows);
     toast('Control을 설정했어요.');
+    scheduleBackgroundSync();
   }
 
   // ── localStorage-first 적립 ──
@@ -1201,6 +1207,7 @@
     renderHistorySection(jar.jarId);
 
     showUndoToast(jar.jarId, entry.entryId, amount);
+    scheduleBackgroundSync();
   }
 
   function deleteEntryLocal(jarId, entryId) {
@@ -1236,6 +1243,7 @@
     }
 
     toast('삭제됐어요.');
+    scheduleBackgroundSync();
   }
 
   // ── Jar 아카이브 (삭제) ──
@@ -1276,6 +1284,7 @@
     }
 
     toast('Jar를 삭제했어요.');
+    scheduleBackgroundSync();
   }
 
   // 삭제 확인 시트 핸들러
@@ -1781,7 +1790,7 @@
   // ── 앱 초기화 (localStorage-first) ──
   async function initApp() {
     if (hasSupabase()) console.info('[DreamJar] Supabase 백엔드 연동됨');
-    else if (isMock()) console.info('[DreamJar] 백엔드 미설정 → 샘플 데이터 모드');
+    else console.info('[DreamJar] Supabase 미로드 → 샘플 데이터 모드');
 
     $('jarLoading').hidden = false;
     $('jarDisplay').hidden = true;
@@ -1804,7 +1813,7 @@
           saveLocalEntries(jarId, entries);
         });
         cachedJars = activeJars(mockJars);
-      } else if (hasSupabase() || scriptUrl) {
+      } else if (hasSupabase()) {
         // 로컬 데이터 없음 — 서버에서 한 번 자동 로드
         toast('로컬 데이터 없음. 서버에서 불러오는 중…');
         try { await syncWithServer(true); return; } catch { /* fall through to empty */ }
