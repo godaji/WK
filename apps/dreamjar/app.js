@@ -11,7 +11,8 @@
 
   // ── 상태 ──
   let userId    = localStorage.getItem(KEY_USER_ID) || '';
-  let scriptUrl = localStorage.getItem(KEY_SCRIPT_URL) || '';
+  const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzrf9M_9x2m8cA2nvv0b0CWKEGNp5Ym2SLV2rJ7ADx79t1ePRbY0yF4wyLdcDU4_nMS/exec';
+  let scriptUrl = localStorage.getItem(KEY_SCRIPT_URL) || DEFAULT_SCRIPT_URL;
 
   // 로컬 캐시 (오프라인·미연결 상태 대비)
   let cachedJars    = [];    // [{jarId, name, description, currentAmount, entryCount}]
@@ -43,8 +44,9 @@
   const ADMIN_CONTROLS = [
     {
       controlId: 'ctrl_ca',
-      name: 'Ca — 아이 적립',
+      name: 'DaeunControl',
       emoji: '⭐',
+      isDefault: true,
       items: [
         { id:'ca_eal',        label:'EAL 졸업',          type:'milestone',   subtype:'tier',
           tiers:[{label:'상위 달성',amount:500000},{label:'달성',amount:300000}], once:true },
@@ -70,8 +72,9 @@
     },
     {
       controlId: 'ctrl_cb',
-      name: 'Cb — 절약 적립',
+      name: 'DadControl',
       emoji: '💰',
+      isDefault: true,
       items: [
         { id:'cb_coffee',   label:'드립커피',     type:'routine', subtype:'per_day', amount:4500 },
         { id:'cb_tumbler',  label:'텀블러',        type:'routine', subtype:'per_day', amount:1200 },
