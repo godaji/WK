@@ -40,7 +40,7 @@
 
   // ── 상태 ──
   let userId    = localStorage.getItem(KEY_USER_ID) || '';
-  const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzrf9M_9x2m8cA2nvv0b0CWKEGNp5Ym2SLV2rJ7ADx79t1ePRbY0yF4wyLdcDU4_nMS/exec';
+  const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx1SF3djcB9kEnpbI_MltdPvtYS7p7ADZ1tnXVKoVTqUtsEgFFy2l11Qxo1TQc0DuSc/exec';
   let scriptUrl = localStorage.getItem(KEY_SCRIPT_URL) || DEFAULT_SCRIPT_URL;
 
   // 캐시
@@ -246,6 +246,7 @@
       const jarId = params.jarId;
       const entries = MOCK_ENTRIES[jarId] || [];
       const dIn = MOCK_DONATIONS_IN.filter(d => d.toJarId === jarId);
+      const dOut = MOCK_DONATIONS_OUT.filter(d => d.fromJarId === jarId);
       const history = [
         ...entries.map(e => ({
           type: 'entry', id: e.entryId, date: e.createdAt,
@@ -253,10 +254,20 @@
           label: e.note || '적립', amount: Number(e.amount) || 0, icon: '💰',
         })),
         ...dIn.map(d => ({
-          type: 'donation', id: d.donationId, date: d.createdAt,
+          type: 'donation_in', id: d.donationId, date: d.createdAt,
           userId: '', contributorName: '(기부 Jar)',
           label: '기부', amount: Number(d.netAmount) || 0, icon: '🦝',
+          requestAmount: Number(d.requestAmount) || 0, feeRate: d.feeRate || 0, feeAmount: Number(d.feeAmount) || 0,
         })),
+        ...dOut.map(d => {
+          const toJar = MOCK_JARS.find(j => j.jarId === d.toJarId);
+          return {
+            type: 'donation_out', id: d.donationId, date: d.createdAt,
+            userId: '', contributorName: (toJar && toJar.name) || d.toJarId || '(알 수 없음)',
+            label: '기부 발신 (수수료 ' + Math.round((d.feeRate || 0) * 100) + '%)',
+            amount: -(Number(d.requestAmount) || 0), icon: '↗️',
+          };
+        }),
       ].sort((a, b) => (b.date > a.date ? 1 : -1));
       return Promise.resolve({ history, memberSubtotals: [] });
     }
@@ -326,7 +337,12 @@
       if (mj) { mj.archived = true; mj.archivedAt = new Date().toISOString(); }
       return Promise.resolve({ archived: true });
     }
-    if (action === 'joinJar') return Promise.resolve({ memberId: 'm-' + Date.now() });
+    if (action === 'joinJar') {
+      const input = params.jarId || '';
+      const jar = MOCK_JARS.find(j => j.jarId === input) || MOCK_JARS.find(j => j.name === input);
+      if (!jar) return Promise.reject(new Error('존재하지 않는 Jar입니다: ' + input));
+      return Promise.resolve({ memberId: 'm-' + Date.now(), jarName: jar.name || '' });
+    }
     if (action === 'registerUser') return Promise.resolve({ userId: params.userId || userId });
     return Promise.resolve({});
   }
@@ -391,6 +407,7 @@
 
   // 동기화 버튼
   $('syncBtn').addEventListener('click', () => syncWithServer(false));
+  $('headerSyncBtn').addEventListener('click', () => syncWithServer(false));
 
   function updateLastSyncDisplay() {
     const el = $('lastSyncText');
@@ -458,6 +475,8 @@
 
     const syncBtn = $('syncBtn');
     if (syncBtn) { syncBtn.disabled = true; syncBtn.textContent = '동기화 중…'; }
+    const hdrSync = $('headerSyncBtn');
+    if (hdrSync) { hdrSync.classList.add('syncing'); hdrSync.disabled = true; }
 
     try {
       // 1. Push all unsynced entries
@@ -539,20 +558,36 @@
       // 4. For active jar, pull server history and merge
       if (currentJar) {
         try {
+          // Snapshot existing donation IDs before pull (to detect new ones)
+          const localE = allEntriesMap[currentJar.jarId] || [];
+          const prevDonationIds = new Set(
+            localE.filter(e => e.type === 'donation_in' || e.type === 'donation').map(e => e.entryId)
+          );
+
           const histData = await apiFetchReal({ query: 'getJarHistory', params: { jarId: currentJar.jarId } });
           const serverEntries = (histData.history || [])
-            .filter(r => r.type === 'entry')
-            .map(e => ({ entryId: e.id, amount: e.amount, note: e.label, createdAt: e.date, synced: true }));
+            .map(e => ({
+              entryId: e.id, amount: e.amount, note: e.label, createdAt: e.date, synced: true,
+              type: e.type || 'entry', icon: e.icon || '💰', contributorName: e.contributorName || '',
+              requestAmount: e.requestAmount || 0, feeRate: e.feeRate || 0, feeAmount: e.feeAmount || 0,
+            }));
           // Filter out entries that are pending local deletion (not yet confirmed by server)
           const stillPendingDel = localPendingDel();
           const pendingDelIds = new Set(stillPendingDel.map(p => p.entryId));
           const filteredServerEntries = serverEntries.filter(e => !pendingDelIds.has(e.entryId));
           // Merge: filtered server entries + still-unsynced local entries (not yet pushed)
-          const localE = allEntriesMap[currentJar.jarId] || [];
           const stillUnsynced = localE.filter(e => !e.synced);
           const merged = [...filteredServerEntries, ...stillUnsynced].sort((a, b) => (b.createdAt > a.createdAt ? 1 : -1));
           saveLocalEntries(currentJar.jarId, merged);
           entryRows = merged;
+
+          // Detect new donation_in entries and show fun popup
+          const newDonations = filteredServerEntries.filter(
+            e => (e.type === 'donation_in' || e.type === 'donation') && !prevDonationIds.has(e.entryId)
+          );
+          if (newDonations.length > 0) {
+            showDonationReceivedPopup(newDonations);
+          }
         } catch { /* use existing local */ }
 
         // Update currentJar from merged data
@@ -582,6 +617,7 @@
       throw err;
     } finally {
       if (syncBtn) { syncBtn.disabled = false; syncBtn.textContent = '서버 동기화'; }
+      if (hdrSync) { hdrSync.classList.remove('syncing'); hdrSync.disabled = false; }
     }
   }
 
@@ -665,18 +701,23 @@
     renderControlSection(jar, entryRows);
     renderHistorySection(jar.jarId);
 
-    // If no local entries for this jar and scriptUrl configured, try loading from server
-    if (entryRows.length === 0 && scriptUrl && !isMock()) {
+    // Pull server history for selected jar (merge with local unsynced)
+    if (scriptUrl && !isMock()) {
       try {
         const histData = await apiFetchReal({ query: 'getJarHistory', params: { jarId: jar.jarId } });
         const serverEntries = (histData.history || [])
-          .filter(r => r.type === 'entry')
-          .map(e => ({ entryId: e.id, amount: e.amount, note: e.label, createdAt: e.date, synced: true }));
-        saveLocalEntries(jar.jarId, serverEntries);
-        entryRows = serverEntries;
+          .map(e => ({
+            entryId: e.id, amount: e.amount, note: e.label, createdAt: e.date, synced: true,
+            type: e.type || 'entry', icon: e.icon || '💰', contributorName: e.contributorName || '',
+            requestAmount: e.requestAmount || 0, feeRate: e.feeRate || 0, feeAmount: e.feeAmount || 0,
+          }));
+        const stillUnsynced = entryRows.filter(e => !e.synced);
+        const merged = [...serverEntries, ...stillUnsynced].sort((a, b) => (b.createdAt > a.createdAt ? 1 : -1));
+        saveLocalEntries(jar.jarId, merged);
+        entryRows = merged;
         renderControlSection(jar, entryRows);
         renderHistorySection(jar.jarId);
-      } catch { /* ignore */ }
+      } catch { /* use existing local */ }
     }
   }
 
@@ -1174,6 +1215,43 @@
     openSheet('historySheet');
   });
 
+  // ── 기부 수신 팝업 (동기화 시 새 기부가 감지되면 표시) ──
+  let _donationQueue = [];
+  function showDonationReceivedPopup(donations) {
+    _donationQueue = donations.slice();
+    _showNextDonation();
+  }
+  function _showNextDonation() {
+    if (_donationQueue.length === 0) return;
+    const d = _donationQueue.shift();
+    const net = Number(d.amount) || 0;
+    const req = Number(d.requestAmount) || 0;
+    const fee = Number(d.feeAmount) || 0;
+    const feePct = Math.round((Number(d.feeRate) || 0) * 100);
+    const from = d.contributorName || '(알 수 없음)';
+    // If we have requestAmount info, show the full breakdown
+    const hasDetail = req > 0;
+    let html = `<div class="dr-recv-img"><img src="./raccoon_boss.jpg" alt="너구리사장"></div>`;
+    html += `<div class="dr-recv-from">💌 <strong>${from}</strong> 에서 기부가 왔어요!</div>`;
+    if (hasDetail) {
+      html += `<div class="dr-row"><span>보낸 금액</span><span>${won(req)}</span></div>`;
+      html += `<div class="dr-row dr-fee"><span>🦝 너구리사장 수수료 (${feePct}%)</span><span>-${won(fee)}</span></div>`;
+      html += `<div class="dr-row dr-net"><span>내 Jar에 도착한 금액</span><span>${won(net)}</span></div>`;
+    } else {
+      html += `<div class="dr-row dr-net"><span>받은 금액</span><span>${won(net)}</span></div>`;
+    }
+    const remaining = _donationQueue.length;
+    if (remaining > 0) {
+      html += `<p class="dr-remaining">${remaining}건의 기부가 더 있어요!</p>`;
+    }
+    $('donateReceivedBody').innerHTML = html;
+    openSheet('donateReceivedSheet');
+  }
+  $('donateReceivedNextBtn').addEventListener('click', () => {
+    closeSheet('donateReceivedSheet');
+    setTimeout(_showNextDonation, 300);
+  });
+
   // ── 기부 버튼 ──
   $('donateBtn').addEventListener('click', () => {
     if (!currentJar) return;
@@ -1206,6 +1284,24 @@
         `<div class="dr-row dr-fee"><span>🦝 너구리사장 수수료 (${feePct}%)</span><span>-${won(res.feeAmount)}</span></div>` +
         `<div class="dr-row dr-net"><span>실제 전달 금액</span><span>${won(res.netAmount)}</span></div>`;
       openSheet('donateResultSheet');
+      // Add donation_out to sender's local history
+      const donOutEntry = {
+        entryId: res.donationId, amount: -amount, note: '기부 발신 (수수료 ' + feePct + '%)',
+        createdAt: new Date().toISOString(), synced: true,
+        type: 'donation_out', icon: '↗️', contributorName: currentJar.name || '',
+      };
+      const myEntries = localEntries(myJar.jarId);
+      myEntries.unshift(donOutEntry);
+      saveLocalEntries(myJar.jarId, myEntries);
+      // Add donation_in to receiver's local history
+      const donInEntry = {
+        entryId: res.donationId + '_in', amount: res.netAmount, note: '기부',
+        createdAt: new Date().toISOString(), synced: true,
+        type: 'donation_in', icon: '🦝', contributorName: myJar.name || '',
+      };
+      const toEntries = localEntries(currentJar.jarId);
+      toEntries.unshift(donInEntry);
+      saveLocalEntries(currentJar.jarId, toEntries);
       // Update my jar's local amount
       myJar.currentAmount = Math.max(0, (Number(myJar.currentAmount) || 0) - amount);
       const jars = localJars();
@@ -1225,22 +1321,31 @@
     const entries = localEntries(jarId);
 
     if (!entries || entries.length === 0) {
-      listEl.innerHTML = '<p class="hist-empty">적립 내역이 없어요.</p>';
+      listEl.innerHTML = '<p class="hist-empty">내역이 없어요.</p>';
       return;
     }
 
-    listEl.innerHTML = entries.map(e =>
-      `<div class="hist-row">
+    listEl.innerHTML = entries.map(e => {
+      const type = e.type || 'entry';
+      const isDonation = type === 'donation' || type === 'donation_in' || type === 'donation_out';
+      const icon = e.icon || (type === 'donation_out' ? '↗️' : type === 'donation' || type === 'donation_in' ? '🦝' : '💰');
+      const amt = Number(e.amount) || 0;
+      const amtSign = amt >= 0 ? '+' : '';
+      const amtClass = amt < 0 ? ' hist-amount-neg' : '';
+      const delBtn = !isDonation
+        ? `<button class="hist-del-btn" data-entry-id="${escHtml(e.entryId)}" data-jar-id="${escHtml(jarId)}" type="button" aria-label="삭제">🗑️</button>`
+        : '';
+      return `<div class="hist-row${isDonation ? ' hist-donation' : ''}">
         <div class="hist-left">
-          <div class="hist-label">${escHtml(displayNote(e.note))}</div>
-          <div class="hist-date">${fmtDate(e.createdAt)}${!e.synced ? ' <span class="hist-pending">●</span>' : ''}</div>
+          <div class="hist-label">${icon} ${escHtml(displayNote(e.note))}</div>
+          <div class="hist-date">${fmtDate(e.createdAt)}${!e.synced ? ' <span class="hist-pending">●</span>' : ''}${e.contributorName ? ' · ' + escHtml(e.contributorName) : ''}</div>
         </div>
         <div class="hist-right">
-          <div class="hist-amount">+${won(e.amount)}</div>
-          <button class="hist-del-btn" data-entry-id="${escHtml(e.entryId)}" data-jar-id="${escHtml(jarId)}" type="button" aria-label="삭제">🗑️</button>
+          <div class="hist-amount${amtClass}">${amtSign}${won(Math.abs(amt))}</div>
+          ${delBtn}
         </div>
-      </div>`
-    ).join('');
+      </div>`;
+    }).join('');
 
     listEl.querySelectorAll('.hist-del-btn').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -1426,6 +1531,54 @@
 
     updateLastSyncDisplay();
   }
+
+  // ── 홈 화면에 추가 (A2HS / PWA install) — CMPA-872 ──
+  const isStandalone = () =>
+    (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) ||
+    window.navigator.standalone === true;
+  const isIOS = () =>
+    /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
+
+  let deferredPrompt = null;
+  function showInstallBtn(show){
+    const btn = $('installBtn'); const div = $('settInstallDivider'); const sec = $('settInstallSection');
+    if (btn) btn.hidden = !show;
+    if (div) div.hidden = !show;
+    if (sec) sec.hidden = !show;
+  }
+  (function setupInstall(){
+    const btn = $('installBtn');
+    if (!btn) return;
+    if (isStandalone()) { showInstallBtn(false); return; }
+
+    window.addEventListener('beforeinstallprompt', e => {
+      e.preventDefault();
+      deferredPrompt = e;
+      showInstallBtn(true);
+    });
+
+    if (isIOS()) showInstallBtn(true);
+
+    btn.addEventListener('click', async () => {
+      if (deferredPrompt){
+        deferredPrompt.prompt();
+        let outcome = 'dismissed';
+        try { ({ outcome } = await deferredPrompt.userChoice); } catch(e){}
+        deferredPrompt = null;
+        showInstallBtn(false);
+        if (outcome === 'accepted') toast('홈 화면에 추가했어요');
+      } else if (isIOS()){
+        openSheet('iosInstallSheet');
+      }
+    });
+
+    window.addEventListener('appinstalled', () => {
+      deferredPrompt = null;
+      showInstallBtn(false);
+      closeSheet('iosInstallSheet');
+      toast('홈 화면에 추가됐어요');
+    });
+  })();
 
   // ── 진입점 ──
   if (!userId) {

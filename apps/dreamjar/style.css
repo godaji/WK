@@ -113,6 +113,8 @@ input, select { font-family: inherit; }
   display: flex; align-items: center; justify-content: center;
 }
 .btn-icon:active { transform: scale(.92); }
+.btn-icon.syncing { animation: spin 1s linear infinite; pointer-events: none; opacity: .6; }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
 /* ── 스크롤 영역 ── */
 .main-scroll {
