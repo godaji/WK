@@ -172,6 +172,71 @@ input, select { font-family: inherit; }
   font-size: 13px; font-weight: 800; color: var(--accent2);
   white-space: nowrap; flex: none;
 }
+/* ── 이번주/이번달/전체 게이지 그리드 ── */
+.jar-gauge-grid { margin-bottom: 10px; }
+.jar-gauge-grid:empty { display: none; margin: 0; }
+.gauge-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.gauge-item {
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 10px 8px 8px;
+  text-align: center;
+}
+.gauge-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.gauge-amount {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--accent2);
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.gauge-bar-wrap {
+  height: 4px;
+  background: var(--card2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.gauge-bar {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transition: width .4s ease;
+}
+.gauge-pred {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: rgba(124, 111, 247, .08);
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--accent2);
+}
+.gauge-pred.achieved {
+  color: #f5d47b;
+  background: rgba(245, 212, 123, .10);
+}
+.gauge-pred-date {
+  font-weight: 700;
+}
+.gauge-pred-days {
+  font-weight: 600;
+  color: var(--muted);
+}
+
 .jar-prediction {
   font-size: 13px; color: var(--accent2);
   background: rgba(124, 111, 247, .12);

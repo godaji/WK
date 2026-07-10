@@ -429,7 +429,9 @@
     try {
       await apiFetch({ action: 'joinJar', params: { jarId, userId } });
       $('joinJarId').value = '';
-      toast('참여했습니다! 동기화 버튼으로 데이터를 불러오세요.');
+      toast('참여 완료! 데이터를 불러옵니다…');
+      await syncWithServer(true);
+      toast('참여했습니다!');
     } catch (err) {
       toast('참여 실패: ' + err.message);
     } finally {
@@ -508,10 +510,31 @@
       }
       savePendingDel(remainingDel);
 
-      // 3. Pull fresh jars from server
+      // 3. Pull fresh jars from server & merge with local state
       const freshJars = await apiFetchReal({ query: 'getJarsByUser', params: { userId } }) || [];
-      saveLocalJars(freshJars);
-      cachedJars = activeJars(freshJars);
+
+      // Re-apply pending archive flags: if a jar was locally deleted but
+      // the server hasn't processed it yet, keep it archived locally.
+      const stillPendingArchive = localPendingArchive();
+      const pendingArchiveIds = new Set(stillPendingArchive.map(p => p.jarId));
+
+      // Merge: preserve local archived state for jars with pending archive,
+      // and preserve pending control changes not yet pushed.
+      const prevLocal = localJars();
+      const mergedJars = freshJars.map(sj => {
+        if (pendingArchiveIds.has(sj.jarId)) {
+          const localJ = prevLocal.find(l => l.jarId === sj.jarId);
+          return { ...sj, archived: true, archivedAt: (localJ && localJ.archivedAt) || new Date().toISOString() };
+        }
+        const pendingCtrlForJar = localPendingCtrl().find(p => p.jarId === sj.jarId);
+        if (pendingCtrlForJar) {
+          return { ...sj, controlId: pendingCtrlForJar.controlId };
+        }
+        return sj;
+      });
+
+      saveLocalJars(mergedJars);
+      cachedJars = activeJars(mergedJars);
 
       // 4. For active jar, pull server history and merge
       if (currentJar) {
@@ -528,9 +551,9 @@
           entryRows = merged;
         } catch { /* use existing local */ }
 
-        // Update currentJar from server
-        const fresh = freshJars.find(j => j.jarId === currentJar.jarId);
-        if (fresh) {
+        // Update currentJar from merged data
+        const fresh = mergedJars.find(j => j.jarId === currentJar.jarId);
+        if (fresh && !fresh.archived) {
           const unsyncedSum = localEntries(currentJar.jarId)
             .filter(e => !e.synced)
             .reduce((s, e) => s + (Number(e.amount) || 0), 0);
@@ -547,7 +570,7 @@
       if (!silent) toast('동기화 완료!');
 
       // If we were in empty state, now we have data — re-init
-      if (!currentJar && freshJars.length > 0) {
+      if (!currentJar && cachedJars.length > 0) {
         await initApp();
       }
     } catch (err) {
@@ -736,14 +759,78 @@
       $('mainJarProgressBar').style.width = pct + '%';
       $('mainJarProgressPct').textContent = pct + '%';
       $('mainJarProgressWrap').hidden = false;
-      const pred = computePrediction(jar);
-      const predEl = $('mainJarPrediction');
-      predEl.textContent = pred;
-      predEl.className = 'jar-prediction' + (cur >= goal ? ' achieved' : '');
+      renderGaugeGrid(jar);
+      // 예상 달성일은 gauge-pred에서 표시하므로 jar-prediction 숨김
+      $('mainJarPrediction').textContent = '';
+      $('mainJarPrediction').className = 'jar-prediction';
     } else {
       $('mainJarProgressWrap').hidden = true;
+      $('mainJarGaugeGrid').innerHTML = '';
       $('mainJarPrediction').textContent = '';
     }
+  }
+
+  /** 이번주/이번달/전체 적립 게이지 + 예상 달성일 렌더 */
+  function renderGaugeGrid(jar) {
+    const entries = localEntries(jar.jarId);
+    const now = new Date();
+
+    // 이번주 (월~일) 시작
+    const dayOfWeek = now.getDay(); // 0=Sun
+    const mondayOffset = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+    const weekStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - mondayOffset);
+
+    // 이번달 시작
+    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+
+    let weekTotal = 0, monthTotal = 0, allTotal = 0;
+    for (const e of entries) {
+      const amt = Number(e.amount) || 0;
+      allTotal += amt;
+      if (!e.createdAt) continue;
+      const d = new Date(e.createdAt);
+      if (d >= monthStart) monthTotal += amt;
+      if (d >= weekStart)  weekTotal  += amt;
+    }
+
+    const goal = Number(jar.goalAmount) || 0;
+    const cur  = Number(jar.currentAmount) || 0;
+
+    // 예상 달성일 계산 (최근 7일 기반)
+    let predHtml = '';
+    if (cur < goal) {
+      const recentTotal = Number(jar.recentSevenDayTotal) || 0;
+      if (recentTotal > 0) {
+        const dailyAvg = recentTotal / 7;
+        const remaining = goal - cur;
+        const daysNeeded = Math.ceil(remaining / dailyAvg);
+        const targetDate = new Date(Date.now() + daysNeeded * 86400000);
+        const dateStr = `${targetDate.getFullYear()}-${String(targetDate.getMonth()+1).padStart(2,'0')}-${String(targetDate.getDate()).padStart(2,'0')}`;
+        predHtml = `<div class="gauge-pred">` +
+          `<span class="gauge-pred-date">${dateStr}</span>` +
+          `<span class="gauge-pred-days">${daysNeeded}일 남음</span>` +
+          `</div>`;
+      }
+    } else {
+      predHtml = `<div class="gauge-pred achieved"><span class="gauge-pred-date">달성 완료!</span></div>`;
+    }
+
+    const gaugeItem = (label, amount, pctOfGoal) => {
+      const pct = goal > 0 ? Math.min(100, Math.round(pctOfGoal / goal * 100)) : 0;
+      return `<div class="gauge-item">` +
+        `<div class="gauge-label">${label}</div>` +
+        `<div class="gauge-amount">${won(amount)}</div>` +
+        `<div class="gauge-bar-wrap"><div class="gauge-bar" style="width:${pct}%"></div></div>` +
+        `</div>`;
+    };
+
+    $('mainJarGaugeGrid').innerHTML =
+      `<div class="gauge-grid">` +
+        gaugeItem('이번주', weekTotal, weekTotal) +
+        gaugeItem('이번달', monthTotal, monthTotal) +
+        gaugeItem('전체', allTotal, allTotal) +
+      `</div>` +
+      predHtml;
   }
 
   function computePrediction(jar) {
