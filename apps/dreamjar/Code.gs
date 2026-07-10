@@ -148,16 +148,28 @@ function handleCreateJar(p) {
 
 /** jar_members 에 멤버 추가 (role=member) */
 function handleJoinJar(p) {
+  var jarId = p.jarId || '';
+  if (!jarId) return jsonErr('jarId 필요');
+  var allJars = readAll(SHEET.JARS);
+  var jar = allJars.find(function(j) { return j.jarId === jarId; });
+  if (!jar) return jsonErr('존재하지 않는 Jar입니다');
+  if (jar.archived === true || jar.archived === 'TRUE' || jar.archived === 'true') {
+    return jsonErr('삭제된 Jar입니다');
+  }
+  var members = readAll(SHEET.JAR_MEMBERS);
+  var existing = members.find(function(m) { return m.jarId === jarId && m.userId === (p.userId || ''); });
+  if (existing) return jsonErr('이미 참여 중인 Jar입니다');
+
   var memberId = newId('m');
   appendRow(SHEET.JAR_MEMBERS, {
     memberId:  memberId,
-    jarId:     p.jarId || '',
+    jarId:     jarId,
     userId:    p.userId || '',
     role:      'member',
     controlId: '',
     joinedAt:  now(),
   });
-  return jsonOk({ memberId: memberId });
+  return jsonOk({ memberId: memberId, jarName: jar.name || '' });
 }
 
 /** jar_members 에서 특정 멤버의 controlId 갱신

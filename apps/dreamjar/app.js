@@ -429,7 +429,9 @@
     try {
       await apiFetch({ action: 'joinJar', params: { jarId, userId } });
       $('joinJarId').value = '';
-      toast('참여했습니다! 동기화 버튼으로 데이터를 불러오세요.');
+      toast('참여 완료! 데이터를 불러옵니다…');
+      await syncWithServer(true);
+      toast('참여했습니다!');
     } catch (err) {
       toast('참여 실패: ' + err.message);
     } finally {
