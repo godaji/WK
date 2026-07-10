@@ -1,0 +1,13 @@
+{
+  "name": "DreamJar2 — 함께 모으는 저금통",
+  "short_name": "DreamJar2",
+  "description": "함께 모으는 드림 저금통 — 단일 화면으로 Jar와 Control을 한눈에.",
+  "lang": "ko",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f0f1a",
+  "theme_color": "#1a1a2e",
+  "icons": []
+}

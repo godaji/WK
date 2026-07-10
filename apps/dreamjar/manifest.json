@@ -1,0 +1,13 @@
+{
+  "name": "DreamJar — 함께 모으는 저금통",
+  "short_name": "DreamJar",
+  "description": "함께 모으는 드림 저금통 — Jar를 만들고, 적립하고, 목표를 함께 이뤄요.",
+  "lang": "ko",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f0f1a",
+  "theme_color": "#1a1a2e",
+  "icons": []
+}

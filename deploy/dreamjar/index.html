@@ -86,6 +86,19 @@
       </div>
       <button id="earnSubmitBtn" class="btn-cta" type="button">적립하기</button>
     </div>
+
+    <!-- 컨트롤 섹션: Jar 선택 시 표시 -->
+    <div id="earnControlSection" hidden style="margin-top:20px;padding:0 4px">
+      <div class="jd-section-title">내 Control</div>
+      <div class="jd-ctrl-row">
+        <span id="earnCtrlName" class="jd-ctrl-name">선택 안 됨</span>
+        <button id="earnCtrlChangeBtn" class="jd-ctrl-btn" type="button">변경</button>
+      </div>
+      <div id="earnCtrlRewardSection" hidden>
+        <div class="jd-section-title" style="margin-top:16px">보상 항목</div>
+        <div id="earnCtrlRewardList" class="jd-reward-list"></div>
+      </div>
+    </div>
   </div>
 
   <div id="tabSettings" class="tab-content" hidden>

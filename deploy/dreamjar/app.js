@@ -8,6 +8,7 @@
   // ── 스토리지 키 ──
   const KEY_USER_ID   = 'dreamjar.userId';
   const KEY_SCRIPT_URL = 'dreamjar.scriptUrl';
+  const KEY_EARN_JAR   = 'dreamjar.earnJarId';
 
   // ── 상태 ──
   let userId    = localStorage.getItem(KEY_USER_ID) || '';
@@ -163,7 +164,9 @@
         try {
           const histData = await apiFetch({ query: 'getJarHistory', params: { jarId: state.jarId } });
           renderJarHistory((histData && histData.history) || []);
-          renderControlSection(currentJar, (histData && histData.history || []).filter(r => r.type === 'entry'));
+          const _undoRows = (histData && histData.history || []).filter(r => r.type === 'entry');
+          renderControlSection(currentJar, _undoRows);
+          renderEarnControlSection(currentJar, _undoRows);
         } catch { /* 무시 */ }
       } catch (err) {
         toast('되돌리기 실패: ' + err.message);
@@ -349,9 +352,10 @@
       return Promise.resolve({ deleted: false });
     }
 
-    // S4: setControl — 멤버의 Control 설정
+    // S4: setControl — 멤버의 Control 설정 (memberId 없으면 jarId로 폴백)
     if (action === 'setControl') {
-      const j = MOCK_JARS.find(m => m.memberId === params.memberId);
+      let j = params.memberId ? MOCK_JARS.find(m => m.memberId === params.memberId) : null;
+      if (!j && params.jarId) j = MOCK_JARS.find(m => m.jarId === params.jarId);
       if (j) j.controlId = params.controlId || '';
       return Promise.resolve({ updated: true });
     }
@@ -677,9 +681,16 @@ ${predHtml}`;
   });
 
   // ── 적립 탭 ──
-  function populateEarnSelect() {
+  async function populateEarnSelect() {
+    // 캐시가 비어 있으면 서버에서 로드 (탭 전환 시 홈을 방문하지 않은 경우 대비)
+    if (cachedJars.length === 0) {
+      try {
+        const jars = await apiFetch({ query: 'getJarsByUser', params: { userId } });
+        cachedJars = jars;
+      } catch { /* 무시 */ }
+    }
     const sel = $('earnJarSelect');
-    const prev = sel.value;
+    const prev = sel.value || localStorage.getItem(KEY_EARN_JAR) || '';
     sel.innerHTML = '<option value="">— Jar를 선택하세요 —</option>';
     cachedJars.forEach(jar => {
       const opt = document.createElement('option');
@@ -688,6 +699,47 @@ ${predHtml}`;
       sel.appendChild(opt);
     });
     if (prev) sel.value = prev;
+    onEarnJarChange(sel.value);
+  }
+
+  // Jar 선택 변경 시: localStorage 저장 + 컨트롤 섹션 갱신
+  $('earnJarSelect').addEventListener('change', () => {
+    onEarnJarChange($('earnJarSelect').value);
+  });
+
+  function onEarnJarChange(jarId) {
+    if (jarId) {
+      localStorage.setItem(KEY_EARN_JAR, jarId);
+      const jar = cachedJars.find(j => j.jarId === jarId);
+      if (jar) {
+        currentJar = jar;
+        $('earnControlSection').hidden = false;
+        renderEarnControlSection(jar, []);
+      }
+    } else {
+      $('earnControlSection').hidden = true;
+    }
+  }
+
+  // 적립 탭 컨트롤 섹션 렌더 (earn tab 전용 DOM 타깃)
+  function renderEarnControlSection(jar, entries) {
+    if (!jar) return;
+    const ctrl    = ADMIN_CONTROLS.find(c => c.controlId === jar.controlId);
+    const nameEl  = $('earnCtrlName');
+    const rewardSec = $('earnCtrlRewardSection');
+    if (!nameEl) return;
+    if (ctrl) {
+      nameEl.textContent = ctrl.emoji + ' ' + ctrl.name;
+      if (rewardSec) rewardSec.hidden = false;
+      renderRewardButtons(ctrl, entries || [], $('earnCtrlRewardList'));
+    } else {
+      nameEl.textContent = '선택 안 됨';
+      if (rewardSec) rewardSec.hidden = true;
+    }
+  }
+
+  if ($('earnCtrlChangeBtn')) {
+    $('earnCtrlChangeBtn').addEventListener('click', openControlPicker);
   }
 
   $('earnSubmitBtn').addEventListener('click', async () => {
@@ -865,7 +917,7 @@ ${predHtml}`;
     }
   }
 
-  function renderRewardButtons(ctrl, entries) {
+  function renderRewardButtons(ctrl, entries, listEl) {
     // [item_id] 패턴으로 once 아이템 적립 여부 판단
     const claimedIds = new Set();
     (entries || []).forEach(e => {
@@ -896,7 +948,7 @@ ${predHtml}`;
         `</button>`;
     }).join('');
 
-    const listEl = $('jdRewardList');
+    if (!listEl) listEl = $('jdRewardList');
     if (!listEl) return;
     listEl.innerHTML = html;
     listEl.querySelectorAll('.reward-btn:not([disabled])').forEach(btn => {
@@ -945,16 +997,18 @@ ${predHtml}`;
   async function onControlSelect(controlId) {
     const jar = currentJar;
     if (!jar) return;
-    const memberId = jar.memberId;
-    if (!memberId) { toast('멤버 정보가 없어요. Jar를 다시 열어보세요.'); return; }
+    const memberId = jar.memberId || '';
     try {
-      await apiFetch({ action: 'setControl', params: { memberId, controlId } });
+      // memberId가 비어 있는 구형 Jar 대비: jarId + userId를 같이 전달해 백엔드가 자동 처리
+      await apiFetch({ action: 'setControl', params: { memberId, controlId, jarId: jar.jarId, userId } });
       jar.controlId = controlId;
       const cached = cachedJars.find(j => j.jarId === jar.jarId);
       if (cached) cached.controlId = controlId;
       closeSheet('controlPickerSheet');
       const rows = cachedEntries[jar.jarId] || [];
-      renderControlSection(jar, rows.filter(r => r.type === 'entry'));
+      const entryRows = rows.filter(r => r.type === 'entry');
+      renderControlSection(jar, entryRows);
+      renderEarnControlSection(jar, entryRows);
       toast('Control을 설정했어요.');
     } catch (err) {
       toast('설정 실패: ' + err.message);
@@ -975,7 +1029,9 @@ ${predHtml}`;
       try {
         const histData = await apiFetch({ query: 'getJarHistory', params: { jarId: jar.jarId } });
         renderJarHistory((histData && histData.history) || []);
-        renderControlSection(jar, (histData && histData.history || []).filter(r => r.type === 'entry'));
+        const _entryRows = (histData && histData.history || []).filter(r => r.type === 'entry');
+        renderControlSection(jar, _entryRows);
+        renderEarnControlSection(jar, _entryRows);
         cachedEntries[jar.jarId] = (histData && histData.history) || [];
       } catch { /* 무시 */ }
     } catch (err) {
@@ -1125,7 +1181,9 @@ ${predHtml}`;
         try {
           const histData = await apiFetch({ query: 'getJarHistory', params: { jarId: jar.jarId } });
           renderJarHistory((histData && histData.history) || []);
-          renderControlSection(jar, (histData && histData.history || []).filter(r => r.type === 'entry'));
+          const _confirmRows = (histData && histData.history || []).filter(r => r.type === 'entry');
+          renderControlSection(jar, _confirmRows);
+          renderEarnControlSection(jar, _confirmRows);
           cachedEntries[jar.jarId] = (histData && histData.history) || [];
         } catch { /* 실패 무시 */ }
       } catch (err) {
@@ -1152,12 +1210,11 @@ ${predHtml}`;
 
   // ── 앱 초기화 ──
   function initApp() {
-    // Mock 모드 배너 (개발 시 확인용, 조용하게)
     if (isMock()) {
       console.info('[DreamJar] Apps Script URL 미설정 → 샘플 데이터 모드');
     }
-
-    // 첫 탭 로드
+    // activeTab 초기값이 'tabHome'이면 switchTab이 early return하여 loadJarList를 건너뜀 — 리셋 후 호출
+    activeTab = '';
     switchTab('tabHome');
   }
 

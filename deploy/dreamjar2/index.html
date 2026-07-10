@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<!-- 모바일 우선: 360~390px. viewport-fit=cover + safe-area -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#1a1a2e">
+<meta name="description" content="함께 모으는 드림 저금통 — 단일 화면으로 Jar와 Control을 한눈에.">
+<title>DreamJar2 — 함께 모으는 저금통</title>
+<link rel="manifest" href="./manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="DreamJar2">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<!-- ===== 초기 설정 화면 (userId 미입력 시) ===== -->
+<div id="setupScreen" class="setup-screen" hidden>
+  <div class="setup-inner">
+    <div class="setup-logo">🫙</div>
+    <h1 class="setup-title">DreamJar2</h1>
+    <p class="setup-desc">함께 모으는 저금통.<br>시작하기 전에 사용자 ID를 설정하세요.</p>
+    <div class="setup-form">
+      <label class="sf-label" for="setupUserId">사용자 ID</label>
+      <input id="setupUserId" class="sf-input" type="text"
+        placeholder="예: hong-gildong-01" autocomplete="off" maxlength="40">
+      <p class="sf-hint">공백 없이 영문·숫자·하이픈만 사용하세요.</p>
+      <label class="sf-label" for="setupScriptUrl">Apps Script URL <span class="sf-optional">(선택)</span></label>
+      <input id="setupScriptUrl" class="sf-input" type="url"
+        placeholder="https://script.google.com/macros/s/…/exec" autocomplete="off">
+      <p class="sf-hint">나중에 설정해도 됩니다. 없으면 샘플 데이터로 미리 볼 수 있어요.</p>
+      <button id="setupSaveBtn" class="sf-save" type="button">시작하기</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 메인 앱 (단일 화면) ===== -->
+<div id="mainApp" hidden>
+
+  <!-- 헤더 -->
+  <div class="app-header">
+    <span class="app-header-title">🫙 DreamJar2</span>
+    <button class="btn-icon" id="settingsBtn" type="button" title="설정">⚙️</button>
+  </div>
+
+  <!-- 스크롤 영역 -->
+  <div class="main-scroll">
+
+    <!-- JAR 섹션 -->
+    <div class="section-card" id="jarSection">
+      <div class="section-label">JAR</div>
+
+      <!-- Jar 선택됨 -->
+      <div id="jarDisplay" hidden>
+        <div class="jar-title-row">
+          <span class="jar-name" id="mainJarName">—</span>
+          <button class="btn-change" id="jarChangeBtn" type="button">변경</button>
+        </div>
+        <div class="jar-amounts" id="mainJarAmounts">
+          <span class="jar-cur" id="mainJarCur">0원</span>
+          <span class="jar-sep"> / </span>
+          <span class="jar-goal" id="mainJarGoal">—</span>
+        </div>
+        <div class="jar-progress-wrap" id="mainJarProgressWrap" hidden>
+          <div class="jar-progress">
+            <div class="jar-progress-bar" id="mainJarProgressBar" style="width:0%"></div>
+          </div>
+          <span class="jar-progress-pct" id="mainJarProgressPct">0%</span>
+        </div>
+        <div class="jar-prediction" id="mainJarPrediction"></div>
+      </div>
+
+      <!-- Jar 없음 -->
+      <div id="jarEmpty" hidden>
+        <p class="jar-empty-msg">아직 Jar가 없어요.</p>
+        <button class="btn-cta" id="jarCreateBtnEmpty" type="button">Jar 만들기</button>
+      </div>
+
+      <!-- 로딩 중 -->
+      <div id="jarLoading">
+        <p class="jar-loading-msg">불러오는 중…</p>
+      </div>
+    </div>
+
+    <!-- CONTROL 섹션 -->
+    <div class="section-card" id="controlSection">
+      <div class="section-label">CONTROL</div>
+
+      <!-- Control 선택됨 -->
+      <div id="controlDisplay" hidden>
+        <div class="ctrl-title-row">
+          <span class="ctrl-name" id="mainCtrlName">—</span>
+          <button class="btn-change" id="ctrlChangeBtn" type="button">변경</button>
+        </div>
+        <div id="mainRewardSection" hidden>
+          <div class="reward-list" id="mainRewardList"></div>
+        </div>
+      </div>
+
+      <!-- Control 미선택 -->
+      <div id="controlEmpty" hidden>
+        <p class="ctrl-empty-msg">먼저 Jar를 선택하세요.</p>
+      </div>
+    </div>
+
+  </div><!-- /main-scroll -->
+</div><!-- /mainApp -->
+
+<!-- ===== 토스트 ===== -->
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<!-- ===== 되돌리기 토스트 (S4 즉시 적립 후 5초 undo) ===== -->
+<div class="undo-toast" id="undoToast" hidden>
+  <span class="undo-toast-label" id="undoToastLabel"></span>
+  <button class="undo-toast-btn" id="undoToastBtn" type="button"></button>
+</div>
+
+<!-- ===== 설정 시트 ===== -->
+<div class="sheet-backdrop" id="settingsSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="설정">
+    <div class="sheet-head">
+      <span>설정</span>
+      <button class="sheet-close" data-close="settingsSheet" type="button">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div class="sett-section">
+        <div class="sett-section-title">계정</div>
+        <div class="sett-field">
+          <label class="sett-label" for="settUserId">사용자 ID</label>
+          <input id="settUserId" class="sett-input" type="text" autocomplete="off" maxlength="40">
+        </div>
+      </div>
+      <div class="sett-section">
+        <div class="sett-section-title">연동</div>
+        <div class="sett-field">
+          <label class="sett-label" for="settScriptUrl">Apps Script URL</label>
+          <input id="settScriptUrl" class="sett-input" type="url"
+            placeholder="https://script.google.com/macros/s/…/exec" autocomplete="off">
+        </div>
+        <p class="sett-hint">비워 두면 샘플 데이터로 동작합니다.</p>
+      </div>
+      <button id="settSaveBtn" class="btn-cta" type="button">저장</button>
+
+      <div class="sett-divider"></div>
+
+      <div class="sett-section">
+        <div class="sett-section-title">내 Jar 목록</div>
+        <div id="settJarList" class="sett-jar-list">
+          <p class="sett-jar-loading">불러오는 중…</p>
+        </div>
+        <div class="join-section">
+          <div class="join-section-title">다른 Jar에 참여</div>
+          <div class="join-row">
+            <input id="joinJarId" class="join-input" type="text"
+              placeholder="Jar ID 입력" autocomplete="off" maxlength="80">
+            <button id="joinJarBtn" class="btn-join" type="button">참여</button>
+          </div>
+        </div>
+        <button class="btn-cta" id="createJarBtnSettings" type="button" style="margin-top:14px">새 Jar 만들기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Jar 선택 시트 ===== -->
+<div class="sheet-backdrop" id="jarPickerSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="Jar 선택">
+    <div class="sheet-head">
+      <span>Jar 선택</span>
+      <button class="sheet-close" data-close="jarPickerSheet" type="button">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div id="jarPickerList" class="jar-picker-list"></div>
+      <button class="btn-cta" id="createJarBtnPicker" type="button" style="margin-top:14px">새 Jar 만들기</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Jar 만들기 시트 ===== -->
+<div class="sheet-backdrop" id="createJarSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="Jar 만들기">
+    <div class="sheet-head">
+      <span>새 Jar 만들기</span>
+      <button class="sheet-close" data-close="createJarSheet" type="button">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div class="cj-field">
+        <label class="cj-label" for="cjName">Jar 이름</label>
+        <input id="cjName" class="cj-input" type="text" placeholder="예: 제주 여행 경비" maxlength="60" autocomplete="off">
+      </div>
+      <div class="cj-field">
+        <label class="cj-label" for="cjGoal">목표금액 <span class="cj-unit">원</span></label>
+        <input id="cjGoal" class="cj-input" type="number" placeholder="예: 500000"
+          min="1" inputmode="numeric">
+      </div>
+      <div class="cj-field">
+        <label class="cj-label" for="cjDesc">설명 <span class="cj-optional">(선택)</span></label>
+        <input id="cjDesc" class="cj-input" type="text" placeholder="어떤 목표인가요?" maxlength="120" autocomplete="off">
+      </div>
+      <button id="cjSaveBtn" class="btn-cta" type="button">만들기</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Control 선택 시트 ===== -->
+<div class="sheet-backdrop" id="controlPickerSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="Control 선택">
+    <div class="sheet-head">
+      <span>Control 선택</span>
+      <button class="sheet-close" data-close="controlPickerSheet" type="button">✕</button>
+    </div>
+    <div class="sheet-body" id="controlPickerList">
+      <button class="cp-item" data-control-id="ctrl_ca" type="button">
+        <span class="cp-emoji">⭐</span>
+        <span class="cp-body">
+          <span class="cp-name">DaeunControl</span>
+          <span class="cp-desc">학업·루틴·마일스톤 달성 보상</span>
+        </span>
+      </button>
+      <button class="cp-item" data-control-id="ctrl_cb" type="button">
+        <span class="cp-emoji">💰</span>
+        <span class="cp-body">
+          <span class="cp-name">DadControl</span>
+          <span class="cp-desc">일상 절약 행동 보상</span>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 티어 선택 시트 ===== -->
+<div class="sheet-backdrop" id="tierPickerSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="달성 수준 선택">
+    <div class="sheet-head">
+      <span id="tierPickerTitle">달성 수준 선택</span>
+      <button class="sheet-close" data-close="tierPickerSheet" type="button">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div id="tierBtnList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 점수 입력 시트 ===== -->
+<div class="sheet-backdrop" id="scoreInputSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="점수 입력">
+    <div class="sheet-head">
+      <span id="scorePickerTitle">점수 입력</span>
+      <button class="sheet-close" data-close="scoreInputSheet" type="button">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div class="si-field">
+        <label class="si-label">점수 (0–100)</label>
+        <input id="scoreInput" class="si-input" type="number" min="0" max="100"
+          inputmode="decimal" placeholder="예: 92" autocomplete="off">
+        <p class="si-hint">입력한 점수에 맞는 구간 보상금액이 자동 계산됩니다.</p>
+      </div>
+      <button id="scoreSubmitBtn" class="btn-cta" type="button">구간 계산 후 적립</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 루틴 적립 시트 (날짜 / 세션) ===== -->
+<div class="sheet-backdrop" id="routineSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="루틴 적립">
+    <div class="sheet-head">
+      <span id="routinePickerTitle">루틴 적립</span>
+      <button class="sheet-close" data-close="routineSheet" type="button">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div class="rt-tabs" id="rtTabs">
+        <button class="rt-tab-btn active" data-rt-tab="rt-today" type="button">오늘</button>
+        <button class="rt-tab-btn" data-rt-tab="rt-date" type="button">날짜 선택</button>
+        <button class="rt-tab-btn" data-rt-tab="rt-session" type="button">세션</button>
+      </div>
+      <!-- 오늘 탭 -->
+      <div class="rt-tab-content" data-rt-tab="rt-today">
+        <p class="rt-desc" id="rtTodayDesc"></p>
+        <button id="routineTodayBtn" class="btn-cta" type="button">오늘 날짜로 적립</button>
+      </div>
+      <!-- 날짜 선택 탭 -->
+      <div class="rt-tab-content" data-rt-tab="rt-date" hidden>
+        <label class="si-label">날짜 선택</label>
+        <input id="routineDateInput" type="date" class="si-input" style="width:100%;margin-bottom:14px">
+        <button id="routineDateConfirm" class="btn-cta" type="button">이 날짜로 적립</button>
+      </div>
+      <!-- 세션 탭 -->
+      <div class="rt-tab-content" data-rt-tab="rt-session" hidden>
+        <p class="si-label">세션 수</p>
+        <div class="session-wrap">
+          <button id="sessionDecBtn" class="session-adj" type="button">−</button>
+          <span id="sessionCount" class="session-num">1</span>
+          <button id="sessionIncBtn" class="session-adj" type="button">＋</button>
+        </div>
+        <button id="sessionConfirmBtn" class="btn-cta" type="button">세션 적립</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 적립 확인 시트 ===== -->
+<div class="sheet-backdrop" id="entryConfirmSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="적립 확인">
+    <div class="sheet-head">
+      <span>적립 확인</span>
+      <button class="sheet-close" data-close="entryConfirmSheet" type="button">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div class="ec-wrap">
+        <div class="ec-item-label" id="confirmLabel"></div>
+        <div class="ec-amount" id="confirmAmount"></div>
+      </div>
+      <button id="entryConfirmBtn" class="btn-cta" type="button">적립하기</button>
+    </div>
+  </div>
+</div>
+
+<script src="./app.js"></script>
+</body>
+</html>
