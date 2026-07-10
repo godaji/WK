@@ -391,6 +391,24 @@
     openSheet('settingsSheet');
   });
 
+  $('logoutBtn').addEventListener('click', () => {
+    if (!confirm('로그아웃하시겠습니까?\n로컬 데이터가 모두 삭제됩니다.')) return;
+    // localStorage에서 dreamjar 관련 키 모두 삭제
+    [KEY_USER_ID, KEY_SCRIPT_URL, KEY_ACTIVE_JAR, KEY_JARS, KEY_ENTRIES,
+     KEY_PENDING_DEL, KEY_PENDING_CTRL, KEY_PENDING_ARCHIVE, KEY_LAST_SYNC
+    ].forEach(k => localStorage.removeItem(k));
+    // 캐시 초기화
+    cachedJars = [];
+    currentJar = null;
+    entryRows  = [];
+    userId     = '';
+    scriptUrl  = DEFAULT_SCRIPT_URL;
+    // 설정 시트 닫고 초기 설정 화면으로
+    closeSheet('settingsSheet');
+    showSetup();
+    toast('로그아웃했어요.');
+  });
+
   $('settSaveBtn').addEventListener('click', () => {
     const newId  = $('settUserId').value.trim();
     const newUrl = $('settScriptUrl').value.trim();
@@ -611,6 +629,10 @@
       // If we were in empty state, now we have data — re-init
       if (!currentJar && cachedJars.length > 0) {
         await initApp();
+      } else if (!currentJar && cachedJars.length === 0) {
+        // 서버에도 jar가 없음 — 빈 상태 표시
+        $('jarLoading').hidden = true;
+        $('jarEmpty').hidden   = false;
       }
     } catch (err) {
       if (!silent) toast('동기화 실패: ' + err.message);
@@ -773,7 +795,7 @@
     updateJarDisplay(jar);
 
     const isOwned = jar.ownerId === userId;
-    $('historyBtn').hidden = !isOwned;
+    $('historyBtn').hidden = false;
     $('donateBtn').hidden  = isOwned;
 
     // Show sync info for joined jars
@@ -1295,7 +1317,8 @@
       saveLocalEntries(myJar.jarId, myEntries);
       // Add donation_in to receiver's local history
       const donInEntry = {
-        entryId: res.donationId + '_in', amount: res.netAmount, note: '기부',
+        entryId: res.donationId + '_in', amount: res.netAmount,
+        note: `기부(${won(amount)}, 수수료${Math.round((res.feeRate || 0) * 100)}%)`,
         createdAt: new Date().toISOString(), synced: true,
         type: 'donation_in', icon: '🦝', contributorName: myJar.name || '',
         requestAmount: amount, feeRate: res.feeRate || 0, feeAmount: res.feeAmount || 0,
@@ -1334,7 +1357,8 @@
       const amt = Number(e.amount) || 0;
       const amtSign = amt >= 0 ? '+' : '';
       const amtClass = amt < 0 ? ' hist-amount-neg' : '';
-      const delBtn = !isDonation
+      const isOwnedJar = currentJar && currentJar.ownerId === userId;
+      const delBtn = !isDonation && isOwnedJar
         ? `<button class="hist-del-btn" data-entry-id="${escHtml(e.entryId)}" data-jar-id="${escHtml(jarId)}" type="button" aria-label="삭제">🗑️</button>`
         : '';
       // 기부 수신 내역: "기부(원래금액, 수수료N%)" 형식으로 표시
