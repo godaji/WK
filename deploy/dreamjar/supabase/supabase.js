@@ -85,6 +85,18 @@
     throw new Error('알 수 없는 action/query: ' + (action || query));
   }
 
+  // ── Auto-ensure user exists (avoids FK violations) ─────────
+  async function ensureUser(userId) {
+    if (!userId) return;
+    const { error } = await supabase.from('users').upsert({
+      user_id:    userId,
+      name:       '',
+      email:      '',
+      created_at: new Date().toISOString(),
+    }, { onConflict: 'user_id', ignoreDuplicates: true });
+    if (error) console.warn('[DreamJar] ensureUser:', error.message);
+  }
+
   // ── POST actions ───────────────────────────────────────────
 
   async function registerUser(p) {
@@ -104,6 +116,9 @@
   async function createJar(p) {
     const jarId = p.jarId || newId('jar');
     const ts = new Date().toISOString();
+
+    // Ensure owner exists in users table (FK constraint)
+    await ensureUser(p.ownerId);
 
     const { error: jarErr } = await supabase.from('jars').insert({
       jar_id:      jarId,
@@ -134,6 +149,7 @@
   async function joinJar(p) {
     const input = (p.jarId || '').trim();
     if (!input) throw new Error('Jar ID 또는 이름을 입력하세요');
+    await ensureUser(p.userId);
 
     // Find jar by ID or name
     let { data: jar } = await supabase
@@ -150,7 +166,10 @@
       .eq('jar_id', jar.jar_id).eq('user_id', p.userId || '')
       .limit(1);
 
-    if (existing && existing.length > 0) throw new Error('이미 참여 중인 Jar입니다');
+    if (existing && existing.length > 0) {
+      // Already a member — return success silently instead of error
+      return { memberId: existing[0].member_id, jarName: jar.name || '', alreadyJoined: true };
+    }
 
     const memberId = newId('m');
     const { error } = await supabase.from('jar_members').insert({
@@ -220,6 +239,7 @@
   }
 
   async function addEntry(p) {
+    await ensureUser(p.userId);
     const entryId = newId('ent');
     const { error } = await supabase.from('entries').insert({
       entry_id:   entryId,
@@ -388,6 +408,14 @@
     for (const u of (allUsers || [])) usersMap[u.user_id] = u;
     const jarsMap = {};
     for (const j of jars) jarsMap[j.jarId] = j;
+    // Fetch foreign jar names (from donation senders/receivers not in user's jars)
+    const foreignJarIds = new Set();
+    for (const d of (allDonIn || [])) { if (d.from_jar_id && !jarsMap[d.from_jar_id]) foreignJarIds.add(d.from_jar_id); }
+    for (const d of (allDonOut || [])) { if (d.to_jar_id && !jarsMap[d.to_jar_id]) foreignJarIds.add(d.to_jar_id); }
+    if (foreignJarIds.size > 0) {
+      const { data: foreignJars } = await supabase.from('jars').select('jar_id, name, owner_id').in('jar_id', [...foreignJarIds]);
+      for (const fj of (foreignJars || [])) jarsMap[fj.jar_id] = { jarId: fj.jar_id, name: fj.name, ownerId: fj.owner_id };
+    }
     const donOutMap = {};
     for (const d of (allDonOut || [])) donOutMap[d.donation_id] = d;
 
@@ -427,6 +455,7 @@
           userId: '', contributorName: toJar.name || d.to_jar_id || '(알 수 없음)',
           label: '기부 발신 (수수료 ' + Math.round((Number(d.fee_rate) || 0) * 100) + '%)',
           amount: -(Number(d.request_amount) || 0), icon: '↗️',
+          sourceNotes: d.source_notes || '',
         };
       });
 
@@ -545,6 +574,14 @@
     for (const u of (users || [])) usersMap[u.user_id] = u;
     const jarsMap = {};
     for (const j of (jarsData || [])) jarsMap[j.jar_id] = j;
+    // Fetch foreign jar names (donation senders/receivers not yet in jarsMap)
+    const foreignJarIds = new Set();
+    for (const d of (dIn || [])) { if (d.from_jar_id && !jarsMap[d.from_jar_id]) foreignJarIds.add(d.from_jar_id); }
+    for (const d of (dOut || [])) { if (d.to_jar_id && !jarsMap[d.to_jar_id]) foreignJarIds.add(d.to_jar_id); }
+    if (foreignJarIds.size > 0) {
+      const { data: foreignJars } = await supabase.from('jars').select('jar_id, name, owner_id').in('jar_id', [...foreignJarIds]);
+      for (const fj of (foreignJars || [])) jarsMap[fj.jar_id] = fj;
+    }
     const donOutMap = {};
     for (const d of (dOut || [])) donOutMap[d.donation_id] = d;
 
@@ -580,6 +617,7 @@
         userId: '', contributorName: toJar.name || d.to_jar_id || '(알 수 없음)',
         label: '기부 발신 (수수료 ' + Math.round((Number(d.fee_rate) || 0) * 100) + '%)',
         amount: -(Number(d.request_amount) || 0), icon: '↗️',
+        sourceNotes: d.source_notes || '',
       };
     });
 
