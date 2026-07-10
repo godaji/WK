@@ -146,24 +146,29 @@ function handleCreateJar(p) {
   return jsonOk({ jarId: jarId });
 }
 
-/** jar_members 에 멤버 추가 (role=member) */
+/** jar_members 에 멤버 추가 (role=member) — jarId 또는 jar 이름으로 검색 */
 function handleJoinJar(p) {
-  var jarId = p.jarId || '';
-  if (!jarId) return jsonErr('jarId 필요');
+  var input = (p.jarId || '').trim();
+  if (!input) return jsonErr('Jar ID 또는 이름을 입력하세요');
   var allJars = readAll(SHEET.JARS);
-  var jar = allJars.find(function(j) { return j.jarId === jarId; });
-  if (!jar) return jsonErr('존재하지 않는 Jar입니다');
+  // 1차: jarId 정확 매칭
+  var jar = allJars.find(function(j) { return j.jarId === input; });
+  // 2차: jar 이름 정확 매칭 (jarId로 못 찾은 경우)
+  if (!jar) {
+    jar = allJars.find(function(j) { return j.name === input; });
+  }
+  if (!jar) return jsonErr('존재하지 않는 Jar입니다: ' + input);
   if (jar.archived === true || jar.archived === 'TRUE' || jar.archived === 'true') {
     return jsonErr('삭제된 Jar입니다');
   }
   var members = readAll(SHEET.JAR_MEMBERS);
-  var existing = members.find(function(m) { return m.jarId === jarId && m.userId === (p.userId || ''); });
+  var existing = members.find(function(m) { return m.jarId === jar.jarId && m.userId === (p.userId || ''); });
   if (existing) return jsonErr('이미 참여 중인 Jar입니다');
 
   var memberId = newId('m');
   appendRow(SHEET.JAR_MEMBERS, {
     memberId:  memberId,
-    jarId:     jarId,
+    jarId:     jar.jarId,
     userId:    p.userId || '',
     role:      'member',
     controlId: '',
@@ -290,11 +295,14 @@ function handleDonate(p) {
   });
 
   appendRow(SHEET.DONATION_IN, {
-    donationId: donationId,
-    toJarId:    p.toJarId || '',
-    fromJarId:  p.fromJarId || '',
-    netAmount:  netAmount,
-    createdAt:  ts,
+    donationId:    donationId,
+    toJarId:       p.toJarId || '',
+    fromJarId:     p.fromJarId || '',
+    requestAmount: requestAmt,
+    feeRate:       feeRate,
+    feeAmount:     feeAmount,
+    netAmount:     netAmount,
+    createdAt:     ts,
   });
 
   return jsonOk({
@@ -389,6 +397,20 @@ function handleGetJarsByUser(p) {
     entriesByJar[e.jarId].push(e);
   });
 
+  // donation_in/donation_out 을 jarId 별로 그룹핑
+  var allDonationsIn = readAll(SHEET.DONATION_IN);
+  var donationsInByJar = {};
+  allDonationsIn.forEach(function(d) {
+    if (!donationsInByJar[d.toJarId]) donationsInByJar[d.toJarId] = [];
+    donationsInByJar[d.toJarId].push(d);
+  });
+  var allDonationsOut = readAll(SHEET.DONATION_OUT);
+  var donationsOutByJar = {};
+  allDonationsOut.forEach(function(d) {
+    if (!donationsOutByJar[d.fromJarId]) donationsOutByJar[d.fromJarId] = [];
+    donationsOutByJar[d.fromJarId].push(d);
+  });
+
   // jar_members 에서 사용자 멤버십 조회
   var members = readAll(SHEET.JAR_MEMBERS).filter(function(m) {
     return m.userId === userId;
@@ -408,12 +430,22 @@ function handleGetJarsByUser(p) {
 
   var sevenDaysAgo = new Date(Date.now() - 7 * 24 * 3600 * 1000).toISOString();
 
+  // 존재하지 않는 jar를 가리키는 고아 멤버 레코드 제외
+  members = members.filter(function(m) { return !!jarsMap[m.jarId]; });
+
   var result = members.map(function(m) {
-    var jar = jarsMap[m.jarId] || {};
+    var jar = jarsMap[m.jarId];
     var jarEntries = entriesByJar[m.jarId] || [];
-    var currentAmount = jarEntries.reduce(function(s, e) {
+    var entriesSum = jarEntries.reduce(function(s, e) {
       return s + (Number(e.amount) || 0);
     }, 0);
+    var dInSum = (donationsInByJar[m.jarId] || []).reduce(function(s, d) {
+      return s + (Number(d.netAmount) || 0);
+    }, 0);
+    var dOutSum = (donationsOutByJar[m.jarId] || []).reduce(function(s, d) {
+      return s + (Number(d.requestAmount) || 0);
+    }, 0);
+    var currentAmount = entriesSum + dInSum - dOutSum;
     var recentSevenDayTotal = jarEntries
       .filter(function(e) { return String(e.createdAt || '') >= sevenDaysAgo; })
       .reduce(function(s, e) { return s + (Number(e.amount) || 0); }, 0);
@@ -534,7 +566,7 @@ function handleGetHistory(p) {
 
 /**
  * S6: 이력 타임라인 + 멤버 기여 소계
- * - entries + donation_in 통합, 역순 정렬
+ * - entries + donation_in + donation_out 통합, 역순 정렬
  * - 기여자 이름은 users 시트 조인
  * - donation 발신 Jar 이름은 jars 시트 조인
  * - memberSubtotals: entries 기준, userId별 합산
@@ -567,25 +599,58 @@ function handleGetJarHistory(p) {
       };
     });
 
-  // donation_in → 이력 항목 변환
+  // donation_out 맵 (donationId → 수수료 정보 조인용)
+  var donationOutMap = {};
+  readAll(SHEET.DONATION_OUT).forEach(function(d) {
+    donationOutMap[d.donationId] = d;
+  });
+
+  // donation_in → 이력 항목 변환 (수수료는 donation_out에서 조인)
   var donationItems = readAll(SHEET.DONATION_IN)
     .filter(function(d) { return d.toJarId === jarId; })
     .map(function(d) {
       var fromJar = jarsMap[d.fromJarId] || {};
+      var dOut = donationOutMap[d.donationId] || {};
+      var reqAmt = Number(dOut.requestAmount) || Number(d.requestAmount) || 0;
+      var fRate  = Number(dOut.feeRate) || Number(d.feeRate) || 0;
+      var feePct = Math.round(fRate * 100);
+      var lbl = reqAmt > 0
+        ? '기부(' + reqAmt.toLocaleString() + '원, 수수료' + feePct + '%)'
+        : '기부';
       return {
         type:            'donation',
         id:              d.donationId,
         date:            String(d.createdAt || ''),
         userId:          fromJar.ownerId || '',
         contributorName: fromJar.name || d.fromJarId || '(알 수 없음)',
-        label:           '기부',
+        label:           lbl,
         amount:          Number(d.netAmount) || 0,
         icon:            '🦝',
+        requestAmount:   Number(dOut.requestAmount) || Number(d.requestAmount) || 0,
+        feeRate:         Number(dOut.feeRate) || Number(d.feeRate) || 0,
+        feeAmount:       Number(dOut.feeAmount) || Number(d.feeAmount) || 0,
+      };
+    });
+
+  // donation_out → 이력 항목 변환
+  var donationOutItems = readAll(SHEET.DONATION_OUT)
+    .filter(function(d) { return d.fromJarId === jarId; })
+    .map(function(d) {
+      var toJar = jarsMap[d.toJarId] || {};
+      return {
+        type:            'donation_out',
+        id:              d.donationId,
+        date:            String(d.createdAt || ''),
+        userId:          '',
+        contributorName: toJar.name || d.toJarId || '(알 수 없음)',
+        label:           '기부 발신 (수수료 ' + Math.round((Number(d.feeRate) || 0) * 100) + '%)',
+        amount:          -(Number(d.requestAmount) || 0),
+        icon:            '↗️',
       };
     });
 
   // 통합 후 날짜 역순 정렬
-  var history = entryItems.concat(donationItems);
+  var history = entryItems.concat(donationItems).concat(donationOutItems);
   history.sort(function(a, b) {
     return (b.date > a.date) ? 1 : (b.date < a.date) ? -1 : 0;
   });
@@ -644,7 +709,7 @@ function initSheets() {
     },
     {
       name: SHEET.DONATION_IN,
-      cols: ['donationId', 'toJarId', 'fromJarId', 'netAmount', 'createdAt'],
+      cols: ['donationId', 'toJarId', 'fromJarId', 'requestAmount', 'feeRate', 'feeAmount', 'netAmount', 'createdAt'],
     },
     {
       name: SHEET.CONTROLS,
@@ -659,9 +724,46 @@ function initSheets() {
       newSheet.appendRow(s.cols);
       Logger.log('시트 생성: ' + s.name);
     } else {
-      Logger.log('이미 존재: ' + s.name + ' (건너뜀)');
+      // 기존 시트에 새 컬럼이 추가됐으면 헤더 행에 append
+      var hdr = existing.getRange(1, 1, 1, existing.getLastColumn()).getValues()[0];
+      var added = [];
+      s.cols.forEach(function(col) {
+        if (hdr.indexOf(col) === -1) {
+          var nextCol = hdr.length + added.length + 1;
+          existing.getRange(1, nextCol).setValue(col);
+          added.push(col);
+        }
+      });
+      if (added.length > 0) {
+        Logger.log('컬럼 추가: ' + s.name + ' → ' + added.join(', '));
+      } else {
+        Logger.log('이미 존재: ' + s.name + ' (건너뜀)');
+      }
     }
   });
 
   Logger.log('initSheets 완료');
+}
+
+/**
+ * 모든 시트의 데이터를 삭제합니다 (헤더 행은 유지).
+ * Apps Script 에디터에서 직접 실행하세요.
+ * v1.0.0 출시용 — 테스트 데이터 정리.
+ */
+function clearAllData() {
+  var spreadsheet = ss();
+  var names = [SHEET.USERS, SHEET.JARS, SHEET.JAR_MEMBERS, SHEET.ENTRIES,
+               SHEET.DONATION_OUT, SHEET.DONATION_IN, SHEET.CONTROLS];
+  names.forEach(function(name) {
+    var sh = spreadsheet.getSheetByName(name);
+    if (!sh) return;
+    var last = sh.getLastRow();
+    if (last > 1) {
+      sh.deleteRows(2, last - 1);
+      Logger.log('삭제 완료: ' + name + ' (' + (last - 1) + '행)');
+    } else {
+      Logger.log('데이터 없음: ' + name);
+    }
+  });
+  Logger.log('clearAllData 완료 — 모든 시트 초기화됨');
 }

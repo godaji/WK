@@ -475,6 +475,8 @@
 
     const syncBtn = $('syncBtn');
     if (syncBtn) { syncBtn.disabled = true; syncBtn.textContent = '동기화 중…'; }
+    const hdrSync = $('headerSyncBtn');
+    if (hdrSync) { hdrSync.classList.add('syncing'); hdrSync.disabled = true; }
 
     try {
       // 1. Push all unsynced entries
@@ -615,6 +617,7 @@
       throw err;
     } finally {
       if (syncBtn) { syncBtn.disabled = false; syncBtn.textContent = '서버 동기화'; }
+      if (hdrSync) { hdrSync.classList.remove('syncing'); hdrSync.disabled = false; }
     }
   }
 
@@ -1295,6 +1298,7 @@
         entryId: res.donationId + '_in', amount: res.netAmount, note: '기부',
         createdAt: new Date().toISOString(), synced: true,
         type: 'donation_in', icon: '🦝', contributorName: myJar.name || '',
+        requestAmount: amount, feeRate: res.feeRate || 0, feeAmount: res.feeAmount || 0,
       };
       const toEntries = localEntries(currentJar.jarId);
       toEntries.unshift(donInEntry);
@@ -1325,16 +1329,26 @@
     listEl.innerHTML = entries.map(e => {
       const type = e.type || 'entry';
       const isDonation = type === 'donation' || type === 'donation_in' || type === 'donation_out';
-      const icon = e.icon || (type === 'donation_out' ? '↗️' : type === 'donation' || type === 'donation_in' ? '🦝' : '💰');
+      const isDonationIn = type === 'donation' || type === 'donation_in';
+      const icon = e.icon || (type === 'donation_out' ? '↗️' : isDonationIn ? '🦝' : '💰');
       const amt = Number(e.amount) || 0;
       const amtSign = amt >= 0 ? '+' : '';
       const amtClass = amt < 0 ? ' hist-amount-neg' : '';
       const delBtn = !isDonation
         ? `<button class="hist-del-btn" data-entry-id="${escHtml(e.entryId)}" data-jar-id="${escHtml(jarId)}" type="button" aria-label="삭제">🗑️</button>`
         : '';
+      // 기부 수신 내역: "기부(원래금액, 수수료N%)" 형식으로 표시
+      let noteDisplay = displayNote(e.note);
+      if (isDonationIn) {
+        const reqAmt = Number(e.requestAmount) || 0;
+        const feePct = Math.round((Number(e.feeRate) || 0) * 100);
+        if (reqAmt > 0) {
+          noteDisplay = `기부(${won(reqAmt)}, 수수료${feePct}%)`;
+        }
+      }
       return `<div class="hist-row${isDonation ? ' hist-donation' : ''}">
         <div class="hist-left">
-          <div class="hist-label">${icon} ${escHtml(displayNote(e.note))}</div>
+          <div class="hist-label">${icon} ${escHtml(noteDisplay)}</div>
           <div class="hist-date">${fmtDate(e.createdAt)}${!e.synced ? ' <span class="hist-pending">●</span>' : ''}${e.contributorName ? ' · ' + escHtml(e.contributorName) : ''}</div>
         </div>
         <div class="hist-right">
