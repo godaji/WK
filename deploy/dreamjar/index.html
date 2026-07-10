@@ -42,7 +42,10 @@
   <!-- 헤더 -->
   <div class="app-header">
     <span class="app-header-title">🫙 DreamJar</span>
-    <button class="btn-icon" id="settingsBtn" type="button" title="설정">⚙️</button>
+    <div class="app-header-actions">
+      <button class="btn-icon" id="headerSyncBtn" type="button" title="동기화">🔄</button>
+      <button class="btn-icon" id="settingsBtn" type="button" title="설정">⚙️</button>
+    </div>
   </div>
 
   <!-- 스크롤 영역 -->
@@ -148,6 +151,13 @@
       </div>
       <button id="settSaveBtn" class="btn-cta" type="button">저장</button>
 
+      <div class="sett-divider" id="settInstallDivider" hidden></div>
+      <div class="sett-section" id="settInstallSection" hidden>
+        <div class="sett-section-title">앱 설치</div>
+        <button class="btn-cta sett-install-btn" id="installBtn" type="button">📲 홈 화면에 추가</button>
+        <p class="sett-hint">바탕화면에 앱 바로가기를 추가합니다.</p>
+      </div>
+
       <div class="sett-divider"></div>
 
       <div class="sett-section">
@@ -168,12 +178,30 @@
           <div class="join-section-title">다른 Jar에 참여</div>
           <div class="join-row">
             <input id="joinJarId" class="join-input" type="text"
-              placeholder="Jar ID 입력" autocomplete="off" maxlength="80">
+              placeholder="Jar 이름 또는 ID 입력" autocomplete="off" maxlength="80">
             <button id="joinJarBtn" class="btn-join" type="button">참여</button>
           </div>
         </div>
         <button class="btn-cta" id="createJarBtnSettings" type="button" style="margin-top:14px">새 Jar 만들기</button>
       </div>
+
+      <div class="sett-divider"></div>
+      <p class="sett-version">DreamJar v1.0.0</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== iOS 홈 화면 추가 안내 시트 ===== -->
+<div class="sheet-backdrop" id="iosInstallSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="홈 화면에 추가 안내">
+    <div class="sheet-head"><span>📲 홈 화면에 추가</span><button class="sheet-close" data-close="iosInstallSheet" type="button">✕</button></div>
+    <div class="sheet-body">
+      <p class="ios-lead">Safari에서 두 번 탭하면 바탕화면 앱처럼 쓸 수 있어요.</p>
+      <ol class="ios-steps">
+        <li>화면 하단의 <b>공유 버튼</b> <span class="ios-share" aria-hidden="true">⬆️</span> 을 누르세요.</li>
+        <li>메뉴를 내려 <b>'홈 화면에 추가'</b> 를 선택하세요.</li>
+        <li>오른쪽 위 <b>'추가'</b> 를 누르면 끝.</li>
+      </ol>
     </div>
   </div>
 </div>
@@ -398,6 +426,20 @@
     <div class="sheet-body">
       <div id="donateResultBody"></div>
       <button class="btn-cta sheet-close" data-close="donateResultSheet" type="button" style="margin-top:16px">확인</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 기부 수신 팝업 시트 ===== -->
+<div class="sheet-backdrop" id="donateReceivedSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="기부 수신">
+    <div class="sheet-head">
+      <span>🦝 기부가 왔어요!</span>
+      <button class="sheet-close" data-close="donateReceivedSheet" type="button">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div id="donateReceivedBody"></div>
+      <button class="btn-cta" id="donateReceivedNextBtn" type="button" style="margin-top:16px">확인</button>
     </div>
   </div>
 </div>
