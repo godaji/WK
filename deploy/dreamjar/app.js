@@ -12,6 +12,7 @@
   const KEY_JARS       = 'dreamjar.jars';       // JSON: [{jarId, name, goalAmount, currentAmount, ...}]
   const KEY_ENTRIES    = 'dreamjar.entries';     // JSON: {jarId: [{entryId, amount, note, createdAt, synced}]}
   const KEY_PENDING_DEL = 'dreamjar.pendingDel'; // JSON: [{entryId, jarId}]
+  const KEY_PENDING_CTRL = 'dreamjar.pendingCtrl'; // JSON: [{jarId, memberId, controlId}]
   const KEY_LAST_SYNC  = 'dreamjar.lastSync';    // ISO timestamp string
 
   // ── localStorage 헬퍼 ──
@@ -28,6 +29,8 @@
   }
   function localPendingDel() { return JSON.parse(localStorage.getItem(KEY_PENDING_DEL) || '[]'); }
   function savePendingDel(list) { localStorage.setItem(KEY_PENDING_DEL, JSON.stringify(list)); }
+  function localPendingCtrl() { return JSON.parse(localStorage.getItem(KEY_PENDING_CTRL) || '[]'); }
+  function savePendingCtrl(list) { localStorage.setItem(KEY_PENDING_CTRL, JSON.stringify(list)); }
 
   // ── 상태 ──
   let userId    = localStorage.getItem(KEY_USER_ID) || '';
@@ -442,6 +445,16 @@
       }
       localStorage.setItem(KEY_ENTRIES, JSON.stringify(allEntriesMap));
 
+      // 1b. Push pending control changes
+      const pendingCtrl = localPendingCtrl();
+      const remainingCtrl = [];
+      for (const pc of pendingCtrl) {
+        try {
+          await apiFetchReal({ action: 'setControl', params: { memberId: pc.memberId, controlId: pc.controlId, jarId: pc.jarId, userId } });
+        } catch { remainingCtrl.push(pc); }
+      }
+      savePendingCtrl(remainingCtrl);
+
       // 2. Execute pending deletes
       const pendingDel = localPendingDel();
       const remainingDel = [];
@@ -765,24 +778,23 @@
     el.addEventListener('click', () => onControlSelect(el.dataset.controlId));
   });
 
-  async function onControlSelect(controlId) {
+  function onControlSelect(controlId) {
     const jar = currentJar;
     if (!jar) return;
-    try {
-      await apiFetch({ action: 'setControl', params: { memberId: jar.memberId || '', controlId, jarId: jar.jarId, userId } });
-      jar.controlId = controlId;
-      const cached = cachedJars.find(j => j.jarId === jar.jarId);
-      if (cached) cached.controlId = controlId;
-      // 로컬에도 저장
-      const jars = localJars();
-      const lj = jars.find(j => j.jarId === jar.jarId);
-      if (lj) { lj.controlId = controlId; saveLocalJars(jars); }
-      closeSheet('controlPickerSheet');
-      renderControlSection(jar, entryRows);
-      toast('Control을 설정했어요.');
-    } catch (err) {
-      toast('설정 실패: ' + err.message);
-    }
+    // localStorage-first: 로컬만 수정, 동기화 때 서버에 push
+    jar.controlId = controlId;
+    const cached = cachedJars.find(j => j.jarId === jar.jarId);
+    if (cached) cached.controlId = controlId;
+    const jars = localJars();
+    const lj = jars.find(j => j.jarId === jar.jarId);
+    if (lj) { lj.controlId = controlId; saveLocalJars(jars); }
+    // pending control change 큐에 추가 (같은 jar 중복 제거)
+    const pending = localPendingCtrl().filter(p => p.jarId !== jar.jarId);
+    pending.push({ jarId: jar.jarId, memberId: jar.memberId || '', controlId });
+    savePendingCtrl(pending);
+    closeSheet('controlPickerSheet');
+    renderControlSection(jar, entryRows);
+    toast('Control을 설정했어요.');
   }
 
   // ── localStorage-first 적립 ──
