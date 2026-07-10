@@ -465,11 +465,26 @@
     if (!jarId) { toast('Jar ID를 입력하세요'); return; }
     $('joinJarBtn').disabled = true;
     try {
-      await apiFetch({ action: 'joinJar', params: { jarId, userId } });
+      const result = await apiFetch({ action: 'joinJar', params: { jarId, userId } });
       $('joinJarId').value = '';
-      toast('참여 완료! 데이터를 불러옵니다…');
+      toast(result.alreadyJoined ? '이미 참여 중! 데이터를 새로고침합니다…' : '참여 완료! 데이터를 불러옵니다…');
+      // Clear checkSync cache so full pull includes the new jar
+      localStorage.removeItem(KEY_SERVER_MODIFIED);
       await syncWithServer(true);
-      toast('참여했습니다!');
+      // Switch to the joined jar if found in cached jars
+      const joinedJar = cachedJars.find(j =>
+        j.jarId === jarId || j.name === jarId || (result.jarName && j.name === result.jarName)
+      );
+      if (joinedJar) {
+        currentJar = joinedJar;
+        localStorage.setItem(KEY_ACTIVE_JAR, joinedJar.jarId);
+        renderJarSection(joinedJar);
+        entryRows = localEntries(joinedJar.jarId);
+        renderControlSection(joinedJar, entryRows);
+        renderHistorySection(joinedJar.jarId);
+      }
+      closeSheet('settingsSheet');
+      toast(result.alreadyJoined ? '이미 참여 중인 Jar입니다.' : '참여했습니다!');
     } catch (err) {
       toast('참여 실패: ' + err.message);
     } finally {
@@ -1532,6 +1547,7 @@
       if (lj) { lj.currentAmount = myJar.currentAmount; saveLocalJars(jars); }
       if (currentJar.jarId === myJar.jarId) updateJarDisplay(myJar);
       cachedJars = activeJars(localJars());
+      scheduleBackgroundSync();
     } catch (err) {
       toast('기부 실패: ' + err.message);
     } finally {
@@ -1602,6 +1618,7 @@
       if (lj) { lj.currentAmount = myJar.currentAmount; saveLocalJars(jars); }
       if (currentJar.jarId === myJar.jarId) updateJarDisplay(myJar);
       cachedJars = activeJars(localJars());
+      scheduleBackgroundSync();
     } catch (err) {
       toast('기부 실패: ' + err.message);
     } finally {
