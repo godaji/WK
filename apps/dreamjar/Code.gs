@@ -4,6 +4,7 @@
  * 배포 전 아래 SPREADSHEET_ID 를 실제 값으로 교체하세요.
  * (Google Sheets URL에서 /d/ 와 /edit 사이의 문자열)
  */
+var CODE_VERSION = 'v5.0-cmpa891'; // feat: bulk donation from entries + per-item fee + sourceNotes
 var SPREADSHEET_ID = '14aUcea8p-LWS9TcscIIryZQXg6JAfwDavttDquKHGHc';
 
 // ─── 시트 이름 상수 ───────────────────────────────────────────────────────────
@@ -15,12 +16,16 @@ var SHEET = {
   DONATION_OUT: 'donation_out',
   DONATION_IN:  'donation_in',
   CONTROLS:     'controls',
+  SYNC_META:    'sync_meta',
 };
 
 // ─── 유틸 ─────────────────────────────────────────────────────────────────────
 
+/** 스프레드시트 인스턴스 캐시 — openById()를 요청당 1회만 호출 (CMPA-888 성능 개선) */
+var _ssCache = null;
 function ss() {
-  return SpreadsheetApp.openById(SPREADSHEET_ID);
+  if (!_ssCache) _ssCache = SpreadsheetApp.openById(SPREADSHEET_ID);
+  return _ssCache;
 }
 
 function sheet(name) {
@@ -36,18 +41,24 @@ function headers(sh) {
   return sh.getRange(1, 1, 1, last).getValues()[0];
 }
 
-/** 시트 전체 데이터를 [{col: val, …}, …] 배열로 반환 (헤더 제외) */
+/** 시트 전체 데이터를 [{col: val, …}, …] 배열로 반환 (헤더 제외)
+ *  최적화: 헤더+데이터를 getValues() 1회로 읽음 (기존 2회 → 1회, CMPA-888) */
 function readAll(sheetName) {
   var sh = sheet(sheetName);
-  var last = sh.getLastRow();
-  if (last <= 1) return [];
-  var cols = headers(sh);
-  var data = sh.getRange(2, 1, last - 1, cols.length).getValues();
-  return data.map(function(row) {
+  var lastRow = sh.getLastRow();
+  if (lastRow <= 1) return [];
+  var lastCol = sh.getLastColumn();
+  if (lastCol === 0) return [];
+  // 헤더(1행) + 데이터(2행~)를 한 번에 읽기
+  var all = sh.getRange(1, 1, lastRow, lastCol).getValues();
+  var cols = all[0];
+  var result = [];
+  for (var r = 1; r < all.length; r++) {
     var obj = {};
-    cols.forEach(function(c, i) { obj[c] = row[i]; });
-    return obj;
-  });
+    for (var c = 0; c < cols.length; c++) { obj[cols[c]] = all[r][c]; }
+    result.push(obj);
+  }
+  return result;
 }
 
 /** 시트 마지막 행에 row 객체(컬럼 순서대로)를 append */
@@ -65,6 +76,66 @@ function newId(prefix) {
 
 function now() {
   return new Date().toISOString();
+}
+
+/**
+ * Per-jar lastModified 갱신 (CMPA-888 v2 — jar별 dirty bit)
+ * sync_meta 시트: key=jarId, value=lastModified timestamp
+ * 다른 유저의 Jar를 dirty로 만들지 않는다.
+ * jarId가 없거나 여러 Jar에 영향을 주는 mutation은 jarIds 배열로 호출.
+ */
+function touchLastModified(jarIdOrIds) {
+  var sh = ss().getSheetByName(SHEET.SYNC_META);
+  if (!sh) {
+    sh = ss().insertSheet(SHEET.SYNC_META);
+    sh.appendRow(['key', 'value']);
+  }
+  var ids = Array.isArray(jarIdOrIds) ? jarIdOrIds : [jarIdOrIds];
+  ids = ids.filter(function(id) { return !!id; });
+  if (ids.length === 0) return;
+
+  var ts = now();
+  var lastRow = sh.getLastRow();
+  var existingKeys = {};
+
+  if (lastRow >= 2) {
+    var data = sh.getRange(2, 1, lastRow - 1, 1).getValues();
+    for (var r = 0; r < data.length; r++) {
+      existingKeys[data[r][0]] = r + 2; // row number (1-indexed)
+    }
+  }
+
+  for (var i = 0; i < ids.length; i++) {
+    var jarId = ids[i];
+    if (existingKeys[jarId]) {
+      sh.getRange(existingKeys[jarId], 2).setValue(ts);
+    } else {
+      sh.appendRow([jarId, ts]);
+    }
+  }
+}
+
+/**
+ * 유저가 참여한 Jar들의 lastModified 맵을 반환 (CMPA-888 v4)
+ * sync_meta에 없는 jarId도 기본값 'init'을 반환하여 클라이언트가 캐시할 수 있게 한다.
+ * { jarId: timestamp, ... }
+ */
+function getJarModifiedMap(jarIds) {
+  // 모든 요청된 jarId에 대해 기본값 설정 (sync_meta에 없어도 캐시 가능)
+  var result = {};
+  for (var i = 0; i < jarIds.length; i++) { result[jarIds[i]] = 'init'; }
+
+  var sh = ss().getSheetByName(SHEET.SYNC_META);
+  if (!sh) return result;
+  var lastRow = sh.getLastRow();
+  if (lastRow < 2) return result;
+  var data = sh.getRange(2, 1, lastRow - 1, 2).getValues();
+  for (var r = 0; r < data.length; r++) {
+    if (result.hasOwnProperty(data[r][0])) {
+      result[data[r][0]] = String(data[r][1] || 'init');
+    }
+  }
+  return result;
 }
 
 /** JSON 응답 반환 */
@@ -99,6 +170,7 @@ function doPost(e) {
     if (action === 'addEntry')      return handleAddEntry(payload);
     if (action === 'deleteEntry')   return handleDeleteEntry(payload);
     if (action === 'donate')        return handleDonate(payload);
+    if (action === 'donateBulk')   return handleDonateBulk(payload);
     if (action === 'archiveJar')   return handleArchiveJar(payload);
 
     return jsonErr('알 수 없는 action: ' + action);
@@ -143,6 +215,7 @@ function handleCreateJar(p) {
       joinedAt:  ts,
     });
   }
+  touchLastModified(jarId);
   return jsonOk({ jarId: jarId });
 }
 
@@ -174,6 +247,7 @@ function handleJoinJar(p) {
     controlId: '',
     joinedAt:  now(),
   });
+  touchLastModified(jar.jarId);
   return jsonOk({ memberId: memberId, jarName: jar.name || '' });
 }
 
@@ -198,6 +272,7 @@ function handleSetControl(p) {
     for (var i = 0; i < data.length; i++) {
       if (data[i][memberIdx] === p.memberId) {
         sh.getRange(i + 2, controlIdx + 1).setValue(p.controlId || '');
+        touchLastModified(jarIdx >= 0 ? data[i][jarIdx] : '');
         return jsonOk({ updated: true });
       }
     }
@@ -208,6 +283,7 @@ function handleSetControl(p) {
     for (var j = 0; j < data.length; j++) {
       if (data[j][jarIdx] === p.jarId && data[j][userIdx] === p.userId) {
         sh.getRange(j + 2, controlIdx + 1).setValue(p.controlId || '');
+        touchLastModified(p.jarId);
         return jsonOk({ updated: true });
       }
     }
@@ -220,6 +296,7 @@ function handleSetControl(p) {
       controlId: p.controlId || '',
       joinedAt:  now(),
     });
+    touchLastModified(p.jarId);
     return jsonOk({ updated: true });
   }
 
@@ -251,6 +328,7 @@ function handleAddEntry(p) {
     note:      p.note || '',
     createdAt: now(),
   });
+  touchLastModified(p.jarId);
   return jsonOk({ entryId: entryId });
 }
 
@@ -264,6 +342,7 @@ function handleDeleteEntry(p) {
   for (var r = 2; r <= last; r++) {
     if (sh.getRange(r, idIdx + 1).getValue() === p.entryId) {
       sh.deleteRow(r);
+      touchLastModified(p.jarId || '');
       return jsonOk({ deleted: true });
     }
   }
@@ -291,6 +370,7 @@ function handleDonate(p) {
     feeRate:       feeRate,
     feeAmount:     feeAmount,
     netAmount:     netAmount,
+    sourceNotes:   '',
     createdAt:     ts,
   });
 
@@ -302,14 +382,90 @@ function handleDonate(p) {
     feeRate:       feeRate,
     feeAmount:     feeAmount,
     netAmount:     netAmount,
+    sourceNotes:   '',
     createdAt:     ts,
   });
 
+  touchLastModified([p.fromJarId, p.toJarId]);
   return jsonOk({
     donationId: donationId,
     feeRate:    feeRate,
     feeAmount:  feeAmount,
     netAmount:  netAmount,
+  });
+}
+
+/**
+ * 벌크 기부 처리 — 적립내역 기반, 항목별 개별 수수료
+ * params.items: [{entryId, amount, note}]
+ * 각 항목마다 개별 donationId + 개별 수수료율
+ * donation_out/donation_in에 sourceNotes로 원본 적립 항목 정보 저장
+ */
+function handleDonateBulk(p) {
+  var items = p.items;
+  if (!items || !items.length) return jsonErr('기부 항목이 없습니다');
+
+  var fromJarId = p.fromJarId || '';
+  var toJarId   = p.toJarId || '';
+  var ts        = now();
+  var results   = [];
+  var totalRequest = 0;
+  var totalFee     = 0;
+  var totalNet     = 0;
+
+  for (var i = 0; i < items.length; i++) {
+    var item       = items[i];
+    var donationId = newId('don');
+    var requestAmt = Number(item.amount) || 0;
+    var feeRate    = Math.random() * 0.5;
+    var feeAmount  = Math.round(requestAmt * feeRate);
+    var netAmount  = requestAmt - feeAmount;
+    var sourceNote = item.note || '';
+
+    appendRow(SHEET.DONATION_OUT, {
+      donationId:    donationId,
+      fromJarId:     fromJarId,
+      toJarId:       toJarId,
+      requestAmount: requestAmt,
+      feeRate:       feeRate,
+      feeAmount:     feeAmount,
+      netAmount:     netAmount,
+      sourceNotes:   sourceNote,
+      createdAt:     ts,
+    });
+
+    appendRow(SHEET.DONATION_IN, {
+      donationId:    donationId,
+      toJarId:       toJarId,
+      fromJarId:     fromJarId,
+      requestAmount: requestAmt,
+      feeRate:       feeRate,
+      feeAmount:     feeAmount,
+      netAmount:     netAmount,
+      sourceNotes:   sourceNote,
+      createdAt:     ts,
+    });
+
+    totalRequest += requestAmt;
+    totalFee     += feeAmount;
+    totalNet     += netAmount;
+
+    results.push({
+      donationId: donationId,
+      note:       sourceNote,
+      amount:     requestAmt,
+      feeRate:    feeRate,
+      feeAmount:  feeAmount,
+      netAmount:  netAmount,
+    });
+  }
+
+  touchLastModified([fromJarId, toJarId]);
+  return jsonOk({
+    items:        results,
+    totalRequest: totalRequest,
+    totalFee:     totalFee,
+    totalNet:     totalNet,
   });
 }
 
@@ -345,6 +501,7 @@ function handleArchiveJar(p) {
     if (sh.getRange(r, jarIdx + 1).getValue() === jarId) {
       sh.getRange(r, archIdx + 1).setValue(true);
       sh.getRange(r, archAtIdx + 1).setValue(now());
+      touchLastModified(jarId);
       return jsonOk({ archived: true });
     }
   }
@@ -361,7 +518,10 @@ function doGet(e) {
     var p = e.parameter;
     var query = p.query;
 
+    if (query === 'version')         return jsonOk({ version: CODE_VERSION });
+    if (query === 'checkSync')       return handleCheckSync(p);
     if (query === 'getJarsByUser')   return handleGetJarsByUser(p);
+    if (query === 'getFullSync')     return handleGetFullSync(p);
     if (query === 'getEntries')      return handleGetEntries(p);
     if (query === 'getAdminControls') return handleGetAdminControls(p);
     if (query === 'getJar')          return handleGetJar(p);
@@ -373,6 +533,20 @@ function doGet(e) {
   } catch (err) {
     return jsonErr(err.message);
   }
+}
+
+/**
+ * 경량 동기화 체크 — sync_meta 시트만 읽어 Jar별 lastModified 반환 (CMPA-888 v3)
+ * 클라이언트가 자기 jarIds를 쿼리 파라미터로 보내므로 jar_members/jars 조회 불필요.
+ * sync_meta 시트 1개만 읽음 → 실제 ~300ms 이하.
+ * 반환: { jarModified: { jarId: timestamp, ... } }
+ */
+function handleCheckSync(p) {
+  // 클라이언트가 보낸 jarIds (콤마 구분 문자열)
+  var jarIdsStr = p.jarIds || '';
+  if (!jarIdsStr) return jsonOk({ jarModified: {} });
+  var jarIds = jarIdsStr.split(',').filter(function(id) { return !!id; });
+  return jsonOk({ jarModified: getJarModifiedMap(jarIds) });
 }
 
 /**
@@ -459,6 +633,171 @@ function handleGetJarsByUser(p) {
   });
 
   return jsonOk(result);
+}
+
+/**
+ * 통합 동기화 엔드포인트 — 한 번의 호출로 유저의 모든 데이터 반환
+ * readAll()을 시트당 1회만 호출하여 5~6회 → 1회 수준으로 네트워크 절감
+ * 반환: { jars: [...], histories: { jarId: { history, memberSubtotals } } }
+ */
+function handleGetFullSync(p) {
+  var userId = p.userId;
+  if (!userId) return jsonErr('userId 필요');
+
+  // 모든 시트를 한 번씩만 읽기
+  var allUsers      = readAll(SHEET.USERS);
+  var allJarsRaw    = readAll(SHEET.JARS);
+  var allMembers    = readAll(SHEET.JAR_MEMBERS);
+  var allEntries    = readAll(SHEET.ENTRIES);
+  var allDonationsIn  = readAll(SHEET.DONATION_IN);
+  var allDonationsOut = readAll(SHEET.DONATION_OUT);
+
+  // 보조 맵 구성
+  var usersMap = {};
+  allUsers.forEach(function(u) { usersMap[u.userId] = u; });
+
+  var jarsMap = {};
+  var allJars = allJarsRaw.filter(function(j) {
+    return j.archived !== true && j.archived !== 'TRUE' && j.archived !== 'true';
+  });
+  allJars.forEach(function(j) { jarsMap[j.jarId] = j; });
+
+  var entriesByJar = {};
+  allEntries.forEach(function(e) {
+    if (!entriesByJar[e.jarId]) entriesByJar[e.jarId] = [];
+    entriesByJar[e.jarId].push(e);
+  });
+
+  var donationsInByJar = {};
+  allDonationsIn.forEach(function(d) {
+    if (!donationsInByJar[d.toJarId]) donationsInByJar[d.toJarId] = [];
+    donationsInByJar[d.toJarId].push(d);
+  });
+
+  var donationsOutByJar = {};
+  var donationOutById = {};
+  allDonationsOut.forEach(function(d) {
+    if (!donationsOutByJar[d.fromJarId]) donationsOutByJar[d.fromJarId] = [];
+    donationsOutByJar[d.fromJarId].push(d);
+    donationOutById[d.donationId] = d;
+  });
+
+  // 유저의 멤버십 조회
+  var members = allMembers.filter(function(m) { return m.userId === userId; });
+  var memberJarIds = {};
+  members.forEach(function(m) { memberJarIds[m.jarId] = true; });
+
+  // ownerId=userId 인데 jar_members 에 없는 Jar 포함 (하위 호환)
+  allJars.forEach(function(j) {
+    if (j.ownerId === userId && !memberJarIds[j.jarId]) {
+      members.push({
+        memberId: '', jarId: j.jarId, userId: userId,
+        role: 'owner', controlId: '', joinedAt: j.createdAt || '',
+      });
+    }
+  });
+
+  var sevenDaysAgo = new Date(Date.now() - 7 * 24 * 3600 * 1000).toISOString();
+
+  // 고아 멤버 제외
+  members = members.filter(function(m) { return !!jarsMap[m.jarId]; });
+
+  // Jar 목록 + 금액 집계
+  var jarResults = members.map(function(m) {
+    var jar = jarsMap[m.jarId];
+    var jarEntries = entriesByJar[m.jarId] || [];
+    var entriesSum = jarEntries.reduce(function(s, e) { return s + (Number(e.amount) || 0); }, 0);
+    var dInSum = (donationsInByJar[m.jarId] || []).reduce(function(s, d) { return s + (Number(d.netAmount) || 0); }, 0);
+    var dOutSum = (donationsOutByJar[m.jarId] || []).reduce(function(s, d) { return s + (Number(d.requestAmount) || 0); }, 0);
+    var currentAmount = entriesSum + dInSum - dOutSum;
+    var recentSevenDayTotal = jarEntries
+      .filter(function(e) { return String(e.createdAt || '') >= sevenDaysAgo; })
+      .reduce(function(s, e) { return s + (Number(e.amount) || 0); }, 0);
+    return Object.assign({}, jar, {
+      role:                m.role,
+      controlId:           m.controlId,
+      memberId:            m.memberId,
+      currentAmount:       currentAmount,
+      recentSevenDayTotal: recentSevenDayTotal,
+    });
+  });
+
+  // 각 Jar별 이력 구성
+  var histories = {};
+  jarResults.forEach(function(jarInfo) {
+    var jarId = jarInfo.jarId;
+
+    // entries → 이력
+    var jarEntries = entriesByJar[jarId] || [];
+    var entryItems = jarEntries.map(function(e) {
+      var user = usersMap[e.userId] || {};
+      return {
+        type: 'entry', id: e.entryId,
+        date: String(e.createdAt || ''),
+        userId: e.userId || '',
+        contributorName: user.name || e.userId || '(알 수 없음)',
+        label: e.note || '적립',
+        amount: Number(e.amount) || 0, icon: '💰',
+      };
+    });
+
+    // donation_in → 이력
+    var jarDonIn = donationsInByJar[jarId] || [];
+    var donationItems = jarDonIn.map(function(d) {
+      var fromJar = jarsMap[d.fromJarId] || {};
+      var dOut = donationOutById[d.donationId] || {};
+      var reqAmt = Number(dOut.requestAmount) || Number(d.requestAmount) || 0;
+      var fRate  = Number(dOut.feeRate) || Number(d.feeRate) || 0;
+      var feePct = Math.round(fRate * 100);
+      var lbl = reqAmt > 0
+        ? '기부(' + reqAmt.toLocaleString() + '원, 수수료' + feePct + '%)'
+        : '기부';
+      return {
+        type: 'donation', id: d.donationId,
+        date: String(d.createdAt || ''),
+        userId: fromJar.ownerId || '',
+        contributorName: fromJar.name || d.fromJarId || '(알 수 없음)',
+        label: lbl, amount: Number(d.netAmount) || 0, icon: '🦝',
+        requestAmount: Number(dOut.requestAmount) || Number(d.requestAmount) || 0,
+        feeRate: Number(dOut.feeRate) || Number(d.feeRate) || 0,
+        feeAmount: Number(dOut.feeAmount) || Number(d.feeAmount) || 0,
+        sourceNotes: String(d.sourceNotes || dOut.sourceNotes || ''),
+      };
+    });
+
+    // donation_out → 이력
+    var jarDonOut = donationsOutByJar[jarId] || [];
+    var donationOutItems = jarDonOut.map(function(d) {
+      var toJar = jarsMap[d.toJarId] || {};
+      return {
+        type: 'donation_out', id: d.donationId,
+        date: String(d.createdAt || ''),
+        userId: '', contributorName: toJar.name || d.toJarId || '(알 수 없음)',
+        label: '기부 발신 (수수료 ' + Math.round((Number(d.feeRate) || 0) * 100) + '%)',
+        amount: -(Number(d.requestAmount) || 0), icon: '↗️',
+      };
+    });
+
+    var history = entryItems.concat(donationItems).concat(donationOutItems);
+    history.sort(function(a, b) { return (b.date > a.date) ? 1 : (b.date < a.date) ? -1 : 0; });
+
+    // 멤버별 기여 소계
+    var subtotalMap = {};
+    entryItems.forEach(function(e) {
+      if (!subtotalMap[e.userId]) {
+        subtotalMap[e.userId] = { userId: e.userId, name: e.contributorName, total: 0 };
+      }
+      subtotalMap[e.userId].total += e.amount;
+    });
+    var memberSubtotals = [];
+    Object.keys(subtotalMap).forEach(function(k) { memberSubtotals.push(subtotalMap[k]); });
+    memberSubtotals.sort(function(a, b) { return b.total - a.total; });
+
+    histories[jarId] = { history: history, memberSubtotals: memberSubtotals };
+  });
+
+  var jarIdList = jarResults.map(function(j) { return j.jarId; });
+  return jsonOk({ jars: jarResults, histories: histories, jarModified: getJarModifiedMap(jarIdList) });
 }
 
 /** jarId 기준 entries 목록 반환 */
@@ -599,28 +938,43 @@ function handleGetJarHistory(p) {
       };
     });
 
-  // donation_in → 이력 항목 변환
+  // donation_out 전체 1회만 읽기 (중복 readAll 제거)
+  var allDonationsOut = readAll(SHEET.DONATION_OUT);
+  var donationOutMap = {};
+  allDonationsOut.forEach(function(d) {
+    donationOutMap[d.donationId] = d;
+  });
+
+  // donation_in → 이력 항목 변환 (수수료는 donation_out에서 조인)
   var donationItems = readAll(SHEET.DONATION_IN)
     .filter(function(d) { return d.toJarId === jarId; })
     .map(function(d) {
       var fromJar = jarsMap[d.fromJarId] || {};
+      var dOut = donationOutMap[d.donationId] || {};
+      var reqAmt = Number(dOut.requestAmount) || Number(d.requestAmount) || 0;
+      var fRate  = Number(dOut.feeRate) || Number(d.feeRate) || 0;
+      var feePct = Math.round(fRate * 100);
+      var lbl = reqAmt > 0
+        ? '기부(' + reqAmt.toLocaleString() + '원, 수수료' + feePct + '%)'
+        : '기부';
       return {
         type:            'donation',
         id:              d.donationId,
         date:            String(d.createdAt || ''),
         userId:          fromJar.ownerId || '',
         contributorName: fromJar.name || d.fromJarId || '(알 수 없음)',
-        label:           '기부',
+        label:           lbl,
         amount:          Number(d.netAmount) || 0,
         icon:            '🦝',
-        requestAmount:   Number(d.requestAmount) || 0,
-        feeRate:         Number(d.feeRate) || 0,
-        feeAmount:       Number(d.feeAmount) || 0,
+        requestAmount:   Number(dOut.requestAmount) || Number(d.requestAmount) || 0,
+        feeRate:         Number(dOut.feeRate) || Number(d.feeRate) || 0,
+        feeAmount:       Number(dOut.feeAmount) || Number(d.feeAmount) || 0,
+        sourceNotes:     String(d.sourceNotes || dOut.sourceNotes || ''),
       };
     });
 
-  // donation_out → 이력 항목 변환
-  var donationOutItems = readAll(SHEET.DONATION_OUT)
+  // donation_out → 이력 항목 변환 (이미 읽은 allDonationsOut 재사용)
+  var donationOutItems = allDonationsOut
     .filter(function(d) { return d.fromJarId === jarId; })
     .map(function(d) {
       var toJar = jarsMap[d.toJarId] || {};
@@ -692,15 +1046,19 @@ function initSheets() {
     },
     {
       name: SHEET.DONATION_OUT,
-      cols: ['donationId', 'fromJarId', 'toJarId', 'requestAmount', 'feeRate', 'feeAmount', 'netAmount', 'createdAt'],
+      cols: ['donationId', 'fromJarId', 'toJarId', 'requestAmount', 'feeRate', 'feeAmount', 'netAmount', 'sourceNotes', 'createdAt'],
     },
     {
       name: SHEET.DONATION_IN,
-      cols: ['donationId', 'toJarId', 'fromJarId', 'requestAmount', 'feeRate', 'feeAmount', 'netAmount', 'createdAt'],
+      cols: ['donationId', 'toJarId', 'fromJarId', 'requestAmount', 'feeRate', 'feeAmount', 'netAmount', 'sourceNotes', 'createdAt'],
     },
     {
       name: SHEET.CONTROLS,
       cols: ['controlId', 'name', 'description', 'ownerId', 'type', 'createdAt'],
+    },
+    {
+      name: SHEET.SYNC_META,
+      cols: ['key', 'value'],
     },
   ];
 

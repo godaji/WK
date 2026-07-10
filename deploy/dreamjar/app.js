@@ -15,6 +15,7 @@
   const KEY_PENDING_CTRL = 'dreamjar.pendingCtrl'; // JSON: [{jarId, memberId, controlId}]
   const KEY_PENDING_ARCHIVE = 'dreamjar.pendingArchive'; // JSON: [{jarId}]
   const KEY_LAST_SYNC  = 'dreamjar.lastSync';    // ISO timestamp string
+  const KEY_SERVER_MODIFIED = 'dreamjar.serverModified'; // 서버 lastModified (CMPA-888)
 
   // ── localStorage 헬퍼 ──
   function localJars() { return JSON.parse(localStorage.getItem(KEY_JARS) || '[]'); }
@@ -118,7 +119,8 @@
   const $ = id => document.getElementById(id);
   const KRW = new Intl.NumberFormat('ko-KR');
   const won = n => KRW.format(Math.round(n || 0)) + '원';
-  const isMock = () => !scriptUrl;
+  const hasSupabase = () => typeof window.DreamJarSupabase !== 'undefined';
+  const isMock = () => !hasSupabase() && !scriptUrl;
 
   function todayStr() {
     const d = new Date();
@@ -197,7 +199,17 @@
   }
 
   async function apiFetchReal({ action, query, params = {} }) {
-    if (!scriptUrl) throw new Error('Apps Script URL이 설정되지 않았어요.');
+    // CMPA-893: Supabase backend (drop-in replacement)
+    if (hasSupabase()) {
+      try {
+        return await DreamJarSupabase.api({ action, query, params });
+      } catch (err) {
+        console.error('[DreamJar] Supabase 오류:', err);
+        throw err;
+      }
+    }
+    // Legacy Apps Script fallback
+    if (!scriptUrl) throw new Error('백엔드가 설정되지 않았어요.');
     try {
       if (action) {
         const res = await fetch(scriptUrl, {
@@ -258,6 +270,7 @@
           userId: '', contributorName: '(기부 Jar)',
           label: '기부', amount: Number(d.netAmount) || 0, icon: '🦝',
           requestAmount: Number(d.requestAmount) || 0, feeRate: d.feeRate || 0, feeAmount: Number(d.feeAmount) || 0,
+          sourceNotes: d.sourceNotes || '',
         })),
         ...dOut.map(d => {
           const toJar = MOCK_JARS.find(j => j.jarId === d.toJarId);
@@ -332,6 +345,34 @@
       if (toJar) toJar.currentAmount = (toJar.currentAmount || 0) + netAmount;
       return Promise.resolve({ donationId: donation.donationId, feeRate, feeAmount, netAmount });
     }
+    if (action === 'donateBulk') {
+      const items = params.items || [];
+      let totalRequest = 0, totalFee = 0, totalNet = 0;
+      const results = items.map(item => {
+        const requestAmt = Number(item.amount) || 0;
+        const feeRate = Math.random() * 0.5;
+        const feeAmount = Math.round(requestAmt * feeRate);
+        const netAmount = requestAmt - feeAmount;
+        totalRequest += requestAmt;
+        totalFee += feeAmount;
+        totalNet += netAmount;
+        const donation = {
+          donationId: 'don-' + Date.now() + '-' + Math.floor(Math.random() * 1e6),
+          fromJarId: params.fromJarId, toJarId: params.toJarId,
+          requestAmount: requestAmt, feeRate, feeAmount, netAmount,
+          sourceNotes: item.note || '',
+          createdAt: new Date().toISOString(),
+        };
+        MOCK_DONATIONS_OUT.push(donation);
+        MOCK_DONATIONS_IN.push(donation);
+        return { donationId: donation.donationId, note: item.note || '', amount: requestAmt, feeRate, feeAmount, netAmount };
+      });
+      const fromJar = MOCK_JARS.find(j => j.jarId === params.fromJarId);
+      if (fromJar) fromJar.currentAmount = Math.max(0, (fromJar.currentAmount || 0) - totalRequest);
+      const toJar = MOCK_JARS.find(j => j.jarId === params.toJarId);
+      if (toJar) toJar.currentAmount = (toJar.currentAmount || 0) + totalNet;
+      return Promise.resolve({ items: results, totalRequest, totalFee, totalNet });
+    }
     if (action === 'archiveJar') {
       const mj = MOCK_JARS.find(j => j.jarId === params.jarId);
       if (mj) { mj.archived = true; mj.archivedAt = new Date().toISOString(); }
@@ -352,7 +393,6 @@
     $('setupScreen').hidden = false;
     $('mainApp').hidden = true;
     $('setupUserId').value  = userId;
-    $('setupScriptUrl').value = scriptUrl;
     $('setupUserId').focus();
   }
   function hideSetup() {
@@ -364,9 +404,7 @@
     const newId = $('setupUserId').value.trim();
     if (!newId) { toast('사용자 ID를 입력하세요.'); $('setupUserId').focus(); return; }
     userId    = newId;
-    scriptUrl = $('setupScriptUrl').value.trim();
     localStorage.setItem(KEY_USER_ID, userId);
-    localStorage.setItem(KEY_SCRIPT_URL, scriptUrl);
     hideSetup();
     initApp();
   });
@@ -384,8 +422,7 @@
 
   // ── 설정 시트 ──
   $('settingsBtn').addEventListener('click', () => {
-    $('settUserId').value    = userId;
-    $('settScriptUrl').value = scriptUrl;
+    $('settUserId').value = userId;
     loadSettJarList();
     updateLastSyncDisplay();
     openSheet('settingsSheet');
@@ -395,7 +432,8 @@
     if (!confirm('로그아웃하시겠습니까?\n로컬 데이터가 모두 삭제됩니다.')) return;
     // localStorage에서 dreamjar 관련 키 모두 삭제
     [KEY_USER_ID, KEY_SCRIPT_URL, KEY_ACTIVE_JAR, KEY_JARS, KEY_ENTRIES,
-     KEY_PENDING_DEL, KEY_PENDING_CTRL, KEY_PENDING_ARCHIVE, KEY_LAST_SYNC
+     KEY_PENDING_DEL, KEY_PENDING_CTRL, KEY_PENDING_ARCHIVE, KEY_LAST_SYNC,
+     KEY_SERVER_MODIFIED
     ].forEach(k => localStorage.removeItem(k));
     // 캐시 초기화
     cachedJars = [];
@@ -411,13 +449,10 @@
 
   $('settSaveBtn').addEventListener('click', () => {
     const newId  = $('settUserId').value.trim();
-    const newUrl = $('settScriptUrl').value.trim();
     if (!newId) { toast('사용자 ID를 입력하세요.'); return; }
-    const changed = (newId !== userId) || (newUrl !== scriptUrl);
+    const changed = (newId !== userId);
     userId    = newId;
-    scriptUrl = newUrl;
     localStorage.setItem(KEY_USER_ID, userId);
-    localStorage.setItem(KEY_SCRIPT_URL, scriptUrl);
     toast('저장됐어요.');
     if (changed) { cachedJars = []; closeSheet('settingsSheet'); initApp(); }
     else { closeSheet('settingsSheet'); }
@@ -497,66 +532,119 @@
     if (hdrSync) { hdrSync.classList.add('syncing'); hdrSync.disabled = true; }
 
     try {
-      // 1. Push all unsynced entries
+      // 0. Check if there are any pending local changes
       const allEntriesMap = JSON.parse(localStorage.getItem(KEY_ENTRIES) || '{}');
+      const pendingCtrl = localPendingCtrl();
+      const pendingArchive = localPendingArchive();
+      const pendingDel = localPendingDel();
+
+      const hasUnsynced = Object.values(allEntriesMap).some(entries => entries.some(e => !e.synced));
+      const hasPending = hasUnsynced || pendingCtrl.length > 0 || pendingArchive.length > 0 || pendingDel.length > 0;
+
+      // If no local changes, check per-jar dirty bits (lightweight — sync_meta only)
+      if (!hasPending) {
+        try {
+          // 로컬에 알고 있는 jarIds를 보내서 sync_meta만 조회 (jar_members/jars 안 읽음)
+          const localJarMod = JSON.parse(localStorage.getItem(KEY_SERVER_MODIFIED) || '{}');
+          const knownJarIds = Object.keys(localJarMod);
+          if (knownJarIds.length > 0) {
+            const checkResult = await apiFetchReal({ query: 'checkSync', params: { jarIds: knownJarIds.join(',') } });
+            const serverJarMod = (checkResult && checkResult.jarModified) || {};
+            const serverKeys = Object.keys(serverJarMod);
+            const allClean = serverKeys.length === knownJarIds.length &&
+              knownJarIds.every(k => serverJarMod[k] === localJarMod[k]);
+            if (allClean) {
+              if (!silent) toast('이미 최신 상태예요!');
+              return;
+            }
+          }
+        } catch { /* checkSync 실패 시 full pull 진행 */ }
+      }
+
+      // 1. Push all pending mutations in PARALLEL (was sequential)
+
+      // Collect all push promises
+      const pushPromises = [];
+
+      // 1a. Unsynced entries — all in parallel
+      const unsyncedRefs = []; // [{jarId, idx}] to mark synced after
       for (const jarId of Object.keys(allEntriesMap)) {
         const entries = allEntriesMap[jarId];
-        let changed = false;
         for (let i = 0; i < entries.length; i++) {
           if (!entries[i].synced) {
-            try {
-              const res = await apiFetchReal({
-                action: 'addEntry',
-                params: { jarId, userId, amount: entries[i].amount, note: entries[i].note },
-              });
-              entries[i] = { ...entries[i], entryId: (res && res.entryId) || entries[i].entryId, synced: true };
-              changed = true;
-            } catch { /* keep as unsynced */ }
+            const ref = { jarId, idx: i };
+            unsyncedRefs.push(ref);
+            pushPromises.push(
+              apiFetchReal({ action: 'addEntry', params: { jarId, userId, amount: entries[i].amount, note: entries[i].note } })
+                .then(res => { ref.result = res; ref.ok = true; })
+                .catch(() => { ref.ok = false; })
+            );
           }
         }
-        if (changed) allEntriesMap[jarId] = entries;
+      }
+
+      // 1b. Pending control changes — parallel
+      const ctrlResults = pendingCtrl.map(pc =>
+        apiFetchReal({ action: 'setControl', params: { memberId: pc.memberId, controlId: pc.controlId, jarId: pc.jarId, userId } })
+          .then(() => ({ pc, ok: true }))
+          .catch(() => ({ pc, ok: false }))
+      );
+      pushPromises.push(...ctrlResults);
+
+      // 1c. Pending archives — parallel
+      const archResults = pendingArchive.map(pa =>
+        apiFetchReal({ action: 'archiveJar', params: { jarId: pa.jarId } })
+          .then(() => ({ pa, ok: true }))
+          .catch(() => ({ pa, ok: false }))
+      );
+      pushPromises.push(...archResults);
+
+      // 1d. Pending deletes — parallel
+      const delResults = pendingDel.map(pd =>
+        apiFetchReal({ action: 'deleteEntry', params: { jarId: pd.jarId, entryId: pd.entryId } })
+          .then(() => ({ pd, ok: true }))
+          .catch(() => ({ pd, ok: false }))
+      );
+      pushPromises.push(...delResults);
+
+      // Wait for ALL push operations at once
+      await Promise.all(pushPromises);
+
+      // Process results: mark synced entries
+      for (const ref of unsyncedRefs) {
+        if (ref.ok) {
+          const entry = allEntriesMap[ref.jarId][ref.idx];
+          allEntriesMap[ref.jarId][ref.idx] = { ...entry, entryId: (ref.result && ref.result.entryId) || entry.entryId, synced: true };
+        }
       }
       localStorage.setItem(KEY_ENTRIES, JSON.stringify(allEntriesMap));
 
-      // 1b. Push pending control changes
-      const pendingCtrl = localPendingCtrl();
-      const remainingCtrl = [];
-      for (const pc of pendingCtrl) {
-        try {
-          await apiFetchReal({ action: 'setControl', params: { memberId: pc.memberId, controlId: pc.controlId, jarId: pc.jarId, userId } });
-        } catch { remainingCtrl.push(pc); }
-      }
+      // Process ctrl/archive/del results
+      const remainingCtrl = (await Promise.all(ctrlResults)).filter(r => !r.ok).map(r => r.pc);
       savePendingCtrl(remainingCtrl);
-
-      // 1c. Push pending archive (jar deletions)
-      const pendingArchive = localPendingArchive();
-      const remainingArchive = [];
-      for (const pa of pendingArchive) {
-        try {
-          await apiFetchReal({ action: 'archiveJar', params: { jarId: pa.jarId } });
-        } catch { remainingArchive.push(pa); }
-      }
+      const remainingArchive = (await Promise.all(archResults)).filter(r => !r.ok).map(r => r.pa);
       savePendingArchive(remainingArchive);
-
-      // 2. Execute pending deletes
-      const pendingDel = localPendingDel();
-      const remainingDel = [];
-      for (const { entryId, jarId } of pendingDel) {
-        try { await apiFetchReal({ action: 'deleteEntry', params: { jarId, entryId } }); }
-        catch { remainingDel.push({ entryId, jarId }); }
-      }
+      const remainingDel = (await Promise.all(delResults)).filter(r => !r.ok).map(r => r.pd);
       savePendingDel(remainingDel);
 
-      // 3. Pull fresh jars from server & merge with local state
-      const freshJars = await apiFetchReal({ query: 'getJarsByUser', params: { userId } }) || [];
+      // 2. Pull ALL data in ONE call (was getJarsByUser + getJarHistory = 2 calls × 5-6 readAll each)
+      const fullSync = await apiFetchReal({ query: 'getFullSync', params: { userId } }) || {};
+      const freshJars = fullSync.jars || [];
+      const serverHistories = fullSync.histories || {};
 
-      // Re-apply pending archive flags: if a jar was locally deleted but
-      // the server hasn't processed it yet, keep it archived locally.
+      // Save per-jar lastModified for future checkSync comparison
+      // If server returned empty jarModified (no mutations yet), generate defaults
+      // so checkSync has jarIds to send next time (prevents infinite getFullSync loop)
+      let jarMod = fullSync.jarModified || {};
+      if (Object.keys(jarMod).length === 0 && freshJars.length > 0) {
+        freshJars.forEach(j => { jarMod[j.jarId] = 'init'; });
+      }
+      localStorage.setItem(KEY_SERVER_MODIFIED, JSON.stringify(jarMod));
+
+      // Re-apply pending archive flags
       const stillPendingArchive = localPendingArchive();
       const pendingArchiveIds = new Set(stillPendingArchive.map(p => p.jarId));
 
-      // Merge: preserve local archived state for jars with pending archive,
-      // and preserve pending control changes not yet pushed.
       const prevLocal = localJars();
       const mergedJars = freshJars.map(sj => {
         if (pendingArchiveIds.has(sj.jarId)) {
@@ -573,42 +661,44 @@
       saveLocalJars(mergedJars);
       cachedJars = activeJars(mergedJars);
 
-      // 4. For active jar, pull server history and merge
-      if (currentJar) {
-        try {
-          // Snapshot existing donation IDs before pull (to detect new ones)
-          const localE = allEntriesMap[currentJar.jarId] || [];
+      // 3. Merge server histories for ALL jars (no extra getJarHistory call needed)
+      const stillPendingDelIds = new Set(localPendingDel().map(p => p.entryId));
+
+      for (const jarInfo of mergedJars) {
+        const jarId = jarInfo.jarId;
+        const histData = serverHistories[jarId];
+        if (!histData) continue;
+
+        const serverEntries = (histData.history || []).map(e => ({
+          entryId: e.id, amount: e.amount, note: e.label, createdAt: e.date, synced: true,
+          type: e.type || 'entry', icon: e.icon || '💰', contributorName: e.contributorName || '',
+          requestAmount: e.requestAmount || 0, feeRate: e.feeRate || 0, feeAmount: e.feeAmount || 0,
+          sourceNotes: e.sourceNotes || '',
+        }));
+        const filteredServerEntries = serverEntries.filter(e => !stillPendingDelIds.has(e.entryId));
+        const localE = allEntriesMap[jarId] || [];
+        const stillUnsynced = localE.filter(e => !e.synced);
+        const merged = [...filteredServerEntries, ...stillUnsynced].sort((a, b) => (b.createdAt > a.createdAt ? 1 : -1));
+        saveLocalEntries(jarId, merged);
+
+        // Active jar: update display + detect new donations
+        if (currentJar && currentJar.jarId === jarId) {
           const prevDonationIds = new Set(
             localE.filter(e => e.type === 'donation_in' || e.type === 'donation').map(e => e.entryId)
           );
-
-          const histData = await apiFetchReal({ query: 'getJarHistory', params: { jarId: currentJar.jarId } });
-          const serverEntries = (histData.history || [])
-            .map(e => ({
-              entryId: e.id, amount: e.amount, note: e.label, createdAt: e.date, synced: true,
-              type: e.type || 'entry', icon: e.icon || '💰', contributorName: e.contributorName || '',
-              requestAmount: e.requestAmount || 0, feeRate: e.feeRate || 0, feeAmount: e.feeAmount || 0,
-            }));
-          // Filter out entries that are pending local deletion (not yet confirmed by server)
-          const stillPendingDel = localPendingDel();
-          const pendingDelIds = new Set(stillPendingDel.map(p => p.entryId));
-          const filteredServerEntries = serverEntries.filter(e => !pendingDelIds.has(e.entryId));
-          // Merge: filtered server entries + still-unsynced local entries (not yet pushed)
-          const stillUnsynced = localE.filter(e => !e.synced);
-          const merged = [...filteredServerEntries, ...stillUnsynced].sort((a, b) => (b.createdAt > a.createdAt ? 1 : -1));
-          saveLocalEntries(currentJar.jarId, merged);
           entryRows = merged;
 
-          // Detect new donation_in entries and show fun popup
           const newDonations = filteredServerEntries.filter(
             e => (e.type === 'donation_in' || e.type === 'donation') && !prevDonationIds.has(e.entryId)
           );
-          if (newDonations.length > 0) {
+          if (newDonations.length > 0 && currentJar.ownerId === userId) {
             showDonationReceivedPopup(newDonations);
           }
-        } catch { /* use existing local */ }
+        }
+      }
 
-        // Update currentJar from merged data
+      // Update currentJar display
+      if (currentJar) {
         const fresh = mergedJars.find(j => j.jarId === currentJar.jarId);
         if (fresh && !fresh.archived) {
           const unsyncedSum = localEntries(currentJar.jarId)
@@ -630,7 +720,6 @@
       if (!currentJar && cachedJars.length > 0) {
         await initApp();
       } else if (!currentJar && cachedJars.length === 0) {
-        // 서버에도 jar가 없음 — 빈 상태 표시
         $('jarLoading').hidden = true;
         $('jarEmpty').hidden   = false;
       }
@@ -732,6 +821,7 @@
             entryId: e.id, amount: e.amount, note: e.label, createdAt: e.date, synced: true,
             type: e.type || 'entry', icon: e.icon || '💰', contributorName: e.contributorName || '',
             requestAmount: e.requestAmount || 0, feeRate: e.feeRate || 0, feeAmount: e.feeAmount || 0,
+            sourceNotes: e.sourceNotes || '',
           }));
         const stillUnsynced = entryRows.filter(e => !e.synced);
         const merged = [...serverEntries, ...stillUnsynced].sort((a, b) => (b.createdAt > a.createdAt ? 1 : -1));
@@ -1253,8 +1343,13 @@
     const from = d.contributorName || '(알 수 없음)';
     // If we have requestAmount info, show the full breakdown
     const hasDetail = req > 0;
-    let html = `<div class="dr-recv-img"><img src="./raccoon_boss.jpg" alt="너구리사장"></div>`;
+    const sourceNote = d.sourceNotes || '';
+    const bossImg = feePct >= 25 ? './raccoon_boss_angry.gif' : './raccoon_boss.jpg';
+    let html = `<div class="dr-recv-img"><img src="${bossImg}" alt="너구리사장"></div>`;
     html += `<div class="dr-recv-from">💌 <strong>${from}</strong> 에서 기부가 왔어요!</div>`;
+    if (sourceNote) {
+      html += `<div class="dr-source-note">💡 "${escHtml(displayNote(sourceNote))}" 에서 기부</div>`;
+    }
     if (hasDetail) {
       html += `<div class="dr-row"><span>보낸 금액</span><span>${won(req)}</span></div>`;
       html += `<div class="dr-row dr-fee"><span>🦝 너구리사장 수수료 (${feePct}%)</span><span>-${won(fee)}</span></div>`;
@@ -1274,6 +1369,167 @@
     setTimeout(_showNextDonation, 300);
   });
 
+  // ── 기부 탭 전환 ──
+  let _activeDonateTab = 'amount';
+
+  function switchDonateTab(tab) {
+    _activeDonateTab = tab;
+    document.querySelectorAll('.donate-tab-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.donateTab === tab);
+    });
+    document.querySelectorAll('.donate-tab-content').forEach(el => {
+      el.hidden = el.dataset.donateTab !== tab;
+    });
+  }
+
+  document.querySelectorAll('.donate-tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      switchDonateTab(btn.dataset.donateTab);
+      if (btn.dataset.donateTab === 'entries') renderDonateBulkList();
+    });
+  });
+
+  // ── 기부 내역 선택 (벌크) ──
+  let _donateBulkSelected = new Set(); // entryIds
+
+  function renderDonateBulkList() {
+    const listEl = $('donateBulkList');
+    const myJar = cachedJars.find(j => j.ownerId === userId);
+    if (!myJar) { listEl.innerHTML = '<p class="hist-empty">내 Jar가 없어요.</p>'; return; }
+
+    const entries = localEntries(myJar.jarId).filter(e => {
+      const type = e.type || 'entry';
+      return type === 'entry' && (Number(e.amount) || 0) > 0;
+    });
+
+    if (entries.length === 0) {
+      listEl.innerHTML = '<p class="hist-empty">기부할 적립 내역이 없어요.</p>';
+      return;
+    }
+
+    _donateBulkSelected = new Set();
+    listEl.innerHTML = entries.map(e => {
+      const amt = Number(e.amount) || 0;
+      const note = displayNote(e.note) || '적립';
+      return `<label class="donate-bulk-item">
+        <input type="checkbox" class="donate-bulk-cb" data-entry-id="${escHtml(e.entryId)}" data-amount="${amt}" data-note="${escHtml(e.note || '')}">
+        <span class="donate-bulk-label">${escHtml(note)}</span>
+        <span class="donate-bulk-date">${fmtDate(e.createdAt)}</span>
+        <span class="donate-bulk-amt">${won(amt)}</span>
+      </label>`;
+    }).join('');
+
+    listEl.querySelectorAll('.donate-bulk-cb').forEach(cb => {
+      cb.addEventListener('change', () => {
+        if (cb.checked) _donateBulkSelected.add(cb.dataset.entryId);
+        else _donateBulkSelected.delete(cb.dataset.entryId);
+        updateDonateBulkSummary();
+      });
+    });
+
+    updateDonateBulkSummary();
+  }
+
+  function updateDonateBulkSummary() {
+    const sumEl = $('donateBulkSummary');
+    if (_donateBulkSelected.size === 0) {
+      sumEl.hidden = true;
+      return;
+    }
+    let total = 0;
+    document.querySelectorAll('.donate-bulk-cb:checked').forEach(cb => {
+      total += Number(cb.dataset.amount) || 0;
+    });
+    $('donateBulkCount').textContent = _donateBulkSelected.size + '건';
+    $('donateBulkTotal').textContent = won(total);
+    sumEl.hidden = false;
+  }
+
+  // ── 벌크 기부 제출 ──
+  $('donateBulkSubmitBtn').addEventListener('click', async () => {
+    if (_donateBulkSelected.size === 0) { toast('기부할 항목을 선택하세요.'); return; }
+    const myJar = cachedJars.find(j => j.ownerId === userId);
+    if (!myJar) return;
+
+    const items = [];
+    document.querySelectorAll('.donate-bulk-cb:checked').forEach(cb => {
+      items.push({
+        entryId: cb.dataset.entryId,
+        amount: Number(cb.dataset.amount) || 0,
+        note: cb.dataset.note || '',
+      });
+    });
+
+    $('donateBulkSubmitBtn').disabled = true;
+    try {
+      const res = await apiFetch({ action: 'donateBulk', params: {
+        fromJarId: myJar.jarId,
+        toJarId: currentJar.jarId,
+        items,
+      }});
+      closeSheet('donateSheet');
+
+      // Show bulk result
+      let html = '';
+      (res.items || []).forEach(item => {
+        const feePct = Math.round((item.feeRate || 0) * 100);
+        const note = displayNote(item.note) || '적립';
+        html += `<div class="dr-bulk-item">
+          <div class="dr-bulk-note">${escHtml(note)}</div>
+          <div class="dr-row"><span>금액</span><span>${won(item.amount)}</span></div>
+          <div class="dr-row dr-fee"><span>🦝 수수료 (${feePct}%)</span><span>-${won(item.feeAmount)}</span></div>
+          <div class="dr-row dr-net"><span>전달</span><span>${won(item.netAmount)}</span></div>
+        </div>`;
+      });
+      html += `<div class="dr-bulk-total">
+        <div class="dr-row"><span>총 기부</span><span>${won(res.totalRequest)}</span></div>
+        <div class="dr-row dr-fee"><span>🦝 총 수수료</span><span>-${won(res.totalFee)}</span></div>
+        <div class="dr-row dr-net"><span>총 전달 금액</span><span>${won(res.totalNet)}</span></div>
+      </div>`;
+      $('donateResultBody').innerHTML = '';
+      $('donateResultBulk').innerHTML = html;
+      $('donateResultBulk').hidden = false;
+      openSheet('donateResultSheet');
+
+      // Update local data — add donation_out entries for sender
+      const ts = new Date().toISOString();
+      const myEntries = localEntries(myJar.jarId);
+      const toEntries = localEntries(currentJar.jarId);
+      let totalReq = 0;
+      (res.items || []).forEach(item => {
+        totalReq += item.amount;
+        const feePct = Math.round((item.feeRate || 0) * 100);
+        myEntries.unshift({
+          entryId: item.donationId, amount: -item.amount,
+          note: '기부 발신 (수수료 ' + feePct + '%)',
+          createdAt: ts, synced: true,
+          type: 'donation_out', icon: '↗️', contributorName: currentJar.name || '',
+        });
+        toEntries.unshift({
+          entryId: item.donationId + '_in', amount: item.netAmount,
+          note: `기부(${won(item.amount)}, 수수료${feePct}%)`,
+          createdAt: ts, synced: true,
+          type: 'donation_in', icon: '🦝', contributorName: myJar.name || '',
+          requestAmount: item.amount, feeRate: item.feeRate || 0, feeAmount: item.feeAmount || 0,
+          sourceNotes: item.note || '',
+        });
+      });
+      saveLocalEntries(myJar.jarId, myEntries);
+      saveLocalEntries(currentJar.jarId, toEntries);
+      // Update my jar amount
+      myJar.currentAmount = Math.max(0, (Number(myJar.currentAmount) || 0) - totalReq);
+      const jars = localJars();
+      const lj = jars.find(j => j.jarId === myJar.jarId);
+      if (lj) { lj.currentAmount = myJar.currentAmount; saveLocalJars(jars); }
+      if (currentJar.jarId === myJar.jarId) updateJarDisplay(myJar);
+      cachedJars = activeJars(localJars());
+    } catch (err) {
+      toast('기부 실패: ' + err.message);
+    } finally {
+      $('donateBulkSubmitBtn').disabled = false;
+    }
+  });
+
   // ── 기부 버튼 ──
   $('donateBtn').addEventListener('click', () => {
     if (!currentJar) return;
@@ -1282,6 +1538,8 @@
     $('donateFrom').textContent = myJar.name;
     $('donateTo').textContent = currentJar.name;
     $('donateAmount').value = '';
+    _donateBulkSelected = new Set();
+    switchDonateTab('amount');
     openSheet('donateSheet');
     setTimeout(() => $('donateAmount').focus(), 300);
   });
@@ -1305,6 +1563,8 @@
         `<div class="dr-row"><span>기부 요청</span><span>${won(amount)}</span></div>` +
         `<div class="dr-row dr-fee"><span>🦝 너구리사장 수수료 (${feePct}%)</span><span>-${won(res.feeAmount)}</span></div>` +
         `<div class="dr-row dr-net"><span>실제 전달 금액</span><span>${won(res.netAmount)}</span></div>`;
+      $('donateResultBulk').innerHTML = '';
+      $('donateResultBulk').hidden = true;
       openSheet('donateResultSheet');
       // Add donation_out to sender's local history
       const donOutEntry = {
@@ -1361,7 +1621,7 @@
       const delBtn = !isDonation && isOwnedJar
         ? `<button class="hist-del-btn" data-entry-id="${escHtml(e.entryId)}" data-jar-id="${escHtml(jarId)}" type="button" aria-label="삭제">🗑️</button>`
         : '';
-      // 기부 수신 내역: "기부(원래금액, 수수료N%)" 형식으로 표시
+      // 기부 수신 내역: "기부(원래금액, 수수료N%)" 형식 + sourceNotes
       let noteDisplay = displayNote(e.note);
       if (isDonationIn) {
         const reqAmt = Number(e.requestAmount) || 0;
@@ -1370,9 +1630,14 @@
           noteDisplay = `기부(${won(reqAmt)}, 수수료${feePct}%)`;
         }
       }
+      const srcNote = e.sourceNotes ? displayNote(e.sourceNotes) : '';
+      const srcNoteHtml = srcNote
+        ? `<div class="hist-src-note">📎 ${escHtml(srcNote)}</div>`
+        : '';
       return `<div class="hist-row${isDonation ? ' hist-donation' : ''}">
         <div class="hist-left">
           <div class="hist-label">${icon} ${escHtml(noteDisplay)}</div>
+          ${srcNoteHtml}
           <div class="hist-date">${fmtDate(e.createdAt)}${!e.synced ? ' <span class="hist-pending">●</span>' : ''}${e.contributorName ? ' · ' + escHtml(e.contributorName) : ''}</div>
         </div>
         <div class="hist-right">
@@ -1515,7 +1780,8 @@
 
   // ── 앱 초기화 (localStorage-first) ──
   async function initApp() {
-    if (isMock()) console.info('[DreamJar] Apps Script URL 미설정 → 샘플 데이터 모드');
+    if (hasSupabase()) console.info('[DreamJar] Supabase 백엔드 연동됨');
+    else if (isMock()) console.info('[DreamJar] 백엔드 미설정 → 샘플 데이터 모드');
 
     $('jarLoading').hidden = false;
     $('jarDisplay').hidden = true;
@@ -1538,7 +1804,7 @@
           saveLocalEntries(jarId, entries);
         });
         cachedJars = activeJars(mockJars);
-      } else if (scriptUrl) {
+      } else if (hasSupabase() || scriptUrl) {
         // 로컬 데이터 없음 — 서버에서 한 번 자동 로드
         toast('로컬 데이터 없음. 서버에서 불러오는 중…');
         try { await syncWithServer(true); return; } catch { /* fall through to empty */ }

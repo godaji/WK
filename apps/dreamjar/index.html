@@ -8,11 +8,13 @@
 <meta name="theme-color" content="#1a1a2e">
 <meta name="description" content="함께 모으는 드림 저금통 — 단일 화면으로 Jar와 Control을 한눈에.">
 <title>DreamJar — 함께 모으는 저금통</title>
+<link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./icons/icon-180.png">
 <link rel="manifest" href="./manifest.json">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DreamJar">
-<link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="./style.css?v=20260711c">
 </head>
 <body>
 
@@ -27,10 +29,7 @@
       <input id="setupUserId" class="sf-input" type="text"
         placeholder="예: hong-gildong-01" autocomplete="off" maxlength="40">
       <p class="sf-hint">공백 없이 영문·숫자·하이픈만 사용하세요.</p>
-      <label class="sf-label" for="setupScriptUrl">Apps Script URL <span class="sf-optional">(선택)</span></label>
-      <input id="setupScriptUrl" class="sf-input" type="url"
-        placeholder="https://script.google.com/macros/s/…/exec" autocomplete="off">
-      <p class="sf-hint">나중에 설정해도 됩니다. 없으면 샘플 데이터로 미리 볼 수 있어요.</p>
+      <!-- Apps Script URL removed — Supabase backend (CMPA-893) -->
       <button id="setupSaveBtn" class="sf-save" type="button">시작하기</button>
     </div>
   </div>
@@ -137,17 +136,16 @@
         <div class="sett-section-title">계정</div>
         <div class="sett-field">
           <label class="sett-label" for="settUserId">사용자 ID</label>
-          <input id="settUserId" class="sett-input" type="text" autocomplete="off" maxlength="40">
+          <div class="sett-input-row">
+            <input id="settUserId" class="sett-input" type="text" autocomplete="off" maxlength="40" readonly>
+          </div>
         </div>
+        <button id="logoutBtn" class="btn-cta btn-danger" type="button" style="margin-top:10px">로그아웃</button>
+        <p class="sett-hint">로그아웃하면 로컬 데이터가 삭제됩니다. 서버 데이터는 유지됩니다.</p>
       </div>
       <div class="sett-section">
         <div class="sett-section-title">연동</div>
-        <div class="sett-field">
-          <label class="sett-label" for="settScriptUrl">Apps Script URL</label>
-          <input id="settScriptUrl" class="sett-input" type="url"
-            placeholder="https://script.google.com/macros/s/…/exec" autocomplete="off">
-        </div>
-        <p class="sett-hint">비워 두면 샘플 데이터로 동작합니다.</p>
+        <p class="sett-hint">Supabase 백엔드 연동 (CMPA-893)</p>
       </div>
       <button id="settSaveBtn" class="btn-cta" type="button">저장</button>
 
@@ -186,7 +184,7 @@
       </div>
 
       <div class="sett-divider"></div>
-      <p class="sett-version">DreamJar v1.0.0</p>
+      <p class="sett-version">DreamJar v1.1.0-supabase</p>
     </div>
   </div>
 </div>
@@ -406,12 +404,29 @@
         <div class="donate-arrow">→</div>
         <div class="donate-to" id="donateTo"></div>
       </div>
-      <div class="cj-field">
-        <label class="cj-label" for="donateAmount">기부 금액 <span class="cj-unit">원</span></label>
-        <input id="donateAmount" class="cj-input" type="number" placeholder="예: 10000" min="1" inputmode="numeric">
+      <!-- 탭 바 -->
+      <div class="donate-tab-bar">
+        <button class="donate-tab-btn active" data-donate-tab="amount" type="button">금액 입력</button>
+        <button class="donate-tab-btn" data-donate-tab="entries" type="button">내역 선택</button>
       </div>
-      <p class="sett-hint">🦝 너구리사장이 0~50% 수수료를 랜덤으로 떼갑니다.</p>
-      <button id="donateSubmitBtn" class="btn-cta" type="button">기부하기</button>
+      <!-- 금액 입력 탭 -->
+      <div class="donate-tab-content" data-donate-tab="amount">
+        <div class="cj-field">
+          <label class="cj-label" for="donateAmount">기부 금액 <span class="cj-unit">원</span></label>
+          <input id="donateAmount" class="cj-input" type="number" placeholder="예: 10000" min="1" inputmode="numeric">
+        </div>
+        <p class="sett-hint">🦝 너구리사장이 0~50% 수수료를 랜덤으로 떼갑니다.</p>
+        <button id="donateSubmitBtn" class="btn-cta" type="button">기부하기</button>
+      </div>
+      <!-- 내역 선택 탭 -->
+      <div class="donate-tab-content" data-donate-tab="entries" hidden>
+        <div id="donateBulkList" class="donate-bulk-list"></div>
+        <div class="donate-bulk-summary" id="donateBulkSummary" hidden>
+          <span id="donateBulkCount">0건</span> 선택 · <span id="donateBulkTotal">0원</span>
+        </div>
+        <p class="sett-hint">🦝 너구리사장이 각 항목마다 0~50% 수수료를 개별 적용합니다.</p>
+        <button id="donateBulkSubmitBtn" class="btn-cta" type="button">선택 항목 기부하기</button>
+      </div>
     </div>
   </div>
 </div>
@@ -425,6 +440,7 @@
     </div>
     <div class="sheet-body">
       <div id="donateResultBody"></div>
+      <div id="donateResultBulk" hidden></div>
       <button class="btn-cta sheet-close" data-close="donateResultSheet" type="button" style="margin-top:16px">확인</button>
     </div>
   </div>
@@ -460,6 +476,8 @@
   </div>
 </div>
 
-<script src="./app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./supabase/supabase.js?v=20260711c"></script>
+<script src="./app.js?v=20260711c"></script>
 </body>
 </html>

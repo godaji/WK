@@ -423,6 +423,8 @@ input, select { font-family: inherit; }
 .sett-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
 .sett-field:last-child { margin-bottom: 0; }
 .sett-label { font-size: 13px; font-weight: 700; color: var(--muted); }
+.sett-input-row { display: flex; gap: 8px; align-items: center; }
+.sett-input-row .sett-input { flex: 1; min-width: 0; }
 .sett-input {
   width: 100%; min-height: 50px;
   background: var(--bg2); border: 1px solid var(--line); border-radius: 12px;
@@ -690,7 +692,7 @@ input, select { font-family: inherit; }
   text-align: center; padding: 8px 0 4px;
 }
 .dr-recv-img img {
-  width: 120px; height: 120px; border-radius: 50%;
+  width: 120px; height: 120px; border-radius: 16px;
   object-fit: cover; border: 3px solid var(--accent2);
 }
 .dr-recv-from {
@@ -718,3 +720,131 @@ input, select { font-family: inherit; }
   display: flex; align-items: center; justify-content: center;
 }
 .jar-picker-del-btn:active { opacity: .7; background: #e04040; }
+
+/* ── 기부 탭 바 ── */
+.donate-tab-bar {
+  display: flex;
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 3px;
+  margin-bottom: 14px;
+  gap: 3px;
+}
+.donate-tab-btn {
+  flex: 1;
+  padding: 8px 0;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  text-align: center;
+  transition: background .15s, color .15s;
+}
+.donate-tab-btn.active {
+  background: var(--accent);
+  color: #fff;
+}
+.donate-tab-btn:active { opacity: .8; }
+
+/* ── 기부 벌크 체크박스 목록 ── */
+.donate-bulk-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 40vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 12px;
+}
+.donate-bulk-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 12px;
+  cursor: pointer;
+  transition: background .15s;
+}
+.donate-bulk-item:active { background: var(--card2); }
+.donate-bulk-cb {
+  flex: none;
+  width: 20px; height: 20px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.donate-bulk-label {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+.donate-bulk-date {
+  flex: none;
+  font-size: 11px;
+  color: var(--muted);
+}
+.donate-bulk-amt {
+  flex: none;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent2);
+  white-space: nowrap;
+}
+
+/* ── 벌크 기부 선택 요약 ── */
+.donate-bulk-summary {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent2);
+  padding: 8px 0;
+  margin-bottom: 4px;
+}
+
+/* ── 벌크 기부 결과 ── */
+.dr-bulk-item {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+}
+.dr-bulk-note {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dr-bulk-total {
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 2px solid var(--accent);
+}
+
+/* ── 기부 수신 sourceNotes ── */
+.dr-source-note {
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  padding: 0 0 10px;
+  line-height: 1.4;
+}
+
+/* ── 내역 sourceNotes ── */
+.hist-src-note {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

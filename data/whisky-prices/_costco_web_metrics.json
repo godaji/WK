@@ -6,7 +6,7 @@
   "articles_unparsed": 6,
   "rows_quarantined": 2,
   "rows_written": 10,
-  "month_file": "2026-06.csv",
-  "collected_date": "2026-06-30",
-  "snapshot": "data/whisky-prices/_runs/2026-06__run2026-06-30.csv"
+  "month_file": "2026-07.csv",
+  "collected_date": "2026-07-06",
+  "snapshot": "data/whisky-prices/_runs/2026-07__run2026-07-06.csv"
 }

@@ -62,6 +62,38 @@ var SPREADSHEET_ID = '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms';
 
 ---
 
+## 로컬 개발
+
+### 실행 방법
+
+```bash
+cd apps/dreamjar
+./scripts/dev-server.sh          # http://localhost:8080
+./scripts/dev-server.sh 3000     # 포트 변경
+./scripts/dev-server.sh --open   # 브라우저 자동 오픈
+```
+
+### Mock 데이터로 동작
+
+Apps Script URL(`WEB_APP_URL`)을 설정하지 않아도 앱이 동작합니다. `localStorage-first` 아키텍처로, 백엔드 없이도 로컬 스토리지에 데이터를 저장하며 mock 데이터로 모든 기능을 테스트할 수 있습니다.
+
+### 기본 흐름
+
+1. **사용자 ID 설정** — 앱 첫 실행 시 사용자 이름 입력
+2. **Jar 생성** — 목표(여행, 운동 등)에 맞는 Jar 만들기
+3. **Control 선택** — Jar에 적용할 Control(이벤트/루틴) 선택
+4. **적립** — 활동 완료 시 리워드 적립
+
+### 모바일에서 확인하기
+
+PC와 휴대폰이 **같은 Wi-Fi 네트워크**에 연결된 상태에서:
+
+1. 서버를 실행하면 터미널에 네트워크 IP가 표시됩니다
+2. 휴대폰 브라우저에서 `http://<표시된 IP>:8080` 접속
+3. 예: `http://192.168.0.10:8080`
+
+---
+
 ## API 레퍼런스
 
 ### POST (doPost)

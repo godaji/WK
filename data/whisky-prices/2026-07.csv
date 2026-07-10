@@ -1,0 +1,11 @@
+﻿술이름,가격_KRW,위치,가져온날짜,출처,신뢰도,비고
+발렌타인 17년산,136900,코스트코,2026-07-06,WebScrape(costcome.com(코스트컴)),중,"정본=w090(발렌타인 17년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/ballantines-17yo-whiskey/"
+커클랜드 15년 하일랜드 싱글몰트 위스키,133900,코스트코,2026-07-06,WebScrape(costcome.com(코스트컴)),중,"정본=w098(커클랜드 15년 하일랜드 싱글몰트); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-15-years-highland-single-malt-whiskey/"
+커클랜드 시그니처 아일레이 싱글몰트 위스키,95900,코스트코,2026-07-06,WebScrape(costcome.com(코스트컴)),중,"정본=w285(커클랜드 시그니처 아일레이 싱글몰트); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-islay-single-malt-whiskey/"
+벨즈 블렌디드 위스키,20990,코스트코,2026-07-06,WebScrape(costcome.com(코스트컴)),중,"정본=w106(벨즈); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/bells-blended-scotch-whisky/"
+더 글렌리벳 15년 싱글몰트 위스키,106900,코스트코,2026-07-06,WebScrape(costcome.com(코스트컴)),중,"정본=w002(글렌리벳 15년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/the-glenlivet-15yo/"
+조니워커 블랙라벨 12년 700,40790,코스트코,2026-07-06,WebScrape(costcome.com(코스트컴)),중,"정본=w050(조니워커 블랙라벨 12년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/johnnie-walker-black-700ml/"
+시바스리갈 12년산,63900,코스트코,2026-07-06,WebScrape(costcome.com(코스트컴)),중,"정본=w048(시바스 리갈 12년); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/chivas-regal-12yo/"
+커클랜드 시그니처 스카치 위스키 1.75L,32490,코스트코,2026-07-06,WebScrape(costcome.com(코스트컴)),중,"정본=w099(커클랜드 시그니처 스카치); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-blended-scotch-whiskey-1-75l-costco-price-summary/"
+커클랜드 시그니처 캐나디안 위스키 1.75L,34990,코스트코,2026-07-06,WebScrape(costcome.com(코스트컴)),중,"정본=w100(커클랜드 시그니처 캐나디안); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/kirkland-signature-canadian-whiskey-1-75l-costco-price-summary/"
+잭다니엘 테네시 애플 위스키 1L,57900,코스트코,2026-07-06,WebScrape(costcome.com(코스트컴)),중,"정본=w067(잭다니엘 애플); 코스트코 매장가(점포미상), costcome.com(코스트컴) 추적; https://costcome.com/jack-daniels-tennessee-apple-whiskey-costco-sales-price-and-features-summary/"

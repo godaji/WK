@@ -87,9 +87,3 @@ robots: "index,follow"
 <div class="cl-wrap"><a class="cl-card" href="{{ _c.url | relative_url }}"><div class="cl-head"><span class="cl-title">최근 업데이트</span><span class="cl-when">{{ _c.log_date }} 기준</span></div><ul class="cl-list">{% if _c.cl_sources %}<li><span class="cl-ic">🗂</span><span>{{ _c.cl_sources }}</span></li>{% endif %}{% if _c.cl_shilla %}<li><span class="cl-ic">🛫</span><span>{{ _c.cl_shilla }}</span></li>{% endif %}{% if _c.cl_retail %}<li><span class="cl-ic">🛒</span><span>{{ _c.cl_retail }}</span></li>{% endif %}</ul><span class="cl-more">업데이트 로그 전체 보기 →</span></a></div>
 {% endif %}
 
-<div class="sec-head">🗂️ 개인 팁 모음</div>
-<ul class="latest-feed">
-  <li><span class="chip">🚌</span><a href="{{ '/bus6004' | relative_url }}">6004번 공항버스 시간표</a></li>
-  <li><span class="chip">🇻🇳</span><a href="{{ '/vietnam-prearrival' | relative_url }}">베트남 사전입국신고 — 한국인 작성 요령</a></li>
-</ul>
-

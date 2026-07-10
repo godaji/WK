@@ -28,10 +28,16 @@ Thumbs.db
 .vscode/*
 !.vscode/settings.json
 
+# --- Node ---
+node_modules/
+
 # --- Logs / temp ---
 *.log
 *.tmp
 tmp/
+
+# --- 배포 스냅샷 (git history 로 rollback 가능, 별도 보관 불필요) ---
+runs/
 
 # --- 보드 소통 보고서 (로컬 단일수신함, git 추적 제외) — CMPA-223 ---
 # review/ 는 보드(사람)가 로컬에서 읽는 보고서 누적함이지 코드 산출물이 아니다.

@@ -1,5 +1,5 @@
 /* 캐스크 적금 서비스워커 — 설치/오프라인(앱셸 캐시) */
-const CACHE = 'dramjar-v7';  // CMPA-777: 관심 목록 전환 — app.js/style.css/index.html 갱신
+const CACHE = 'dramjar-v8';  // CMPA-812: 직접 입력 + Export/Import — app.js/style.css/index.html 갱신
 const SHELL = [
   './',
   './index.html',

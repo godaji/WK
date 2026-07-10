@@ -64,6 +64,7 @@
     if (!j || !j.productId) return null;
     j.savings = Array.isArray(j.savings) ? j.savings : [];
     if (!j.id) j.id = uid();
+    if (j.isCustom && j.targetPrice == null) j.targetPrice = 0;
     return j;
   }
   function save() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); }
@@ -137,24 +138,35 @@
     $('goalCreate').hidden = true;
     $('goalBody').hidden = false;
     $('goalName').textContent = j.name;
-    const floor = floorOf(j.productId);
+    const isCustom = !!j.isCustom;
+    const floor = isCustom ? null : floorOf(j.productId);
+    const target = isCustom ? (j.targetPrice || 0) : (floor ? floor.floor_krw : 0);
     const tot = jarTotal();
-    const target = floor ? floor.floor_krw : 0;
     const pct = Math.min(100, target > 0 ? (tot / target) * 100 : 0);
     const fill = $('progressFill');
     fill.style.width = pct.toFixed(1) + '%';
     $('goalPct').textContent = Math.floor(pct) + '%';
-    $('goalFloor').textContent = floor ? won(target) : '가격 정보 없음';
-    $('goalCollected').textContent = floor && floor.collected_at ? `· ${floor.collected_at} 수집 기준값` : '';
+    const hasTarget = target > 0;
     const remain = Math.max(0, target - tot);
-    const done = target > 0 && remain <= 0;
-    $('goalRemain').textContent = !floor ? '—' : (done ? '달성! 🎉' : won(remain));
+    const done = hasTarget && remain <= 0;
+    $('goalRemain').textContent = !hasTarget ? '—' : (done ? '달성! 🎉' : won(remain));
     fill.classList.toggle('done', done);
+    // floor / 목표금액 표시
+    const floorLabel = $('goalFloorLabel');
+    if (isCustom) {
+      floorLabel.textContent = '목표 금액 ';
+      $('goalFloor').textContent = hasTarget ? won(target) : '—';
+      $('goalCollected').textContent = '(직접 입력)';
+    } else {
+      floorLabel.textContent = '현재 국내 최저가 ';
+      $('goalFloor').textContent = floor ? won(target) : '가격 정보 없음';
+      $('goalCollected').textContent = floor && floor.collected_at ? `· ${floor.collected_at} 수집 기준값` : '';
+    }
     // 달성 → 사러가기 + 구매완료(다음 목표)
     const row = $('goalAchieved');
     row.hidden = !done;
     const cta = $('ctaBuy');
-    if (done && floor && floor.dailyshot_url){ cta.hidden = false; cta.href = floor.dailyshot_url; }
+    if (!isCustom && done && floor && floor.dailyshot_url){ cta.hidden = false; cta.href = floor.dailyshot_url; }
     else cta.hidden = true;
   }
 
@@ -198,8 +210,10 @@
 
   function maybeCelebrate(){
     const j = jar(); if (!j) return;
-    const floor = floorOf(j.productId);
-    if (floor && jarTotal() >= floor.floor_krw && floor.floor_krw > 0){
+    const isCustom = !!j.isCustom;
+    const floorEntry = isCustom ? null : floorOf(j.productId);
+    const target = isCustom ? (j.targetPrice || 0) : (floorEntry ? floorEntry.floor_krw : 0);
+    if (target > 0 && jarTotal() >= target){
       if (!celebrated){ celebrated = true; vibrate([20,40,20]); toast('🎉 목표 달성! 사러 가거나 다음 목표로'); }
     } else celebrated = false;
   }
@@ -222,6 +236,7 @@
   function setGoal(f){
     if (jar()){
       jar().productId = f.product_id; jar().name = f.name;
+      delete jar().isCustom; delete jar().targetPrice;
     } else {
       state.activeJar = { id: uid(), productId: f.product_id, name: f.name, createdAt: Date.now(), savings: [] };
     }
@@ -230,15 +245,31 @@
     closeSheet('goalSheet'); vibrate(12); toast(`목표: ${f.name}`); maybeCelebrate();
   }
 
+  // ── 커스텀 목표 설정 / 변경 (직접 입력 — 적립금 유지) ──
+  function setCustomGoal(name, price){
+    if (jar()){
+      jar().productId = 'custom_' + uid(); jar().name = name;
+      jar().targetPrice = price; jar().isCustom = true;
+    } else {
+      state.activeJar = { id: uid(), productId: 'custom_' + uid(), name, targetPrice: price, isCustom: true, createdAt: Date.now(), savings: [] };
+    }
+    celebrated = false; save();
+    renderGoal(); renderTotal();
+    closeSheet('goalSheet'); vibrate(12); toast(`목표: ${name}`); maybeCelebrate();
+  }
+
   // ── 구매 완료 → 캐비닛 보관 + 새 적금통(다음 목표) ──
   function redeem(){
     const j = jar(); if (!j) return;
-    const floor = floorOf(j.productId);
+    const isCustom = !!j.isCustom;
+    const floor = isCustom ? null : floorOf(j.productId);
     if (!window.confirm(`${j.name} 구매 완료로 처리할까요?\n이 적금통은 캐비닛에 보관되고, 새 목표를 시작합니다.`)) return;
     state.cabinet.unshift({
       id: j.id, productId: j.productId, name: j.name,
       createdAt: j.createdAt, redeemedAt: Date.now(),
-      savedTotal: jarTotal(), floorAtRedeem: floor ? floor.floor_krw : null,
+      savedTotal: jarTotal(),
+      floorAtRedeem: isCustom ? j.targetPrice : (floor ? floor.floor_krw : null),
+      isCustom: isCustom || false,
     });
     state.activeJar = null; celebrated = false; save();
     renderGoal(); renderTotal();
@@ -258,20 +289,25 @@
     /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
 
   let deferredPrompt = null;                          // beforeinstallprompt 보관
+  function showInstallBtn(show){
+    const btn = $('installBtn'); const hd = $('settInstallHead');
+    if (btn) btn.hidden = !show;
+    if (hd)  hd.hidden  = !show;
+  }
   function setupInstall(){
     const btn = $('installBtn');
     if (!btn) return;
-    if (isStandalone()) { btn.hidden = true; return; } // 이미 설치/실행 → 버튼 불필요
+    if (isStandalone()) { showInstallBtn(false); return; }
 
     // Android/Chrome: 설치 가능 신호가 오면 버튼 노출
     window.addEventListener('beforeinstallprompt', e => {
       e.preventDefault();
       deferredPrompt = e;
-      btn.hidden = false;
+      showInstallBtn(true);
     });
 
     // iOS Safari: beforeinstallprompt 미발생 → 수동 안내 버튼 노출
-    if (isIOS()) btn.hidden = false;
+    if (isIOS()) showInstallBtn(true);
 
     btn.addEventListener('click', async () => {
       vibrate(8);
@@ -280,17 +316,17 @@
         let outcome = 'dismissed';
         try { ({ outcome } = await deferredPrompt.userChoice); } catch(e){}
         deferredPrompt = null;
-        btn.hidden = true;                            // 프롬프트는 1회성
+        showInstallBtn(false);
         if (outcome === 'accepted') toast('홈 화면에 추가했어요');
       } else if (isIOS()){
-        openSheet('iosInstallSheet');                 // 수동 안내 모달
+        openSheet('iosInstallSheet');
       }
     });
 
     // 설치 완료 → 버튼/안내 정리 + 토스트
     window.addEventListener('appinstalled', () => {
       deferredPrompt = null;
-      btn.hidden = true;
+      showInstallBtn(false);
       closeSheet('iosInstallSheet');
       vibrate([20,40,20]);
       toast('홈 화면에 추가됐어요');
@@ -321,11 +357,50 @@
     btn.classList.toggle('on', state.starOnlyFilter);
   }
 
+  // ── 직접 입력 폼 헬퍼 ──
+  function openCustomForm(){
+    $('customName').value = '';
+    $('customPrice').value = '';
+    $('customForm').hidden = false;
+    $('goalList').hidden = true;
+    try { $('customName').focus(); } catch(e){}
+  }
+  function closeCustomForm(){
+    $('customForm').hidden = true;
+    $('goalList').hidden = false;
+  }
+  function submitCustomForm(){
+    const name = $('customName').value.trim();
+    const raw = String($('customPrice').value).replace(/[^0-9]/g, '');
+    const price = parseInt(raw, 10);
+    if (!name){ toast('위스키 이름을 입력해 주세요'); try { $('customName').focus(); } catch(e){} return; }
+    if (!price || price <= 0){ toast('금액을 입력해 주세요'); try { $('customPrice').focus(); } catch(e){} return; }
+    setCustomGoal(name, price);
+  }
+
   // ── 목표 선택 시트 ──
   function renderGoalList(){
     const box = $('goalList');
     box.innerHTML = '';
-    if (!floors.length){ box.innerHTML = '<p class="hist-empty">floor 데이터를 불러오지 못했습니다.</p>'; return; }
+    // 폼 뷰 초기화
+    $('customForm').hidden = true;
+    box.hidden = false;
+
+    // "직접 입력" 행 최상단
+    const customBtn = document.createElement('button');
+    customBtn.type = 'button';
+    customBtn.className = 'custom-entry-btn';
+    customBtn.innerHTML = '<span class="ceb-plus">+</span> 직접 입력 <span class="ceb-hint">목록에 없는 위스키</span>';
+    customBtn.addEventListener('click', openCustomForm);
+    box.appendChild(customBtn);
+
+    if (!floors.length){
+      const p = document.createElement('p');
+      p.className = 'hist-empty';
+      p.textContent = 'floor 데이터를 불러오지 못했습니다.';
+      box.appendChild(p);
+      return;
+    }
     const curId = jar() ? jar().productId : null;
 
     const starredFloors = floors.filter(f => state.starred.includes(String(f.product_id)));
@@ -573,13 +648,63 @@
       renderSettingsSheet();
     });
     $('cabinetOpen').addEventListener('click', () => { renderCabinet(); openSheet('cabinetSheet'); });
+    $('customCancel').addEventListener('click', closeCustomForm);
+    $('customSave').addEventListener('click', submitCustomForm);
+    $('customName').addEventListener('keydown', e => { if (e.key === 'Enter') $('customPrice').focus(); });
+    $('customPrice').addEventListener('keydown', e => { if (e.key === 'Enter') submitCustomForm(); });
     $('rateMinus').addEventListener('click', () => stepRate(-500));
     $('ratePlus').addEventListener('click', () => stepRate(500));
     $('rateSave').addEventListener('click', saveRate);
+    $('exportBtn').addEventListener('click', exportData);
+    $('importBtn').addEventListener('click', importData);
+    $('importFile').addEventListener('change', e => {
+      handleImportFile(e.target.files[0]);
+      e.target.value = '';
+    });
     document.querySelectorAll('[data-close]').forEach(b =>
       b.addEventListener('click', () => closeSheet(b.dataset.close)));
     document.querySelectorAll('.sheet-backdrop').forEach(bd =>
       bd.addEventListener('click', e => { if (e.target === bd) bd.hidden = true; }));
+  }
+
+  // ── 데이터 내보내기 ──
+  function exportData(){
+    const raw = localStorage.getItem(STORE_KEY);
+    if (!raw){ toast('내보낼 데이터가 없어요'); return; }
+    const d = new Date();
+    const date = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const blob = new Blob([raw], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `dramjar-backup-${date}.json`;
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    toast('백업 파일을 저장했습니다');
+  }
+
+  // ── 데이터 가져오기 ──
+  function importData(){ $('importFile').click(); }
+
+  function handleImportFile(file){
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      let parsed;
+      try { parsed = JSON.parse(e.target.result); }
+      catch(err){ toast('파일을 읽을 수 없어요 (JSON 오류)'); return; }
+      if (!parsed || typeof parsed !== 'object' ||
+          !('activeJar' in parsed) || !('cabinet' in parsed) || !('itemRates' in parsed)){
+        toast('올바른 백업 파일이 아니에요'); return;
+      }
+      if (!window.confirm('현재 데이터가 교체됩니다. 계속할까요?')) return;
+      localStorage.setItem(STORE_KEY, JSON.stringify(parsed));
+      state = load(); celebrated = false;
+      renderGrid(); renderTotal(); renderGoal();
+      _syncFilterBtn(); _syncSettingsCount(); renderSettingsSheet();
+      toast('데이터를 불러왔어요');
+    };
+    reader.onerror = () => { toast('파일 읽기에 실패했어요'); };
+    reader.readAsText(file);
   }
 
   // ── floor 데이터 로드 ──

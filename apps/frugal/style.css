@@ -150,14 +150,15 @@ strong{font-variant-numeric:tabular-nums;}
 .tile .label{font-size:12px;font-weight:600;line-height:1.15;}
 .tile .rate{font-size:11px;color:var(--gold);font-variant-numeric:tabular-nums;}
 
-/* ===== 홈 화면에 추가 (A2HS) 버튼 — 담백하게, 엄지존 하단 ===== */
-.install-btn{
+/* ===== 홈 화면에 추가 (A2HS) 버튼 — 설정 시트 내 ===== */
+.sett-install-head{margin-top:6px;}
+.sett-install-btn{
   width:100%;min-height:var(--tap);border-radius:14px;padding:12px;
   background:var(--card);border:1px solid var(--gold-deep);color:var(--gold);
   font-size:15px;font-weight:700;
   display:flex;align-items:center;justify-content:center;gap:6px;
 }
-.install-btn:active{transform:scale(.98);background:var(--card2);}
+.sett-install-btn:active{transform:scale(.98);background:var(--card2);}
 
 /* iOS 설치 안내 시트 */
 .ios-lead{margin:2px 0 12px;font-size:15px;color:var(--text);line-height:1.5;}
@@ -216,6 +217,47 @@ strong{font-variant-numeric:tabular-nums;}
 .goal-section-head{font-size:12px;font-weight:700;color:var(--muted);
   padding:10px 4px 4px;margin-bottom:4px;border-bottom:1px solid var(--line);}
 
+/* ===== 직접 입력 버튼 (목표 선택 시트 최상단) ===== */
+.custom-entry-btn{
+  display:flex;align-items:center;gap:8px;
+  width:100%;min-height:52px;padding:0 16px;
+  border-radius:14px;background:var(--card);border:1px solid var(--gold-deep);
+  color:var(--gold);font-size:15px;font-weight:700;
+  margin-bottom:12px;text-align:left;
+}
+.custom-entry-btn:active{transform:scale(.98);background:var(--card2);}
+.ceb-plus{font-size:20px;font-weight:800;line-height:1;}
+.ceb-hint{font-size:12px;color:var(--muted);font-weight:400;margin-left:auto;}
+
+/* ===== 직접 입력 폼 ===== */
+.custom-form{padding:4px 0 8px;}
+.cf-field{margin-bottom:14px;}
+.cf-label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;font-weight:600;}
+.cf-input{
+  display:block;width:100%;min-height:48px;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  color:var(--text);font-size:16px;padding:0 14px;
+  outline:none;font-family:inherit;
+  -webkit-appearance:none;appearance:none;
+}
+.cf-input:focus{border-color:var(--gold);}
+.cf-input::placeholder{color:var(--muted);opacity:.7;}
+.cf-input::-webkit-outer-spin-button,
+.cf-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+.cf-input[type=number]{-moz-appearance:textfield;}
+.cf-price-wrap{display:flex;align-items:center;gap:8px;}
+.cf-input-price{flex:1;}
+.cf-won{font-size:16px;color:var(--muted);flex:none;}
+.cf-btns{display:flex;gap:10px;margin-top:18px;}
+.cf-cancel{flex:1;min-height:52px;border-radius:14px;
+  background:var(--card);border:1px solid var(--line);color:var(--muted);
+  font-size:16px;font-weight:700;}
+.cf-cancel:active{transform:scale(.97);}
+.cf-save{flex:2;min-height:52px;border-radius:14px;
+  background:linear-gradient(90deg,var(--gold-deep),var(--gold));color:#241a10;
+  font-size:17px;font-weight:800;}
+.cf-save:active{transform:scale(.98);}
+
 /* 단가 스테퍼 */
 .stepper{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:8px 0 16px;}
 .step-btn{flex:none;width:64px;height:64px;border-radius:50%;
@@ -267,3 +309,15 @@ strong{font-variant-numeric:tabular-nums;}
   background:var(--card2);border:1px solid var(--line);color:var(--muted);font-size:13px;font-weight:700;}
 .sett-row .sr-tried.on{border-color:var(--ok);color:var(--ok);}
 .sett-row .sr-tried:active{transform:scale(.92);}
+
+/* ===== 설정 시트: 데이터 Export / Import ===== */
+.sett-data-head{margin-top:16px;}
+.sett-data-actions{display:flex;flex-direction:column;gap:8px;margin-top:8px;}
+.sett-data-btn{
+  width:100%;min-height:44px;border-radius:12px;
+  background:var(--card);border:1px solid var(--line);
+  color:var(--text);font-size:15px;font-weight:600;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.sett-data-btn:active{transform:scale(.97);background:var(--card2);}
+.sett-data-btn-import{border-color:var(--gold-deep);color:var(--gold);}
