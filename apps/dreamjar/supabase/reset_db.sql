@@ -134,7 +134,8 @@ create policy "controls_delete" on public.controls
 -- 4. Admin user creation helper function
 -- ============================================================
 -- Usage: select admin_create_user('hong-gildong-01', 'mypassword123');
--- This creates a Supabase Auth user + public.users row in one call.
+-- This creates a Supabase Auth user + identity + public.users row in one call.
+-- Must be run from Supabase SQL Editor (needs superuser/service_role access).
 create or replace function public.admin_create_user(
   p_user_id  text,
   p_password text
@@ -144,30 +145,42 @@ declare
   v_email    text;
   v_auth_uid uuid;
 begin
-  -- Map userId to email format for Supabase Auth
   v_email := p_user_id || '@dreamjar.local';
+  v_auth_uid := gen_random_uuid();
 
-  -- Create auth user via supabase_admin (requires service_role or dashboard)
-  -- Note: This function must be called with service_role key or from Supabase Dashboard SQL Editor
+  -- Insert into auth.users with all required fields
   insert into auth.users (
     instance_id, id, aud, role, email, encrypted_password,
     email_confirmed_at, created_at, updated_at,
     confirmation_token, recovery_token, email_change_token_new,
-    raw_app_meta_data, raw_user_meta_data
+    raw_app_meta_data, raw_user_meta_data,
+    is_super_admin, phone, phone_confirmed_at
   ) values (
     '00000000-0000-0000-0000-000000000000',
-    gen_random_uuid(), 'authenticated', 'authenticated',
+    v_auth_uid, 'authenticated', 'authenticated',
     v_email, crypt(p_password, gen_salt('bf')),
     now(), now(), now(),
-    '', '', '',
+    encode(gen_random_bytes(32), 'hex'), '', '',
     '{"provider":"email","providers":["email"]}'::jsonb,
-    jsonb_build_object('user_id', p_user_id)
-  )
-  returning id into v_auth_uid;
+    jsonb_build_object('user_id', p_user_id),
+    false, null, null
+  );
+
+  -- Insert identity row (required for Supabase Auth login to work)
+  insert into auth.identities (
+    id, user_id, identity_data, provider, provider_id,
+    last_sign_in_at, created_at, updated_at
+  ) values (
+    v_auth_uid, v_auth_uid,
+    jsonb_build_object('sub', v_auth_uid::text, 'email', v_email, 'email_verified', true, 'phone_verified', false),
+    'email', v_auth_uid::text,
+    now(), now(), now()
+  );
 
   -- Create public.users row
   insert into public.users (user_id, name, auth_uid, created_at)
-  values (p_user_id, p_user_id, v_auth_uid, now());
+  values (p_user_id, p_user_id, v_auth_uid, now())
+  on conflict (user_id) do update set auth_uid = v_auth_uid;
 
   return jsonb_build_object(
     'userId',  p_user_id,
