@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DreamJar">
-<link rel="stylesheet" href="./style.css?v=20260711i">
+<link rel="stylesheet" href="./style.css?v=20260711j">
 </head>
 <body>
 
@@ -60,6 +60,11 @@
           <span class="jar-name" id="mainJarName">—</span>
           <button class="btn-change" id="jarChangeBtn" type="button">변경</button>
         </div>
+        <div class="jar-image-display" id="mainJarImage" hidden>
+          <img id="mainJarImageImg" src="" alt="Jar 사진">
+          <button class="jar-image-edit" id="jarImageEditBtn" type="button" hidden>📷</button>
+        </div>
+        <input type="file" id="jarImageFileEdit" accept="image/*" hidden>
         <div class="jar-amounts" id="mainJarAmounts">
           <span class="jar-cur" id="mainJarCur">0원</span>
           <span class="jar-sep"> / </span>
@@ -239,6 +244,17 @@
       <div class="cj-field">
         <label class="cj-label" for="cjDesc">설명 <span class="cj-optional">(선택)</span></label>
         <input id="cjDesc" class="cj-input" type="text" placeholder="어떤 목표인가요?" maxlength="120" autocomplete="off">
+      </div>
+      <div class="cj-field">
+        <label class="cj-label">목표 사진 <span class="cj-optional">(선택)</span></label>
+        <div class="cj-image-upload" id="cjImageUpload">
+          <input type="file" id="cjImageFile" accept="image/*" hidden>
+          <div class="cj-image-preview" id="cjImagePreview" hidden>
+            <img id="cjImagePreviewImg" src="" alt="미리보기">
+            <button class="cj-image-remove" id="cjImageRemoveBtn" type="button">✕</button>
+          </div>
+          <button class="cj-image-add-btn" id="cjImageAddBtn" type="button">📷 사진 추가</button>
+        </div>
       </div>
       <button id="cjSaveBtn" class="btn-cta" type="button">만들기</button>
     </div>
@@ -525,7 +541,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./supabase/supabase.js?v=20260711i"></script>
-<script src="./app.js?v=20260711i"></script>
+<script src="./supabase/supabase.js?v=20260711j"></script>
+<script src="./app.js?v=20260711j"></script>
 </body>
 </html>

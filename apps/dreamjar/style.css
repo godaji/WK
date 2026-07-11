@@ -70,6 +70,7 @@ input, select { font-family: inherit; }
 .sf-input:focus { border-color: var(--accent); }
 .sf-input::placeholder { color: var(--muted); opacity: .6; }
 .sf-hint { margin: 6px 2px 0; font-size: 12px; color: var(--muted); line-height: 1.4; }
+.sf-error { margin: 8px 2px 0; font-size: 13px; color: #e57373; line-height: 1.4; font-weight: 600; }
 .sf-save {
   margin-top: 24px;
   width: 100%; min-height: 54px; border-radius: 16px;
@@ -933,3 +934,72 @@ input, select { font-family: inherit; }
   font-weight: 600; cursor: pointer; text-align: center;
 }
 .btn-add-item:active { background: var(--card); }
+
+/* ── Jar 사진 ── */
+.jar-image-display {
+  position: relative;
+  margin-bottom: 12px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.jar-image-display img {
+  display: block;
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+.jar-image-edit {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0,0,0,.6);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.jar-image-edit:active { opacity: .7; }
+
+/* ── Jar 만들기 — 사진 업로드 ── */
+.cj-image-upload { margin-top: 4px; }
+.cj-image-add-btn {
+  width: 100%;
+  min-height: 48px;
+  background: var(--bg);
+  border: 2px dashed var(--line);
+  border-radius: 14px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+.cj-image-add-btn:active { border-color: var(--accent); color: var(--accent2); }
+.cj-image-preview {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.cj-image-preview img {
+  display: block;
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+.cj-image-remove {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0,0,0,.7);
+  color: #fff;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

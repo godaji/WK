@@ -1007,6 +1007,10 @@
     $('cjName').value = '';
     $('cjGoal').value = '';
     $('cjDesc').value = '';
+    $('cjImagePreview').hidden = true;
+    $('cjImagePreviewImg').src = '';
+    $('cjImageAddBtn').hidden = false;
+    $('cjImageFile').value = '';
     openSheet('createJarSheet');
     setTimeout(() => $('cjName').focus(), 300);
   }
@@ -1029,10 +1033,21 @@
     $('cjSaveBtn').disabled = true;
     try {
       const res = await apiFetch({ action: 'createJar', params: { name, description: desc, goalAmount: goal, ownerId: userId } });
+      // Upload jar image if selected
+      let imageUrl = '';
+      const imageFile = $('cjImageFile').files[0];
+      if (imageFile && hasSupabase()) {
+        try {
+          imageUrl = await window.DreamJarSupabase.uploadJarImage(res.jarId, imageFile);
+          await apiFetch({ action: 'updateJarImage', params: { jarId: res.jarId, imageUrl } });
+        } catch (imgErr) {
+          console.warn('[DreamJar] Image upload failed:', imgErr);
+        }
+      }
       closeSheet('createJarSheet');
       toast('Jar를 만들었어요!');
       // 새 Jar를 로컬에 추가
-      const newJar = { jarId: res.jarId, name, description: desc, goalAmount: goal, currentAmount: 0, ownerId: userId, controlId: '', memberId: '' };
+      const newJar = { jarId: res.jarId, name, description: desc, goalAmount: goal, currentAmount: 0, ownerId: userId, controlId: '', memberId: '', imageUrl };
       const jars = localJars();
       jars.unshift(newJar);
       saveLocalJars(jars);
@@ -1049,6 +1064,51 @@
   // "Jar 만들기" 버튼 (Jar 없을 때 표시)
   $('jarCreateBtnEmpty').addEventListener('click', openCreateJar);
 
+  // ── Jar 사진 업로드 (만들기) ──
+  $('cjImageAddBtn').addEventListener('click', () => $('cjImageFile').click());
+  $('cjImageFile').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) { toast('사진은 5MB 이하만 가능합니다.'); return; }
+    const reader = new FileReader();
+    reader.onload = () => {
+      $('cjImagePreviewImg').src = reader.result;
+      $('cjImagePreview').hidden = false;
+      $('cjImageAddBtn').hidden = true;
+    };
+    reader.readAsDataURL(file);
+  });
+  $('cjImageRemoveBtn').addEventListener('click', () => {
+    $('cjImagePreview').hidden = true;
+    $('cjImagePreviewImg').src = '';
+    $('cjImageAddBtn').hidden = false;
+    $('cjImageFile').value = '';
+  });
+
+  // ── Jar 사진 변경 (기존 Jar) ──
+  $('jarImageEditBtn').addEventListener('click', () => $('jarImageFileEdit').click());
+  $('jarImageFileEdit').addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) { toast('사진은 5MB 이하만 가능합니다.'); return; }
+    if (!currentJar || !hasSupabase()) return;
+    toast('사진 업로드 중…');
+    try {
+      const imageUrl = await window.DreamJarSupabase.uploadJarImage(currentJar.jarId, file);
+      await apiFetch({ action: 'updateJarImage', params: { jarId: currentJar.jarId, imageUrl } });
+      currentJar.imageUrl = imageUrl;
+      // Update local cache
+      const jars = localJars();
+      const idx = jars.findIndex(j => j.jarId === currentJar.jarId);
+      if (idx >= 0) { jars[idx].imageUrl = imageUrl; saveLocalJars(jars); }
+      renderJarSection(currentJar);
+      toast('사진이 변경되었어요!');
+    } catch (err) {
+      toast('사진 업로드 실패: ' + err.message);
+    }
+    $('jarImageFileEdit').value = '';
+  });
+
   // ── JAR 섹션 렌더 ──
   function renderJarSection(jar) {
     $('jarLoading').hidden = true;
@@ -1060,6 +1120,18 @@
     const isOwned = jar.ownerId === userId;
     $('historyBtn').hidden = false;
     $('donateBtn').hidden  = isOwned;
+
+    // Show jar image
+    const imgDisplay = $('mainJarImage');
+    const imgEl = $('mainJarImageImg');
+    if (jar.imageUrl) {
+      imgEl.src = jar.imageUrl;
+      imgDisplay.hidden = false;
+      $('jarImageEditBtn').hidden = !isOwned;
+    } else {
+      imgDisplay.hidden = true;
+      imgEl.src = '';
+    }
 
     // Show sync info for joined jars
     const syncInfo = $('jarSyncInfo');

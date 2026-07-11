@@ -18,13 +18,17 @@
 
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // ── Auth helpers ───────────────────────────────────────────
+  // ── Auth helpers (CMPA-913: userId+password login) ─────────
 
-  /** Sign in with Google OAuth (Supabase handles the redirect) */
-  async function signInWithGoogle() {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: { redirectTo: window.location.origin + window.location.pathname },
+  /**
+   * Sign in with userId + password.
+   * Internally maps userId → {userId}@dreamjar.local for Supabase Auth email/password.
+   */
+  async function signInWithPassword(userId, password) {
+    const email = userId + '@dreamjar.local';
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
     });
     if (error) throw error;
     return data;
@@ -39,6 +43,19 @@
   async function getSession() {
     const { data: { session } } = await supabase.auth.getSession();
     return session;
+  }
+
+  /** Get the app-level userId from the current session */
+  async function getAuthUserId() {
+    const session = await getSession();
+    if (!session) return null;
+    // user_id is stored in users table; extract from user_metadata or query
+    const meta = session.user?.user_metadata;
+    if (meta?.user_id) return meta.user_id;
+    // Fallback: derive from email ({userId}@dreamjar.local)
+    const email = session.user?.email || '';
+    if (email.endsWith('@dreamjar.local')) return email.replace('@dreamjar.local', '');
+    return null;
   }
 
   /** Listen to auth state changes */
@@ -71,6 +88,7 @@
     if (action === 'donate')         return await donateSingle(params);
     if (action === 'donateBulk')     return await donateBulk(params);
     if (action === 'archiveJar')     return await archiveJar(params);
+    if (action === 'updateJarImage') return await updateJarImage(params.jarId, params.imageUrl);
 
     // GET queries
     if (query === 'version')          return { version: 'supabase-v1.0' };
@@ -131,6 +149,7 @@
       owner_id:    p.ownerId || '',
       goal_amount: Number(p.goalAmount) || 0,
       control_id:  p.controlId || '',
+      image_url:   p.imageUrl || null,
       created_at:  ts,
     });
     if (jarErr) throw jarErr;
@@ -311,6 +330,28 @@
     return data;
   }
 
+  async function uploadJarImage(jarId, file) {
+    const ext = file.name.split('.').pop() || 'jpg';
+    const path = `${jarId}/${Date.now()}.${ext}`;
+    const { error } = await supabase.storage
+      .from('jar-images')
+      .upload(path, file, { cacheControl: '3600', upsert: false });
+    if (error) throw error;
+    const { data: { publicUrl } } = supabase.storage
+      .from('jar-images')
+      .getPublicUrl(path);
+    return publicUrl;
+  }
+
+  async function updateJarImage(jarId, imageUrl) {
+    const { error } = await supabase
+      .from('jars')
+      .update({ image_url: imageUrl })
+      .eq('jar_id', jarId);
+    if (error) throw error;
+    return { updated: true };
+  }
+
   async function archiveJar(p) {
     const { error } = await supabase
       .from('jars')
@@ -405,6 +446,7 @@
         createdAt:           j.created_at,
         role:                m.role || 'owner',
         memberId:            m.member_id || '',
+        imageUrl:            j.image_url || '',
         currentAmount:       entriesSum + dInSum - dOutSum,
         recentSevenDayTotal: 0, // simplified for PoC
       };
@@ -567,6 +609,7 @@
       jarId: jar.jar_id, name: jar.name, description: jar.description,
       ownerId: jar.owner_id, goalAmount: jar.goal_amount,
       controlId: jar.control_id, createdAt: jar.created_at,
+      imageUrl: jar.image_url || '',
       currentAmount: entriesSum + dInSum - dOutSum,
       entryCount: (entries || []).length + (dIn || []).length,
     };
@@ -728,6 +771,7 @@
       jarId: j.jar_id, name: j.name, description: j.description,
       ownerId: j.owner_id, goalAmount: j.goal_amount,
       controlId: j.control_id, createdAt: j.created_at,
+      imageUrl: j.image_url || '',
       archived: j.archived, archivedAt: j.archived_at,
     }));
   }
@@ -736,10 +780,12 @@
   window.DreamJarSupabase = {
     supabase,
     api:       supabaseApi,
+    uploadJarImage,
     auth: {
-      signInWithGoogle,
+      signInWithPassword,
       signOut,
       getSession,
+      getAuthUserId,
       onAuthStateChange,
     },
   };

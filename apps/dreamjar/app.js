@@ -406,24 +406,58 @@
   }
 
   // ── 설정 화면 ──
-  function showSetup() {
-    $('setupScreen').hidden = false;
+  // ── 로그인 화면 (CMPA-913) ──
+  function showLogin() {
+    $('loginScreen').hidden = false;
     $('mainApp').hidden = true;
-    $('setupUserId').value  = userId;
-    $('setupUserId').focus();
+    $('loginError').hidden = true;
+    $('loginUserId').value = '';
+    $('loginPassword').value = '';
+    $('loginUserId').focus();
   }
-  function hideSetup() {
-    $('setupScreen').hidden = true;
+  function hideLogin() {
+    $('loginScreen').hidden = true;
     $('mainApp').hidden = false;
   }
 
-  $('setupSaveBtn').addEventListener('click', () => {
-    const newId = $('setupUserId').value.trim();
-    if (!newId) { toast('사용자 ID를 입력하세요.'); $('setupUserId').focus(); return; }
-    userId    = newId;
-    localStorage.setItem(KEY_USER_ID, userId);
-    hideSetup();
-    initApp();
+  $('loginBtn').addEventListener('click', async () => {
+    const inputUserId = $('loginUserId').value.trim();
+    const password = $('loginPassword').value;
+    if (!inputUserId) { $('loginUserId').focus(); return; }
+    if (!password) { $('loginPassword').focus(); return; }
+
+    const btn = $('loginBtn');
+    btn.disabled = true;
+    btn.textContent = '로그인 중…';
+    $('loginError').hidden = true;
+
+    try {
+      if (!hasSupabase()) throw new Error('서버에 연결할 수 없습니다.');
+      await DreamJarSupabase.auth.signInWithPassword(inputUserId, password);
+      const authUserId = await DreamJarSupabase.auth.getAuthUserId();
+      userId = authUserId || inputUserId;
+      localStorage.setItem(KEY_USER_ID, userId);
+      hideLogin();
+      initApp();
+    } catch (err) {
+      console.error('[DreamJar] 로그인 실패:', err);
+      const errEl = $('loginError');
+      errEl.textContent = err.message === 'Invalid login credentials'
+        ? '사용자 ID 또는 비밀번호가 올바르지 않습니다.'
+        : '로그인 실패: ' + (err.message || '알 수 없는 오류');
+      errEl.hidden = false;
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '로그인';
+    }
+  });
+
+  // Enter key submits login
+  $('loginPassword').addEventListener('keydown', e => {
+    if (e.key === 'Enter') $('loginBtn').click();
+  });
+  $('loginUserId').addEventListener('keydown', e => {
+    if (e.key === 'Enter') $('loginPassword').focus();
   });
 
   // ── 시트 공통 ──
@@ -445,8 +479,10 @@
     openSheet('settingsSheet');
   });
 
-  $('logoutBtn').addEventListener('click', () => {
+  $('logoutBtn').addEventListener('click', async () => {
     if (!confirm('로그아웃하시겠습니까?\n로컬 데이터가 모두 삭제됩니다.')) return;
+    // Supabase Auth 로그아웃
+    try { if (hasSupabase()) await DreamJarSupabase.auth.signOut(); } catch {}
     // localStorage에서 dreamjar 관련 키 모두 삭제
     [KEY_USER_ID, KEY_ACTIVE_JAR, KEY_JARS, KEY_ENTRIES,
      KEY_PENDING_DEL, KEY_PENDING_CTRL, KEY_PENDING_ARCHIVE, KEY_LAST_SYNC,
@@ -457,9 +493,9 @@
     currentJar = null;
     entryRows  = [];
     userId     = '';
-    // 설정 시트 닫고 초기 설정 화면으로
+    // 설정 시트 닫고 로그인 화면으로
     closeSheet('settingsSheet');
-    showSetup();
+    showLogin();
     toast('로그아웃했어요.');
   });
 
@@ -1007,6 +1043,10 @@
     $('cjName').value = '';
     $('cjGoal').value = '';
     $('cjDesc').value = '';
+    $('cjImagePreview').hidden = true;
+    $('cjImagePreviewImg').src = '';
+    $('cjImageAddBtn').hidden = false;
+    $('cjImageFile').value = '';
     openSheet('createJarSheet');
     setTimeout(() => $('cjName').focus(), 300);
   }
@@ -1029,10 +1069,21 @@
     $('cjSaveBtn').disabled = true;
     try {
       const res = await apiFetch({ action: 'createJar', params: { name, description: desc, goalAmount: goal, ownerId: userId } });
+      // Upload jar image if selected
+      let imageUrl = '';
+      const imageFile = $('cjImageFile').files[0];
+      if (imageFile && hasSupabase()) {
+        try {
+          imageUrl = await window.DreamJarSupabase.uploadJarImage(res.jarId, imageFile);
+          await apiFetch({ action: 'updateJarImage', params: { jarId: res.jarId, imageUrl } });
+        } catch (imgErr) {
+          console.warn('[DreamJar] Image upload failed:', imgErr);
+        }
+      }
       closeSheet('createJarSheet');
       toast('Jar를 만들었어요!');
       // 새 Jar를 로컬에 추가
-      const newJar = { jarId: res.jarId, name, description: desc, goalAmount: goal, currentAmount: 0, ownerId: userId, controlId: '', memberId: '' };
+      const newJar = { jarId: res.jarId, name, description: desc, goalAmount: goal, currentAmount: 0, ownerId: userId, controlId: '', memberId: '', imageUrl };
       const jars = localJars();
       jars.unshift(newJar);
       saveLocalJars(jars);
@@ -1049,6 +1100,51 @@
   // "Jar 만들기" 버튼 (Jar 없을 때 표시)
   $('jarCreateBtnEmpty').addEventListener('click', openCreateJar);
 
+  // ── Jar 사진 업로드 (만들기) ──
+  $('cjImageAddBtn').addEventListener('click', () => $('cjImageFile').click());
+  $('cjImageFile').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) { toast('사진은 5MB 이하만 가능합니다.'); return; }
+    const reader = new FileReader();
+    reader.onload = () => {
+      $('cjImagePreviewImg').src = reader.result;
+      $('cjImagePreview').hidden = false;
+      $('cjImageAddBtn').hidden = true;
+    };
+    reader.readAsDataURL(file);
+  });
+  $('cjImageRemoveBtn').addEventListener('click', () => {
+    $('cjImagePreview').hidden = true;
+    $('cjImagePreviewImg').src = '';
+    $('cjImageAddBtn').hidden = false;
+    $('cjImageFile').value = '';
+  });
+
+  // ── Jar 사진 변경 (기존 Jar) ──
+  $('jarImageEditBtn').addEventListener('click', () => $('jarImageFileEdit').click());
+  $('jarImageFileEdit').addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) { toast('사진은 5MB 이하만 가능합니다.'); return; }
+    if (!currentJar || !hasSupabase()) return;
+    toast('사진 업로드 중…');
+    try {
+      const imageUrl = await window.DreamJarSupabase.uploadJarImage(currentJar.jarId, file);
+      await apiFetch({ action: 'updateJarImage', params: { jarId: currentJar.jarId, imageUrl } });
+      currentJar.imageUrl = imageUrl;
+      // Update local cache
+      const jars = localJars();
+      const idx = jars.findIndex(j => j.jarId === currentJar.jarId);
+      if (idx >= 0) { jars[idx].imageUrl = imageUrl; saveLocalJars(jars); }
+      renderJarSection(currentJar);
+      toast('사진이 변경되었어요!');
+    } catch (err) {
+      toast('사진 업로드 실패: ' + err.message);
+    }
+    $('jarImageFileEdit').value = '';
+  });
+
   // ── JAR 섹션 렌더 ──
   function renderJarSection(jar) {
     $('jarLoading').hidden = true;
@@ -1060,6 +1156,18 @@
     const isOwned = jar.ownerId === userId;
     $('historyBtn').hidden = false;
     $('donateBtn').hidden  = isOwned;
+
+    // Show jar image
+    const imgDisplay = $('mainJarImage');
+    const imgEl = $('mainJarImageImg');
+    if (jar.imageUrl) {
+      imgEl.src = jar.imageUrl;
+      imgDisplay.hidden = false;
+      $('jarImageEditBtn').hidden = !isOwned;
+    } else {
+      imgDisplay.hidden = true;
+      imgEl.src = '';
+    }
 
     // Show sync info for joined jars
     const syncInfo = $('jarSyncInfo');
@@ -2285,12 +2393,36 @@
     });
   })();
 
-  // ── 진입점 ──
-  if (!userId) {
-    showSetup();
-  } else {
-    hideSetup();
-    initApp();
-  }
+  // ── 진입점 (CMPA-913: auth session 확인) ──
+  (async function boot() {
+    if (hasSupabase()) {
+      try {
+        const session = await DreamJarSupabase.auth.getSession();
+        if (session && session.user) {
+          // 유효한 세션이 있으면 userId 복원 후 앱 진입
+          const authUserId = await DreamJarSupabase.auth.getAuthUserId();
+          if (authUserId) {
+            userId = authUserId;
+            localStorage.setItem(KEY_USER_ID, userId);
+          }
+          hideLogin();
+          initApp();
+
+          // 세션 변경 감지 (토큰 만료 → 자동 갱신, 로그아웃 감지)
+          DreamJarSupabase.auth.onAuthStateChange((event) => {
+            if (event === 'SIGNED_OUT') {
+              // 세션 만료 등으로 로그아웃됨
+              userId = '';
+              localStorage.removeItem(KEY_USER_ID);
+              showLogin();
+            }
+          });
+          return;
+        }
+      } catch {}
+    }
+    // 세션 없음 → 로그인 화면
+    showLogin();
+  })();
 
 })();
