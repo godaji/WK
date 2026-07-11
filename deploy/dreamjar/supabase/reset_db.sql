@@ -25,110 +25,19 @@ truncate public.jars         cascade;
 truncate public.users        cascade;
 
 -- ============================================================
--- 3. New auth-based RLS policies
+-- 3. Permissive RLS policies (CMPA-927)
 -- ============================================================
+-- DreamJar uses localStorage userId, not Supabase Auth (auth.uid()).
+-- Auth-based RLS blocked searchJars() — users couldn't find jars to join.
+-- Use permissive policies; app-level userId provides logical isolation.
 
--- Helper: get user_id from auth.uid()
--- Users table stores auth_uid (Supabase Auth UUID) mapped to user_id (app-level text ID)
--- All RLS policies resolve auth.uid() → user_id via the users table
-
--- users: can read/update own row only (matched by auth_uid)
-create policy "users_select_own" on public.users
-  for select using (auth_uid = auth.uid());
-create policy "users_update_own" on public.users
-  for update using (auth_uid = auth.uid());
-create policy "users_insert_own" on public.users
-  for insert with check (auth_uid = auth.uid());
-
--- jars: owner or member can access
-create policy "jars_select" on public.jars
-  for select using (
-    owner_id in (select user_id from public.users where auth_uid = auth.uid())
-    or jar_id in (select jar_id from public.jar_members where user_id in (select user_id from public.users where auth_uid = auth.uid()))
-  );
-create policy "jars_insert" on public.jars
-  for insert with check (
-    owner_id in (select user_id from public.users where auth_uid = auth.uid())
-  );
-create policy "jars_update" on public.jars
-  for update using (
-    owner_id in (select user_id from public.users where auth_uid = auth.uid())
-    or jar_id in (select jar_id from public.jar_members where user_id in (select user_id from public.users where auth_uid = auth.uid()))
-  );
-
--- jar_members: member of the jar can read; owner can insert/delete
-create policy "jar_members_select" on public.jar_members
-  for select using (
-    jar_id in (
-      select jar_id from public.jar_members jm
-      where jm.user_id in (select user_id from public.users where auth_uid = auth.uid())
-    )
-    or jar_id in (
-      select jar_id from public.jars where owner_id in (select user_id from public.users where auth_uid = auth.uid())
-    )
-  );
-create policy "jar_members_insert" on public.jar_members
-  for insert with check (
-    user_id in (select user_id from public.users where auth_uid = auth.uid())
-    or jar_id in (select jar_id from public.jars where owner_id in (select user_id from public.users where auth_uid = auth.uid()))
-  );
-create policy "jar_members_update" on public.jar_members
-  for update using (
-    user_id in (select user_id from public.users where auth_uid = auth.uid())
-    or jar_id in (select jar_id from public.jars where owner_id in (select user_id from public.users where auth_uid = auth.uid()))
-  );
-
--- entries: jar member can read/insert/delete
-create policy "entries_select" on public.entries
-  for select using (
-    jar_id in (select jar_id from public.jar_members where user_id in (select user_id from public.users where auth_uid = auth.uid()))
-    or jar_id in (select jar_id from public.jars where owner_id in (select user_id from public.users where auth_uid = auth.uid()))
-  );
-create policy "entries_insert" on public.entries
-  for insert with check (
-    user_id in (select user_id from public.users where auth_uid = auth.uid())
-  );
-create policy "entries_delete" on public.entries
-  for delete using (
-    user_id in (select user_id from public.users where auth_uid = auth.uid())
-  );
-
--- donation_out: jar member can read; jar owner can insert
-create policy "donation_out_select" on public.donation_out
-  for select using (
-    from_jar_id in (select jar_id from public.jar_members where user_id in (select user_id from public.users where auth_uid = auth.uid()))
-    or from_jar_id in (select jar_id from public.jars where owner_id in (select user_id from public.users where auth_uid = auth.uid()))
-    or to_jar_id in (select jar_id from public.jar_members where user_id in (select user_id from public.users where auth_uid = auth.uid()))
-    or to_jar_id in (select jar_id from public.jars where owner_id in (select user_id from public.users where auth_uid = auth.uid()))
-  );
-
--- donation_in: jar member can read
-create policy "donation_in_select" on public.donation_in
-  for select using (
-    to_jar_id in (select jar_id from public.jar_members where user_id in (select user_id from public.users where auth_uid = auth.uid()))
-    or to_jar_id in (select jar_id from public.jars where owner_id in (select user_id from public.users where auth_uid = auth.uid()))
-    or from_jar_id in (select jar_id from public.jar_members where user_id in (select user_id from public.users where auth_uid = auth.uid()))
-    or from_jar_id in (select jar_id from public.jars where owner_id in (select user_id from public.users where auth_uid = auth.uid()))
-  );
-
--- controls: admin controls readable by all authenticated users; custom controls by owner
-create policy "controls_select" on public.controls
-  for select using (
-    owner_id = 'admin'
-    or owner_id in (select user_id from public.users where auth_uid = auth.uid())
-  );
-create policy "controls_insert" on public.controls
-  for insert with check (
-    owner_id in (select user_id from public.users where auth_uid = auth.uid())
-  );
-create policy "controls_update" on public.controls
-  for update using (
-    owner_id in (select user_id from public.users where auth_uid = auth.uid())
-  );
-create policy "controls_delete" on public.controls
-  for delete using (
-    owner_id in (select user_id from public.users where auth_uid = auth.uid())
-  );
+create policy "allow_all" on public.users     for all using (true) with check (true);
+create policy "allow_all" on public.jars      for all using (true) with check (true);
+create policy "allow_all" on public.jar_members for all using (true) with check (true);
+create policy "allow_all" on public.entries   for all using (true) with check (true);
+create policy "allow_all" on public.donation_out for all using (true) with check (true);
+create policy "allow_all" on public.donation_in  for all using (true) with check (true);
+create policy "allow_all" on public.controls  for all using (true) with check (true);
 
 -- ============================================================
 -- 4. Admin user creation helper function
