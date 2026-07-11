@@ -107,7 +107,7 @@
     },
     {
       controlId: 'ctrl_cb',
-      name: 'DadControl',
+      name: 'FrugalControl',
       emoji: '💰',
       items: [
         { id:'cb_coffee',   label:'드립커피',     type:'routine', subtype:'per_day', amount:4500 },
@@ -1525,7 +1525,7 @@
       if (!ctrl) return;
       $('customCtrlSheetTitle').textContent = '컨트롤 편집';
       $('ccName').value = ctrl.name || '';
-      $('ccEmoji').value = ctrl.emoji || '';
+      setPickedEmoji(ctrl.emoji || '🎯');
       $('ccDesc').value = ctrl.description || '';
       _editingCtrlItems = (ctrl.items || []).map(i => ({ ...i }));
       $('ccDeleteBtn').hidden = false;
@@ -1535,7 +1535,7 @@
       _editingCtrlId = null;
       $('customCtrlSheetTitle').textContent = '내 컨트롤 만들기';
       $('ccName').value = '';
-      $('ccEmoji').value = '';
+      setPickedEmoji('🎯');
       $('ccDesc').value = '';
       _editingCtrlItems = [];
       $('ccDeleteBtn').hidden = true;

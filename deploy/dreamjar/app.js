@@ -107,7 +107,7 @@
     },
     {
       controlId: 'ctrl_cb',
-      name: 'DadControl',
+      name: 'FrugalControl',
       emoji: '💰',
       items: [
         { id:'cb_coffee',   label:'드립커피',     type:'routine', subtype:'per_day', amount:4500 },
