@@ -964,6 +964,17 @@ input, select { font-family: inherit; }
 }
 .jar-image-edit:active { opacity: .7; }
 
+/* ── Jar 순환 버튼 (CMPA-915) ── */
+.btn-jar-next {
+  flex: none;
+  width: 36px; height: 36px;
+  background: var(--card2); border-radius: 50%;
+  font-size: 20px; font-weight: 700; color: var(--accent2);
+  display: flex; align-items: center; justify-content: center;
+  line-height: 1;
+}
+.btn-jar-next:active { opacity: .7; }
+
 /* ── Jar 이름 편집 버튼 (CMPA-915) ── */
 .jar-name-edit {
   flex: none;

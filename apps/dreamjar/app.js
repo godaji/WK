@@ -938,8 +938,14 @@
     }
   });
 
-  // ── Jar 선택 시트 ──
-  $('jarChangeBtn').addEventListener('click', openJarPicker);
+  // ── Jar 순환 (CMPA-915: 다음 Jar로 빙글빙글) ──
+  $('jarChangeBtn').addEventListener('click', () => {
+    const jars = activeJars(cachedJars);
+    if (jars.length <= 1) return;
+    const curIdx = currentJar ? jars.findIndex(j => j.jarId === currentJar.jarId) : -1;
+    const nextIdx = (curIdx + 1) % jars.length;
+    onJarSelect(jars[nextIdx]);
+  });
 
   function openJarPicker() {
     renderJarPickerList();
@@ -1186,6 +1192,9 @@
 
     // Show name edit button for owner (CMPA-915)
     $('jarNameEditBtn').hidden = !isOwned;
+
+    // Hide jar cycle button if only 1 jar (CMPA-915)
+    $('jarChangeBtn').hidden = activeJars(cachedJars).length <= 1;
 
     // Show jar image or add-photo button (CMPA-915)
     const imgDisplay = $('mainJarImage');
