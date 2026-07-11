@@ -111,10 +111,12 @@
   // ── Auto-ensure user exists (avoids FK violations) ─────────
   async function ensureUser(userId) {
     if (!userId) return;
+    const session = await getSession();
     const { error } = await supabase.from('users').upsert({
       user_id:    userId,
       name:       '',
       email:      '',
+      auth_uid:   session?.user?.id || null,
       created_at: new Date().toISOString(),
     }, { onConflict: 'user_id', ignoreDuplicates: true });
     if (error) console.warn('[DreamJar] ensureUser:', error.message);
