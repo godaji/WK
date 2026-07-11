@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DreamJar">
-<link rel="stylesheet" href="./style.css?v=20260711e">
+<link rel="stylesheet" href="./style.css?v=20260711h">
 </head>
 <body>
 
@@ -176,9 +176,10 @@
           <div class="join-section-title">다른 Jar에 참여</div>
           <div class="join-row">
             <input id="joinJarId" class="join-input" type="text"
-              placeholder="Jar 이름 또는 ID 입력" autocomplete="off" maxlength="80">
-            <button id="joinJarBtn" class="btn-join" type="button">참여</button>
+              placeholder="Jar 이름으로 검색 또는 ID 입력" autocomplete="off" maxlength="80">
+            <button id="joinJarBtn" class="btn-join" type="button">검색</button>
           </div>
+          <div id="joinSearchResults" class="join-search-results" hidden></div>
         </div>
         <button class="btn-cta" id="createJarBtnSettings" type="button" style="margin-top:14px">새 Jar 만들기</button>
       </div>
@@ -251,21 +252,68 @@
       <span>Control 선택</span>
       <button class="sheet-close" data-close="controlPickerSheet" type="button">✕</button>
     </div>
-    <div class="sheet-body" id="controlPickerList">
-      <button class="cp-item" data-control-id="ctrl_ca" type="button">
-        <span class="cp-emoji">⭐</span>
-        <span class="cp-body">
-          <span class="cp-name">DaeunControl</span>
-          <span class="cp-desc">학업·루틴·마일스톤 달성 보상</span>
-        </span>
-      </button>
-      <button class="cp-item" data-control-id="ctrl_cb" type="button">
-        <span class="cp-emoji">💰</span>
-        <span class="cp-body">
-          <span class="cp-name">DadControl</span>
-          <span class="cp-desc">일상 절약 행동 보상</span>
-        </span>
-      </button>
+    <div class="sheet-body">
+      <div id="controlPickerList"></div>
+      <button class="btn-cta" id="createCustomCtrlBtn" type="button" style="margin-top:14px">내 컨트롤 만들기</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 커스텀 컨트롤 생성/편집 시트 ===== -->
+<div class="sheet-backdrop" id="customCtrlSheet" hidden>
+  <div class="sheet sheet-full" role="dialog" aria-modal="true" aria-label="컨트롤 만들기">
+    <div class="sheet-head">
+      <span id="customCtrlSheetTitle">내 컨트롤 만들기</span>
+      <button class="sheet-close" data-close="customCtrlSheet" type="button">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div class="cj-field">
+        <label class="cj-label" for="ccName">컨트롤 이름</label>
+        <input id="ccName" class="cj-input" type="text" placeholder="예: 운동 루틴" maxlength="40" autocomplete="off">
+      </div>
+      <div class="cj-field">
+        <label class="cj-label" for="ccEmoji">이모지</label>
+        <input id="ccEmoji" class="cj-input" type="text" placeholder="예: 🏃" maxlength="4" autocomplete="off" style="width:60px">
+      </div>
+      <div class="cj-field">
+        <label class="cj-label" for="ccDesc">설명 <span class="cj-optional">(선택)</span></label>
+        <input id="ccDesc" class="cj-input" type="text" placeholder="어떤 보상 체계인가요?" maxlength="80" autocomplete="off">
+      </div>
+      <div class="cj-field">
+        <label class="cj-label">적립 아이템</label>
+        <div id="ccItemList" class="cc-item-list"></div>
+        <button class="btn-add-item" id="ccAddItemBtn" type="button">+ 아이템 추가</button>
+      </div>
+      <button id="ccSaveBtn" class="btn-cta" type="button">저장</button>
+      <button id="ccDeleteBtn" class="btn-cta btn-danger" type="button" style="margin-top:8px" hidden>컨트롤 삭제</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 커스텀 컨트롤 아이템 추가/편집 시트 ===== -->
+<div class="sheet-backdrop" id="ccItemSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="아이템 편집">
+    <div class="sheet-head">
+      <span id="ccItemSheetTitle">아이템 추가</span>
+      <button class="sheet-close" data-close="ccItemSheet" type="button">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div class="cj-field">
+        <label class="cj-label" for="cciLabel">이름</label>
+        <input id="cciLabel" class="cj-input" type="text" placeholder="예: 아침 운동" maxlength="40" autocomplete="off">
+      </div>
+      <div class="cj-field">
+        <label class="cj-label" for="cciAmount">금액 <span class="cj-unit">원</span></label>
+        <input id="cciAmount" class="cj-input" type="number" placeholder="예: 5000" min="1" inputmode="numeric">
+      </div>
+      <div class="cj-field">
+        <label class="cj-label" for="cciType">유형</label>
+        <select id="cciType" class="cj-input">
+          <option value="routine">루틴 (매일 반복)</option>
+          <option value="milestone">마일스톤 (1회)</option>
+        </select>
+      </div>
+      <button id="cciSaveBtn" class="btn-cta" type="button">추가</button>
     </div>
   </div>
 </div>
@@ -477,7 +525,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./supabase/supabase.js?v=20260711f"></script>
-<script src="./app.js?v=20260711e"></script>
+<script src="./supabase/supabase.js?v=20260711h"></script>
+<script src="./app.js?v=20260711h"></script>
 </body>
 </html>

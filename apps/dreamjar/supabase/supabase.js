@@ -64,6 +64,8 @@
     if (action === 'joinJar')        return await joinJar(params);
     if (action === 'setControl')     return await setControl(params);
     if (action === 'createControl')  return await createControl(params);
+    if (action === 'updateControl')  return await updateControl(params);
+    if (action === 'deleteControl')  return await deleteControl(params);
     if (action === 'addEntry')       return await addEntry(params);
     if (action === 'deleteEntry')    return await deleteEntry(params);
     if (action === 'donate')         return await donateSingle(params);
@@ -77,10 +79,12 @@
     if (query === 'getFullSync')      return await getFullSync(params);
     if (query === 'getEntries')       return await getEntries(params);
     if (query === 'getAdminControls') return await getAdminControls();
+    if (query === 'getCustomControls') return await getCustomControls(params);
     if (query === 'getJar')           return await getJar(params);
     if (query === 'getHistory')       return await getHistory(params);
     if (query === 'getJarHistory')    return await getJarHistory(params);
     if (query === 'getAllJars')        return await getAllJars();
+    if (query === 'searchJars')       return await searchJars(params);
 
     throw new Error('알 수 없는 action/query: ' + (action || query));
   }
@@ -230,12 +234,36 @@
       control_id:  controlId,
       name:        p.name || '',
       description: p.description || '',
+      emoji:       p.emoji || '',
       owner_id:    p.ownerId || '',
       type:        p.type || '',
+      items:       p.items || [],
       created_at:  new Date().toISOString(),
+      updated_at:  new Date().toISOString(),
     });
     if (error) throw error;
     return { controlId };
+  }
+
+  async function updateControl(p) {
+    if (!p.controlId) throw new Error('controlId 필요');
+    const updates = { updated_at: new Date().toISOString() };
+    if (p.name !== undefined)        updates.name        = p.name;
+    if (p.description !== undefined) updates.description = p.description;
+    if (p.emoji !== undefined)       updates.emoji       = p.emoji;
+    if (p.items !== undefined)       updates.items       = p.items;
+    const { error } = await supabase.from('controls')
+      .update(updates).eq('control_id', p.controlId);
+    if (error) throw error;
+    return { updated: true };
+  }
+
+  async function deleteControl(p) {
+    if (!p.controlId) throw new Error('controlId 필요');
+    const { error } = await supabase.from('controls')
+      .delete().eq('control_id', p.controlId);
+    if (error) throw error;
+    return { deleted: true };
   }
 
   async function addEntry(p) {
@@ -504,6 +532,20 @@
     }));
   }
 
+  async function getCustomControls(p) {
+    if (!p.userId) throw new Error('userId 필요');
+    const { data, error } = await supabase
+      .from('controls').select('*')
+      .eq('owner_id', p.userId)
+      .order('created_at', { ascending: false });
+    if (error) throw error;
+    return (data || []).map(c => ({
+      controlId: c.control_id, name: c.name, description: c.description,
+      emoji: c.emoji || '', ownerId: c.owner_id, type: c.type || 'custom',
+      items: c.items || [], createdAt: c.created_at,
+    }));
+  }
+
   async function getJar(p) {
     if (!p.jarId) throw new Error('jarId 필요');
     const { data: jar, error } = await supabase
@@ -634,6 +676,49 @@
       history,
       memberSubtotals: Object.values(subtotalMap).sort((a, b) => b.total - a.total),
     };
+  }
+
+  async function searchJars(p) {
+    const q = (p.query || '').trim();
+    if (!q) return [];
+
+    // Search unarchived jars whose name contains the query (case-insensitive)
+    const { data: jars, error } = await supabase
+      .from('jars').select('jar_id, name, owner_id')
+      .eq('archived', false)
+      .ilike('name', `%${q}%`)
+      .limit(20);
+    if (error) throw error;
+    if (!jars || jars.length === 0) return [];
+
+    // Fetch owner names for display
+    const ownerIds = [...new Set(jars.map(j => j.owner_id).filter(Boolean))];
+    let ownersMap = {};
+    if (ownerIds.length > 0) {
+      const { data: users } = await supabase
+        .from('users').select('user_id, name')
+        .in('user_id', ownerIds);
+      for (const u of (users || [])) ownersMap[u.user_id] = u.name || u.user_id;
+    }
+
+    // Check which jars the current user already joined
+    const userId = p.userId || '';
+    let joinedSet = new Set();
+    if (userId) {
+      const jarIds = jars.map(j => j.jar_id);
+      const { data: members } = await supabase
+        .from('jar_members').select('jar_id')
+        .eq('user_id', userId)
+        .in('jar_id', jarIds);
+      for (const m of (members || [])) joinedSet.add(m.jar_id);
+    }
+
+    return jars.map(j => ({
+      jarId: j.jar_id,
+      name: j.name,
+      ownerName: ownersMap[j.owner_id] || j.owner_id || '',
+      alreadyJoined: joinedSet.has(j.jar_id),
+    }));
   }
 
   async function getAllJars() {
