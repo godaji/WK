@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DreamJar">
-<link rel="stylesheet" href="./style.css?v=20260711k">
+<link rel="stylesheet" href="./style.css?v=20260711m">
 </head>
 <body>
 
@@ -60,12 +60,14 @@
       <div id="jarDisplay" hidden>
         <div class="jar-title-row">
           <span class="jar-name" id="mainJarName">—</span>
+          <button class="jar-name-edit" id="jarNameEditBtn" type="button" hidden>✏️</button>
           <button class="btn-change" id="jarChangeBtn" type="button">변경</button>
         </div>
         <div class="jar-image-display" id="mainJarImage" hidden>
           <img id="mainJarImageImg" src="" alt="Jar 사진">
           <button class="jar-image-edit" id="jarImageEditBtn" type="button" hidden>📷</button>
         </div>
+        <button class="jar-image-add" id="jarImageAddBtn" type="button" hidden>📷 사진 추가</button>
         <input type="file" id="jarImageFileEdit" accept="image/*" hidden>
         <div class="jar-amounts" id="mainJarAmounts">
           <span class="jar-cur" id="mainJarCur">0원</span>
@@ -543,7 +545,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./supabase/supabase.js?v=20260711k"></script>
-<script src="./app.js?v=20260711k"></script>
+<script src="./supabase/supabase.js?v=20260711m"></script>
+<script src="./app.js?v=20260711m"></script>
 </body>
 </html>

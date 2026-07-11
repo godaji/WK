@@ -89,6 +89,7 @@
     if (action === 'donateBulk')     return await donateBulk(params);
     if (action === 'archiveJar')     return await archiveJar(params);
     if (action === 'updateJarImage') return await updateJarImage(params.jarId, params.imageUrl);
+    if (action === 'updateJarName')  return await updateJarName(params.jarId, params.name);
 
     // GET queries
     if (query === 'version')          return { version: 'supabase-v1.0' };
@@ -347,6 +348,17 @@
     const { error } = await supabase
       .from('jars')
       .update({ image_url: imageUrl })
+      .eq('jar_id', jarId);
+    if (error) throw error;
+    return { updated: true };
+  }
+
+  async function updateJarName(jarId, name) {
+    if (!jarId) throw new Error('jarId 필요');
+    if (!name || !name.trim()) throw new Error('이름을 입력하세요');
+    const { error } = await supabase
+      .from('jars')
+      .update({ name: name.trim() })
       .eq('jar_id', jarId);
     if (error) throw error;
     return { updated: true };

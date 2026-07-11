@@ -397,6 +397,11 @@
       const results = MOCK_JARS.filter(j => !j.archived && j.name && j.name.toLowerCase().includes(q));
       return Promise.resolve(results.map(j => ({ jarId: j.jarId, name: j.name, ownerName: j.ownerId || '', alreadyJoined: false })));
     }
+    if (action === 'updateJarName') {
+      const mj = MOCK_JARS.find(j => j.jarId === params.jarId);
+      if (mj) mj.name = params.name;
+      return Promise.resolve({ updated: true });
+    }
     if (action === 'registerUser') return Promise.resolve({ userId: params.userId || userId });
     if (action === 'createControl') return Promise.resolve({ controlId: params.controlId || 'ctrl_mock_' + Date.now() });
     if (action === 'updateControl') return Promise.resolve({ updated: true });
@@ -1146,6 +1151,27 @@
     $('jarImageFileEdit').value = '';
   });
 
+  // ── Jar 이름 변경 (CMPA-915) ──
+  $('jarNameEditBtn').addEventListener('click', async () => {
+    if (!currentJar) return;
+    const newName = prompt('Jar 이름 변경', currentJar.name || '');
+    if (newName === null || !newName.trim() || newName.trim() === currentJar.name) return;
+    try {
+      await apiFetch({ action: 'updateJarName', params: { jarId: currentJar.jarId, name: newName.trim() } });
+      currentJar.name = newName.trim();
+      const jars = localJars();
+      const idx = jars.findIndex(j => j.jarId === currentJar.jarId);
+      if (idx >= 0) { jars[idx].name = newName.trim(); saveLocalJars(jars); }
+      renderJarSection(currentJar);
+      toast('이름이 변경되었어요!');
+    } catch (err) {
+      toast('이름 변경 실패: ' + err.message);
+    }
+  });
+
+  // ── Jar 사진 추가 (사진 없을 때, CMPA-915) ──
+  $('jarImageAddBtn').addEventListener('click', () => $('jarImageFileEdit').click());
+
   // ── JAR 섹션 렌더 ──
   function renderJarSection(jar) {
     $('jarLoading').hidden = true;
@@ -1158,16 +1184,21 @@
     $('historyBtn').hidden = false;
     $('donateBtn').hidden  = isOwned;
 
-    // Show jar image
+    // Show name edit button for owner (CMPA-915)
+    $('jarNameEditBtn').hidden = !isOwned;
+
+    // Show jar image or add-photo button (CMPA-915)
     const imgDisplay = $('mainJarImage');
     const imgEl = $('mainJarImageImg');
     if (jar.imageUrl) {
       imgEl.src = jar.imageUrl;
       imgDisplay.hidden = false;
       $('jarImageEditBtn').hidden = !isOwned;
+      $('jarImageAddBtn').hidden = true;
     } else {
       imgDisplay.hidden = true;
       imgEl.src = '';
+      $('jarImageAddBtn').hidden = !isOwned;
     }
 
     // Show sync info for joined jars

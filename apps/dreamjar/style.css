@@ -964,6 +964,33 @@ input, select { font-family: inherit; }
 }
 .jar-image-edit:active { opacity: .7; }
 
+/* ── Jar 이름 편집 버튼 (CMPA-915) ── */
+.jar-name-edit {
+  flex: none;
+  width: 32px; height: 32px;
+  background: transparent;
+  font-size: 14px;
+  color: var(--muted);
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 6px;
+}
+.jar-name-edit:active { background: var(--card2); }
+
+/* ── Jar 사진 추가 버튼 (사진 없을 때, CMPA-915) ── */
+.jar-image-add {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 10px;
+  background: var(--card2);
+  border: 2px dashed var(--border, rgba(255,255,255,.12));
+  border-radius: 14px;
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+}
+.jar-image-add:active { opacity: .7; }
+
 /* ── Jar 만들기 — 사진 업로드 ── */
 .cj-image-upload { margin-top: 4px; }
 .cj-image-add-btn {
