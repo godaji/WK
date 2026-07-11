@@ -104,6 +104,14 @@
     if (query === 'getJarHistory')    return await getJarHistory(params);
     if (query === 'getAllJars')        return await getAllJars();
     if (query === 'searchJars')       return await searchJars(params);
+    // CMPA-933: posts, comments, cheers
+    if (action === 'createPost')     return await createPost(params);
+    if (action === 'deletePost')     return await deletePost(params);
+    if (action === 'createComment')  return await createComment(params);
+    if (action === 'deleteComment')  return await deleteComment(params);
+    if (action === 'addCheer')       return await addCheer(params);
+    if (query === 'getPosts')        return await getPosts(params);
+    if (query === 'getCheers')       return await getCheers(params);
 
     throw new Error('알 수 없는 action/query: ' + (action || query));
   }
@@ -817,6 +825,132 @@
       controlId: j.control_id, createdAt: j.created_at,
       imageUrl: j.image_url || '',
       archived: j.archived, archivedAt: j.archived_at,
+    }));
+  }
+
+  // ── CMPA-933: Posts, Comments, Cheers ──────────────────────
+
+  async function createPost(p) {
+    const postId = newId('post');
+    const { error } = await supabase.from('posts').insert({
+      post_id:    postId,
+      jar_id:     p.jarId,
+      author_id:  p.authorId || null,
+      guest_name: p.guestName || '',
+      content:    p.content || '',
+      created_at: new Date().toISOString(),
+    });
+    if (error) throw error;
+    return { postId };
+  }
+
+  async function deletePost(p) {
+    const { error } = await supabase.from('posts')
+      .delete().eq('post_id', p.postId);
+    if (error) throw error;
+    return { ok: true };
+  }
+
+  async function createComment(p) {
+    const commentId = newId('cmt');
+    const { error } = await supabase.from('comments').insert({
+      comment_id: commentId,
+      post_id:    p.postId,
+      jar_id:     p.jarId,
+      author_id:  p.authorId || null,
+      guest_name: p.guestName || '',
+      content:    p.content || '',
+      created_at: new Date().toISOString(),
+    });
+    if (error) throw error;
+    return { commentId };
+  }
+
+  async function deleteComment(p) {
+    const { error } = await supabase.from('comments')
+      .delete().eq('comment_id', p.commentId);
+    if (error) throw error;
+    return { ok: true };
+  }
+
+  async function addCheer(p) {
+    const cheerId = newId('cheer');
+    const { error } = await supabase.from('cheers').insert({
+      cheer_id:   cheerId,
+      jar_id:     p.jarId,
+      author_id:  p.authorId || null,
+      guest_name: p.guestName || '',
+      emoji:      p.emoji || '👏',
+      created_at: new Date().toISOString(),
+    });
+    if (error) throw error;
+    return { cheerId };
+  }
+
+  async function getPosts(p) {
+    // Fetch posts for a jar, newest first, with comments
+    const { data: posts, error } = await supabase
+      .from('posts').select('*')
+      .eq('jar_id', p.jarId)
+      .order('created_at', { ascending: false })
+      .limit(100);
+    if (error) throw error;
+
+    const postIds = (posts || []).map(p => p.post_id);
+    let comments = [];
+    if (postIds.length > 0) {
+      const { data: cmts } = await supabase
+        .from('comments').select('*')
+        .in('post_id', postIds)
+        .order('created_at', { ascending: true });
+      comments = cmts || [];
+    }
+
+    // Map author names
+    const authorIds = [...new Set(
+      [...(posts || []), ...comments]
+        .map(x => x.author_id).filter(Boolean)
+    )];
+    let namesMap = {};
+    if (authorIds.length > 0) {
+      const { data: users } = await supabase
+        .from('users').select('user_id, name')
+        .in('user_id', authorIds);
+      for (const u of (users || [])) namesMap[u.user_id] = u.name || u.user_id;
+    }
+
+    return (posts || []).map(p => ({
+      postId:     p.post_id,
+      jarId:      p.jar_id,
+      authorId:   p.author_id,
+      authorName: p.author_id ? (namesMap[p.author_id] || p.author_id) : '',
+      guestName:  p.guest_name || '',
+      content:    p.content,
+      createdAt:  p.created_at,
+      comments:   comments.filter(c => c.post_id === p.post_id).map(c => ({
+        commentId:  c.comment_id,
+        authorId:   c.author_id,
+        authorName: c.author_id ? (namesMap[c.author_id] || c.author_id) : '',
+        guestName:  c.guest_name || '',
+        content:    c.content,
+        createdAt:  c.created_at,
+      })),
+    }));
+  }
+
+  async function getCheers(p) {
+    const { data, error } = await supabase
+      .from('cheers').select('*')
+      .eq('jar_id', p.jarId)
+      .order('created_at', { ascending: false })
+      .limit(100);
+    if (error) throw error;
+    return (data || []).map(c => ({
+      cheerId:    c.cheer_id,
+      authorId:   c.author_id,
+      guestName:  c.guest_name || '',
+      emoji:      c.emoji,
+      createdAt:  c.created_at,
     }));
   }
 

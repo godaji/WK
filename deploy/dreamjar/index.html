@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DreamJar">
-<link rel="stylesheet" href="./style.css?v=20260711q">
+<link rel="stylesheet" href="./style.css?v=20260711s">
 </head>
 <body>
 
@@ -118,6 +118,19 @@
       <!-- Control 미선택 -->
       <div id="controlEmpty" hidden>
         <p class="ctrl-empty-msg">먼저 Jar를 선택하세요.</p>
+      </div>
+    </div>
+
+    <!-- 게시판 섹션 (CMPA-933) -->
+    <div class="section-card" id="postsSection" hidden>
+      <div class="section-label">게시판</div>
+      <div class="posts-header">
+        <button class="btn-cta btn-sm" id="writePostBtn" type="button">✍️ 글쓰기</button>
+        <button class="btn-icon" id="cheerBtn" type="button" title="응원하기">👏</button>
+      </div>
+      <div id="cheerSummary" class="cheer-summary" hidden></div>
+      <div id="postsList" class="posts-list">
+        <p class="posts-empty">아직 글이 없어요.</p>
       </div>
     </div>
 
@@ -555,8 +568,81 @@
   </div>
 </div>
 
+<!-- ===== 게시글 작성 시트 (CMPA-933) ===== -->
+<div class="sheet-backdrop" id="writePostSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="글쓰기">
+    <div class="sheet-head">
+      <span>✍️ 글쓰기</span>
+      <button class="sheet-close" data-close="writePostSheet" type="button">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div class="cj-field" id="postGuestField" hidden>
+        <label class="cj-label" for="postGuestName">닉네임</label>
+        <input id="postGuestName" class="cj-input" type="text" placeholder="닉네임을 입력하세요" maxlength="30" autocomplete="off">
+      </div>
+      <div class="cj-field">
+        <label class="cj-label" for="postContent">내용</label>
+        <textarea id="postContent" class="cj-textarea" placeholder="응원이나 이야기를 남겨보세요" maxlength="500" rows="4"></textarea>
+      </div>
+      <button id="postSubmitBtn" class="btn-cta" type="button">게시하기</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 게시글 상세 + 댓글 시트 (CMPA-933) ===== -->
+<div class="sheet-backdrop" id="postDetailSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="게시글">
+    <div class="sheet-head">
+      <span>게시글</span>
+      <button class="sheet-close" data-close="postDetailSheet" type="button">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div id="postDetailContent" class="post-detail-content"></div>
+      <div class="post-comments-header">💬 댓글</div>
+      <div id="postCommentsList" class="post-comments-list"></div>
+      <div class="post-comment-input-row">
+        <div class="cj-field" id="commentGuestField" hidden style="margin-bottom:8px">
+          <input id="commentGuestName" class="cj-input cj-input-sm" type="text" placeholder="닉네임" maxlength="30" autocomplete="off">
+        </div>
+        <div class="post-comment-input-wrap">
+          <input id="commentInput" class="cj-input cj-input-sm" type="text" placeholder="댓글을 입력하세요" maxlength="200" autocomplete="off">
+          <button id="commentSubmitBtn" class="btn-sm btn-cta" type="button">전송</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 응원 시트 (CMPA-933) ===== -->
+<div class="sheet-backdrop" id="cheerSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="응원하기">
+    <div class="sheet-head">
+      <span>👏 응원하기</span>
+      <button class="sheet-close" data-close="cheerSheet" type="button">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div class="cj-field" id="cheerGuestField" hidden>
+        <label class="cj-label" for="cheerGuestName">닉네임</label>
+        <input id="cheerGuestName" class="cj-input" type="text" placeholder="닉네임을 입력하세요" maxlength="30" autocomplete="off">
+      </div>
+      <div class="cj-field">
+        <label class="cj-label">응원 이모지 선택</label>
+        <div class="cheer-emoji-grid">
+          <button class="cheer-emoji-btn active" data-emoji="👏" type="button">👏</button>
+          <button class="cheer-emoji-btn" data-emoji="💪" type="button">💪</button>
+          <button class="cheer-emoji-btn" data-emoji="🔥" type="button">🔥</button>
+          <button class="cheer-emoji-btn" data-emoji="⭐" type="button">⭐</button>
+          <button class="cheer-emoji-btn" data-emoji="❤️" type="button">❤️</button>
+          <button class="cheer-emoji-btn" data-emoji="🎉" type="button">🎉</button>
+        </div>
+      </div>
+      <button id="cheerSubmitBtn" class="btn-cta" type="button">응원 보내기</button>
+    </div>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./supabase/supabase.js?v=20260711r"></script>
-<script src="./app.js?v=20260711v"></script>
+<script src="./supabase/supabase.js?v=20260711s"></script>
+<script src="./app.js?v=20260711w"></script>
 </body>
 </html>

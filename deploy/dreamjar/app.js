@@ -590,6 +590,7 @@
         entryRows = localEntries(joinedJar.jarId);
         renderControlSection(joinedJar, entryRows);
         renderHistorySection(joinedJar.jarId);
+        renderPostsSection(joinedJar); // CMPA-933
       }
       closeSheet('settingsSheet');
       toast(result.alreadyJoined ? '이미 참여 중인 Jar입니다.' : '참여했습니다!');
@@ -1039,6 +1040,7 @@
     entryRows = localEntries(jar.jarId);
     renderControlSection(jar, entryRows);
     renderHistorySection(jar.jarId);
+    renderPostsSection(jar); // CMPA-933
 
     // Pull server history for selected jar (merge with local unsynced)
     if (!isMock()) {
@@ -2506,9 +2508,257 @@
     entryRows = localEntries(jar.jarId);
     renderControlSection(jar, entryRows);
     renderHistorySection(jar.jarId);
+    renderPostsSection(jar); // CMPA-933
 
     updateLastSyncDisplay();
   }
+
+  // ── CMPA-933: 게시판(Posts) + 댓글(Comments) + 응원(Cheers) ──
+
+  let _postsCache = [];       // 현재 jar 게시글 캐시
+  let _cheersCache = [];      // 현재 jar 응원 캐시
+  let _currentPostId = null;  // 상세 보기 중인 게시글
+
+  /** 현재 사용자가 이 jar의 멤버인지 확인 */
+  function isMemberOfJar(jar) {
+    if (!jar || !userId) return false;
+    return jar.ownerId === userId || jar.role === 'member' || jar.role === 'owner';
+  }
+
+  /** 게시판 섹션 렌더링 */
+  async function renderPostsSection(jar) {
+    const section = $('postsSection');
+    if (!jar) { section.hidden = true; return; }
+    section.hidden = false;
+
+    // 멤버가 아닌 경우 guest 닉네임 필드 표시 (글쓰기 시트에서)
+    const isMember = isMemberOfJar(jar);
+
+    // 서버에서 불러오기
+    if (hasSupabase()) {
+      try {
+        _postsCache = await DreamJarSupabase.api({ query: 'getPosts', params: { jarId: jar.jarId } });
+        _cheersCache = await DreamJarSupabase.api({ query: 'getCheers', params: { jarId: jar.jarId } });
+      } catch (err) {
+        console.warn('[DreamJar] 게시글 로드 실패:', err.message);
+        _postsCache = [];
+        _cheersCache = [];
+      }
+    }
+
+    renderCheerSummary();
+    renderPostsList();
+  }
+
+  function renderCheerSummary() {
+    const el = $('cheerSummary');
+    if (!_cheersCache || _cheersCache.length === 0) { el.hidden = true; return; }
+
+    // 이모지별 카운트
+    const counts = {};
+    _cheersCache.forEach(c => { counts[c.emoji] = (counts[c.emoji] || 0) + 1; });
+
+    el.innerHTML = Object.entries(counts)
+      .sort((a, b) => b[1] - a[1])
+      .map(([emoji, cnt]) =>
+        `<span class="cheer-badge">${emoji} <span class="cheer-badge-count">${cnt}</span></span>`
+      ).join('');
+    el.hidden = false;
+  }
+
+  function renderPostsList() {
+    const listEl = $('postsList');
+    if (!_postsCache || _postsCache.length === 0) {
+      listEl.innerHTML = '<p class="posts-empty">아직 글이 없어요.</p>';
+      return;
+    }
+
+    listEl.innerHTML = _postsCache.map(p => {
+      const authorLabel = p.authorId
+        ? `<span class="post-author">${escHtml(p.authorName || p.authorId)}</span>`
+        : `<span class="post-author-guest">${escHtml(p.guestName || '익명')}</span>`;
+      const cmtCount = (p.comments || []).length;
+      const preview = (p.content || '').slice(0, 80) + ((p.content || '').length > 80 ? '…' : '');
+      return `<div class="post-card" data-post-id="${escHtml(p.postId)}">
+        ${authorLabel}
+        <div class="post-body">${escHtml(preview)}</div>
+        <div class="post-meta">
+          <span>${fmtDate(p.createdAt)}</span>
+          ${cmtCount > 0 ? `<span class="post-comment-count">💬 ${cmtCount}</span>` : ''}
+        </div>
+      </div>`;
+    }).join('');
+
+    listEl.querySelectorAll('.post-card').forEach(card => {
+      card.addEventListener('click', () => openPostDetail(card.dataset.postId));
+    });
+  }
+
+  /** 게시글 상세 시트 열기 */
+  function openPostDetail(postId) {
+    const post = _postsCache.find(p => p.postId === postId);
+    if (!post) return;
+    _currentPostId = postId;
+
+    const isMember = isMemberOfJar(currentJar);
+
+    // 게시글 본문
+    const authorLabel = post.authorId
+      ? `<span class="post-author">${escHtml(post.authorName || post.authorId)}</span>`
+      : `<span class="post-author-guest">${escHtml(post.guestName || '익명')}</span>`;
+    $('postDetailContent').innerHTML =
+      `${authorLabel}
+       <div class="post-body">${escHtml(post.content)}</div>
+       <div class="post-meta"><span>${fmtDate(post.createdAt)}</span></div>`;
+
+    // 댓글 목록
+    renderCommentsList(post.comments || []);
+
+    // guest 닉네임 필드
+    $('commentGuestField').hidden = isMember;
+    $('commentInput').value = '';
+
+    openSheet('postDetailSheet');
+  }
+
+  function renderCommentsList(comments) {
+    const listEl = $('postCommentsList');
+    if (!comments || comments.length === 0) {
+      listEl.innerHTML = '<p class="posts-empty" style="padding:8px 0">댓글이 없어요.</p>';
+      return;
+    }
+    listEl.innerHTML = comments.map(c => {
+      const authorLabel = c.authorId
+        ? `<span class="comment-author">${escHtml(c.authorName || c.authorId)}</span>`
+        : `<span class="comment-author-guest">${escHtml(c.guestName || '익명')}</span>`;
+      return `<div class="comment-row">
+        ${authorLabel}
+        <div class="comment-body">${escHtml(c.content)}</div>
+        <div class="comment-date">${fmtDate(c.createdAt)}</div>
+      </div>`;
+    }).join('');
+  }
+
+  // ── 글쓰기 ──
+  $('writePostBtn').addEventListener('click', () => {
+    const isMember = isMemberOfJar(currentJar);
+    $('postGuestField').hidden = isMember;
+    $('postGuestName').value = '';
+    $('postContent').value = '';
+    openSheet('writePostSheet');
+  });
+
+  $('postSubmitBtn').addEventListener('click', async () => {
+    if (!currentJar) return;
+    const content = $('postContent').value.trim();
+    if (!content) { toast('내용을 입력하세요.'); return; }
+
+    const isMember = isMemberOfJar(currentJar);
+    const guestName = isMember ? '' : $('postGuestName').value.trim();
+    if (!isMember && !guestName) { toast('닉네임을 입력하세요.'); return; }
+
+    $('postSubmitBtn').disabled = true;
+    try {
+      if (hasSupabase()) {
+        await DreamJarSupabase.api({ action: 'createPost', params: {
+          jarId: currentJar.jarId,
+          authorId: isMember ? userId : null,
+          guestName: guestName,
+          content: content,
+        }});
+      }
+      closeSheet('writePostSheet');
+      toast('게시글을 올렸어요.');
+      await renderPostsSection(currentJar);
+    } catch (err) {
+      toast('게시 실패: ' + err.message);
+    } finally {
+      $('postSubmitBtn').disabled = false;
+    }
+  });
+
+  // ── 댓글 ──
+  $('commentSubmitBtn').addEventListener('click', async () => {
+    if (!currentJar || !_currentPostId) return;
+    const content = $('commentInput').value.trim();
+    if (!content) return;
+
+    const isMember = isMemberOfJar(currentJar);
+    const guestName = isMember ? '' : $('commentGuestName').value.trim();
+    if (!isMember && !guestName) { toast('닉네임을 입력하세요.'); return; }
+
+    $('commentSubmitBtn').disabled = true;
+    try {
+      if (hasSupabase()) {
+        await DreamJarSupabase.api({ action: 'createComment', params: {
+          postId: _currentPostId,
+          jarId: currentJar.jarId,
+          authorId: isMember ? userId : null,
+          guestName: guestName,
+          content: content,
+        }});
+      }
+      $('commentInput').value = '';
+      toast('댓글을 달았어요.');
+      // 새로고침
+      await renderPostsSection(currentJar);
+      // 상세 시트 다시 열기
+      openPostDetail(_currentPostId);
+    } catch (err) {
+      toast('댓글 실패: ' + err.message);
+    } finally {
+      $('commentSubmitBtn').disabled = false;
+    }
+  });
+
+  // ── 응원 ──
+  let _selectedCheerEmoji = '👏';
+
+  $('cheerBtn').addEventListener('click', () => {
+    const isMember = isMemberOfJar(currentJar);
+    $('cheerGuestField').hidden = isMember;
+    $('cheerGuestName').value = '';
+    _selectedCheerEmoji = '👏';
+    document.querySelectorAll('.cheer-emoji-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.emoji === '👏');
+    });
+    openSheet('cheerSheet');
+  });
+
+  document.querySelectorAll('.cheer-emoji-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      _selectedCheerEmoji = btn.dataset.emoji;
+      document.querySelectorAll('.cheer-emoji-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.emoji === _selectedCheerEmoji);
+      });
+    });
+  });
+
+  $('cheerSubmitBtn').addEventListener('click', async () => {
+    if (!currentJar) return;
+    const isMember = isMemberOfJar(currentJar);
+    const guestName = isMember ? '' : $('cheerGuestName').value.trim();
+    if (!isMember && !guestName) { toast('닉네임을 입력하세요.'); return; }
+
+    $('cheerSubmitBtn').disabled = true;
+    try {
+      if (hasSupabase()) {
+        await DreamJarSupabase.api({ action: 'addCheer', params: {
+          jarId: currentJar.jarId,
+          authorId: isMember ? userId : null,
+          guestName: guestName,
+          emoji: _selectedCheerEmoji,
+        }});
+      }
+      closeSheet('cheerSheet');
+      toast(_selectedCheerEmoji + ' 응원을 보냈어요!');
+      await renderPostsSection(currentJar);
+    } catch (err) {
+      toast('응원 실패: ' + err.message);
+    } finally {
+      $('cheerSubmitBtn').disabled = false;
+    }
+  });
 
   // ── 홈 화면에 추가 (A2HS / PWA install) — CMPA-872 ──
   const isStandalone = () =>

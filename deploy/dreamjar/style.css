@@ -1086,3 +1086,78 @@ input, select { font-family: inherit; }
   min-height: 40px; border-radius: 10px; cursor: pointer;
 }
 .emoji-cell:active { background: var(--line); }
+
+/* ── CMPA-933: 게시판(Posts), 댓글(Comments), 응원(Cheers) ── */
+.posts-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px;
+}
+.btn-sm {
+  padding: 6px 14px; font-size: .85rem; border-radius: 8px;
+  border: none; cursor: pointer;
+}
+.posts-list { display: flex; flex-direction: column; gap: 10px; }
+.posts-empty { color: #888; font-size: .9rem; text-align: center; padding: 20px 0; }
+
+.post-card {
+  background: var(--card, #23233a); border-radius: 12px; padding: 14px;
+  cursor: pointer; transition: background .15s;
+}
+.post-card:active { background: var(--line, #2e2e4a); }
+.post-author { font-weight: 600; font-size: .85rem; color: var(--accent, #8b7cf7); }
+.post-author-guest { font-weight: 600; font-size: .85rem; color: #e0a040; }
+.post-body { margin: 6px 0; font-size: .95rem; white-space: pre-wrap; word-break: break-word; }
+.post-meta {
+  display: flex; align-items: center; gap: 10px;
+  font-size: .78rem; color: #888;
+}
+.post-comment-count { color: var(--accent, #8b7cf7); }
+
+/* 게시글 상세 */
+.post-detail-content {
+  background: var(--card, #23233a); border-radius: 12px; padding: 14px;
+  margin-bottom: 14px;
+}
+.post-comments-header {
+  font-size: .9rem; font-weight: 600; margin-bottom: 8px; color: #aaa;
+}
+.post-comments-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+.comment-row {
+  background: var(--card, #23233a); border-radius: 10px; padding: 10px 12px;
+}
+.comment-author { font-weight: 600; font-size: .8rem; color: var(--accent, #8b7cf7); }
+.comment-author-guest { font-weight: 600; font-size: .8rem; color: #e0a040; }
+.comment-body { font-size: .9rem; margin: 3px 0; white-space: pre-wrap; word-break: break-word; }
+.comment-date { font-size: .75rem; color: #888; }
+.post-comment-input-row { margin-top: 8px; }
+.post-comment-input-wrap {
+  display: flex; gap: 8px; align-items: center;
+}
+.post-comment-input-wrap .cj-input-sm { flex: 1; }
+.cj-input-sm { padding: 8px 10px; font-size: .9rem; }
+
+/* 응원 */
+.cheer-summary {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; font-size: 1.1rem;
+}
+.cheer-badge {
+  background: var(--card, #23233a); border-radius: 20px; padding: 4px 10px;
+  font-size: .9rem; display: flex; align-items: center; gap: 4px;
+}
+.cheer-badge-count { font-size: .8rem; color: #aaa; }
+
+.cheer-emoji-grid {
+  display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; padding: 8px 0;
+}
+.cheer-emoji-btn {
+  font-size: 2rem; padding: 10px; border: 2px solid transparent; border-radius: 14px;
+  background: var(--card, #23233a); cursor: pointer; transition: border-color .15s;
+}
+.cheer-emoji-btn.active { border-color: var(--accent, #8b7cf7); }
+
+/* 텍스트에어리어 */
+.cj-textarea {
+  width: 100%; box-sizing: border-box; padding: 10px 12px; border-radius: 10px;
+  border: 1px solid var(--line, #333); background: var(--card, #23233a);
+  color: inherit; font-size: .95rem; font-family: inherit; resize: vertical;
+}
