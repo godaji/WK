@@ -70,6 +70,7 @@ input, select { font-family: inherit; }
 .sf-input:focus { border-color: var(--accent); }
 .sf-input::placeholder { color: var(--muted); opacity: .6; }
 .sf-hint { margin: 6px 2px 0; font-size: 12px; color: var(--muted); line-height: 1.4; }
+.sf-error { margin: 8px 2px 0; font-size: 13px; color: #e57373; line-height: 1.4; font-weight: 600; }
 .sf-save {
   margin-top: 24px;
   width: 100%; min-height: 54px; border-radius: 16px;

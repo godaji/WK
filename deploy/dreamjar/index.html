@@ -14,23 +14,25 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DreamJar">
-<link rel="stylesheet" href="./style.css?v=20260711j">
+<link rel="stylesheet" href="./style.css?v=20260711k">
 </head>
 <body>
 
-<!-- ===== 초기 설정 화면 (userId 미입력 시) ===== -->
-<div id="setupScreen" class="setup-screen" hidden>
+<!-- ===== 로그인 화면 (CMPA-913: userId+비밀번호 인증) ===== -->
+<div id="loginScreen" class="setup-screen" hidden>
   <div class="setup-inner">
     <div class="setup-logo">🫙</div>
     <h1 class="setup-title">DreamJar</h1>
-    <p class="setup-desc">함께 모으는 저금통.<br>시작하기 전에 사용자 ID를 설정하세요.</p>
+    <p class="setup-desc">함께 모으는 저금통.<br>로그인하여 시작하세요.</p>
     <div class="setup-form">
-      <label class="sf-label" for="setupUserId">사용자 ID</label>
-      <input id="setupUserId" class="sf-input" type="text"
-        placeholder="예: hong-gildong-01" autocomplete="off" maxlength="40">
-      <p class="sf-hint">공백 없이 영문·숫자·하이픈만 사용하세요.</p>
-      <!-- Apps Script URL removed — Supabase backend (CMPA-893) -->
-      <button id="setupSaveBtn" class="sf-save" type="button">시작하기</button>
+      <label class="sf-label" for="loginUserId">사용자 ID</label>
+      <input id="loginUserId" class="sf-input" type="text"
+        placeholder="예: hong-gildong-01" autocomplete="username" maxlength="40">
+      <label class="sf-label" for="loginPassword">비밀번호</label>
+      <input id="loginPassword" class="sf-input" type="password"
+        placeholder="비밀번호를 입력하세요" autocomplete="current-password" maxlength="100">
+      <p class="sf-error" id="loginError" hidden></p>
+      <button id="loginBtn" class="sf-save" type="button">로그인</button>
     </div>
   </div>
 </div>
@@ -190,7 +192,7 @@
       </div>
 
       <div class="sett-divider"></div>
-      <p class="sett-version">DreamJar v1.1.0-supabase</p>
+      <p class="sett-version">DreamJar v1.2.0-auth</p>
     </div>
   </div>
 </div>
@@ -541,7 +543,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./supabase/supabase.js?v=20260711j"></script>
-<script src="./app.js?v=20260711j"></script>
+<script src="./supabase/supabase.js?v=20260711k"></script>
+<script src="./app.js?v=20260711k"></script>
 </body>
 </html>
