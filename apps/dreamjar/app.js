@@ -952,10 +952,10 @@
     }
   });
 
-  // ── Jar 순환 (CMPA-915: 다음 Jar로 빙글빙글) ──
+  // ── Jar 순환 / picker (CMPA-915, CMPA-926) ──
   $('jarChangeBtn').addEventListener('click', () => {
     const jars = activeJars(cachedJars);
-    if (jars.length <= 1) return;
+    if (jars.length <= 1) { openJarPicker(); return; }
     const curIdx = currentJar ? jars.findIndex(j => j.jarId === currentJar.jarId) : -1;
     const nextIdx = (curIdx + 1) % jars.length;
     onJarSelect(jars[nextIdx]);
@@ -1207,8 +1207,8 @@
     // Show name edit button for owner (CMPA-915)
     $('jarNameEditBtn').hidden = !isOwned;
 
-    // Hide jar cycle button if only 1 jar (CMPA-915)
-    $('jarChangeBtn').hidden = activeJars(cachedJars).length <= 1;
+    // Always show jar change button (CMPA-926: picker fallback for 1 jar)
+    $('jarChangeBtn').hidden = false;
 
     // Show jar image or add-photo button (CMPA-915)
     const imgDisplay = $('mainJarImage');
