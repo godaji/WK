@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DreamJar">
-<link rel="stylesheet" href="./style.css?v=20260711t">
+<link rel="stylesheet" href="./style.css?v=20260711u">
 </head>
 <body>
 
@@ -80,6 +80,23 @@
     <div class="public-posts-section">
       <h3 class="public-posts-title">📝 응원 게시판</h3>
       <div id="publicPostsList" class="posts-list"></div>
+    </div>
+  </div>
+
+  <!-- Ad Gate Overlay (CMPA-934: 보상형 광고 게이트) -->
+  <div id="adGateOverlay" class="ad-gate-overlay" hidden>
+    <div class="ad-gate-card">
+      <div class="ad-gate-icon">📺</div>
+      <h3 class="ad-gate-title">응원 준비 중...</h3>
+      <p class="ad-gate-desc">잠시 후 응원하기가 열립니다.</p>
+      <div class="ad-gate-countdown">
+        <span id="adGateCount">5</span><span>초</span>
+      </div>
+      <!-- AdSense rewarded ad slot (activated after approval) -->
+      <div id="adGateAdSlot" class="ad-gate-ad-slot"></div>
+      <button id="adGateSkipBtn" class="btn-cta ad-gate-btn" type="button" hidden disabled>
+        응원하기로 이동
+      </button>
     </div>
   </div>
 </div>
@@ -690,7 +707,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./supabase/supabase.js?v=20260711t"></script>
-<script src="./app.js?v=20260711t"></script>
+<script src="./supabase/supabase.js?v=20260711u"></script>
+<script src="./app.js?v=20260711u"></script>
 </body>
 </html>

@@ -1244,6 +1244,41 @@ input, select { font-family: inherit; }
   font-size: .75rem; color: var(--muted, #888); margin-top: 6px;
 }
 
+/* Ad Gate Overlay (CMPA-934) */
+.ad-gate-overlay {
+  position: fixed; inset: 0; z-index: 999;
+  background: rgba(0,0,0,.85);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.ad-gate-overlay[hidden] { display: none; }
+.ad-gate-card {
+  background: var(--bg2, #1a1a2e); border-radius: 20px;
+  padding: 32px 24px; text-align: center;
+  max-width: 320px; width: 100%;
+  box-shadow: 0 8px 32px rgba(0,0,0,.5);
+}
+.ad-gate-icon { font-size: 48px; margin-bottom: 12px; }
+.ad-gate-title {
+  font-size: 1.1rem; font-weight: 700; margin: 0 0 8px;
+  color: var(--text-primary, #fff);
+}
+.ad-gate-desc {
+  font-size: .9rem; color: var(--muted, #888); margin: 0 0 16px;
+}
+.ad-gate-countdown {
+  font-size: 2.5rem; font-weight: 700; color: var(--accent, #8b7cf7);
+  margin-bottom: 16px;
+}
+.ad-gate-countdown span:last-child { font-size: 1rem; margin-left: 2px; }
+.ad-gate-ad-slot {
+  min-height: 60px; margin-bottom: 12px;
+  /* Placeholder for future AdSense unit */
+}
+.ad-gate-btn {
+  width: 100%; padding: 14px; font-size: 1rem;
+}
+
 /* Share jar button */
 .btn-share-jar {
   display: block; width: 100%; margin-top: 8px;

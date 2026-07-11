@@ -2856,12 +2856,78 @@
       const posts = await DreamJarSupabase.api({ query: 'getPosts', params: { jarId } });
       renderPublicPosts(posts);
 
-      // Donate button
-      $('publicDonateBtn').onclick = () => handlePublicDonate(jarId);
+      // Donate button → triggers ad gate first
+      $('publicDonateBtn').onclick = () => showAdGate(jarId);
     } catch (err) {
       $('publicJarName').textContent = 'Jar를 찾을 수 없습니다';
       $('publicJarDesc').textContent = err.message || '';
     }
+  }
+
+  // ── CMPA-934 Ad Gate: Rewarded ad before donation ──
+  const AD_GATE_SECONDS = 5;
+  let _adGateUnlocked = false;
+
+  function showAdGate(jarId) {
+    const nameEl = $('publicDonorName');
+    const errEl = $('publicDonateError');
+    errEl.hidden = true;
+
+    const guestName = (nameEl.value || '').trim();
+    if (!guestName) {
+      errEl.textContent = '닉네임을 입력해주세요.';
+      errEl.hidden = false;
+      nameEl.focus();
+      return;
+    }
+
+    // If already unlocked (within same session after watching ad), skip
+    if (_adGateUnlocked) {
+      handlePublicDonate(jarId);
+      return;
+    }
+
+    // Try AdSense rewarded ad first, fall back to countdown
+    if (window._adsenseRewardedReady) {
+      triggerAdsenseRewarded(jarId);
+    } else {
+      showCountdownGate(jarId);
+    }
+  }
+
+  function showCountdownGate(jarId) {
+    const overlay = $('adGateOverlay');
+    const countEl = $('adGateCount');
+    const skipBtn = $('adGateSkipBtn');
+    overlay.hidden = false;
+    skipBtn.hidden = true;
+    skipBtn.disabled = true;
+
+    let remaining = AD_GATE_SECONDS;
+    countEl.textContent = remaining;
+
+    const interval = setInterval(() => {
+      remaining--;
+      countEl.textContent = remaining;
+      if (remaining <= 0) {
+        clearInterval(interval);
+        skipBtn.hidden = false;
+        skipBtn.disabled = false;
+        skipBtn.textContent = '✅ 응원하기로 이동';
+        skipBtn.onclick = () => {
+          overlay.hidden = true;
+          _adGateUnlocked = true;
+          handlePublicDonate(jarId);
+        };
+      }
+    }, 1000);
+  }
+
+  /** AdSense rewarded ad trigger (placeholder — activated after AdSense approval) */
+  function triggerAdsenseRewarded(jarId) {
+    // This will be activated when AdSense is approved and configured.
+    // For now, falls back to countdown.
+    showCountdownGate(jarId);
   }
 
   function renderPublicPosts(posts) {
