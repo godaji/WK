@@ -145,7 +145,7 @@ declare
   v_email    text;
   v_auth_uid uuid;
 begin
-  v_email := p_user_id || '@dreamjar.local';
+  v_email := p_user_id || '@dreamjar.app';
   v_auth_uid := gen_random_uuid();
 
   -- Insert into auth.users with all required fields

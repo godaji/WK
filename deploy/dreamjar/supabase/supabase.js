@@ -22,10 +22,10 @@
 
   /**
    * Sign in with userId + password.
-   * Internally maps userId → {userId}@dreamjar.local for Supabase Auth email/password.
+   * Internally maps userId → {userId}@dreamjar.app for Supabase Auth email/password.
    */
   async function signInWithPassword(userId, password) {
-    const email = userId + '@dreamjar.local';
+    const email = userId + '@dreamjar.app';
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -52,9 +52,9 @@
     // user_id is stored in users table; extract from user_metadata or query
     const meta = session.user?.user_metadata;
     if (meta?.user_id) return meta.user_id;
-    // Fallback: derive from email ({userId}@dreamjar.local)
+    // Fallback: derive from email ({userId}@dreamjar.app)
     const email = session.user?.email || '';
-    if (email.endsWith('@dreamjar.local')) return email.replace('@dreamjar.local', '');
+    if (email.endsWith('@dreamjar.app')) return email.replace('@dreamjar.app', '');
     return null;
   }
 
