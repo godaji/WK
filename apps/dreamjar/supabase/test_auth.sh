@@ -26,7 +26,7 @@ echo "▶ Test 1: Login with correct credentials (shhong / star)"
 LOGIN_RESP=$(curl -s -X POST "$SUPABASE_URL/auth/v1/token?grant_type=password" \
   -H "apikey: $ANON_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"email":"shhong@dreamjar.app","password":"star"}')
+  -d '{"email":"shhong@dreamjar.io","password":"star"}')
 
 ACCESS_TOKEN=$(echo "$LOGIN_RESP" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('access_token',''))" 2>/dev/null || echo "")
 LOGIN_ERROR=$(echo "$LOGIN_RESP" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('error','') or d.get('msg','') or d.get('error_description',''))" 2>/dev/null || echo "")
@@ -44,7 +44,7 @@ echo "▶ Test 2: Login with wrong password (shhong / wrongpass)"
 BAD_RESP=$(curl -s -X POST "$SUPABASE_URL/auth/v1/token?grant_type=password" \
   -H "apikey: $ANON_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"email":"shhong@dreamjar.app","password":"wrongpass"}')
+  -d '{"email":"shhong@dreamjar.io","password":"wrongpass"}')
 
 BAD_TOKEN=$(echo "$BAD_RESP" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('access_token',''))" 2>/dev/null || echo "")
 BAD_ERROR=$(echo "$BAD_RESP" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('error_description','') or d.get('msg','') or d.get('error',''))" 2>/dev/null || echo "")
@@ -61,7 +61,7 @@ echo "▶ Test 3: Login with non-existent user"
 NOUSER_RESP=$(curl -s -X POST "$SUPABASE_URL/auth/v1/token?grant_type=password" \
   -H "apikey: $ANON_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"email":"nonexistent@dreamjar.app","password":"whatever"}')
+  -d '{"email":"nonexistent@dreamjar.io","password":"whatever"}')
 
 NOUSER_TOKEN=$(echo "$NOUSER_RESP" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('access_token',''))" 2>/dev/null || echo "")
 
@@ -118,10 +118,10 @@ if [ -n "$ACCESS_TOKEN" ] && [ "$ACCESS_TOKEN" != "" ]; then
   JWT_EMAIL=$(echo "$LOGIN_RESP" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('user',{}).get('email',''))" 2>/dev/null || echo "")
   JWT_UID=$(echo "$LOGIN_RESP" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('user',{}).get('id',''))" 2>/dev/null || echo "")
 
-  if [ "$JWT_EMAIL" = "shhong@dreamjar.app" ]; then
-    pass "JWT email = shhong@dreamjar.app"
+  if [ "$JWT_EMAIL" = "shhong@dreamjar.io" ]; then
+    pass "JWT email = shhong@dreamjar.io"
   else
-    fail "JWT email = '$JWT_EMAIL', expected 'shhong@dreamjar.app'"
+    fail "JWT email = '$JWT_EMAIL', expected 'shhong@dreamjar.io'"
   fi
 
   if [ -n "$JWT_UID" ]; then
