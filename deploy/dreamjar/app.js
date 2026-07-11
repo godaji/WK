@@ -1975,6 +1975,19 @@
     openSheet('historySheet');
   });
 
+  // CMPA-934: Share public jar link
+  $('shareJarBtn').addEventListener('click', () => {
+    if (!currentJar) return;
+    const url = window.location.origin + window.location.pathname + '?jar=' + encodeURIComponent(currentJar.jarId);
+    if (navigator.share) {
+      navigator.share({ title: currentJar.name + ' — DreamJar', url }).catch(() => {});
+    } else if (navigator.clipboard) {
+      navigator.clipboard.writeText(url).then(() => toast('링크가 복사되었어요!')).catch(() => toast(url));
+    } else {
+      prompt('공유 링크:', url);
+    }
+  });
+
   // ── 기부 수신 팝업 (동기화 시 새 기부가 감지되면 표시) ──
   let _donationQueue = [];
   function showDonationReceivedPopup(donations) {
@@ -2809,7 +2822,135 @@
   })();
 
   // ── 진입점 (CMPA-913: auth session 확인) ──
+  // ── CMPA-934: Public Jar View ──
+  function getPublicJarId() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('jar') || '';
+  }
+
+  async function initPublicJar(jarId) {
+    const screen = $('publicJarScreen');
+    screen.hidden = false;
+    $('loginScreen').hidden = true;
+    $('mainApp').hidden = true;
+
+    try {
+      const jar = await DreamJarSupabase.api({ query: 'getPublicJar', params: { jarId } });
+      $('publicJarName').textContent = jar.name;
+      $('publicJarDesc').textContent = jar.description;
+      if (jar.imageUrl) {
+        $('publicJarImage').hidden = false;
+        $('publicJarImageImg').src = jar.imageUrl;
+      }
+      const cur = Number(jar.currentAmount) || 0;
+      const goal = Number(jar.goalAmount) || 0;
+      $('publicJarCur').textContent = cur.toLocaleString() + '원';
+      $('publicJarGoal').textContent = goal ? goal.toLocaleString() + '원' : '—';
+      if (goal > 0) {
+        const pct = Math.min(100, Math.round((cur / goal) * 100));
+        $('publicJarProgressBar').style.width = pct + '%';
+        $('publicJarProgressPct').textContent = pct + '%';
+      }
+
+      // Load posts
+      const posts = await DreamJarSupabase.api({ query: 'getPosts', params: { jarId } });
+      renderPublicPosts(posts);
+
+      // Donate button
+      $('publicDonateBtn').onclick = () => handlePublicDonate(jarId);
+    } catch (err) {
+      $('publicJarName').textContent = 'Jar를 찾을 수 없습니다';
+      $('publicJarDesc').textContent = err.message || '';
+    }
+  }
+
+  function renderPublicPosts(posts) {
+    const list = $('publicPostsList');
+    if (!posts || !posts.length) {
+      list.innerHTML = '<p style="color:var(--muted);font-size:.85rem;">아직 응원 메시지가 없습니다.</p>';
+      return;
+    }
+    list.innerHTML = posts.slice(0, 20).map(p => {
+      const name = p.guestName || p.authorName || '익명';
+      const date = p.createdAt ? new Date(p.createdAt).toLocaleDateString('ko-KR') : '';
+      const content = (p.content || '').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
+      return '<div class="public-post-card">'
+        + '<div class="public-post-author">' + name + '</div>'
+        + '<div class="public-post-content">' + content + '</div>'
+        + '<div class="public-post-date">' + date + '</div>'
+        + '</div>';
+    }).join('');
+  }
+
+  async function handlePublicDonate(jarId) {
+    const nameEl = $('publicDonorName');
+    const msgEl = $('publicDonorMessage');
+    const errEl = $('publicDonateError');
+    const successEl = $('publicDonateSuccess');
+    const btn = $('publicDonateBtn');
+
+    errEl.hidden = true;
+    successEl.hidden = true;
+
+    const guestName = (nameEl.value || '').trim();
+    if (!guestName) {
+      errEl.textContent = '닉네임을 입력해주세요.';
+      errEl.hidden = false;
+      nameEl.focus();
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = '전송 중…';
+
+    try {
+      await DreamJarSupabase.api({
+        action: 'addPublicDonation',
+        params: {
+          jarId,
+          guestName,
+          message: (msgEl.value || '').trim(),
+        },
+      });
+      successEl.hidden = false;
+      btn.textContent = '✅ 응원 완료!';
+      nameEl.value = '';
+      msgEl.value = '';
+
+      // Refresh jar info + posts
+      const jar = await DreamJarSupabase.api({ query: 'getPublicJar', params: { jarId } });
+      const cur = Number(jar.currentAmount) || 0;
+      const goal = Number(jar.goalAmount) || 0;
+      $('publicJarCur').textContent = cur.toLocaleString() + '원';
+      if (goal > 0) {
+        const pct = Math.min(100, Math.round((cur / goal) * 100));
+        $('publicJarProgressBar').style.width = pct + '%';
+        $('publicJarProgressPct').textContent = pct + '%';
+      }
+      const posts = await DreamJarSupabase.api({ query: 'getPosts', params: { jarId } });
+      renderPublicPosts(posts);
+
+      // Re-enable after a delay
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.textContent = '💰 1,000원 응원하기';
+      }, 3000);
+    } catch (err) {
+      errEl.textContent = '오류: ' + (err.message || '전송 실패');
+      errEl.hidden = false;
+      btn.disabled = false;
+      btn.textContent = '💰 1,000원 응원하기';
+    }
+  }
+
   (async function boot() {
+    // CMPA-934: Public jar link check (?jar=xxx)
+    const publicJarId = getPublicJarId();
+    if (publicJarId && hasSupabase()) {
+      await initPublicJar(publicJarId);
+      return;
+    }
+
     if (hasSupabase()) {
       try {
         const session = await DreamJarSupabase.auth.getSession();

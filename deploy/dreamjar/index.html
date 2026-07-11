@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DreamJar">
-<link rel="stylesheet" href="./style.css?v=20260711s">
+<link rel="stylesheet" href="./style.css?v=20260711t">
 </head>
 <body>
 
@@ -33,6 +33,53 @@
         placeholder="비밀번호를 입력하세요" autocomplete="current-password" maxlength="100">
       <p class="sf-error" id="loginError" hidden></p>
       <button id="loginBtn" class="sf-save" type="button">로그인</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Public Jar 공개 보기 (CMPA-934) ===== -->
+<div id="publicJarScreen" class="setup-screen" hidden>
+  <div class="public-jar-inner">
+    <div class="public-jar-header">🫙 DreamJar</div>
+    <div class="public-jar-image" id="publicJarImage" hidden>
+      <img id="publicJarImageImg" src="" alt="Jar" loading="lazy">
+    </div>
+    <h2 class="public-jar-name" id="publicJarName">—</h2>
+    <p class="public-jar-desc" id="publicJarDesc"></p>
+    <div class="public-jar-amounts">
+      <span class="jar-cur" id="publicJarCur">0원</span>
+      <span class="jar-sep"> / </span>
+      <span class="jar-goal" id="publicJarGoal">—</span>
+    </div>
+    <div class="public-jar-progress">
+      <div class="jar-progress">
+        <div class="jar-progress-bar" id="publicJarProgressBar" style="width:0%"></div>
+      </div>
+      <span class="jar-progress-pct" id="publicJarProgressPct">0%</span>
+    </div>
+
+    <!-- 응원 도네이션 폼 -->
+    <div class="public-donate-section">
+      <h3 class="public-donate-title">💰 응원 도네이션 (1,000원)</h3>
+      <label class="sf-label" for="publicDonorName">닉네임</label>
+      <input id="publicDonorName" class="sf-input" type="text"
+        placeholder="닉네임을 입력하세요" maxlength="20">
+      <label class="sf-label" for="publicDonorMessage">응원 메시지</label>
+      <textarea id="publicDonorMessage" class="sf-input public-textarea"
+        placeholder="응원의 메시지를 남겨주세요 (선택)" maxlength="200" rows="3"></textarea>
+      <button id="publicDonateBtn" class="btn-cta public-donate-btn" type="button">
+        💰 1,000원 응원하기
+      </button>
+      <p class="sf-error" id="publicDonateError" hidden></p>
+      <p class="public-donate-success" id="publicDonateSuccess" hidden>
+        ✅ 응원이 전달되었습니다! 감사합니다 🎉
+      </p>
+    </div>
+
+    <!-- 게시판 미리보기 -->
+    <div class="public-posts-section">
+      <h3 class="public-posts-title">📝 응원 게시판</h3>
+      <div id="publicPostsList" class="posts-list"></div>
     </div>
   </div>
 </div>
@@ -84,6 +131,7 @@
         <div class="jar-prediction" id="mainJarPrediction"></div>
         <div class="jar-sync-info" id="jarSyncInfo" hidden></div>
         <button class="btn-donate" id="donateBtn" type="button" hidden>🦝 기부하기</button>
+        <button class="btn-share-jar" id="shareJarBtn" type="button">🔗 공유 링크</button>
         <button class="btn-history" id="historyBtn" type="button">내역보기</button>
       </div>
 
@@ -642,7 +690,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./supabase/supabase.js?v=20260711s"></script>
-<script src="./app.js?v=20260711w"></script>
+<script src="./supabase/supabase.js?v=20260711t"></script>
+<script src="./app.js?v=20260711t"></script>
 </body>
 </html>

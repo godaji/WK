@@ -113,6 +113,10 @@
     if (query === 'getPosts')        return await getPosts(params);
     if (query === 'getCheers')       return await getCheers(params);
 
+    // CMPA-934: public jar + donation
+    if (query === 'getPublicJar')    return await getPublicJar(params);
+    if (action === 'addPublicDonation') return await addPublicDonation(params);
+
     throw new Error('알 수 없는 action/query: ' + (action || query));
   }
 
@@ -952,6 +956,77 @@
       emoji:      c.emoji,
       createdAt:  c.created_at,
     }));
+  }
+
+  // ── CMPA-934: Public Jar + Donation ─────────────────────────
+
+  /** Fetch jar info for public (non-auth) view */
+  async function getPublicJar(p) {
+    if (!p.jarId) throw new Error('jarId 필요');
+    const { data: jar, error } = await supabase
+      .from('jars').select('jar_id, name, description, goal_amount, image_url, owner_id')
+      .eq('jar_id', p.jarId).single();
+    if (error) throw error;
+
+    const { data: entries } = await supabase
+      .from('entries').select('amount').eq('jar_id', p.jarId);
+    const { data: dIn } = await supabase
+      .from('donation_in').select('net_amount').eq('to_jar_id', p.jarId);
+    const { data: dOut } = await supabase
+      .from('donation_out').select('request_amount').eq('from_jar_id', p.jarId);
+
+    const entriesSum = (entries || []).reduce((s, e) => s + (Number(e.amount) || 0), 0);
+    const dInSum = (dIn || []).reduce((s, d) => s + (Number(d.net_amount) || 0), 0);
+    const dOutSum = (dOut || []).reduce((s, d) => s + (Number(d.request_amount) || 0), 0);
+
+    return {
+      jarId: jar.jar_id,
+      name: jar.name,
+      description: jar.description || '',
+      goalAmount: jar.goal_amount,
+      imageUrl: jar.image_url || '',
+      currentAmount: entriesSum + dInSum - dOutSum,
+    };
+  }
+
+  /**
+   * Public donation: add 1,000원 entry + auto-post to jar board.
+   * No auth required (RLS permissive).
+   */
+  async function addPublicDonation(p) {
+    if (!p.jarId) throw new Error('jarId 필요');
+    if (!p.guestName) throw new Error('닉네임 필요');
+    const amount = 1000;
+    const message = p.message || '';
+
+    // 1) Insert entry (donation amount)
+    const entryId = newId('ent');
+    const { error: entryErr } = await supabase.from('entries').insert({
+      entry_id:   entryId,
+      jar_id:     p.jarId,
+      user_id:    '__donation__',
+      amount:     amount,
+      note:       '응원 도네이션 from ' + p.guestName,
+      created_at: new Date().toISOString(),
+    });
+    if (entryErr) throw entryErr;
+
+    // 2) Auto-post to jar board
+    const postContent = message
+      ? '💰 ' + p.guestName + '님이 1,000원을 응원합니다!\n\n' + message
+      : '💰 ' + p.guestName + '님이 1,000원을 응원합니다!';
+    const postId = newId('post');
+    const { error: postErr } = await supabase.from('posts').insert({
+      post_id:    postId,
+      jar_id:     p.jarId,
+      author_id:  null,
+      guest_name: p.guestName,
+      content:    postContent,
+      created_at: new Date().toISOString(),
+    });
+    if (postErr) throw postErr;
+
+    return { entryId, postId, amount };
   }
 
   // ── Expose to global scope ─────────────────────────────────

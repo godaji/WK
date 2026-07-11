@@ -1161,3 +1161,94 @@ input, select { font-family: inherit; }
   border: 1px solid var(--line, #333); background: var(--card, #23233a);
   color: inherit; font-size: .95rem; font-family: inherit; resize: vertical;
 }
+
+/* ===== CMPA-934: Public Jar View ===== */
+#publicJarScreen {
+  position: fixed; inset: 0;
+  display: flex; align-items: flex-start; justify-content: center;
+  padding: 20px 16px; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  background: var(--bg, #0f0f23);
+}
+#publicJarScreen:not([hidden]) { display: flex; }
+.public-jar-inner {
+  width: 100%; max-width: 420px;
+  background: var(--bg2, #1a1a2e); border-radius: 20px;
+  padding: 24px 20px; box-shadow: 0 4px 20px rgba(0,0,0,.3);
+}
+.public-jar-header {
+  text-align: center; font-size: 1.3rem; font-weight: 700;
+  margin-bottom: 16px; color: var(--text-primary, #fff);
+}
+.public-jar-image { text-align: center; margin-bottom: 12px; }
+.public-jar-image img {
+  max-width: min(100%, 280px); border-radius: 14px;
+  object-fit: cover;
+}
+.public-jar-name {
+  text-align: center; font-size: 1.2rem; font-weight: 700;
+  margin: 0 0 6px; color: var(--text-primary, #fff);
+}
+.public-jar-desc {
+  text-align: center; font-size: .9rem; color: var(--muted, #888);
+  margin: 0 0 16px; white-space: pre-line;
+}
+.public-jar-amounts {
+  text-align: center; margin-bottom: 8px; font-size: 1.1rem;
+}
+.public-jar-progress {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 20px;
+}
+.public-jar-progress .jar-progress { flex: 1; }
+
+.public-donate-section {
+  background: var(--card, #23233a); border-radius: 14px;
+  padding: 16px; margin-bottom: 20px;
+}
+.public-donate-title {
+  font-size: 1rem; font-weight: 700; margin: 0 0 12px;
+  color: var(--text-primary, #fff);
+}
+.public-textarea {
+  width: 100%; box-sizing: border-box; padding: 10px 12px;
+  border-radius: 10px; border: 1px solid var(--line, #333);
+  background: var(--bg2, #1a1a2e); color: inherit;
+  font-size: .9rem; font-family: inherit; resize: vertical;
+}
+.public-donate-btn {
+  margin-top: 12px; width: 100%; font-size: 1rem; padding: 14px;
+}
+.public-donate-success {
+  text-align: center; color: #4caf50; font-size: .95rem;
+  margin-top: 12px;
+}
+
+.public-posts-section { margin-top: 4px; }
+.public-posts-title {
+  font-size: 1rem; font-weight: 700; margin: 0 0 10px;
+  color: var(--text-primary, #fff);
+}
+.public-posts-section .posts-list { gap: 8px; }
+.public-post-card {
+  background: var(--card, #23233a); border-radius: 10px;
+  padding: 12px; margin-bottom: 8px;
+}
+.public-post-author {
+  font-size: .8rem; font-weight: 600; color: var(--accent, #8b7cf7);
+  margin-bottom: 4px;
+}
+.public-post-content {
+  font-size: .9rem; color: var(--text-primary, #fff);
+  white-space: pre-line; word-break: break-word;
+}
+.public-post-date {
+  font-size: .75rem; color: var(--muted, #888); margin-top: 6px;
+}
+
+/* Share jar button */
+.btn-share-jar {
+  display: block; width: 100%; margin-top: 8px;
+  padding: 10px; border-radius: 10px; border: 1px solid var(--line, #333);
+  background: var(--card, #23233a); color: var(--text-primary, #fff);
+  font-size: .9rem; cursor: pointer; text-align: center;
+}
+.btn-share-jar:active { opacity: .7; }
