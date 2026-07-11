@@ -2172,7 +2172,10 @@
     if (!myJar) { toast('내 Jar가 없어 기부할 수 없어요.'); return; }
     $('donateFrom').textContent = myJar.name;
     $('donateTo').textContent = currentJar.name;
+    const bal = Number(myJar.currentAmount) || 0;
+    $('donateBalance').textContent = `잔액: ${won(bal)}`;
     $('donateAmount').value = '';
+    $('donateAmount').max = bal;
     _donateBulkSelected = new Set();
     switchDonateTab('amount');
     openSheet('donateSheet');

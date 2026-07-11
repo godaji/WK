@@ -196,7 +196,19 @@ declare
   v_fee_rate    double precision;
   v_fee_amount  bigint;
   v_net_amount  bigint;
+  v_balance     bigint;
 begin
+  -- 잔액 체크: entries + donation_in - donation_out
+  select coalesce(sum(e.amount), 0)
+       + coalesce((select sum(di.net_amount) from public.donation_in di where di.to_jar_id = p_from_jar_id), 0)
+       - coalesce((select sum(do2.request_amount) from public.donation_out do2 where do2.from_jar_id = p_from_jar_id), 0)
+    into v_balance
+    from public.entries e where e.jar_id = p_from_jar_id;
+
+  if p_amount > v_balance then
+    raise exception '잔액 부족: 잔액 %, 요청 %', v_balance, p_amount;
+  end if;
+
   v_donation_id := 'don_' || extract(epoch from now())::bigint || '_' || floor(random()*1e6)::int;
   v_fee_rate    := random() * 0.5;
   v_fee_amount  := round(p_amount * v_fee_rate);
@@ -237,7 +249,24 @@ declare
   v_total_req   bigint := 0;
   v_total_fee   bigint := 0;
   v_total_net   bigint := 0;
+  v_balance     bigint;
+  v_items_total bigint := 0;
 begin
+  -- 총 기부액 계산
+  select coalesce(sum((item->>'amount')::bigint), 0) into v_items_total
+    from jsonb_array_elements(p_items) item;
+
+  -- 잔액 체크: entries + donation_in - donation_out
+  select coalesce(sum(e.amount), 0)
+       + coalesce((select sum(di.net_amount) from public.donation_in di where di.to_jar_id = p_from_jar_id), 0)
+       - coalesce((select sum(do2.request_amount) from public.donation_out do2 where do2.from_jar_id = p_from_jar_id), 0)
+    into v_balance
+    from public.entries e where e.jar_id = p_from_jar_id;
+
+  if v_items_total > v_balance then
+    raise exception '잔액 부족: 잔액 %, 요청 %', v_balance, v_items_total;
+  end if;
+
   for v_item in select * from jsonb_array_elements(p_items)
   loop
     v_donation_id := 'don_' || extract(epoch from now())::bigint || '_' || floor(random()*1e6)::int;
