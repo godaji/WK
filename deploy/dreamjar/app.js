@@ -2828,11 +2828,22 @@
     return params.get('jar') || '';
   }
 
+  // Remember donor nickname in localStorage
+  const KEY_DONOR_NAME = 'dreamjar.donorName';
+  function getSavedDonorName() { return localStorage.getItem(KEY_DONOR_NAME) || ''; }
+  function saveDonorName(name) { if (name) localStorage.setItem(KEY_DONOR_NAME, name); }
+
   async function initPublicJar(jarId) {
     const screen = $('publicJarScreen');
     screen.hidden = false;
     $('loginScreen').hidden = true;
     $('mainApp').hidden = true;
+
+    // Pre-fill saved donor nickname
+    const savedName = getSavedDonorName();
+    if (savedName) {
+      $('publicDonorName').value = savedName;
+    }
 
     try {
       const jar = await DreamJarSupabase.api({ query: 'getPublicJar', params: { jarId } });
@@ -2978,12 +2989,13 @@
           message: (msgEl.value || '').trim(),
         },
       });
+      // Save donor name for next time
+      saveDonorName(guestName);
       // Show raccoon stealing message
       successEl.innerHTML = '🦝 너구리 사장이 ' + (result.raccoonFee || 2) + '원을 수수료로 가져갔습니다...<br>'
         + '✅ Jar에 ' + (result.netAmount || 3) + '원이 전달됐어요!';
       successEl.hidden = false;
       btn.textContent = '✅ 응원 완료!';
-      nameEl.value = '';
       msgEl.value = '';
 
       // Refresh jar info + posts
