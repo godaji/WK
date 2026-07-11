@@ -116,6 +116,20 @@
         { id:'cb_homemeal', label:'집밥',          type:'routine', subtype:'per_day', amount:8000 },
       ],
     },
+    {
+      controlId: 'ctrl_cc',
+      name: 'EemControl',
+      emoji: '📚',
+      items: [
+        { id:'cc_english',  label:'영어공부',     type:'routine', subtype:'per_day', amount:1000, tab:'routine' },
+        { id:'cc_coffee',   label:'드립커피',     type:'routine', subtype:'per_day', amount:3000, tab:'routine' },
+        { id:'cc_tumbler',  label:'텀블러',        type:'routine', subtype:'per_day', amount:1200, tab:'routine' },
+        { id:'cc_transit',  label:'도보/대중교통', type:'routine', subtype:'per_day', amount:5000, tab:'routine' },
+        { id:'cc_homemeal', label:'집밥',          type:'routine', subtype:'per_day', amount:5000, tab:'routine' },
+        { id:'cc_ielts',    label:'IELTS',         type:'academic', subtype:'threshold',
+          thresholds:[{min:7.0,amount:2000000},{min:6.5,amount:1000000}], once:true, tab:'event' },
+      ],
+    },
   ];
 
   /** All controls = built-in + custom */
