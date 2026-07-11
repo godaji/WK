@@ -1001,6 +1001,9 @@
     const netAmount = adRevenue - raccoonFee; // Jar에 실제 전달
     const message = p.message || '';
 
+    // Ensure the donation pseudo-user exists (FK constraint)
+    await ensureUser('__donation__');
+
     // 1) Insert entry (net amount after raccoon fee)
     const entryId = newId('ent');
     const { error: entryErr } = await supabase.from('entries').insert({
