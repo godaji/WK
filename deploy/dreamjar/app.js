@@ -1201,6 +1201,7 @@
     const imgEl = $('mainJarImageImg');
     if (jar.imageUrl) {
       imgEl.src = jar.imageUrl;
+      imgEl.loading = 'lazy'; // CMPA-919
       imgDisplay.hidden = false;
       $('jarImageEditBtn').hidden = !isOwned;
       $('jarImageAddBtn').hidden = true;
@@ -1525,7 +1526,7 @@
       if (!ctrl) return;
       $('customCtrlSheetTitle').textContent = '컨트롤 편집';
       $('ccName').value = ctrl.name || '';
-      $('ccEmoji').value = ctrl.emoji || '';
+      setPickedEmoji(ctrl.emoji || '🎯');
       $('ccDesc').value = ctrl.description || '';
       _editingCtrlItems = (ctrl.items || []).map(i => ({ ...i }));
       $('ccDeleteBtn').hidden = false;
@@ -1535,15 +1536,87 @@
       _editingCtrlId = null;
       $('customCtrlSheetTitle').textContent = '내 컨트롤 만들기';
       $('ccName').value = '';
-      $('ccEmoji').value = '';
+      setPickedEmoji('🎯');
       $('ccDesc').value = '';
       _editingCtrlItems = [];
       $('ccDeleteBtn').hidden = true;
       $('ccSaveBtn').textContent = '만들기';
     }
     renderCCItemList();
+    closeEmojiPicker();
     openSheet('customCtrlSheet');
   }
+
+  // ── 이모지 피커 ──
+  const EMOJI_CATEGORIES = [
+    { icon: '😀', label: '표정', emojis: '😀😃😄😁😆😅🤣😂🙂😊😇🥰😍🤩😘😗😚😋😛😝😜🤪🤨🧐🤓😎🥳🤗🤔😐😑😶🙄😏😣😥😮😯😲😳🥺😦😧😨😰😢😭😤😠😡🤬🥱😴💀👻👽🤖😺😸😻' },
+    { icon: '👋', label: '손·사람', emojis: '👋🤚🖐✋🖖👌🤌🤏✌🤞🤟🤘🤙👈👉👆👇☝👍👎✊👊🤛🤜👏🙌👐🤝🙏💪🦵🦶👶👧🧒👦👩🧑👨🧓👴👵' },
+    { icon: '🐶', label: '동물', emojis: '🐶🐱🐭🐹🐰🦊🐻🐼🐨🐯🦁🐮🐷🐸🐵🙈🙉🙊🐒🐔🐧🐦🐤🦆🦅🦉🦇🐺🐗🐴🦄🐝🐛🦋🐌🐞🐜🪲🐢🐍🦎🦖🦕🐙🦑🦐🦞🦀🐡🐠🐟🐬🐳🐋🦈🐊🐅🐆🦓🦍' },
+    { icon: '🍎', label: '음식', emojis: '🍎🍐🍊🍋🍌🍉🍇🍓🫐🍈🍒🍑🥭🍍🥥🥝🍅🥑🥦🥬🥒🌶🫑🌽🥕🧄🧅🥔🍠🥐🥯🍞🥖🥨🧀🥚🍳🥞🧇🥓🥩🍗🍖🌭🍔🍟🍕🫓🥪🌮🌯🫔🥗🥘🫕🍝🍜🍲🍛🍣🍱🥟🍤🍙🍚🍘🍥🥮🍢🍡🍧🍨🍦🥧🧁🍰🎂🍮🍭🍬🍫🍿🍩🍪🌰🥜☕🍵🧋🍺🍻🥂🍷🍸🍹🧃🥤🧊' },
+    { icon: '⚽', label: '활동', emojis: '⚽🏀🏈⚾🥎🎾🏐🏉🥏🎱🏓🏸🏒🥅⛳🏹🎣🤿🥊🥋🎽🛹🛼🛷⛸🥌🎿⛷🏂🪂🏋🤼🤸🤺⛹🏌🏇🧘🏄🏊🤽🚣🧗🚵🚴🏆🥇🥈🥉🏅🎖🏵🎗🎫🎪🎭🎨🎬🎤🎧🎼🎹🥁🎷🎺🎸🪕🎻🎲♟🎯🎳🎮🎰🧩' },
+    { icon: '🚗', label: '여행', emojis: '🚗🚕🚙🚌🚎🏎🚓🚑🚒🚐🛻🚚🚛🚜🛵🏍🚲🛴🚏🛣🛤🛞⛽🚨🚥🚦🛑🚧⚓⛵🛶🚤🛳⛴🛥🚢✈🛩🛫🛬🪂💺🚁🚟🚠🚡🛰🚀🛸🌍🌎🌏🗺🧭🏔⛰🌋🗻🏕🏖🏜🏝🏞🏟🏛🏗🧱🪨🪵🛖🏘🏚🏠🏡🏢🏣🏤🏥🏦🏨🏩🏪🏫🏬🏭🏯🏰💒🗼🗽⛪🕌🛕🕍⛩🕋⛲⛺🌁🌃🏙🌄🌅🌆🌇🌉♨🎠🎡🎢💈🎪' },
+    { icon: '💡', label: '사물', emojis: '💡🔦🕯🪔🧯🛢💰💳💎⚖🪜🧲🪄🧪🧫🔬🔭📡🛡🪚🔧🪛🔩⚙🗜⚖🔗⛓🪝🧰🧲💊💉🩸🩹🩺🌡🪥🪒🚿🛁🧹🧺🧻🪣🧽📱💻⌨🖥🖨🖱🖲💽💾💿📀🎥📷📸📹📼🔍🔎📚📖📝📅📌📎📏📐✂🗑🔒🔑🗝' },
+    { icon: '❤', label: '기호', emojis: '❤🧡💛💚💙💜🖤🤍🤎💔❣💕💞💓💗💖💘💝⭐🌟✨⚡🔥💥☀🌈☁🌧⛈🌩🌨❄☃⛄🌬💨🌊💧💦☔⛱🌀🌪🌤⛅🌥🌦🎄🎆🎇🧨✨🎈🎉🎊🎋🎍🎎🎏🎐🎑🧧🎀🎁🎗🎟🎫♻💯🔴🟠🟡🟢🔵🟣⚫⚪🟤✅❌❓❗‼⁉⬆↗➡↘⬇↙⬅↖↕↔' },
+  ];
+
+  function setPickedEmoji(emoji) {
+    $('ccEmoji').value = emoji;
+    $('ccEmojiPreview').textContent = emoji;
+  }
+
+  function closeEmojiPicker() {
+    $('emojiPickerPopup').hidden = true;
+  }
+
+  (function initEmojiPicker() {
+    const tabsEl = $('emojiPickerTabs');
+    const gridEl = $('emojiPickerGrid');
+    let activeIdx = 0;
+
+    EMOJI_CATEGORIES.forEach((cat, i) => {
+      const tab = document.createElement('span');
+      tab.className = 'emoji-tab' + (i === 0 ? ' active' : '');
+      tab.textContent = cat.icon;
+      tab.title = cat.label;
+      tab.addEventListener('click', () => showCategory(i));
+      tabsEl.appendChild(tab);
+    });
+
+    function showCategory(idx) {
+      activeIdx = idx;
+      tabsEl.querySelectorAll('.emoji-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+      const emojis = [...EMOJI_CATEGORIES[idx].emojis];
+      gridEl.innerHTML = '';
+      emojis.forEach(em => {
+        const cell = document.createElement('span');
+        cell.className = 'emoji-cell';
+        cell.textContent = em;
+        cell.addEventListener('click', () => {
+          setPickedEmoji(em);
+          closeEmojiPicker();
+        });
+        gridEl.appendChild(cell);
+      });
+      gridEl.scrollTop = 0;
+    }
+
+    $('ccEmojiBtn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      const popup = $('emojiPickerPopup');
+      if (!popup.hidden) { popup.hidden = true; return; }
+      showCategory(activeIdx);
+      popup.hidden = false;
+    });
+
+    document.addEventListener('click', (e) => {
+      const popup = $('emojiPickerPopup');
+      if (!popup.hidden && !popup.contains(e.target) && e.target !== $('ccEmojiBtn')) {
+        popup.hidden = true;
+      }
+    });
+
+    showCategory(0);
+  })();
 
   function renderCCItemList() {
     const listEl = $('ccItemList');

@@ -331,12 +331,42 @@
     return data;
   }
 
+  /**
+   * Resize an image file client-side before upload (CMPA-919).
+   * Returns a Blob (JPEG, quality 0.8) with longest side ≤ maxPx.
+   */
+  function resizeImage(file, maxPx = 800, quality = 0.8) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        let { width, height } = img;
+        if (width > maxPx || height > maxPx) {
+          const ratio = Math.min(maxPx / width, maxPx / height);
+          width  = Math.round(width  * ratio);
+          height = Math.round(height * ratio);
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width  = width;
+        canvas.height = height;
+        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+        canvas.toBlob(
+          blob => blob ? resolve(blob) : reject(new Error('Canvas toBlob failed')),
+          'image/jpeg',
+          quality,
+        );
+      };
+      img.onerror = () => reject(new Error('Image load failed'));
+      img.src = URL.createObjectURL(file);
+    });
+  }
+
   async function uploadJarImage(jarId, file) {
-    const ext = file.name.split('.').pop() || 'jpg';
-    const path = `${jarId}/${Date.now()}.${ext}`;
+    // CMPA-919: resize before upload
+    const resized = await resizeImage(file);
+    const path = `${jarId}/${Date.now()}.jpg`;
     const { error } = await supabase.storage
       .from('jar-images')
-      .upload(path, file, { cacheControl: '3600', upsert: false });
+      .upload(path, resized, { cacheControl: '86400', upsert: false, contentType: 'image/jpeg' });
     if (error) throw error;
     const { data: { publicUrl } } = supabase.storage
       .from('jar-images')

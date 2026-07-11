@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DreamJar">
-<link rel="stylesheet" href="./style.css?v=20260711n">
+<link rel="stylesheet" href="./style.css?v=20260711o">
 </head>
 <body>
 
@@ -64,7 +64,7 @@
           <button class="btn-jar-next" id="jarChangeBtn" type="button" title="다음 Jar">›</button>
         </div>
         <div class="jar-image-display" id="mainJarImage" hidden>
-          <img id="mainJarImageImg" src="" alt="Jar 사진">
+          <img id="mainJarImageImg" src="" alt="Jar 사진" loading="lazy">
           <button class="jar-image-edit" id="jarImageEditBtn" type="button" hidden>📷</button>
         </div>
         <button class="jar-image-add" id="jarImageAddBtn" type="button" hidden>📷 사진 추가</button>
@@ -292,8 +292,18 @@
         <input id="ccName" class="cj-input" type="text" placeholder="예: 운동 루틴" maxlength="40" autocomplete="off">
       </div>
       <div class="cj-field">
-        <label class="cj-label" for="ccEmoji">이모지</label>
-        <input id="ccEmoji" class="cj-input" type="text" placeholder="예: 🏃" maxlength="4" autocomplete="off" style="width:60px">
+        <label class="cj-label">이모지</label>
+        <input id="ccEmoji" type="hidden" value="">
+        <div class="emoji-picker-wrap">
+          <button id="ccEmojiBtn" class="emoji-picker-trigger" type="button" aria-label="이모지 선택">
+            <span id="ccEmojiPreview" class="emoji-picker-preview">🎯</span>
+            <span class="emoji-picker-arrow">▾</span>
+          </button>
+          <div id="emojiPickerPopup" class="emoji-picker-popup" hidden>
+            <div class="emoji-picker-tabs" id="emojiPickerTabs"></div>
+            <div class="emoji-picker-grid" id="emojiPickerGrid"></div>
+          </div>
+        </div>
       </div>
       <div class="cj-field">
         <label class="cj-label" for="ccDesc">설명 <span class="cj-optional">(선택)</span></label>
@@ -545,7 +555,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./supabase/supabase.js?v=20260711n"></script>
-<script src="./app.js?v=20260711n"></script>
+<script src="./supabase/supabase.js?v=20260711o"></script>
+<script src="./app.js?v=20260711o"></script>
 </body>
 </html>
