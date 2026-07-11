@@ -2999,13 +2999,13 @@
       // Re-enable after a delay
       setTimeout(() => {
         btn.disabled = false;
-        btn.textContent = '📺 광고 보고 1,000원 응원하기';
+        btn.textContent = '📺 광고 보고 5원 응원하기';
       }, 3000);
     } catch (err) {
       errEl.textContent = '오류: ' + (err.message || '전송 실패');
       errEl.hidden = false;
       btn.disabled = false;
-      btn.textContent = '📺 광고 보고 1,000원 응원하기';
+      btn.textContent = '📺 광고 보고 5원 응원하기';
     }
   }
 

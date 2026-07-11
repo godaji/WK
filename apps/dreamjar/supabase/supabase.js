@@ -990,13 +990,13 @@
   }
 
   /**
-   * Public donation: add 1,000원 entry + auto-post to jar board.
+   * Public donation: add 5원 entry (= ad view revenue) + auto-post to jar board.
    * No auth required (RLS permissive).
    */
   async function addPublicDonation(p) {
     if (!p.jarId) throw new Error('jarId 필요');
     if (!p.guestName) throw new Error('닉네임 필요');
-    const amount = 1000;
+    const amount = 5;
     const message = p.message || '';
 
     // 1) Insert entry (donation amount)
@@ -1013,8 +1013,8 @@
 
     // 2) Auto-post to jar board
     const postContent = message
-      ? '📺 ' + p.guestName + '님이 광고를 보고 1,000원을 응원했습니다!\n\n' + message
-      : '📺 ' + p.guestName + '님이 광고를 보고 1,000원을 응원했습니다!';
+      ? '📺 ' + p.guestName + '님이 광고를 보고 5원을 응원했습니다!\n\n' + message
+      : '📺 ' + p.guestName + '님이 광고를 보고 5원을 응원했습니다!';
     const postId = newId('post');
     const { error: postErr } = await supabase.from('posts').insert({
       post_id:    postId,
