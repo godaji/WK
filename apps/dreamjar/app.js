@@ -2970,7 +2970,7 @@
     btn.textContent = '전송 중…';
 
     try {
-      await DreamJarSupabase.api({
+      const result = await DreamJarSupabase.api({
         action: 'addPublicDonation',
         params: {
           jarId,
@@ -2978,6 +2978,9 @@
           message: (msgEl.value || '').trim(),
         },
       });
+      // Show raccoon stealing message
+      successEl.innerHTML = '🦝 너구리 사장이 ' + (result.raccoonFee || 2) + '원을 수수료로 가져갔습니다...<br>'
+        + '✅ Jar에 ' + (result.netAmount || 3) + '원이 전달됐어요!';
       successEl.hidden = false;
       btn.textContent = '✅ 응원 완료!';
       nameEl.value = '';

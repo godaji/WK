@@ -990,31 +990,33 @@
   }
 
   /**
-   * Public donation: add 5원 entry (= ad view revenue) + auto-post to jar board.
+   * Public donation: ad view → 5원 generated → raccoon boss takes 2원 fee → 3원 to Jar.
    * No auth required (RLS permissive).
    */
   async function addPublicDonation(p) {
     if (!p.jarId) throw new Error('jarId 필요');
     if (!p.guestName) throw new Error('닉네임 필요');
-    const amount = 5;
+    const adRevenue = 5;       // 광고 1회 수익
+    const raccoonFee = 2;      // 🦝 너구리 사장 수수료
+    const netAmount = adRevenue - raccoonFee; // Jar에 실제 전달
     const message = p.message || '';
 
-    // 1) Insert entry (donation amount)
+    // 1) Insert entry (net amount after raccoon fee)
     const entryId = newId('ent');
     const { error: entryErr } = await supabase.from('entries').insert({
       entry_id:   entryId,
       jar_id:     p.jarId,
       user_id:    '__donation__',
-      amount:     amount,
-      note:       '광고 시청 응원 from ' + p.guestName,
+      amount:     netAmount,
+      note:       '광고 시청 응원 from ' + p.guestName + ' (🦝 수수료 ' + raccoonFee + '원 차감)',
       created_at: new Date().toISOString(),
     });
     if (entryErr) throw entryErr;
 
     // 2) Auto-post to jar board
     const postContent = message
-      ? '📺 ' + p.guestName + '님이 광고를 보고 5원을 응원했습니다!\n\n' + message
-      : '📺 ' + p.guestName + '님이 광고를 보고 5원을 응원했습니다!';
+      ? '📺 ' + p.guestName + '님이 광고를 보고 응원했습니다! (+' + netAmount + '원)\n🦝 너구리 사장이 ' + raccoonFee + '원을 수수료로 가져갔습니다...\n\n' + message
+      : '📺 ' + p.guestName + '님이 광고를 보고 응원했습니다! (+' + netAmount + '원)\n🦝 너구리 사장이 ' + raccoonFee + '원을 수수료로 가져갔습니다...';
     const postId = newId('post');
     const { error: postErr } = await supabase.from('posts').insert({
       post_id:    postId,
@@ -1026,7 +1028,7 @@
     });
     if (postErr) throw postErr;
 
-    return { entryId, postId, amount };
+    return { entryId, postId, adRevenue, raccoonFee, netAmount };
   }
 
   // ── Expose to global scope ─────────────────────────────────
