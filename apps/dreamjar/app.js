@@ -441,10 +441,11 @@
       initApp();
     } catch (err) {
       console.error('[DreamJar] 로그인 실패:', err);
+      const errMsg = err?.message || err?.error_description || err?.msg || (typeof err === 'string' ? err : JSON.stringify(err));
       const errEl = $('loginError');
-      errEl.textContent = err.message === 'Invalid login credentials'
+      errEl.textContent = (errMsg === 'Invalid login credentials' || errMsg === 'invalid_grant')
         ? '사용자 ID 또는 비밀번호가 올바르지 않습니다.'
-        : '로그인 실패: ' + (err.message || '알 수 없는 오류');
+        : '로그인 실패: ' + errMsg;
       errEl.hidden = false;
     } finally {
       btn.disabled = false;
