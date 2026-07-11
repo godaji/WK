@@ -898,13 +898,13 @@ input, select { font-family: inherit; }
   display: flex; align-items: center; gap: 6px; margin-bottom: 8px;
 }
 .cp-custom-row .cp-item { flex: 1; margin-bottom: 0; }
-.cp-edit-btn {
+.cp-edit-btn, .cp-fork-btn {
   flex: none; width: 40px; height: 40px; border-radius: 10px;
   background: var(--card); border: 1px solid var(--line);
   font-size: 16px; cursor: pointer; display: flex;
   align-items: center; justify-content: center;
 }
-.cp-edit-btn:active { background: var(--card2); }
+.cp-edit-btn:active, .cp-fork-btn:active { background: var(--card2); }
 
 .sheet-full .sheet-body { max-height: 70vh; overflow-y: auto; }
 

@@ -1484,13 +1484,16 @@
       const isActive = c.controlId === activeCtrlId;
       const desc = c.controlId === 'ctrl_ca' ? '학업·루틴·마일스톤 달성 보상'
                  : c.controlId === 'ctrl_cb' ? '일상 절약 행동 보상' : '';
-      html += `<button class="cp-item${isActive ? ' active' : ''}" data-control-id="${escHtml(c.controlId)}" type="button">
-        <span class="cp-emoji">${c.emoji}</span>
-        <span class="cp-body">
-          <span class="cp-name">${escHtml(c.name)}</span>
-          <span class="cp-desc">${escHtml(desc)}</span>
-        </span>
-      </button>`;
+      html += `<div class="cp-custom-row">
+        <button class="cp-item${isActive ? ' active' : ''}" data-control-id="${escHtml(c.controlId)}" type="button">
+          <span class="cp-emoji">${c.emoji}</span>
+          <span class="cp-body">
+            <span class="cp-name">${escHtml(c.name)}</span>
+            <span class="cp-desc">${escHtml(desc)}</span>
+          </span>
+        </button>
+        <button class="cp-fork-btn" data-fork-ctrl-id="${escHtml(c.controlId)}" type="button" title="복제하여 내 컨트롤 만들기">📋</button>
+      </div>`;
     });
 
     // Custom controls
@@ -1525,6 +1528,14 @@
         openCustomCtrlEditor(el.dataset.editCtrlId);
       });
     });
+    // Bind fork (clone built-in template as new custom control)
+    listEl.querySelectorAll('.cp-fork-btn').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeSheet('controlPickerSheet');
+        forkControlAsCustom(el.dataset.forkCtrlId);
+      });
+    });
   }
 
   // "내 컨트롤 만들기" 버튼
@@ -1532,6 +1543,27 @@
     closeSheet('controlPickerSheet');
     openCustomCtrlEditor(null);
   });
+
+  // Fork: 기존 템플릿을 복제하여 내 컨트롤로 만들기
+  function forkControlAsCustom(controlId) {
+    const src = allControls().find(c => c.controlId === controlId);
+    if (!src) return;
+    _editingCtrlId = null; // create mode
+    $('customCtrlSheetTitle').textContent = '템플릿에서 만들기';
+    $('ccName').value = src.name + ' (내 버전)';
+    setPickedEmoji(src.emoji || '🎯');
+    $('ccDesc').value = src.description || '';
+    // Deep-clone items with new IDs to avoid conflicts
+    _editingCtrlItems = (src.items || []).map(item => ({
+      ...item,
+      id: 'ci_' + Date.now() + '_' + Math.floor(Math.random() * 1e6),
+    }));
+    $('ccDeleteBtn').hidden = true;
+    $('ccSaveBtn').textContent = '만들기';
+    renderCCItemList();
+    closeEmojiPicker();
+    openSheet('customCtrlSheet');
+  }
 
   // ── 커스텀 컨트롤 에디터 ──
   function openCustomCtrlEditor(controlId) {
