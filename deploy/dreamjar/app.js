@@ -126,6 +126,8 @@
         { id:'cc_tumbler',  label:'텀블러',        type:'routine', subtype:'per_day', amount:1200, tab:'routine' },
         { id:'cc_transit',  label:'도보/대중교통', type:'routine', subtype:'per_day', amount:5000, tab:'routine' },
         { id:'cc_homemeal', label:'집밥',          type:'routine', subtype:'per_day', amount:5000, tab:'routine' },
+        { id:'cc_kr_read',  label:'한국책읽기30분', type:'routine', subtype:'per_day', amount:1000, tab:'routine' },
+        { id:'cc_en_read',  label:'영어책읽기30분', type:'routine', subtype:'per_day', amount:1000, tab:'routine' },
         { id:'cc_ielts',    label:'IELTS',         type:'academic', subtype:'threshold',
           thresholds:[{min:7.0,amount:2000000},{min:6.5,amount:1000000}], once:true, tab:'event' },
       ],
