@@ -1205,8 +1205,11 @@ input, select { font-family: inherit; }
   padding: 16px; margin-bottom: 20px;
 }
 .public-donate-title {
-  font-size: 1rem; font-weight: 700; margin: 0 0 12px;
+  font-size: 1rem; font-weight: 700; margin: 0 0 4px;
   color: var(--text-primary, #fff);
+}
+.public-donate-desc {
+  font-size: .85rem; color: var(--muted, #888); margin: 0 0 12px;
 }
 .public-textarea {
   width: 100%; box-sizing: border-box; padding: 10px 12px;

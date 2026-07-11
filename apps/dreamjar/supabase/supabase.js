@@ -1006,15 +1006,15 @@
       jar_id:     p.jarId,
       user_id:    '__donation__',
       amount:     amount,
-      note:       '응원 도네이션 from ' + p.guestName,
+      note:       '광고 시청 응원 from ' + p.guestName,
       created_at: new Date().toISOString(),
     });
     if (entryErr) throw entryErr;
 
     // 2) Auto-post to jar board
     const postContent = message
-      ? '💰 ' + p.guestName + '님이 1,000원을 응원합니다!\n\n' + message
-      : '💰 ' + p.guestName + '님이 1,000원을 응원합니다!';
+      ? '📺 ' + p.guestName + '님이 광고를 보고 1,000원을 응원했습니다!\n\n' + message
+      : '📺 ' + p.guestName + '님이 광고를 보고 1,000원을 응원했습니다!';
     const postId = newId('post');
     const { error: postErr } = await supabase.from('posts').insert({
       post_id:    postId,
