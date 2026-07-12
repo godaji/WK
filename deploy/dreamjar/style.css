@@ -1305,6 +1305,21 @@ input, select { font-family: inherit; }
 }
 .btn-open-board:active { opacity: .8; }
 
+/* CMPA-947: Control 버튼 (게시판 버튼과 동일 패턴) */
+.control-header { display: flex; align-items: center; }
+.btn-open-control {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--card2);
+  border: 1px solid var(--line);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent2);
+  text-align: center;
+}
+.btn-open-control:active { opacity: .8; }
+
 .board-screen {
   position: fixed; inset: 0;
   background: var(--bg);

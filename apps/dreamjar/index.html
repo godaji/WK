@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DreamJar">
-<link rel="stylesheet" href="./style.css?v=20260712a">
+<link rel="stylesheet" href="./style.css?v=20260712b">
 </head>
 <body>
 
@@ -163,25 +163,10 @@
       </div>
     </div>
 
-    <!-- CONTROL 섹션 -->
+    <!-- CONTROL 섹션 (CMPA-947: 버튼만 표시, 상세는 시트) -->
     <div class="section-card" id="controlSection">
-      <div class="section-label">CONTROL</div>
-
-      <!-- Control 선택됨 -->
-      <div id="controlDisplay" hidden>
-        <div class="ctrl-title-row">
-          <span class="ctrl-name" id="mainCtrlName">—</span>
-          <button class="btn-change" id="ctrlChangeBtn" type="button">변경</button>
-        </div>
-        <div id="mainRewardSection" hidden>
-          <div class="reward-list" id="mainRewardList"></div>
-          <button class="btn-manual-entry" id="manualEntryBtn" type="button">✏️ 직접 입력하기</button>
-        </div>
-      </div>
-
-      <!-- Control 미선택 -->
-      <div id="controlEmpty" hidden>
-        <p class="ctrl-empty-msg">먼저 Jar를 선택하세요.</p>
+      <div class="control-header">
+        <button class="btn-open-control" id="openControlBtn" type="button">🎯 적립하기</button>
       </div>
     </div>
 
@@ -348,6 +333,34 @@
         </div>
       </div>
       <button id="cjSaveBtn" class="btn-cta" type="button">만들기</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Control 적립 시트 (CMPA-947) ===== -->
+<div class="sheet-backdrop" id="controlActionSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="적립하기">
+    <div class="sheet-head">
+      <span id="controlActionTitle">적립하기</span>
+      <button class="sheet-close" data-close="controlActionSheet" type="button">✕</button>
+    </div>
+    <div class="sheet-body">
+      <!-- Control 선택됨 -->
+      <div id="controlDisplay" hidden>
+        <div class="ctrl-title-row">
+          <span class="ctrl-name" id="mainCtrlName">—</span>
+          <button class="btn-change" id="ctrlChangeBtn" type="button">변경</button>
+        </div>
+        <div id="mainRewardSection" hidden>
+          <div class="reward-list" id="mainRewardList"></div>
+          <button class="btn-manual-entry" id="manualEntryBtn" type="button">✏️ 직접 입력하기</button>
+        </div>
+      </div>
+      <!-- Control 미선택 -->
+      <div id="controlEmpty" hidden>
+        <p class="ctrl-empty-msg">Control을 먼저 선택하세요.</p>
+        <button class="btn-cta" id="pickControlFromActionBtn" type="button" style="margin-top:12px">Control 선택</button>
+      </div>
     </div>
   </div>
 </div>
@@ -716,7 +729,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./supabase/supabase.js?v=20260712a"></script>
-<script src="./app.js?v=20260712a"></script>
+<script src="./supabase/supabase.js?v=20260712b"></script>
+<script src="./app.js?v=20260712b"></script>
 </body>
 </html>

@@ -1352,6 +1352,7 @@
       $('controlEmpty').hidden   = false;
       const emptyMsg0 = $('controlEmpty').querySelector('.ctrl-empty-msg');
       if (emptyMsg0) emptyMsg0.textContent = '먼저 Jar를 선택하세요.';
+      $('openControlBtn').textContent = '🎯 적립하기';
       return;
     }
 
@@ -1361,12 +1362,13 @@
       $('controlEmpty').hidden   = false;
       const emptyMsg = $('controlEmpty').querySelector('.ctrl-empty-msg');
       if (emptyMsg) emptyMsg.textContent = '참여 중인 Jar입니다.';
+      $('openControlBtn').textContent = '🎯 적립하기';
       return;
     }
 
     // Reset message for own jars
     const emptyMsg2 = $('controlEmpty').querySelector('.ctrl-empty-msg');
-    if (emptyMsg2) emptyMsg2.textContent = '먼저 Jar를 선택하세요.';
+    if (emptyMsg2) emptyMsg2.textContent = 'Control을 먼저 선택하세요.';
 
     const ctrl = findControl(jar.controlId);
     $('controlEmpty').hidden   = true;
@@ -1376,9 +1378,17 @@
       $('mainCtrlName').textContent = ctrl.emoji + ' ' + ctrl.name;
       $('mainRewardSection').hidden = false;
       renderRewardButtons(ctrl, entries || [], $('mainRewardList'));
+      // CMPA-947: 메인 버튼에 Control 이름 표시
+      $('openControlBtn').textContent = ctrl.emoji + ' 적립하기';
+      $('controlActionTitle').textContent = ctrl.emoji + ' ' + ctrl.name;
     } else {
       $('mainCtrlName').textContent = '선택 안 됨';
       $('mainRewardSection').hidden = true;
+      $('openControlBtn').textContent = '🎯 적립하기';
+      $('controlActionTitle').textContent = '적립하기';
+      // No control selected: show empty state
+      $('controlEmpty').hidden   = false;
+      $('controlDisplay').hidden = true;
     }
   }
 
@@ -1465,6 +1475,18 @@
       btn.addEventListener('pointermove',   cancelLp);
     });
   }
+
+  // CMPA-947: 적립하기 버튼 → Control 시트 열기
+  $('openControlBtn').addEventListener('click', () => {
+    if (!currentJar) { toast('먼저 Jar를 선택하세요.'); return; }
+    renderControlSection(currentJar, localEntries(currentJar.jarId));
+    openSheet('controlActionSheet');
+  });
+
+  // Control 미선택 시 시트 내 "Control 선택" 버튼
+  $('pickControlFromActionBtn').addEventListener('click', () => {
+    openControlPicker();
+  });
 
   // Control 변경 버튼
   $('ctrlChangeBtn').addEventListener('click', openControlPicker);
