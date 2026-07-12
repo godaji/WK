@@ -2580,29 +2580,63 @@
   }
 
   function renderPostsList() {
-    const listEl = $('postsList');
+    // CMPA-944: 게시판 전체화면에서 날짜별 그룹핑으로 렌더
+    renderBoardPostsList();
+  }
+
+  /** CMPA-944: 게시판 전체화면 열기 */
+  function openBoardScreen() {
+    renderBoardPostsList();
+    $('boardScreen').hidden = false;
+  }
+
+  /** CMPA-944: 게시판 전체화면 닫기 */
+  function closeBoardScreen() {
+    $('boardScreen').hidden = true;
+  }
+
+  /** CMPA-944: 날짜별 그룹핑 렌더 */
+  function renderBoardPostsList() {
+    const listEl = $('boardPostsList');
     if (!_postsCache || _postsCache.length === 0) {
       listEl.innerHTML = '<p class="posts-empty">아직 글이 없어요.</p>';
       return;
     }
 
-    listEl.innerHTML = _postsCache.map(p => {
-      const authorLabel = p.authorId
-        ? `<span class="post-author">${escHtml(p.authorName || p.authorId)}</span>`
-        : `<span class="post-author-guest">${escHtml(p.guestName || '익명')}</span>`;
-      const cmtCount = (p.comments || []).length;
-      const preview = (p.content || '').slice(0, 80) + ((p.content || '').length > 80 ? '…' : '');
-      return `<div class="post-card" data-post-id="${escHtml(p.postId)}">
-        ${authorLabel}
-        <div class="post-body">${escHtml(preview)}</div>
-        <div class="post-meta">
-          <span>${fmtDate(p.createdAt)}</span>
-          ${cmtCount > 0 ? `<span class="post-comment-count">💬 ${cmtCount}</span>` : ''}
-        </div>
-      </div>`;
-    }).join('');
+    // 날짜별 그룹핑
+    const groups = {};
+    _postsCache.forEach(p => {
+      const dateKey = p.createdAt ? p.createdAt.slice(0, 10) : 'unknown';
+      if (!groups[dateKey]) groups[dateKey] = [];
+      groups[dateKey].push(p);
+    });
 
-    listEl.querySelectorAll('.post-card').forEach(card => {
+    // 날짜 내림차순 정렬
+    const sortedKeys = Object.keys(groups).sort((a, b) => b.localeCompare(a));
+
+    let html = '';
+    sortedKeys.forEach(dateKey => {
+      const d = new Date(dateKey + 'T00:00:00');
+      const label = isNaN(d.getTime()) ? dateKey : `${d.getMonth() + 1}월 ${d.getDate()}일`;
+      html += `<div class="board-date-header">${label}</div>`;
+      groups[dateKey].forEach(p => {
+        const authorLabel = p.authorId
+          ? `<span class="post-author">${escHtml(p.authorName || p.authorId)}</span>`
+          : `<span class="post-author-guest">${escHtml(p.guestName || '익명')}</span>`;
+        const cmtCount = (p.comments || []).length;
+        const preview = (p.content || '').slice(0, 60) + ((p.content || '').length > 60 ? '…' : '');
+        html += `<div class="board-post-card" data-post-id="${escHtml(p.postId)}">
+          ${authorLabel}
+          <div class="post-body">${escHtml(preview)}</div>
+          <div class="post-meta">
+            ${cmtCount > 0 ? `<span class="post-comment-count">💬 ${cmtCount}</span>` : ''}
+          </div>
+        </div>`;
+      });
+    });
+
+    listEl.innerHTML = html;
+    listEl.querySelectorAll('.board-post-card').forEach(card => {
       card.addEventListener('click', () => openPostDetail(card.dataset.postId));
     });
   }
@@ -2652,14 +2686,19 @@
     }).join('');
   }
 
+  // ── CMPA-944: 게시판 전체화면 열기/닫기 ──
+  $('openBoardBtn').addEventListener('click', () => openBoardScreen());
+  $('boardBackBtn').addEventListener('click', () => closeBoardScreen());
+
   // ── 글쓰기 ──
-  $('writePostBtn').addEventListener('click', () => {
+  function openWritePostSheet() {
     const isMember = isMemberOfJar(currentJar);
     $('postGuestField').hidden = isMember;
     $('postGuestName').value = '';
     $('postContent').value = '';
     openSheet('writePostSheet');
-  });
+  }
+  $('boardWriteBtn').addEventListener('click', () => openWritePostSheet());
 
   $('postSubmitBtn').addEventListener('click', async () => {
     if (!currentJar) return;

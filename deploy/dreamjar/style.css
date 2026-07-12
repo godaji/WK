@@ -1290,3 +1290,82 @@ input, select { font-family: inherit; }
   font-size: .9rem; cursor: pointer; text-align: center;
 }
 .btn-share-jar:active { opacity: .7; }
+
+/* ===== CMPA-944: 게시판 전체화면 ===== */
+.btn-open-board {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--card2);
+  border: 1px solid var(--line);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent2);
+  text-align: center;
+}
+.btn-open-board:active { opacity: .8; }
+
+.board-screen {
+  position: fixed; inset: 0;
+  background: var(--bg);
+  z-index: 55;
+  display: flex; flex-direction: column;
+}
+.board-screen[hidden] { display: none; }
+.board-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: calc(var(--safe-top) + 10px) 12px 10px;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--line);
+  flex: none;
+}
+.board-back-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--card2); border: 1px solid var(--line);
+  font-size: 20px; color: var(--text);
+  display: flex; align-items: center; justify-content: center;
+}
+.board-back-btn:active { opacity: .7; }
+.board-title {
+  flex: 1; font-size: 17px; font-weight: 700; color: var(--text);
+}
+.board-header-actions { flex: none; }
+
+.board-scroll {
+  flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  padding: 8px 10px calc(var(--safe-bot) + 12px);
+  max-width: 480px; width: 100%; margin: 0 auto;
+}
+
+/* Date group headers */
+.board-date-header {
+  font-size: 12px; font-weight: 700; color: var(--muted);
+  padding: 10px 4px 4px;
+  position: sticky; top: 0;
+  background: var(--bg);
+  z-index: 1;
+}
+
+/* Compact post card for board view */
+.board-post-card {
+  background: var(--card); border-radius: 10px;
+  padding: 8px 10px; margin-bottom: 4px;
+  cursor: pointer; transition: background .12s;
+}
+.board-post-card:active { background: var(--line); }
+.board-post-card .post-author,
+.board-post-card .post-author-guest {
+  font-size: 12px;
+}
+.board-post-card .post-body {
+  margin: 2px 0;
+  font-size: 13px;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.board-post-card .post-meta {
+  font-size: 11px;
+  margin-top: 2px;
+}

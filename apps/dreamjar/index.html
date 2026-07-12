@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DreamJar">
-<link rel="stylesheet" href="./style.css?v=20260711x">
+<link rel="stylesheet" href="./style.css?v=20260712a">
 </head>
 <body>
 
@@ -185,21 +185,31 @@
       </div>
     </div>
 
-    <!-- 게시판 섹션 (CMPA-933) -->
+    <!-- 게시판 섹션 (CMPA-933, CMPA-944: 버튼만 표시) -->
     <div class="section-card" id="postsSection" hidden>
-      <div class="section-label">게시판</div>
       <div class="posts-header">
-        <button class="btn-cta btn-sm" id="writePostBtn" type="button">✍️ 글쓰기</button>
+        <button class="btn-open-board" id="openBoardBtn" type="button">📋 게시판</button>
         <button class="btn-icon" id="cheerBtn" type="button" title="응원하기">👏</button>
       </div>
       <div id="cheerSummary" class="cheer-summary" hidden></div>
-      <div id="postsList" class="posts-list">
-        <p class="posts-empty">아직 글이 없어요.</p>
-      </div>
     </div>
 
   </div><!-- /main-scroll -->
 </div><!-- /mainApp -->
+
+<!-- ===== 게시판 전체화면 (CMPA-944) ===== -->
+<div class="board-screen" id="boardScreen" hidden>
+  <div class="board-header">
+    <button class="board-back-btn" id="boardBackBtn" type="button">←</button>
+    <span class="board-title">게시판</span>
+    <div class="board-header-actions">
+      <button class="btn-cta btn-sm" id="boardWriteBtn" type="button">✍️ 글쓰기</button>
+    </div>
+  </div>
+  <div class="board-scroll" id="boardPostsList">
+    <p class="posts-empty">아직 글이 없어요.</p>
+  </div>
+</div>
 
 <!-- ===== 토스트 ===== -->
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
@@ -706,7 +716,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./supabase/supabase.js?v=20260711x"></script>
-<script src="./app.js?v=20260711x"></script>
+<script src="./supabase/supabase.js?v=20260712a"></script>
+<script src="./app.js?v=20260712a"></script>
 </body>
 </html>
