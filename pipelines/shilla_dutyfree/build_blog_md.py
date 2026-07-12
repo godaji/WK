@@ -1079,7 +1079,7 @@ def _layout_default():
   <ul class="snav">
     <li><a href="{{{{ '/cask/' | relative_url }}}}">🥃 Cask</a></li>
     <li><a href="{{{{ '/code/' | relative_url }}}}">💻 Code</a></li>
-    <li><a href="{{{{ '/dj/' | relative_url }}}}">🐷 Dram Jar</a></li>
+    <li><a href="{{{{ '/dreamjar/' | relative_url }}}}">🫙 DreamJar</a></li>
     <li><a href="{{{{ '/about/' | relative_url }}}}">👤 About</a></li>
   </ul>
   <div class="side-foot">
@@ -2296,17 +2296,17 @@ def selftest():
               and "#code" not in layout and "#cask" not in layout,
               "nav: Code/Cask → 기둥 페이지 링크(앵커 점프 제거)")
         # CMPA-284: 사이드바 nav 에서 '앱'(/apps/) 항목 제거.
-        # CMPA-358: 순서=홈/Cask/Code/Dram Jar/About (보드 요청 — 앱 메뉴 추가).
-        # CMPA-365: 앱 정식 이름=Dram Jar(보드 확정) → nav 라벨 '🐷 Dram Jar', 경로 /dj/.
+        # CMPA-358: 순서=홈/Cask/Code/DreamJar/About (보드 요청 — 앱 메뉴 추가).
+        # CMPA-954: 앱 승격 DreamJar → nav 라벨 '🫙 DreamJar', 경로 /dreamjar/.
         _snav = layout[layout.index('class="snav"'):layout.index("</ul>",
                        layout.index('class="snav"'))]
         check("/apps/" not in layout and "🧰" not in layout,
               "nav: '앱' 항목(/apps/ 링크) 제거(CMPA-284)")
         check(_snav.index("/cask/") < _snav.index("/code/")
-              < _snav.index("/dj/") < _snav.index("/about/"),
-              "nav: 순서 Cask → Code → Dram Jar → About (CMPA-358)")
-        check("🐷 Dram Jar" in layout and "🐷 Frugal App" not in layout,
-              "nav: 앱 라벨 'Dram Jar'(CMPA-365)")
+              < _snav.index("/dreamjar/") < _snav.index("/about/"),
+              "nav: 순서 Cask → Code → DreamJar → About (CMPA-358)")
+        check("🫙 DreamJar" in layout and "🐷 Dram Jar" not in layout,
+              "nav: 앱 라벨 'DreamJar'(CMPA-954)")
         css = open(os.path.join(out, "assets", "css", "style.css"),
                    encoding="utf-8").read()
         check(".stars::before" in css and "radial-gradient" in css
