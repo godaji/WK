@@ -1393,3 +1393,13 @@ input, select { font-family: inherit; }
   font-size: 11px;
   margin-top: 2px;
 }
+.sf-contact {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  margin-top: 12px;
+}
+.sf-contact a {
+  color: rgba(255,255,255,0.5);
+  text-decoration: underline;
+}
