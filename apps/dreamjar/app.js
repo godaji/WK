@@ -2560,11 +2560,11 @@
     return jar.ownerId === userId || jar.role === 'member' || jar.role === 'owner';
   }
 
-  /** 게시판 섹션 렌더링 */
+  /** 게시판 섹션 렌더링 (CMPA-951: jarDisplay 내부로 이동) */
   async function renderPostsSection(jar) {
-    const section = $('postsSection');
-    if (!jar) { section.hidden = true; return; }
-    section.hidden = false;
+    const section = $('postsHeader');
+    if (!jar) { if (section) section.hidden = true; return; }
+    if (section) section.hidden = false;
 
     // 멤버가 아닌 경우 guest 닉네임 필드 표시 (글쓰기 시트에서)
     const isMember = isMemberOfJar(jar);
@@ -2936,9 +2936,10 @@
     }
   }
 
-  // ── CMPA-934 Ad Gate: Rewarded ad before donation ──
+  // ── CMPA-950 Ad Gate: Pseudo-rewarded ad (AdSense display in modal) ──
   const AD_GATE_SECONDS = 5;
   let _adGateUnlocked = false;
+  let _adGateInterval = null;
 
   function showAdGate(jarId) {
     const nameEl = $('publicDonorName');
@@ -2959,30 +2960,34 @@
       return;
     }
 
-    // Try AdSense rewarded ad first, fall back to countdown
-    if (window._adsenseRewardedReady) {
-      triggerAdsenseRewarded(jarId);
-    } else {
-      showCountdownGate(jarId);
-    }
+    showCountdownGate(jarId);
   }
 
   function showCountdownGate(jarId) {
     const overlay = $('adGateOverlay');
     const countEl = $('adGateCount');
     const skipBtn = $('adGateSkipBtn');
+    const adIns = $('adGateIns');
     overlay.hidden = false;
     skipBtn.hidden = true;
     skipBtn.disabled = true;
 
+    // Show ad content (CMPA-948: 쭉심 자체 광고 iframe)
+    var adIframe = $('adGateIframe');
+    if (adIframe) {
+      adIframe.src = adIframe.src; // reload to restart animation
+    }
+
     let remaining = AD_GATE_SECONDS;
     countEl.textContent = remaining;
 
-    const interval = setInterval(() => {
+    if (_adGateInterval) clearInterval(_adGateInterval);
+    _adGateInterval = setInterval(() => {
       remaining--;
       countEl.textContent = remaining;
       if (remaining <= 0) {
-        clearInterval(interval);
+        clearInterval(_adGateInterval);
+        _adGateInterval = null;
         skipBtn.hidden = false;
         skipBtn.disabled = false;
         skipBtn.textContent = '✅ 응원하기로 이동';
@@ -2993,13 +2998,6 @@
         };
       }
     }, 1000);
-  }
-
-  /** AdSense rewarded ad trigger (placeholder — activated after AdSense approval) */
-  function triggerAdsenseRewarded(jarId) {
-    // This will be activated when AdSense is approved and configured.
-    // For now, falls back to countdown.
-    showCountdownGate(jarId);
   }
 
   function renderPublicPosts(posts) {

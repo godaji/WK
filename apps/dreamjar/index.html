@@ -14,7 +14,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DreamJar">
-<link rel="stylesheet" href="./style.css?v=20260712b">
+<link rel="stylesheet" href="./style.css?v=20260712d">
+<!-- AdSense: replace ca-pub-XXXXXXXXXXXXXXXX with actual pub ID after approval (CMPA-950) -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+  crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -91,8 +94,12 @@
       <div class="ad-gate-countdown">
         <span id="adGateCount">5</span><span>초</span>
       </div>
-      <!-- AdSense rewarded ad slot (activated after approval) -->
-      <div id="adGateAdSlot" class="ad-gate-ad-slot"></div>
+      <!-- 쭉심 광고 (CMPA-948) — AdSense 승인 전까지 자체 광고 노출 -->
+      <div id="adGateAdSlot" class="ad-gate-ad-slot">
+        <iframe id="adGateIframe" src="../zzuksim-ad/index.html"
+          style="width:100%;height:260px;border:none;border-radius:12px;overflow:hidden;"
+          scrolling="no" loading="lazy"></iframe>
+      </div>
       <button id="adGateSkipBtn" class="btn-cta ad-gate-btn" type="button" hidden disabled>
         응원하기로 이동
       </button>
@@ -149,6 +156,17 @@
         <button class="btn-donate" id="donateBtn" type="button" hidden>🦝 기부하기</button>
         <button class="btn-share-jar" id="shareJarBtn" type="button">🔗 공유 링크</button>
         <button class="btn-history" id="historyBtn" type="button">내역보기</button>
+        <!-- CMPA-951: 적립하기·게시판 버튼을 Jar 카드 안으로 이동 -->
+        <div class="jar-inline-actions" id="jarInlineActions">
+          <div class="control-header">
+            <button class="btn-open-control" id="openControlBtn" type="button">🎯 적립하기</button>
+          </div>
+          <div class="posts-header" id="postsHeader">
+            <button class="btn-open-board" id="openBoardBtn" type="button">📋 게시판</button>
+            <button class="btn-icon" id="cheerBtn" type="button" title="응원하기">👏</button>
+          </div>
+          <div id="cheerSummary" class="cheer-summary" hidden></div>
+        </div>
       </div>
 
       <!-- Jar 없음 -->
@@ -163,21 +181,7 @@
       </div>
     </div>
 
-    <!-- CONTROL 섹션 (CMPA-947: 버튼만 표시, 상세는 시트) -->
-    <div class="section-card" id="controlSection">
-      <div class="control-header">
-        <button class="btn-open-control" id="openControlBtn" type="button">🎯 적립하기</button>
-      </div>
-    </div>
-
-    <!-- 게시판 섹션 (CMPA-933, CMPA-944: 버튼만 표시) -->
-    <div class="section-card" id="postsSection" hidden>
-      <div class="posts-header">
-        <button class="btn-open-board" id="openBoardBtn" type="button">📋 게시판</button>
-        <button class="btn-icon" id="cheerBtn" type="button" title="응원하기">👏</button>
-      </div>
-      <div id="cheerSummary" class="cheer-summary" hidden></div>
-    </div>
+    <!-- CMPA-951: controlSection·postsSection 제거됨, 버튼은 jarDisplay 안으로 이동 -->
 
   </div><!-- /main-scroll -->
 </div><!-- /mainApp -->
@@ -729,7 +733,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./supabase/supabase.js?v=20260712b"></script>
-<script src="./app.js?v=20260712b"></script>
+<script src="./supabase/supabase.js?v=20260712d"></script>
+<script src="./app.js?v=20260712d"></script>
 </body>
 </html>
