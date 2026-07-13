@@ -107,13 +107,25 @@
     },
     {
       controlId: 'ctrl_cb',
-      name: 'FrugalControl',
-      emoji: '💰',
+      name: 'JieunControl',
+      emoji: '🌈',
+      description: '건강 습관 — 대신 하기 보상',
+      type: 'default',
       items: [
-        { id:'cb_coffee',   label:'드립커피',     type:'routine', subtype:'per_day', amount:4500 },
-        { id:'cb_tumbler',  label:'텀블러',        type:'routine', subtype:'per_day', amount:1200 },
-        { id:'cb_transit',  label:'도보/대중교통', type:'routine', subtype:'per_day', amount:5000 },
-        { id:'cb_homemeal', label:'집밥',          type:'routine', subtype:'per_day', amount:8000 },
+        // 루틴 탭
+        { id:'cb_swap_water', label:'💧 음료수 대신 물 마시기',              type:'routine',     subtype:'per_day',  amount:1500,  tab:'routine' },
+        { id:'cb_swap_meat',  label:'🍖 가공육/튀김 대신 고기 먹기',        type:'routine',     subtype:'per_day',  amount:1500,  tab:'routine' },
+        { id:'cb_swap_grain', label:'🍚 빵/흰밥 대신 갈색밥 먹기',          type:'routine',     subtype:'per_day',  amount:1500,  tab:'routine' },
+        { id:'cb_swap_sweet', label:'🍇 사탕/아이스크림 대신 얼린 과일 먹기', type:'routine',     subtype:'per_day',  amount:1500,  tab:'routine' },
+        { id:'cb_outdoor',    label:'🏃 바깥 놀이 30분',                    type:'routine',     subtype:'per_day',  amount:2000,  tab:'routine' },
+        { id:'cb_earlybed',   label:'🌙 일찍 자기 (10시 전)',               type:'routine',     subtype:'per_day',  amount:500,   tab:'routine' },
+        // 이벤트 탭
+        { id:'cb_newplay',      label:'🆕 새 운동 도전',           type:'performance', subtype:'session', amount:5000,  tab:'event' },
+        { id:'cb_cook',         label:'👩‍🍳 건강 간식 만들기',       type:'performance', subtype:'session', amount:3000,  tab:'event' },
+        { id:'cb_walk_family',  label:'🚶‍♂️ 가족 산책',              type:'performance', subtype:'session', amount:2000,  tab:'event' },
+        { id:'cb_streak_week',  label:'🔥 1주 연속 바깥놀이',      type:'performance', subtype:'session', amount:10000, tab:'event' },
+        { id:'cb_swap_streak',  label:'⭐ 1주 4종 swap 올클리어',  type:'performance', subtype:'session', amount:15000, tab:'event' },
+        { id:'cb_weight_check', label:'⚖️ 월간 체중 유지',         type:'milestone',   subtype:'once',    amount:20000, once:true, tab:'event' },
       ],
     },
     {
