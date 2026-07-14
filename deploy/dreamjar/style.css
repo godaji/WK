@@ -1385,11 +1385,36 @@ input, select { font-family: inherit; }
   margin: 2px 0;
   font-size: 13px;
   line-height: 1.35;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 .board-post-card .post-meta {
   font-size: 11px;
   margin-top: 2px;
 }
+
+/* CMPA-982: post emoji reactions */
+.post-reactions {
+  display: flex; flex-wrap: wrap; gap: 4px;
+  margin-top: 6px;
+}
+.post-reaction-badge {
+  display: inline-flex; align-items: center; gap: 2px;
+  background: var(--card2, #252545); border-radius: 12px;
+  padding: 2px 8px; font-size: 14px;
+}
+.post-reaction-cnt { font-size: 12px; color: var(--muted, #888); }
+
+.post-reaction-picker {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-top: 8px;
+}
+.post-reaction-toggle {
+  font-size: 20px; padding: 4px 8px;
+  border: 2px solid transparent; border-radius: 10px;
+  background: var(--card2, #252545);
+  cursor: pointer; transition: border-color .15s;
+}
+.post-reaction-toggle.active { border-color: var(--accent, #7c6ff7); }
+.post-reaction-toggle:active { opacity: .7; }
+.post-reaction-toggle:disabled { opacity: .4; }

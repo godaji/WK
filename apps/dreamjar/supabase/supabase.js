@@ -110,6 +110,8 @@
     if (action === 'createComment')  return await createComment(params);
     if (action === 'deleteComment')  return await deleteComment(params);
     if (action === 'addCheer')       return await addCheer(params);
+    if (action === 'addPostReaction')    return await addPostReaction(params);
+    if (action === 'removePostReaction') return await removePostReaction(params);
     if (query === 'getPosts')        return await getPosts(params);
     if (query === 'getCheers')       return await getCheers(params);
 
@@ -891,6 +893,29 @@
     return { cheerId };
   }
 
+  // CMPA-982: post-level emoji reactions (jar owner only)
+  async function addPostReaction(p) {
+    // Upsert: one emoji per author per post
+    const { error } = await supabase.from('post_reactions').upsert({
+      post_id:    p.postId,
+      author_id:  p.authorId,
+      emoji:      p.emoji,
+      created_at: new Date().toISOString(),
+    }, { onConflict: 'post_id,author_id,emoji' });
+    if (error) throw error;
+    return { ok: true };
+  }
+
+  async function removePostReaction(p) {
+    const { error } = await supabase.from('post_reactions')
+      .delete()
+      .eq('post_id', p.postId)
+      .eq('author_id', p.authorId)
+      .eq('emoji', p.emoji);
+    if (error) throw error;
+    return { ok: true };
+  }
+
   async function getPosts(p) {
     // Fetch posts for a jar, newest first, with comments
     const { data: posts, error } = await supabase
@@ -902,17 +927,25 @@
 
     const postIds = (posts || []).map(p => p.post_id);
     let comments = [];
+    let reactions = [];
     if (postIds.length > 0) {
       const { data: cmts } = await supabase
         .from('comments').select('*')
         .in('post_id', postIds)
         .order('created_at', { ascending: true });
       comments = cmts || [];
+      // CMPA-982: fetch post reactions
+      try {
+        const { data: rxns } = await supabase
+          .from('post_reactions').select('*')
+          .in('post_id', postIds);
+        reactions = rxns || [];
+      } catch (_) { reactions = []; }
     }
 
     // Map author names
     const authorIds = [...new Set(
-      [...(posts || []), ...comments]
+      [...(posts || []), ...comments, ...reactions]
         .map(x => x.author_id).filter(Boolean)
     )];
     let namesMap = {};
@@ -938,6 +971,10 @@
         guestName:  c.guest_name || '',
         content:    c.content,
         createdAt:  c.created_at,
+      })),
+      reactions:  reactions.filter(r => r.post_id === p.post_id).map(r => ({
+        authorId: r.author_id,
+        emoji:    r.emoji,
       })),
     }));
   }

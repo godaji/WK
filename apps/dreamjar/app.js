@@ -2696,10 +2696,11 @@
           ? `<span class="post-author">${escHtml(p.authorName || p.authorId)}</span>`
           : `<span class="post-author-guest">${escHtml(p.guestName || '익명')}</span>`;
         const cmtCount = (p.comments || []).length;
-        const preview = (p.content || '').slice(0, 60) + ((p.content || '').length > 60 ? '…' : '');
+        const rxnHtml = renderReactionBadges(p.reactions || []);
         html += `<div class="board-post-card" data-post-id="${escHtml(p.postId)}">
           ${authorLabel}
-          <div class="post-body">${escHtml(preview)}</div>
+          <div class="post-body">${escHtml(p.content || '')}</div>
+          ${rxnHtml}
           <div class="post-meta">
             ${cmtCount > 0 ? `<span class="post-comment-count">💬 ${cmtCount}</span>` : ''}
           </div>
@@ -2711,6 +2712,40 @@
     listEl.querySelectorAll('.board-post-card').forEach(card => {
       card.addEventListener('click', () => openPostDetail(card.dataset.postId));
     });
+  }
+
+  // CMPA-982: reaction badge renderer (compact emoji counts)
+  function renderReactionBadges(reactions) {
+    if (!reactions || reactions.length === 0) return '';
+    const counts = {};
+    reactions.forEach(r => { counts[r.emoji] = (counts[r.emoji] || 0) + 1; });
+    return '<div class="post-reactions">' +
+      Object.entries(counts).map(([emoji, cnt]) =>
+        `<span class="post-reaction-badge">${emoji}${cnt > 1 ? ' <span class="post-reaction-cnt">' + cnt + '</span>' : ''}</span>`
+      ).join('') + '</div>';
+  }
+
+  // CMPA-982: reaction picker for post detail (jar owner only)
+  const POST_REACTION_EMOJIS = ['👍', '❤️', '😂', '🎉', '🔥', '👏'];
+
+  function renderPostReactionPicker(post) {
+    const isOwner = currentJar && currentJar.ownerId === userId;
+    const reactions = post.reactions || [];
+
+    // Always show existing reaction badges
+    let html = renderReactionBadges(reactions);
+
+    // Owner-only reaction picker
+    if (isOwner) {
+      const myReactions = reactions.filter(r => r.authorId === userId).map(r => r.emoji);
+      html += '<div class="post-reaction-picker">';
+      POST_REACTION_EMOJIS.forEach(emoji => {
+        const active = myReactions.includes(emoji) ? ' active' : '';
+        html += `<button class="post-reaction-toggle${active}" data-emoji="${emoji}" type="button">${emoji}</button>`;
+      });
+      html += '</div>';
+    }
+    return html;
   }
 
   /** 게시글 상세 시트 열기 */
@@ -2728,7 +2763,33 @@
     $('postDetailContent').innerHTML =
       `${authorLabel}
        <div class="post-body">${escHtml(post.content)}</div>
-       <div class="post-meta"><span>${fmtDate(post.createdAt)}</span></div>`;
+       <div class="post-meta"><span>${fmtDate(post.createdAt)}</span></div>
+       ${renderPostReactionPicker(post)}`;
+
+    // CMPA-982: bind reaction toggle buttons (jar owner only)
+    $('postDetailContent').querySelectorAll('.post-reaction-toggle').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        const emoji = btn.dataset.emoji;
+        const isActive = btn.classList.contains('active');
+        btn.disabled = true;
+        try {
+          if (hasSupabase()) {
+            if (isActive) {
+              await DreamJarSupabase.api({ action: 'removePostReaction', params: { postId, authorId: userId, emoji } });
+            } else {
+              await DreamJarSupabase.api({ action: 'addPostReaction', params: { postId, authorId: userId, emoji } });
+            }
+          }
+          await renderPostsSection(currentJar);
+          openPostDetail(postId);
+        } catch (err) {
+          toast('반응 실패: ' + err.message);
+        } finally {
+          btn.disabled = false;
+        }
+      });
+    });
 
     // 댓글 목록
     renderCommentsList(post.comments || []);
