@@ -50,8 +50,8 @@ from pipelines.common.whisky_quality import canonical_store, is_quarantined  # n
 
 # 월 변경 시 아래 두 줄만 갱신하면 도메스틱 누적월·현재월 단발소스(SOURCES)·오염
 # 베이스라인(PAST_MONTHS)이 모두 이 둘로부터 파생되어 따라온다. 미존재 입력은 로더가 skip.
-DOMESTIC_MONTHS = ["2026-03", "2026-04", "2026-05", "2026-06"]
-CURRENT_MONTH = "2026-06"
+DOMESTIC_MONTHS = ["2026-03", "2026-04", "2026-05", "2026-06", "2026-07"]
+CURRENT_MONTH = "2026-07"
 PAST_MONTHS = tuple(m for m in DOMESTIC_MONTHS if m != CURRENT_MONTH)  # 오염 베이스라인 = 현재월 제외 과거 도메스틱
 OUTLIER_LO, OUTLIER_HI = 1 / 3, 3      # 현재가가 과거평균의 ⅓~3배 밖이면 오염행
 
