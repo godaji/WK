@@ -2192,7 +2192,19 @@
         toJarId: currentJar.jarId,
         items,
       }});
+      const bulkMsg = ($('donateBulkMessage').value || '').trim();
       closeSheet('donateSheet');
+      // Auto-post cheer message to recipient jar's board
+      if (bulkMsg && hasSupabase()) {
+        try {
+          await DreamJarSupabase.api({ action: 'createPost', params: {
+            jarId: currentJar.jarId,
+            authorId: userId,
+            guestName: '',
+            content: '💝 ' + bulkMsg,
+          }});
+        } catch (e) { console.warn('[DreamJar] 응원 메시지 게시 실패:', e.message); }
+      }
 
       // Show bulk result
       let html = '';
@@ -2271,6 +2283,8 @@
     $('donateBalance').textContent = `잔액: ${won(bal)}`;
     $('donateAmount').value = '';
     $('donateAmount').max = bal;
+    $('donateMessage').value = '';
+    $('donateBulkMessage').value = '';
     _donateBulkSelected = new Set();
     switchDonateTab('amount');
     openSheet('donateSheet');
@@ -2293,7 +2307,19 @@
         toJarId: currentJar.jarId,
         amount,
       }});
+      const donateMsg = ($('donateMessage').value || '').trim();
       closeSheet('donateSheet');
+      // Auto-post cheer message to recipient jar's board
+      if (donateMsg && hasSupabase()) {
+        try {
+          await DreamJarSupabase.api({ action: 'createPost', params: {
+            jarId: currentJar.jarId,
+            authorId: userId,
+            guestName: '',
+            content: '💝 ' + donateMsg,
+          }});
+        } catch (e) { console.warn('[DreamJar] 응원 메시지 게시 실패:', e.message); }
+      }
       // Show result
       const feePct = Math.round((res.feeRate || 0) * 100);
       $('donateResultBody').innerHTML =

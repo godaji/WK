@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DreamJar">
-<link rel="stylesheet" href="./style.css?v=20260714a">
+<link rel="stylesheet" href="./style.css?v=20260714b">
 <!-- AdSense: replace ca-pub-XXXXXXXXXXXXXXXX with actual pub ID after approval (CMPA-950) -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
   crossorigin="anonymous"></script>
@@ -599,6 +599,10 @@
           <input id="donateAmount" class="cj-input" type="number" placeholder="예: 10000" min="1" inputmode="numeric">
         </div>
         <p class="sett-hint">🦝 너구리사장이 0~50% 수수료를 랜덤으로 떼갑니다.</p>
+        <div class="cj-field">
+          <label class="cj-label" for="donateMessage">응원 메시지 <span class="cj-unit">선택</span></label>
+          <textarea id="donateMessage" class="cj-input" rows="2" placeholder="응원 한마디를 남겨보세요!" maxlength="300"></textarea>
+        </div>
         <button id="donateSubmitBtn" class="btn-cta" type="button">기부하기</button>
       </div>
       <!-- 내역 선택 탭 -->
@@ -608,6 +612,10 @@
           <span id="donateBulkCount">0건</span> 선택 · <span id="donateBulkTotal">0원</span>
         </div>
         <p class="sett-hint">🦝 너구리사장이 각 항목마다 0~50% 수수료를 개별 적용합니다.</p>
+        <div class="cj-field">
+          <label class="cj-label" for="donateBulkMessage">응원 메시지 <span class="cj-unit">선택</span></label>
+          <textarea id="donateBulkMessage" class="cj-input" rows="2" placeholder="응원 한마디를 남겨보세요!" maxlength="300"></textarea>
+        </div>
         <button id="donateBulkSubmitBtn" class="btn-cta" type="button">선택 항목 기부하기</button>
       </div>
     </div>
@@ -734,6 +742,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="./supabase/supabase.js?v=20260714a"></script>
-<script src="./app.js?v=20260714a"></script>
+<script src="./app.js?v=20260714b"></script>
 </body>
 </html>
