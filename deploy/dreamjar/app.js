@@ -129,6 +129,19 @@
       ],
     },
     {
+      controlId: 'ctrl_cd',
+      name: 'FrugalControl',
+      emoji: '💰',
+      description: '일상 절약 행동 보상',
+      type: 'default',
+      items: [
+        { id:'cd_coffee',   label:'드립커피',     type:'routine', subtype:'per_day', amount:4500 },
+        { id:'cd_tumbler',  label:'텀블러',        type:'routine', subtype:'per_day', amount:1200 },
+        { id:'cd_transit',  label:'도보/대중교통', type:'routine', subtype:'per_day', amount:5000 },
+        { id:'cd_homemeal', label:'집밥',          type:'routine', subtype:'per_day', amount:8000 },
+      ],
+    },
+    {
       controlId: 'ctrl_cc',
       name: 'EemControl',
       emoji: '📚',
@@ -1518,8 +1531,7 @@
     // Built-in controls
     builtIn.forEach(c => {
       const isActive = c.controlId === activeCtrlId;
-      const desc = c.controlId === 'ctrl_ca' ? '학업·루틴·마일스톤 달성 보상'
-                 : c.controlId === 'ctrl_cb' ? '일상 절약 행동 보상' : '';
+      const desc = c.description || (c.controlId === 'ctrl_ca' ? '학업·루틴·마일스톤 달성 보상' : '');
       html += `<div class="cp-custom-row">
         <button class="cp-item${isActive ? ' active' : ''}" data-control-id="${escHtml(c.controlId)}" type="button">
           <span class="cp-emoji">${c.emoji}</span>
