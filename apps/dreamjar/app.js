@@ -2201,7 +2201,7 @@
             jarId: currentJar.jarId,
             authorId: userId,
             guestName: '',
-            content: '💝 ' + bulkMsg,
+            content: '💝 ' + bulkMsg + '\n💰 기부 ' + won(res.totalRequest) + ' → 🦝 너구리사장 수수료 ' + won(res.totalFee) + ' → 실제 도착 ' + won(res.totalNet),
           }});
         } catch (e) { console.warn('[DreamJar] 응원 메시지 게시 실패:', e.message); }
       }
@@ -2316,7 +2316,7 @@
             jarId: currentJar.jarId,
             authorId: userId,
             guestName: '',
-            content: '💝 ' + donateMsg,
+            content: '💝 ' + donateMsg + '\n💰 기부 ' + won(amount) + ' → 🦝 너구리사장 수수료 ' + won(res.feeAmount) + ' (' + Math.round((res.feeRate || 0) * 100) + '%) → 실제 도착 ' + won(res.netAmount),
           }});
         } catch (e) { console.warn('[DreamJar] 응원 메시지 게시 실패:', e.message); }
       }
