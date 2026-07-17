@@ -4126,6 +4126,7 @@ Yuza 2023 Release Single Malt Japanese Whisky,unmatched,,,
 龜泉 Junmai Daiginjo Genshu CEL-24 Aiyama,unmatched,,,
 龜泉 Junmai Daiginjo Genshu CEL-24 Yamada Nishiki,unmatched,,,
 龜泉 Kameizumi Junmai Ginjo Nama Genshu CEL-24 300ml,unmatched,,,
+가쿠빈,matched,w083,산토리 가쿠빈,rule
 가쿠빈 700ml,matched,w083,산토리 가쿠빈,rule
 가쿠빈 700ml 두 개입 메가잔 패키지,matched,w083,산토리 가쿠빈,rule
 골든 블루 사피루스,matched,w064,골든블루 사피루스,rule
@@ -4185,14 +4186,12 @@ Yuza 2023 Release Single Malt Japanese Whisky,unmatched,,,
 글렌리벳 15년 700ml,matched,w002,글렌리벳 15년,rule
 글렌리벳 17년 스몰 배치 2 700ml,matched,w003,글렌리벳 17년 스몰배치,rule
 글렌리벳 17년 스몰배치,matched,w003,글렌리벳 17년 스몰배치,rule
-글렌리벳 19년 스몰 배치 2,matched,w004,글렌리벳 19년 스몰배치,rule
 글렌리벳 19년 스몰 배치 2 700ml,matched,w004,글렌리벳 19년 스몰배치,rule
 글렌리벳 19년 스몰배치,matched,w004,글렌리벳 19년 스몰배치,rule
 글렌리벳 파운더스 리저브 700ml,unmatched,,,
 글렌모렌지 12년,matched,w020,글렌모렌지 12년,rule
 글렌모렌지 12년 700ml,matched,w020,글렌모렌지 12년,rule
 글렌모렌지 15년,matched,w021,글렌모렌지 15년,rule
-글렌모렌지 D 오리지널 12년,matched,w020,글렌모렌지 12년,rule
 글렌모렌지 D 오리지널 12년 700ml,matched,w020,글렌모렌지 12년,rule
 글렌모렌지 오리지널 10년 700ml,unmatched,,,
 글렌모렌지 익스플로전 #1,matched,w022,글렌모렌지 익스플로전 No.1,rule
@@ -4201,6 +4200,7 @@ Yuza 2023 Release Single Malt Japanese Whisky,unmatched,,,
 글렌알라키 10년 루비포트 700ml,matched,w096,글렌알라키 10년 루비 포트,rule
 글렌킨치 12년,matched,w038,글렌킨치 12년,rule
 글렌킨치 12년 700ml,matched,w038,글렌킨치 12년,rule
+글렌파클라스 15년,matched,w093,글렌파클라스 15년,rule
 글렌피딕 12년,matched,w005,글렌피딕 12년,rule
 글렌피딕 12년 700ml,matched,w005,글렌피딕 12년,rule
 글렌피딕 12년 쉐리 700ml,matched,w094,글렌피딕 12년 셰리 캐스크,rule
@@ -4213,7 +4213,9 @@ Yuza 2023 Release Single Malt Japanese Whisky,unmatched,,,
 글렌피딕 15년,matched,w007,글렌피딕 15년,rule
 글렌피딕 15년 700ml,matched,w007,글렌피딕 15년,rule
 글렌피딕 15년 솔레라 700ml,matched,w007,글렌피딕 15년,rule
+글렌피딕 15년 싱글 몰트 위스키,matched,w007,글렌피딕 15년,rule
 글렌피딕 15년 싱글 몰트 위스키 700ml,matched,w007,글렌피딕 15년,rule
+글렌피딕 15년 싱글트 위스키,matched,w007,글렌피딕 15년,rule
 글렌피딕 15년 싱글트 위스키 700ml,matched,w007,글렌피딕 15년,rule
 글렌피딕 18년 700ml,matched,w115,글렌피딕 18년,rule
 네이키드 몰트 700ml,matched,w121,네이키드 몰트,rule
@@ -4277,7 +4279,6 @@ Yuza 2023 Release Single Malt Japanese Whisky,unmatched,,,
 라프로익 오크 셀렉트,matched,w102,라프로익 오크 셀렉트,rule
 라프로익 오크셀렉트 700ml,matched,w102,라프로익 오크 셀렉트,rule
 라프로잇 10년 750mml,matched,w035,라프로익 10년,rule
-러셀 리저브 10년,matched,w095,러셀스 리저브 10년,rule
 러셀 리저브 10년 750ml,matched,w095,러셀스 리저브 10년,rule
 러셀 리저브 싱글 배럴,matched,w077,러셀스 리저브 싱글배럴,rule
 러셀 리저브 싱글 배럴 750ml,matched,w077,러셀스 리저브 싱글배럴,rule
@@ -4347,11 +4348,13 @@ Yuza 2023 Release Single Malt Japanese Whisky,unmatched,,,
 발베니 12년 더블우드 700ml,matched,w008,발베니 12년 더블우드,rule
 발베니 12년 더블우드 750ml,matched,w008,발베니 12년 더블우드,rule
 발베니 12년 몬틸라 700ml,matched,w008,발베니 12년 더블우드,rule
+발베니 12년 싱글트 위스키,matched,w008,발베니 12년 더블우드,rule
 발베니 12년 싱글트 위스키 700ml,matched,w008,발베니 12년 더블우드,rule
 발베니 12년 아메리칸 오크,matched,w008,발베니 12년 더블우드,rule
 발베니 12년 아메리칸 오크 700ml,matched,w008,발베니 12년 더블우드,rule
 발베니 14년 캐리비안 캐스크,matched,w009,발베니 14년 캐리비안 캐스크,rule
 발베니 14년 캐리비안 캐스크 700ml,matched,w009,발베니 14년 캐리비안 캐스크,rule
+발베니 14년 캐리비안 케스크,matched,w009,발베니 14년 캐리비안 캐스크,rule
 발베니 14년 캐리비안 케스크 700ml,matched,w009,발베니 14년 캐리비안 캐스크,rule
 발베니 16년 프렌치 오크,matched,w105,발베니 16년 프렌치 오크,rule
 발베니 16년 프렌치 오크 700ml,matched,w105,발베니 16년 프렌치 오크,rule
@@ -4372,8 +4375,8 @@ Yuza 2023 Release Single Malt Japanese Whisky,unmatched,,,
 벤니학 10년,matched,w017,벤리악 10년,rule
 벤로막 15년,unmatched,,,
 벤리악 10년 700ml,matched,w017,벤리악 10년,rule
+벨즈,matched,w106,벨즈,rule
 벨즈 블렌디드 위스키,matched,w106,벨즈,rule
-벨즈 스카치 위스키,matched,w106,벨즈,rule
 벨즈 스카치 위스키 1L,matched,w106,벨즈,rule
 보모어 18년,unmatched,,,
 봄베이 사파이어 진,excluded,,,gin
@@ -4384,6 +4387,7 @@ Yuza 2023 Release Single Malt Japanese Whisky,unmatched,,,
 부시밀 12년 싱글트 700ml,matched,w108,부쉬밀 12년 싱글몰트,rule
 부시밀 15년 싱글 몰트 700ml,matched,w062,부쉬밀 15년 싱글몰트,rule
 부심일 15년,matched,w062,부쉬밀 15년 싱글몰트,rule
+브라클라 12년,matched,w026,로얄 브라클라 12년,rule
 브라클라 12년 700ml,matched,w026,로얄 브라클라 12년,rule
 블랙 앤 화이트 700ml,unmatched,,,
 블랙보트 스카치 위스키 700ml,matched,w109,블랙보트,rule
@@ -4504,10 +4508,10 @@ Yuza 2023 Release Single Malt Japanese Whisky,unmatched,,,
 잭다니엘 테네시 전용잔 패키지,matched,w066,잭다니엘 No.7,rule
 잭다니엘 허니,matched,w091,잭다니엘 허니,rule
 잭다니엘 허니 1L,matched,w091,잭다니엘 허니,rule
-잭다니엘스,matched,w066,잭다니엘 No.7,rule
 잭다니엘스 1L,matched,w066,잭다니엘 No.7,rule
 잭다니엘스 700ml 전용 패키지,matched,w066,잭다니엘 No.7,rule
 잭다니엘스 BB라이 700ml,matched,w068,잭다니엘 라이,rule
+잭다니엘스 애플,matched,w067,잭다니엘 애플,rule
 잭다니엘스 애플 1L,matched,w067,잭다니엘 애플,rule
 잭다니엘스 애플 700ml 전용잔 패키지,matched,w067,잭다니엘 애플,rule
 잭다니엘스 테네시 700ml 전용잔 패키지,matched,w066,잭다니엘 No.7,rule
@@ -4544,13 +4548,11 @@ Yuza 2023 Release Single Malt Japanese Whisky,unmatched,,,
 조니워커 그인라 700ml,matched,w042,조니워커 그린라벨 15년,rule
 조니워커 더블블랙,matched,w051,조니워커 더블블랙,rule
 조니워커 더블블랙 1L,matched,w051,조니워커 더블블랙,rule
-조니워커 레드,matched,w049,조니워커 레드라벨,rule
 조니워커 레드 1.75L,matched,w049,조니워커 레드라벨,rule
 조니워커 레드 700ml,matched,w049,조니워커 레드라벨,rule
 조니워커 레드라벨 1750ml,matched,w049,조니워커 레드라벨,rule
 조니워커 레드라벨 700ml,matched,w049,조니워커 레드라벨,rule
 조니워커 블ml,unmatched,,,
-조니워커 블랙,matched,w050,조니워커 블랙라벨 12년,rule
 조니워커 블랙 1.75L,matched,w050,조니워커 블랙라벨 12년,rule
 조니워커 블랙 200ml,matched,w050,조니워커 블랙라벨 12년,rule
 조니워커 블랙 700ml,matched,w050,조니워커 블랙라벨 12년,rule
@@ -4568,16 +4570,17 @@ Yuza 2023 Release Single Malt Japanese Whisky,unmatched,,,
 조니워커 블랙루비,matched,w052,조니워커 블랙 루비,rule
 조니워커 블랙루비 700ml,matched,w052,조니워커 블랙 루비,rule
 조니워커 블로라 750ml,matched,w053,조니워커 블루라벨,rule
+조니워커 블루,matched,w053,조니워커 블루라벨,rule
 조니워커 블루 500ml,matched,w053,조니워커 블루라벨,rule
 조니워커 블루 700ml,matched,w053,조니워커 블루라벨,rule
 조니워커 블루 750ml,matched,w053,조니워커 블루라벨,rule
 조니워커 블루 750mml,matched,w053,조니워커 블루라벨,rule
+조니워커 블루라,matched,w053,조니워커 블루라벨,rule
 조니워커 블루라 750ml,matched,w053,조니워커 블루라벨,rule
 조니워커 블루라베 750mml,matched,w053,조니워커 블루라벨,rule
 조니워커 블루라벨,matched,w053,조니워커 블루라벨,rule
 조니워커 블루라벨 500ml,matched,w053,조니워커 블루라벨,rule
 조니워커 블루라벨 750ml,matched,w053,조니워커 블루라벨,rule
-조니워커블 블루,matched,w053,조니워커 블루라벨,rule
 조니워커블 블루 750ml,matched,w053,조니워커 블루라벨,rule
 주라 10년 700ml,matched,w116,주라 10년,rule
 주라 12년 쉐리케스크 700ml,matched,w117,주라 12년 셰리 캐스크,rule
@@ -4600,10 +4603,12 @@ Yuza 2023 Release Single Malt Japanese Whisky,unmatched,,,
 카발란 디스틸러 리셀레트 싱글 몰트 700ml,matched,w084,카발란 디스틸러리 셀렉트,rule
 카발란 디스틸러리 셀렉트,matched,w084,카발란 디스틸러리 셀렉트,rule
 카발란 디스틸러리 셀렉트 700ml,matched,w084,카발란 디스틸러리 셀렉트,rule
+카발란 디스틸러리 셀렉트 싱글,matched,w084,카발란 디스틸러리 셀렉트,rule
 카발란 디스틸러리 셀렉트 싱글 700ml,matched,w084,카발란 디스틸러리 셀렉트,rule
 카발란 디스틸러리 셀렉트 싱글 몰트,matched,w084,카발란 디스틸러리 셀렉트,rule
 카발란 디스틸러리 셀렉트 싱글 몰트 700ml,matched,w084,카발란 디스틸러리 셀렉트,rule
 카발란 디스틸러리 셀렉트 싱글몰트,matched,w084,카발란 디스틸러리 셀렉트,rule
+카발란 디스틸러리 셀렉트 싱글트,matched,w084,카발란 디스틸러리 셀렉트,rule
 카발란 디스틸러리 셀렉트 싱글트 700ml,matched,w084,카발란 디스틸러리 셀렉트,rule
 카발란 솔리스트 700ml,unmatched,,,
 칼라 1 블렌디드 스카치 위스키,matched,w130,칼라일,rule
@@ -4622,7 +4627,7 @@ Yuza 2023 Release Single Malt Japanese Whisky,unmatched,,,
 커티삭 프로히비션,matched,w058,커티삭 프로히비션,rule
 커티삭 프로히비션 1L,matched,w058,커티삭 프로히비션,rule
 커티삭 프로히비션 700ml,matched,w058,커티삭 프로히비션,rule
-코발 밀레 위스키,matched,w113,코발 밀레,rule
+코발 밀레,matched,w113,코발 밀레,rule
 코발 밀레 위스키 500ml,matched,w113,코발 밀레,rule
 코발라이 위스키 500ml,matched,w114,코발 라이,rule
 쿠티삭 프로히비션,matched,w058,커티삭 프로히비션,rule
@@ -4652,7 +4657,6 @@ Yuza 2023 Release Single Malt Japanese Whisky,unmatched,,,
 탐두 15년,matched,w016,탐두 15년,rule
 탐두 15년 700ml,matched,w016,탐두 15년,rule
 파이어볼 시나몬 위스키 500ml,excluded,,,liqueur-cinnamon
-파클라스 15년,matched,w093,글렌파클라스 15년,rule
 파클라스 15년 700ml,matched,w093,글렌파클라스 15년,rule
 페로네 리몬첼,excluded,,,liqueur-limoncello
 페이머스 그라우스 1L,matched,w054,페이머스 그라우스,rule
