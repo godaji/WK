@@ -1,5 +1,5 @@
 {
-  "asof": "2026-07-13",
+  "asof": "2026-07-20",
   "steps": {
     "fx": {
       "ok": true
@@ -8,15 +8,15 @@
       "label": "hk",
       "returncode": 0,
       "ok": true,
-      "tail": "[Caskells] whisky rows: 413\n[TheRareMalt] whisky rows: 663\n[Mizunara] whisky rows: 834\nWROTE 1910 rows -> /home/dudaji/work/WK/data/whisky-prices/2026-07_hk_whisky_poc.csv\nSNAPSHOT -> /home/dudaji/work/WK/data/whisky-prices/_runs/2026-07_hk_whisky_poc__run2026-07-13.csv",
-      "rows": 1910
+      "tail": "[Caskells] whisky rows: 413\n[TheRareMalt] whisky rows: 664\n[Mizunara] whisky rows: 836\nWROTE 1913 rows -> /home/dudaji/work/WK/data/whisky-prices/2026-07_hk_whisky_poc.csv\nSNAPSHOT -> /home/dudaji/work/WK/data/whisky-prices/_runs/2026-07_hk_whisky_poc__run2026-07-20.csv",
+      "rows": 1913
     },
     "jp": {
       "label": "jp",
       "returncode": 0,
       "ok": true,
-      "tail": "[酒類ドットコム(syurui)] whisky rows: 571\n[SAKE People] whisky rows: 493\n[酒庫住田屋(sumidaya)] whisky rows: 335\nWROTE 1399 rows -> /home/dudaji/work/WK/data/whisky-prices/jp/2026-07_jp_shopify_poc.csv  (fx 1JPY=9.281227 KRW)\nSNAPSHOT -> /home/dudaji/work/WK/data/whisky-prices/jp/_runs/2026-07_jp_shopify_poc__run2026-07-13.csv",
-      "rows": 1399,
+      "tail": "[酒類ドットコム(syurui)] whisky rows: 572\n[SAKE People] whisky rows: 480\n[酒庫住田屋(sumidaya)] whisky rows: 337\nWROTE 1389 rows -> /home/dudaji/work/WK/data/whisky-prices/jp/2026-07_jp_shopify_poc.csv  (fx 1JPY=9.151419 KRW)\nSNAPSHOT -> /home/dudaji/work/WK/data/whisky-prices/jp/_runs/2026-07_jp_shopify_poc__run2026-07-20.csv",
+      "rows": 1389,
       "mode": "LIVE"
     }
   },
@@ -27,9 +27,9 @@
     "jp_csv": "data/whisky-prices/jp/2026-07_jp_shopify_poc.csv"
   },
   "fx": {
-    "asof": "2026-07-12",
-    "HKD_KRW": 191.537086,
-    "JPY_KRW": 9.281227,
+    "asof": "2026-07-19",
+    "HKD_KRW": 189.558899,
+    "JPY_KRW": 9.151419,
     "source": "open.er-api.com (USD base cross-rate)"
   }
 }
