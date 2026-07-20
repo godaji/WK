@@ -1,6 +1,6 @@
 ﻿canonical_id,name_ko,name_en,brand,category,n_aliases,n_rows,markets,min_krw,max_krw,alias_examples
 w001,글렌리벳 12년,The Glenlivet 12 Year Old,Glenlivet,싱글몰트,7,9,HK;JP;KR;KR-DS,57000,159030,Glenlivet 12 Year Old Double Oak; 【正規輸入品】 ザ グレンリベット 12年 40% 1000ml 箱付 シングルモルト スコッチ ウイスキー; 【正規輸入品】ザ グレンリベット 12年 40% 700ml 箱付 スコッチ ウイスキー; ザ グレンリベット 12年 1000ml
-w002,글렌리벳 15년,The Glenlivet 15 Year Old French Oak Reserve,Glenlivet,싱글몰트,8,29,HK;JP;KR;KR-DS,86000,238174,Glenlivet 15 Years Old French Oak Reserve Single Malt Scotch Whisky; 【正規輸入品】 ザ グレンリベット 15年 フレンチ オーク リザーブ 40% 700ml 箱付 シングルモルト スコッチ ウイスキー; ザ グレンリベット フレンチオーク リザーヴ 15年; 글랜립의 15년
+w002,글렌리벳 15년,The Glenlivet 15 Year Old French Oak Reserve,Glenlivet,싱글몰트,8,30,HK;JP;KR;KR-DS,86000,238174,Glenlivet 15 Years Old French Oak Reserve Single Malt Scotch Whisky; 【正規輸入品】 ザ グレンリベット 15年 フレンチ オーク リザーブ 40% 700ml 箱付 シングルモルト スコッチ ウイスキー; ザ グレンリベット フレンチオーク リザーヴ 15年; 글랜립의 15년
 w003,글렌리벳 17년 스몰배치,The Glenlivet 17 Year Old Small Batch,Glenlivet,싱글몰트,4,7,KR,229800,229800,글랜립의 17년 스몰 배치 2; 글렌리벳 17년 스몰 배치 2 700ml; 글렌리벳 17년 스몰배치; 더 글렌리벳 17년 스몰 배치 2
 w004,글렌리벳 19년 스몰배치,The Glenlivet 19 Year Old Small Batch,Glenlivet,싱글몰트,5,10,KR;KR-DS,339400,380000,글랜립의 19년 스몰 배치; 글렌리벳 19년 스몰 배치 2 700ml; 글렌리벳 19년 스몰배치; 더 글렌리벳 19년
 w005,글렌피딕 12년,Glenfiddich 12 Year Old,Glenfiddich,싱글몰트,4,23,HK;KR;KR-DS,59000,157437,"Glenfiddich - 12y, 40%; 글랜피딕 12년; 글렌피딕 12년; 글렌피딕 12년 700ml"
@@ -46,9 +46,9 @@ w044,발렌타인 10년,Ballantine's 10 Year Old,Ballantine's,블렌디드,4,21,
 w045,발렌타인 12년,Ballantine's 12 Year Old,Ballantine's,블렌디드,3,3,JP;KR,70159,137676,バランタイン 12年; 新 バランタイン シングルモルト グレンバーギー 12年; 발렌타인 싱글트 글램버기 12년 500ml
 w046,발렌타인 싱글몰트 15년,Ballantine's Single Malt 15 Year Old,Ballantine's,싱글몰트,4,6,JP;KR;KR-DS,87000,207649,新 バランタイン シングルモルト グレンバーギー 15年; 발렌타인 싱글 몰트 글램버이 15년 700ml; 발렌타인 싱글몰트 15년; 발렌타인 싱글트 글램버기 15년 700ml
 w047,발렌타인 21년,Ballantine's 21 Year Old,Ballantine's,블렌디드,2,12,KR;KR-DS,165000,244100,발렌타인 21년; 발렌타인 21년 700ml
-w048,시바스 리갈 12년,Chivas Regal 12 Year Old,Chivas Regal,블렌디드,4,12,JP;KR;KR-DS,39500,120396,【世界五大ウイスキー】スコッチウイスキー シーバスリーガル 12年水楢《瓶 700ml×1本》; シーバスリーガル　匠　リザーブ　12年　40度《瓶 700ml×1本》; 시바스 리갈 12년; 시바스리갈 12년산
+w048,시바스 리갈 12년,Chivas Regal 12 Year Old,Chivas Regal,블렌디드,4,13,JP;KR;KR-DS,39500,120396,【世界五大ウイスキー】スコッチウイスキー シーバスリーガル 12年水楢《瓶 700ml×1本》; シーバスリーガル　匠　リザーブ　12年　40度《瓶 700ml×1本》; 시바스 리갈 12년; 시바스리갈 12년산
 w049,조니워커 레드라벨,Johnnie Walker Red Label,Johnnie Walker,블렌디드,5,13,KR,26800,54800,조니어 레드 1.75l; 조니워커 레드 1.75L; 조니워커 레드 700ml; 조니워커 레드라벨 1750ml
-w050,조니워커 블랙라벨 12년,Johnnie Walker Black Label 12 Year Old,Johnnie Walker,블렌디드,10,36,JP;KR,36990,94800,【世界五大ウイスキー】スコッチウイスキー  ジョニーウォーカー ブラックラベル12年《瓶 お得な1L×1本》; 조니어커 블랙; 조니워커 블랙 1.75L; 조니워커 블랙 700ml
+w050,조니워커 블랙라벨 12년,Johnnie Walker Black Label 12 Year Old,Johnnie Walker,블렌디드,10,37,JP;KR,36990,94800,【世界五大ウイスキー】スコッチウイスキー  ジョニーウォーカー ブラックラベル12年《瓶 お得な1L×1本》; 조니어커 블랙; 조니워커 블랙 1.75L; 조니워커 블랙 700ml
 w051,조니워커 더블블랙,Johnnie Walker Double Black,Johnnie Walker,블렌디드,2,8,KR;KR-DS,44000,59800,조니워커 더블블랙; 조니워커 더블블랙 1L
 w052,조니워커 블랙 루비,Johnnie Walker Black Ruby,Johnnie Walker,블렌디드,6,15,KR;KR-DS,44800,64800,조니어 블랙 루비; 조니워커 블랙 누루비 700ml; 조니워커 블랙 루비; 조니워커 블랙 루비 700ml
 w053,조니워커 블루라벨,Johnnie Walker Blue Label,Johnnie Walker,블렌디드,14,34,KR;KR-DS,189800,650000,조니어커 블루; 조니워커 블로라 750ml; 조니워커 블루; 조니워커 블루 500ml
@@ -65,7 +65,7 @@ w063,골든블루 다이아몬드,Golden Blue Diamond,Golden Blue,기타(국산 
 w064,골든블루 사피루스,Golden Blue Sapphirus,Golden Blue,기타(국산 위스키류),3,8,KR,28980,28980,골든 블루 사피루스; 골든블루 사파이러스; 골든블루 사피루스
 w065,짐빔 화이트,Jim Beam White Label,Jim Beam,버번,13,26,KR;KR-DS,19800,35490,진빈 법원 유스키 1L; 진빔; 진빔 1L; 진빔 700ml
 w066,잭다니엘 No.7,Jack Daniel's Old No.7,Jack Daniel's,테네시,6,8,KR,34980,55900,잭 다니에 700ml; 잭 다니엘스 테네시 위스키 1L; 잭다니스 1L; 잭다니엘 No.7
-w067,잭다니엘 애플,Jack Daniel's Apple,Jack Daniel's,플레이버드,8,16,KR;KR-DS,37100,115000,잭 다니엘스 애플 1L; 잭 다니엘스 애플 500mml; 잭다니에스 애플 1L; 잭다니엘 애플
+w067,잭다니엘 애플,Jack Daniel's Apple,Jack Daniel's,플레이버드,8,17,KR;KR-DS,37100,115000,잭 다니엘스 애플 1L; 잭 다니엘스 애플 500mml; 잭다니에스 애플 1L; 잭다니엘 애플
 w068,잭다니엘 라이,Jack Daniel's Tennessee Rye,Jack Daniel's,라이,2,3,KR;KR-DS,39980,62800,잭다니엘 라이; 잭다니엘스 BB라이 700ml
 w069,버팔로 트레이스,Buffalo Trace,Buffalo Trace,버번,4,18,KR;KR-DS,38000,49980,버팔로 트레이스; 버팔로 트레이스 1L; 버팔로 트레이스 750ml; 버팔로 트레이스 750mml
 w070,1792 스몰배치,1792 Small Batch,1792,버번,7,28,JP;KR;KR-DS;TW,39980,117447,1792 スモールバッチ; 1792 小批次波本威士忌; 1792 스몰 배치; 1792 스몰 배치 750ml
@@ -88,7 +88,7 @@ w086,글렌드로낙 오드 투 더 엠버스,(unverified) 'Ode to the Embers',G
 w087,글렌드로낙 오드 투 더 다크,(unverified) 'Ode to the Dark',GlenDronach,싱글몰트,4,4,KR,159800,159800,글렌드로(?) 오드 투 더 다크 700ml; 더 글랜드 로드투더 다크 700ml; 더 글랜드 로드투더 닥 700ml; 더 글렌드로 오드투더 다크
 w088,탈리스만 9년 포르투기즈 캐스크,Talisman 9 Year Old Portuguese Cask,Talisman,블렌디드,7,18,KR;KR-DS,16980,69800,탈리스마 위스키 1L; 탈리스만 9년; 탈리스만 9년 포르투기즈 캐스크; 탈리스만 9년 포르투기즈 캐스크 700ml
 w089,탈리스커 와일드 블루,Talisker Wild (name_en 미확정),Talisker,싱글몰트,2,19,KR;KR-DS,69400,109000,탈리스커 와일드 블루; 탈리스커 와일드 블루 700ml
-w090,발렌타인 17년,Ballantine's 17 Year Old,Ballantine's,블렌디드,8,27,JP;KR;KR-DS,95000,293877,バランタイン 17年 Ballantine’s 17 Years Old（700ml／40％）｜並行品; バランタイン 17年 トリビュートリリース; 발렌타인 17년; 발렌타인 17년 500mml
+w090,발렌타인 17년,Ballantine's 17 Year Old,Ballantine's,블렌디드,8,28,JP;KR;KR-DS,95000,293877,バランタイン 17年 Ballantine’s 17 Years Old（700ml／40％）｜並行品; バランタイン 17年 トリビュートリリース; 발렌타인 17년; 발렌타인 17년 500mml
 w091,잭다니엘 허니,Jack Daniel's Tennessee Honey,Jack Daniel's,리큐르(위스키베이스),3,3,KR;KR-DS,49800,74000,잭 다니엘스 허니 700ml; 잭다니엘 허니; 잭다니엘 허니 1L
 w092,발렌타인 싱글몰트 글렌버기 16년,Ballantine's Single Malt Glenburgie 16,Ballantine's,싱글몰트,4,10,KR;KR-DS,169800,195000,발렌타인 싱글램버이 16년; 발렌타인 싱글몰트 글렌버기 16년; 발렌타인 싱글트 글램버기 16년 스몰 배치; 발렌타인 싱글트 글램버이 16년 스몰 배치 700ml
 w093,글렌파클라스 15년,Glenfarclas 15 Year Old,Glenfarclas,싱글몰트,2,5,KR;KR-DS,119400,137000,글렌파클라스 15년; 파클라스 15년 700ml
@@ -96,14 +96,14 @@ w094,글렌피딕 12년 셰리 캐스크,Glenfiddich 12 Year Old Sherry Cask,Gle
 w095,러셀스 리저브 10년,Russell's Reserve 10 Year Old,Russell's Reserve,버번,1,3,KR,59400,99000,러셀 리저브 10년 750ml
 w096,글렌알라키 10년 루비 포트,GlenAllachie 10 Year Old Ruby Port Wood Finish,GlenAllachie,싱글몰트,4,6,KR;KR-DS,89800,185000,글렌라키 10년 루비 포트 700ml; 글렌알라키 10년 루비 포트; 글렌알라키 10년 루비 포트 700ml; 글렌알라키 10년 루비포트 700ml
 w097,주라 18년,Jura 18 Year Old,Jura,싱글몰트,2,4,KR;KR-DS,79400,119800,주라 18년; 주라 18년 700ml
-w098,커클랜드 15년 하일랜드 싱글몰트,Kirkland Signature Highland Single Malt 15,Kirkland,싱글몰트,1,9,KR,133900,133900,커클랜드 15년 하일랜드 싱글몰트 위스키
-w099,커클랜드 시그니처 스카치,Kirkland Signature Blended Scotch,Kirkland,블렌디드,1,9,KR,32490,32490,커클랜드 시그니처 스카치 위스키 1.75L
-w100,커클랜드 시그니처 캐나디안,Kirkland Signature Canadian Whisky,Kirkland,캐나디안,1,9,KR,34990,34990,커클랜드 시그니처 캐나디안 위스키 1.75L
+w098,커클랜드 15년 하일랜드 싱글몰트,Kirkland Signature Highland Single Malt 15,Kirkland,싱글몰트,1,10,KR,133900,133900,커클랜드 15년 하일랜드 싱글몰트 위스키
+w099,커클랜드 시그니처 스카치,Kirkland Signature Blended Scotch,Kirkland,블렌디드,1,10,KR,32490,32490,커클랜드 시그니처 스카치 위스키 1.75L
+w100,커클랜드 시그니처 캐나디안,Kirkland Signature Canadian Whisky,Kirkland,캐나디안,1,10,KR,34990,34990,커클랜드 시그니처 캐나디안 위스키 1.75L
 w102,라프로익 오크 셀렉트,Laphroaig Select / Oak Select,Laphroaig,싱글몰트,5,5,HK;KR;KR-DS,47500,197806,Laphroaig SELECT 200 Years Anniversary Islay Single Malt Scotch Whisky; Laphroaig SELECT Single Malt Islay Scotch Whisky; Laphroaig Select; 라프로익 오크 셀렉트
 w103,린도어스 1494 코어,Lindores Abbey MCDXCIV Core,Lindores Abbey,싱글몰트,1,1,KR,69800,69800,린도어스 1494 코어 위스키 700ml
 w104,맥캘란 셰리 오크 12년,Macallan Sherry Oak 12 Year Old,The Macallan,싱글몰트,2,3,KR,119800,119800,맥캘란 셰리 오크 12년 700ml; 맥캘란 쉐리오크 12년 700ml
 w105,발베니 16년 프렌치 오크,Balvenie 16 Year Old French Oak,Balvenie,싱글몰트,4,4,HK;KR;KR-DS,219800,629748,"Balvenie - 16y, French Oak, 47.6%; 발베니 16년 프렌치 오크; 발베니 16년 프렌치 오크 700ml; 발베니 16년 프렌치오크 700ml"
-w106,벨즈,Bell's Original,Bell's,블렌디드,3,9,KR;KR-DS,15400,20990,벨즈; 벨즈 블렌디드 위스키; 벨즈 스카치 위스키 1L
+w106,벨즈,Bell's Original,Bell's,블렌디드,3,10,KR;KR-DS,15400,20990,벨즈; 벨즈 블렌디드 위스키; 벨즈 스카치 위스키 1L
 w107,부쉬밀 10년 싱글몰트,Bushmills 10 Year Old Single Malt,Bushmills,싱글몰트,3,3,JP;KR,44940,128627,ブッシュミルズ シングルモルト 10年; ブッシュミルズ シングルモルト 10年 40% 700ml 箱付 アイリッシュ ウイスキー; 부시밀 10년 싱글트 700ml
 w108,부쉬밀 12년 싱글몰트,Bushmills 12 Year Old Single Malt,Bushmills,싱글몰트,1,1,KR,59400,59400,부시밀 12년 싱글트 700ml
 w109,블랙보트,Black Bottle,Black Bottle,블렌디드,1,1,KR,19800,19800,블랙보트 스카치 위스키 700ml
@@ -152,5 +152,5 @@ w261,더 디콘,The Deacon,The Deacon,블렌디드,1,1,JP,79748,79748,THE DEACON
 w276,올트모어 18년,Aultmore 18 Year Old,Aultmore,싱글몰트,1,1,HK,993064,993064,"Adelphi Selection - Aultmore 18y, 2000, 55% , 480b"
 w277,듀어스 더블더블 27년,Dewar's Double Double 27,Dewar's,블렌디드,1,1,JP,740889,740889,【数量限定】デュワーズ　ダブルダブル　27年 46度　500ml  [ギフトBox入り]
 w282,스카파 글란사,Scapa Glansa,Scapa,싱글몰트,1,1,HK,238174,238174,"Scapa ""Glansa"" Single Malt Scotch Whisky"
-w285,커클랜드 시그니처 아일레이 싱글몰트,Kirkland Signature Islay Single Malt Scotch Whisky,Kirkland,싱글몰트,1,7,KR,95900,95900,커클랜드 시그니처 아일레이 싱글몰트 위스키
+w285,커클랜드 시그니처 아일레이 싱글몰트,Kirkland Signature Islay Single Malt Scotch Whisky,Kirkland,싱글몰트,1,8,KR,95900,95900,커클랜드 시그니처 아일레이 싱글몰트 위스키
 w287,벤리악 Quarter Cask Peated 1000ml,BenRiach Quarter Cask Peated,BenRiach,싱글몰트,1,1,HK,238174,238174,BenRiach 10 Years Old Curiositas Peated Scotch Single Malt Whisky OLDER RELEASE
