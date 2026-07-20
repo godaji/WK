@@ -1,7 +1,7 @@
 {
-  "data_date": "2026-07-13",
-  "fingerprint": "581f0e0116e73e6e1b6c62e7ee2b561d5920931f1cb862e757013c21e589d9e8",
-  "gen_date": "2026-07-13",
+  "data_date": "2026-07-20",
+  "fingerprint": "8c1dcb4860bb46580b8274048989d8e2fba05188d9de4685bc9b159b1238dbe2",
+  "gen_date": "2026-07-20",
   "history": [
     {
       "data_date": "2026-06-01",
@@ -56,8 +56,14 @@
       "fingerprint": "581f0e0116e73e6e1b6c62e7ee2b561d5920931f1cb862e757013c21e589d9e8",
       "gen_date": "2026-07-13",
       "report": "reports/whisky-price/2026-07_위스키가격리포트_2026-07-13.md"
+    },
+    {
+      "data_date": "2026-07-20",
+      "fingerprint": "8c1dcb4860bb46580b8274048989d8e2fba05188d9de4685bc9b159b1238dbe2",
+      "gen_date": "2026-07-20",
+      "report": "reports/whisky-price/2026-07_위스키가격리포트_2026-07-20.md"
     }
   ],
-  "report": "reports/whisky-price/2026-07_위스키가격리포트_2026-07-13.md",
-  "updated_at": "2026-07-13"
+  "report": "reports/whisky-price/2026-07_위스키가격리포트_2026-07-20.md",
+  "updated_at": "2026-07-20"
 }
