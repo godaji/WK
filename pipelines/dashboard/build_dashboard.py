@@ -1236,6 +1236,7 @@ code{word-break:break-all;overflow-wrap:anywhere}
 <body>
 <div class="wrap">
   <h1>🥃 위스키 가격 대시보드</h1>
+  <p class="sub" style="margin-bottom:6px"><a href="search/" style="color:var(--amber);text-decoration:none">🔍 전체 위스키 검색 (278종)</a></p>
   <p class="sub">📅 소매 최신 수집: <b>{gl}</b>
   · 신라면세 수집: <b>{df_meta.get("sdate") if df_meta else "—"}</b>
   · 표시 {len(rows)}종 (소매 수집 {sum(1 for r in rows if r["retail_price"] is not None)}종 /

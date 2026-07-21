@@ -5,17 +5,17 @@ date: "2026-07-20 09:00:00 +0900"
 categories: ["price"]
 kind: "patch"
 cadence: "weekly"
-breakthroughs: 4
+breakthroughs: 0
 prev_date: "2026-07-19"
-latest_date: "2026-07-20"
+latest_date: "2026-07-21"
 weekly_start: "2026-07-20"
 weekly_end: "2026-07-26"
-days: 1
+days: 2
 hotdeals: ["보모어 22년 700ml — 면세 ₩326,129 · 74%↓", "보모어 14년 700ml — 면세 ₩55,581 · 45%↓", "보모어 16년 700ml — 면세 ₩89,910 · 40%↓", "라가불린 16년 700ml — 면세 ₩105,067 · 22%↓"]
 hotdeals_count: 4
 rare_drops: []
 rare_drops_count: 0
-description: "면세 위스키 가격 주간 로그 7/20~7/26 — 이번주 핫딜 4종 · 오랜만의 큰 인하 0종 · 최신 2026-07-20. CaskCode"
+description: "면세 위스키 가격 주간 로그 7/20~7/26 — 이번주 핫딜 4종 · 오랜만의 큰 인하 0종 · 최신 2026-07-21. CaskCode"
 robots: "noindex,nofollow"
 ---
 
@@ -31,6 +31,25 @@ _이번 주 면세가가 국내최저가보다 싼 위스키를 모았습니다.
 | 보모어 14년 700ml | 면세 **₩55,581** · 국내최저 [₩101,000 🔗](https://dailyshot.co/m/item/25811)<br>절약 **−₩45,419 (45%↓)** · 할인 50%→45% |
 | 보모어 16년 700ml | 면세 **₩89,910** · 국내최저 [₩150,000 🔗](https://dailyshot.co/m/item/25812)<br>절약 **−₩60,090 (40%↓)** · 할인 50%→45% |
 | 라가불린 16년 700ml | 면세 **₩105,067** · 국내최저 [₩135,000 🔗](https://dailyshot.co/m/item/1679)<br>절약 **−₩29,933 (22%↓)** · 할인 45%→42% |
+
+---
+
+## 📅 7월 21일 (화)
+
+*직전 2026-07-20 → 최신 2026-07-21* · *환율 ₩1,486.95 (기준일 2026-07-20)*
+
+### 📊 한눈에 — 할인율 변동 요약
+
+_각 위스키 이름을 누르면 도수·맛·스토리 설명이 펼쳐집니다._
+
+<details style="margin:8px 0"><summary><strong>미세조정(할증)</strong> 1건 · 10%p 미만 (펼치기)</summary><div style="margin-top:6px"><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">로얄브라클라 12년 1000ml: 51%→49% (₩73,992)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 로얄브라클라 (Royal Brackla) · 하이랜드<br><b>도수</b> 46%<br><b>캐스크</b> 버번 캐스크 숙성 후 올로로소 셰리 캐스크 피니시 · 논칠필터<br><b>맛</b> 토피·무화과·프루트케이크 향에 육두구·계피·호두. 입안엔 잘 익은 복숭아·블랙체리·초콜릿·아몬드, 무스코바도 설탕의 따뜻한 단맛 피니시.<br><b>스토리</b> 1812년 설립, 1835년 윌리엄 4세에게 'The King's Own Whisky' 칭호를 받은 첫 증류소. 현재 듀어스(바카디) 소유. 12년은 올로로소 셰리 피니시 코어레인지.<br><span style="color:#8a8f98">출처: 공식 royalbrackla.com · Master of Malt · The Whiskey Wash (2026-06-12 리서치) · 수집일 2026-06-12</span></div></details></div></details>
+
+### 🏆 국내최저가(데일리샷·트레이더스·코스트코) 대비 핫딜
+
+이번 패치엔 국내최저 돌파 항목이 없습니다.
+
+*국내최저가 = 데일리샷·트레이더스·코스트코 국내 소매가 중 최저(면세·해외 제외) 브랜드+숙성 근사매칭 · 매칭 실패/인디·싱글캐스크는 비움.*
+
 
 ---
 
