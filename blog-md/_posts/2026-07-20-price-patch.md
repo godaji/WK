@@ -5,40 +5,43 @@ date: "2026-07-20 09:00:00 +0900"
 categories: ["price"]
 kind: "patch"
 cadence: "weekly"
-breakthroughs: 1
+breakthroughs: 5
 prev_date: "2026-07-19"
-latest_date: "2026-07-23"
+latest_date: "2026-07-24"
 weekly_start: "2026-07-20"
 weekly_end: "2026-07-26"
-days: 4
-hotdeals: ["보모어 22년 700ml — 면세 ₩326,129 · 74%↓", "더 글렌리벳 16년 1000ml — 면세 ₩119,725 · 68%↓", "보모어 14년 700ml — 면세 ₩55,581 · 45%↓", "보모어 16년 700ml — 면세 ₩89,910 · 40%↓", "발베니 Balvenie 15년 Madeira Cask 700ml — 면세 ₩128,643 · 37%↓"]
-hotdeals_count: 19
+days: 5
+hotdeals: ["보모어 22년 700ml — 면세 ₩294,959 · 76%↓", "더 글렌리벳 16년 1000ml — 면세 ₩119,725 · 68%↓", "보모어 14년 700ml — 면세 ₩50,269 · 50%↓", "보모어 16년 700ml — 면세 ₩81,317 · 46%↓", "글렌피딕 18년 벳4 퍼페츄얼 IGL CNY 700ml — 면세 ₩118,032 · 38%↓"]
+hotdeals_count: 22
 rare_drops: ["패터캐른 28년 700ml → ₩689,945 (−47%)", "주라 1993 700ml → ₩712,844 (−46%)", "달모어 포트폴리오 시리즈 2007년 700ml → ₩719,089 (−45%)", "부쉬밀 포트캐스크 25년 700ml → ₩802,953 (−37%)", "와일드무어 30년 트로피칼 코스트 700ml → ₩367,174 (−33%)"]
 rare_drops_count: 7
-description: "면세 위스키 가격 주간 로그 7/20~7/26 — 이번주 핫딜 19종 · 오랜만의 큰 인하 7종 · 최신 2026-07-23. CaskCode"
+description: "면세 위스키 가격 주간 로그 7/20~7/26 — 이번주 핫딜 22종 · 오랜만의 큰 인하 7종 · 최신 2026-07-24. CaskCode"
 robots: "noindex,nofollow"
 ---
 
 이 글은 신라면세 위스키 가격변동을 **하루 단위로 아래에 쌓는 주간 로그**입니다. 위에 이번주 핫딜을 모았고, 아래는 날짜별 상세(최신이 맨 위) · 기간 2026-07-20 ~ 2026-07-26.
 
-## 🔥 이번주 핫딜 (19종)
+## 🔥 이번주 핫딜 (22종)
 
 _이번 주 면세가가 국내최저가보다 싼 위스키를 모았습니다. 각 항목은 그 주 최신 관측가 기준 · 절약률 높은 순._
 
 | 🏆 위스키 | 상세 |
 |---|---|
-| 보모어 22년 700ml | 면세 **₩326,129** · 국내최저 [₩1,249,000 🔗](https://dailyshot.co/m/item/19707)<br>절약 **−₩922,871 (74%↓)** · 할인 50%→45% |
+| 보모어 22년 700ml | 면세 **₩294,959** · 국내최저 [₩1,249,000 🔗](https://dailyshot.co/m/item/19707)<br>절약 **−₩954,041 (76%↓)** · 할인 45%→50% |
 | 더 글렌리벳 16년 1000ml | 면세 **₩119,725** · 국내최저 [₩370,000 🔗](https://dailyshot.co/m/item/21907)<br>절약 **−₩250,275 (68%↓)** · 할인 49%→30% |
-| 보모어 14년 700ml | 면세 **₩55,581** · 국내최저 [₩101,000 🔗](https://dailyshot.co/m/item/25811)<br>절약 **−₩45,419 (45%↓)** · 할인 50%→45% |
-| 보모어 16년 700ml | 면세 **₩89,910** · 국내최저 [₩150,000 🔗](https://dailyshot.co/m/item/25812)<br>절약 **−₩60,090 (40%↓)** · 할인 50%→45% |
+| 보모어 14년 700ml | 면세 **₩50,269** · 국내최저 [₩101,000 🔗](https://dailyshot.co/m/item/25811)<br>절약 **−₩50,731 (50%↓)** · 할인 45%→50% |
+| 보모어 16년 700ml | 면세 **₩81,317** · 국내최저 [₩150,000 🔗](https://dailyshot.co/m/item/25812)<br>절약 **−₩68,683 (46%↓)** · 할인 45%→50% |
+| 글렌피딕 18년 벳4 퍼페츄얼 IGL CNY 700ml | 면세 **₩118,032** · 국내최저 [₩189,000 🔗](https://dailyshot.co/m/item/23280)<br>절약 **−₩70,968 (38%↓)** · 할인 49%→45% |
 | 발베니 Balvenie 15년 Madeira Cask 700ml | 면세 **₩128,643** · 국내최저 [₩205,000 🔗](https://dailyshot.co/m/item/7409)<br>절약 **−₩76,357 (37%↓)** · 할인 49%→47% |
 | 발베니 Balvenie 19년 Week of Peat 700ml | 면세 **₩248,246** · 국내최저 [₩395,000 🔗](https://dailyshot.co/m/item/13773)<br>절약 **−₩146,754 (37%↓)** · 할인 48%→47% |
+| 글렌피딕 21년 700ml | 면세 **₩202,968** · 국내최저 [₩297,000 🔗](https://dailyshot.co/m/item/28392)<br>절약 **−₩94,032 (32%↓)** · 할인 47%→48% |
 | 글렌피딕 18년 Vat4 Perpetual 700ml | 면세 **₩129,365** · 국내최저 [₩189,000 🔗](https://dailyshot.co/m/item/23280)<br>절약 **−₩59,635 (32%↓)** · 할인 45%→40% |
 | 발베니 Balvenie 18년 Sherry Cask 700ml | 면세 **₩243,012** · 국내최저 [₩349,000 🔗](https://dailyshot.co/m/item/6323)<br>절약 **−₩105,988 (30%↓)** · 할인 47%→41% |
+| 글렌피딕 21년 CNY 2026 리미티드 에디션 700ml | 면세 **₩214,899** · 국내최저 [₩297,000 🔗](https://dailyshot.co/m/item/28392)<br>절약 **−₩82,101 (28%↓)** · 할인 49%→45% |
+| 라가불린 16년 700ml | 면세 **₩99,387** · 국내최저 [₩135,000 🔗](https://dailyshot.co/m/item/1679)<br>절약 **−₩35,613 (26%↓)** · 할인 42%→45% |
 | 발베니 18년 페드로 히메네즈(PX) 셰리 캐스크 빅토 응아이 에디션 700ml | 면세 **₩259,488** · 국내최저 [₩349,000 🔗](https://dailyshot.co/m/item/6323)<br>절약 **−₩89,512 (26%↓)** · 할인 39%→37% |
 | 발베니 15년 마데이라 캐스크 빅토 응아이 에디션 700ml | 면세 **₩153,632** · 국내최저 [₩205,000 🔗](https://dailyshot.co/m/item/7409)<br>절약 **−₩51,368 (25%↓)** · 할인 39%→37% |
 | 발베니 12년 Golden Cask 700ml | 면세 **₩71,374** · 국내최저 [₩93,000 🔗](https://dailyshot.co/m/item/3190)<br>절약 **−₩21,626 (23%↓)** · 할인 43%→40% |
-| 라가불린 16년 700ml | 면세 **₩105,067** · 국내최저 [₩135,000 🔗](https://dailyshot.co/m/item/1679)<br>절약 **−₩29,933 (22%↓)** · 할인 45%→42% |
 | 글렌알라키 18Y(24RB) 700mL | 면세 **₩260,314** · 국내최저 [₩324,000 🔗](https://dailyshot.co/m/item/21708)<br>절약 **−₩63,686 (20%↓)** · 할인 33%→35% |
 | 글렌피딕 26년 GC 700ml | 면세 **₩626,349** · 국내최저 [₩769,000 🔗](https://dailyshot.co/m/item/12615)<br>절약 **−₩142,651 (19%↓)** · 할인 35%→40% |
 | 글렌피딕 Vat 1 Perpetual Collection 1000ml | 면세 **₩56,831** · 국내최저 [₩66,000 🔗](https://dailyshot.co/m/item/6338)<br>절약 **−₩9,169 (14%↓)** · 할인 53%→51% |
@@ -55,17 +58,46 @@ _원래 거의 정상가였다가 **이번 주 처음으로 20% 넘게 떨어진
 
 | 🕰️ 위스키 | 상세 |
 |---|---|
-| 패터캐른 28년 700ml | 면세 **₩689,945**<br>**−47% 인하** · 그동안 ₩1,304,786 거의 정상가(5% 할인)로 45일째 → 50% 할인 · 7/21 첫 인하 |
-| 주라 1993 700ml | 면세 **₩712,844**<br>**−46% 인하** · 그동안 ₩1,321,658 거의 정상가(5% 할인)로 44일째 → 49% 할인 · 7/21 첫 인하 |
-| 달모어 포트폴리오 시리즈 2007년 700ml | 면세 **₩719,089**<br>**−45% 인하** · 그동안 ₩1,307,598 거의 정상가(5% 할인)로 45일째 → 48% 할인 · 7/21 첫 인하 |
-| 부쉬밀 포트캐스크 25년 700ml | 면세 **₩802,953**<br>**−37% 인하** · 그동안 ₩1,265,417 거의 정상가(5% 할인)로 45일째 → 40% 할인 · 7/21 첫 인하 |
-| 와일드무어 30년 트로피칼 코스트 700ml | 면세 **₩367,174**<br>**−33% 인하** · 그동안 ₩545,535 거의 정상가(5% 할인)로 45일째 → 36% 할인 · 7/22 첫 인하 |
-| 조니워커 킹조지 5세 500ml | 면세 **₩380,600**<br>**−32% 인하** · 그동안 ₩618,648 거의 정상가(5% 할인)로 45일째 → 35% 할인 · 7/21 첫 인하 |
-| 조니워커 킹조지 5세 750ml | 면세 **₩607,230**<br>**−32% 인하** · 그동안 ₩987,025 거의 정상가(5% 할인)로 44일째 → 35% 할인 · 7/21 첫 인하 |
+| 패터캐른 28년 700ml | 면세 **₩689,945**<br>**−47% 인하** · 그동안 ₩1,303,437 거의 정상가(5% 할인)로 45일째 → 50% 할인 · 7/21 첫 인하 |
+| 주라 1993 700ml | 면세 **₩712,844**<br>**−46% 인하** · 그동안 ₩1,320,292 거의 정상가(5% 할인)로 44일째 → 49% 할인 · 7/21 첫 인하 |
+| 달모어 포트폴리오 시리즈 2007년 700ml | 면세 **₩719,089**<br>**−45% 인하** · 그동안 ₩1,306,246 거의 정상가(5% 할인)로 45일째 → 48% 할인 · 7/21 첫 인하 |
+| 부쉬밀 포트캐스크 25년 700ml | 면세 **₩802,953**<br>**−37% 인하** · 그동안 ₩1,264,109 거의 정상가(5% 할인)로 45일째 → 40% 할인 · 7/21 첫 인하 |
+| 와일드무어 30년 트로피칼 코스트 700ml | 면세 **₩367,174**<br>**−33% 인하** · 그동안 ₩544,971 거의 정상가(5% 할인)로 45일째 → 36% 할인 · 7/22 첫 인하 |
+| 조니워커 킹조지 5세 500ml | 면세 **₩380,600**<br>**−32% 인하** · 그동안 ₩618,009 거의 정상가(5% 할인)로 45일째 → 35% 할인 · 7/21 첫 인하 |
+| 조니워커 킹조지 5세 750ml | 면세 **₩607,230**<br>**−32% 인하** · 그동안 ₩986,005 거의 정상가(5% 할인)로 44일째 → 35% 할인 · 7/21 첫 인하 |
 
 ---
 
-## 📅 7월 23일 (목) — 돌파 1건
+## 📅 7월 24일 (금) — 돌파 5건
+
+*직전 2026-07-23 → 최신 2026-07-24* · *환율 ₩1,478.49 (기준일 2026-07-23)*
+
+### 📊 한눈에 — 할인율 변동 요약
+
+_각 위스키 이름을 누르면 도수·맛·스토리 설명이 펼쳐집니다._
+
+**🔥 오늘의 핫딜 — 면세가가 더 싸짐 (10%p↑)**
+
+<details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">달모어 퀸텟 700ml: 5%→30% (₩154,207)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 달모어 (Dalmore) · 하이랜드 (Highland)<br><b>도수</b> 44.5%<br><b>캐스크</b> 5캐스크 피니시: 모스카텔·말바지아 마데이라·30년 마투살렘 셰리·10년 포트·보르도 카베르네 소비뇽<br><b>맛</b> 말린 파인애플·꽃꿀·건자두·다크초콜릿·토피의 깊은 과일 향. 입에서 레드애플·민트·시나몬·에스프레소, 시가박스·에스프레소의 긴 여운.<br><b>스토리</b> 달모어 하이랜드 증류소(1839년 설립)의 트래블 리테일 전용 표현. 리처드 패터슨 마스터 블렌더가 5가지 디저트 와인·주정강화 와인 캐스크로 피니시하여 풍부한 과일·초콜릿·스파이스 복합미를 구현했다. NAS.<br><span style="color:#8a8f98">출처: 공식 dalmore.com · whisky.com · thewhiskyworld.com (2026-07-24 리서치) · 수집일 2026-07-24</span></div></details>
+
+<details style="margin:8px 0"><summary><strong>미세조정(할인)</strong> 8건 · 10%p 미만 (펼치기)</summary><div style="margin-top:6px"><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">버팔로 트레이스 버번 위스키 1000ml: 37%→43% (₩25,282)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 버팔로 트레이스 (Buffalo Trace) · 미국 켄터키<br><b>도수</b> 40%<br><b>캐스크</b> 새 화입 아메리칸 오크 배럴 · 매시빌 #1(저-라이, 라이 10%↓)<br><b>맛</b> 카라멜·바닐라·꿀에 오렌지 제스트, 깊게는 가죽·오크·살구 향. 입안은 카라멜·흑설탕·바닐라에 여름 과일, 끝에 옅은 스파이스.<br><b>스토리</b> 켄터키 프랭크포트의 미국 最古 연속가동 증류소(버팔로 트레이스 디스틸러리) 플래그십 버번. 매시빌 #1(저라이)로 만든 가성비 켄터키 스트레이트 버번의 기준.<br><span style="color:#8a8f98">출처: 공식 buffalotracedistillery.com · Breaking Bourbon (2026-06-12 리서치) · 수집일 2026-06-12</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">보모어 14년 700ml: 45%→50% (₩50,269)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 보모어 (Bowmore) · 아일라 (Islay)<br><b>도수</b> 43%<br><b>캐스크</b> 엑스-버번 캐스크 숙성 후 보르도 레드와인 캐스크(바리크) 피니시 · GTR 면세 전용(Appellations)<br><b>맛</b> 베리·붉은과일 단맛에 보모어 특유의 아일라 피트 스모크. 다크베리·자두에 캠프파이어 훈연과 차콜 오크, 요거트 프루트껌 같은 새콤달콤함.<br><b>스토리</b> Appellations는 2024년 마스터 블렌더 캘럼 프레이저가 선보인 글로벌 면세(GTR) 전용 와인캐스크 피니시 컬렉션. 14년은 보르도 바리크 피니시 표현이다. 보모어는 1779년 설립된 아일라 最古 증류소.<br><span style="color:#8a8f98">출처: 공식 bowmore.com · Moodie Davitt Report · Whisky Advocate (2026-06-12 리서치) · 수집일 2026-06-12</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">보모어 16년 700ml: 45%→50% (₩81,317)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 보모어 (Bowmore) · 아일라 (Islay)<br><b>도수</b> 43%<br><b>캐스크</b> 엑스-버번 숙성 후 루비 포트(도루 밸리) 캐스크 피니시 · GTR 면세 전용(Appellations)<br><b>맛</b> 루비 포트가 더한 잘 익은 베리·건자두·다크초콜릿 단맛에 보모어의 아일라 피트 스모크와 짭조름한 해풍.<br><b>스토리</b> Appellations 컬렉션의 16년 표현으로 포르투갈 도루 밸리 루비 포트 캐스크 피니시. 보모어는 1779년 설립된 아일라 最古 증류소.<br><span style="color:#8a8f98">출처: 공식 bowmore.com · Moodie Davitt Report · Whisky Advocate (2026-06-12 리서치) · 수집일 2026-06-12</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">보모어 22년 700ml: 45%→50% (₩294,959)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 보모어 (Bowmore) · 아일라 (Islay)<br><b>도수</b> 48%<br><b>캐스크</b> 엑스-버번 숙성 후 소테른(귀부 스위트와인) 캐스크 피니시 · GTR 면세 전용(Appellations)<br><b>맛</b> 소테른의 꿀·살구·열대과일 단맛에 보모어 22년의 깊은 오크·은은한 피트 스모크, 풍부하고 긴 피니시.<br><b>스토리</b> Appellations 컬렉션 최상위 22년은 프랑스 소테른 스위트와인 캐스크 피니시로 48% 병입. 보모어는 1779년 설립된 아일라 最古 증류소.<br><span style="color:#8a8f98">출처: 공식 bowmore.com · Moodie Davitt Report · Whisky Advocate (2026-06-12 리서치) · 수집일 2026-06-12</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">시크릿 스페이사이드 Longmorn 18년 700ml: 30%→34% (₩98,320)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 롱몬 (Longmorn) · 스코틀랜드 스페이사이드<br><b>도수</b> 48%<br><b>캐스크</b> 아메리칸 오크 배럴 &amp; 혹스헤드 더블 캐스크 숙성 (18년)<br><b>맛</b> 잘 익은 배·망고·크리미한 토피의 트로피컬한 향에 오렌지 마멀레이드·퍼지·오크·구운 견과. 팔레트는 바닐라 퍼지·버터 토피에 배 콤포트·샌달우드·주시한 열대과일, 민트초콜릿·말린 살구·코코넛으로 이어지고 견과류 피니시에 신선한 망고가 돈다.<br><b>스토리</b> 시바스 브라더스가 2019년 면세(트래블 리테일) 채널로 선보인 '시크릿 스페이사이드(The Secret Speyside)' 컬렉션 중 하나. 롱몬은 1893년 설립된 스페이사이드 증류소로 오랫동안 블렌디드(시바스 리갈 등)의 핵심 몰트로 쓰여 단독 병입이 드물었다. 이 18년은 아메리칸 오크 배럴과 혹스헤드에서 더블 캐스크로 약 18년 숙성한 트로피컬·과일 중심 싱글몰트.<br><span style="color:#8a8f98">출처: Master of Malt · The Whisky Exchange · Whisky.com (2026-06-22 리서치) · 수집일 2026-06-22</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">라가불린 16년 700ml: 42%→45% (₩99,387)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 라가불린 (Lagavulin) · 아일라 (Islay)<br><b>도수</b> 43%<br><b>캐스크</b> 엑스-버번 및 셰리 캐스크에서 최소 16년 숙성<br><b>맛</b> 코: 아일라 특유의 강렬한 피트 스모크에 요오드, 달콤한 스파이스, 잘 익은 셰리, 크리미한 바닐라. 입: 오일리하면서 진하고 풍부하며, 짭짤한 브라인과 묵직한 피트·오크, 과일의 단맛. 피니시: 무화과·대추야자·피트 스모크·바닐라의 길고 스파이시한 여운.<br><b>스토리</b> 1816년 설립된 라가불린은 아일라 남부를 대표하는 증류소로, 강력한 피트 스모크 캐릭터로 유명하다. 16년은 디아지오 'Classic Malts'의 일원이자 아일라 싱글몰트의 벤치마크로 평가받는 클래식 제품이다.<br><span style="color:#8a8f98">출처: Malts.com (Diageo 공식), Whisky Magazine, Caskers (2026-06-09 리서치) · 수집일 2026-06-09</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">시바스리갈 13년 Sherry Cask 1000ml: 40%→43% (₩48,879)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 시바스 브라더스 · 스코틀랜드 스페이사이드<br><b>도수</b> 40%<br><b>캐스크</b> 13년 숙성 후 올로로소 셰리 캐스크 셀렉티브 피니시(익스트라 13)<br><b>맛</b> 잘 익은 배·멜론, 크리미한 토피, 밀크초콜릿에 계피·생강 힌트의 과일 향. 입에서는 시럽에 졸인 배, 크랜베리·라즈베리 같은 붉은 베리, 계피 사과파이, 토피소스와 바닐라가 부드럽게 퍼지고, 가죽 같은 드라이함이 도는 미디엄 단맛 피니시로 마무리된다.<br><b>스토리</b> 시바스 익스트라 13 시리즈 중 올로로소 셰리 캐스크에서 추가 숙성한 셰리 캐스크 셀렉션으로, 깊은 향과 풍부한 과일·단맛이 특징이다. 면세·트래블 리테일에서 흔히 보이는 1L 사양이다.<br><span style="color:#8a8f98">출처: Chivas 공식·Whisky Magazine·Distiller (2026-06-25 리서치) · 수집일 2026-06-25</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">글렌피딕 21년 700ml: 47%→48% (₩202,968)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 글렌피딕 (Glenfiddich) · 스페이사이드<br><b>도수</b> 40%<br><b>캐스크</b> 엑스-버번 숙성 후 카리브해 럼 캐스크 피니시 (Gran Reserva)<br><b>맛</b> 날카로운 생강·무화과·라임 향에서 스위트 토피·바닐라·바나나, 이국적 스파이스의 따뜻한 크레센도 피니시. 럼 캐스크가 더한 토피·열대 과일 단맛.<br><b>스토리</b> 글렌피딕 21년 Gran Reserva는 카리브해 럼 캐스크에서 약 4개월 추가 피니시한 표현. 세계에서 가장 많이 팔리는 싱글몰트 글렌피딕의 프리미엄 코어레인지.<br><span style="color:#8a8f98">출처: 공식 glenfiddich.com · The Whisky Exchange (2026-06-08 리서치) · 수집일 2026-06-08</span></div></details></div></details>
+
+### 🏆 국내최저가(데일리샷·트레이더스·코스트코) 대비 핫딜
+
+| 🏆 위스키 | 상세 |
+|---|---|
+| 보모어 22년 700ml | 면세 **₩294,959** · 국내최저 [₩1,249,000 🔗](https://dailyshot.co/m/item/19707)<br>절약 **−₩954,041 (76%↓)** · 할인 45%→50% |
+| 글렌피딕 21년 700ml | 면세 **₩202,968** · 국내최저 [₩297,000 🔗](https://dailyshot.co/m/item/28392)<br>절약 **−₩94,032 (32%↓)** · 할인 47%→48% |
+| 보모어 16년 700ml | 면세 **₩81,317** · 국내최저 [₩150,000 🔗](https://dailyshot.co/m/item/25812)<br>절약 **−₩68,683 (46%↓)** · 할인 45%→50% |
+| 보모어 14년 700ml | 면세 **₩50,269** · 국내최저 [₩101,000 🔗](https://dailyshot.co/m/item/25811)<br>절약 **−₩50,731 (50%↓)** · 할인 45%→50% |
+| 라가불린 16년 700ml | 면세 **₩99,387** · 국내최저 [₩135,000 🔗](https://dailyshot.co/m/item/1679)<br>절약 **−₩35,613 (26%↓)** · 할인 42%→45% |
+
+*국내최저가 = 데일리샷·트레이더스·코스트코 국내 소매가 중 최저(면세·해외 제외) 브랜드+숙성 근사매칭 · 매칭 실패/인디·싱글캐스크는 비움.*
+
+
+---
+
+## 📅 7월 23일 (목) — 돌파 3건
 
 *직전 2026-07-22 → 최신 2026-07-23* · *환율 ₩1,480.02 (기준일 2026-07-22)*
 
@@ -75,13 +107,15 @@ _각 위스키 이름을 누르면 도수·맛·스토리 설명이 펼쳐집니
 
 <details style="margin:8px 0"><summary><strong>미세조정(할인)</strong> 1건 · 10%p 미만 (펼치기)</summary><div style="margin-top:6px"><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">글렌피딕 23년 그랑크뤼 슬림팩 700ml: 45%→48% (₩271,673)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 글렌피딕 (Glenfiddich) · 스페이사이드<br><b>도수</b> 40%<br><b>캐스크</b> 아메리칸·유러피언 오크 23년 숙성 후 희귀한 프랑스 퀴베(cuvée, 샴페인용) 캐스크에서 약 6개월 추가 피니시<br><b>맛</b> 사과꽃·갓 구운 빵·설탕에 절인 레몬 향. 입안에서 진한 바닐라 오크·스위트 브리오슈·샌들우드·서양배 셔벗·청포도가 펼쳐지고, 길고 호화로우며 달콤한 피니시로 마무리된다.<br><b>스토리</b> 글렌피딕 그랑크뤼(Grand Cru)는 샴페인(스파클링 와인) 양조에 쓰인 희귀한 프랑스 퀴베 캐스크에서 약 6개월 추가 피니시한 23년 표현으로, 축하주를 콘셉트로 한 프리미엄 라인이다. '슬림팩'은 면세/선물용 슬림 패키지 사양(원액 동일).<br><span style="color:#8a8f98">출처: 공식 glenfiddich.com · Drinkhacker · Scotch&amp;Sheen (2026-06-26 리서치) · 수집일 2026-06-26</span></div></details></div></details>
 
-<details style="margin:8px 0"><summary><strong>미세조정(할증)</strong> 1건 · 10%p 미만 (펼치기)</summary><div style="margin-top:6px"><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">발베니 Balvenie 15년 Madeira Cask 700ml: 49%→47% (₩128,643)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 발베니 (Balvenie) · 스페이사이드<br><b>도수</b> 43%<br><b>캐스크</b> 엑스-버번 캐스크 숙성 후 마데이라 와인 캐스크 피니시 · GTR 면세 전용<br><b>맛</b> 견과류·체리·레드커런트·라즈베리 등 베리 믹스 향. 다크프루트·블랙체리·시트러스·시나몬·토스티 오크·바닐라·헤이즐넛, 풍부하고 부드러운 피니시. 발베니다운 꿀·바닐라에 새콤달콤 과일이 더해짐.<br><b>스토리</b> 발베니 15년 마데이라 캐스크는 12년 골든·18년 PX 셰리와 함께 글로벌 면세(GTR) 전용 라인. 포르투갈 마데이라 섬 와인 캐스크 피니시로 너티함과 베리 풍미를 입혔다.<br><span style="color:#8a8f98">출처: The Whisky Edition · Secret Whiskey Society · whisky.com (2026-06-08 리서치) · 수집일 2026-06-08</span></div></details></div></details>
+<details style="margin:8px 0"><summary><strong>미세조정(할증)</strong> 5건 · 10%p 미만 (펼치기)</summary><div style="margin-top:6px"><div style="margin:5px 0">글렌피딕 18년 벳4 퍼페츄얼 IGL CNY 700ml: 49%→45% (₩118,032)</div><div style="margin:5px 0">글렌피딕 21년 CNY 2026 리미티드 에디션 700ml: 49%→45% (₩214,899)</div><div style="margin:5px 0">GF LIQU Glenfiddich 40 700ml: 47%→45% (₩4,465,667)</div><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">발베니 Balvenie 15년 Madeira Cask 700ml: 49%→47% (₩128,643)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 발베니 (Balvenie) · 스페이사이드<br><b>도수</b> 43%<br><b>캐스크</b> 엑스-버번 캐스크 숙성 후 마데이라 와인 캐스크 피니시 · GTR 면세 전용<br><b>맛</b> 견과류·체리·레드커런트·라즈베리 등 베리 믹스 향. 다크프루트·블랙체리·시트러스·시나몬·토스티 오크·바닐라·헤이즐넛, 풍부하고 부드러운 피니시. 발베니다운 꿀·바닐라에 새콤달콤 과일이 더해짐.<br><b>스토리</b> 발베니 15년 마데이라 캐스크는 12년 골든·18년 PX 셰리와 함께 글로벌 면세(GTR) 전용 라인. 포르투갈 마데이라 섬 와인 캐스크 피니시로 너티함과 베리 풍미를 입혔다.<br><span style="color:#8a8f98">출처: The Whisky Edition · Secret Whiskey Society · whisky.com (2026-06-08 리서치) · 수집일 2026-06-08</span></div></details><div style="margin:5px 0">글렌피딕 XX 700ml: 46%→45% (₩74,889)</div></div></details>
 
 ### 🏆 국내최저가(데일리샷·트레이더스·코스트코) 대비 핫딜
 
 | 🏆 위스키 | 상세 |
 |---|---|
+| 글렌피딕 21년 CNY 2026 리미티드 에디션 700ml | 면세 **₩214,899** · 국내최저 [₩297,000 🔗](https://dailyshot.co/m/item/28392)<br>절약 **−₩82,101 (28%↓)** · 할인 49%→45% |
 | 발베니 Balvenie 15년 Madeira Cask 700ml | 면세 **₩128,643** · 국내최저 [₩205,000 🔗](https://dailyshot.co/m/item/7409)<br>절약 **−₩76,357 (37%↓)** · 할인 49%→47% |
+| 글렌피딕 18년 벳4 퍼페츄얼 IGL CNY 700ml | 면세 **₩118,032** · 국내최저 [₩189,000 🔗](https://dailyshot.co/m/item/23280)<br>절약 **−₩70,968 (38%↓)** · 할인 49%→45% |
 
 ### 📦 품절/내림 (1)
 
@@ -153,7 +187,7 @@ _각 위스키 이름을 누르면 도수·맛·스토리 설명이 펼쳐집니
 
 **🔺 할증 심화 — 할인 축소·가격 상승 (10%p↑)**
 
-<div style="margin:5px 0">달모어 퀸텟 700ml: 30%→5% (₩210,478)</div>
+<details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">달모어 퀸텟 700ml: 30%→5% (₩210,478)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 달모어 (Dalmore) · 하이랜드 (Highland)<br><b>도수</b> 44.5%<br><b>캐스크</b> 5캐스크 피니시: 모스카텔·말바지아 마데이라·30년 마투살렘 셰리·10년 포트·보르도 카베르네 소비뇽<br><b>맛</b> 말린 파인애플·꽃꿀·건자두·다크초콜릿·토피의 깊은 과일 향. 입에서 레드애플·민트·시나몬·에스프레소, 시가박스·에스프레소의 긴 여운.<br><b>스토리</b> 달모어 하이랜드 증류소(1839년 설립)의 트래블 리테일 전용 표현. 리처드 패터슨 마스터 블렌더가 5가지 디저트 와인·주정강화 와인 캐스크로 피니시하여 풍부한 과일·초콜릿·스파이스 복합미를 구현했다. NAS.<br><span style="color:#8a8f98">출처: 공식 dalmore.com · whisky.com · thewhiskyworld.com (2026-07-24 리서치) · 수집일 2026-07-24</span></div></details>
 <details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">더 글렌리벳 16년 1000ml: 49%→30% (₩119,725)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 더 글렌리벳 증류소 · 스코틀랜드 스페이사이드<br><b>도수</b> 48%<br><b>캐스크</b> 100% 퍼스트필 엑스버번 캐스크 (Nadurra)<br><b>맛</b> 바닐라·우드 스파이스·꽃향에 꿀·구운 오크·잘 익은 바나나. 오일리한 입안에 바닐라·후추·오크와 복숭아·사과, 생강 끝맛. 길고 드라이한 피니시.<br><b>스토리</b> 면세 전용 1L '나두라(Nadurra) 16년'. 100% 퍼스트필 엑스버번 캐스크에서 숙성한 논칠필터 표현으로, 면세 1L는 48%로 병입된다(70cl 내추럴 캐스크 스트렝스 버전과 구분).<br><span style="color:#8a8f98">출처: rebmordechaireviews.blogspot.com·Whisky Connosr·TheWhiskeyShelf (2026-06-09 리서치) · 수집일 2026-06-09</span></div></details>
 
 <details style="margin:8px 0"><summary><strong>미세조정(할인)</strong> 6건 · 10%p 미만 (펼치기)</summary><div style="margin-top:6px"><div style="margin:5px 0">로얄 브라클라 25년 700ml: 40%→47% (₩709,275)</div><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">조니워커 킹조지 5세 750ml: 35%→42% (₩605,426)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 조니워커 (Johnnie Walker) · 블렌디드(스코틀랜드)<br><b>도수</b> 43%<br><b>캐스크</b> 다양한 캐스크(킹조지 5세 시대 가동 증류소 원액 블렌드)<br><b>맛</b> 옅은 스모크에 신선한 과일·맥아·건포도·무화과·시나몬, 그리고 바닐라·잘 익은 사과·구운 아몬드·밀크초콜릿이 더해진 향. 팔레트는 다크초콜릿·샌달우드·절제된 피트 스모크·단 말린 과일이 층층이 쌓이고 후추·생강·넛맥 스파이스가 따른다. 벨벳처럼 풍성한 질감, 메이플 시럽 뉘앙스의 길고 따뜻한 피니시.<br><b>스토리</b> 블루라벨 프레스티지 라인. 조지 5세가 조니워커에 로열 워런트를 수여한 1934년을 기려, 그 시대에 가동하던 증류소들의 희소 원액으로 블렌딩한다.<br><span style="color:#8a8f98">출처: 공식 사이트 · Difford's Guide · Whiskybase · 수집일 2026-06-20</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">부쉬밀 포트캐스크 25년 700ml: 35%→40% (₩802,953)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 부쉬밀스 (Bushmills) · 아일랜드(북아일랜드)<br><b>도수</b> 46%<br><b>캐스크</b> 버번·셰리 캐스크 숙성 후 퍼스트필 루비 포트 파이프 피니시<br><b>맛</b> 잘 익은 산딸기류 검은 과일에 꿀·토스티드 오크·따뜻한 스파이스가 어우러진 향. 팔레트는 아몬드의 단맛에서 카라멜라이즈드 체리·자두·블랙베리로 이어지고 다크초콜릿과 은은한 스파이스가 받친다. 포트 영향의 '레드 골드' 빛깔. 피니시는 따뜻한 오크·포트의 단맛·스파이스가 길게 남는다.<br><b>스토리</b> 부쉬밀스의 초고숙성 프레스티지 싱글몰트. 처음 5분의 1을 버번·셰리에서 숙성한 뒤 약 20년을 퍼스트필 루비 포트 파이프에서 마무리한 희소 보틀.<br><span style="color:#8a8f98">출처: 공식 사이트 · The Whiskey Wash · Tastings.com · 수집일 2026-06-20</span></div></details><div style="margin:5px 0">와일드무어 40년 블랙 마운틴 700ml: 28%→33% (₩896,631)</div><div style="margin:5px 0">글렌알라키 18Y(24RB) 700mL: 33%→35% (₩260,314)</div><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">우드포드 리저브 더블 오크 1000ml: 44%→45% (₩61,448)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 우드포드 리저브 (Woodford Reserve) · 미국 켄터키<br><b>도수</b> 45.2%<br><b>캐스크</b> 1차 차콜 처리 오크 배럴 숙성 후 딥 토스트·라이트 차 2차 오크 배럴 추가 숙성 (Double Oaked)<br><b>맛</b> 다크 프루트·카라멜·꿀·초콜릿·마지판의 달콤한 아로마. 풀바디의 바닐라·다크 카라멜·헤이즐넛·사과·스파이스가 어우러지고 길고 크리미하며 꿀사과 향의 피니시.<br><b>스토리</b> 우드포드 리저브 증류소는 1812년 가동을 시작해 Brown-Forman이 소유한 켄터키 버사이유 소재 증류소다. 더블 오크는 두 번의 서로 다른 오크 배럴을 거쳐 기존 버번보다 풍부하고 부드러운 오크 캐릭터를 구현한 익스프레션으로 2023년 샌프란시스코 세계 스피리츠 경연대회 더블 골드 메달을 수상했다.<br><span style="color:#8a8f98">출처: 공식 woodfordreserve.com · en.wikipedia.org (Woodford Reserve) (2026-07-06 리서치) · 수집일 2026-07-06</span></div></details></div></details>
