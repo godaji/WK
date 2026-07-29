@@ -1,14 +1,14 @@
 {
-  "asof": "2026-07-27",
+  "asof": "2026-07-28",
   "source": "open.er-api.com (USD base cross-rate)",
   "krw_per": {
-    "HKD": 186.116255,
-    "JPY": 8.917456
+    "HKD": 187.118053,
+    "JPY": 8.962326
   },
   "raw_usd": {
-    "HKD": 7.842426,
-    "JPY": 163.679291,
-    "KRW": 1459.602954
+    "HKD": 7.841757,
+    "JPY": 163.722491,
+    "KRW": 1467.334302
   },
   "fetched_url": "https://open.er-api.com/v6/latest/USD"
 }
