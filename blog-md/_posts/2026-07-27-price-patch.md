@@ -5,17 +5,17 @@ date: "2026-07-27 09:00:00 +0900"
 categories: ["price"]
 kind: "patch"
 cadence: "weekly"
-breakthroughs: 6
+breakthroughs: 0
 prev_date: "2026-07-26"
-latest_date: "2026-07-28"
+latest_date: "2026-07-30"
 weekly_start: "2026-07-27"
 weekly_end: "2026-08-02"
-days: 2
+days: 4
 hotdeals: ["보모어 22년 700ml — 면세 ₩321,010 · 74%↓", "벤리악 트리플 디스틸드 25년 700ml — 면세 ₩358,303 · 53%↓", "보모어 14년 700ml — 면세 ₩54,708 · 46%↓", "보모어 16년 700ml — 면세 ₩88,499 · 41%↓", "발베니 Balvenie 19년 Week of Peat 700ml — 면세 ₩253,429 · 36%↓"]
 hotdeals_count: 16
 rare_drops: []
 rare_drops_count: 0
-description: "면세 위스키 가격 주간 로그 7/27~8/2 — 이번주 핫딜 16종 · 오랜만의 큰 인하 0종 · 최신 2026-07-28. CaskCode"
+description: "면세 위스키 가격 주간 로그 7/27~8/2 — 이번주 핫딜 16종 · 오랜만의 큰 인하 0종 · 최신 2026-07-30. CaskCode"
 robots: "noindex,nofollow"
 ---
 
@@ -43,6 +43,48 @@ _이번 주 면세가가 국내최저가보다 싼 위스키를 모았습니다.
 | 글렌피딕 15년 Vat3 Perpetual 700ml | 면세 **₩79,649** · 국내최저 [₩89,000 🔗](https://dailyshot.co/m/item/1650)<br>절약 **−₩9,351 (11%↓)** · 할인 47%→45% |
 | 발베니 21년 포트우드 700ml | 면세 **₩421,285** · 국내최저 [₩459,000 🔗](https://dailyshot.co/m/item/3222)<br>절약 **−₩37,715 (8%↓)** · 할인 25%→20% |
 | 글렌피딕 Vat 1 Perpetual Collection 1000ml | 면세 **₩62,754** · 국내최저 [₩66,000 🔗](https://dailyshot.co/m/item/6338)<br>절약 **−₩3,246 (5%↓)** · 할인 51%→45% |
+
+---
+
+## 📅 7월 30일 (목)
+
+*직전 2026-07-29 → 최신 2026-07-30* · *환율 ₩1,457.52 (기준일 2026-07-29)*
+
+### 📊 한눈에 — 할인율 변동 요약
+
+_각 위스키 이름을 누르면 도수·맛·스토리 설명이 펼쳐집니다._
+
+<details style="margin:8px 0"><summary><strong>미세조정(할인)</strong> 1건 · 10%p 미만 (펼치기)</summary><div style="margin-top:6px"><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">브룩라디 블랙아트 사페로 700ml: 38%→40% (₩208,134)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 브룩라디 (Bruichladdich) · 아일라 (Islay)<br><b>도수</b> 46% (추정 · 병 표기 미확인)<br><b>캐스크</b> 비공개(Black Art 시리즈 전통 — 캐스크 레시피를 비밀로 유지)<br><b>맛</b> 피트 없는 아일라 싱글몰트. Black Art 시리즈 특유의 검은 과일·다크초콜릿·트로피컬·오크 스파이스·허브·시트러스 필 복합미. 긴 크리미 피니시. (동일 시리즈 기준 추정 노트 · Sapero 에디션 공식 노트 미확인)<br><b>스토리</b> 브룩라디는 1881년 아일라 서해안에 설립된 논피트 싱글몰트 증류소. Black Art 시리즈는 헤드 디스틸러(아담 하넷→짐 맥이완 후임)가 캐스크 레시피를 비공개로 유지하는 프리미엄 한정판 라인이다. Sapero 에디션은 면세(트래블 리테일) 채널 전용 표현으로 추정. 시리즈 전통상 다양한 와인·셰리·버번 캐스크 배팅 후 비밀 레시피로 완성한다.<br><span style="color:#8a8f98">출처: bruichladdich.com (시리즈 정보) · 신라면세 리스팅 (2026-07-30 리서치 · Sapero 에디션 공식 상세 미공개) · 수집일 2026-07-30</span></div></details></div></details>
+
+### 🏆 국내최저가(데일리샷·트레이더스·코스트코) 대비 핫딜
+
+이번 패치엔 국내최저 돌파 항목이 없습니다.
+
+*국내최저가 = 데일리샷·트레이더스·코스트코 국내 소매가 중 최저(면세·해외 제외) 브랜드+숙성 근사매칭 · 매칭 실패/인디·싱글캐스크는 비움.*
+
+
+---
+
+## 📅 7월 29일 (수)
+
+*직전 2026-07-28 → 최신 2026-07-29* · *환율 ₩1,467.33 (기준일 2026-07-28)*
+
+### 📊 한눈에 — 할인율 변동 요약
+
+_각 위스키 이름을 누르면 도수·맛·스토리 설명이 펼쳐집니다._
+
+**🔥 오늘의 핫딜 — 면세가가 더 싸짐 (10%p↑)**
+
+<div style="margin:5px 0">벤리악 50년 1966 700ml: 34%→44% (₩26,130,289)</div>
+
+<details style="margin:8px 0"><summary><strong>미세조정(할인)</strong> 2건 · 10%p 미만 (펼치기)</summary><div style="margin-top:6px"><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">브룩라디 블랙아트 사페로 700ml: 35%→38% (₩216,520)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 브룩라디 (Bruichladdich) · 아일라 (Islay)<br><b>도수</b> 46% (추정 · 병 표기 미확인)<br><b>캐스크</b> 비공개(Black Art 시리즈 전통 — 캐스크 레시피를 비밀로 유지)<br><b>맛</b> 피트 없는 아일라 싱글몰트. Black Art 시리즈 특유의 검은 과일·다크초콜릿·트로피컬·오크 스파이스·허브·시트러스 필 복합미. 긴 크리미 피니시. (동일 시리즈 기준 추정 노트 · Sapero 에디션 공식 노트 미확인)<br><b>스토리</b> 브룩라디는 1881년 아일라 서해안에 설립된 논피트 싱글몰트 증류소. Black Art 시리즈는 헤드 디스틸러(아담 하넷→짐 맥이완 후임)가 캐스크 레시피를 비공개로 유지하는 프리미엄 한정판 라인이다. Sapero 에디션은 면세(트래블 리테일) 채널 전용 표현으로 추정. 시리즈 전통상 다양한 와인·셰리·버번 캐스크 배팅 후 비밀 레시피로 완성한다.<br><span style="color:#8a8f98">출처: bruichladdich.com (시리즈 정보) · 신라면세 리스팅 (2026-07-30 리서치 · Sapero 에디션 공식 상세 미공개) · 수집일 2026-07-30</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">BLADNOCH 16YO 700ml: 47%→49% (₩138,443)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 블라드노흐 (Bladnoch) · 스코틀랜드 로우랜드<br><b>도수</b> 46.7%<br><b>캐스크</b> 올로로소 셰리 캐스크 숙성<br><b>맛</b> 올로로소 셰리가 뚜렷해 건과일·향신료·다크초콜릿·태운 캐러멜·무화과·건포도가 풍부하고, 바디는 비교적 가벼우며 실키한 질감에 오렌지 제스트·담뱃잎 뉘앙스가 이어진다.<br><b>스토리</b> 로우랜드 최남단 갤러웨이의 블라드노흐 증류소(1817년 설립, 현존 최고령급)에서 만든 16년 싱글몰트로, 올로로소 셰리 캐스크에서만 숙성한 셰리 중심 표현.<br><span style="color:#8a8f98">출처: Bladnoch 공식 · Hard To Find Whisky · A Scot on Scotch (2026-06-10 리서치) · 수집일 2026-06-10</span></div></details></div></details>
+
+### 🏆 국내최저가(데일리샷·트레이더스·코스트코) 대비 핫딜
+
+이번 패치엔 국내최저 돌파 항목이 없습니다.
+
+*국내최저가 = 데일리샷·트레이더스·코스트코 국내 소매가 중 최저(면세·해외 제외) 브랜드+숙성 근사매칭 · 매칭 실패/인디·싱글캐스크는 비움.*
+
 
 ---
 
@@ -93,7 +135,7 @@ _각 위스키 이름을 누르면 도수·맛·스토리 설명이 펼쳐집니
 
 **🔥 오늘의 핫딜 — 면세가가 더 싸짐 (10%p↑)**
 
-<div style="margin:5px 0">브룩라디 블랙아트 사페로 700ml: 10%→35% (₩226,294)</div>
+<details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">브룩라디 블랙아트 사페로 700ml: 10%→35% (₩226,294)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 브룩라디 (Bruichladdich) · 아일라 (Islay)<br><b>도수</b> 46% (추정 · 병 표기 미확인)<br><b>캐스크</b> 비공개(Black Art 시리즈 전통 — 캐스크 레시피를 비밀로 유지)<br><b>맛</b> 피트 없는 아일라 싱글몰트. Black Art 시리즈 특유의 검은 과일·다크초콜릿·트로피컬·오크 스파이스·허브·시트러스 필 복합미. 긴 크리미 피니시. (동일 시리즈 기준 추정 노트 · Sapero 에디션 공식 노트 미확인)<br><b>스토리</b> 브룩라디는 1881년 아일라 서해안에 설립된 논피트 싱글몰트 증류소. Black Art 시리즈는 헤드 디스틸러(아담 하넷→짐 맥이완 후임)가 캐스크 레시피를 비공개로 유지하는 프리미엄 한정판 라인이다. Sapero 에디션은 면세(트래블 리테일) 채널 전용 표현으로 추정. 시리즈 전통상 다양한 와인·셰리·버번 캐스크 배팅 후 비밀 레시피로 완성한다.<br><span style="color:#8a8f98">출처: bruichladdich.com (시리즈 정보) · 신라면세 리스팅 (2026-07-30 리서치 · Sapero 에디션 공식 상세 미공개) · 수집일 2026-07-30</span></div></details>
 
 **🔺 할증 심화 — 할인 축소·가격 상승 (10%p↑)**
 
