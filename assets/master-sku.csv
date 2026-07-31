@@ -4,7 +4,7 @@ w002,글렌리벳 15년,The Glenlivet 15 Year Old French Oak Reserve,Glenlivet,�
 w003,글렌리벳 17년 스몰배치,The Glenlivet 17 Year Old Small Batch,Glenlivet,싱글몰트,4,8,KR;KR-DS,229800,255000,글랜립의 17년 스몰 배치 2; 글렌리벳 17년 스몰 배치 2 700ml; 글렌리벳 17년 스몰배치; 더 글렌리벳 17년 스몰 배치 2
 w004,글렌리벳 19년 스몰배치,The Glenlivet 19 Year Old Small Batch,Glenlivet,싱글몰트,5,10,KR;KR-DS,339400,380000,글랜립의 19년 스몰 배치; 글렌리벳 19년 스몰 배치 2 700ml; 글렌리벳 19년 스몰배치; 더 글렌리벳 19년
 w005,글렌피딕 12년,Glenfiddich 12 Year Old,Glenfiddich,싱글몰트,4,23,HK;KR;KR-DS,68000,154924,"Glenfiddich - 12y, 40%; 글랜피딕 12년; 글렌피딕 12년; 글렌피딕 12년 700ml"
-w006,글렌피딕 14년 버번배럴,Glenfiddich 14 Year Old Bourbon Barrel Reserve,Glenfiddich,싱글몰트,6,22,KR;KR-DS,89800,118000,글랜피딕 14년; 글렌피딕 14년; 글렌피딕 14년 버번 캐스크 700ml; 글렌피딕 14년 버번배럴
+w006,글렌피딕 14년 버번배럴,Glenfiddich 14 Year Old Bourbon Barrel Reserve,Glenfiddich,싱글몰트,6,22,KR;KR-DS,89800,105000,글랜피딕 14년; 글렌피딕 14년; 글렌피딕 14년 버번 캐스크 700ml; 글렌피딕 14년 버번배럴
 w007,글렌피딕 15년,Glenfiddich 15 Year Old Solera,Glenfiddich,싱글몰트,8,24,KR;KR-DS,96900,129000,글램피닉 15년; 글렌피딕 15년; 글렌피딕 15년 700ml; 글렌피딕 15년 솔레라 700ml
 w008,발베니 12년 더블우드,The Balvenie DoubleWood 12 Year Old,Balvenie,싱글몰트,12,35,KR;KR-DS,94900,119800,발베니 12년; 발베니 12년 700ml; 발베니 12년 더블 우드 700ml; 발베니 12년 더블로드 700ml
 w009,발베니 14년 캐리비안 캐스크,The Balvenie Caribbean Cask 14 Year Old,Balvenie,싱글몰트,7,28,HK;JP;KR;KR-DS,94900,357517,"Balvenie - Caribbean Cask 14y, 43%; Balvenie Caribbean Cask 14 Years Single Malt Scotch Whisky; シングルモルト ウイスキー バルヴェニー 14年 カリビアンカスク [イギリス 700ml ]; 발베니 14년 캐리비안 캐스크"
@@ -91,7 +91,7 @@ w089,탈리스커 와일드 블루,Talisker Wild (name_en 미확정),Talisker,�
 w090,발렌타인 17년,Ballantine's 17 Year Old,Ballantine's,블렌디드,8,29,JP;KR;KR-DS,109000,286760,バランタイン 17年 Ballantine’s 17 Years Old（700ml／40％）｜並行品; バランタイン 17年 トリビュートリリース; 발렌타인 17년; 발렌타인 17년 500mml
 w091,잭다니엘 허니,Jack Daniel's Tennessee Honey,Jack Daniel's,리큐르(위스키베이스),3,3,KR;KR-DS,49800,98000,잭 다니엘스 허니 700ml; 잭다니엘 허니; 잭다니엘 허니 1L
 w092,발렌타인 싱글몰트 글렌버기 16년,Ballantine's Single Malt Glenburgie 16,Ballantine's,싱글몰트,4,10,KR;KR-DS,169800,398000,발렌타인 싱글램버이 16년; 발렌타인 싱글몰트 글렌버기 16년; 발렌타인 싱글트 글램버기 16년 스몰 배치; 발렌타인 싱글트 글램버이 16년 스몰 배치 700ml
-w093,글렌파클라스 15년,Glenfarclas 15 Year Old,Glenfarclas,싱글몰트,2,5,KR;KR-DS,119400,179900,글렌파클라스 15년; 파클라스 15년 700ml
+w093,글렌파클라스 15년,Glenfarclas 15 Year Old,Glenfarclas,싱글몰트,2,5,KR;KR-DS,119400,179900,파클라스 15년; 파클라스 15년 700ml
 w094,글렌피딕 12년 셰리 캐스크,Glenfiddich 12 Year Old Sherry Cask,Glenfiddich,싱글몰트,2,4,KR,69900,89800,글렌피딕 12년 쉐리 700ml; 글렌피딕 12년 쉐리케스크 700ml
 w095,러셀스 리저브 10년,Russell's Reserve 10 Year Old,Russell's Reserve,버번,1,3,KR,59400,99000,러셀 리저브 10년 750ml
 w096,글렌알라키 10년 루비 포트,GlenAllachie 10 Year Old Ruby Port Wood Finish,GlenAllachie,싱글몰트,4,6,KR;KR-DS,89800,185000,글렌라키 10년 루비 포트 700ml; 글렌알라키 10년 루비 포트; 글렌알라키 10년 루비 포트 700ml; 글렌알라키 10년 루비포트 700ml
@@ -110,7 +110,7 @@ w109,블랙보트,Black Bottle,Black Bottle,블렌디드,1,1,KR,19800,19800,블�
 w110,에반 윌리엄스 싱글배럴,Evan Williams Single Barrel,Evan Williams,버번,1,1,KR,69800,69800,에반 윌리엄스 싱글 베럴 750ml
 w111,에반 윌리엄스 BIB,Evan Williams Bottled-in-Bond,Evan Williams,버번,4,10,KR,31800,39980,에반 윌리엄스 BIB 12주년 에디션; 에반 윌리엄스 BIB 12주년 에디션 50도 1L; 에반 윌리엄스 BIB 1L; 에반윌리엄스 BIB 750ml
 w112,커클랜드 바틀드 인 본드 버번,Kirkland Bottled-in-Bond Bourbon,Kirkland,버번,1,1,KR,62900,62900,커클랜드 시그니처 바틀 인본드 버뉴스키 1L
-w113,코발 밀레,Koval Millet,Koval,싱글그레인,2,2,KR;KR-DS,53400,99000,코발 밀레; 코발 밀레 위스키 500ml
+w113,코발 밀레,Koval Millet,Koval,싱글그레인,2,2,KR;KR-DS,53400,99000,코발 밀레 위스키; 코발 밀레 위스키 500ml
 w114,코발 라이,Koval Rye,Koval,라이,1,1,KR,53400,53400,코발라이 위스키 500ml
 w115,글렌피딕 18년,Glenfiddich 18 Year Old,Glenfiddich,싱글몰트,2,2,HK;KR,256600,389297,"Glenfiddich - 18y, 40%; 글렌피딕 18년 700ml"
 w116,주라 10년,Jura 10 Year Old,Jura,싱글몰트,1,1,KR,78000,78000,주라 10년 700ml

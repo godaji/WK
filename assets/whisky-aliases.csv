@@ -4152,7 +4152,6 @@ Yuza 2023 Release Single Malt Japanese Whisky,unmatched,,,
 글렌알라키 10년 루비포트 700ml,matched,w096,글렌알라키 10년 루비 포트,rule
 글렌킨치 12년,matched,w038,글렌킨치 12년,rule
 글렌킨치 12년 700ml,matched,w038,글렌킨치 12년,rule
-글렌파클라스 15년,matched,w093,글렌파클라스 15년,rule
 글렌피딕 12년,matched,w005,글렌피딕 12년,rule
 글렌피딕 12년 700ml,matched,w005,글렌피딕 12년,rule
 글렌피딕 12년 쉐리 700ml,matched,w094,글렌피딕 12년 셰리 캐스크,rule
@@ -4579,7 +4578,7 @@ Yuza 2023 Release Single Malt Japanese Whisky,unmatched,,,
 커티삭 프로히비션,matched,w058,커티삭 프로히비션,rule
 커티삭 프로히비션 1L,matched,w058,커티삭 프로히비션,rule
 커티삭 프로히비션 700ml,matched,w058,커티삭 프로히비션,rule
-코발 밀레,matched,w113,코발 밀레,rule
+코발 밀레 위스키,matched,w113,코발 밀레,rule
 코발 밀레 위스키 500ml,matched,w113,코발 밀레,rule
 코발라이 위스키 500ml,matched,w114,코발 라이,rule
 쿠티삭 프로히비션,matched,w058,커티삭 프로히비션,rule
@@ -4609,6 +4608,7 @@ Yuza 2023 Release Single Malt Japanese Whisky,unmatched,,,
 탐두 15년,matched,w016,탐두 15년,rule
 탐두 15년 700ml,matched,w016,탐두 15년,rule
 파이어볼 시나몬 위스키 500ml,excluded,,,liqueur-cinnamon
+파클라스 15년,matched,w093,글렌파클라스 15년,rule
 파클라스 15년 700ml,matched,w093,글렌파클라스 15년,rule
 페로네 리몬첼,excluded,,,liqueur-limoncello
 페이머스 그라우스 1L,matched,w054,페이머스 그라우스,rule
