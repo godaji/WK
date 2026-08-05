@@ -41,11 +41,11 @@ robots: "index,follow"
 
 <div class="sec-head">🆕 읽을거리</div>
 <a class="dash-cta" href="{{ '/dashboard/brands/' | relative_url }}">🥃 위스키 브랜드별 구매 팁 →<span class="dash-sub">브랜드별 가치 추천 · 등급 사다리</span></a>
-{% assign _editorial = site.posts | where_exp: "p","p.categories contains 'tasting' or p.categories contains 'data' or p.categories contains 'dev' or p.categories contains 'travel'" %}
+{% assign _editorial = site.posts | where_exp: "p","p.categories contains 'tasting' or p.categories contains 'data' or p.categories contains 'dev'" %}
 {% if _editorial.size > 0 %}
 <ul class="latest-feed">
 {% for p in _editorial limit: 5 %}
-  <li><span class="chip">{% if p.categories contains 'dev' or p.categories contains 'data' %}💻{% elsif p.categories contains 'travel' %}✈️{% else %}🥃{% endif %}</span>
+  <li><span class="chip">{% if p.categories contains 'dev' or p.categories contains 'data' %}💻{% else %}🥃{% endif %}</span>
   <span class="when">{{ p.date | date: "%-m/%-d" }}</span>
   <a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>
 {% endfor %}
