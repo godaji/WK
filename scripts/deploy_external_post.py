@@ -57,7 +57,7 @@ LIVE_BASE = "https://godaji.github.io/CaskCode"
 #   dev/data → Code 기둥(blog-md/code.md), tasting/wprice → Cask 기둥(blog-md/cask.md).
 # 이 집합 밖이면 URL 200 이어도 어느 목록에도 안 걸리는 '고아글'(CMPA-326).
 # (CMPA-400: invest 버킷 전면 폐지 — 더는 받지 않는다.)
-RENDER_BUCKETS = {"dev", "data", "tasting", "wprice"}
+RENDER_BUCKETS = {"dev", "data", "tasting", "wprice", "travel"}
 # 자주 쓰는 오해 → 올바른 버킷 안내(특히 'price' 는 known 목록엔 있으나 렌더 섹션이 없어 고아).
 BUCKET_HINTS = {"price": "wprice"}
 

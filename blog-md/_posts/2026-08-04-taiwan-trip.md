@@ -1,6 +1,9 @@
 ---
 layout: null
 permalink: /2026/08/04/taiwan-trip/
+title: "대만 1박 2일 · 올인원 (지도·일정·맛집)"
+categories: travel
+date: 2026-08-04
 ---
 <!DOCTYPE html>
 <html lang="ko">

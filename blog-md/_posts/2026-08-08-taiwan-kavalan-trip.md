@@ -1,6 +1,9 @@
 ---
 layout: null
 permalink: /2026/08/08/taiwan-kavalan-trip/
+title: "대만, 둘이서 3일 — 카발란 커플여행"
+categories: travel
+date: 2026-08-08
 ---
 <!DOCTYPE html>
 <html lang="ko">
