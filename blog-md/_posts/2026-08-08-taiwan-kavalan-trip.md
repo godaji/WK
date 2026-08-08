@@ -1,3 +1,7 @@
+---
+layout: null
+permalink: /2026/08/08/taiwan-kavalan-trip/
+---
 <!DOCTYPE html>
 <html lang="ko">
 <head>
