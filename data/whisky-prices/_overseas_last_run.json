@@ -1,5 +1,5 @@
 {
-  "asof": "2026-08-03",
+  "asof": "2026-08-10",
   "steps": {
     "fx": {
       "ok": true
@@ -8,15 +8,15 @@
       "label": "hk",
       "returncode": 0,
       "ok": true,
-      "tail": "[Caskells] whisky rows: 413\n[TheRareMalt] whisky rows: 654\n[Mizunara] whisky rows: 833\nWROTE 1900 rows -> /home/dudaji/work/WK/data/whisky-prices/2026-08_hk_whisky_poc.csv\nSNAPSHOT -> /home/dudaji/work/WK/data/whisky-prices/_runs/2026-08_hk_whisky_poc__run2026-08-03.csv",
-      "rows": 1900
+      "tail": "[Caskells] whisky rows: 413\n[TheRareMalt] ERROR: HTTP Error 503: Service Unavailable\n[Mizunara] ERROR: HTTP Error 503: Service Unavailable\nWROTE 413 rows -> /home/dudaji/work/WK/data/whisky-prices/2026-08_hk_whisky_poc.csv\nSNAPSHOT -> /home/dudaji/work/WK/data/whisky-prices/_runs/2026-08_hk_whisky_poc__run2026-08-10.csv",
+      "rows": 413
     },
     "jp": {
       "label": "jp",
       "returncode": 0,
       "ok": true,
-      "tail": "[酒類ドットコム(syurui)] whisky rows: 572\n[SAKE People] whisky rows: 493\n[酒庫住田屋(sumidaya)] whisky rows: 336\nWROTE 1401 rows -> /home/dudaji/work/WK/data/whisky-prices/jp/2026-08_jp_shopify_poc.csv  (fx 1JPY=9.082578 KRW)\nSNAPSHOT -> /home/dudaji/work/WK/data/whisky-prices/jp/_runs/2026-08_jp_shopify_poc__run2026-08-03.csv",
-      "rows": 1401,
+      "tail": "! 酒類ドットコム(syurui) page1: HTTP Error 503: Service Unavailable\n[酒類ドットコム(syurui)] whisky rows: 0\n  ! SAKE People page1: HTTP Error 503: Service Unavailable\n[SAKE People] whisky rows: 0\n  ! 酒庫住田屋(sumidaya) page1: HTTP Error 503: Service Unavailable\n[酒庫住田屋(sumidaya)] whisky rows: 0\nWROTE 0 rows -> /home/dudaji/work/WK/data/whisky-prices/jp/2026-08_jp_shopify_poc.csv  (fx 1JPY=8.928501 KRW)\nSNAPSHOT -> /home/dudaji/work/WK/data/whisky-prices/jp/_runs/2026-08_jp_shopify_poc__run2026-08-10.csv",
+      "rows": 0,
       "mode": "LIVE"
     }
   },
@@ -27,9 +27,9 @@
     "jp_csv": "data/whisky-prices/jp/2026-08_jp_shopify_poc.csv"
   },
   "fx": {
-    "asof": "2026-08-02",
-    "HKD_KRW": 183.391931,
-    "JPY_KRW": 9.082578,
+    "asof": "2026-08-10",
+    "HKD_KRW": 179.673829,
+    "JPY_KRW": 8.928501,
     "source": "open.er-api.com (USD base cross-rate)"
   }
 }
