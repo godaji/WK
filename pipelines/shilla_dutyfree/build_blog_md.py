@@ -1452,6 +1452,17 @@ _HOME_CHANGELOG = """{% assign _cl = site.posts | where_exp: "p","p.kind == 'cha
 {% endif %}
 """
 
+# 🗂️ 개인 팁 모음 — 메인 맨 아래 고정 링크(CMPA-1234 보드 복원 2026-08-11).
+#   가격 파이프라인과 무관한 손수 큐레이션 링크(공항버스·사전입국)라 _index_md() 재생성 시
+#   자동으로 사라지곤 했다(CMPA-1239) → 생성기에 상수로 박아 재생성에도 보존한다.
+#   kramdown 안전: sec-head <div> 앞 빈 줄 보존(트림 금지) → HTML 블록 인식.
+_HOME_TIPS = """<div class="sec-head">🗂️ 개인 팁 모음</div>
+<ul class="latest-feed">
+  <li><span class="chip">🚌</span><a href="{{ '/bus6004' | relative_url }}">6004번 공항버스 시간표</a></li>
+  <li><span class="chip">🇻🇳</span><a href="{{ '/vietnam-prearrival' | relative_url }}">베트남 사전입국신고 — 한국인 작성 요령</a></li>
+</ul>
+"""
+
 # 💱 면세 vs 국내 'gap' 텍스트 캐러셀 — 홈 **상단**(CMPA-693 보드 2026-06-29).
 #   '국내최저 − 면세최저'(100ml당) gap 을 핵심 지표로, 인기 밴드(병당 5~30만원)에서
 #   🟢면세 이득 TOP·🔴소매 이득·🔀오늘 큰 변동(+원인)·🏆스코어보드를 한 줄씩 회전 노출.
@@ -1577,7 +1588,9 @@ def _index_md():
             + '<div class="hub">\n' + "".join(cards) + "</div>\n"
             # CMPA-687 보드: 메인 **맨 아래**에 업데이트 로그(릴리스 노트) 링크 섹션.
             #   허브 카드(</div>) 다음 빈 줄 보존(트림 금지) → sec-head 가 HTML 블록으로 인식.
-            + "\n" + _HOME_CHANGELOG + "\n")
+            + "\n" + _HOME_CHANGELOG
+            # CMPA-1234 보드: 업데이트 로그 아래 '개인 팁 모음' 고정 링크(재생성 보존 — CMPA-1239).
+            + "\n" + _HOME_TIPS + "\n")
     return fm + "\n" + home
 
 
