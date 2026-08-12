@@ -5,23 +5,23 @@ date: "2026-08-10 09:00:00 +0900"
 categories: ["price"]
 kind: "patch"
 cadence: "weekly"
-breakthroughs: 0
+breakthroughs: 1
 prev_date: "2026-08-09"
 latest_date: "2026-08-12"
 weekly_start: "2026-08-10"
 weekly_end: "2026-08-16"
 days: 3
-hotdeals: ["발베니 Balvenie 15년 Madeira Cask 700ml — 면세 ₩127,150 · 49%↓", "보모어 14년 700ml — 면세 ₩52,721 · 48%↓", "보모어 16년 700ml — 면세 ₩85,283 · 46%↓", "글렌파클라스 25년 700ml — 면세 ₩314,378 · 44%↓", "발베니 15년 마데이라 캐스크 빅토 응아이 에디션 700ml — 면세 ₩150,268 · 40%↓"]
-hotdeals_count: 11
-rare_drops: []
-rare_drops_count: 0
-description: "면세 위스키 가격 주간 로그 8/10~8/16 — 이번주 핫딜 11종 · 오랜만의 큰 인하 0종 · 최신 2026-08-12. CaskCode"
+hotdeals: ["발베니 Balvenie 15년 Madeira Cask 700ml — 면세 ₩127,150 · 49%↓", "보모어 14년 700ml — 면세 ₩52,721 · 48%↓", "보모어 16년 700ml — 면세 ₩85,283 · 46%↓", "글렌파클라스 25년 700ml — 면세 ₩314,378 · 44%↓", "벤리악 40년 700ml — 면세 ₩4,443,713 · 41%↓"]
+hotdeals_count: 12
+rare_drops: ["NEW 올트모어 21년 (깔바도스) 500ml → ₩140,992 (−47%)"]
+rare_drops_count: 1
+description: "면세 위스키 가격 주간 로그 8/10~8/16 — 이번주 핫딜 12종 · 오랜만의 큰 인하 1종 · 최신 2026-08-12. CaskCode"
 robots: "noindex,nofollow"
 ---
 
 이 글은 신라면세 위스키 가격변동을 **하루 단위로 아래에 쌓는 주간 로그**입니다. 위에 이번주 핫딜을 모았고, 아래는 날짜별 상세(최신이 맨 위) · 기간 2026-08-10 ~ 2026-08-16.
 
-## 🔥 이번주 핫딜 (11종)
+## 🔥 이번주 핫딜 (12종)
 
 _이번 주 면세가가 국내최저가보다 싼 위스키를 모았습니다. 각 항목은 그 주 최신 관측가 기준 · 절약률 높은 순._
 
@@ -31,6 +31,7 @@ _이번 주 면세가가 국내최저가보다 싼 위스키를 모았습니다.
 | 보모어 14년 700ml | 면세 **₩52,721** · 국내최저 [₩102,000 🔗](https://dailyshot.co/m/item/25811)<br>절약 **−₩49,279 (48%↓)** · 할인 50%→45% |
 | 보모어 16년 700ml | 면세 **₩85,283** · 국내최저 [₩159,000 🔗](https://dailyshot.co/m/item/25812)<br>절약 **−₩73,717 (46%↓)** · 할인 50%→45% |
 | 글렌파클라스 25년 700ml | 면세 **₩314,378** · 국내최저 [₩557,000 🔗](https://dailyshot.co/m/item/4348)<br>절약 **−₩242,622 (44%↓)** · 할인 42%→41% |
+| 벤리악 40년 700ml | 면세 **₩4,443,713** · 국내최저 [₩7,500,000 🔗](https://dailyshot.co/m/item/31393)<br>절약 **−₩3,056,287 (41%↓)** · 할인 38%→36% |
 | 발베니 15년 마데이라 캐스크 빅토 응아이 에디션 700ml | 면세 **₩150,268** · 국내최저 [₩249,000 🔗](https://dailyshot.co/m/item/7409)<br>절약 **−₩98,732 (40%↓)** · 할인 36%→35% |
 | 라가불린 16년 700ml | 면세 **₩91,147** · 국내최저 [₩142,000 🔗](https://dailyshot.co/m/item/1679)<br>절약 **−₩50,853 (36%↓)** · 할인 41%→47% |
 | 발베니 12년 Golden Cask 700ml | 면세 **₩69,918** · 국내최저 [₩108,000 🔗](https://dailyshot.co/m/item/3190)<br>절약 **−₩38,082 (35%↓)** · 할인 39%→38% |
@@ -41,7 +42,17 @@ _이번 주 면세가가 국내최저가보다 싼 위스키를 모았습니다.
 
 ---
 
-## 📅 8월 12일 (수)
+## 🕰️ 신라면세 오랜만의 큰 인하 (1종)
+
+_원래 거의 정상가였다가 **이번 주 처음으로 20% 넘게 떨어진** 위스키입니다. 늘 할인하거나 잔잔히 오르내리는 건 제외 · 낙폭 큰 순._
+
+| 🕰️ 위스키 | 상세 |
+|---|---|
+| NEW 올트모어 21년 (깔바도스) 500ml | 면세 **₩140,992**<br>**−47% 인하** · 그동안 ₩267,884 거의 정상가(5% 할인)로 67일째 → 50% 할인 · 8/12 첫 인하 |
+
+---
+
+## 📅 8월 12일 (수) — 돌파 1건
 
 *직전 2026-08-11 → 최신 2026-08-12* · *환율 ₩1,417.00 (기준일 2026-08-11)*
 
@@ -51,19 +62,35 @@ _각 위스키 이름을 누르면 도수·맛·스토리 설명이 펼쳐집니
 
 **🔥 오늘의 핫딜 — 면세가가 더 싸짐 (10%p↑)**
 
+<details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">더 글렌리벳 Grounbreaker Collection 700ml: 30%→53% (₩66,316)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 더 글렌리벳 (The Glenlivet) · 스코틀랜드 스페이사이드<br><b>도수</b> 40%<br><b>캐스크</b> 유러피언 오크 + 아메리칸 오크 숙성 후 차콜드 아메리칸 오크 + 유러피언 레드와인 캐스크 피니시 · 트래블 리테일 전용<br><b>맛</b> 블루베리·카라멜라이즈드 페어·커스터드·파인애플·버터스카치·스파이스 향. 차콜드 레드프루트와 부드러운 사과·배 과실이 고전적인 글렌리벳 특유의 부드럽고 꽃향기 어린 스피릿에 층을 더한다.<br><b>스토리</b> 더 글렌리벳 그라운드브레이커(Groundbreaker) 컬렉션은 트래블 리테일 전용 리미티드 에디션 시리즈로, 여행을 통해 자신의 예술 분야에서 새 기준을 세운 창의적 예술가들과의 콜라보레이션을 기념한다. 챕터 1은 레드 홍 이(Red Hong Yi) 아티스트와의 협업으로 탄생했다. 유러피언·아메리칸 오크 숙성 후 차콜드 아메리칸 오크·레드와인 캐스크 피니시로 마무리한다. (신라면세 리스팅 표기는 Grounbreaker이나 정식 명칭은 Groundbreaker)<br><span style="color:#8a8f98">출처: The Glenlivet 공식 theglenlivet.com · Whisky Magazine · thewhiskyworld.com (2026-06-30 리서치) · 수집일 2026-06-30</span></div></details>
+<div style="margin:5px 0">뉴리프 8년 라이 750ml: 20%→30% (₩97,623)</div>
+<div style="margin:5px 0">뉴리프 8년 버번 750ml: 20%→30% (₩97,623)</div>
 <details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">시그나토리 스페이사이드 (M) 2005 CS 20년 #22 700ml: 0%→10% (₩611,906)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 언디스클로즈드 스페이사이드 "(M)" · 독립병입 시그나토리 빈티지 (M=비공개 증류소 코드, 업계선 맥캘란으로 추정) · 스페이사이드<br><b>도수</b> 58.4% (캐스크 스트렝스 · 자매캐스크 #21 실측 기준 — 단일 캐스크라 병별 상이)<br><b>캐스크</b> 퍼스트필 올로로소 셰리 버트 단일 캐스크(DRU17/A106 계열 #22) · 2005 증류 20년 숙성 · 비냉각여과·무착색 (자매캐스크 #21 = 611병)<br><b>맛</b> 건포도·말린 오크·초콜릿 오렌지 향에 넛맥·계피·스튜드 프룻의 부드러운 스파이스. 다크초콜릿·커피·자두·무화과·가죽·진한 오크가 층을 이루는 진한 셰리 풍미. (맛 노트는 동 빈티지 자매캐스크 #20/#21 기준 — 싱글캐스크라 병별 편차)<br><b>스토리</b> 시그나토리 빈티지의 캐스크 스트렝스 컬렉션. 이름을 밝히지 않은 스페이사이드 증류소("(M)")의 2005년 증류 원액을 퍼스트필 올로로소 셰리 버트에서 20년 숙성해 2026년 캐스크 스트렝스로 병입한 싱글캐스크. 업계에서는 "(M)"을 맥캘란으로 널리 추정한다. 도수·풍미는 자매캐스크(#21, 58.4%·611병) 기준이며 병별 편차 가능.<br><span style="color:#8a8f98">출처: Royal Mile Whiskies · Whiskybase · CaskCartel · K&amp;L Wines (2026-08-12 리서치) · 수집일 2026-08-12</span></div></details>
 
-<details style="margin:8px 0"><summary><strong>미세조정(할인)</strong> 1건 · 10%p 미만 (펼치기)</summary><div style="margin-top:6px"><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">조니워커 킹조지 5세 500ml: 35%→39% (₩380,323)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 조니워커 (Johnnie Walker) · 블렌디드(스코틀랜드)<br><b>도수</b> 43%<br><b>캐스크</b> 다양한 캐스크(킹조지 5세 시대 가동 증류소 원액 블렌드)<br><b>맛</b> 옅은 스모크에 신선한 과일·맥아·건포도·무화과·시나몬, 그리고 바닐라·잘 익은 사과·구운 아몬드·밀크초콜릿이 더해진 향. 팔레트는 다크초콜릿·샌달우드·절제된 피트 스모크·단 말린 과일이 층층이 쌓이고 후추·생강·넛맥 스파이스가 따른다. 벨벳처럼 풍성한 질감, 메이플 시럽 뉘앙스의 길고 따뜻한 피니시.<br><b>스토리</b> 블루라벨 프레스티지 라인(500ml). 조지 5세가 조니워커에 로열 워런트를 수여한 1934년을 기려 그 시대 가동 증류소들의 희소 원액으로 블렌딩한다.<br><span style="color:#8a8f98">출처: 공식 사이트 · Difford's Guide · Whiskybase · 수집일 2026-06-20</span></div></details></div></details>
+<details style="margin:8px 0"><summary><strong>미세조정(할인)</strong> 7건 · 10%p 미만 (펼치기)</summary><div style="margin-top:6px"><div style="margin:5px 0">뉴리프 싱글배럴 버번 750ml: 24%→30% (₩87,661)</div><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">기원 달 700ml: 35%→40% (₩50,162)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 쓰리 소사이어티스 증류소 (Three Societies · Ki One) · 대한민국 (경기 남양주)<br><b>도수</b> 공식 미확인 (불명 · 과신금지)<br><b>캐스크</b> 면세 전용 '해·달·별' 라인이라 캐스크 사양 미공개(불명). 기원 코어 라인은 통상 버진 아메리칸 오크·엑스버번·STR/와인·셰리 캐스크를 사용하고 한국 기후로 빠르게 숙성한다.<br><b>맛</b> 공식 맛 노트 미공개(불명). 기원 코어 라인 경향은 바닐라·캐러멜·꿀 등 버진오크 단맛 기반이나 '달' 개별 노트는 불명.<br><b>스토리</b> '달'은 기원의 면세 전용 '해·달·별' 라인 중 하나로, 국내 정식 시그니처 라인(호랑이·독수리·유니콘)과는 별개의 면세 전용 제품이다. 기원은 한국 최초 상업 싱글몰트 증류소로 2020년 남양주에서 가동했고 마스터 디스틸러 앤드류 샌드·창업자 도정한이 주도한다. 동일 라인 기프트팩 표기 기준 약 35% 소매 리스팅이 있으나 공식 미확인. (면세 전용이라 사양 일부 불명)<br><span style="color:#8a8f98">출처: 신라면세 기원 브랜드관(shilladfs.com) · 듀티풀(dutyful.co.kr) · threesocieties.co.kr (2026-06-26 리서치) · 수집일 2026-06-26</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">기원 달 기프트팩 700ml: 35%→40% (₩61,214)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 쓰리 소사이어티스 증류소 (Three Societies · Ki One) · 대한민국 (경기 남양주)<br><b>도수</b> 약 35% 표기 소매 리스팅 있으나 공식 미확인 (불명 · 과신금지)<br><b>캐스크</b> 면세 전용 라인이라 캐스크 사양 미공개(불명). 기원 코어 라인은 통상 버진 아메리칸 오크·엑스버번·STR/와인·셰리 캐스크 사용, 한국 기후로 빠른 숙성.<br><b>맛</b> 공식 맛 노트 미공개(불명). 기원 코어 라인 경향은 바닐라·캐러멜·꿀 등 버진오크 단맛 기반(달 개별 노트는 불명).<br><b>스토리</b> '달'은 기원의 면세 전용 '해·달·별' 라인 중 하나로 알려짐(2025 출시). 기원은 한국 최초 상업 싱글몰트 증류소로 2020년 남양주에서 가동, 마스터 디스틸러 앤드류 샌드·창업자 도정한 주도. 호랑이·유니콘·배치 등 시리즈 출시, 2025 IWSC 수상. 기프트팩 구성품은 불명.<br><span style="color:#8a8f98">출처: 신라면세 기원 브랜드관(shilladfs.com) · 나무위키 '기원(위스키)' · threesocieties.co.kr · 88bamboo.co (2026-06-15 리서치) · 수집일 2026-06-15</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">기원 코리안 트래블 익스클루시브 700ml: 35%→40% (₩100,324)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 쓰리 소사이어티스 증류소 (Three Societies · Ki One) · 대한민국 (경기 남양주)<br><b>도수</b> 공식 미확인 (불명 · 과신금지)<br><b>캐스크</b> 면세 전용 Korean Travel Exclusive 에디션이라 캐스크 사양 미공개(불명). 기원 코어 라인은 통상 버진 아메리칸 오크·엑스버번·STR/와인·셰리 캐스크를 사용하고 한국 기후로 빠르게 숙성한다.<br><b>맛</b> 공식 맛 노트 미공개(불명). 기원 코어 라인 경향은 바닐라·캐러멜·꿀 등 버진오크 단맛 기반이나 본 에디션 개별 노트는 불명.<br><b>스토리</b> Korean Travel Exclusive는 기원의 면세 전용 라인 중 하나로, 해·달·별 시리즈와 함께 면세 채널에 유통되는 여행자 전용 에디션이다. 기원은 한국 최초 상업 싱글몰트 증류소로 2020년 남양주에서 가동했고 마스터 디스틸러 앤드류 샌드·창업자 도정한이 주도한다. 2025 IWSC Worldwide Whisky Trophy 수상. (면세 전용이라 도수·캐스크 등 사양 일부 불명)<br><span style="color:#8a8f98">출처: 신라면세 기원 브랜드관(shilladfs.com) · threesocieties.co.kr · kione.co.kr (2026-08-10 리서치) · 수집일 2026-08-10</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">기원 해 700ml: 35%→40% (₩56,113)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 쓰리 소사이어티스 증류소 (Three Societies · Ki One) · 대한민국 (경기 남양주)<br><b>도수</b> 공식 미확인 (불명 · 과신금지)<br><b>캐스크</b> 면세 전용 '해·달·별' 라인이라 캐스크 사양 미공개(불명). 기원 코어 라인은 통상 버진 아메리칸 오크·엑스버번·STR/와인·셰리 캐스크를 사용하고 한국 기후로 빠르게 숙성한다.<br><b>맛</b> 공식 맛 노트 미공개(불명). 기원 코어 라인 경향은 바닐라·캐러멜·꿀 등 버진오크 단맛 기반이나 '해' 개별 노트는 불명.<br><b>스토리</b> '해'는 기원의 면세 전용 '해·달·별' 라인 중 하나로, 국내 정식 시그니처 라인(호랑이·독수리·유니콘)과는 별개의 면세 전용 제품이다. 기원은 한국 최초 상업 싱글몰트 증류소로 2020년 남양주에서 가동했고 마스터 디스틸러 앤드류 샌드·창업자 도정한이 주도한다. (면세 전용이라 도수·캐스크 등 사양 일부 불명)<br><span style="color:#8a8f98">출처: 신라면세 기원 브랜드관(shilladfs.com) · 듀티풀(dutyful.co.kr) · threesocieties.co.kr (2026-06-26 리서치) · 수집일 2026-06-26</span></div></details><div style="margin:5px 0">뉴리프 바틀인본드 버번 750ml: 25%→30% (₩67,738)</div><div style="margin:5px 0">NEW 올트모어 21년 (깔바도스) 500ml: 48%→50% (₩140,992)</div></div></details>
+
+<details style="margin:8px 0"><summary><strong>미세조정(할증)</strong> 4건 · 10%p 미만 (펼치기)</summary><div style="margin-top:6px"><div style="margin:5px 0">브룩라디 블랙아트 11 700ml: 25%→20% (₩510,120)</div><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">BLADNOCH 16YO 700ml: 49%→47% (₩138,937)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 블라드노흐 (Bladnoch) · 스코틀랜드 로우랜드<br><b>도수</b> 46.7%<br><b>캐스크</b> 올로로소 셰리 캐스크 숙성<br><b>맛</b> 올로로소 셰리가 뚜렷해 건과일·향신료·다크초콜릿·태운 캐러멜·무화과·건포도가 풍부하고, 바디는 비교적 가벼우며 실키한 질감에 오렌지 제스트·담뱃잎 뉘앙스가 이어진다.<br><b>스토리</b> 로우랜드 최남단 갤러웨이의 블라드노흐 증류소(1817년 설립, 현존 최고령급)에서 만든 16년 싱글몰트로, 올로로소 셰리 캐스크에서만 숙성한 셰리 중심 표현.<br><span style="color:#8a8f98">출처: Bladnoch 공식 · Hard To Find Whisky · A Scot on Scotch (2026-06-10 리서치) · 수집일 2026-06-10</span></div></details><div style="margin:5px 0">벤리악 40년 700ml: 38%→36% (₩4,443,713)</div><div style="margin:5px 0">산토리 Chita 700ml: 56%→54% (₩47,583)</div></div></details>
 
 ### 🏆 국내최저가(데일리샷·트레이더스·코스트코) 대비 핫딜
 
-이번 패치엔 국내최저 돌파 항목이 없습니다.
+| 🏆 위스키 | 상세 |
+|---|---|
+| 벤리악 40년 700ml | 면세 **₩4,443,713** · 국내최저 [₩7,500,000 🔗](https://dailyshot.co/m/item/31393)<br>절약 **−₩3,056,287 (41%↓)** · 할인 38%→36% |
 
 ### 🆕 신규 입고 (1)
 
 | 위스키 | 현재 KRW |
 |---|--:|
 | 이에이치 테일러 스몰배치 750ml | ₩113,077 |
+
+### 📦 품절/내림 (4)
+
+| 위스키 |
+|---|
+| 더글라스랭 OP LEDAIG 13년 700ml |
+| 더글라스랭 DOUGLAS OP GLEN GARIOCH 12년 700ml |
+| 토마틴 12년 1000ml |
+| 글렌모레이 커티 샥 스카치 위스키 1000ml |
 
 ### 🆕 신규 술 설명 — 이름을 눌러 펼치기
 
