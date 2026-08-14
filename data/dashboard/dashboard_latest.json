@@ -9,7 +9,7 @@
     "fx_dutyfree": {
       "usd_krw": 1418.412787,
       "asof": "2026-08-14",
-      "shilla_date": "2026-08-14"
+      "shilla_date": "2026-08-15"
     },
     "fx_overseas": {
       "asof": "2026-08-14",
@@ -52,8 +52,8 @@
         "prev": "2026-08-12_am"
       },
       "shilla": {
-        "prev": "2026-08-13",
-        "latest": "2026-08-14"
+        "prev": "2026-08-14",
+        "latest": "2026-08-15"
       }
     }
   },
@@ -72,9 +72,9 @@
     },
     {
       "key_label": "면세 데이터 (신라면세)",
-      "last_collected": "2026-08-14",
+      "last_collected": "2026-08-15",
       "items": 663,
-      "status": "갱신됨 (8/14)"
+      "status": "갱신됨 (8/15)"
     },
     {
       "key_label": "코스트코 웹",
@@ -363,10 +363,7 @@
         "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5310223"
       },
       "retail_change": null,
-      "dutyfree_change": {
-        "direction": "down",
-        "delta_usd": -0.81
-      },
+      "dutyfree_change": null,
       "overseas": {
         "hk_local_krw": null,
         "jp_local_krw": null,
@@ -412,10 +409,7 @@
         "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5887242"
       },
       "retail_change": null,
-      "dutyfree_change": {
-        "direction": "down",
-        "delta_usd": -11.67
-      },
+      "dutyfree_change": null,
       "overseas": {
         "hk_local_krw": null,
         "jp_local_krw": null,
@@ -783,10 +777,7 @@
         "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5624247"
       },
       "retail_change": null,
-      "dutyfree_change": {
-        "direction": "down",
-        "delta_usd": -0.33
-      },
+      "dutyfree_change": null,
       "overseas": {
         "hk_local_krw": null,
         "jp_local_krw": null,
@@ -3380,10 +3371,7 @@
         "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5472422"
       },
       "retail_change": null,
-      "dutyfree_change": {
-        "direction": "down",
-        "delta_usd": -7.83
-      },
+      "dutyfree_change": null,
       "overseas": {
         "hk_local_krw": 355754,
         "jp_local_krw": null,
@@ -4103,10 +4091,7 @@
         "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5667234"
       },
       "retail_change": null,
-      "dutyfree_change": {
-        "direction": "down",
-        "delta_usd": -2.38
-      },
+      "dutyfree_change": null,
       "overseas": {
         "hk_local_krw": null,
         "jp_local_krw": null,
@@ -4266,10 +4251,7 @@
         "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5070543"
       },
       "retail_change": null,
-      "dutyfree_change": {
-        "direction": "down",
-        "delta_usd": -1.88
-      },
+      "dutyfree_change": null,
       "overseas": {
         "hk_local_krw": null,
         "jp_local_krw": null,
