@@ -37,14 +37,14 @@
       "new_badge": "품목 국내 최신 수집일 == 데이터셋 전체 최신 수집일"
     },
     "counts": {
-      "rows": 144,
-      "retail_matched": 71,
+      "rows": 146,
+      "retail_matched": 74,
       "dutyfree_matched": 99,
       "hotdeal": 1,
-      "dutyfree_win": 26,
+      "dutyfree_win": 27,
       "hk_cheaper": 3,
       "jp_cheaper": 0,
-      "new": 139
+      "new": 142
     },
     "change_windows": {
       "dailyshot": {
@@ -61,7 +61,7 @@
     {
       "key_label": "데일리샷 (소매 온라인)",
       "last_collected": "2026-08-15",
-      "items": 81,
+      "items": 76,
       "status": "성공"
     },
     {
@@ -73,7 +73,7 @@
     {
       "key_label": "면세 데이터 (신라면세)",
       "last_collected": "2026-08-15",
-      "items": 663,
+      "items": 664,
       "status": "갱신됨 (8/15)"
     },
     {
@@ -131,6 +131,52 @@
         "mileage_rate_pct": "46.0",
         "shilla_name": "잭다니엘 허니 1000ml",
         "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/3299108"
+      },
+      "retail_change": null,
+      "dutyfree_change": null,
+      "overseas": {
+        "hk_local_krw": null,
+        "jp_local_krw": null,
+        "hk_cheaper": false,
+        "jp_cheaper": false
+      },
+      "badges": {
+        "hotdeal": false,
+        "dutyfree_win": true,
+        "hk_cheaper": false,
+        "jp_cheaper": false,
+        "new": true
+      }
+    },
+    {
+      "canonical_id": "w095",
+      "name": "러셀스 리저브 10년",
+      "brand": "Russell's Reserve",
+      "category": "버번",
+      "retail": {
+        "price_krw": 99000,
+        "source": "데일리샷(온라인)",
+        "source_key": "dailyshot",
+        "collected_date": "2026-08-15",
+        "prev_price_krw": null,
+        "direction": null,
+        "primary_is_dailyshot": true
+      },
+      "dailyshot": {
+        "price_krw": 99000,
+        "seller": "스타보틀&어슬렁 합정",
+        "region": "서울 마포구",
+        "located": true,
+        "cheaper_than_physical": false
+      },
+      "dutyfree": {
+        "price_krw": 31205,
+        "volume_ml": 750,
+        "per_100ml_krw": 4161,
+        "price_usd": 22.0,
+        "mileage_rate_pct": "45.0",
+        "shilla_name": "러셀 리저브 10년 750ml",
+        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5898920"
       },
       "retail_change": null,
       "dutyfree_change": null,
@@ -1390,7 +1436,7 @@
       "brand": "Glenlivet",
       "category": "싱글몰트",
       "retail": {
-        "price_krw": 380000,
+        "price_krw": 398000,
         "source": "데일리샷(온라인)",
         "source_key": "dailyshot",
         "collected_date": "2026-08-15",
@@ -1399,9 +1445,9 @@
         "primary_is_dailyshot": true
       },
       "dailyshot": {
-        "price_krw": 380000,
-        "seller": "보틀벙커 잠실점",
-        "region": "서울 송파구",
+        "price_krw": 398000,
+        "seller": "와인갤러리 시흥",
+        "region": "경기 시흥시",
         "located": true,
         "cheaper_than_physical": false
       },
@@ -1732,7 +1778,7 @@
       "brand": "Glenmorangie",
       "category": "싱글몰트",
       "retail": {
-        "price_krw": 92000,
+        "price_krw": 78000,
         "source": "데일리샷(온라인)",
         "source_key": "dailyshot",
         "collected_date": "2026-08-15",
@@ -1741,7 +1787,7 @@
         "primary_is_dailyshot": true
       },
       "dailyshot": {
-        "price_krw": 92000,
+        "price_krw": 78000,
         "seller": "리쿼하우스",
         "region": "서울 강남구",
         "located": true,
@@ -1993,20 +2039,26 @@
       }
     },
     {
-      "canonical_id": "w050",
-      "name": "조니워커 블랙라벨 12년",
+      "canonical_id": "w049",
+      "name": "조니워커 레드라벨",
       "brand": "Johnnie Walker",
       "category": "블렌디드",
       "retail": {
-        "price_krw": 40790,
-        "source": "코스트코",
-        "source_key": "코스트코",
-        "collected_date": "2026-08-10",
-        "prev_price_krw": 40790,
+        "price_krw": 26500,
+        "source": "데일리샷(온라인)",
+        "source_key": "dailyshot",
+        "collected_date": "2026-08-15",
+        "prev_price_krw": null,
         "direction": null,
-        "primary_is_dailyshot": false
+        "primary_is_dailyshot": true
       },
-      "dailyshot": null,
+      "dailyshot": {
+        "price_krw": 26500,
+        "seller": "팔도밀방 강남본점",
+        "region": "서울 강남구",
+        "located": true,
+        "cheaper_than_physical": false
+      },
       "dutyfree": null,
       "retail_change": null,
       "dutyfree_change": null,
@@ -2021,7 +2073,45 @@
         "dutyfree_win": false,
         "hk_cheaper": false,
         "jp_cheaper": false,
-        "new": false
+        "new": true
+      }
+    },
+    {
+      "canonical_id": "w050",
+      "name": "조니워커 블랙라벨 12년",
+      "brand": "Johnnie Walker",
+      "category": "블렌디드",
+      "retail": {
+        "price_krw": 40790,
+        "source": "코스트코",
+        "source_key": "코스트코",
+        "collected_date": "2026-08-15",
+        "prev_price_krw": 40790,
+        "direction": null,
+        "primary_is_dailyshot": false
+      },
+      "dailyshot": {
+        "price_krw": 44000,
+        "seller": "리쿼하우스",
+        "region": "서울 강남구",
+        "located": true,
+        "cheaper_than_physical": false
+      },
+      "dutyfree": null,
+      "retail_change": null,
+      "dutyfree_change": null,
+      "overseas": {
+        "hk_local_krw": null,
+        "jp_local_krw": null,
+        "hk_cheaper": false,
+        "jp_cheaper": false
+      },
+      "badges": {
+        "hotdeal": false,
+        "dutyfree_win": false,
+        "hk_cheaper": false,
+        "jp_cheaper": false,
+        "new": true
       }
     },
     {
@@ -2117,6 +2207,44 @@
       "dailyshot": {
         "price_krw": 49000,
         "seller": "보틀즈 논현",
+        "region": "서울 강남구",
+        "located": true,
+        "cheaper_than_physical": false
+      },
+      "dutyfree": null,
+      "retail_change": null,
+      "dutyfree_change": null,
+      "overseas": {
+        "hk_local_krw": null,
+        "jp_local_krw": null,
+        "hk_cheaper": false,
+        "jp_cheaper": false
+      },
+      "badges": {
+        "hotdeal": false,
+        "dutyfree_win": false,
+        "hk_cheaper": false,
+        "jp_cheaper": false,
+        "new": true
+      }
+    },
+    {
+      "canonical_id": "w066",
+      "name": "잭다니엘 No.7",
+      "brand": "Jack Daniel's",
+      "category": "테네시",
+      "retail": {
+        "price_krw": 31900,
+        "source": "데일리샷(온라인)",
+        "source_key": "dailyshot",
+        "collected_date": "2026-08-15",
+        "prev_price_krw": null,
+        "direction": null,
+        "primary_is_dailyshot": true
+      },
+      "dailyshot": {
+        "price_krw": 31900,
+        "seller": "팔도밀방 강남본점",
         "region": "서울 강남구",
         "located": true,
         "cheaper_than_physical": false
@@ -2686,7 +2814,7 @@
       },
       "dailyshot": {
         "price_krw": 142000,
-        "seller": "CU 강남푸르지오점",
+        "seller": "이마트24 역삼초교점",
         "region": "서울특별시 강남구",
         "located": true,
         "cheaper_than_physical": false
@@ -3069,10 +3197,10 @@
       }
     },
     {
-      "canonical_id": "w207",
-      "name": "발베니 21년 포트우드",
-      "brand": "Balvenie",
-      "category": "싱글몰트",
+      "canonical_id": "w188",
+      "name": "로얄살루트 25년",
+      "brand": "Royal Salute",
+      "category": "블렌디드",
       "retail": {
         "price_krw": null,
         "source": "",
@@ -3084,18 +3212,18 @@
       },
       "dailyshot": null,
       "dutyfree": {
-        "price_krw": 408503,
+        "price_krw": 262179,
         "volume_ml": 700,
-        "per_100ml_krw": 58358,
-        "price_usd": 288.0,
-        "mileage_rate_pct": "",
-        "shilla_name": "발베니 21년 포트우드 700ml",
-        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5479261"
+        "per_100ml_krw": 37454,
+        "price_usd": 184.83960000000002,
+        "mileage_rate_pct": "30.0",
+        "shilla_name": "로얄살루트 25년 700ml",
+        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/4599460"
       },
       "retail_change": null,
       "dutyfree_change": null,
       "overseas": {
-        "hk_local_krw": 517461,
+        "hk_local_krw": null,
         "jp_local_krw": null,
         "hk_cheaper": false,
         "jp_cheaper": false
@@ -3149,10 +3277,10 @@
       }
     },
     {
-      "canonical_id": "w188",
-      "name": "로얄살루트 25년",
-      "brand": "Royal Salute",
-      "category": "블렌디드",
+      "canonical_id": "w207",
+      "name": "발베니 21년 포트우드",
+      "brand": "Balvenie",
+      "category": "싱글몰트",
       "retail": {
         "price_krw": null,
         "source": "",
@@ -3164,18 +3292,18 @@
       },
       "dailyshot": null,
       "dutyfree": {
-        "price_krw": 262179,
+        "price_krw": 408503,
         "volume_ml": 700,
-        "per_100ml_krw": 37454,
-        "price_usd": 184.83960000000002,
-        "mileage_rate_pct": "30.0",
-        "shilla_name": "로얄살루트 25년 700ml",
-        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/4599460"
+        "per_100ml_krw": 58358,
+        "price_usd": 288.0,
+        "mileage_rate_pct": "",
+        "shilla_name": "발베니 21년 포트우드 700ml",
+        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5479261"
       },
       "retail_change": null,
       "dutyfree_change": null,
       "overseas": {
-        "hk_local_krw": null,
+        "hk_local_krw": 517461,
         "jp_local_krw": null,
         "hk_cheaper": false,
         "jp_cheaper": false
@@ -3389,10 +3517,10 @@
       }
     },
     {
-      "canonical_id": "w184",
-      "name": "글렌피딕 22년 그랑 코르테스",
-      "brand": "Glenfiddich",
-      "category": "싱글몰트",
+      "canonical_id": "w200",
+      "name": "로얄살루트 21년 루나 뉴이어 2026",
+      "brand": "Royal Salute",
+      "category": "블렌디드",
       "retail": {
         "price_krw": null,
         "source": "",
@@ -3404,13 +3532,13 @@
       },
       "dailyshot": null,
       "dutyfree": {
-        "price_krw": 294604,
+        "price_krw": 174786,
         "volume_ml": 700,
-        "per_100ml_krw": 42086,
-        "price_usd": 207.7,
-        "mileage_rate_pct": "33.0",
-        "shilla_name": "글렌피딕 22년 그랑 코르테스 700ml",
-        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5479260"
+        "per_100ml_krw": 24969,
+        "price_usd": 123.22639999999998,
+        "mileage_rate_pct": "30.0",
+        "shilla_name": "로얄살루트 21년 루나 뉴이어 2026 700ml",
+        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5848847"
       },
       "retail_change": null,
       "dutyfree_change": null,
@@ -3469,9 +3597,9 @@
       }
     },
     {
-      "canonical_id": "w200",
-      "name": "로얄살루트 21년 루나 뉴이어 2026",
-      "brand": "Royal Salute",
+      "canonical_id": "w206",
+      "name": "듀어스 더블더블 30년",
+      "brand": "Dewar's",
       "category": "블렌디드",
       "retail": {
         "price_krw": null,
@@ -3484,13 +3612,53 @@
       },
       "dailyshot": null,
       "dutyfree": {
-        "price_krw": 174786,
+        "price_krw": 251981,
+        "volume_ml": 500,
+        "per_100ml_krw": 50396,
+        "price_usd": 177.65,
+        "mileage_rate_pct": "48.0",
+        "shilla_name": "듀어스 더블더블 30년 500ml",
+        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5547656"
+      },
+      "retail_change": null,
+      "dutyfree_change": null,
+      "overseas": {
+        "hk_local_krw": null,
+        "jp_local_krw": null,
+        "hk_cheaper": false,
+        "jp_cheaper": false
+      },
+      "badges": {
+        "hotdeal": false,
+        "dutyfree_win": false,
+        "hk_cheaper": false,
+        "jp_cheaper": false,
+        "new": true
+      }
+    },
+    {
+      "canonical_id": "w184",
+      "name": "글렌피딕 22년 그랑 코르테스",
+      "brand": "Glenfiddich",
+      "category": "싱글몰트",
+      "retail": {
+        "price_krw": null,
+        "source": "",
+        "source_key": null,
+        "collected_date": "",
+        "prev_price_krw": null,
+        "direction": null,
+        "primary_is_dailyshot": false
+      },
+      "dailyshot": null,
+      "dutyfree": {
+        "price_krw": 294604,
         "volume_ml": 700,
-        "per_100ml_krw": 24969,
-        "price_usd": 123.22639999999998,
-        "mileage_rate_pct": "30.0",
-        "shilla_name": "로얄살루트 21년 루나 뉴이어 2026 700ml",
-        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5848847"
+        "per_100ml_krw": 42086,
+        "price_usd": 207.7,
+        "mileage_rate_pct": "33.0",
+        "shilla_name": "글렌피딕 22년 그랑 코르테스 700ml",
+        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5479260"
       },
       "retail_change": null,
       "dutyfree_change": null,
@@ -3571,46 +3739,6 @@
         "mileage_rate_pct": "46.0",
         "shilla_name": "조니워커 XR 21년 750ml",
         "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/287166"
-      },
-      "retail_change": null,
-      "dutyfree_change": null,
-      "overseas": {
-        "hk_local_krw": null,
-        "jp_local_krw": null,
-        "hk_cheaper": false,
-        "jp_cheaper": false
-      },
-      "badges": {
-        "hotdeal": false,
-        "dutyfree_win": false,
-        "hk_cheaper": false,
-        "jp_cheaper": false,
-        "new": true
-      }
-    },
-    {
-      "canonical_id": "w206",
-      "name": "듀어스 더블더블 30년",
-      "brand": "Dewar's",
-      "category": "블렌디드",
-      "retail": {
-        "price_krw": null,
-        "source": "",
-        "source_key": null,
-        "collected_date": "",
-        "prev_price_krw": null,
-        "direction": null,
-        "primary_is_dailyshot": false
-      },
-      "dailyshot": null,
-      "dutyfree": {
-        "price_krw": 251981,
-        "volume_ml": 500,
-        "per_100ml_krw": 50396,
-        "price_usd": 177.65,
-        "mileage_rate_pct": "48.0",
-        "shilla_name": "듀어스 더블더블 30년 500ml",
-        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5547656"
       },
       "retail_change": null,
       "dutyfree_change": null,
@@ -3949,46 +4077,6 @@
       }
     },
     {
-      "canonical_id": "w212",
-      "name": "조니워커 골드 리저브",
-      "brand": "Johnnie Walker",
-      "category": "블렌디드",
-      "retail": {
-        "price_krw": null,
-        "source": "",
-        "source_key": null,
-        "collected_date": "",
-        "prev_price_krw": null,
-        "direction": null,
-        "primary_is_dailyshot": false
-      },
-      "dailyshot": null,
-      "dutyfree": {
-        "price_krw": 64033,
-        "volume_ml": 1000,
-        "per_100ml_krw": 6403,
-        "price_usd": 45.144000000000005,
-        "mileage_rate_pct": "49.0",
-        "shilla_name": "조니워커 골드 리저브 1000ml",
-        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5667234"
-      },
-      "retail_change": null,
-      "dutyfree_change": null,
-      "overseas": {
-        "hk_local_krw": null,
-        "jp_local_krw": null,
-        "hk_cheaper": false,
-        "jp_cheaper": false
-      },
-      "badges": {
-        "hotdeal": false,
-        "dutyfree_win": false,
-        "hk_cheaper": false,
-        "jp_cheaper": false,
-        "new": true
-      }
-    },
-    {
       "canonical_id": "w245",
       "name": "글렌피딕 XX",
       "brand": "Glenfiddich",
@@ -4011,6 +4099,46 @@
         "mileage_rate_pct": "45.0",
         "shilla_name": "글렌피딕 XX 700ml",
         "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5437409"
+      },
+      "retail_change": null,
+      "dutyfree_change": null,
+      "overseas": {
+        "hk_local_krw": null,
+        "jp_local_krw": null,
+        "hk_cheaper": false,
+        "jp_cheaper": false
+      },
+      "badges": {
+        "hotdeal": false,
+        "dutyfree_win": false,
+        "hk_cheaper": false,
+        "jp_cheaper": false,
+        "new": true
+      }
+    },
+    {
+      "canonical_id": "w212",
+      "name": "조니워커 골드 리저브",
+      "brand": "Johnnie Walker",
+      "category": "블렌디드",
+      "retail": {
+        "price_krw": null,
+        "source": "",
+        "source_key": null,
+        "collected_date": "",
+        "prev_price_krw": null,
+        "direction": null,
+        "primary_is_dailyshot": false
+      },
+      "dailyshot": null,
+      "dutyfree": {
+        "price_krw": 64033,
+        "volume_ml": 1000,
+        "per_100ml_krw": 6403,
+        "price_usd": 45.144000000000005,
+        "mileage_rate_pct": "49.0",
+        "shilla_name": "조니워커 골드 리저브 1000ml",
+        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5667234"
       },
       "retail_change": null,
       "dutyfree_change": null,
@@ -4109,33 +4237,33 @@
       }
     },
     {
-      "canonical_id": "w071",
-      "name": "메이커스 마크",
-      "brand": "Maker's Mark",
-      "category": "버번",
+      "canonical_id": "w243",
+      "name": "탈리스커 다크 스톰",
+      "brand": "Talisker",
+      "category": "싱글몰트",
       "retail": {
         "price_krw": null,
         "source": "",
         "source_key": null,
-        "collected_date": "2026-07-03",
+        "collected_date": "",
         "prev_price_krw": null,
         "direction": null,
         "primary_is_dailyshot": false
       },
       "dailyshot": null,
       "dutyfree": {
-        "price_krw": 37333,
+        "price_krw": 81062,
         "volume_ml": 1000,
-        "per_100ml_krw": 3733,
-        "price_usd": 26.32,
-        "mileage_rate_pct": "53.0",
-        "shilla_name": "메이커스 마크 1000ml",
-        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5070543"
+        "per_100ml_krw": 8106,
+        "price_usd": 57.15,
+        "mileage_rate_pct": "55.0",
+        "shilla_name": "탈리스커 다크 스톰 1000ml",
+        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5070436"
       },
       "retail_change": null,
       "dutyfree_change": null,
       "overseas": {
-        "hk_local_krw": null,
+        "hk_local_krw": 89837,
         "jp_local_krw": null,
         "hk_cheaper": false,
         "jp_cheaper": false
@@ -4171,6 +4299,46 @@
         "mileage_rate_pct": "47.0",
         "shilla_name": "듀어스 더블더블 21년 미즈나라캐스크 500ml",
         "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5268249"
+      },
+      "retail_change": null,
+      "dutyfree_change": null,
+      "overseas": {
+        "hk_local_krw": null,
+        "jp_local_krw": null,
+        "hk_cheaper": false,
+        "jp_cheaper": false
+      },
+      "badges": {
+        "hotdeal": false,
+        "dutyfree_win": false,
+        "hk_cheaper": false,
+        "jp_cheaper": false,
+        "new": true
+      }
+    },
+    {
+      "canonical_id": "w071",
+      "name": "메이커스 마크",
+      "brand": "Maker's Mark",
+      "category": "버번",
+      "retail": {
+        "price_krw": null,
+        "source": "",
+        "source_key": null,
+        "collected_date": "2026-07-03",
+        "prev_price_krw": null,
+        "direction": null,
+        "primary_is_dailyshot": false
+      },
+      "dailyshot": null,
+      "dutyfree": {
+        "price_krw": 37333,
+        "volume_ml": 1000,
+        "per_100ml_krw": 3733,
+        "price_usd": 26.32,
+        "mileage_rate_pct": "53.0",
+        "shilla_name": "메이커스 마크 1000ml",
+        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5070543"
       },
       "retail_change": null,
       "dutyfree_change": null,
@@ -4269,46 +4437,6 @@
       }
     },
     {
-      "canonical_id": "w243",
-      "name": "탈리스커 다크 스톰",
-      "brand": "Talisker",
-      "category": "싱글몰트",
-      "retail": {
-        "price_krw": null,
-        "source": "",
-        "source_key": null,
-        "collected_date": "",
-        "prev_price_krw": null,
-        "direction": null,
-        "primary_is_dailyshot": false
-      },
-      "dailyshot": null,
-      "dutyfree": {
-        "price_krw": 81062,
-        "volume_ml": 1000,
-        "per_100ml_krw": 8106,
-        "price_usd": 57.15,
-        "mileage_rate_pct": "55.0",
-        "shilla_name": "탈리스커 다크 스톰 1000ml",
-        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5070436"
-      },
-      "retail_change": null,
-      "dutyfree_change": null,
-      "overseas": {
-        "hk_local_krw": 89837,
-        "jp_local_krw": null,
-        "hk_cheaper": false,
-        "jp_cheaper": false
-      },
-      "badges": {
-        "hotdeal": false,
-        "dutyfree_win": false,
-        "hk_cheaper": false,
-        "jp_cheaper": false,
-        "new": true
-      }
-    },
-    {
       "canonical_id": "w214",
       "name": "더 글렌리벳 16년",
       "brand": "Glenlivet",
@@ -4336,6 +4464,46 @@
       "dutyfree_change": null,
       "overseas": {
         "hk_local_krw": 508477,
+        "jp_local_krw": null,
+        "hk_cheaper": false,
+        "jp_cheaper": false
+      },
+      "badges": {
+        "hotdeal": false,
+        "dutyfree_win": false,
+        "hk_cheaper": false,
+        "jp_cheaper": false,
+        "new": true
+      }
+    },
+    {
+      "canonical_id": "w248",
+      "name": "조니워커 블랙 트리플 캐스크",
+      "brand": "Johnnie Walker",
+      "category": "블렌디드",
+      "retail": {
+        "price_krw": null,
+        "source": "",
+        "source_key": null,
+        "collected_date": "",
+        "prev_price_krw": null,
+        "direction": null,
+        "primary_is_dailyshot": false
+      },
+      "dailyshot": null,
+      "dutyfree": {
+        "price_krw": 42893,
+        "volume_ml": 1000,
+        "per_100ml_krw": 4289,
+        "price_usd": 30.24,
+        "mileage_rate_pct": "52.0",
+        "shilla_name": "조니워커 블랙 트리플 캐스크 1000ml",
+        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5082567"
+      },
+      "retail_change": null,
+      "dutyfree_change": null,
+      "overseas": {
+        "hk_local_krw": null,
         "jp_local_krw": null,
         "hk_cheaper": false,
         "jp_cheaper": false
@@ -4549,46 +4717,6 @@
       }
     },
     {
-      "canonical_id": "w248",
-      "name": "조니워커 블랙 트리플 캐스크",
-      "brand": "Johnnie Walker",
-      "category": "블렌디드",
-      "retail": {
-        "price_krw": null,
-        "source": "",
-        "source_key": null,
-        "collected_date": "",
-        "prev_price_krw": null,
-        "direction": null,
-        "primary_is_dailyshot": false
-      },
-      "dailyshot": null,
-      "dutyfree": {
-        "price_krw": 42893,
-        "volume_ml": 1000,
-        "per_100ml_krw": 4289,
-        "price_usd": 30.24,
-        "mileage_rate_pct": "52.0",
-        "shilla_name": "조니워커 블랙 트리플 캐스크 1000ml",
-        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5082567"
-      },
-      "retail_change": null,
-      "dutyfree_change": null,
-      "overseas": {
-        "hk_local_krw": null,
-        "jp_local_krw": null,
-        "hk_cheaper": false,
-        "jp_cheaper": false
-      },
-      "badges": {
-        "hotdeal": false,
-        "dutyfree_win": false,
-        "hk_cheaper": false,
-        "jp_cheaper": false,
-        "new": true
-      }
-    },
-    {
       "canonical_id": "w244",
       "name": "탈리스커 써지",
       "brand": "Talisker",
@@ -4669,28 +4797,28 @@
       }
     },
     {
-      "canonical_id": "w121",
-      "name": "네이키드 몰트",
-      "brand": "The Naked Malt",
-      "category": "블렌디드몰트",
+      "canonical_id": "w054",
+      "name": "페이머스 그라우스",
+      "brand": "The Famous Grouse",
+      "category": "블렌디드",
       "retail": {
         "price_krw": null,
         "source": "",
         "source_key": null,
-        "collected_date": "2026-04-23",
+        "collected_date": "2026-06-01",
         "prev_price_krw": null,
         "direction": null,
         "primary_is_dailyshot": false
       },
       "dailyshot": null,
       "dutyfree": {
-        "price_krw": 41489,
+        "price_krw": 22695,
         "volume_ml": 1000,
-        "per_100ml_krw": 4149,
-        "price_usd": 29.25,
+        "per_100ml_krw": 2270,
+        "price_usd": 16.0,
         "mileage_rate_pct": "",
-        "shilla_name": "네이키드 몰트 1000ml",
-        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5957380"
+        "shilla_name": "페이머스 그라우스 1000ml",
+        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5957381"
       },
       "retail_change": null,
       "dutyfree_change": null,
@@ -4749,28 +4877,28 @@
       }
     },
     {
-      "canonical_id": "w054",
-      "name": "페이머스 그라우스",
-      "brand": "The Famous Grouse",
-      "category": "블렌디드",
+      "canonical_id": "w121",
+      "name": "네이키드 몰트",
+      "brand": "The Naked Malt",
+      "category": "블렌디드몰트",
       "retail": {
         "price_krw": null,
         "source": "",
         "source_key": null,
-        "collected_date": "2026-06-01",
+        "collected_date": "2026-04-23",
         "prev_price_krw": null,
         "direction": null,
         "primary_is_dailyshot": false
       },
       "dailyshot": null,
       "dutyfree": {
-        "price_krw": 22695,
+        "price_krw": 41489,
         "volume_ml": 1000,
-        "per_100ml_krw": 2270,
-        "price_usd": 16.0,
+        "per_100ml_krw": 4149,
+        "price_usd": 29.25,
         "mileage_rate_pct": "",
-        "shilla_name": "페이머스 그라우스 1000ml",
-        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5957381"
+        "shilla_name": "네이키드 몰트 1000ml",
+        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5957380"
       },
       "retail_change": null,
       "dutyfree_change": null,
@@ -5851,46 +5979,6 @@
         "mileage_rate_pct": "50.0",
         "shilla_name": "조니워커 18년 750ml",
         "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/3651371"
-      },
-      "retail_change": null,
-      "dutyfree_change": null,
-      "overseas": {
-        "hk_local_krw": null,
-        "jp_local_krw": null,
-        "hk_cheaper": false,
-        "jp_cheaper": false
-      },
-      "badges": {
-        "hotdeal": false,
-        "dutyfree_win": false,
-        "hk_cheaper": false,
-        "jp_cheaper": false,
-        "new": true
-      }
-    },
-    {
-      "canonical_id": "w095",
-      "name": "러셀스 리저브 10년",
-      "brand": "Russell's Reserve",
-      "category": "버번",
-      "retail": {
-        "price_krw": null,
-        "source": "",
-        "source_key": null,
-        "collected_date": "2026-04-23",
-        "prev_price_krw": null,
-        "direction": null,
-        "primary_is_dailyshot": false
-      },
-      "dailyshot": null,
-      "dutyfree": {
-        "price_krw": 31205,
-        "volume_ml": 750,
-        "per_100ml_krw": 4161,
-        "price_usd": 22.0,
-        "mileage_rate_pct": "45.0",
-        "shilla_name": "러셀 리저브 10년 750ml",
-        "shilla_url": "https://www.shilladfs.com/estore/kr/ko/p/5898920"
       },
       "retail_change": null,
       "dutyfree_change": null,
