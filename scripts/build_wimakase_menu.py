@@ -19,6 +19,7 @@ CLAUDE.md 준수:
 from __future__ import annotations
 
 import html
+import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -100,6 +101,269 @@ TIERS = [
     },
 ]
 
+# ── 위스키 상세(팝업용) ───────────────────────────────────────────────────────
+# 각 술을 탭하면 뜨는 모달의 내용. 위키피디아 등 널리 문서화된 사실 기반.
+# 필드: 증류소 / 지역 / 캐스크 / 스토리(증류소·제품 배경) / 출처.
+# ⚠️ 확실치 않은 항목은 빈 문자열로 둔다(위장 금지, CMPA-1282 보드 주의). 키 = 제품명(TIERS와 정확히 일치).
+DETAILS = {
+    "글렌드로낙 21년": {
+        "distillery": "글렌드로낙 (GlenDronach)", "region": "스코틀랜드 하이랜드",
+        "cask": "올로로소 & 페드로 히메네즈(PX) 셰리 캐스크",
+        "story": "1826년 설립된 하이랜드 증류소로, 셰리 캐스크 숙성에 특화돼 있다. "
+                 "'Parliament(팔러먼트)'는 증류소 인근 나무에 무리 지어 사는 까마귀 떼를 부르는 "
+                 "영어 표현(a parliament of rooks)에서 따온 이름이다. 21년은 진한 다크 프루츠와 "
+                 "초콜릿, 스파이스가 층층이 쌓인 고숙성 셰리 몰트의 대표격이다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "글렌피딕 18년": {
+        "distillery": "글렌피딕 (Glenfiddich)", "region": "스코틀랜드 스페이사이드 (더프타운)",
+        "cask": "올로로소 셰리 & 버번 오크",
+        "story": "1886년 윌리엄 그랜트가 세운 가족 경영 증류소로, 게일어로 '사슴의 계곡(Valley of the Deer)'을 뜻한다. "
+                 "전 세계에서 가장 많이 팔리는 싱글 몰트 중 하나다. 18년은 셰리와 버번 오크에서 오래 숙성해 "
+                 "잘 익은 사과와 오크 스파이스의 균형이 좋다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "글렌리벳 19년": {
+        "distillery": "글렌리벳 (The Glenlivet)", "region": "스코틀랜드 스페이사이드",
+        "cask": "",
+        "story": "1824년 조지 스미스가 세운, 글렌리벳 교구 최초의 정식 면허 증류소다. 밀주가 성행하던 시대에 "
+                 "합법 면허를 받아 위협에 시달렸고, 조지 스미스가 권총을 지니고 다닌 일화로 유명하다. "
+                 "정규 라인을 벗어난 고숙성·고도수 바틀이다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "올트모어 18년": {
+        "distillery": "올트모어 (Aultmore)", "region": "스코틀랜드 스페이사이드 (키스)",
+        "cask": "",
+        "story": "1896년 설립돼 오랫동안 듀어스 블렌드의 원액으로 쓰이다가 싱글 몰트로 알려졌다. "
+                 "인근 습지 'Foggie Moss'의 전설과 함께, 깔끔하고 우아한 스타일로 정평이 나 있다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "아벨라워 아브나흐": {
+        "distillery": "아벨라워 (Aberlour)", "region": "스코틀랜드 스페이사이드",
+        "cask": "올로로소 셰리 벗 (논칠필터·캐스크 스트렝스)",
+        "story": "'A'bunadh(아브나흐)'는 게일어로 '원래의, 근원'을 뜻한다. 올로로소 셰리 벗에서만 숙성해 "
+                 "배치별로 캐스크 스트렝스·논칠필터로 병입하며, 숙성년수 표기가 없는(NAS) 진한 셰리 폭탄이다. "
+                 "배치마다 도수가 조금씩 다르다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "옥토모어 15.1": {
+        "distillery": "브룩라디 (Bruichladdich)", "region": "스코틀랜드 아일라",
+        "cask": "아메리칸 위스키 캐스크",
+        "story": "옥토모어는 브룩라디 증류소가 만드는 '세계에서 가장 강하게 피트한 위스키' 시리즈다. "
+                 "15.1은 108.2 PPM의 압도적인 피트 수치를 지니면서도, 비교적 짧은 숙성으로 강렬한 스모크와 "
+                 "젊은 힘을 동시에 낸다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "스테그 (Stagg)": {
+        "distillery": "버팔로 트레이스 (Buffalo Trace)", "region": "미국 켄터키",
+        "cask": "새 그을린 아메리칸 화이트 오크",
+        "story": "19세기 위스키 사업가 조지 T. 스태그(George T. Stagg)의 이름을 딴 언컷·언필터드 캐스크 "
+                 "스트렝스 버번이다. 물을 타지 않고 여과도 최소화해 높은 도수와 진한 풍미를 그대로 담으며, "
+                 "물량이 적어 구하기 매우 어렵다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "일라이저 크레이그 18년": {
+        "distillery": "헤븐 힐 (Heaven Hill)", "region": "미국 켄터키",
+        "cask": "새 그을린 아메리칸 화이트 오크",
+        "story": "이름은 오크통 내부를 그을려 버번을 '발명'했다는 전설의 침례교 목사 일라이저 크레이그에서 왔다. "
+                 "18년은 버번으로서는 매우 긴 숙성의 싱글 배럴로, 희소성이 높다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "카발란 올로로소": {
+        "distillery": "카발란 (Kavalan)", "region": "대만 이란현",
+        "cask": "올로로소 셰리 캐스크 (싱글 캐스크·캐스크 스트렝스)",
+        "story": "2005년 킹카 그룹이 세운 대만의 대표 증류소다. 아열대 기후에서 빠르게 숙성해 짧은 기간에도 "
+                 "진한 풍미를 낸다. 'Solist' 시리즈는 단일 캐스크·캐스크 스트렝스로 병입하며, 올로로소는 "
+                 "진한 건과일과 열대 과일 뉘앙스가 특징이다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "야마자키 12년": {
+        "distillery": "산토리 야마자키 (Suntory Yamazaki)", "region": "일본 (오사카 인근)",
+        "cask": "아메리칸·스패니시 오크 및 미즈나라(일본 오크)",
+        "story": "1923년 토리이 신지로가 세운 일본 최초의 몰트 위스키 증류소다. 물이 좋기로 이름난 야마자키에 "
+                 "자리했고, 미즈나라(일본 참나무) 캐스크가 주는 특유의 향으로 유명하다. 전 세계적 품귀로 "
+                 "프리미엄이 높다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "기원 타이거 (Tiger)": {
+        "distillery": "쓰리소사이어티스 (Three Societies)", "region": "대한민국 남양주",
+        "cask": "",
+        "story": "쓰리소사이어티스는 한국 최초의 싱글 몰트 증류소로, 첫 제품 '기원(Ki One)'을 선보였다. "
+                 "'타이거'는 한정 에디션으로 수집 가치가 높다.",
+        "source": "증류소 공식",
+    },
+    "발베니 12년 더블우드": {
+        "distillery": "발베니 (The Balvenie)", "region": "스코틀랜드 스페이사이드 (더프타운)",
+        "cask": "전통 오크 숙성 후 올로로소 셰리 캐스크 마감",
+        "story": "윌리엄 그랜트 앤 선즈가 운영하며, 지금도 자체 몰팅(플로어 몰팅)을 유지하는 몇 안 되는 증류소다. "
+                 "몰트 마스터 데이비드 스튜어트가 정립한 '캐스크 피니시' 기법의 상징이 바로 더블우드로, "
+                 "버번 오크에서 숙성 후 셰리 캐스크로 옮겨 꿀·바닐라의 화사한 단맛을 얹는다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "글렌알라키 15년": {
+        "distillery": "글렌알라키 (GlenAllachie)", "region": "스코틀랜드 스페이사이드",
+        "cask": "PX & 올로로소 셰리 캐스크",
+        "story": "1967년 설립됐고, 2017년 마스터 디스틸러 빌리 워커가 인수한 뒤 셰리 중심의 캐릭터로 크게 주목받았다. "
+                 "15년은 진득한 셰리 풍미로 근래 가장 인기 있는 바틀 중 하나다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "매캘란 더블우드 12년": {
+        "distillery": "매캘란 (The Macallan)", "region": "스코틀랜드 스페이사이드 (크레이겔라키)",
+        "cask": "셰리 시즈닝한 유럽산·미국산 오크 (더블 캐스크)",
+        "story": "1824년 설립, 셰리 오크 숙성의 대명사로 불리는 증류소다. 더블 캐스크 12년은 유럽·미국산 오크의 "
+                 "셰리 시즈닝 캐스크를 함께 써 밸런스가 좋아, 싱글 몰트 입문·중급의 정석으로 꼽힌다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "글렌드로낙 12년": {
+        "distillery": "글렌드로낙 (GlenDronach)", "region": "스코틀랜드 하이랜드",
+        "cask": "PX & 올로로소 셰리 캐스크",
+        "story": "1826년 설립된 셰리 캐스크 전문 증류소의 엔트리급 12년으로, 셰리 캐스크 위스키의 교과서로 통한다. "
+                 "부드러운 건포도·초콜릿 풍미가 입문에 좋다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "에버펠디 16년": {
+        "distillery": "에버펠디 (Aberfeldy)", "region": "스코틀랜드 하이랜드 (퍼스셔)",
+        "cask": "",
+        "story": "1896년 존 듀어 앤 선즈가 세워 듀어스 블렌드의 심장부 역할을 해 온 증류소다. "
+                 "꿀 같은 달콤함으로 '골든 드램'이라 불리며, 16년은 부드럽고 원숙한 편이다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "로얄 브라크라 12년": {
+        "distillery": "로얄 브라크라 (Royal Brackla)", "region": "스코틀랜드 하이랜드",
+        "cask": "올로로소 셰리 피니시",
+        "story": "1812년 설립됐고, 1835년 윌리엄 4세로부터 위스키 최초의 왕실 인증(로열 워런트)을 받아 "
+                 "'The King's Own Whisky'로 불렸다. 올로로소 셰리 피니시로 고급스럽고 우아한 맛을 낸다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "부나하벤 12년": {
+        "distillery": "부나하벤 (Bunnahabhain)", "region": "스코틀랜드 아일라",
+        "cask": "셰리 & 버번 캐스크 (논칠필터)",
+        "story": "1881년 설립. 강한 피트로 유명한 아일라에서 이례적으로 피트가 거의 없는 스타일을 대표한다. "
+                 "12년은 논칠필터·무착색으로 병입돼 훌륭한 바디감과 견과·건과일 풍미를 낸다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "조니워커 그린": {
+        "distillery": "조니워커 (Johnnie Walker) · 디아지오", "region": "스코틀랜드 (블렌디드 몰트)",
+        "cask": "",
+        "story": "그린 라벨은 그레인 없이 여러 싱글 몰트만 섞은 15년 숙성 블렌디드 몰트다. 탈리스커·크라간모어 등 "
+                 "성격이 다른 몰트들을 조화시켜 가성비와 퀄리티를 함께 잡았다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "러셀 리저브 싱글배럴": {
+        "distillery": "와일드 터키 (Wild Turkey)", "region": "미국 켄터키",
+        "cask": "새 그을린 아메리칸 화이트 오크 (싱글 배럴)",
+        "story": "와일드 터키의 전설적 마스터 디스틸러 부자(父子) 지미 러셀·에디 러셀의 이름을 딴 라인이다. "
+                 "단일 배럴에서 병입해 진한 풍미와 타격감으로 버번 매니아들의 지지를 받는다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "이글레어 10년": {
+        "distillery": "버팔로 트레이스 (Buffalo Trace)", "region": "미국 켄터키",
+        "cask": "새 그을린 아메리칸 화이트 오크 (싱글 배럴)",
+        "story": "버팔로 트레이스 증류소의 프리미엄 싱글 배럴 버번으로, 10년 숙성이다. 바닐라·오크·토피의 "
+                 "부드러운 균형으로 이름난 스테디셀러다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "와일드터키 레어브리드 라이": {
+        "distillery": "와일드 터키 (Wild Turkey)", "region": "미국 켄터키",
+        "cask": "새 그을린 아메리칸 화이트 오크 (배럴 프루프)",
+        "story": "여러 숙성년수의 라이를 섞어 물을 거의 타지 않고 배럴 프루프로 병입한다. 라이 특유의 스파이스와 "
+                 "높은 도수의 타격감, 풍미가 일품이다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "사가모어 라이 CS": {
+        "distillery": "사가모어 스피릿 (Sagamore Spirit)", "region": "미국 메릴랜드 볼티모어",
+        "cask": "새 그을린 아메리칸 화이트 오크 (캐스크 스트렝스)",
+        "story": "메릴랜드 스타일 라이의 부활을 이끄는 볼티모어 증류소다. 캐스크 스트렝스 버전은 강렬한 타격감과 "
+                 "진한 화사함이 특징이다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "탈리스커 10년": {
+        "distillery": "탈리스커 (Talisker)", "region": "스코틀랜드 스카이 섬",
+        "cask": "",
+        "story": "1830년 설립된, 오랫동안 스카이 섬 유일의 증류소였다. '바다가 빚은 위스키'라는 말처럼 짭조름한 "
+                 "바다향과 후추 같은 스파이시함이 상징이다. 10년은 그 캐릭터의 정석이다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "아드벡 10년": {
+        "distillery": "아드벡 (Ardbeg)", "region": "스코틀랜드 아일라",
+        "cask": "버번 캐스크 (논칠필터)",
+        "story": "1815년 설립된 아일라의 대표 피트 증류소다. 강한 피트에도 시트러스·바닐라의 균형이 좋아 "
+                 "'가장 완성도 높은 피트 위스키' 중 하나로 꼽힌다. 논칠필터로 병입한다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "라프로익 쿼터 캐스크": {
+        "distillery": "라프로익 (Laphroaig)", "region": "스코틀랜드 아일라",
+        "cask": "버번 캐스크 후 작은 쿼터 캐스크 추가 숙성 (논칠필터)",
+        "story": "1815년 설립. 소독약·요오드에 비유되는 개성 강한 피트로 유명하다. 쿼터 캐스크는 작은 오크통에서 "
+                 "추가 숙성해 나무·피트 향을 강하게 농축한 NAS 버전이다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "스카라버스 CS 피티드": {
+        "distillery": "헌터 레잉 (Hunter Laing) 병입 · 아일라", "region": "스코틀랜드 아일라",
+        "cask": "",
+        "story": "'스카라버스(Scarabus)'는 증류소명을 밝히지 않는 아일라 싱글 몰트로, 헌터 레잉이 병입한다. "
+                 "캐스크 스트렝스 버전은 높은 도수의 가성비 피트로 평가받는다.",
+        "source": "병입사 공식",
+    },
+    "폴존 피티드 CS": {
+        "distillery": "폴 존 (Paul John)", "region": "인도 고아",
+        "cask": "캐스크 스트렝스",
+        "story": "인도 고아의 아열대 기후에서 숙성하는 인디안 싱글 몰트다. 빠른 숙성으로 진한 풍미를 내며, "
+                 "피티드 캐스크 스트렝스는 강한 피트와 높은 도수의 자극이 특징이다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "엔젤스 엔비 스몰배치": {
+        "distillery": "엔젤스 엔비 (Angel's Envy)", "region": "미국 켄터키 루이빌",
+        "cask": "버번 숙성 후 포트 와인 캐스크 마감",
+        "story": "전설적 마스터 디스틸러 링컨 헨더슨이 만든 브랜드로, 버번을 포트 와인 캐스크에서 마감해 "
+                 "달콤함을 더한다. 이름은 숙성 중 증발하는 '천사의 몫(Angel's Share)'에서 착안했다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "놉크릭 9년": {
+        "distillery": "짐 빔 (Jim Beam)", "region": "미국 켄터키",
+        "cask": "새 그을린 아메리칸 화이트 오크 (스몰배치)",
+        "story": "짐 빔의 스몰배치 컬렉션 중 하나로, 이름은 링컨 대통령이 어린 시절 살던 '놉 크릭'에서 왔다. "
+                 "묵직하고 진한 견과·오크 풍미가 특징이다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "일라이저 크레이그 스몰배치": {
+        "distillery": "헤븐 힐 (Heaven Hill)", "region": "미국 켄터키",
+        "cask": "새 그을린 아메리칸 화이트 오크 (스몰배치)",
+        "story": "버번을 '발명'했다는 전설의 목사 일라이저 크레이그에서 이름을 딴 스몰배치 버번이다. "
+                 "우디함과 바닐라의 정석적인 균형으로 데일리 버번의 표준으로 꼽힌다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "LOT 40": {
+        "distillery": "하이람 워커 (Hiram Walker) · 코비", "region": "캐나다",
+        "cask": "",
+        "story": "100% 호밀(라이)을 단식 증류기로 내린 캐네디언 라이의 대표작이다. 호밀빵·허브 같은 라이 특유의 "
+                 "화사함이 또렷하다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "몽키숄더": {
+        "distillery": "윌리엄 그랜트 앤 선즈 (William Grant & Sons)", "region": "스코틀랜드 (블렌디드 몰트)",
+        "cask": "",
+        "story": "글렌피딕·발베니·키닌비 등 스페이사이드 몰트를 섞은 블렌디드 몰트다. 이름은 예전 몰트맨들이 "
+                 "보리를 삽으로 뒤집다 어깨가 처지던 직업병('monkey shoulder')에서 왔다. 달콤·부드러워 "
+                 "하이볼과 입문용으로 최적이다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "닛카 프론티어": {
+        "distillery": "닛카 (Nikka)", "region": "일본",
+        "cask": "",
+        "story": "닛카는 '일본 위스키의 아버지' 타케츠루 마사타카가 세운 회사로, 요이치·미야기쿄 증류소를 운영한다. "
+                 "프론티어는 몰트 원액을 넉넉히 담아 피트감과 48도의 탄탄함으로 하이볼 기주로 잘 어울린다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+    "제임슨": {
+        "distillery": "미들턴 (Midleton) · 아이리시 디스틸러스", "region": "아일랜드",
+        "cask": "버번 & 셰리 캐스크",
+        "story": "1780년 존 제임슨이 더블린에서 시작한, 전 세계에서 가장 많이 팔리는 아이리시 위스키다. "
+                 "세 번 증류(트리플 디스틸)해 부드럽고 깔끔한 맛이 특징이며, 지금은 미들턴 증류소에서 만든다.",
+        "source": "위키피디아 · 증류소 공식",
+    },
+}
+
 PAGE_CSS = """*{box-sizing:border-box}
 body{margin:0;background:#0f1115;color:#e8eaed;
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
@@ -123,32 +387,70 @@ h1 .gold{color:#e0a84e}
 .tserve{color:#b6bcc6;font-size:.82rem;margin-top:.5em;background:#141821;border-left:3px solid #e0a84e;
  padding:8px 12px;border-radius:0 8px 8px 0}
 .tcount{color:#6b7280;font-size:.78rem;font-weight:600}
-.card{background:#141821;border:1px solid #20242e;border-radius:14px;padding:13px 15px;margin:9px 0}
+.card{background:#141821;border:1px solid #20242e;border-radius:14px;padding:13px 15px;margin:9px 0;
+ width:100%;text-align:left;color:inherit;font:inherit;display:block}
+button.card{cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .15s,background .15s}
+button.card:hover,button.card:focus-visible{border-color:#e0a84e;background:#171c26;outline:none}
+button.card:active{background:#1b212c}
 .chead{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
 .cname{font-weight:700;font-size:1.05rem;flex:1 1 60%;min-width:0}
 .cabv{color:#e0a84e;font-size:.85rem;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
 .cmeta{color:#9aa0aa;font-size:.8rem;margin:.28em 0 .45em}
 .cnotes{color:#cdd2da;font-size:.9rem}
+.chint{color:#6b7280;font-size:.74rem;margin-top:.55em;display:flex;align-items:center;gap:.3em}
+.chint svg{width:12px;height:12px;fill:currentColor}
 .note{margin:30px 0 0;color:#8a909a;font-size:.8rem;text-align:center;line-height:1.7}
-footer{margin-top:26px;text-align:center;color:#5b616b;font-size:.75rem;line-height:1.7}"""
+footer{margin-top:26px;text-align:center;color:#5b616b;font-size:.75rem;line-height:1.7}
+/* ── 상세 팝업(모달) — 모바일 우선 바텀시트, 데스크톱에선 가운데 카드 ── */
+.mask{position:fixed;inset:0;background:rgba(6,8,11,.72);backdrop-filter:blur(2px);
+ display:none;z-index:50;align-items:flex-end;justify-content:center}
+.mask.open{display:flex}
+.modal{background:#141821;border:1px solid #2a2e37;width:100%;max-width:560px;
+ border-radius:18px 18px 0 0;max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch;
+ padding:20px 18px calc(22px + env(safe-area-inset-bottom));
+ box-shadow:0 -12px 40px rgba(0,0,0,.5);animation:slideup .22s ease}
+@keyframes slideup{from{transform:translateY(24px);opacity:.4}to{transform:translateY(0);opacity:1}}
+.mgrip{width:38px;height:4px;border-radius:999px;background:#2a2e37;margin:0 auto 14px}
+.mtop{display:flex;align-items:flex-start;gap:10px}
+.mname{font-size:1.28rem;font-weight:800;line-height:1.3;flex:1}
+.mx{flex:none;background:#20242e;border:none;color:#cdd2da;width:32px;height:32px;border-radius:50%;
+ font-size:1.1rem;cursor:pointer;line-height:1}
+.mx:hover{background:#2a2e37}
+.mtags{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 4px}
+.tag{font-size:.76rem;padding:.24em .7em;border-radius:999px;border:1px solid #2a2e37;color:#cdd2da;background:#0f1115}
+.tag.gold{color:#e0a84e;border-color:#3a2f1a;background:#1a1508}
+.mgrid{margin:14px 0 2px;border-top:1px solid #20242e}
+.mrow{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid #20242e;font-size:.9rem}
+.mrow .k{color:#9aa0aa;flex:0 0 68px}
+.mrow .v{color:#e8eaed;flex:1}
+.msec{margin-top:16px}
+.msec h4{color:#e0a84e;font-size:.82rem;letter-spacing:.02em;margin:0 0 .5em;text-transform:none}
+.msec p{margin:0;color:#cdd2da;font-size:.94rem;line-height:1.65}
+.msrc{margin-top:16px;color:#6b7280;font-size:.74rem}
+@media(min-width:600px){.mask{align-items:center}.modal{border-radius:18px}.mgrip{display:none}}"""
 
 
-def _card(item: tuple[str, str, str, str]) -> str:
+_HINT_SVG = ('<svg viewBox="0 0 24 24"><path d="M13 3a9 9 0 100 18 9 9 0 000-18zm-1 5h2v2h-2V8zm0 '
+             '4h2v6h-2v-6z"/></svg>')
+
+
+def _card(key: str, item: tuple[str, str, str, str]) -> str:
     name, cat, abv, notes = item
     e = html.escape
-    return f"""<div class="card">
+    return f"""<button type="button" class="card" data-w="{e(key)}">
   <div class="chead">
     <span class="cname">{e(name)}</span>
     <span class="cabv">{e(abv)} ABV</span>
   </div>
   <div class="cmeta">{e(cat)}</div>
   <div class="cnotes">{e(notes)}</div>
-</div>"""
+  <div class="chint">{_HINT_SVG}<span>탭하여 상세 · 스토리 보기</span></div>
+</button>"""
 
 
-def _tier_section(tier: dict) -> str:
+def _tier_section(tier: dict, keys: dict) -> str:
     e = html.escape
-    cards = "\n".join(_card(x) for x in tier["items"])
+    cards = "\n".join(_card(keys[id(x)], x) for x in tier["items"])
     n = len(tier["items"])
     return f"""<section class="tier" id="{e(tier['id'])}">
   <div class="thead">
@@ -160,9 +462,68 @@ def _tier_section(tier: dict) -> str:
 </section>"""
 
 
+def _build_data(keys: dict) -> dict:
+    """카드 key → 팝업에 뿌릴 상세 데이터(JS). DETAILS에 없거나 빈 값은 생략(위장 금지)."""
+    data = {}
+    for tier in TIERS:
+        for item in tier["items"]:
+            name, cat, abv, notes = item
+            d = DETAILS.get(name, {})
+            data[keys[id(item)]] = {
+                "name": name, "cat": cat, "abv": abv, "notes": notes,
+                "tier": tier["name"],
+                "distillery": d.get("distillery", ""),
+                "region": d.get("region", ""),
+                "cask": d.get("cask", ""),
+                "story": d.get("story", ""),
+                "source": d.get("source", ""),
+            }
+    return data
+
+
+MODAL_JS = """(function(){
+ var data=window.__WIMAKASE__||{};
+ var mask=document.getElementById('mask');
+ var m=document.getElementById('mbody');
+ var last=null;
+ function esc(s){var d=document.createElement('div');d.textContent=s==null?'':s;return d.innerHTML;}
+ function row(k,v){return v?'<div class="mrow"><span class="k">'+k+'</span><span class="v">'+esc(v)+'</span></div>':'';}
+ function open(key){
+  var d=data[key];if(!d)return;
+  var h='<div class="mtop"><div class="mname">'+esc(d.name)+'</div>'+
+        '<button type="button" class="mx" aria-label="닫기" onclick="__wmClose()">✕</button></div>'+
+        '<div class="mtags"><span class="tag gold">'+esc(d.abv)+' ABV</span>'+
+        '<span class="tag">'+esc(d.cat)+'</span>'+
+        (d.tier?'<span class="tag">'+esc(d.tier)+'</span>':'')+'</div>'+
+        '<div class="mgrid">'+row('증류소',d.distillery)+row('지역',d.region)+
+        row('캐스크',d.cask)+row('도수',d.abv)+row('분류',d.cat)+'</div>';
+  if(d.notes)h+='<div class="msec"><h4>특징</h4><p>'+esc(d.notes)+'</p></div>';
+  if(d.story)h+='<div class="msec"><h4>스토리</h4><p>'+esc(d.story)+'</p></div>';
+  if(d.source)h+='<div class="msrc">출처 · '+esc(d.source)+' (요약)</div>';
+  m.innerHTML=h;
+  mask.classList.add('open');document.body.style.overflow='hidden';
+  m.parentNode.scrollTop=0;
+ }
+ window.__wmClose=function(){mask.classList.remove('open');document.body.style.overflow='';
+  if(last){last.focus();last=null;}};
+ document.querySelectorAll('button.card').forEach(function(b){
+  b.addEventListener('click',function(){last=b;open(b.getAttribute('data-w'));});
+ });
+ mask.addEventListener('click',function(e){if(e.target===mask)window.__wmClose();});
+ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&mask.classList.contains('open'))window.__wmClose();});
+})();"""
+
+
 def render() -> str:
     e = html.escape
-    tiers_html = "\n".join(_tier_section(t) for t in TIERS)
+    # 각 아이템 객체에 안정적인 key(w1..wN) 부여 — id() 로 매핑
+    keys, n = {}, 0
+    for tier in TIERS:
+        for item in tier["items"]:
+            n += 1
+            keys[id(item)] = f"w{n}"
+    tiers_html = "\n".join(_tier_section(t, keys) for t in TIERS)
+    data_json = json.dumps(_build_data(keys), ensure_ascii=False)
     total = sum(len(t["items"]) for t in TIERS)
     return f"""<!DOCTYPE html>
 <html lang="ko">
@@ -191,10 +552,18 @@ def render() -> str:
 
 {tiers_html}
 
-<p class="note">고도수(55%+) 제품은 소량의 물을 더하면 풍미가 열립니다 · 다음 잔 전 입 안을 물로 헹궈주세요 · 테이스팅 각 20 ml</p>
+<p class="note">각 술을 탭하면 증류소·캐스크·스토리 상세가 열립니다 · 고도수(55%+)는 소량의 물을 더하면 풍미가 열립니다 · 다음 잔 전 입 안을 물로 헹궈주세요 · 테이스팅 각 20 ml</p>
 
-<footer>합정 위마카세 · 메뉴 {e(VERSION)} &nbsp;·&nbsp; CaskCode<br>메뉴는 수시로 업데이트됩니다 — 버전을 확인하세요 🥃</footer>
+<footer>합정 위마카세 · 메뉴 {e(VERSION)} &nbsp;·&nbsp; CaskCode<br>메뉴는 수시로 업데이트됩니다 — 버전을 확인하세요 🥃<br>상세 정보는 위키피디아 등 공개 자료를 요약한 참고용입니다.</footer>
 </div>
+
+<div class="mask" id="mask" role="dialog" aria-modal="true" aria-label="위스키 상세">
+  <div class="modal"><div class="mgrip"></div><div id="mbody"></div></div>
+</div>
+<script>window.__WIMAKASE__={data_json};</script>
+<script>
+{MODAL_JS}
+</script>
 </body>
 </html>
 """
