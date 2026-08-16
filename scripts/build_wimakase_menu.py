@@ -488,8 +488,11 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
  border-bottom:1px solid #171c26;white-space:pre-wrap;word-break:break-word}
 .lgmemotext::before{content:"✏️ ";opacity:.7}
 .lgedit{padding:2px 2px 11px;border-bottom:1px solid #171c26}
+/* ⚠️ font-size는 반드시 16px 이상 — iOS Safari/카톡 웹뷰는 16px 미만 입력창에 포커스 시
+   자동 확대(zoom)하고, 확대되면 시각뷰포트가 좁아져 모달이 화면보다 넓어 보이며 우측이
+   잘린다("width 깨짐"의 진짜 원인, CMPA-1285 보드 스크린샷). 16px면 확대 자체가 안 일어난다. */
 .lgedit textarea{width:100%;box-sizing:border-box;max-width:100%;min-width:0;background:#0f1115;border:1px solid #2a2e37;border-radius:8px;color:#e8eaed;
- font:inherit;font-size:.86rem;padding:8px;resize:vertical;min-height:52px;display:block}
+ font:inherit;font-size:16px;padding:8px;resize:vertical;min-height:52px;display:block}
 .lgeditbtns{display:flex;gap:8px;margin-top:6px}
 .lgsave{background:#e0a84e;color:#1a1508;border:none;border-radius:8px;padding:6px 16px;
  font:inherit;font-weight:700;font-size:.82rem;cursor:pointer}
