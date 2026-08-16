@@ -66,16 +66,11 @@ TIERS = [
         "sub": "고도수 & 매니아픽",
         "serve": "바텐더 추천 또는 고객 선택으로 5잔(각 20ml) 제공",
         "items": [
-            ("발베니 12년 더블우드", "싱글 몰트 스카치", "40%", "화사하고 달달한 꿀/바닐라 풍미의 정석"),
             ("글렌알라키 15년", "싱글 몰트 스카치", "46%", "진득한 셰리 풍미로 최근 가장 인기 있는 바틀"),
-            ("매캘란 더블우드 12년", "싱글 몰트 스카치", "40%", "싱글 몰트의 절대 강자, 훌륭한 밸런스"),
             ("글렌드로낙 12년", "싱글 몰트 스카치", "43%", "입문~중급용 셰리 캐스크의 교과서"),
-            ("에버펠디 16년", "싱글 몰트 스카치", "40%", "부드럽고 꿀 같은 달콤함"),
             ("로얄 브라크라 12년", "싱글 몰트 스카치", "46%", "올로로소 셰리 피니시, 고급스럽고 우아한 맛"),
             ("부나하벤 12년", "싱글 몰트 스카치", "46.3%", "논칠필터, 훌륭한 바디감의 아일라 몰트"),
-            ("조니워커 그린", "블렌디드 몰트", "43%", "가성비와 퀄리티를 모두 잡은 15년 숙성 블렌딩"),
             ("러셀 리저브 싱글배럴", "버번 위스키", "55%", "버번 매니아들의 열렬한 지지를 받는 훌륭한 바틀"),
-            ("이글레어 10년", "버번 위스키", "45%", "버팔로트레이스 증류소의 프리미엄 라인"),
             ("와일드터키 레어브리드 라이", "라이 위스키", "56.1%", "타격감과 풍미가 일품인 배럴 프루프 라이"),
             ("사가모어 라이 CS", "라이 위스키", "56%", "CS 특유의 강렬한 타격감과 진한 화사함"),
             ("탈리스커 10년", "싱글 몰트 스카치", "45.8%", "바다향과 후추향이 일품인 대표 피트 위스키"),
@@ -92,6 +87,11 @@ TIERS = [
         "sub": "프리플로우 · 무제한",
         "serve": "1, 2티어 코스 완료 후 니트, 온더락, 하이볼 등으로 무제한 제공",
         "items": [
+            ("발베니 12년 더블우드", "싱글 몰트 스카치", "40%", "화사하고 달달한 꿀/바닐라 풍미의 정석"),
+            ("매캘란 더블우드 12년", "싱글 몰트 스카치", "40%", "싱글 몰트의 절대 강자, 훌륭한 밸런스"),
+            ("에버펠디 16년", "싱글 몰트 스카치", "40%", "부드럽고 꿀 같은 달콤함"),
+            ("조니워커 그린", "블렌디드 몰트", "43%", "가성비와 퀄리티를 모두 잡은 15년 숙성 블렌딩"),
+            ("이글레어 10년", "버번 위스키", "45%", "버팔로트레이스 증류소의 프리미엄 라인"),
             ("엔젤스 엔비 스몰배치", "버번 위스키", "50%", "포트 캐스크 피니시의 달콤함과 스몰배치의 타격감"),
             ("놉크릭 9년", "버번 위스키", "50%", "짐빔 가문 스몰배치, 묵직하고 진한 땅콩/견과류 풍미"),
             ("일라이저 크레이그 스몰배치", "버번 위스키", "47%", "우디함과 바닐라의 정석적인 밸런스"),
@@ -382,25 +382,35 @@ h1 .gold{color:#e0a84e}
 .program .pt{color:#e0a84e;font-weight:700;font-size:.98rem;margin-bottom:.55em}
 .program p{margin:.4em 0;color:#cdd2da;font-size:.9rem}
 .program .vol{color:#7fd1b9;font-weight:600;margin-top:.5em;font-size:.9rem}
-.tier{margin-top:30px;scroll-margin-top:8px}
-.thead{border-bottom:1px solid #2a2e37;padding-bottom:.5em;margin-bottom:12px}
-.tname{color:#e0a84e;font-size:1.18rem;font-weight:700}
+/* ── 티어 탭 (한 번에 한 티어만) ── */
+.tabs{position:sticky;top:0;z-index:20;display:flex;gap:6px;background:#0f1115;
+ padding:10px 0 9px;margin-top:22px;border-bottom:1px solid #20242e}
+.tab{flex:1;background:#141821;border:1px solid #20242e;border-radius:12px;color:#cdd2da;
+ font:inherit;font-size:.92rem;font-weight:700;padding:9px 4px;cursor:pointer;line-height:1.25;
+ -webkit-tap-highlight-color:transparent;transition:border-color .15s,background .15s,color .15s}
+.tab b{display:block;font-size:.7rem;font-weight:600;color:#6b7280;margin-top:.2em}
+.tab.active{border-color:#e0a84e;background:#1a1508;color:#e0a84e}
+.tab.active b{color:#e0a84e}
+.tier{display:none;margin-top:16px;scroll-margin-top:8px}
+.tier.active{display:block}
+.thead{border-bottom:1px solid #2a2e37;padding-bottom:.5em;margin-bottom:10px}
+.tname{color:#e0a84e;font-size:1.12rem;font-weight:700}
 .tsub{color:#9aa0aa;font-size:.82rem;margin-top:.15em}
-.tserve{color:#b6bcc6;font-size:.82rem;margin-top:.5em;background:#141821;border-left:3px solid #e0a84e;
- padding:8px 12px;border-radius:0 8px 8px 0}
+.tserve{color:#b6bcc6;font-size:.8rem;margin-top:.5em;background:#141821;border-left:3px solid #e0a84e;
+ padding:7px 11px;border-radius:0 8px 8px 0}
 .tcount{color:#6b7280;font-size:.78rem;font-weight:600}
-.card{background:#141821;border:1px solid #20242e;border-radius:14px;padding:13px 15px;margin:9px 0;
- width:100%;text-align:left;color:inherit;font:inherit;display:block}
+/* ── 컴팩트 카드 그리드 (앞면 = 제품명 + 도수 + 원산지) ── */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
+.card{background:#141821;border:1px solid #20242e;border-radius:12px;padding:11px 12px;
+ width:100%;text-align:left;color:inherit;font:inherit;display:flex;flex-direction:column;min-height:86px}
 button.card{cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .15s,background .15s}
 button.card:hover,button.card:focus-visible{border-color:#e0a84e;background:#171c26;outline:none}
 button.card:active{background:#1b212c}
-.chead{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
-.cname{font-weight:700;font-size:1.05rem;flex:1 1 60%;min-width:0}
-.cabv{color:#e0a84e;font-size:.85rem;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
-.cmeta{color:#9aa0aa;font-size:.8rem;margin:.28em 0 .45em}
-.cnotes{color:#cdd2da;font-size:.9rem}
-.chint{color:#6b7280;font-size:.74rem;margin-top:.55em;display:flex;align-items:center;gap:.3em}
-.chint svg{width:12px;height:12px;fill:currentColor}
+.cname{font-weight:700;font-size:.95rem;line-height:1.3;word-break:keep-all}
+.cfoot{margin-top:auto;padding-top:8px;display:flex;align-items:baseline;justify-content:space-between;gap:6px}
+.cabv{color:#e0a84e;font-size:.82rem;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+.corigin{color:#9aa0aa;font-size:.72rem;text-align:right;line-height:1.25;word-break:keep-all}
+@media(min-width:600px){.grid{grid-template-columns:repeat(3,1fr)}}
 .note{margin:30px 0 0;color:#8a909a;font-size:.8rem;text-align:center;line-height:1.7}
 footer{margin-top:26px;text-align:center;color:#5b616b;font-size:.75rem;line-height:1.7}
 /* ── 상세 팝업(모달) — 모바일 우선 바텀시트, 데스크톱에선 가운데 카드 ── */
@@ -432,35 +442,51 @@ footer{margin-top:26px;text-align:center;color:#5b616b;font-size:.75rem;line-hei
 @media(min-width:600px){.mask{align-items:center}.modal{border-radius:18px}.mgrip{display:none}}"""
 
 
-_HINT_SVG = ('<svg viewBox="0 0 24 24"><path d="M13 3a9 9 0 100 18 9 9 0 000-18zm-1 5h2v2h-2V8zm0 '
-             '4h2v6h-2v-6z"/></svg>')
+def _origin(name: str, cat: str) -> str:
+    """카드 앞면에 노출할 짧은 '원산지/증류소' 라벨 — region의 국가·지역 (괄호 상세 제거)."""
+    region = DETAILS.get(name, {}).get("region", "")
+    if region:
+        return region.split("(")[0].strip()
+    return cat
 
 
 def _card(key: str, item: tuple[str, str, str, str]) -> str:
     name, cat, abv, notes = item
     e = html.escape
+    origin = _origin(name, cat)
     return f"""<button type="button" class="card" data-w="{e(key)}">
-  <div class="chead">
-    <span class="cname">{e(name)}</span>
-    <span class="cabv">{e(abv)} ABV</span>
-  </div>
-  <div class="cmeta">{e(cat)}</div>
-  <div class="cnotes">{e(notes)}</div>
-  <div class="chint">{_HINT_SVG}<span>탭하여 상세 · 스토리 보기</span></div>
+  <div class="cname">{e(name)}</div>
+  <div class="cfoot"><span class="cabv">{e(abv)}</span><span class="corigin">{e(origin)}</span></div>
 </button>"""
 
 
-def _tier_section(tier: dict, keys: dict) -> str:
+def _tabs() -> str:
     e = html.escape
-    cards = "\n".join(_card(keys[id(x)], x) for x in tier["items"])
+    btns = []
+    for i, t in enumerate(TIERS):
+        cls = "tab active" if i == 0 else "tab"
+        n = len(t["items"])
+        btns.append(
+            f'<button type="button" class="{cls}" data-tier="{e(t["id"])}">'
+            f'{e(t["medal"])} {i + 1}티어<b>{n}종</b></button>'
+        )
+    return '<div class="tabs" role="tablist">' + "".join(btns) + "</div>"
+
+
+def _tier_section(tier: dict, keys: dict, active: bool) -> str:
+    e = html.escape
+    cards = "\n  ".join(_card(keys[id(x)], x) for x in tier["items"])
     n = len(tier["items"])
-    return f"""<section class="tier" id="{e(tier['id'])}">
+    cls = "tier active" if active else "tier"
+    return f"""<section class="{cls}" id="{e(tier['id'])}" role="tabpanel">
   <div class="thead">
     <div class="tname">{e(tier['medal'])} {e(tier['name'])} <span class="tcount">· {n}종</span></div>
     <div class="tsub">{e(tier['sub'])}</div>
     <div class="tserve">제공 방식 — {e(tier['serve'])}</div>
   </div>
+  <div class="grid">
   {cards}
+  </div>
 </section>"""
 
 
@@ -516,6 +542,19 @@ MODAL_JS = """(function(){
 })();"""
 
 
+TAB_JS = """(function(){
+ var tabs=document.querySelectorAll('.tab');
+ var tiers=document.querySelectorAll('.tier');
+ tabs.forEach(function(t){
+  t.addEventListener('click',function(){
+   var id=t.getAttribute('data-tier');
+   tabs.forEach(function(x){x.classList.toggle('active',x===t);});
+   tiers.forEach(function(s){s.classList.toggle('active',s.id===id);});
+  });
+ });
+})();"""
+
+
 def render() -> str:
     e = html.escape
     # 각 아이템 객체에 안정적인 key(w1..wN) 부여 — id() 로 매핑
@@ -524,7 +563,8 @@ def render() -> str:
         for item in tier["items"]:
             n += 1
             keys[id(item)] = f"w{n}"
-    tiers_html = "\n".join(_tier_section(t, keys) for t in TIERS)
+    tabs_html = _tabs()
+    tiers_html = "\n".join(_tier_section(t, keys, i == 0) for i, t in enumerate(TIERS))
     data_json = json.dumps(_build_data(keys), ensure_ascii=False)
     collected_json = json.dumps(COLLECTED, ensure_ascii=False)
     total = sum(len(t["items"]) for t in TIERS)
@@ -553,9 +593,10 @@ def render() -> str:
   <p class="vol">{e(PROGRAM['volume'])}</p>
 </div>
 
+{tabs_html}
 {tiers_html}
 
-<p class="note">각 술을 탭하면 증류소·캐스크·스토리 상세가 열립니다 · 고도수(55%+)는 소량의 물을 더하면 풍미가 열립니다 · 다음 잔 전 입 안을 물로 헹궈주세요 · 테이스팅 각 20 ml</p>
+<p class="note">티어 탭을 눌러 이동하세요 · 각 술 카드를 탭하면 증류소·캐스크·스토리 상세가 열립니다 · 고도수(55%+)는 소량의 물을 더하면 풍미가 열립니다 · 다음 잔 전 입 안을 물로 헹궈주세요 · 테이스팅 각 20 ml</p>
 
 <footer>합정 위마카세 · 메뉴 {e(VERSION)} &nbsp;·&nbsp; CaskCode<br>메뉴는 수시로 업데이트됩니다 — 버전을 확인하세요 🥃<br>상세 정보는 위키피디아 등 공개 자료를 요약한 참고용입니다 · 수집 {e(COLLECTED)}</footer>
 </div>
@@ -566,6 +607,7 @@ def render() -> str:
 <script>window.__WIMAKASE__={data_json};window.__WM_COLLECTED__={collected_json};</script>
 <script>
 {MODAL_JS}
+{TAB_JS}
 </script>
 </body>
 </html>
