@@ -470,11 +470,16 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
 .logday{margin-top:14px}
 .logdate{color:#e0a84e;font-size:.86rem;font-weight:700;border-bottom:1px solid #20242e;padding-bottom:.3em}
 .logdate span{color:#6b7280;font-weight:600;font-size:.78rem}
+.logdate .logdur{color:#e0a84e;font-weight:700;font-size:.78rem;margin-left:.4em;
+ font-variant-numeric:tabular-nums}
 .logrow{display:flex;align-items:center;justify-content:space-between;gap:10px;
  padding:8px 2px;min-width:0}
 /* flex 자식 가로 넘침 차단(카톡 웹뷰·CMPA-1282 계열): 긴 위스키명이 행을 밀어내지 않게 */
 .lgname{font-size:.92rem;flex:1 1 auto;min-width:0;word-break:keep-all;overflow-wrap:anywhere}
 .lgabv{color:#e0a84e;font-size:.8rem;font-weight:700;margin-left:.5em;font-variant-numeric:tabular-nums}
+/* 담은 시각(HH:MM) 배지 — 좁은 화면(≈360px)에서 이름/도수·버튼과 안 겹치게 flex:none·nowrap */
+.lgtime{flex:none;color:#8b93a0;font-size:.72rem;font-weight:600;font-variant-numeric:tabular-nums;
+ background:#191d26;padding:2px 6px;border-radius:6px;white-space:nowrap}
 .lgbtns{display:flex;gap:6px;flex:none}
 .lgmemo{flex:none;background:#20242e;border:none;color:#9aa0aa;width:28px;height:28px;border-radius:7px;
  font-size:.85rem;cursor:pointer;line-height:1;-webkit-tap-highlight-color:transparent}
@@ -501,6 +506,30 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
 .logclear{display:block;width:100%;margin-top:20px;background:transparent;border:1px solid #3a2222;
  color:#c98;border-radius:10px;padding:10px;font:inherit;font-size:.86rem;cursor:pointer}
 .logclear:hover{background:#2a1616}
+/* ── 카톡 인앱 강제탈출 실패 시 Plan B 안내 레이어(CMPA-1286) — 전체를 덮는 안내창 ──
+   CLAUDE.md 카톡 웹뷰 원칙: 100vw/100vh/backdrop-filter:blur 금지. inset:0(=100% 폭·높이)+
+   반투명 rgba 배경, safe-area 방어적 조합(max(env(...),Npx))만 쓴다. 닫기(X) 가능. */
+.kkomask{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;
+ background:rgba(8,10,14,.96);color:#e8eaed;overflow-y:auto;-webkit-overflow-scrolling:touch;
+ padding:calc(24px + env(safe-area-inset-top)) 22px calc(24px + max(env(safe-area-inset-bottom), 12px))}
+.kkomask.open{display:flex}
+.kkobox{width:100%;max-width:400px;text-align:center}
+.kkoicon{font-size:2.6rem;line-height:1;margin-bottom:4px}
+.kkobox h2{font-size:1.16rem;margin:.35em 0 .2em;color:#e0a84e}
+.kkobox p{color:#cdd2da;font-size:.9rem;line-height:1.6;margin:.6em 0}
+.kkosteps{text-align:left;margin:16px 0;padding:14px 18px;background:#141821;
+ border:1px solid #2a2e37;border-radius:12px}
+.kkosteps li{color:#cdd2da;font-size:.92rem;line-height:1.7;margin:0 0 4px;min-width:0;word-break:keep-all}
+.kkosteps b{color:#e0a84e}
+.kkoopen{display:block;width:100%;background:#e0a84e;color:#1a1508;border:none;border-radius:12px;
+ padding:13px;font:inherit;font-weight:800;font-size:.95rem;cursor:pointer;margin:8px 0;
+ -webkit-tap-highlight-color:transparent;transition:transform .1s}
+.kkoopen:active{transform:scale(.98)}
+.kkoclose{display:block;width:100%;background:transparent;color:#9aa0aa;border:1px solid #2a2e37;
+ border-radius:12px;padding:11px;font:inherit;font-size:.88rem;cursor:pointer;margin:4px 0;
+ -webkit-tap-highlight-color:transparent}
+.kkoclose:active{background:#171c26}
+.kkofoot{color:#5b616b;font-size:.74rem;margin-top:14px}
 @media(min-width:600px){.mask{align-items:center}.modal{border-radius:18px}.mgrip{display:none}}"""
 
 
@@ -652,13 +681,22 @@ LOG_JS = """(function(){
  function save(a){try{localStorage.setItem(LS,JSON.stringify(a));}catch(e){}}
  function today(){var d=new Date(),m=('0'+(d.getMonth()+1)).slice(-2),dd=('0'+d.getDate()).slice(-2);
   return d.getFullYear()+'-'+m+'-'+dd;}
+ // 담는 순간의 기기(핸드폰) 로컬 시각 스냅샷(HH:MM) — 사용자가 편집하는 값이 아님(클릭 캡처).
+ function nowhm(){var d=new Date(),h=('0'+d.getHours()).slice(-2),mi=('0'+d.getMinutes()).slice(-2);
+  return h+':'+mi;}
+ // 'HH:MM' → 자정 기준 분. 형식이 아니면 null(구버전 기록엔 ts 없음 → 총시간 계산 제외).
+ function hm2min(s){if(!s||typeof s!=='string')return null;var m=/^(\\d{1,2}):(\\d{2})$/.exec(s);
+  if(!m)return null;var h=+m[1],mi=+m[2];if(h>23||mi>59)return null;return h*60+mi;}
+ // 경과 분 → 'N시간 M분'(0시간이면 'M분').
+ function durtxt(min){if(min<=0)return '';var h=Math.floor(min/60),m=min%60;
+  return (h?h+'시간 ':'')+m+'분';}
  function esc(s){var x=document.createElement('div');x.textContent=s==null?'':s;return x.innerHTML;}
  function updateFab(){cnt.textContent=load().length;}
  function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');
   if(toastT)clearTimeout(toastT);toastT=setTimeout(function(){toastEl.classList.remove('show');},1400);}
  function add(key){
   var d=data[key];if(!d)return;
-  var a=load();a.push({k:key,name:d.name,cat:d.cat,abv:d.abv,date:today()});save(a);
+  var a=load();a.push({k:key,name:d.name,cat:d.cat,abv:d.abv,date:today(),ts:nowhm()});save(a);
   updateFab();toast('담김 · '+d.name);
  }
  window.__wmRemove=function(i){var a=load();a.splice(i,1);save(a);editing=null;updateFab();renderLog();};
@@ -681,11 +719,19 @@ LOG_JS = """(function(){
   order.sort().reverse();
   h+='<div class="logsum">총 '+a.length+'잔 · '+order.length+'일 기록</div>';
   order.forEach(function(dt){
-   h+='<div class="logday"><div class="logdate">'+esc(dt)+' <span>('+byDate[dt].length+'잔)</span></div>';
+   // 그날 첫 잔~마지막 잔 경과시간(ts 있는 기록만). 유효 기록 2개 미만이면 총시간 생략.
+   var mins=byDate[dt].map(function(o){return hm2min(o.e.ts);})
+     .filter(function(x){return x!=null;});
+   var dur='';
+   if(mins.length>=2){var lo=Math.min.apply(null,mins),hi=Math.max.apply(null,mins);
+    dur=durtxt(hi-lo);}
+   h+='<div class="logday"><div class="logdate">'+esc(dt)+' <span>('+byDate[dt].length+'잔)</span>'+
+      (dur?'<span class="logdur">🕒 '+esc(dur)+'</span>':'')+'</div>';
    byDate[dt].forEach(function(o){
     var e=o.e,i=o.i,memo=e.memo||'';
+    var tsbadge=e.ts?'<span class="lgtime">'+esc(e.ts)+'</span>':'';
     h+='<div class="logrow"><span class="lgname">'+esc(e.name)+
-       '<span class="lgabv">'+esc(e.abv)+'</span></span><div class="lgbtns">'+
+       '<span class="lgabv">'+esc(e.abv)+'</span></span>'+tsbadge+'<div class="lgbtns">'+
        '<button type="button" class="lgmemo'+(memo?' has':'')+'" aria-label="메모" '+
        'title="메모" onclick="__wmMemo('+i+')">✏️</button>'+
        '<button type="button" class="lgx" aria-label="삭제" onclick="__wmRemove('+i+')">✕</button>'+
@@ -743,6 +789,50 @@ EXT_JS = """(function(){
 })();"""
 
 
+# 카톡 인앱 브라우저 → 강제 외부 브라우저 리다이렉트 + 플랜 B 안내 레이어(CMPA-1286, 보드 요청).
+# <head>에서 즉시 실행 — 깨진 페이지가 렌더되기 전에 크롬/사파리로 튕긴다.
+#  · kakaotalk UA에서만 동작(크롬/사파리 직접 접속엔 무영향).
+#  · Android: intent:// 스킴으로 크롬 강제 호출. iOS: kakaotalk://web/openExternal 로 사파리.
+#  · 세션당 자동 시도 1회(무한 리다이렉트 루프 방지).
+#  · 스킴이 막혀 인앱에 남으면(iOS 간헐) 1.5초 뒤 전체 안내 레이어(Plan B) 노출 — 닫기 가능.
+REDIRECT_JS = """(function(){
+ var ua=navigator.userAgent||'';
+ if(!/KAKAOTALK/i.test(ua))return;            // 카톡 인앱에서만 — 그 외 브라우저엔 무영향
+ var url=location.href.split('#')[0];
+ var isIOS=/iphone|ipad|ipod/i.test(ua);
+ function openExt(){
+  if(isIOS){
+   location.href='kakaotalk://web/openExternal?url='+encodeURIComponent(url);
+  }else{
+   var noProto=url.replace(/^https?:\\/\\//,'');
+   location.href='intent://'+noProto+'#Intent;scheme=https;package=com.android.chrome;end';
+  }
+ }
+ var RKEY='wm_kko_redir_v1';var DKEY='wm_kko_planb_dismiss_v1';
+ var tried=false,dismissed=false;
+ try{tried=sessionStorage.getItem(RKEY)==='1';}catch(e){}
+ try{dismissed=sessionStorage.getItem(DKEY)==='1';}catch(e){}
+ if(!tried){try{sessionStorage.setItem(RKEY,'1');}catch(e){}openExt();}
+ // 플랜 B — 스킴이 막혀 여전히 카톡 인앱이면 안내 레이어로 수동 탈출 유도.
+ function initPlanB(){
+  var mask=document.getElementById('kkomask');if(!mask)return;
+  var openBtn=document.getElementById('kkoopen');
+  var closeBtn=document.getElementById('kkoclose');
+  if(openBtn)openBtn.addEventListener('click',openExt);
+  if(closeBtn)closeBtn.addEventListener('click',function(){
+   dismissed=true;try{sessionStorage.setItem(DKEY,'1');}catch(e){}
+   mask.classList.remove('open');document.body.style.overflow='';});
+  setTimeout(function(){
+   if(dismissed)return;
+   if(/KAKAOTALK/i.test(navigator.userAgent||'')){
+    mask.classList.add('open');document.body.style.overflow='hidden';}
+  },1500);
+ }
+ if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initPlanB);}
+ else{initPlanB();}
+})();"""
+
+
 def _next_build() -> int:
     """빌드 카운터를 1 증가시켜 반환(발행마다 캐시버스트 쿼리·라벨이 달라지게)."""
     try:
@@ -779,6 +869,8 @@ def render(build: int) -> str:
 <meta http-equiv="Expires" content="0">
 <meta name="build" content="{e(cache_tag)}">
 <link rel="canonical" href="wimakase.html?v={e(cache_tag)}">
+<!-- 카톡 인앱 → 강제 외부 브라우저 리다이렉트(CMPA-1286). 깨진 렌더 전에 즉시 실행하려 head에 둔다. -->
+<script>{REDIRECT_JS}</script>
 <title>{e(TITLE)} · 위스키 메뉴 {e(VERSION)}</title>
 <meta name="description" content="{e(TITLE)} 위스키 바 메뉴 — 3티어 {total}종. 1·2티어 테이스팅 200ml + 3티어 프리플로우. {e(VERSION)}">
 <style>
@@ -810,6 +902,21 @@ def render(build: int) -> str:
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="mask" id="logmask" role="dialog" aria-modal="true" aria-label="내가 마신 목록">
   <div class="modal"><div class="mgrip"></div><div id="logbody"></div></div>
+</div>
+
+<div class="kkomask" id="kkomask" role="dialog" aria-modal="true" aria-label="다른 브라우저로 열기 안내">
+  <div class="kkobox">
+    <div class="kkoicon">🔗</div>
+    <h2>다른 브라우저로 열어주세요</h2>
+    <p>카카오톡 안에서는 화면이 깨져 보일 수 있어요.<br>크롬·사파리에서 열면 편하게 보실 수 있습니다.</p>
+    <ol class="kkosteps">
+      <li>화면 <b>우측 하단 ⁝</b>(더보기)를 누르세요</li>
+      <li><b>다른 브라우저로 열기</b>를 선택하세요</li>
+    </ol>
+    <button type="button" class="kkoopen" id="kkoopen">🔗 기본 브라우저에서 다시 열기</button>
+    <button type="button" class="kkoclose" id="kkoclose">그냥 여기서 볼게요</button>
+    <div class="kkofoot">CaskCode</div>
+  </div>
 </div>
 
 <script>window.__WIMAKASE__={data_json};window.__WM_COLLECTED__={collected_json};</script>
