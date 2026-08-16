@@ -32,12 +32,14 @@ h1 .gold{color:#e0a84e}
 .tcount{color:#6b7280;font-size:.76rem;font-weight:600}
 /* ── 한 줄 목록 (이름 + 도수) · 탭하면 상세 팝업 ── */
 .list{display:flex;flex-direction:column}
-.row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;
  width:100%;text-align:left;color:inherit;font:inherit;background:transparent;
  border:0;border-bottom:1px solid #1c202a;padding:8px 2px;cursor:pointer;
  -webkit-tap-highlight-color:transparent;transition:background .12s}
 .row:hover,.row:focus-visible{background:#171c26;outline:none}
+.rmain{display:flex;flex-direction:column;gap:1px;min-width:0}
 .rname{font-weight:600;font-size:.95rem;line-height:1.3;word-break:keep-all}
+.rcat{color:#8a909a;font-size:.72rem;line-height:1.3}
 .rabv{color:#e0a84e;font-size:.85rem;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;flex:none}
 .note{margin:20px 0 0;color:#8a909a;font-size:.78rem;text-align:center;line-height:1.6}
 footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-height:1.6}
@@ -82,17 +84,17 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
     <div class="tserve">바텐더 추천 또는 고객 선택으로 5잔(각 20ml) 제공</div>
   </div>
   <div class="list">
-  <button type="button" class="row" data-w="w1"><span class="rname">글렌드로낙 21년</span><span class="rabv">48%</span></button>
-  <button type="button" class="row" data-w="w2"><span class="rname">글렌피딕 18년</span><span class="rabv">48%</span></button>
-  <button type="button" class="row" data-w="w3"><span class="rname">글렌리벳 19년</span><span class="rabv">48%</span></button>
-  <button type="button" class="row" data-w="w4"><span class="rname">올트모어 18년</span><span class="rabv">46%</span></button>
-  <button type="button" class="row" data-w="w5"><span class="rname">아벨라워 아브나흐</span><span class="rabv">61%</span></button>
-  <button type="button" class="row" data-w="w6"><span class="rname">옥토모어 15.1</span><span class="rabv">59.1%</span></button>
-  <button type="button" class="row" data-w="w7"><span class="rname">스테그 (Stagg)</span><span class="rabv">63~65%</span></button>
-  <button type="button" class="row" data-w="w8"><span class="rname">일라이저 크레이그 18년</span><span class="rabv">45%</span></button>
-  <button type="button" class="row" data-w="w9"><span class="rname">카발란 올로로소</span><span class="rabv">55%</span></button>
-  <button type="button" class="row" data-w="w10"><span class="rname">야마자키 12년</span><span class="rabv">43%</span></button>
-  <button type="button" class="row" data-w="w11"><span class="rname">기원 타이거 (Tiger)</span><span class="rabv">46%</span></button>
+  <button type="button" class="row" data-w="w1"><span class="rmain"><span class="rname">글렌드로낙 21년</span><span class="rcat">싱글 몰트 스카치</span></span><span class="rabv">48%</span></button>
+  <button type="button" class="row" data-w="w2"><span class="rmain"><span class="rname">글렌피딕 18년</span><span class="rcat">싱글 몰트 스카치</span></span><span class="rabv">48%</span></button>
+  <button type="button" class="row" data-w="w3"><span class="rmain"><span class="rname">글렌리벳 19년</span><span class="rcat">싱글 몰트 스카치</span></span><span class="rabv">48%</span></button>
+  <button type="button" class="row" data-w="w4"><span class="rmain"><span class="rname">올트모어 18년</span><span class="rcat">싱글 몰트 스카치</span></span><span class="rabv">46%</span></button>
+  <button type="button" class="row" data-w="w5"><span class="rmain"><span class="rname">아벨라워 아브나흐</span><span class="rcat">싱글 몰트 스카치</span></span><span class="rabv">61%</span></button>
+  <button type="button" class="row" data-w="w6"><span class="rmain"><span class="rname">옥토모어 15.1</span><span class="rcat">싱글 몰트 스카치</span></span><span class="rabv">59.1%</span></button>
+  <button type="button" class="row" data-w="w7"><span class="rmain"><span class="rname">스테그 (Stagg)</span><span class="rcat">버번 위스키</span></span><span class="rabv">63~65%</span></button>
+  <button type="button" class="row" data-w="w8"><span class="rmain"><span class="rname">일라이저 크레이그 18년</span><span class="rcat">버번 위스키</span></span><span class="rabv">45%</span></button>
+  <button type="button" class="row" data-w="w9"><span class="rmain"><span class="rname">카발란 올로로소</span><span class="rcat">타이완 싱글 몰트</span></span><span class="rabv">55%</span></button>
+  <button type="button" class="row" data-w="w10"><span class="rmain"><span class="rname">야마자키 12년</span><span class="rcat">재패니즈 싱글 몰트</span></span><span class="rabv">43%</span></button>
+  <button type="button" class="row" data-w="w11"><span class="rmain"><span class="rname">기원 타이거 (Tiger)</span><span class="rcat">코리안 싱글 몰트</span></span><span class="rabv">46%</span></button>
   </div>
 </section>
 <section class="tier" id="tier2" role="tabpanel">
@@ -101,19 +103,19 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
     <div class="tserve">바텐더 추천 또는 고객 선택으로 5잔(각 20ml) 제공</div>
   </div>
   <div class="list">
-  <button type="button" class="row" data-w="w12"><span class="rname">글렌알라키 15년</span><span class="rabv">46%</span></button>
-  <button type="button" class="row" data-w="w13"><span class="rname">매캘란 더블우드 12년</span><span class="rabv">40%</span></button>
-  <button type="button" class="row" data-w="w14"><span class="rname">에버펠디 16년</span><span class="rabv">40%</span></button>
-  <button type="button" class="row" data-w="w15"><span class="rname">로얄 브라크라 12년</span><span class="rabv">46%</span></button>
-  <button type="button" class="row" data-w="w16"><span class="rname">부나하벤 12년</span><span class="rabv">46.3%</span></button>
-  <button type="button" class="row" data-w="w17"><span class="rname">러셀 리저브 싱글배럴</span><span class="rabv">55%</span></button>
-  <button type="button" class="row" data-w="w18"><span class="rname">와일드터키 레어브리드 라이</span><span class="rabv">56.1%</span></button>
-  <button type="button" class="row" data-w="w19"><span class="rname">사가모어 라이 CS</span><span class="rabv">56%</span></button>
-  <button type="button" class="row" data-w="w20"><span class="rname">탈리스커 10년</span><span class="rabv">45.8%</span></button>
-  <button type="button" class="row" data-w="w21"><span class="rname">아드벡 10년</span><span class="rabv">46%</span></button>
-  <button type="button" class="row" data-w="w22"><span class="rname">라프로익 쿼터 캐스크</span><span class="rabv">48%</span></button>
-  <button type="button" class="row" data-w="w23"><span class="rname">스카라버스 CS 피티드</span><span class="rabv">57%</span></button>
-  <button type="button" class="row" data-w="w24"><span class="rname">폴존 피티드 CS</span><span class="rabv">55.5%</span></button>
+  <button type="button" class="row" data-w="w12"><span class="rmain"><span class="rname">글렌알라키 15년</span><span class="rcat">싱글 몰트 스카치</span></span><span class="rabv">46%</span></button>
+  <button type="button" class="row" data-w="w13"><span class="rmain"><span class="rname">매캘란 더블우드 12년</span><span class="rcat">싱글 몰트 스카치</span></span><span class="rabv">40%</span></button>
+  <button type="button" class="row" data-w="w14"><span class="rmain"><span class="rname">에버펠디 16년</span><span class="rcat">싱글 몰트 스카치</span></span><span class="rabv">40%</span></button>
+  <button type="button" class="row" data-w="w15"><span class="rmain"><span class="rname">로얄 브라크라 12년</span><span class="rcat">싱글 몰트 스카치</span></span><span class="rabv">46%</span></button>
+  <button type="button" class="row" data-w="w16"><span class="rmain"><span class="rname">부나하벤 12년</span><span class="rcat">싱글 몰트 스카치</span></span><span class="rabv">46.3%</span></button>
+  <button type="button" class="row" data-w="w17"><span class="rmain"><span class="rname">러셀 리저브 싱글배럴</span><span class="rcat">버번 위스키</span></span><span class="rabv">55%</span></button>
+  <button type="button" class="row" data-w="w18"><span class="rmain"><span class="rname">와일드터키 레어브리드 라이</span><span class="rcat">라이 위스키</span></span><span class="rabv">56.1%</span></button>
+  <button type="button" class="row" data-w="w19"><span class="rmain"><span class="rname">사가모어 라이 CS</span><span class="rcat">라이 위스키</span></span><span class="rabv">56%</span></button>
+  <button type="button" class="row" data-w="w20"><span class="rmain"><span class="rname">탈리스커 10년</span><span class="rcat">싱글 몰트 스카치</span></span><span class="rabv">45.8%</span></button>
+  <button type="button" class="row" data-w="w21"><span class="rmain"><span class="rname">아드벡 10년</span><span class="rcat">싱글 몰트 스카치</span></span><span class="rabv">46%</span></button>
+  <button type="button" class="row" data-w="w22"><span class="rmain"><span class="rname">라프로익 쿼터 캐스크</span><span class="rcat">싱글 몰트 스카치</span></span><span class="rabv">48%</span></button>
+  <button type="button" class="row" data-w="w23"><span class="rmain"><span class="rname">스카라버스 CS 피티드</span><span class="rcat">싱글 몰트 스카치</span></span><span class="rabv">57%</span></button>
+  <button type="button" class="row" data-w="w24"><span class="rmain"><span class="rname">폴존 피티드 CS</span><span class="rcat">인디안 싱글 몰트</span></span><span class="rabv">55.5%</span></button>
   </div>
 </section>
 <section class="tier" id="tier3" role="tabpanel">
@@ -122,17 +124,17 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
     <div class="tserve">1, 2티어 코스 완료 후 니트, 온더락, 하이볼 등으로 무제한 제공</div>
   </div>
   <div class="list">
-  <button type="button" class="row" data-w="w25"><span class="rname">발베니 12년 더블우드</span><span class="rabv">40%</span></button>
-  <button type="button" class="row" data-w="w26"><span class="rname">글렌드로낙 12년</span><span class="rabv">43%</span></button>
-  <button type="button" class="row" data-w="w27"><span class="rname">조니워커 그린</span><span class="rabv">43%</span></button>
-  <button type="button" class="row" data-w="w28"><span class="rname">이글레어 10년</span><span class="rabv">45%</span></button>
-  <button type="button" class="row" data-w="w29"><span class="rname">엔젤스 엔비 스몰배치</span><span class="rabv">50%</span></button>
-  <button type="button" class="row" data-w="w30"><span class="rname">놉크릭 9년</span><span class="rabv">50%</span></button>
-  <button type="button" class="row" data-w="w31"><span class="rname">일라이저 크레이그 스몰배치</span><span class="rabv">47%</span></button>
-  <button type="button" class="row" data-w="w32"><span class="rname">LOT 40</span><span class="rabv">43%</span></button>
-  <button type="button" class="row" data-w="w33"><span class="rname">몽키숄더</span><span class="rabv">40%</span></button>
-  <button type="button" class="row" data-w="w34"><span class="rname">닛카 프론티어</span><span class="rabv">48%</span></button>
-  <button type="button" class="row" data-w="w35"><span class="rname">제임슨</span><span class="rabv">40%</span></button>
+  <button type="button" class="row" data-w="w25"><span class="rmain"><span class="rname">발베니 12년 더블우드</span><span class="rcat">싱글 몰트 스카치</span></span><span class="rabv">40%</span></button>
+  <button type="button" class="row" data-w="w26"><span class="rmain"><span class="rname">글렌드로낙 12년</span><span class="rcat">싱글 몰트 스카치</span></span><span class="rabv">43%</span></button>
+  <button type="button" class="row" data-w="w27"><span class="rmain"><span class="rname">조니워커 그린</span><span class="rcat">블렌디드 몰트</span></span><span class="rabv">43%</span></button>
+  <button type="button" class="row" data-w="w28"><span class="rmain"><span class="rname">이글레어 10년</span><span class="rcat">버번 위스키</span></span><span class="rabv">45%</span></button>
+  <button type="button" class="row" data-w="w29"><span class="rmain"><span class="rname">엔젤스 엔비 스몰배치</span><span class="rcat">버번 위스키</span></span><span class="rabv">50%</span></button>
+  <button type="button" class="row" data-w="w30"><span class="rmain"><span class="rname">놉크릭 9년</span><span class="rcat">버번 위스키</span></span><span class="rabv">50%</span></button>
+  <button type="button" class="row" data-w="w31"><span class="rmain"><span class="rname">일라이저 크레이그 스몰배치</span><span class="rcat">버번 위스키</span></span><span class="rabv">47%</span></button>
+  <button type="button" class="row" data-w="w32"><span class="rmain"><span class="rname">LOT 40</span><span class="rcat">캐네디언 라이</span></span><span class="rabv">43%</span></button>
+  <button type="button" class="row" data-w="w33"><span class="rmain"><span class="rname">몽키숄더</span><span class="rcat">블렌디드 몰트</span></span><span class="rabv">40%</span></button>
+  <button type="button" class="row" data-w="w34"><span class="rmain"><span class="rname">닛카 프론티어</span><span class="rcat">재패니즈 블렌디드</span></span><span class="rabv">48%</span></button>
+  <button type="button" class="row" data-w="w35"><span class="rmain"><span class="rname">제임슨</span><span class="rcat">아이리시 위스키</span></span><span class="rabv">40%</span></button>
   </div>
 </section>
 
@@ -171,7 +173,7 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
  }
  window.__wmClose=function(){mask.classList.remove('open');document.body.style.overflow='';
   if(last){last.focus();last=null;}};
- document.querySelectorAll('button.card').forEach(function(b){
+ document.querySelectorAll('button.row').forEach(function(b){
   b.addEventListener('click',function(){last=b;open(b.getAttribute('data-w'));});
  });
  mask.addEventListener('click',function(e){if(e.target===mask)window.__wmClose();});

@@ -392,12 +392,14 @@ h1 .gold{color:#e0a84e}
 .tcount{color:#6b7280;font-size:.76rem;font-weight:600}
 /* ── 한 줄 목록 (이름 + 도수) · 탭하면 상세 팝업 ── */
 .list{display:flex;flex-direction:column}
-.row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;
  width:100%;text-align:left;color:inherit;font:inherit;background:transparent;
  border:0;border-bottom:1px solid #1c202a;padding:8px 2px;cursor:pointer;
  -webkit-tap-highlight-color:transparent;transition:background .12s}
 .row:hover,.row:focus-visible{background:#171c26;outline:none}
+.rmain{display:flex;flex-direction:column;gap:1px;min-width:0}
 .rname{font-weight:600;font-size:.95rem;line-height:1.3;word-break:keep-all}
+.rcat{color:#8a909a;font-size:.72rem;line-height:1.3}
 .rabv{color:#e0a84e;font-size:.85rem;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;flex:none}
 .note{margin:20px 0 0;color:#8a909a;font-size:.78rem;text-align:center;line-height:1.6}
 footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-height:1.6}
@@ -442,7 +444,9 @@ def _card(key: str, item: tuple[str, str, str, str]) -> str:
     name, cat, abv, notes = item
     e = html.escape
     return f'<button type="button" class="row" data-w="{e(key)}">' \
-           f'<span class="rname">{e(name)}</span><span class="rabv">{e(abv)}</span></button>'
+           f'<span class="rmain"><span class="rname">{e(name)}</span>' \
+           f'<span class="rcat">{e(cat)}</span></span>' \
+           f'<span class="rabv">{e(abv)}</span></button>'
 
 
 def _tabs() -> str:
@@ -518,7 +522,7 @@ MODAL_JS = """(function(){
  }
  window.__wmClose=function(){mask.classList.remove('open');document.body.style.overflow='';
   if(last){last.focus();last=null;}};
- document.querySelectorAll('button.card').forEach(function(b){
+ document.querySelectorAll('button.row').forEach(function(b){
   b.addEventListener('click',function(){last=b;open(b.getAttribute('data-w'));});
  });
  mask.addEventListener('click',function(e){if(e.target===mask)window.__wmClose();});
