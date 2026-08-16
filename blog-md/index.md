@@ -89,6 +89,7 @@ robots: "index,follow"
 
 <div class="sec-head">🗂️ 개인 팁 모음</div>
 <ul class="latest-feed">
+  <li><span class="chip">🥃</span><a href="{{ '/wimakase.html' | relative_url }}">합정 두다지 위마카세 — 위스키 메뉴</a></li>
   <li><span class="chip">🚌</span><a href="{{ '/bus6004' | relative_url }}">6004번 공항버스 시간표</a></li>
   <li><span class="chip">🇻🇳</span><a href="{{ '/vietnam-prearrival' | relative_url }}">베트남 사전입국신고 — 한국인 작성 요령</a></li>
 </ul>
