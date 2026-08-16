@@ -376,6 +376,15 @@ body{margin:0;background:#0f1115;color:#e8eaed;
 header{text-align:center;margin:0 0 2px}
 h1{font-size:1.32rem;margin:.15em 0;color:#e8eaed}
 h1 .gold{color:#e0a84e}
+/* ── 외부 브라우저(새 창) 열기 배너 (CMPA-1285) — 카톡/인앱 웹뷰에서 깨질 때 기본 브라우저로 탈출 ── */
+.extbar{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;
+ background:#1a1508;border:1px solid #3a2f1a;border-radius:10px;
+ padding:7px 10px;margin:6px 0 2px;color:#e0a84e;font-size:.8rem;text-align:center;line-height:1.4}
+.extbar .extmsg{color:#cdbf9a;min-width:0;word-break:keep-all}
+.extbar button{flex:none;background:#e0a84e;color:#1a1508;border:0;border-radius:8px;
+ font:inherit;font-weight:700;font-size:.82rem;padding:6px 12px;cursor:pointer;
+ -webkit-tap-highlight-color:transparent}
+.extbar button:active{transform:scale(.96)}
 /* ── 티어 탭 (한 번에 한 티어만) · 상단 고정 ── */
 .tabs{position:sticky;top:0;z-index:20;display:flex;gap:6px;background:#0f1115;
  padding:8px 0 7px;margin:4px 0 0;border-bottom:1px solid #20242e}
@@ -462,8 +471,9 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
 .logdate{color:#e0a84e;font-size:.86rem;font-weight:700;border-bottom:1px solid #20242e;padding-bottom:.3em}
 .logdate span{color:#6b7280;font-weight:600;font-size:.78rem}
 .logrow{display:flex;align-items:center;justify-content:space-between;gap:10px;
- padding:8px 2px}
-.lgname{font-size:.92rem}
+ padding:8px 2px;min-width:0}
+/* flex 자식 가로 넘침 차단(카톡 웹뷰·CMPA-1282 계열): 긴 위스키명이 행을 밀어내지 않게 */
+.lgname{font-size:.92rem;flex:1 1 auto;min-width:0;word-break:keep-all;overflow-wrap:anywhere}
 .lgabv{color:#e0a84e;font-size:.8rem;font-weight:700;margin-left:.5em;font-variant-numeric:tabular-nums}
 .lgbtns{display:flex;gap:6px;flex:none}
 .lgmemo{flex:none;background:#20242e;border:none;color:#9aa0aa;width:28px;height:28px;border-radius:7px;
@@ -620,11 +630,19 @@ LOG_JS = """(function(){
  // iOS/카톡 웹뷰 키보드 보정 — 메모 편집 시 바텀시트를 VisualViewport(키보드 위) 높이에 맞춰
  // 하단이 키보드에 가리지 않게 한다(CLAUDE.md 카톡 웹뷰 원칙).
  var vv=window.visualViewport;
+ function vvReset(){mask.style.top='';mask.style.bottom='';mask.style.height='';}
  function vvFit(){
-  if(!vv)return;
-  if(mask.classList.contains('open')){
-   mask.style.top=vv.offsetTop+'px';mask.style.bottom='auto';mask.style.height=vv.height+'px';
-  }else{mask.style.top='';mask.style.bottom='';mask.style.height='';}
+  if(!vv){return;}
+  if(!mask.classList.contains('open')){vvReset();return;}
+  // 키보드가 화면을 '실제로' 줄였을 때만 바텀시트를 시각뷰포트에 맞춘다.
+  // kakao/iOS 웹뷰가 포커스 순간 offsetTop/height에 과도한 값을 잠깐 내놓아
+  // 모달이 화면 밖으로 튕겨 '깨져' 보이던 문제 방지(clamp + 최소 축소량 게이트).
+  var winH=window.innerHeight||vv.height||0;
+  var h=vv.height||winH;var top=vv.offsetTop||0;
+  if(top<0){top=0;}
+  if(!(h>0)||h>=winH-80){vvReset();return;} // 키보드 없음 → 기본 inset:0(전체화면) 유지
+  if(top+h>winH){top=Math.max(0,winH-h);}   // 하단이 화면 밖으로 나가지 않게 clamp
+  mask.style.top=top+'px';mask.style.bottom='auto';mask.style.height=h+'px';
  }
  if(vv){vv.addEventListener('resize',vvFit);vv.addEventListener('scroll',vvFit);}
  function load(){try{return JSON.parse(localStorage.getItem(LS))||[];}catch(e){return [];}}
@@ -702,6 +720,26 @@ LOG_JS = """(function(){
 })();"""
 
 
+# 외부 브라우저(새 창) 열기 — 카톡 인앱 웹뷰가 페이지를 깨뜨릴 때 기본 브라우저로 탈출(CMPA-1285).
+# 보드 요청: "차라리 새창으로 띄우게". 카톡은 openExternal 스킴, 그 외엔 window.open(_blank) 폴백.
+EXT_JS = """(function(){
+ var bar=document.getElementById('extbar');var btn=document.getElementById('extbtn');
+ if(!bar||!btn)return;
+ var ua=navigator.userAgent||'';
+ var isKakao=/KAKAOTALK/i.test(ua);
+ var isInApp=isKakao||/Line\\/|Instagram|FBAN|FBAV|FB_IAB|NAVER|DaumApps|; wv\\)/i.test(ua);
+ function cleanUrl(){return location.href.split('#')[0];}
+ function openExt(){
+  var u=cleanUrl();
+  if(isKakao){location.href='kakaotalk://web/openExternal?url='+encodeURIComponent(u);return;}
+  try{var w=window.open(u,'_blank','noopener');if(!w){location.href=u;}}catch(e){location.href=u;}
+ }
+ btn.addEventListener('click',openExt);
+ // 인앱 웹뷰(깨짐 잦은 환경)에서만 배너를 노출 — 일반 브라우저에는 숨겨 잡음 최소화.
+ if(!isInApp){bar.style.display='none';}
+})();"""
+
+
 def _next_build() -> int:
     """빌드 카운터를 1 증가시켜 반환(발행마다 캐시버스트 쿼리·라벨이 달라지게)."""
     try:
@@ -748,6 +786,10 @@ def render(build: int) -> str:
 <header>
   <h1>합정 두다지 <span class="gold">위마카세</span></h1>
 </header>
+<div class="extbar" id="extbar">
+  <span class="extmsg">📱 화면이 깨져 보이면</span>
+  <button type="button" id="extbtn">🔗 새 창(기본 브라우저)에서 열기</button>
+</div>
 
 {tabs_html}
 {tiers_html}
@@ -772,6 +814,7 @@ def render(build: int) -> str:
 {MODAL_JS}
 {TAB_JS}
 {LOG_JS}
+{EXT_JS}
 </script>
 </body>
 </html>
