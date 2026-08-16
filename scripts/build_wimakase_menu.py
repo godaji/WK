@@ -390,13 +390,18 @@ h1 .gold{color:#e0a84e}
 .tsub{color:#9aa0aa;font-size:.78rem;margin-top:.1em}
 .tserve{color:#9aa0aa;font-size:.75rem;margin-top:.3em}
 .tcount{color:#6b7280;font-size:.76rem;font-weight:600}
-/* ── 한 줄 목록 (이름 + 도수) · 탭하면 상세 팝업 ── */
+/* ── 한 줄 목록 (이름 + 도수) · 탭하면 상세 팝업, ＋ 누르면 기록 ── */
 .list{display:flex;flex-direction:column}
-.row{display:flex;align-items:center;justify-content:space-between;gap:10px;
- width:100%;text-align:left;color:inherit;font:inherit;background:transparent;
- border:0;border-bottom:1px solid #1c202a;padding:8px 2px;cursor:pointer;
+.row{display:flex;align-items:center;gap:8px;border-bottom:1px solid #1c202a}
+.rtap{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:1;min-width:0;
+ text-align:left;color:inherit;font:inherit;background:transparent;border:0;padding:8px 2px;cursor:pointer;
  -webkit-tap-highlight-color:transparent;transition:background .12s}
-.row:hover,.row:focus-visible{background:#171c26;outline:none}
+.rtap:hover,.rtap:focus-visible{background:#171c26;outline:none}
+.radd{flex:none;background:#1a1508;border:1px solid #3a2f1a;color:#e0a84e;
+ width:36px;height:36px;border-radius:9px;font-size:1.35rem;font-weight:700;line-height:1;
+ cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .1s,background .12s,color .12s}
+.radd:active{transform:scale(.84)}
+.radd.added{background:#e0a84e;color:#1a1508;transform:scale(1.05)}
 .rmain{display:flex;flex-direction:column;gap:1px;min-width:0}
 .rname{font-weight:600;font-size:.95rem;line-height:1.3;word-break:keep-all}
 .rcat{color:#8a909a;font-size:.72rem;line-height:1.3}
@@ -429,6 +434,33 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
 .msec h4{color:#e0a84e;font-size:.82rem;letter-spacing:.02em;margin:0 0 .5em;text-transform:none}
 .msec p{margin:0;color:#cdd2da;font-size:.94rem;line-height:1.65}
 .msrc{margin-top:16px;color:#6b7280;font-size:.74rem}
+/* ── 플로팅 '내 기록' 버튼 · 토스트 · 기록 목록 ── */
+.fab{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:40;
+ display:flex;align-items:center;gap:8px;background:#e0a84e;color:#0f1115;border:none;border-radius:999px;
+ padding:11px 16px;font:inherit;font-weight:800;font-size:.9rem;cursor:pointer;
+ box-shadow:0 6px 20px rgba(0,0,0,.45);-webkit-tap-highlight-color:transparent}
+.fab .cnt{background:#0f1115;color:#e0a84e;border-radius:999px;padding:1px 8px;min-width:22px;
+ text-align:center;font-size:.82rem;font-variant-numeric:tabular-nums}
+.toast{position:fixed;left:50%;bottom:calc(74px + env(safe-area-inset-bottom));
+ transform:translateX(-50%) translateY(10px);background:#1a1508;color:#e0a84e;border:1px solid #3a2f1a;
+ border-radius:10px;padding:9px 16px;font-size:.86rem;font-weight:600;white-space:nowrap;
+ opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:60}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.logempty{color:#8a909a;font-size:.9rem;text-align:center;line-height:1.7;margin:28px 0}
+.logsum{color:#9aa0aa;font-size:.82rem;margin:10px 0 4px}
+.logday{margin-top:14px}
+.logdate{color:#e0a84e;font-size:.86rem;font-weight:700;border-bottom:1px solid #20242e;padding-bottom:.3em}
+.logdate span{color:#6b7280;font-weight:600;font-size:.78rem}
+.logrow{display:flex;align-items:center;justify-content:space-between;gap:10px;
+ padding:8px 2px;border-bottom:1px solid #171c26}
+.lgname{font-size:.92rem}
+.lgabv{color:#e0a84e;font-size:.8rem;font-weight:700;margin-left:.5em;font-variant-numeric:tabular-nums}
+.lgx{flex:none;background:#20242e;border:none;color:#9aa0aa;width:28px;height:28px;border-radius:7px;
+ font-size:.9rem;cursor:pointer;line-height:1;-webkit-tap-highlight-color:transparent}
+.lgx:hover{background:#3a2222;color:#e88}
+.logclear{display:block;width:100%;margin-top:20px;background:transparent;border:1px solid #3a2222;
+ color:#c98;border-radius:10px;padding:10px;font:inherit;font-size:.86rem;cursor:pointer}
+.logclear:hover{background:#2a1616}
 @media(min-width:600px){.mask{align-items:center}.modal{border-radius:18px}.mgrip{display:none}}"""
 
 
@@ -443,10 +475,14 @@ def _origin(name: str, cat: str) -> str:
 def _card(key: str, item: tuple[str, str, str, str]) -> str:
     name, cat, abv, notes = item
     e = html.escape
-    return f'<button type="button" class="row" data-w="{e(key)}">' \
+    return f'<div class="row">' \
+           f'<button type="button" class="rtap" data-w="{e(key)}">' \
            f'<span class="rmain"><span class="rname">{e(name)}</span>' \
            f'<span class="rcat">{e(cat)}</span></span>' \
-           f'<span class="rabv">{e(abv)}</span></button>'
+           f'<span class="rabv">{e(abv)}</span></button>' \
+           f'<button type="button" class="radd" data-w="{e(key)}" ' \
+           f'aria-label="{e(name)} 마신 목록에 담기" title="마신 목록에 담기">＋</button>' \
+           f'</div>'
 
 
 def _tabs() -> str:
@@ -522,7 +558,7 @@ MODAL_JS = """(function(){
  }
  window.__wmClose=function(){mask.classList.remove('open');document.body.style.overflow='';
   if(last){last.focus();last=null;}};
- document.querySelectorAll('button.row').forEach(function(b){
+ document.querySelectorAll('button.rtap').forEach(function(b){
   b.addEventListener('click',function(){last=b;open(b.getAttribute('data-w'));});
  });
  mask.addEventListener('click',function(e){if(e.target===mask)window.__wmClose();});
@@ -540,6 +576,69 @@ TAB_JS = """(function(){
    tiers.forEach(function(s){s.classList.toggle('active',s.id===id);});
   });
  });
+})();"""
+
+
+# ── '내가 마신 목록' — ＋ 버튼으로 그날 마신 술을 날짜와 함께 localStorage에 기록 ──
+LOG_JS = """(function(){
+ var LS='wm_log_v1';
+ var data=window.__WIMAKASE__||{};
+ var fab=document.getElementById('fab');
+ var cnt=document.getElementById('fabcnt');
+ var mask=document.getElementById('logmask');
+ var body=document.getElementById('logbody');
+ var toastEl=document.getElementById('toast');var toastT=null;
+ function load(){try{return JSON.parse(localStorage.getItem(LS))||[];}catch(e){return [];}}
+ function save(a){try{localStorage.setItem(LS,JSON.stringify(a));}catch(e){}}
+ function today(){var d=new Date(),m=('0'+(d.getMonth()+1)).slice(-2),dd=('0'+d.getDate()).slice(-2);
+  return d.getFullYear()+'-'+m+'-'+dd;}
+ function esc(s){var x=document.createElement('div');x.textContent=s==null?'':s;return x.innerHTML;}
+ function updateFab(){cnt.textContent=load().length;}
+ function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');
+  if(toastT)clearTimeout(toastT);toastT=setTimeout(function(){toastEl.classList.remove('show');},1400);}
+ function add(key){
+  var d=data[key];if(!d)return;
+  var a=load();a.push({k:key,name:d.name,cat:d.cat,abv:d.abv,date:today()});save(a);
+  updateFab();toast('담김 · '+d.name);
+ }
+ window.__wmRemove=function(i){var a=load();a.splice(i,1);save(a);updateFab();renderLog();};
+ window.__wmClearLog=function(){if(!confirm('내가 마신 목록을 모두 지울까요?'))return;
+  save([]);updateFab();renderLog();};
+ function renderLog(){
+  var a=load();
+  var h='<div class="mtop"><div class="mname">📒 내가 마신 목록</div>'+
+        '<button type="button" class="mx" aria-label="닫기" onclick="__wmCloseLog()">✕</button></div>';
+  if(!a.length){h+='<p class="logempty">아직 담은 위스키가 없습니다.<br>'+
+    '메뉴에서 각 위스키 옆 ＋ 를 눌러 그날 마신 술을 기록하세요.</p>';body.innerHTML=h;return;}
+  var byDate={},order=[];
+  a.forEach(function(e,i){if(!byDate[e.date]){byDate[e.date]=[];order.push(e.date);}
+   byDate[e.date].push({e:e,i:i});});
+  order.sort().reverse();
+  h+='<div class="logsum">총 '+a.length+'잔 · '+order.length+'일 기록</div>';
+  order.forEach(function(dt){
+   h+='<div class="logday"><div class="logdate">'+esc(dt)+' <span>('+byDate[dt].length+'잔)</span></div>';
+   byDate[dt].forEach(function(o){
+    h+='<div class="logrow"><span class="lgname">'+esc(o.e.name)+
+       '<span class="lgabv">'+esc(o.e.abv)+'</span></span>'+
+       '<button type="button" class="lgx" aria-label="삭제" onclick="__wmRemove('+o.i+')">✕</button></div>';
+   });
+   h+='</div>';
+  });
+  h+='<button type="button" class="logclear" onclick="__wmClearLog()">전체 지우기</button>';
+  body.innerHTML=h;
+ }
+ function openLog(){renderLog();mask.classList.add('open');document.body.style.overflow='hidden';
+  var md=mask.querySelector('.modal');if(md)md.scrollTop=0;}
+ window.__wmCloseLog=function(){mask.classList.remove('open');document.body.style.overflow='';};
+ fab.addEventListener('click',openLog);
+ mask.addEventListener('click',function(e){if(e.target===mask)window.__wmCloseLog();});
+ document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'&&mask.classList.contains('open'))window.__wmCloseLog();});
+ document.querySelectorAll('button.radd').forEach(function(b){
+  b.addEventListener('click',function(ev){ev.stopPropagation();add(b.getAttribute('data-w'));
+   b.classList.add('added');setTimeout(function(){b.classList.remove('added');},260);});
+ });
+ updateFab();
 })();"""
 
 
@@ -575,7 +674,7 @@ def render() -> str:
 {tabs_html}
 {tiers_html}
 
-<p class="note">각 위스키를 탭하면 증류소·캐스크·스토리 상세가 열립니다 · 테이스팅 각 20ml</p>
+<p class="note">위스키를 탭하면 상세가 열리고, 옆의 ＋ 를 누르면 그날 마신 목록에 담깁니다 · 테이스팅 각 20ml</p>
 
 <footer>합정 위마카세 · 메뉴 {e(VERSION)} &nbsp;·&nbsp; CaskCode<br>메뉴는 수시로 업데이트됩니다 — 버전을 확인하세요 🥃<br>상세 정보는 위키피디아 등 공개 자료를 요약한 참고용입니다 · 수집 {e(COLLECTED)}</footer>
 </div>
@@ -583,10 +682,18 @@ def render() -> str:
 <div class="mask" id="mask" role="dialog" aria-modal="true" aria-label="위스키 상세">
   <div class="modal"><div class="mgrip"></div><div id="mbody"></div></div>
 </div>
+
+<button type="button" class="fab" id="fab" aria-label="내가 마신 목록 열기">📒 내 기록 <span class="cnt" id="fabcnt">0</span></button>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="mask" id="logmask" role="dialog" aria-modal="true" aria-label="내가 마신 목록">
+  <div class="modal"><div class="mgrip"></div><div id="logbody"></div></div>
+</div>
+
 <script>window.__WIMAKASE__={data_json};window.__WM_COLLECTED__={collected_json};</script>
 <script>
 {MODAL_JS}
 {TAB_JS}
+{LOG_JS}
 </script>
 </body>
 </html>
