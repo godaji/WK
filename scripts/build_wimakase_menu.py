@@ -26,6 +26,8 @@ ROOT = Path(__file__).resolve().parent.parent
 
 VERSION = "v2026.08.16"
 TITLE = "합정 위마카세"
+# 상세(증류소·스토리) 메타 수집일 — CLAUDE.md 데이터 관리 원칙(수집 날짜 메타 필수, CMPA-1284).
+COLLECTED = "2026-08-16"
 
 # ── 운영 프로그램 (The Night's Journey) ──────────────────────────────────────
 PROGRAM = {
@@ -499,7 +501,7 @@ MODAL_JS = """(function(){
         row('캐스크',d.cask)+row('도수',d.abv)+row('분류',d.cat)+'</div>';
   if(d.notes)h+='<div class="msec"><h4>특징</h4><p>'+esc(d.notes)+'</p></div>';
   if(d.story)h+='<div class="msec"><h4>스토리</h4><p>'+esc(d.story)+'</p></div>';
-  if(d.source)h+='<div class="msrc">출처 · '+esc(d.source)+' (요약)</div>';
+  if(d.source)h+='<div class="msrc">출처 · '+esc(d.source)+' (요약) · 수집 '+esc(window.__WM_COLLECTED__||'')+'</div>';
   m.innerHTML=h;
   mask.classList.add('open');document.body.style.overflow='hidden';
   m.parentNode.scrollTop=0;
@@ -524,6 +526,7 @@ def render() -> str:
             keys[id(item)] = f"w{n}"
     tiers_html = "\n".join(_tier_section(t, keys) for t in TIERS)
     data_json = json.dumps(_build_data(keys), ensure_ascii=False)
+    collected_json = json.dumps(COLLECTED, ensure_ascii=False)
     total = sum(len(t["items"]) for t in TIERS)
     return f"""<!DOCTYPE html>
 <html lang="ko">
@@ -554,13 +557,13 @@ def render() -> str:
 
 <p class="note">각 술을 탭하면 증류소·캐스크·스토리 상세가 열립니다 · 고도수(55%+)는 소량의 물을 더하면 풍미가 열립니다 · 다음 잔 전 입 안을 물로 헹궈주세요 · 테이스팅 각 20 ml</p>
 
-<footer>합정 위마카세 · 메뉴 {e(VERSION)} &nbsp;·&nbsp; CaskCode<br>메뉴는 수시로 업데이트됩니다 — 버전을 확인하세요 🥃<br>상세 정보는 위키피디아 등 공개 자료를 요약한 참고용입니다.</footer>
+<footer>합정 위마카세 · 메뉴 {e(VERSION)} &nbsp;·&nbsp; CaskCode<br>메뉴는 수시로 업데이트됩니다 — 버전을 확인하세요 🥃<br>상세 정보는 위키피디아 등 공개 자료를 요약한 참고용입니다 · 수집 {e(COLLECTED)}</footer>
 </div>
 
 <div class="mask" id="mask" role="dialog" aria-modal="true" aria-label="위스키 상세">
   <div class="modal"><div class="mgrip"></div><div id="mbody"></div></div>
 </div>
-<script>window.__WIMAKASE__={data_json};</script>
+<script>window.__WIMAKASE__={data_json};window.__WM_COLLECTED__={collected_json};</script>
 <script>
 {MODAL_JS}
 </script>
