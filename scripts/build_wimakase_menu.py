@@ -24,6 +24,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
+# 발행마다 자동 증가하는 빌드 카운터 — 캐시버스트 신호(CMPA-1285). 사이드카 파일에 누적 저장.
+BUILD_FILE = Path(__file__).resolve().parent / "wimakase_build.txt"
 VERSION = "v2026.08.16"
 TITLE = "합정 두다지 위마카세"
 # 상세(증류소·스토리) 메타 수집일 — CLAUDE.md 데이터 관리 원칙(수집 날짜 메타 필수, CMPA-1284).
@@ -409,12 +411,13 @@ h1 .gold{color:#e0a84e}
 .note{margin:20px 0 0;color:#8a909a;font-size:.78rem;text-align:center;line-height:1.6}
 footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-height:1.6}
 /* ── 상세 팝업(모달) — 모바일 우선 바텀시트, 데스크톱에선 가운데 카드 ── */
-.mask{position:fixed;inset:0;background:rgba(6,8,11,.72);backdrop-filter:blur(2px);
+/* 카톡/구형 안드로이드 웹뷰 검은화면·버벅임 방지 — blur 대신 반투명 rgba 만 사용(CLAUDE.md). */
+.mask{position:fixed;inset:0;background:rgba(6,8,11,.82);
  display:none;z-index:50;align-items:flex-end;justify-content:center}
 .mask.open{display:flex}
 .modal{background:#141821;border:1px solid #2a2e37;width:100%;max-width:560px;
- border-radius:18px 18px 0 0;max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch;
- padding:20px 18px calc(22px + env(safe-area-inset-bottom));
+ border-radius:18px 18px 0 0;max-height:88vh;max-height:88dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;
+ padding:20px 18px calc(22px + max(env(safe-area-inset-bottom), 12px));
  box-shadow:0 -12px 40px rgba(0,0,0,.5);animation:slideup .22s ease}
 @keyframes slideup{from{transform:translateY(24px);opacity:.4}to{transform:translateY(0);opacity:1}}
 .mgrip{width:38px;height:4px;border-radius:999px;background:#2a2e37;margin:0 auto 14px}
@@ -442,13 +445,13 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
 .mgoogle:hover{background:#221a0a}
 .mgoogle:active{transform:scale(.98)}
 /* ── 플로팅 '내 기록' 버튼 · 토스트 · 기록 목록 ── */
-.fab{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:40;
+.fab{position:fixed;right:14px;bottom:calc(14px + max(env(safe-area-inset-bottom), 12px));z-index:40;
  display:flex;align-items:center;gap:8px;background:#e0a84e;color:#0f1115;border:none;border-radius:999px;
  padding:11px 16px;font:inherit;font-weight:800;font-size:.9rem;cursor:pointer;
  box-shadow:0 6px 20px rgba(0,0,0,.45);-webkit-tap-highlight-color:transparent}
 .fab .cnt{background:#0f1115;color:#e0a84e;border-radius:999px;padding:1px 8px;min-width:22px;
  text-align:center;font-size:.82rem;font-variant-numeric:tabular-nums}
-.toast{position:fixed;left:50%;bottom:calc(74px + env(safe-area-inset-bottom));
+.toast{position:fixed;left:50%;bottom:calc(74px + max(env(safe-area-inset-bottom), 12px));
  transform:translateX(-50%) translateY(10px);background:#1a1508;color:#e0a84e;border:1px solid #3a2f1a;
  border-radius:10px;padding:9px 16px;font-size:.86rem;font-weight:600;white-space:nowrap;
  opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:60}
@@ -614,6 +617,16 @@ LOG_JS = """(function(){
  var body=document.getElementById('logbody');
  var toastEl=document.getElementById('toast');var toastT=null;
  var editing=null;
+ // iOS/카톡 웹뷰 키보드 보정 — 메모 편집 시 바텀시트를 VisualViewport(키보드 위) 높이에 맞춰
+ // 하단이 키보드에 가리지 않게 한다(CLAUDE.md 카톡 웹뷰 원칙).
+ var vv=window.visualViewport;
+ function vvFit(){
+  if(!vv)return;
+  if(mask.classList.contains('open')){
+   mask.style.top=vv.offsetTop+'px';mask.style.bottom='auto';mask.style.height=vv.height+'px';
+  }else{mask.style.top='';mask.style.bottom='';mask.style.height='';}
+ }
+ if(vv){vv.addEventListener('resize',vvFit);vv.addEventListener('scroll',vvFit);}
  function load(){try{return JSON.parse(localStorage.getItem(LS))||[];}catch(e){return [];}}
  function save(a){try{localStorage.setItem(LS,JSON.stringify(a));}catch(e){}}
  function today(){var d=new Date(),m=('0'+(d.getMonth()+1)).slice(-2),dd=('0'+d.getDate()).slice(-2);
@@ -671,11 +684,12 @@ LOG_JS = """(function(){
   h+='<button type="button" class="logclear" onclick="__wmClearLog()">전체 지우기</button>';
   body.innerHTML=h;
   if(editing!==null){var ta=document.getElementById('lgmemoinput');
-   if(ta){ta.focus();ta.setSelectionRange(ta.value.length,ta.value.length);}}
+   if(ta){ta.focus();ta.setSelectionRange(ta.value.length,ta.value.length);
+    setTimeout(function(){try{ta.scrollIntoView({block:'center'});}catch(e){}vvFit();},300);}}
  }
  function openLog(){editing=null;renderLog();mask.classList.add('open');document.body.style.overflow='hidden';
-  var md=mask.querySelector('.modal');if(md)md.scrollTop=0;}
- window.__wmCloseLog=function(){mask.classList.remove('open');document.body.style.overflow='';};
+  var md=mask.querySelector('.modal');if(md)md.scrollTop=0;vvFit();}
+ window.__wmCloseLog=function(){mask.classList.remove('open');document.body.style.overflow='';vvFit();};
  fab.addEventListener('click',openLog);
  mask.addEventListener('click',function(e){if(e.target===mask)window.__wmCloseLog();});
  document.addEventListener('keydown',function(e){
@@ -688,8 +702,20 @@ LOG_JS = """(function(){
 })();"""
 
 
-def render() -> str:
+def _next_build() -> int:
+    """빌드 카운터를 1 증가시켜 반환(발행마다 캐시버스트 쿼리·라벨이 달라지게)."""
+    try:
+        n = int(BUILD_FILE.read_text(encoding="utf-8").strip())
+    except Exception:
+        n = 0
+    n += 1
+    BUILD_FILE.write_text(f"{n}\n", encoding="utf-8")
+    return n
+
+
+def render(build: int) -> str:
     e = html.escape
+    cache_tag = f"{VERSION}-b{build}"  # 예: v2026.08.16-b3 (발행마다 증가)
     # 각 아이템 객체에 안정적인 key(w1..wN) 부여 — id() 로 매핑
     keys, n = {}, 0
     for tier in TIERS:
@@ -706,6 +732,12 @@ def render() -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- 캐시버스트(CMPA-1285): 카톡/iOS 웹뷰가 옛 버전을 붙잡지 않게 no-cache 신호 + 빌드 라벨 {e(cache_tag)} -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="build" content="{e(cache_tag)}">
+<link rel="canonical" href="wimakase.html?v={e(cache_tag)}">
 <title>{e(TITLE)} · 위스키 메뉴 {e(VERSION)}</title>
 <meta name="description" content="{e(TITLE)} 위스키 바 메뉴 — 3티어 {total}종. 1·2티어 테이스팅 200ml + 3티어 프리플로우. {e(VERSION)}">
 <style>
@@ -722,7 +754,7 @@ def render() -> str:
 
 <p class="note">위스키를 탭하면 상세·구글 이미지 검색이 열리고, 옆의 ＋ 를 누르면 그날 마신 목록에 담깁니다 · 📒 내 기록에서 ✏️ 로 메모도 남길 수 있어요 · 테이스팅 각 20ml</p>
 
-<footer>합정 위마카세 · 메뉴 {e(VERSION)} &nbsp;·&nbsp; CaskCode<br>메뉴는 수시로 업데이트됩니다 — 버전을 확인하세요 🥃<br>상세 정보는 위키피디아 등 공개 자료를 요약한 참고용입니다 · 수집 {e(COLLECTED)}</footer>
+<footer>합정 위마카세 · 메뉴 {e(VERSION)} &nbsp;·&nbsp; CaskCode<br>메뉴는 수시로 업데이트됩니다 — 버전을 확인하세요 🥃<br>상세 정보는 위키피디아 등 공개 자료를 요약한 참고용입니다 · 수집 {e(COLLECTED)}<br><span style="color:#3b414b;font-size:.68rem">build {e(cache_tag)}</span></footer>
 </div>
 
 <div class="mask" id="mask" role="dialog" aria-modal="true" aria-label="위스키 상세">
@@ -746,8 +778,9 @@ def render() -> str:
 """
 
 
-def build() -> list[Path]:
-    doc = render()
+def build() -> tuple[list[Path], int]:
+    build_no = _next_build()
+    doc = render(build_no)
     outs = [
         ROOT / "blog-md" / "wimakase.html",
         ROOT / "deploy" / "menu" / "wimakase" / "index.html",
@@ -757,12 +790,12 @@ def build() -> list[Path]:
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text(doc, encoding="utf-8")
         written.append(p)
-    return written
+    return written, build_no
 
 
 if __name__ == "__main__":
-    paths = build()
+    paths, build_no = build()
     total = sum(len(t["items"]) for t in TIERS)
-    print(f"built 합정 위마카세 {VERSION} — {total}종 ({', '.join(str(len(t['items'])) for t in TIERS)})")
+    print(f"built 합정 위마카세 {VERSION}-b{build_no} — {total}종 ({', '.join(str(len(t['items'])) for t in TIERS)})")
     for p in paths:
         print(f"  {p.relative_to(ROOT)}")
