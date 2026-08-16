@@ -25,7 +25,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 
 VERSION = "v2026.08.16"
-TITLE = "합정 위마카세"
+TITLE = "합정 두다지 위마카세"
 # 상세(증류소·스토리) 메타 수집일 — CLAUDE.md 데이터 관리 원칙(수집 날짜 메타 필수, CMPA-1284).
 COLLECTED = "2026-08-16"
 
@@ -67,7 +67,8 @@ TIERS = [
         "serve": "바텐더 추천 또는 고객 선택으로 5잔(각 20ml) 제공",
         "items": [
             ("글렌알라키 15년", "싱글 몰트 스카치", "46%", "진득한 셰리 풍미로 최근 가장 인기 있는 바틀"),
-            ("글렌드로낙 12년", "싱글 몰트 스카치", "43%", "입문~중급용 셰리 캐스크의 교과서"),
+            ("매캘란 더블우드 12년", "싱글 몰트 스카치", "40%", "싱글 몰트의 절대 강자, 훌륭한 밸런스"),
+            ("에버펠디 16년", "싱글 몰트 스카치", "40%", "부드럽고 꿀 같은 달콤함"),
             ("로얄 브라크라 12년", "싱글 몰트 스카치", "46%", "올로로소 셰리 피니시, 고급스럽고 우아한 맛"),
             ("부나하벤 12년", "싱글 몰트 스카치", "46.3%", "논칠필터, 훌륭한 바디감의 아일라 몰트"),
             ("러셀 리저브 싱글배럴", "버번 위스키", "55%", "버번 매니아들의 열렬한 지지를 받는 훌륭한 바틀"),
@@ -88,8 +89,7 @@ TIERS = [
         "serve": "1, 2티어 코스 완료 후 니트, 온더락, 하이볼 등으로 무제한 제공",
         "items": [
             ("발베니 12년 더블우드", "싱글 몰트 스카치", "40%", "화사하고 달달한 꿀/바닐라 풍미의 정석"),
-            ("매캘란 더블우드 12년", "싱글 몰트 스카치", "40%", "싱글 몰트의 절대 강자, 훌륭한 밸런스"),
-            ("에버펠디 16년", "싱글 몰트 스카치", "40%", "부드럽고 꿀 같은 달콤함"),
+            ("글렌드로낙 12년", "싱글 몰트 스카치", "43%", "입문~중급용 셰리 캐스크의 교과서"),
             ("조니워커 그린", "블렌디드 몰트", "43%", "가성비와 퀄리티를 모두 잡은 15년 숙성 블렌딩"),
             ("이글레어 10년", "버번 위스키", "45%", "버팔로트레이스 증류소의 프리미엄 라인"),
             ("엔젤스 엔비 스몰배치", "버번 위스키", "50%", "포트 캐스크 피니시의 달콤함과 스몰배치의 타격감"),
@@ -370,49 +370,37 @@ PAGE_CSS = """*{box-sizing:border-box}
 body{margin:0;background:#0f1115;color:#e8eaed;
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
  line-height:1.55;font-size:16px;-webkit-text-size-adjust:100%}
-.wrap{max-width:680px;margin:0 auto;padding:28px 18px 72px}
-header{text-align:center;margin-bottom:16px}
-.kicker{letter-spacing:.28em;font-size:.72rem;color:#9aa0aa;text-transform:uppercase}
-h1{font-size:1.85rem;margin:.25em 0 .12em;color:#e8eaed}
+.wrap{max-width:680px;margin:0 auto;padding:10px 12px 40px}
+header{text-align:center;margin:0 0 2px}
+h1{font-size:1.32rem;margin:.15em 0;color:#e8eaed}
 h1 .gold{color:#e0a84e}
-.ver{display:inline-block;margin-top:.5em;padding:.24em .8em;border:1px solid #2a2e37;border-radius:999px;
- color:#e0a84e;font-size:.8rem;font-weight:600;letter-spacing:.04em}
-.sub{color:#9aa0aa;font-size:.9rem;margin:.35em 0 0}
-.program{background:#141821;border:1px solid #2a2e37;border-radius:14px;padding:15px 16px;margin:18px 0 8px}
-.program .pt{color:#e0a84e;font-weight:700;font-size:.98rem;margin-bottom:.55em}
-.program p{margin:.4em 0;color:#cdd2da;font-size:.9rem}
-.program .vol{color:#7fd1b9;font-weight:600;margin-top:.5em;font-size:.9rem}
-/* ── 티어 탭 (한 번에 한 티어만) ── */
+/* ── 티어 탭 (한 번에 한 티어만) · 상단 고정 ── */
 .tabs{position:sticky;top:0;z-index:20;display:flex;gap:6px;background:#0f1115;
- padding:10px 0 9px;margin-top:22px;border-bottom:1px solid #20242e}
-.tab{flex:1;background:#141821;border:1px solid #20242e;border-radius:12px;color:#cdd2da;
- font:inherit;font-size:.92rem;font-weight:700;padding:9px 4px;cursor:pointer;line-height:1.25;
+ padding:8px 0 7px;margin:4px 0 0;border-bottom:1px solid #20242e}
+.tab{flex:1;background:#141821;border:1px solid #20242e;border-radius:10px;color:#cdd2da;
+ font:inherit;font-size:.9rem;font-weight:700;padding:7px 4px;cursor:pointer;line-height:1.2;
  -webkit-tap-highlight-color:transparent;transition:border-color .15s,background .15s,color .15s}
-.tab b{display:block;font-size:.7rem;font-weight:600;color:#6b7280;margin-top:.2em}
+.tab b{font-size:.72rem;font-weight:600;color:#6b7280;margin-left:.3em}
 .tab.active{border-color:#e0a84e;background:#1a1508;color:#e0a84e}
 .tab.active b{color:#e0a84e}
-.tier{display:none;margin-top:16px;scroll-margin-top:8px}
+.tier{display:none;margin-top:8px;scroll-margin-top:8px}
 .tier.active{display:block}
-.thead{border-bottom:1px solid #2a2e37;padding-bottom:.5em;margin-bottom:10px}
-.tname{color:#e0a84e;font-size:1.12rem;font-weight:700}
-.tsub{color:#9aa0aa;font-size:.82rem;margin-top:.15em}
-.tserve{color:#b6bcc6;font-size:.8rem;margin-top:.5em;background:#141821;border-left:3px solid #e0a84e;
- padding:7px 11px;border-radius:0 8px 8px 0}
-.tcount{color:#6b7280;font-size:.78rem;font-weight:600}
-/* ── 컴팩트 카드 그리드 (앞면 = 제품명 + 도수 + 원산지) ── */
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
-.card{background:#141821;border:1px solid #20242e;border-radius:12px;padding:11px 12px;
- width:100%;text-align:left;color:inherit;font:inherit;display:flex;flex-direction:column;min-height:86px}
-button.card{cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .15s,background .15s}
-button.card:hover,button.card:focus-visible{border-color:#e0a84e;background:#171c26;outline:none}
-button.card:active{background:#1b212c}
-.cname{font-weight:700;font-size:.95rem;line-height:1.3;word-break:keep-all}
-.cfoot{margin-top:auto;padding-top:8px;display:flex;align-items:baseline;justify-content:space-between;gap:6px}
-.cabv{color:#e0a84e;font-size:.82rem;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
-.corigin{color:#9aa0aa;font-size:.72rem;text-align:right;line-height:1.25;word-break:keep-all}
-@media(min-width:600px){.grid{grid-template-columns:repeat(3,1fr)}}
-.note{margin:30px 0 0;color:#8a909a;font-size:.8rem;text-align:center;line-height:1.7}
-footer{margin-top:26px;text-align:center;color:#5b616b;font-size:.75rem;line-height:1.7}
+.thead{border-bottom:1px solid #2a2e37;padding-bottom:.35em;margin-bottom:2px}
+.tname{color:#e0a84e;font-size:1rem;font-weight:700}
+.tsub{color:#9aa0aa;font-size:.78rem;margin-top:.1em}
+.tserve{color:#9aa0aa;font-size:.75rem;margin-top:.3em}
+.tcount{color:#6b7280;font-size:.76rem;font-weight:600}
+/* ── 한 줄 목록 (이름 + 도수) · 탭하면 상세 팝업 ── */
+.list{display:flex;flex-direction:column}
+.row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;
+ width:100%;text-align:left;color:inherit;font:inherit;background:transparent;
+ border:0;border-bottom:1px solid #1c202a;padding:8px 2px;cursor:pointer;
+ -webkit-tap-highlight-color:transparent;transition:background .12s}
+.row:hover,.row:focus-visible{background:#171c26;outline:none}
+.rname{font-weight:600;font-size:.95rem;line-height:1.3;word-break:keep-all}
+.rabv{color:#e0a84e;font-size:.85rem;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;flex:none}
+.note{margin:20px 0 0;color:#8a909a;font-size:.78rem;text-align:center;line-height:1.6}
+footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-height:1.6}
 /* ── 상세 팝업(모달) — 모바일 우선 바텀시트, 데스크톱에선 가운데 카드 ── */
 .mask{position:fixed;inset:0;background:rgba(6,8,11,.72);backdrop-filter:blur(2px);
  display:none;z-index:50;align-items:flex-end;justify-content:center}
@@ -453,11 +441,8 @@ def _origin(name: str, cat: str) -> str:
 def _card(key: str, item: tuple[str, str, str, str]) -> str:
     name, cat, abv, notes = item
     e = html.escape
-    origin = _origin(name, cat)
-    return f"""<button type="button" class="card" data-w="{e(key)}">
-  <div class="cname">{e(name)}</div>
-  <div class="cfoot"><span class="cabv">{e(abv)}</span><span class="corigin">{e(origin)}</span></div>
-</button>"""
+    return f'<button type="button" class="row" data-w="{e(key)}">' \
+           f'<span class="rname">{e(name)}</span><span class="rabv">{e(abv)}</span></button>'
 
 
 def _tabs() -> str:
@@ -481,10 +466,9 @@ def _tier_section(tier: dict, keys: dict, active: bool) -> str:
     return f"""<section class="{cls}" id="{e(tier['id'])}" role="tabpanel">
   <div class="thead">
     <div class="tname">{e(tier['medal'])} {e(tier['name'])} <span class="tcount">· {n}종</span></div>
-    <div class="tsub">{e(tier['sub'])}</div>
-    <div class="tserve">제공 방식 — {e(tier['serve'])}</div>
+    <div class="tserve">{e(tier['serve'])}</div>
   </div>
-  <div class="grid">
+  <div class="list">
   {cards}
   </div>
 </section>"""
@@ -581,22 +565,13 @@ def render() -> str:
 </head>
 <body><div class="wrap">
 <header>
-  <div class="kicker">Whisky Bar · 합정</div>
-  <h1>합정 <span class="gold">위마카세</span></h1>
-  <div class="ver">MENU {e(VERSION)}</div>
-  <p class="sub">3티어 위스키 테이스팅 · 총 {total}종</p>
+  <h1>합정 두다지 <span class="gold">위마카세</span></h1>
 </header>
-
-<div class="program">
-  <div class="pt">🥃 운영 프로그램 · The Night's Journey</div>
-  <p>{e(PROGRAM['course'])}</p>
-  <p class="vol">{e(PROGRAM['volume'])}</p>
-</div>
 
 {tabs_html}
 {tiers_html}
 
-<p class="note">티어 탭을 눌러 이동하세요 · 각 술 카드를 탭하면 증류소·캐스크·스토리 상세가 열립니다 · 고도수(55%+)는 소량의 물을 더하면 풍미가 열립니다 · 다음 잔 전 입 안을 물로 헹궈주세요 · 테이스팅 각 20 ml</p>
+<p class="note">각 위스키를 탭하면 증류소·캐스크·스토리 상세가 열립니다 · 테이스팅 각 20ml</p>
 
 <footer>합정 위마카세 · 메뉴 {e(VERSION)} &nbsp;·&nbsp; CaskCode<br>메뉴는 수시로 업데이트됩니다 — 버전을 확인하세요 🥃<br>상세 정보는 위키피디아 등 공개 자료를 요약한 참고용입니다 · 수집 {e(COLLECTED)}</footer>
 </div>
