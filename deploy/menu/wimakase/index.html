@@ -74,6 +74,13 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
 .msec h4{color:#e0a84e;font-size:.82rem;letter-spacing:.02em;margin:0 0 .5em;text-transform:none}
 .msec p{margin:0;color:#cdd2da;font-size:.94rem;line-height:1.65}
 .msrc{margin-top:16px;color:#6b7280;font-size:.74rem}
+/* ── 구글 이미지 검색 버튼 (상세 팝업 하단) ── */
+.mgoogle{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:18px;
+ background:#1a1508;border:1px solid #3a2f1a;color:#e0a84e;border-radius:12px;padding:12px;
+ font-size:.92rem;font-weight:700;text-decoration:none;-webkit-tap-highlight-color:transparent;
+ transition:background .12s,transform .1s}
+.mgoogle:hover{background:#221a0a}
+.mgoogle:active{transform:scale(.98)}
 /* ── 플로팅 '내 기록' 버튼 · 토스트 · 기록 목록 ── */
 .fab{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:40;
  display:flex;align-items:center;gap:8px;background:#e0a84e;color:#0f1115;border:none;border-radius:999px;
@@ -92,12 +99,29 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
 .logdate{color:#e0a84e;font-size:.86rem;font-weight:700;border-bottom:1px solid #20242e;padding-bottom:.3em}
 .logdate span{color:#6b7280;font-weight:600;font-size:.78rem}
 .logrow{display:flex;align-items:center;justify-content:space-between;gap:10px;
- padding:8px 2px;border-bottom:1px solid #171c26}
+ padding:8px 2px}
 .lgname{font-size:.92rem}
 .lgabv{color:#e0a84e;font-size:.8rem;font-weight:700;margin-left:.5em;font-variant-numeric:tabular-nums}
+.lgbtns{display:flex;gap:6px;flex:none}
+.lgmemo{flex:none;background:#20242e;border:none;color:#9aa0aa;width:28px;height:28px;border-radius:7px;
+ font-size:.85rem;cursor:pointer;line-height:1;-webkit-tap-highlight-color:transparent}
+.lgmemo:hover{background:#2a2e37;color:#e0a84e}
+.lgmemo.has{background:#1a1508;color:#e0a84e;border:1px solid #3a2f1a}
 .lgx{flex:none;background:#20242e;border:none;color:#9aa0aa;width:28px;height:28px;border-radius:7px;
  font-size:.9rem;cursor:pointer;line-height:1;-webkit-tap-highlight-color:transparent}
 .lgx:hover{background:#3a2222;color:#e88}
+/* ── 기록 메모 (담은 위스키에 남기는 한줄 메모) ── */
+.lgmemotext{color:#cdd2da;font-size:.84rem;line-height:1.55;padding:0 2px 9px;
+ border-bottom:1px solid #171c26;white-space:pre-wrap;word-break:break-word}
+.lgmemotext::before{content:"✏️ ";opacity:.7}
+.lgedit{padding:2px 2px 11px;border-bottom:1px solid #171c26}
+.lgedit textarea{width:100%;background:#0f1115;border:1px solid #2a2e37;border-radius:8px;color:#e8eaed;
+ font:inherit;font-size:.86rem;padding:8px;resize:vertical;min-height:52px}
+.lgeditbtns{display:flex;gap:8px;margin-top:6px}
+.lgsave{background:#e0a84e;color:#1a1508;border:none;border-radius:8px;padding:6px 16px;
+ font:inherit;font-weight:700;font-size:.82rem;cursor:pointer}
+.lgcancel{background:transparent;color:#9aa0aa;border:1px solid #2a2e37;border-radius:8px;
+ padding:6px 16px;font:inherit;font-size:.82rem;cursor:pointer}
 .logclear{display:block;width:100%;margin-top:20px;background:transparent;border:1px solid #3a2222;
  color:#c98;border-radius:10px;padding:10px;font:inherit;font-size:.86rem;cursor:pointer}
 .logclear:hover{background:#2a1616}
@@ -170,7 +194,7 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
   </div>
 </section>
 
-<p class="note">위스키를 탭하면 상세가 열리고, 옆의 ＋ 를 누르면 그날 마신 목록에 담깁니다 · 테이스팅 각 20ml</p>
+<p class="note">위스키를 탭하면 상세·구글 이미지 검색이 열리고, 옆의 ＋ 를 누르면 그날 마신 목록에 담깁니다 · 📒 내 기록에서 ✏️ 로 메모도 남길 수 있어요 · 테이스팅 각 20ml</p>
 
 <footer>합정 위마카세 · 메뉴 v2026.08.16 &nbsp;·&nbsp; CaskCode<br>메뉴는 수시로 업데이트됩니다 — 버전을 확인하세요 🥃<br>상세 정보는 위키피디아 등 공개 자료를 요약한 참고용입니다 · 수집 2026-08-16</footer>
 </div>
@@ -205,6 +229,7 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
         row('캐스크',d.cask)+row('도수',d.abv)+row('분류',d.cat)+'</div>';
   if(d.notes)h+='<div class="msec"><h4>특징</h4><p>'+esc(d.notes)+'</p></div>';
   if(d.story)h+='<div class="msec"><h4>스토리</h4><p>'+esc(d.story)+'</p></div>';
+  h+='<a class="mgoogle" href="https://www.google.com/search?tbm=isch&q='+encodeURIComponent(d.name+' 위스키')+'" target="_blank" rel="noopener">🔍 구글 이미지로 사진 보기</a>';
   if(d.source)h+='<div class="msrc">출처 · '+esc(d.source)+' (요약) · 수집 '+esc(window.__WM_COLLECTED__||'')+'</div>';
   m.innerHTML=h;
   mask.classList.add('open');document.body.style.overflow='hidden';
@@ -237,6 +262,7 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
  var mask=document.getElementById('logmask');
  var body=document.getElementById('logbody');
  var toastEl=document.getElementById('toast');var toastT=null;
+ var editing=null;
  function load(){try{return JSON.parse(localStorage.getItem(LS))||[];}catch(e){return [];}}
  function save(a){try{localStorage.setItem(LS,JSON.stringify(a));}catch(e){}}
  function today(){var d=new Date(),m=('0'+(d.getMonth()+1)).slice(-2),dd=('0'+d.getDate()).slice(-2);
@@ -250,15 +276,20 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
   var a=load();a.push({k:key,name:d.name,cat:d.cat,abv:d.abv,date:today()});save(a);
   updateFab();toast('담김 · '+d.name);
  }
- window.__wmRemove=function(i){var a=load();a.splice(i,1);save(a);updateFab();renderLog();};
+ window.__wmRemove=function(i){var a=load();a.splice(i,1);save(a);editing=null;updateFab();renderLog();};
  window.__wmClearLog=function(){if(!confirm('내가 마신 목록을 모두 지울까요?'))return;
-  save([]);updateFab();renderLog();};
+  save([]);editing=null;updateFab();renderLog();};
+ window.__wmMemo=function(i){editing=(editing===i?null:i);renderLog();};
+ window.__wmMemoCancel=function(){editing=null;renderLog();};
+ window.__wmMemoSave=function(i){var ta=document.getElementById('lgmemoinput');
+  var v=ta?ta.value.trim():'';var a=load();if(a[i]){a[i].memo=v;save(a);}editing=null;renderLog();};
  function renderLog(){
   var a=load();
   var h='<div class="mtop"><div class="mname">📒 내가 마신 목록</div>'+
         '<button type="button" class="mx" aria-label="닫기" onclick="__wmCloseLog()">✕</button></div>';
   if(!a.length){h+='<p class="logempty">아직 담은 위스키가 없습니다.<br>'+
-    '메뉴에서 각 위스키 옆 ＋ 를 눌러 그날 마신 술을 기록하세요.</p>';body.innerHTML=h;return;}
+    '메뉴에서 각 위스키 옆 ＋ 를 눌러 그날 마신 술을 기록하세요.<br>'+
+    '담은 뒤 ✏️ 를 눌러 맛·느낌 메모를 남길 수 있어요.</p>';body.innerHTML=h;return;}
   var byDate={},order=[];
   a.forEach(function(e,i){if(!byDate[e.date]){byDate[e.date]=[];order.push(e.date);}
    byDate[e.date].push({e:e,i:i});});
@@ -267,16 +298,31 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
   order.forEach(function(dt){
    h+='<div class="logday"><div class="logdate">'+esc(dt)+' <span>('+byDate[dt].length+'잔)</span></div>';
    byDate[dt].forEach(function(o){
-    h+='<div class="logrow"><span class="lgname">'+esc(o.e.name)+
-       '<span class="lgabv">'+esc(o.e.abv)+'</span></span>'+
-       '<button type="button" class="lgx" aria-label="삭제" onclick="__wmRemove('+o.i+')">✕</button></div>';
+    var e=o.e,i=o.i,memo=e.memo||'';
+    h+='<div class="logrow"><span class="lgname">'+esc(e.name)+
+       '<span class="lgabv">'+esc(e.abv)+'</span></span><div class="lgbtns">'+
+       '<button type="button" class="lgmemo'+(memo?' has':'')+'" aria-label="메모" '+
+       'title="메모" onclick="__wmMemo('+i+')">✏️</button>'+
+       '<button type="button" class="lgx" aria-label="삭제" onclick="__wmRemove('+i+')">✕</button>'+
+       '</div></div>';
+    if(editing===i){
+     h+='<div class="lgedit"><textarea id="lgmemoinput" '+
+        'placeholder="이 위스키의 맛·향·느낌을 메모하세요">'+esc(memo)+'</textarea>'+
+        '<div class="lgeditbtns"><button type="button" class="lgsave" '+
+        'onclick="__wmMemoSave('+i+')">저장</button>'+
+        '<button type="button" class="lgcancel" onclick="__wmMemoCancel()">취소</button></div></div>';
+    }else if(memo){
+     h+='<div class="lgmemotext">'+esc(memo)+'</div>';
+    }
    });
    h+='</div>';
   });
   h+='<button type="button" class="logclear" onclick="__wmClearLog()">전체 지우기</button>';
   body.innerHTML=h;
+  if(editing!==null){var ta=document.getElementById('lgmemoinput');
+   if(ta){ta.focus();ta.setSelectionRange(ta.value.length,ta.value.length);}}
  }
- function openLog(){renderLog();mask.classList.add('open');document.body.style.overflow='hidden';
+ function openLog(){editing=null;renderLog();mask.classList.add('open');document.body.style.overflow='hidden';
   var md=mask.querySelector('.modal');if(md)md.scrollTop=0;}
  window.__wmCloseLog=function(){mask.classList.remove('open');document.body.style.overflow='';};
  fab.addEventListener('click',openLog);
