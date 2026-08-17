@@ -5,23 +5,23 @@ date: "2026-08-17 09:00:00 +0900"
 categories: ["price"]
 kind: "patch"
 cadence: "weekly"
-breakthroughs: 2
+breakthroughs: 3
 prev_date: "2026-08-16"
-latest_date: "2026-08-17"
+latest_date: "2026-08-18"
 weekly_start: "2026-08-17"
 weekly_end: "2026-08-23"
-days: 1
-hotdeals: ["보모어 14년 700ml — 면세 ₩52,916 · 48%↓", "보모어 16년 700ml — 면세 ₩85,599 · 46%↓"]
-hotdeals_count: 2
-rare_drops: []
-rare_drops_count: 0
-description: "면세 위스키 가격 주간 로그 8/17~8/23 — 이번주 핫딜 2종 · 오랜만의 큰 인하 0종 · 최신 2026-08-17. CaskCode"
+days: 2
+hotdeals: ["보모어 14년 700ml — 면세 ₩52,916 · 48%↓", "보모어 16년 700ml — 면세 ₩85,599 · 46%↓", "라가불린 16년 700ml — 면세 ₩91,500 · 36%↓", "와일드 터키 레어브리드 1000ml — 면세 ₩49,925 · 33%↓", "글렌알라키 12년 (24RB) 700ml — 면세 ₩74,648 · 27%↓"]
+hotdeals_count: 5
+rare_drops: ["와일드 터키 레어브리드 1000ml → ₩49,925 (−38%)"]
+rare_drops_count: 1
+description: "면세 위스키 가격 주간 로그 8/17~8/23 — 이번주 핫딜 5종 · 오랜만의 큰 인하 1종 · 최신 2026-08-18. CaskCode"
 robots: "noindex,nofollow"
 ---
 
 이 글은 신라면세 위스키 가격변동을 **하루 단위로 아래에 쌓는 주간 로그**입니다. 위에 이번주 핫딜을 모았고, 아래는 날짜별 상세(최신이 맨 위) · 기간 2026-08-17 ~ 2026-08-23.
 
-## 🔥 이번주 핫딜 (2종)
+## 🔥 이번주 핫딜 (5종)
 
 _이번 주 면세가가 국내최저가보다 싼 위스키를 모았습니다. 각 항목은 그 주 최신 관측가 기준 · 절약률 높은 순._
 
@@ -29,6 +29,48 @@ _이번 주 면세가가 국내최저가보다 싼 위스키를 모았습니다.
 |---|---|
 | 보모어 14년 700ml | 면세 **₩52,916** · 국내최저 [₩102,000 🔗](https://dailyshot.co/m/item/25811)<br>절약 **−₩49,084 (48%↓)** · 할인 50%→45% |
 | 보모어 16년 700ml | 면세 **₩85,599** · 국내최저 [₩159,000 🔗](https://dailyshot.co/m/item/25812)<br>절약 **−₩73,401 (46%↓)** · 할인 50%→45% |
+| 라가불린 16년 700ml | 면세 **₩91,500** · 국내최저 [₩142,000 🔗](https://dailyshot.co/m/item/1679)<br>절약 **−₩50,500 (36%↓)** · 할인 48%→47% |
+| 와일드 터키 레어브리드 1000ml | 면세 **₩49,925** · 국내최저 [₩75,000 🔗](https://dailyshot.co/m/item/19596)<br>절약 **−₩25,075 (33%↓)** · 할인 42%→44% |
+| 글렌알라키 12년 (24RB) 700ml | 면세 **₩74,648** · 국내최저 [₩102,000 🔗](https://dailyshot.co/m/item/21702)<br>절약 **−₩27,352 (27%↓)** · 할인 50%→51% |
+
+---
+
+## 🕰️ 신라면세 오랜만의 큰 인하 (1종)
+
+_원래 거의 정상가였다가 **이번 주 처음으로 20% 넘게 떨어진** 위스키입니다. 늘 할인하거나 잔잔히 오르내리는 건 제외 · 낙폭 큰 순._
+
+| 🕰️ 위스키 | 상세 |
+|---|---|
+| 와일드 터키 레어브리드 1000ml | 면세 **₩49,925** · 국내최저 [₩75,000 🔗](https://dailyshot.co/m/item/19596)<br>**−38% 인하** · 그동안 ₩80,236 거의 정상가(10% 할인)로 73일째 → 44% 할인 · 8/18 첫 인하 |
+
+---
+
+## 📅 8월 18일 (화) — 돌파 3건
+
+*직전 2026-08-17 → 최신 2026-08-18* · *환율 ₩1,415.10 (기준일 2026-08-17)*
+
+### 📊 한눈에 — 할인율 변동 요약
+
+_각 위스키 이름을 누르면 도수·맛·스토리 설명이 펼쳐집니다._
+
+**🔺 할증 심화 — 할인 축소·가격 상승 (10%p↑)**
+
+<details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">브룩라디 블랙아트 사페로 700ml: 40%→0% (₩336,794)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 브룩라디 (Bruichladdich) · 아일라 (Islay)<br><b>도수</b> 46% (추정 · 병 표기 미확인)<br><b>캐스크</b> 비공개(Black Art 시리즈 전통 — 캐스크 레시피를 비밀로 유지)<br><b>맛</b> 피트 없는 아일라 싱글몰트. Black Art 시리즈 특유의 검은 과일·다크초콜릿·트로피컬·오크 스파이스·허브·시트러스 필 복합미. 긴 크리미 피니시. (동일 시리즈 기준 추정 노트 · Sapero 에디션 공식 노트 미확인)<br><b>스토리</b> 브룩라디는 1881년 아일라 서해안에 설립된 논피트 싱글몰트 증류소. Black Art 시리즈는 헤드 디스틸러(아담 하넷→짐 맥이완 후임)가 캐스크 레시피를 비공개로 유지하는 프리미엄 한정판 라인이다. Sapero 에디션은 면세(트래블 리테일) 채널 전용 표현으로 추정. 시리즈 전통상 다양한 와인·셰리·버번 캐스크 배팅 후 비밀 레시피로 완성한다.<br><span style="color:#8a8f98">출처: bruichladdich.com (시리즈 정보) · 신라면세 리스팅 (2026-07-30 리서치 · Sapero 에디션 공식 상세 미공개) · 수집일 2026-07-30</span></div></details>
+
+<details style="margin:8px 0"><summary><strong>미세조정(할인)</strong> 2건 · 10%p 미만 (펼치기)</summary><div style="margin-top:6px"><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">와일드 터키 레어브리드 1000ml: 42%→44% (₩49,925)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 와일드 터키 (Wild Turkey) · 미국(켄터키)<br><b>도수</b> 58.4% (배럴 프루프 · 배치별 상이)<br><b>캐스크</b> 뉴 차르드 오크 배럴<br><b>맛</b> 버터·정향·오크의 향에 오렌지 껍질·민트·달콤한 담배가 더해진다. 팔레트는 묵직한 캐러멜·초콜릿·바닐라에 시나몬 스파이스·구운 오크·가죽·무화과가 어우러진다. 피니시는 길고 강건하며 캐러멜·바닐라의 단맛이 남는다.<br><b>스토리</b> 와일드 터키 레어브리드는 약 6·8·12년 숙성 배럴을 혼합한 스몰배치 배럴 프루프 버번으로, 희석 없이 병입한다. 배치마다 도수가 다소 달라진다.<br><span style="color:#8a8f98">출처: Master of Malt · Dramface · 공식 정보 (2026-06-20 리서치) · 수집일 2026-06-20</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">글렌알라키 12년 (24RB) 700ml: 50%→51% (₩74,648)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 글렌알라키 (GlenAllachie) · 스페이사이드<br><b>도수</b> 46% (논칠필터·천연색)<br><b>캐스크</b> 엑스-버번(1·2차) + 버진 오크 + PX 셰리 + 올로로소 셰리 캐스크 숙성·리랙 (24년 리브랜드)<br><b>맛</b> 구운 바나나·아몬드·콜라·갓 자른 오크 향. 팔레트는 스템 진저·건포도·오일리한 보리·버터 바닐라, 피니시에 살짝 초콜릿. 과일 프리저브·크리스마스 케이크·트리클 토피·다크초콜릿의 진한 셰리 캐릭터.<br><b>스토리</b> 글렌알라키는 1967년 설립, 2017년 빌리 워커가 인수한 스페이사이드 증류소. 12년은 2018년 출시된 플래그십으로 2024년 라벨을 리디자인(24RB=2024 리브랜드)했다. 엑스-버번·버진 오크·PX/올로로소 셰리 캐스크를 조합·리랙해 숙성한 셰리 지향 코어레인지.<br><span style="color:#8a8f98">출처: Master of Malt · The Whisky Exchange · Words of Whisky (2026-08-18 리서치) · 수집일 2026-08-18</span></div></details></div></details>
+
+<details style="margin:8px 0"><summary><strong>미세조정(할증)</strong> 9건 · 10%p 미만 (펼치기)</summary><div style="margin-top:6px"><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">조니워커 킹조지 5세 500ml: 42%→35% (₩404,718)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 조니워커 (Johnnie Walker) · 블렌디드(스코틀랜드)<br><b>도수</b> 43%<br><b>캐스크</b> 다양한 캐스크(킹조지 5세 시대 가동 증류소 원액 블렌드)<br><b>맛</b> 옅은 스모크에 신선한 과일·맥아·건포도·무화과·시나몬, 그리고 바닐라·잘 익은 사과·구운 아몬드·밀크초콜릿이 더해진 향. 팔레트는 다크초콜릿·샌달우드·절제된 피트 스모크·단 말린 과일이 층층이 쌓이고 후추·생강·넛맥 스파이스가 따른다. 벨벳처럼 풍성한 질감, 메이플 시럽 뉘앙스의 길고 따뜻한 피니시.<br><b>스토리</b> 블루라벨 프레스티지 라인(500ml). 조지 5세가 조니워커에 로열 워런트를 수여한 1934년을 기려 그 시대 가동 증류소들의 희소 원액으로 블렌딩한다.<br><span style="color:#8a8f98">출처: 공식 사이트 · Difford's Guide · Whiskybase · 수집일 2026-06-20</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">글렌피딕 23년 Grand Cru 700ml: 43%→40% (₩299,718)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 글렌피딕 (Glenfiddich) · 스코틀랜드 스페이사이드<br><b>도수</b> 40%<br><b>캐스크</b> 아메리칸 오크 + 유러피안 오크 캐스크에서 23년 숙성 후 프랑스 그랑 크뤼 큐베(샴페인 전단계 와인) 캐스크에서 피니싱<br><b>맛</b> 사과꽃·갓 구운 빵·캔디드 레몬·무스캇 포도 향. 풍부한 바닐라 오크·달콤한 브리오슈·샌달우드·배 소르베·화이트 그레이프·토스티드 코코넛. 길고 풍성하며 달콤한 여운에 정향·빈티지 오크·몰트 잔향.<br><b>스토리</b> 글렌피딕은 1886년 윌리엄 그랜트가 스페이사이드에 설립하고 1887년 크리스마스에 첫 증류한 증류소이다. Grand Cru는 프랑스 그랑 크뤼 등급 포도원의 큐베 캐스크로 피니싱한 유일한 글렌피딕 싱글 몰트로 스코틀랜드 위스키와 프랑스 와인 문화의 만남을 표방한다.<br><span style="color:#8a8f98">출처: glenfiddich.com 공식 · Master of Malt · Drinkhacker (2026-07-17 리서치) · 수집일 2026-07-17</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">NEW 올트모어 21년 (깔바도스) 500ml: 50%→48% (₩147,138)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 올트모어 (Aultmore) · 독립 스페이사이드 · 스페이사이드<br><b>도수</b> 46% (논칠필터·천연색)<br><b>캐스크</b> 리필/버번 숙성 후 세컨드필 깔바도스(사과 브랜디) 캐스크 피니시<br><b>맛</b> 사과꽃 만발한 과수원의 상큼한 향에 아몬드·섬세한 오크. 세컨드필 깔바도스가 사과·토스티드 아몬드의 과실 단맛과 부드러운 스파이스를 더한다. 균형 잡힌 스페이사이드 몰트.<br><b>스토리</b> 올트모어는 1896년 스페이사이드에 설립, 현재 듀어스(바카디) 소유의 '숨은 보석' 증류소로 깨끗하고 꽃향 나는 스피릿으로 유명하다. 2024년 출시된 Cask Finish Collection(트래블 리테일 면세 전용) 4종 중 하나로, 21년 원액을 깔바도스 캐스크로 피니시했다. 컬렉션 전 제품이 46%·논칠필터·천연색.<br><span style="color:#8a8f98">출처: moodiedavittreport.com · dutyfreehunter.com · whiskyintelligence.com (2026-08-18 리서치) · 수집일 2026-08-18</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">에버펠디 25년 700ml: 42%→40% (₩465,815)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 에버펠디 (Aberfeldy) · 스코틀랜드 하이랜드<br><b>도수</b> 43%<br><b>캐스크</b> 리필 캐스크 숙성 후 퍼스트필 올로로소 셰리 1년+ 피니시<br><b>맛</b> 코코아 파우더·크리미한 카라멜·따뜻한 시나몬이 쌓이는 향. 팔레트는 맥아·시리얼 베이스 위에 섬세한 과일과 바닐라 커피가 얹히고, 시나몬 스파이스에 옅은 스모크가 온기를 더한다. 하이랜드 꿀·야생 딸기의 단맛.<br><b>스토리</b> '골든 드램' 에버펠디의 25년. 리필 캐스크 숙성 후 퍼스트필 올로로소 셰리에서 1년 이상 피니시해 단맛과 깊이를 더했다.<br><span style="color:#8a8f98">출처: 공식 사이트(aberfeldy.com) · The Whiskey Wash · 수집일 2026-06-20</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">듀어스 더블더블 26년 500ml: 49%→48% (₩176,714)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 듀어스 (Dewar's) · 블렌디드(스코틀랜드)<br><b>도수</b> 46%<br><b>캐스크</b> 듀어스 4단계 숙성(더블더블) 공법 · 올로로소 셰리 캐스크 피니시<br><b>맛</b> 풍부한 과일·아몬드·따뜻한 스파이스에 매끄럽고 럭셔리한 여운. 시트러스·플로럴 허니·은은한 스파이스가 층층이 쌓여 밝은 과일과 실키한 질감의 균형 잡힌 팔레트로 이어진다.<br><b>스토리</b> 듀어스 더블더블은 마스터 블렌더 스테파니 맥레오드가 고안한 4단계 숙성 공법(싱글몰트·싱글그레인을 각각 숙성 후 결혼시키고 다시 셰리 캐스크에 숙성)을 쓴 프리미엄 라인. 26년은 글로벌 트래블 리테일(면세) 전용 표현으로 올로로소 셰리 캐스크 피니시. SF 월드 스피릿 컴피티션 금상(2023·2025).<br><span style="color:#8a8f98">출처: dewars.com 공식 · Caskers · The Whiskey Wash (2026-08-18 리서치) · 수집일 2026-08-18</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">라가불린 16년 700ml: 48%→47% (₩91,500)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 라가불린 (Lagavulin) · 아일라 (Islay)<br><b>도수</b> 43%<br><b>캐스크</b> 엑스-버번 및 셰리 캐스크에서 최소 16년 숙성<br><b>맛</b> 코: 아일라 특유의 강렬한 피트 스모크에 요오드, 달콤한 스파이스, 잘 익은 셰리, 크리미한 바닐라. 입: 오일리하면서 진하고 풍부하며, 짭짤한 브라인과 묵직한 피트·오크, 과일의 단맛. 피니시: 무화과·대추야자·피트 스모크·바닐라의 길고 스파이시한 여운.<br><b>스토리</b> 1816년 설립된 라가불린은 아일라 남부를 대표하는 증류소로, 강력한 피트 스모크 캐릭터로 유명하다. 16년은 디아지오 'Classic Malts'의 일원이자 아일라 싱글몰트의 벤치마크로 평가받는 클래식 제품이다.<br><span style="color:#8a8f98">출처: Malts.com (Diageo 공식), Whisky Magazine, Caskers (2026-06-09 리서치) · 수집일 2026-06-09</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">로얄브라클라 12년 1000ml: 48%→47% (₩73,025)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 로얄브라클라 (Royal Brackla) · 하이랜드<br><b>도수</b> 46%<br><b>캐스크</b> 버번 캐스크 숙성 후 올로로소 셰리 캐스크 피니시 · 논칠필터<br><b>맛</b> 토피·무화과·프루트케이크 향에 육두구·계피·호두. 입안엔 잘 익은 복숭아·블랙체리·초콜릿·아몬드, 무스코바도 설탕의 따뜻한 단맛 피니시.<br><b>스토리</b> 1812년 설립, 1835년 윌리엄 4세에게 'The King's Own Whisky' 칭호를 받은 첫 증류소. 현재 듀어스(바카디) 소유. 12년은 올로로소 셰리 피니시 코어레인지.<br><span style="color:#8a8f98">출처: 공식 royalbrackla.com · Master of Malt · The Whiskey Wash (2026-06-12 리서치) · 수집일 2026-06-12</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">로크로몬드 8년 Madeira 1000ml: 56%→55% (₩33,113)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 로크로몬드 (Loch Lomond) · 하이랜드<br><b>도수</b> 46% (caskcartel·dutyfreepoints·whisky.com 일치, 1L 트래블리테일 2022 릴리스)<br><b>캐스크</b> 아메리칸 오크 숙성 후 마데이라 캐스크 피니시<br><b>맛</b> 코에서 오렌지·너트맥·아몬드 마지팬. 입에서는 복숭아·배·무화과에 너트맥과 마지팬, 호두의 견과 풍미. 마데이라 피니시가 과수원 과일 캐릭터와 향신료를 더한다.<br><b>스토리</b> 로크로몬드는 스완넥 포트스틸과 독특한 스트레이트넥(직선목) 포트스틸을 함께 운용해 다양한 스타일을 한 증류소에서 만드는 하이랜드 증류소다. 이 8년 마데이라 우드 피니시는 글로벌 트래블리테일(면세) 전용 라인업의 1L 보틀로, 2022년 릴리스되었다. 아메리칸 오크에서 숙성한 뒤 마데이라 캐스크로 추가 숙성해 과실미와 스파이스를 강조했다.<br><span style="color:#8a8f98">출처: lochlomondwhiskies.com(Global Travel Retail), caskcartel.com, dutyfreepoints.com, whisky.com 위스키 데이터베이스 (2026-06-09 리서치) · 수집일 2026-06-09</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">조니워커 아일랜드 그린 1000ml: 51%→50% (₩61,336)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 조니워커 (Johnnie Walker · 블렌디드 몰트) · 블렌디드 몰트(스코틀랜드)<br><b>도수</b> 43%<br><b>캐스크</b> NAS(숙성연수 미표기) 블렌디드 몰트 — 카올 일라 중심 + 클라이넬리시·글렌킨치·카듀<br><b>맛</b> 스모키하고 약간 메디시널한 페놀 피트에 헤더·구운 파인애플·바닐라·옅은 오크 향. 팔레트는 스모키하고 오일리하며 붉은 사과·복숭아의 과일감에 카라멜 캔디·헤더·오크가 더해진다. 길고 스모키한 피니시에 헤더 힌트.<br><b>스토리</b> 2016년 면세(트래블 리테일) 전용으로 출시된 블렌디드 몰트. 카올 일라(아일라 피트)를 골격으로 클라이넬리시(하이랜드 과일감)·글렌킨치(로우랜드)·카듀(스페이사이드 단맛)를 결합해, '그린 라벨 15년'보다 아일라 피트 쪽으로 무게를 둔 NAS 블렌디드 몰트.<br><span style="color:#8a8f98">출처: The Scotch Noob · WhiskyCast · Whisky of the Week (2026-06-22 리서치) · 수집일 2026-06-22</span></div></details></div></details>
+
+### 🏆 국내최저가(데일리샷·트레이더스·코스트코) 대비 핫딜
+
+| 🏆 위스키 | 상세 |
+|---|---|
+| 라가불린 16년 700ml | 면세 **₩91,500** · 국내최저 [₩142,000 🔗](https://dailyshot.co/m/item/1679)<br>절약 **−₩50,500 (36%↓)** · 할인 48%→47% |
+| 글렌알라키 12년 (24RB) 700ml | 면세 **₩74,648** · 국내최저 [₩102,000 🔗](https://dailyshot.co/m/item/21702)<br>절약 **−₩27,352 (27%↓)** · 할인 50%→51% |
+| 와일드 터키 레어브리드 1000ml | 면세 **₩49,925** · 국내최저 [₩75,000 🔗](https://dailyshot.co/m/item/19596)<br>절약 **−₩25,075 (33%↓)** · 할인 42%→44% |
+
+*국내최저가 = 데일리샷·트레이더스·코스트코 국내 소매가 중 최저(면세·해외 제외) 브랜드+숙성 근사매칭 · 매칭 실패/인디·싱글캐스크는 비움.*
+
 
 ---
 
