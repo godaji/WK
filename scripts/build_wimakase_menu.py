@@ -32,7 +32,22 @@ TITLE = "합정 두다지 위마카세"
 COLLECTED = "2026-08-16"
 
 # ── 운영 프로그램 (The Night's Journey) ──────────────────────────────────────
+# CMPA-1303: 상단 흐름을 '웰컴 하이볼(예열) → Tier 1·2 니트 → Tier 3 프리플로우'로 노출.
 PROGRAM = {
+    "title": "🌙 The Night's Journey · 오늘의 흐름",
+    "flow": "🍸 웰컴 하이볼(예열) → 🥇🥈 Tier 1·2 니트 → 🥉 Tier 3 프리플로우(무제한)",
+    # 웰컴 하이볼 = '예열 1잔'(원하면 최대 2잔). 본편 무제한 하이볼은 Tier 3 프리플로우.
+    "welcome": {
+        "name": "🍸 웰컴 하이볼",
+        "tag": "워밍업",
+        "desc": "니트 테이스팅을 시작하기 전, 입을 여는 가벼운 하이볼 1잔(원하시면 최대 2잔)."
+                " 저도수 클린 기주(몽키숄더 · 닛카 프론티어)에 탄산은 넉넉히, 시럽은 적게, 차갑게 냅니다.",
+        "tip": "💧 니트로 넘어가기 직전, 물 한 모금으로 입을 헹구세요.",
+        "note": "※ 예열 1잔입니다. 하이볼 무제한은 Tier 3 프리플로우에서 즐기세요.",
+    },
+    # 서빙 가이드(CMPA-1303): 티어 라벨은 가격·희소성 기준 → 강도순이 아님을 안내.
+    "guide": "🍶 테이스팅은 도수·피트가 낮은 잔부터 높은 잔 순으로 제공됩니다(바텐더 재량)."
+             " 티어 라벨은 가격·희소성 기준이라 강도 순서가 아닙니다.",
     "course": "1티어 5잔(각 20ml) + 2티어 5잔(각 20ml) 테이스팅 후, 3티어 프리플로우(무제한) 제공",
     "volume": "총 테이스팅 용량 200ml (프리플로우 제외)",
 }
@@ -52,15 +67,12 @@ TIERS = [
             ("글렌리벳 19년", "싱글 몰트 스카치", "48%", "정규 라인을 벗어난 고숙성/고도수 바틀"),
             ("올트모어 18년", "싱글 몰트 스카치", "46%", "깔끔하고 우아한 고숙성 스페이사이드 몰트"),
             ("글렌파클라스 25년", "싱글 몰트 스카치", "43%", "고숙성 셰리 캐스크의 정석, 부드럽고 진한 스페이사이드 클래식"),
-            ("스프링뱅크 12년 CS", "싱글 몰트 스카치", "55.8%",
-             "논칠필터·CS(배치별 도수 상이), 캠벨타운 특유의 짭짤·오일리·은은한 피트"),
             ("아벨라워 아브나흐", "싱글 몰트 스카치", "61%", "꾸덕한 셰리 폭탄, 강력한 타격감의 CS"),
             ("옥토모어 15.1", "싱글 몰트 스카치", "59.1%",
              "108.2 PPM의 세계 최고 수준의 강력한 피트 수치, 압도적인 스모키함"),
             ("스테그 (Stagg)", "버번 위스키", "63~65%", "구하기 매우 힘든 프리미엄 CS 버번"),
             ("일라이저 크레이그 18년", "버번 위스키", "45%", "초고숙성 버번, 높은 희소성"),
             ("카발란 올로로소", "타이완 싱글 몰트", "55%", "대만 특유의 진한 열대 숙성 셰리 (CS)"),
-            ("야마자키 12년", "재패니즈 싱글 몰트", "43%", "전 세계적인 품귀 현상, 높은 프리미엄"),
             ("기원 타이거 (Tiger)", "코리안 싱글 몰트", "46%", "쓰리소사이어티스 한정판, 수집 가치 높음"),
         ],
     },
@@ -154,16 +166,6 @@ DETAILS = {
                  "고숙성 셰리 몰트의 정석이다.",
         "source": "위키피디아 · 증류소 공식",
     },
-    "스프링뱅크 12년 CS": {
-        "distillery": "스프링뱅크 (Springbank)", "region": "스코틀랜드 캠벨타운",
-        "cask": "버번 & 셰리 캐스크 혼합 (배치별 상이)",
-        "story": "1828년부터 미첼(Mitchell) 가문이 소유·운영하는 캠벨타운의 증류소로, "
-                 "몰팅부터 병입까지 전 과정을 자가 생산하는 것으로 유명하다. "
-                 "12년 캐스크 스트렝스는 논칠필터·비착색으로 배치별로 병입되며, "
-                 "캠벨타운 특유의 짭짤함·오일리한 질감과 은은한 피트가 어우러진다. "
-                 "배치마다 도수가 조금씩 다르다(대략 54~57%).",
-        "source": "위키피디아 · 증류소 공식",
-    },
     "아벨라워 아브나흐": {
         "distillery": "아벨라워 (Aberlour)", "region": "스코틀랜드 스페이사이드",
         "cask": "올로로소 셰리 벗 (논칠필터·캐스크 스트렝스)",
@@ -201,14 +203,6 @@ DETAILS = {
         "story": "2005년 킹카 그룹이 세운 대만의 대표 증류소다. 아열대 기후에서 빠르게 숙성해 짧은 기간에도 "
                  "진한 풍미를 낸다. 'Solist' 시리즈는 단일 캐스크·캐스크 스트렝스로 병입하며, 올로로소는 "
                  "진한 건과일과 열대 과일 뉘앙스가 특징이다.",
-        "source": "위키피디아 · 증류소 공식",
-    },
-    "야마자키 12년": {
-        "distillery": "산토리 야마자키 (Suntory Yamazaki)", "region": "일본 (오사카 인근)",
-        "cask": "아메리칸·스패니시 오크 및 미즈나라(일본 오크)",
-        "story": "1923년 토리이 신지로가 세운 일본 최초의 몰트 위스키 증류소다. 물이 좋기로 이름난 야마자키에 "
-                 "자리했고, 미즈나라(일본 참나무) 캐스크가 주는 특유의 향으로 유명하다. 전 세계적 품귀로 "
-                 "프리미엄이 높다.",
         "source": "위키피디아 · 증류소 공식",
     },
     "기원 타이거 (Tiger)": {
@@ -407,6 +401,24 @@ h1 .gold{color:#e0a84e}
  font:inherit;font-weight:700;font-size:.82rem;padding:6px 12px;cursor:pointer;
  -webkit-tap-highlight-color:transparent}
 .extbar button:active{transform:scale(.96)}
+/* ── 운영 프로그램(The Night's Journey) · 상단 흐름 + 웰컴 하이볼 + 서빙 가이드 (CMPA-1303) ──
+   카톡 웹뷰 원칙: 100vw/blur 금지, 긴 문구 word-break:keep-all·min-width:0 로 가로 넘침 차단. */
+.program{background:#12100a;border:1px solid #2e2712;border-radius:12px;
+ padding:12px 13px;margin:8px 0 2px;min-width:0}
+.pgtitle{color:#e0a84e;font-size:.92rem;font-weight:700;line-height:1.35;word-break:keep-all}
+.pgflow{color:#cdd2da;font-size:.82rem;font-weight:600;line-height:1.55;margin-top:6px;
+ word-break:keep-all;overflow-wrap:anywhere}
+.welcome{background:#0f1115;border:1px solid #24242e;border-radius:10px;
+ padding:10px 11px;margin-top:10px;min-width:0}
+.wcname{color:#7fd0e0;font-size:.9rem;font-weight:700;line-height:1.3;word-break:keep-all}
+.wctag{display:inline-block;background:#0c2b33;color:#7fd0e0;border:1px solid #1d4650;
+ border-radius:999px;font-size:.68rem;font-weight:700;padding:1px 8px;margin-left:.4em;vertical-align:middle}
+.wcdesc{margin:7px 0 0;color:#cdd2da;font-size:.83rem;line-height:1.6;word-break:keep-all;overflow-wrap:anywhere}
+.wctip{margin:6px 0 0;color:#9fd8e6;font-size:.8rem;line-height:1.55;word-break:keep-all}
+.wcnote{margin:6px 0 0;color:#8a909a;font-size:.75rem;line-height:1.5;word-break:keep-all}
+.pgguide{margin-top:10px;color:#cdbf9a;font-size:.8rem;line-height:1.6;
+ border-top:1px solid #24242e;padding-top:9px;word-break:keep-all;overflow-wrap:anywhere}
+.pgcourse{margin-top:7px;color:#8a909a;font-size:.74rem;line-height:1.55;word-break:keep-all}
 /* ── 티어 탭 (한 번에 한 티어만) · 상단 고정 ── */
 .tabs{position:sticky;top:0;z-index:20;display:flex;gap:6px;background:#0f1115;
  padding:8px 0 7px;margin:4px 0 0;border-bottom:1px solid #20242e}
@@ -574,6 +586,25 @@ def _card(key: str, item: tuple[str, str, str, str]) -> str:
            f'<button type="button" class="radd" data-w="{e(key)}" ' \
            f'aria-label="{e(name)} 마신 목록에 담기" title="마신 목록에 담기">＋</button>' \
            f'</div>'
+
+
+def _program_section() -> str:
+    """상단 운영 프로그램 — 흐름 + 웰컴 하이볼(예열) + 서빙 가이드 (CMPA-1303)."""
+    e = html.escape
+    p = PROGRAM
+    w = p["welcome"]
+    return f"""<section class="program" aria-label="오늘의 흐름">
+  <div class="pgtitle">{e(p['title'])}</div>
+  <div class="pgflow">{e(p['flow'])}</div>
+  <div class="welcome">
+    <div class="wcname">{e(w['name'])}<span class="wctag">{e(w['tag'])}</span></div>
+    <p class="wcdesc">{e(w['desc'])}</p>
+    <p class="wctip">{e(w['tip'])}</p>
+    <p class="wcnote">{e(w['note'])}</p>
+  </div>
+  <div class="pgguide">{e(p['guide'])}</div>
+  <div class="pgcourse">{e(p['course'])} · {e(p['volume'])}</div>
+</section>"""
 
 
 def _tabs() -> str:
@@ -875,6 +906,7 @@ def render(build: int) -> str:
         for item in tier["items"]:
             n += 1
             keys[id(item)] = f"w{n}"
+    program_html = _program_section()
     tabs_html = _tabs()
     tiers_html = "\n".join(_tier_section(t, keys, i == 0) for i, t in enumerate(TIERS))
     data_json = json.dumps(_build_data(keys), ensure_ascii=False)
@@ -908,6 +940,7 @@ def render(build: int) -> str:
   <button type="button" id="extbtn">🔗 새 창(기본 브라우저)에서 열기</button>
 </div>
 
+{program_html}
 {tabs_html}
 {tiers_html}
 
