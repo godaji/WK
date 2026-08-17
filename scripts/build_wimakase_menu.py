@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import html
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -119,6 +120,20 @@ TIERS = [
         ],
     },
 ]
+
+
+def _abv_value(abv: str) -> float:
+    """도수 문자열에서 정렬 기준값(하한)을 뽑는다. 예: '48%'→48, '63~65%'→63,
+    '46.3%'→46.3. 범위(~,-)는 하한값 기준(CMPA-1303 보드). 파싱 실패 시 뒤로 밀되
+    stable sort 라 원래 순서는 보존된다."""
+    m = re.search(r"\d+(?:\.\d+)?", abv or "")
+    return float(m.group()) if m else float("inf")
+
+
+# 각 티어 내부만 ABV 오름차순(저도수→고도수)으로 stable 재정렬 — 티어 구분은 유지.
+# (CMPA-1303 보드 2026-08-17 · "저도수→고도수 서빙" 가이드와 방향 일치)
+for _t in TIERS:
+    _t["items"].sort(key=lambda it: _abv_value(it[2]))
 
 # ── 위스키 상세(팝업용) ───────────────────────────────────────────────────────
 # 각 술을 탭하면 뜨는 모달의 내용. 위키피디아 등 널리 문서화된 사실 기반.
