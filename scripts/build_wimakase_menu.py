@@ -441,9 +441,11 @@ h1 .gold{color:#e0a84e}
 .extbar button:active{transform:scale(.96)}
 /* ── 운영 프로그램(The Night's Journey) · 상단 흐름 + 웰컴 하이볼 + 서빙 가이드 (CMPA-1303) ──
    카톡 웹뷰 원칙: 100vw/blur 금지, 긴 문구 word-break:keep-all·min-width:0 로 가로 넘침 차단. */
+.loctitle{color:#8fe0a6;font-size:.86rem;font-weight:800;margin:10px 0 2px;
+ letter-spacing:.01em;word-break:keep-all}
 .loc{display:flex;align-items:center;gap:10px;width:100%;box-sizing:border-box;
  background:#101a12;border:1px solid #23402b;border-radius:12px;padding:11px 13px;
- margin:8px 0 2px;text-decoration:none;min-width:0}
+ margin:4px 0 2px;text-decoration:none;min-width:0}
 .locpin{font-size:1.15rem;line-height:1;flex:none}
 .loctxt{display:flex;flex-direction:column;min-width:0}
 .loctxt b{color:#8fe0a6;font-size:.9rem;font-weight:700;line-height:1.3;word-break:keep-all}
@@ -644,6 +646,7 @@ def _program_section() -> str:
     w = p["welcome"]
     loc = LOCATION
     return f"""<section class="tier active" id="tier0" role="tabpanel">
+  <div class="loctitle">🧭 찾아오기</div>
   <a class="loc" href="{e(loc['url'])}" target="_blank" rel="noopener" aria-label="{e(loc['text'])} · 네이버지도 길찾기">
     <span class="locpin" aria-hidden="true">📍</span>
     <span class="loctxt"><b>{e(loc['text'])}</b><span class="locsub">네이버지도에서 길찾기 →</span></span>
