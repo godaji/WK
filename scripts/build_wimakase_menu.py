@@ -53,6 +53,13 @@ PROGRAM = {
     "volume": "총 테이스팅 용량 200ml (프리플로우 제외)",
 }
 
+# 매장 위치 안내(CMPA-1308): 0티어 안내 패널 상단에 노출. 네이버지도 링크는 카톡 인앱에서
+# 지도앱 딥링크로 튈 수 있어 일반 https naver.me 앵커로 둔다(target=_blank).
+LOCATION = {
+    "text": "합정역 3번출구에서 300m",
+    "url": "https://naver.me/x1m0L9p4",
+}
+
 # ── 3티어 메뉴 데이터 ─────────────────────────────────────────────────────────
 # 각 항목: (제품명, 분류, 도수 ABV, 비고 특징)
 TIERS = [
@@ -122,6 +129,12 @@ TIERS = [
         ],
     },
 ]
+
+# CMPA-1282 보드: 특정 카드는 상세 팝업 대신 외부 링크로 이동한다(예외 처리).
+# '하우스 위스키' → CaskCode 홈. 카드 rtap 버튼에 data-href로 실려 MODAL_JS에서 우선 처리.
+HOUSE_LINKS = {
+    "하우스 위스키": "https://godaji.github.io/CaskCode/",
+}
 
 
 def _abv_value(abv: str) -> float:
@@ -428,6 +441,13 @@ h1 .gold{color:#e0a84e}
 .extbar button:active{transform:scale(.96)}
 /* ── 운영 프로그램(The Night's Journey) · 상단 흐름 + 웰컴 하이볼 + 서빙 가이드 (CMPA-1303) ──
    카톡 웹뷰 원칙: 100vw/blur 금지, 긴 문구 word-break:keep-all·min-width:0 로 가로 넘침 차단. */
+.loc{display:flex;align-items:center;gap:10px;width:100%;box-sizing:border-box;
+ background:#101a12;border:1px solid #23402b;border-radius:12px;padding:11px 13px;
+ margin:8px 0 2px;text-decoration:none;min-width:0}
+.locpin{font-size:1.15rem;line-height:1;flex:none}
+.loctxt{display:flex;flex-direction:column;min-width:0}
+.loctxt b{color:#8fe0a6;font-size:.9rem;font-weight:700;line-height:1.3;word-break:keep-all}
+.locsub{color:#6f8a76;font-size:.72rem;margin-top:2px}
 .program{background:#12100a;border:1px solid #2e2712;border-radius:12px;
  padding:12px 13px;margin:8px 0 2px;min-width:0}
 .pgtitle{color:#e0a84e;font-size:.92rem;font-weight:700;line-height:1.35;word-break:keep-all}
@@ -602,8 +622,11 @@ def _origin(name: str, cat: str) -> str:
 def _card(key: str, item: tuple[str, str, str, str]) -> str:
     name, cat, abv, notes = item
     e = html.escape
+    # CMPA-1282 보드: '하우스 위스키'만 예외적으로 상세 팝업 대신 CaskCode로 이동시킨다.
+    href = HOUSE_LINKS.get(name, "")
+    href_attr = f' data-href="{e(href)}"' if href else ""
     return f'<div class="row">' \
-           f'<button type="button" class="rtap" data-w="{e(key)}">' \
+           f'<button type="button" class="rtap" data-w="{e(key)}"{href_attr}>' \
            f'<span class="rmain"><span class="rname">{e(name)}</span>' \
            f'<span class="rcat">{e(cat)}</span></span>' \
            f'<span class="rabv">{e(abv)}</span></button>' \
@@ -619,7 +642,12 @@ def _program_section() -> str:
     e = html.escape
     p = PROGRAM
     w = p["welcome"]
+    loc = LOCATION
     return f"""<section class="tier active" id="tier0" role="tabpanel">
+  <a class="loc" href="{e(loc['url'])}" target="_blank" rel="noopener" aria-label="{e(loc['text'])} · 네이버지도 길찾기">
+    <span class="locpin" aria-hidden="true">📍</span>
+    <span class="loctxt"><b>{e(loc['text'])}</b><span class="locsub">네이버지도에서 길찾기 →</span></span>
+  </a>
   <section class="program" aria-label="오늘의 흐름">
   <div class="pgtitle">{e(p['title'])}</div>
   <div class="pgflow">{e(p['flow'])}</div>
@@ -712,7 +740,11 @@ MODAL_JS = """(function(){
  window.__wmClose=function(){mask.classList.remove('open');document.body.style.overflow='';
   if(last){last.focus();last=null;}};
  document.querySelectorAll('button.rtap').forEach(function(b){
-  b.addEventListener('click',function(){last=b;open(b.getAttribute('data-w'));});
+  b.addEventListener('click',function(){
+   var href=b.getAttribute('data-href');
+   if(href){location.href=href;return;}   // CMPA-1282: '하우스 위스키' 예외 — 팝업 대신 이동
+   last=b;open(b.getAttribute('data-w'));
+  });
  });
  mask.addEventListener('click',function(e){if(e.target===mask)window.__wmClose();});
  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&mask.classList.contains('open'))window.__wmClose();});
