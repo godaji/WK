@@ -130,10 +130,11 @@ TIERS = [
     },
 ]
 
-# CMPA-1282 보드: 특정 카드는 상세 팝업 대신 외부 링크로 이동한다(예외 처리).
-# '하우스 위스키' → CaskCode 홈. 카드 rtap 버튼에 data-href로 실려 MODAL_JS에서 우선 처리.
-HOUSE_LINKS = {
-    "하우스 위스키": "https://godaji.github.io/CaskCode/",
+# CMPA-1310 보드: '하우스 위스키'는 실제 상용 제품이 아닌 '하우스 블렌드'라
+# 구글 이미지 검색이 무의미하다. 상세 팝업은 다른 위스키와 동일하게 열되(b19 예외 되돌림),
+# 팝업 안의 '구글 이미지로 사진 보기' 버튼만 숨긴다(_build_data 의 noimg 플래그로 전달).
+NO_IMAGE_SEARCH = {
+    "하우스 위스키",
 }
 
 
@@ -624,11 +625,8 @@ def _origin(name: str, cat: str) -> str:
 def _card(key: str, item: tuple[str, str, str, str]) -> str:
     name, cat, abv, notes = item
     e = html.escape
-    # CMPA-1282 보드: '하우스 위스키'만 예외적으로 상세 팝업 대신 CaskCode로 이동시킨다.
-    href = HOUSE_LINKS.get(name, "")
-    href_attr = f' data-href="{e(href)}"' if href else ""
     return f'<div class="row">' \
-           f'<button type="button" class="rtap" data-w="{e(key)}"{href_attr}>' \
+           f'<button type="button" class="rtap" data-w="{e(key)}">' \
            f'<span class="rmain"><span class="rname">{e(name)}</span>' \
            f'<span class="rcat">{e(cat)}</span></span>' \
            f'<span class="rabv">{e(abv)}</span></button>' \
@@ -712,6 +710,7 @@ def _build_data(keys: dict) -> dict:
                 "cask": d.get("cask", ""),
                 "story": d.get("story", ""),
                 "source": d.get("source", ""),
+                "noimg": name in NO_IMAGE_SEARCH,
             }
     return data
 
@@ -734,7 +733,7 @@ MODAL_JS = """(function(){
         row('캐스크',d.cask)+row('도수',d.abv)+row('분류',d.cat)+'</div>';
   if(d.notes)h+='<div class="msec"><h4>특징</h4><p>'+esc(d.notes)+'</p></div>';
   if(d.story)h+='<div class="msec"><h4>스토리</h4><p>'+esc(d.story)+'</p></div>';
-  h+='<a class="mgoogle" href="https://www.google.com/search?tbm=isch&q='+encodeURIComponent(d.name+' 위스키')+'" target="_blank" rel="noopener">🔍 구글 이미지로 사진 보기</a>';
+  if(!d.noimg)h+='<a class="mgoogle" href="https://www.google.com/search?tbm=isch&q='+encodeURIComponent(d.name+' 위스키')+'" target="_blank" rel="noopener">🔍 구글 이미지로 사진 보기</a>';
   if(d.source)h+='<div class="msrc">출처 · '+esc(d.source)+' (요약) · 수집 '+esc(window.__WM_COLLECTED__||'')+'</div>';
   m.innerHTML=h;
   mask.classList.add('open');document.body.style.overflow='hidden';
@@ -744,8 +743,6 @@ MODAL_JS = """(function(){
   if(last){last.focus();last=null;}};
  document.querySelectorAll('button.rtap').forEach(function(b){
   b.addEventListener('click',function(){
-   var href=b.getAttribute('data-href');
-   if(href){location.href=href;return;}   // CMPA-1282: '하우스 위스키' 예외 — 팝업 대신 이동
    last=b;open(b.getAttribute('data-w'));
   });
  });
