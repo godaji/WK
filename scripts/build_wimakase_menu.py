@@ -439,10 +439,9 @@ h1 .gold{color:#e0a84e}
  padding:8px 0 7px;margin:4px 0 0;border-bottom:1px solid #20242e}
 .tab{flex:1;background:#141821;border:1px solid #20242e;border-radius:10px;color:#cdd2da;
  font:inherit;font-size:.9rem;font-weight:700;padding:7px 4px;cursor:pointer;line-height:1.2;
+ white-space:nowrap;
  -webkit-tap-highlight-color:transparent;transition:border-color .15s,background .15s,color .15s}
-.tab b{font-size:.72rem;font-weight:600;color:#6b7280;margin-left:.3em}
 .tab.active{border-color:#e0a84e;background:#1a1508;color:#e0a84e}
-.tab.active b{color:#e0a84e}
 .tier{display:none;margin-top:8px;scroll-margin-top:8px}
 .tier.active{display:block}
 .thead{border-bottom:1px solid #2a2e37;padding-bottom:.35em;margin-bottom:2px}
@@ -628,16 +627,15 @@ def _program_section() -> str:
 
 def _tabs() -> str:
     e = html.escape
-    # CMPA-1304: 0티어(가이드)를 첫 번째·기본 탭으로. 1~3티어는 medal·N종 유지.
+    # CMPA-1305: 탭 라벨 축약 — '0 안내/1티어/2티어/3티어', N종 제거(줄바꿈 방지).
     btns = [
         '<button type="button" class="tab active" data-tier="tier0">'
-        '📖 0티어<b>안내</b></button>'
+        '📖 0 안내</button>'
     ]
     for i, t in enumerate(TIERS):
-        n = len(t["items"])
         btns.append(
             f'<button type="button" class="tab" data-tier="{e(t["id"])}">'
-            f'{e(t["medal"])} {i + 1}티어<b>{n}종</b></button>'
+            f'{e(t["medal"])} {i + 1}티어</button>'
         )
     return '<div class="tabs" role="tablist">' + "".join(btns) + "</div>"
 
