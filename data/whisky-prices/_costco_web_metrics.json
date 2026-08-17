@@ -7,6 +7,6 @@
   "rows_quarantined": 2,
   "rows_written": 10,
   "month_file": "2026-08.csv",
-  "collected_date": "2026-08-10",
-  "snapshot": "data/whisky-prices/_runs/2026-08__run2026-08-10.csv"
+  "collected_date": "2026-08-17",
+  "snapshot": "data/whisky-prices/_runs/2026-08__run2026-08-17.csv"
 }
