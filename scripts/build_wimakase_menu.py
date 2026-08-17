@@ -604,11 +604,14 @@ def _card(key: str, item: tuple[str, str, str, str]) -> str:
 
 
 def _program_section() -> str:
-    """상단 운영 프로그램 — 흐름 + 웰컴 하이볼(예열) + 서빙 가이드 (CMPA-1303)."""
+    """0티어(가이드) 탭 패널 — 흐름 + 웰컴 하이볼(예열) + 서빙 가이드 (CMPA-1303).
+    CMPA-1304 보드: 탭 위 상단이 길어 탭 전환 시 점프가 컸다. 가이드를 첫 번째(기본) 0티어
+    탭 패널로 옮겨 탭바 위 상단을 짧게 만든다(탭바는 계속 sticky)."""
     e = html.escape
     p = PROGRAM
     w = p["welcome"]
-    return f"""<section class="program" aria-label="오늘의 흐름">
+    return f"""<section class="tier active" id="tier0" role="tabpanel">
+  <section class="program" aria-label="오늘의 흐름">
   <div class="pgtitle">{e(p['title'])}</div>
   <div class="pgflow">{e(p['flow'])}</div>
   <div class="welcome">
@@ -619,17 +622,21 @@ def _program_section() -> str:
   </div>
   <div class="pgguide">{e(p['guide'])}</div>
   <div class="pgcourse">{e(p['course'])} · {e(p['volume'])}</div>
+  </section>
 </section>"""
 
 
 def _tabs() -> str:
     e = html.escape
-    btns = []
+    # CMPA-1304: 0티어(가이드)를 첫 번째·기본 탭으로. 1~3티어는 medal·N종 유지.
+    btns = [
+        '<button type="button" class="tab active" data-tier="tier0">'
+        '📖 0티어<b>안내</b></button>'
+    ]
     for i, t in enumerate(TIERS):
-        cls = "tab active" if i == 0 else "tab"
         n = len(t["items"])
         btns.append(
-            f'<button type="button" class="{cls}" data-tier="{e(t["id"])}">'
+            f'<button type="button" class="tab" data-tier="{e(t["id"])}">'
             f'{e(t["medal"])} {i + 1}티어<b>{n}종</b></button>'
         )
     return '<div class="tabs" role="tablist">' + "".join(btns) + "</div>"
@@ -921,9 +928,10 @@ def render(build: int) -> str:
         for item in tier["items"]:
             n += 1
             keys[id(item)] = f"w{n}"
-    program_html = _program_section()
+    program_html = _program_section()  # 0티어(가이드) 탭 패널 — 기본 활성
     tabs_html = _tabs()
-    tiers_html = "\n".join(_tier_section(t, keys, i == 0) for i, t in enumerate(TIERS))
+    # 1~3티어는 기본 비활성(0티어가 첫 탭). CMPA-1304.
+    tiers_html = "\n".join(_tier_section(t, keys, False) for t in TIERS)
     data_json = json.dumps(_build_data(keys), ensure_ascii=False)
     collected_json = json.dumps(COLLECTED, ensure_ascii=False)
     total = sum(len(t["items"]) for t in TIERS)
@@ -955,8 +963,8 @@ def render(build: int) -> str:
   <button type="button" id="extbtn">🔗 새 창(기본 브라우저)에서 열기</button>
 </div>
 
-{program_html}
 {tabs_html}
+{program_html}
 {tiers_html}
 
 <p class="note">위스키를 탭하면 상세·구글 이미지 검색이 열리고, 옆의 ＋ 를 누르면 그날 마신 목록에 담깁니다 · 📒 내 기록에서 ✏️ 로 메모도 남길 수 있어요 · 테이스팅 각 20ml</p>
