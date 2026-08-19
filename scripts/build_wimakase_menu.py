@@ -448,6 +448,16 @@ h1 .gold{color:#e0a84e}
  font:inherit;font-weight:700;font-size:.82rem;padding:6px 12px;cursor:pointer;
  -webkit-tap-highlight-color:transparent}
 .extbar button:active{transform:scale(.96)}
+/* ── 테마 코스 페이지로 가는 CTA (CMPA-1323) — 별도 wimakase-course.html 링크 ── */
+.coursecta{display:flex;align-items:center;gap:10px;width:100%;box-sizing:border-box;
+ background:#12100a;border:1px solid #3a2f1a;border-radius:12px;padding:11px 13px;
+ margin:8px 0 2px;text-decoration:none;min-width:0;-webkit-tap-highlight-color:transparent}
+.coursecta:active{transform:scale(.99)}
+.ccicon{font-size:1.15rem;line-height:1;flex:none}
+.cctxt{display:flex;flex-direction:column;min-width:0}
+.cctxt b{color:#e0a84e;font-size:.9rem;font-weight:800;line-height:1.3;word-break:keep-all}
+.ccsub{color:#cdbf9a;font-size:.74rem;margin-top:2px;word-break:keep-all;overflow-wrap:anywhere}
+.ccarrow{flex:none;color:#e0a84e;font-size:1.05rem;font-weight:800}
 /* ── 운영 프로그램(The Night's Journey) · 상단 흐름 + 웰컴 하이볼 + 서빙 가이드 (CMPA-1303) ──
    카톡 웹뷰 원칙: 100vw/blur 금지, 긴 문구 word-break:keep-all·min-width:0 로 가로 넘침 차단. */
 .loctitle{color:#8fe0a6;font-size:.86rem;font-weight:800;margin:10px 0 2px;
@@ -1011,6 +1021,12 @@ def render(build: int) -> str:
   <span class="extmsg">📱 화면이 깨져 보이면</span>
   <button type="button" id="extbtn">🔗 새 창(기본 브라우저)에서 열기</button>
 </div>
+
+<a class="coursecta" href="wimakase-course.html" aria-label="테마 코스 보기">
+  <span class="ccicon" aria-hidden="true">🎭</span>
+  <span class="cctxt"><b>오늘의 테마 코스</b><span class="ccsub">스토리형 3잔 플라이트 → 페스티벌로. 셰리·버번·피트·라이·입문 등</span></span>
+  <span class="ccarrow" aria-hidden="true">→</span>
+</a>
 
 {tabs_html}
 {program_html}
