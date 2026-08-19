@@ -5,7 +5,7 @@ date: "2026-08-17 09:00:00 +0900"
 categories: ["price"]
 kind: "patch"
 cadence: "weekly"
-breakthroughs: 3
+breakthroughs: 4
 prev_date: "2026-08-16"
 latest_date: "2026-08-19"
 weekly_start: "2026-08-17"
@@ -34,14 +34,14 @@ _이번 주 면세가가 국내최저가보다 싼 위스키를 모았습니다.
 | 발베니 Balvenie 18년 Sherry Cask 700ml | 면세 **₩235,190** · 국내최저 [₩389,000 🔗](https://dailyshot.co/m/item/6323)<br>절약 **−₩153,810 (40%↓)** · 할인 39%→40% |
 | 발베니 12년 Golden Cask 700ml | 면세 **₩69,057** · 국내최저 [₩108,000 🔗](https://dailyshot.co/m/item/3190)<br>절약 **−₩38,943 (36%↓)** · 할인 38%→39% |
 | 라가불린 16년 700ml | 면세 **₩91,500** · 국내최저 [₩142,000 🔗](https://dailyshot.co/m/item/1679)<br>절약 **−₩50,500 (36%↓)** · 할인 48%→47% |
+| 발베니 21년 포트우드 700ml | 면세 **₩348,288** · 국내최저 [₩509,000 🔗](https://dailyshot.co/m/item/3222)<br>절약 **−₩160,712 (32%↓)** · 할인 25%→32% |
 | 와일드 터키 레어브리드 1000ml | 면세 **₩52,129** · 국내최저 [₩75,000 🔗](https://dailyshot.co/m/item/19596)<br>절약 **−₩22,871 (30%↓)** · 할인 44%→42% |
 | 글렌알라키 12년 (24RB) 700ml | 면세 **₩75,899** · 국내최저 [₩102,000 🔗](https://dailyshot.co/m/item/21702)<br>절약 **−₩26,101 (26%↓)** · 할인 51%→50% |
 | 글렌알라키 15년 (24RB) 700ml | 면세 **₩121,909** · 국내최저 [₩163,000 🔗](https://dailyshot.co/m/item/21704)<br>절약 **−₩41,091 (25%↓)** · 할인 50%→49% |
-| 발베니 21년 포트우드 700ml | 면세 **₩383,096** · 국내최저 [₩509,000 🔗](https://dailyshot.co/m/item/3222)<br>절약 **−₩125,904 (25%↓)** · 할인 20%→25% |
 
 ---
 
-## 📅 8월 19일 (수) — 돌파 3건
+## 📅 8월 19일 (수) — 돌파 4건
 
 *직전 2026-08-18 → 최신 2026-08-19* · *환율 ₩1,414.42 (기준일 2026-08-18)*
 
@@ -49,15 +49,28 @@ _이번 주 면세가가 국내최저가보다 싼 위스키를 모았습니다.
 
 _각 위스키 이름을 누르면 도수·맛·스토리 설명이 펼쳐집니다._
 
+**🔥 오늘의 핫딜 — 면세가가 더 싸짐 (10%p↑)**
+
+<div style="margin:5px 0">조니워커 엑스오디네어 750ml: 35%→45% (₩204,189)</div>
+
+<details style="margin:8px 0"><summary><strong>미세조정(할인)</strong> 2건 · 10%p 미만 (펼치기)</summary><div style="margin-top:6px"><div style="margin:5px 0">발베니 21년 포트우드 700ml: 25%→32% (₩348,288)</div><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">조니워커 킹조지 5세 500ml: 35%→42% (₩364,072)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 조니워커 (Johnnie Walker) · 블렌디드(스코틀랜드)<br><b>도수</b> 43%<br><b>캐스크</b> 다양한 캐스크(킹조지 5세 시대 가동 증류소 원액 블렌드)<br><b>맛</b> 옅은 스모크에 신선한 과일·맥아·건포도·무화과·시나몬, 그리고 바닐라·잘 익은 사과·구운 아몬드·밀크초콜릿이 더해진 향. 팔레트는 다크초콜릿·샌달우드·절제된 피트 스모크·단 말린 과일이 층층이 쌓이고 후추·생강·넛맥 스파이스가 따른다. 벨벳처럼 풍성한 질감, 메이플 시럽 뉘앙스의 길고 따뜻한 피니시.<br><b>스토리</b> 블루라벨 프레스티지 라인(500ml). 조지 5세가 조니워커에 로열 워런트를 수여한 1934년을 기려 그 시대 가동 증류소들의 희소 원액으로 블렌딩한다.<br><span style="color:#8a8f98">출처: 공식 사이트 · Difford's Guide · Whiskybase · 수집일 2026-06-20</span></div></details></div></details>
+
 <details style="margin:8px 0"><summary><strong>미세조정(할증)</strong> 3건 · 10%p 미만 (펼치기)</summary><div style="margin-top:6px"><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">와일드 터키 레어브리드 1000ml: 44%→42% (₩52,129)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 와일드 터키 (Wild Turkey) · 미국(켄터키)<br><b>도수</b> 58.4% (배럴 프루프 · 배치별 상이)<br><b>캐스크</b> 뉴 차르드 오크 배럴<br><b>맛</b> 버터·정향·오크의 향에 오렌지 껍질·민트·달콤한 담배가 더해진다. 팔레트는 묵직한 캐러멜·초콜릿·바닐라에 시나몬 스파이스·구운 오크·가죽·무화과가 어우러진다. 피니시는 길고 강건하며 캐러멜·바닐라의 단맛이 남는다.<br><b>스토리</b> 와일드 터키 레어브리드는 약 6·8·12년 숙성 배럴을 혼합한 스몰배치 배럴 프루프 버번으로, 희석 없이 병입한다. 배치마다 도수가 다소 달라진다.<br><span style="color:#8a8f98">출처: Master of Malt · Dramface · 공식 정보 (2026-06-20 리서치) · 수집일 2026-06-20</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">글렌알라키 12년 (24RB) 700ml: 51%→50% (₩75,899)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 글렌알라키 (GlenAllachie) · 스페이사이드<br><b>도수</b> 46% (논칠필터·천연색)<br><b>캐스크</b> 엑스-버번(1·2차) + 버진 오크 + PX 셰리 + 올로로소 셰리 캐스크 숙성·리랙 (24년 리브랜드)<br><b>맛</b> 구운 바나나·아몬드·콜라·갓 자른 오크 향. 팔레트는 스템 진저·건포도·오일리한 보리·버터 바닐라, 피니시에 살짝 초콜릿. 과일 프리저브·크리스마스 케이크·트리클 토피·다크초콜릿의 진한 셰리 캐릭터.<br><b>스토리</b> 글렌알라키는 1967년 설립, 2017년 빌리 워커가 인수한 스페이사이드 증류소. 12년은 2018년 출시된 플래그십으로 2024년 라벨을 리디자인(24RB=2024 리브랜드)했다. 엑스-버번·버진 오크·PX/올로로소 셰리 캐스크를 조합·리랙해 숙성한 셰리 지향 코어레인지.<br><span style="color:#8a8f98">출처: Master of Malt · The Whisky Exchange · Words of Whisky (2026-08-18 리서치) · 수집일 2026-08-18</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">글렌알라키 15년 (24RB) 700ml: 50%→49% (₩121,909)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 글렌알라키 (GlenAllachie) · 스페이사이드<br><b>도수</b> 46% (논칠필터·무착색)<br><b>캐스크</b> 페드로 히메네스(PX) 셰리·올로로소 셰리·버진 오크 캐스크 숙성 (2024 리배치 24RB)<br><b>맛</b> 다크체리·골든시럽·달큰한 스파이스·토피·글레이즈드 무화과·헤이즐넛 향. 히더 꿀·오렌지필·코코아·생강에 카라멜라이즈드 흑설탕의 피니시. 진한 마호가니 빛에 시나몬·바닐라 토피·다크초콜릿이 겹겹이.<br><b>스토리</b> 글렌알라키는 1967년 설립된 스페이사이드 증류소로, 2017년 빌리 워커(전 벤리악·글렌드로낙) 팀이 인수해 셰리 캐스크 중심으로 재편했다. 코어 15년은 PX·올로로소 셰리와 버진 오크에서 숙성해 46%·논칠필터·무착색으로 병입하는 셰리 가성비 대표 표현. (24RB = 2024 리배치)<br><span style="color:#8a8f98">출처: 공식 theglenallachie.com · The Whisky Exchange · Words of Whisky (2026-06-12 리서치) · 수집일 2026-06-12</span></div></details></div></details>
 
 ### 🏆 국내최저가(데일리샷·트레이더스·코스트코) 대비 핫딜
 
 | 🏆 위스키 | 상세 |
 |---|---|
+| 발베니 21년 포트우드 700ml | 면세 **₩348,288** · 국내최저 [₩509,000 🔗](https://dailyshot.co/m/item/3222)<br>절약 **−₩160,712 (32%↓)** · 할인 25%→32% |
 | 글렌알라키 15년 (24RB) 700ml | 면세 **₩121,909** · 국내최저 [₩163,000 🔗](https://dailyshot.co/m/item/21704)<br>절약 **−₩41,091 (25%↓)** · 할인 50%→49% |
 | 글렌알라키 12년 (24RB) 700ml | 면세 **₩75,899** · 국내최저 [₩102,000 🔗](https://dailyshot.co/m/item/21702)<br>절약 **−₩26,101 (26%↓)** · 할인 51%→50% |
 | 와일드 터키 레어브리드 1000ml | 면세 **₩52,129** · 국내최저 [₩75,000 🔗](https://dailyshot.co/m/item/19596)<br>절약 **−₩22,871 (30%↓)** · 할인 44%→42% |
+
+### 🆕 신규 입고 (1)
+
+| 위스키 | 현재 KRW |
+|---|--:|
+| 고든앤맥패일 코노세어초이스 몰트락 2000 23년 700ml | ₩423,051 |
 
 *국내최저가 = 데일리샷·트레이더스·코스트코 국내 소매가 중 최저(면세·해외 제외) 브랜드+숙성 근사매칭 · 매칭 실패/인디·싱글캐스크는 비움.*
 
