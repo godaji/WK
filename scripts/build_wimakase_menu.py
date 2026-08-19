@@ -1106,7 +1106,7 @@ def render(build: int) -> str:
   <div class="modal"><div class="mgrip"></div><div id="mbody"></div></div>
 </div>
 
-<a class="fabcourse" id="fabcourse" href="wimakase-course.html" aria-label="테마 코스 전체 보기 — 별도 페이지">🥃 테마 코스</a>
+<a class="fabcourse" id="fabcourse" href="wimakase-course.html?v={e(cache_tag)}" aria-label="테마 코스 전체 보기 — 별도 페이지">🥃 테마 코스</a>
 <button type="button" class="fab" id="fab" aria-label="내가 마신 목록 열기">📒 내 기록 <span class="cnt" id="fabcnt">0</span></button>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="mask" id="logmask" role="dialog" aria-modal="true" aria-label="내가 마신 목록">
