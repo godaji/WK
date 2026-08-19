@@ -145,6 +145,34 @@ NO_IMAGE_SEARCH = {
     "하우스 위스키 피티드 CS",  # CMPA-1321: 두 번째 하우스 블렌드도 구글 이미지 검색 숨김.
 }
 
+# ── 탭 내 인라인 추천(CMPA-1326 · 보드 opt1 확정 2026-08-19) ──────────────────────
+# 보드 지적(2026-08-19): 추천 코스가 웰컴↔하이라이트↔페스티벌 탭을 왕복해 바 서빙이 불편.
+# → 추천을 '그 탭 안에서 즐기는 2~3잔'으로 인라인화(서빙 중 탭 이동 0). 태생적으로 탭을 넘는
+#   여정형 테마 코스(글렌드로낙 12→21 수직시음 등)는 별도 '테마 코스' 페이지(wimakase-course.html)에
+#   남겨 두고, 메뉴 탭에서는 각 탭 안에서 완결되는 추천만 노출한다.
+# 웰컴=내 취향 찾기(버번/셰리/피트 한 모금씩), 하이라이트=끌린 스타일 심화(CMPA-1329 분기 유지).
+# 잔은 모두 해당 탭 소속이라 이름으로만 참조 — 탭에 없으면 조용히 생략(위장 금지, CLAUDE.md).
+TAB_RECOS = {
+    "tier2": {  # 웰컴
+        "title": "🧭 이 탭 추천 — 내 취향 찾기",
+        "desc": "버번·셰리·피트를 한 모금씩. 끌리는 스타일을 하이라이트에서 이어가세요.",
+        "picks": [
+            ("러셀 리저브 싱글배럴", "🥃 버번"),
+            ("글렌드로낙 12년", "🍇 셰리"),
+            ("탈리스커 10년", "🔥 피트"),
+        ],
+    },
+    "tier1": {  # 하이라이트
+        "title": "🥃 이 탭 추천 — 취향대로 심화",
+        "desc": "웰컴에서 끌린 스타일 그대로, 이 탭 안에서 한 단계 위로.",
+        "picks": [
+            ("스테그 (Stagg)", "🥃 버번"),
+            ("글렌드로낙 21년", "🍇 셰리"),
+            ("옥토모어 15.1", "🔥 피트"),
+        ],
+    },
+}
+
 
 def _abv_value(abv: str) -> float:
     """도수 문자열에서 정렬 기준값(하한)을 뽑는다. 예: '48%'→48, '63~65%'→63,
@@ -506,6 +534,16 @@ h1 .gold{color:#e0a84e}
 .rname{font-weight:600;font-size:.95rem;line-height:1.3;word-break:keep-all}
 .rcat{color:#8a909a;font-size:.72rem;line-height:1.3}
 .rabv{color:#e0a84e;font-size:.85rem;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;flex:none}
+/* ── 탭 내 인라인 추천(CMPA-1326 · 보드 opt1 2026-08-19) — 서빙 중 탭 이동 없이 이 탭에서 즐기는 2~3잔.
+   카톡 웹뷰 원칙: flex 자식 min-width:0·word-break:keep-all 로 가로 넘침 차단, 100vw/blur 미사용. */
+.reco{margin:0 0 14px;padding:12px 12px 4px;background:#141a12;border:1px solid #2b3a24;border-radius:14px}
+.recohd{margin-bottom:4px;min-width:0}
+.recott{display:block;color:#bfe0a0;font-weight:800;font-size:.94rem;word-break:keep-all}
+.recods{display:block;color:#8a9a82;font-size:.78rem;line-height:1.45;margin-top:2px;word-break:keep-all}
+.reco .row{border-bottom:1px solid #20281a}
+.reco .rmain{flex-direction:row;align-items:center;gap:6px;flex-wrap:wrap}
+.recotag{flex:none;background:#20281a;border:1px solid #3a4a2e;color:#bfe0a0;border-radius:999px;
+ padding:2px 8px;font-size:.72rem;font-weight:700;white-space:nowrap}
 .note{margin:20px 0 0;color:#8a909a;font-size:.78rem;text-align:center;line-height:1.6}
 footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-height:1.6}
 /* ── 상세 팝업(모달) — 모바일 우선 바텀시트, 데스크톱에선 가운데 카드 ── */
@@ -549,14 +587,15 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
  box-shadow:0 6px 20px rgba(0,0,0,.45);-webkit-tap-highlight-color:transparent}
 .fab .cnt{background:#0f1115;color:#e0a84e;border-radius:999px;padding:1px 8px;min-width:22px;
  text-align:center;font-size:.82rem;font-variant-numeric:tabular-nums}
-/* ── 플로팅 '추천 코스' 버튼(CMPA-1325) — '내 기록' 바로 위에 세로로 겹치지 않게 스택 ──
+/* ── 플로팅 '테마 코스' 링크(CMPA-1325 뼈대 → CMPA-1326 opt1) — '내 기록' 바로 위 스택 ──
+   보드 opt1(2026-08-19): 메뉴 안 추천은 각 탭 인라인(.reco)으로 옮기고, 이 버튼은 여정형
+   테마 코스 전체 페이지(wimakase-course.html)로 가는 링크로 전환(CMPA-1329 코스 보존).
    높이는 vh 금지·safe-area 방어조합(max(env(...),Npx)) 유지. '내 기록'(약 40px) 위 여백 확보. */
 .fabcourse{position:fixed;right:14px;bottom:calc(64px + max(env(safe-area-inset-bottom), 12px));z-index:40;
  display:flex;align-items:center;gap:8px;background:#1a1508;color:#e0a84e;border:1px solid #3a2f1a;
  border-radius:999px;padding:11px 16px;font:inherit;font-weight:800;font-size:.9rem;cursor:pointer;
- box-shadow:0 6px 20px rgba(0,0,0,.45);-webkit-tap-highlight-color:transparent}
+ text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.45);-webkit-tap-highlight-color:transparent}
 .fabcourse:active{transform:scale(.97)}
-/* 추천 코스 시트 본문(코스 카드) 스타일은 build_wimakase_course.COURSE_CSS 를 재사용해 주입한다(CMPA-1326). */
 .toast{position:fixed;left:50%;bottom:calc(74px + max(env(safe-area-inset-bottom), 12px));
  transform:translateX(-50%) translateY(10px);background:#1a1508;color:#e0a84e;border:1px solid #3a2f1a;
  border-radius:10px;padding:9px 16px;font-size:.86rem;font-weight:600;white-space:nowrap;
@@ -696,16 +735,50 @@ def _tabs() -> str:
     return '<div class="tabs" role="tablist">' + "".join(btns) + "</div>"
 
 
+def _tier_recos(tier: dict, keys: dict) -> str:
+    """탭 내 인라인 추천 블록(CMPA-1326 opt1). 추천 잔은 모두 이 탭 소속이라 tier['items']에서
+    이름으로 찾는다 — 없으면 조용히 생략(위장 금지). 카드/기록(＋)은 기존 rtap/radd JS 재사용."""
+    reco = TAB_RECOS.get(tier["id"])
+    if not reco:
+        return ""
+    e = html.escape
+    by_name = {it[0]: it for it in tier["items"]}
+    rows = []
+    for name, tag in reco["picks"]:
+        it = by_name.get(name)
+        if not it:
+            continue
+        key = keys[id(it)]
+        rows.append(
+            f'<div class="row"><button type="button" class="rtap" data-w="{e(key)}">'
+            f'<span class="rmain"><span class="recotag">{e(tag)}</span>'
+            f'<span class="rname">{e(name)}</span></span>'
+            f'<span class="rabv">{e(it[2])}</span></button>'
+            f'<button type="button" class="radd" data-w="{e(key)}" '
+            f'aria-label="{e(name)} 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>'
+        )
+    if not rows:
+        return ""
+    return (
+        '<div class="reco"><div class="recohd">'
+        f'<span class="recott">{e(reco["title"])}</span>'
+        f'<span class="recods">{e(reco["desc"])}</span></div>\n  '
+        + "\n  ".join(rows) + "\n</div>"
+    )
+
+
 def _tier_section(tier: dict, keys: dict, active: bool) -> str:
     e = html.escape
     cards = "\n  ".join(_card(keys[id(x)], x) for x in tier["items"])
     n = len(tier["items"])
     cls = "tier active" if active else "tier"
+    recos = _tier_recos(tier, keys)
     return f"""<section class="{cls}" id="{e(tier['id'])}" role="tabpanel">
   <div class="thead">
     <div class="tname">{e(tier['medal'])} {e(tier['name'])} <span class="tcount">· {n}종</span></div>
     <div class="tserve">{e(tier['serve'])}</div>
   </div>
+  {recos}
   <div class="list">
   {cards}
   </div>
@@ -921,20 +994,6 @@ EXT_JS = """(function(){
 })();"""
 
 
-# 추천 코스 시트 열고 닫기(CMPA-1325) — 기존 mask/modal 패턴 재사용. 본문은 실제 코스 6종(CMPA-1326).
-COURSE_JS = """(function(){
- var btn=document.getElementById('fabcourse');var mask=document.getElementById('coursemask');
- if(!btn||!mask)return;
- function open(){mask.classList.add('open');document.body.style.overflow='hidden';
-  var md=mask.querySelector('.modal');if(md)md.scrollTop=0;}
- window.__wmCloseCourse=function(){mask.classList.remove('open');document.body.style.overflow='';};
- btn.addEventListener('click',open);
- mask.addEventListener('click',function(e){if(e.target===mask)window.__wmCloseCourse();});
- document.addEventListener('keydown',function(e){
-  if(e.key==='Escape'&&mask.classList.contains('open'))window.__wmCloseCourse();});
-})();"""
-
-
 # 카톡 인앱 브라우저 → 강제 외부 브라우저 리다이렉트 + 플랜 B 안내 레이어(CMPA-1286, 보드 요청).
 # <head>에서 즉시 실행 — 깨진 페이지가 렌더되기 전에 크롬/사파리로 튕긴다.
 #  · kakaotalk UA에서만 동작(크롬/사파리 직접 접속엔 무영향).
@@ -1001,15 +1060,8 @@ def render(build: int) -> str:
             keys[id(item)] = f"w{n}"
     program_html = _program_section()  # 0티어(가이드) 탭 패널 — 기본 활성
     tabs_html = _tabs()
-    # 1~3티어는 기본 비활성(0티어가 첫 탭). CMPA-1304.
+    # 1~3티어는 기본 비활성(0티어가 첫 탭). CMPA-1304. 추천은 각 탭 안에 인라인(CMPA-1326 opt1).
     tiers_html = "\n".join(_tier_section(t, keys, False) for t in TIERS)
-    # 추천 코스 시트(CMPA-1326): 코스 데이터·렌더는 build_wimakase_course 정본을 재사용한다.
-    # 지연 import — course 모듈이 이 모듈을 top-level import 하므로 순환을 피하려고 함수 안에서 불러온다.
-    import build_wimakase_course as course  # noqa: PLC0415
-    # 코스 잔은 위스키명으로 참조 → 메뉴가 부여한 안정 key(w#)로 매핑해 상세/기록 조회가 통하게 한다.
-    name2key = {item[0]: keys[id(item)] for tier in TIERS for item in tier["items"]}
-    course_css = course.COURSE_CSS
-    courses_html = "\n".join(course._course_section(c, name2key) for c in course.COURSES)
     data_json = json.dumps(_build_data(keys), ensure_ascii=False)
     collected_json = json.dumps(COLLECTED, ensure_ascii=False)
     total = sum(len(t["items"]) for t in TIERS)
@@ -1030,7 +1082,6 @@ def render(build: int) -> str:
 <meta name="description" content="{e(TITLE)} 위스키 바 메뉴 — 3티어 {total}종. 웰컴·하이라이트 각 3잔 테이스팅 + 페스티벌 프리플로우. {e(VERSION)}">
 <style>
 {PAGE_CSS}
-{course_css}
 </style>
 </head>
 <body><div class="wrap">
@@ -1055,20 +1106,11 @@ def render(build: int) -> str:
   <div class="modal"><div class="mgrip"></div><div id="mbody"></div></div>
 </div>
 
-<button type="button" class="fabcourse" id="fabcourse" aria-label="추천 코스 열기">🥃 추천 코스</button>
+<a class="fabcourse" id="fabcourse" href="wimakase-course.html" aria-label="테마 코스 전체 보기 — 별도 페이지">🥃 테마 코스</a>
 <button type="button" class="fab" id="fab" aria-label="내가 마신 목록 열기">📒 내 기록 <span class="cnt" id="fabcnt">0</span></button>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="mask" id="logmask" role="dialog" aria-modal="true" aria-label="내가 마신 목록">
   <div class="modal"><div class="mgrip"></div><div id="logbody"></div></div>
-</div>
-
-<div class="mask" id="coursemask" role="dialog" aria-modal="true" aria-label="추천 코스">
-  <div class="modal"><div class="mgrip"></div>
-    <div class="mtop"><div class="mname">🥃 추천 코스</div>
-      <button type="button" class="mx" aria-label="닫기" onclick="__wmCloseCourse()">✕</button></div>
-    <p class="clead">테마 하나를 고르면 그 스토리를 따라 <b style="color:#e0a84e">저강도 → 고강도</b>로 잔을 냅니다. 3잔 풀버전이 기본이고, 가볍게 즐기실 분을 위한 <b style="color:#7fd0e0">2잔 라이트</b>도 함께 안내합니다. 마지막엔 <b style="color:#e0a84e">페스티벌 프리플로우(무제한)</b>로 이어집니다. 잔을 탭하면 상세가 열리고, ＋ 로 내 기록에 담을 수 있어요.</p>
-    {courses_html}
-  </div>
 </div>
 
 <div class="kkomask" id="kkomask" role="dialog" aria-modal="true" aria-label="다른 브라우저로 열기 안내">
@@ -1092,7 +1134,6 @@ def render(build: int) -> str:
 {TAB_JS}
 {LOG_JS}
 {EXT_JS}
-{COURSE_JS}
 </script>
 </body>
 </html>
