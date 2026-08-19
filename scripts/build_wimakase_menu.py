@@ -556,12 +556,7 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
  border-radius:999px;padding:11px 16px;font:inherit;font-weight:800;font-size:.9rem;cursor:pointer;
  box-shadow:0 6px 20px rgba(0,0,0,.45);-webkit-tap-highlight-color:transparent}
 .fabcourse:active{transform:scale(.97)}
-/* 추천 코스 시트 — 지금은 플레이스홀더(뼈대)만. 실제 코스는 후속 이슈에서 채운다. */
-.courseph{margin-top:14px;background:#12100a;border:1px solid #2e2712;border-radius:12px;
- padding:18px 15px;text-align:center;min-width:0}
-.courseph .cpicon{font-size:2rem;line-height:1}
-.courseph b{display:block;color:#e0a84e;font-size:1rem;font-weight:800;margin-top:8px;word-break:keep-all}
-.courseph p{color:#cdbf9a;font-size:.88rem;line-height:1.6;margin:8px 0 0;word-break:keep-all;overflow-wrap:anywhere}
+/* 추천 코스 시트 본문(코스 카드) 스타일은 build_wimakase_course.COURSE_CSS 를 재사용해 주입한다(CMPA-1326). */
 .toast{position:fixed;left:50%;bottom:calc(74px + max(env(safe-area-inset-bottom), 12px));
  transform:translateX(-50%) translateY(10px);background:#1a1508;color:#e0a84e;border:1px solid #3a2f1a;
  border-radius:10px;padding:9px 16px;font-size:.86rem;font-weight:600;white-space:nowrap;
@@ -926,7 +921,7 @@ EXT_JS = """(function(){
 })();"""
 
 
-# 추천 코스 시트 열고 닫기(CMPA-1325) — 기존 mask/modal 패턴 재사용. 지금은 플레이스홀더만.
+# 추천 코스 시트 열고 닫기(CMPA-1325) — 기존 mask/modal 패턴 재사용. 본문은 실제 코스 6종(CMPA-1326).
 COURSE_JS = """(function(){
  var btn=document.getElementById('fabcourse');var mask=document.getElementById('coursemask');
  if(!btn||!mask)return;
@@ -1008,6 +1003,13 @@ def render(build: int) -> str:
     tabs_html = _tabs()
     # 1~3티어는 기본 비활성(0티어가 첫 탭). CMPA-1304.
     tiers_html = "\n".join(_tier_section(t, keys, False) for t in TIERS)
+    # 추천 코스 시트(CMPA-1326): 코스 데이터·렌더는 build_wimakase_course 정본을 재사용한다.
+    # 지연 import — course 모듈이 이 모듈을 top-level import 하므로 순환을 피하려고 함수 안에서 불러온다.
+    import build_wimakase_course as course  # noqa: PLC0415
+    # 코스 잔은 위스키명으로 참조 → 메뉴가 부여한 안정 key(w#)로 매핑해 상세/기록 조회가 통하게 한다.
+    name2key = {item[0]: keys[id(item)] for tier in TIERS for item in tier["items"]}
+    course_css = course.COURSE_CSS
+    courses_html = "\n".join(course._course_section(c, name2key) for c in course.COURSES)
     data_json = json.dumps(_build_data(keys), ensure_ascii=False)
     collected_json = json.dumps(COLLECTED, ensure_ascii=False)
     total = sum(len(t["items"]) for t in TIERS)
@@ -1028,6 +1030,7 @@ def render(build: int) -> str:
 <meta name="description" content="{e(TITLE)} 위스키 바 메뉴 — 3티어 {total}종. 웰컴·하이라이트 각 3잔 테이스팅 + 페스티벌 프리플로우. {e(VERSION)}">
 <style>
 {PAGE_CSS}
+{course_css}
 </style>
 </head>
 <body><div class="wrap">
@@ -1063,11 +1066,8 @@ def render(build: int) -> str:
   <div class="modal"><div class="mgrip"></div>
     <div class="mtop"><div class="mname">🥃 추천 코스</div>
       <button type="button" class="mx" aria-label="닫기" onclick="__wmCloseCourse()">✕</button></div>
-    <div class="courseph">
-      <div class="cpicon" aria-hidden="true">🥃</div>
-      <b>추천 코스는 곧 제공됩니다</b>
-      <p>취향에 맞춘 테이스팅 코스를 준비 중입니다.<br>조금만 기다려 주세요.</p>
-    </div>
+    <p class="clead">테마 하나를 고르면 그 스토리를 따라 <b style="color:#e0a84e">저강도 → 고강도</b>로 잔을 냅니다. 3잔 풀버전이 기본이고, 가볍게 즐기실 분을 위한 <b style="color:#7fd0e0">2잔 라이트</b>도 함께 안내합니다. 마지막엔 <b style="color:#e0a84e">페스티벌 프리플로우(무제한)</b>로 이어집니다. 잔을 탭하면 상세가 열리고, ＋ 로 내 기록에 담을 수 있어요.</p>
+    {courses_html}
   </div>
 </div>
 
