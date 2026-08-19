@@ -541,9 +541,14 @@ h1 .gold{color:#e0a84e}
  cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .1s,background .12s,color .12s}
 .radd:active{transform:scale(.84)}
 .radd.added{background:#e0a84e;color:#1a1508;transform:scale(1.05)}
-/* '내 기록'에 담긴 위스키 = 선택됨 표시(CMPA-1331 req4). 행에 금색 틴트 + ＋버튼이 ✓(채운 금색)으로 */
-.row.picked{background:#181206}
-.row.picked .rname{color:#f0c877}
+/* '내 기록'에 담긴 위스키 = 메뉴 목록에서 확실히 구별(CMPA-1332). 스크롤 중에도 한눈에 보이게:
+   ① 진한 금색 틴트 + ② 좌측 금색 세로바(inset box-shadow — blur 0·레이아웃 시프트 없음, 카톡 웹뷰 안전)
+   ③ 이름 뒤 '✓ 내 기록' 금색 배지(pseudo-element — JS DOM 조작 없이 .picked 클래스만으로) */
+.row.picked{background:#241a05;box-shadow:inset 3px 0 0 0 #e0a84e}
+.row.picked .rname{color:#f4cf82}
+.row.picked .rname::after{content:"✓ 내 기록";display:inline-block;margin-left:7px;
+ vertical-align:middle;font-size:.66rem;font-weight:800;color:#1a1508;background:#e0a84e;
+ border-radius:999px;padding:.12em .55em;line-height:1.5;white-space:nowrap}
 .radd.on{background:#e0a84e;color:#1a1508;border-color:#e0a84e}
 .rmain{display:flex;flex-direction:column;gap:1px;min-width:0}
 .rname{font-weight:600;font-size:.95rem;line-height:1.3;word-break:keep-all}
