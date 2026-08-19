@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<!-- 캐시버스트(CMPA-1285): 카톡/iOS 웹뷰가 옛 버전을 붙잡지 않게 no-cache 신호 + 빌드 라벨 v2026.08.19-b26 -->
+<!-- 캐시버스트(CMPA-1285): 카톡/iOS 웹뷰가 옛 버전을 붙잡지 않게 no-cache 신호 + 빌드 라벨 v2026.08.19-b27 -->
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="build" content="v2026.08.19-b26">
-<link rel="canonical" href="wimakase.html?v=v2026.08.19-b26">
+<meta name="build" content="v2026.08.19-b27">
+<link rel="canonical" href="wimakase.html?v=v2026.08.19-b27">
 <!-- 카톡 인앱 → 강제 외부 브라우저 리다이렉트(CMPA-1286). 깨진 렌더 전에 즉시 실행하려 head에 둔다. -->
 <script>(function(){
  var ua=navigator.userAgent||'';
@@ -282,6 +282,14 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
 .cbridge{margin:10px 0 0;color:#cdbf9a;font-size:.8rem;line-height:1.55;
  border-top:1px solid #2a2413;padding-top:9px;word-break:keep-all;overflow-wrap:anywhere}
 .cbridge b{color:#e0a84e;font-weight:700}
+/* 내 취향 찾아보기(분기형) — 웰컴/하이라이트 소제목 + 선택지 블록 */
+.csub{color:#e0a84e;font-size:.82rem;font-weight:800;margin:12px 0 4px;
+ word-break:keep-all;overflow-wrap:anywhere}
+.cchoice{margin:7px 0 0;padding:8px 10px 6px;background:#0f0e08;border:1px solid #241f10;
+ border-radius:11px;min-width:0}
+.cbranch{color:#cdbf9a;font-size:.79rem;font-weight:800;margin:0 0 2px;
+ word-break:keep-all;overflow-wrap:anywhere}
+.cchoice .row{border-bottom:none}
 
 </style>
 </head>
@@ -379,7 +387,7 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
 
 <p class="note">위스키를 탭하면 상세·구글 이미지 검색이 열리고, 옆의 ＋ 를 누르면 그날 마신 목록에 담깁니다 · 📒 내 기록에서 ✏️ 로 메모도 남길 수 있어요</p>
 
-<footer>합정 위마카세 · 메뉴 v2026.08.19 &nbsp;·&nbsp; CaskCode<br>메뉴는 수시로 업데이트됩니다 — 버전을 확인하세요 🥃<br>상세 정보는 위키피디아 등 공개 자료를 요약한 참고용입니다 · 수집 2026-08-16<br><span style="color:#3b414b;font-size:.68rem">build v2026.08.19-b26</span></footer>
+<footer>합정 위마카세 · 메뉴 v2026.08.19 &nbsp;·&nbsp; CaskCode<br>메뉴는 수시로 업데이트됩니다 — 버전을 확인하세요 🥃<br>상세 정보는 위키피디아 등 공개 자료를 요약한 참고용입니다 · 수집 2026-08-16<br><span style="color:#3b414b;font-size:.68rem">build v2026.08.19-b27</span></footer>
 </div>
 
 <div class="mask" id="mask" role="dialog" aria-modal="true" aria-label="위스키 상세">
@@ -400,6 +408,24 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
     <p class="clead">테마 하나를 고르면 그 스토리를 따라 <b style="color:#e0a84e">저강도 → 고강도</b>로 잔을 냅니다. 3잔 풀버전이 기본이고, 가볍게 즐기실 분을 위한 <b style="color:#7fd0e0">2잔 라이트</b>도 함께 안내합니다. 마지막엔 <b style="color:#e0a84e">페스티벌 프리플로우(무제한)</b>로 이어집니다. 잔을 탭하면 상세가 열리고, ＋ 로 내 기록에 담을 수 있어요.</p>
     <section class="course">
   <div class="chead">
+    <span class="cid">★</span><span class="cname">내 취향 찾아보기</span>
+    <span class="ctag">스타일 탐색 → 하이라이트 선택</span>
+  </div>
+  <p class="clead">버번·셰리·피트를 한 모금씩 맛본 뒤, 가장 끌리는 스타일로 한 잔 더 깊이 들어갑니다. 어디서부터 시작할지 모르겠다면 여기부터.</p>
+  <div class="csub">① 웰컴 탐색 · 종류별로 한 모금씩</div>
+  <div class="list">
+  <div class="row"><button type="button" class="rtap" data-w="w12"><span class="cstep" aria-hidden="true">1</span><span class="rmain"><span class="rname">러셀 리저브 싱글배럴</span><span class="rstory">버번 갈래 · 바닐라·오크의 미국 위스키 원형.</span></span><span class="rabv">55%</span></button><button type="button" class="radd" data-w="w12" aria-label="러셀 리저브 싱글배럴 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>
+  <div class="row"><button type="button" class="rtap" data-w="w4"><span class="cstep" aria-hidden="true">2</span><span class="rmain"><span class="rname">글렌드로낙 12년</span><span class="rstory">셰리 갈래 · 다크초콜릿·건포도, 셰리 캐스크 교과서.</span></span><span class="rabv">43%</span></button><button type="button" class="radd" data-w="w4" aria-label="글렌드로낙 12년 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>
+  <div class="row"><button type="button" class="rtap" data-w="w5"><span class="cstep" aria-hidden="true">3</span><span class="rmain"><span class="rname">탈리스커 10년</span><span class="rstory">피트 갈래 · 해안 스모크·후추의 입문 피트.</span></span><span class="rabv">45.8%</span></button><button type="button" class="radd" data-w="w5" aria-label="탈리스커 10년 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>
+  </div>
+  <div class="csub">② 하이라이트 · 끌린 스타일로 한 잔 더</div>
+  <div class="cchoice"><div class="cbranch">🥃 버번이 끌렸다면</div><div class="list"><div class="row"><button type="button" class="rtap" data-w="w27"><span class="cstep" aria-hidden="true">→</span><span class="rmain"><span class="rname">스테그 (Stagg)</span><span class="rstory">프리미엄 CS 버번의 압도적 타격감. → 버번 매니아 코스로.</span></span><span class="rabv">63~65%</span></button><button type="button" class="radd" data-w="w27" aria-label="스테그 (Stagg) 마신 목록에 담기" title="마신 목록에 담기">＋</button></div></div></div>
+  <div class="cchoice"><div class="cbranch">🍇 셰리가 끌렸다면</div><div class="list"><div class="row"><button type="button" class="rtap" data-w="w20"><span class="cstep" aria-hidden="true">→</span><span class="rmain"><span class="rname">글렌드로낙 21년</span><span class="rstory">웰컴의 12년과 수직으로 잇는 고숙성 셰리. → 셰리 매니아 코스로.</span></span><span class="rabv">48%</span></button><button type="button" class="radd" data-w="w20" aria-label="글렌드로낙 21년 마신 목록에 담기" title="마신 목록에 담기">＋</button></div></div></div>
+  <div class="cchoice"><div class="cbranch">🔥 피트가 끌렸다면</div><div class="list"><div class="row"><button type="button" class="rtap" data-w="w24"><span class="cstep" aria-hidden="true">→</span><span class="rmain"><span class="rname">옥토모어 15.1</span><span class="rstory">108.2 PPM, 피트의 정점. → 피트 매니아 코스로.</span></span><span class="rabv">59.1%</span></button><button type="button" class="radd" data-w="w24" aria-label="옥토모어 15.1 마신 목록에 담기" title="마신 목록에 담기">＋</button></div></div></div>
+  <div class="cbridge">→ <b>페스티벌 브릿지</b> · 하우스 위스키·조니워커 그린으로 페스티벌 프리플로우.</div>
+</section>
+<section class="course">
+  <div class="chead">
     <span class="cid">A</span><span class="cname">셰리의 시간여행</span>
     <span class="ctag">글렌드로낙 수직 시음</span>
   </div>
@@ -413,8 +439,8 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
 </section>
 <section class="course">
   <div class="chead">
-    <span class="cid">B</span><span class="cname">켄터키 버번 로드</span>
-    <span class="ctag">저 → 중 → 고</span>
+    <span class="cid">B</span><span class="cname">버번 매니아</span>
+    <span class="ctag">켄터키 버번 사다리 · 저→중→고</span>
   </div>
   <p class="clead">도수와 희소성이 한 계단씩 올라가는 버번 사다리.</p>
   <div class="list">
@@ -427,8 +453,8 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
 </section>
 <section class="course">
   <div class="chead">
-    <span class="cid">C</span><span class="cname">피트의 강도 여행</span>
-    <span class="ctag">아일라 → 옥토모어</span>
+    <span class="cid">C</span><span class="cname">피트 매니아</span>
+    <span class="ctag">피트의 강도 여행 · 아일라→옥토모어</span>
   </div>
   <p class="clead">스모크가 낮은 데서 세계 최고 수치까지. PPM 사다리.</p>
   <div class="list">
@@ -469,8 +495,8 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
 </section>
 <section class="course">
   <div class="chead">
-    <span class="cid">G</span><span class="cname">셰리 폭탄 사다리</span>
-    <span class="ctag">보너스 · CS 셰리 마니아</span>
+    <span class="cid">G</span><span class="cname">셰리 매니아</span>
+    <span class="ctag">셰리 폭탄 사다리 · CS 셰리</span>
   </div>
   <p class="clead">진득한 셰리에서 꾸덕한 CS 폭탄까지. 셰리 러버 특화 코스.</p>
   <div class="list">

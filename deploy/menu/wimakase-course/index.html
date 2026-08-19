@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<!-- 캐시버스트(CMPA-1285 패턴): 카톡/iOS 웹뷰가 옛 버전을 붙잡지 않게 no-cache 신호 + 빌드 라벨 v2026.08.19-c1 -->
+<!-- 캐시버스트(CMPA-1285 패턴): 카톡/iOS 웹뷰가 옛 버전을 붙잡지 않게 no-cache 신호 + 빌드 라벨 v2026.08.19-c3 -->
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="build" content="v2026.08.19-c1">
-<link rel="canonical" href="wimakase-course.html?v=v2026.08.19-c1">
+<meta name="build" content="v2026.08.19-c3">
+<link rel="canonical" href="wimakase-course.html?v=v2026.08.19-c3">
 <!-- 카톡 인앱 → 강제 외부 브라우저 리다이렉트(CMPA-1286). 깨진 렌더 전에 즉시 실행하려 head에 둔다. -->
 <script>(function(){
  var ua=navigator.userAgent||'';
@@ -47,7 +47,7 @@
  else{initPlanB();}
 })();</script>
 <title>합정 두다지 위마카세 · 테마 코스 v2026.08.19</title>
-<meta name="description" content="합정 두다지 위마카세 테마 3잔 플라이트 코스 6종 — 스토리형 저강도→고강도 시음 후 페스티벌 프리플로우로. v2026.08.19">
+<meta name="description" content="합정 두다지 위마카세 테마 3잔 플라이트 코스 7종 — 스토리형 저강도→고강도 시음 후 페스티벌 프리플로우로. v2026.08.19">
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#0f1115;color:#e8eaed;
@@ -66,16 +66,6 @@ h1 .gold{color:#e0a84e}
  font:inherit;font-weight:700;font-size:.82rem;padding:6px 12px;cursor:pointer;
  -webkit-tap-highlight-color:transparent}
 .extbar button:active{transform:scale(.96)}
-/* ── 테마 코스 페이지로 가는 CTA (CMPA-1323) — 별도 wimakase-course.html 링크 ── */
-.coursecta{display:flex;align-items:center;gap:10px;width:100%;box-sizing:border-box;
- background:#12100a;border:1px solid #3a2f1a;border-radius:12px;padding:11px 13px;
- margin:8px 0 2px;text-decoration:none;min-width:0;-webkit-tap-highlight-color:transparent}
-.coursecta:active{transform:scale(.99)}
-.ccicon{font-size:1.15rem;line-height:1;flex:none}
-.cctxt{display:flex;flex-direction:column;min-width:0}
-.cctxt b{color:#e0a84e;font-size:.9rem;font-weight:800;line-height:1.3;word-break:keep-all}
-.ccsub{color:#cdbf9a;font-size:.74rem;margin-top:2px;word-break:keep-all;overflow-wrap:anywhere}
-.ccarrow{flex:none;color:#e0a84e;font-size:1.05rem;font-weight:800}
 /* ── 운영 프로그램(The Night's Journey) · 상단 흐름 + 웰컴 하이볼 + 서빙 가이드 (CMPA-1303) ──
    카톡 웹뷰 원칙: 100vw/blur 금지, 긴 문구 word-break:keep-all·min-width:0 로 가로 넘침 차단. */
 .loctitle{color:#8fe0a6;font-size:.86rem;font-weight:800;margin:10px 0 2px;
@@ -177,6 +167,14 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
  box-shadow:0 6px 20px rgba(0,0,0,.45);-webkit-tap-highlight-color:transparent}
 .fab .cnt{background:#0f1115;color:#e0a84e;border-radius:999px;padding:1px 8px;min-width:22px;
  text-align:center;font-size:.82rem;font-variant-numeric:tabular-nums}
+/* ── 플로팅 '추천 코스' 버튼(CMPA-1325) — '내 기록' 바로 위에 세로로 겹치지 않게 스택 ──
+   높이는 vh 금지·safe-area 방어조합(max(env(...),Npx)) 유지. '내 기록'(약 40px) 위 여백 확보. */
+.fabcourse{position:fixed;right:14px;bottom:calc(64px + max(env(safe-area-inset-bottom), 12px));z-index:40;
+ display:flex;align-items:center;gap:8px;background:#1a1508;color:#e0a84e;border:1px solid #3a2f1a;
+ border-radius:999px;padding:11px 16px;font:inherit;font-weight:800;font-size:.9rem;cursor:pointer;
+ box-shadow:0 6px 20px rgba(0,0,0,.45);-webkit-tap-highlight-color:transparent}
+.fabcourse:active{transform:scale(.97)}
+/* 추천 코스 시트 본문(코스 카드) 스타일은 build_wimakase_course.COURSE_CSS 를 재사용해 주입한다(CMPA-1326). */
 .toast{position:fixed;left:50%;bottom:calc(74px + max(env(safe-area-inset-bottom), 12px));
  transform:translateX(-50%) translateY(10px);background:#1a1508;color:#e0a84e;border:1px solid #3a2f1a;
  border-radius:10px;padding:9px 16px;font-size:.86rem;font-weight:600;white-space:nowrap;
@@ -284,6 +282,14 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
 .cbridge{margin:10px 0 0;color:#cdbf9a;font-size:.8rem;line-height:1.55;
  border-top:1px solid #2a2413;padding-top:9px;word-break:keep-all;overflow-wrap:anywhere}
 .cbridge b{color:#e0a84e;font-weight:700}
+/* 내 취향 찾아보기(분기형) — 웰컴/하이라이트 소제목 + 선택지 블록 */
+.csub{color:#e0a84e;font-size:.82rem;font-weight:800;margin:12px 0 4px;
+ word-break:keep-all;overflow-wrap:anywhere}
+.cchoice{margin:7px 0 0;padding:8px 10px 6px;background:#0f0e08;border:1px solid #241f10;
+ border-radius:11px;min-width:0}
+.cbranch{color:#cdbf9a;font-size:.79rem;font-weight:800;margin:0 0 2px;
+ word-break:keep-all;overflow-wrap:anywhere}
+.cchoice .row{border-bottom:none}
 
 </style>
 </head>
@@ -301,41 +307,59 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
 
 <section class="course">
   <div class="chead">
+    <span class="cid">★</span><span class="cname">내 취향 찾아보기</span>
+    <span class="ctag">스타일 탐색 → 하이라이트 선택</span>
+  </div>
+  <p class="clead">버번·셰리·피트를 한 모금씩 맛본 뒤, 가장 끌리는 스타일로 한 잔 더 깊이 들어갑니다. 어디서부터 시작할지 모르겠다면 여기부터.</p>
+  <div class="csub">① 웰컴 탐색 · 종류별로 한 모금씩</div>
+  <div class="list">
+  <div class="row"><button type="button" class="rtap" data-w="w1"><span class="cstep" aria-hidden="true">1</span><span class="rmain"><span class="rname">러셀 리저브 싱글배럴</span><span class="rstory">버번 갈래 · 바닐라·오크의 미국 위스키 원형.</span></span><span class="rabv">55%</span></button><button type="button" class="radd" data-w="w1" aria-label="러셀 리저브 싱글배럴 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>
+  <div class="row"><button type="button" class="rtap" data-w="w2"><span class="cstep" aria-hidden="true">2</span><span class="rmain"><span class="rname">글렌드로낙 12년</span><span class="rstory">셰리 갈래 · 다크초콜릿·건포도, 셰리 캐스크 교과서.</span></span><span class="rabv">43%</span></button><button type="button" class="radd" data-w="w2" aria-label="글렌드로낙 12년 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>
+  <div class="row"><button type="button" class="rtap" data-w="w3"><span class="cstep" aria-hidden="true">3</span><span class="rmain"><span class="rname">탈리스커 10년</span><span class="rstory">피트 갈래 · 해안 스모크·후추의 입문 피트.</span></span><span class="rabv">45.8%</span></button><button type="button" class="radd" data-w="w3" aria-label="탈리스커 10년 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>
+  </div>
+  <div class="csub">② 하이라이트 · 끌린 스타일로 한 잔 더</div>
+  <div class="cchoice"><div class="cbranch">🥃 버번이 끌렸다면</div><div class="list"><div class="row"><button type="button" class="rtap" data-w="w4"><span class="cstep" aria-hidden="true">→</span><span class="rmain"><span class="rname">스테그 (Stagg)</span><span class="rstory">프리미엄 CS 버번의 압도적 타격감. → 버번 매니아 코스로.</span></span><span class="rabv">63~65%</span></button><button type="button" class="radd" data-w="w4" aria-label="스테그 (Stagg) 마신 목록에 담기" title="마신 목록에 담기">＋</button></div></div></div>
+  <div class="cchoice"><div class="cbranch">🍇 셰리가 끌렸다면</div><div class="list"><div class="row"><button type="button" class="rtap" data-w="w5"><span class="cstep" aria-hidden="true">→</span><span class="rmain"><span class="rname">글렌드로낙 21년</span><span class="rstory">웰컴의 12년과 수직으로 잇는 고숙성 셰리. → 셰리 매니아 코스로.</span></span><span class="rabv">48%</span></button><button type="button" class="radd" data-w="w5" aria-label="글렌드로낙 21년 마신 목록에 담기" title="마신 목록에 담기">＋</button></div></div></div>
+  <div class="cchoice"><div class="cbranch">🔥 피트가 끌렸다면</div><div class="list"><div class="row"><button type="button" class="rtap" data-w="w6"><span class="cstep" aria-hidden="true">→</span><span class="rmain"><span class="rname">옥토모어 15.1</span><span class="rstory">108.2 PPM, 피트의 정점. → 피트 매니아 코스로.</span></span><span class="rabv">59.1%</span></button><button type="button" class="radd" data-w="w6" aria-label="옥토모어 15.1 마신 목록에 담기" title="마신 목록에 담기">＋</button></div></div></div>
+  <div class="cbridge">→ <b>페스티벌 브릿지</b> · 하우스 위스키·조니워커 그린으로 페스티벌 프리플로우.</div>
+</section>
+<section class="course">
+  <div class="chead">
     <span class="cid">A</span><span class="cname">셰리의 시간여행</span>
     <span class="ctag">글렌드로낙 수직 시음</span>
   </div>
   <p class="clead">같은 증류소가 오래 잠들수록 어떻게 깊어지는가. 12년과 21년을 나란히 비교하는 수직 시음.</p>
   <div class="list">
-  <div class="row"><button type="button" class="rtap" data-w="w1"><span class="cstep" aria-hidden="true">1</span><span class="rmain"><span class="rname">글렌드로낙 12년</span><span class="rstory">셰리 캐스크의 교과서. 다크초콜릿·건포도의 밑그림.</span></span><span class="rabv">43%</span></button><button type="button" class="radd" data-w="w1" aria-label="글렌드로낙 12년 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>
-  <div class="row"><button type="button" class="rtap" data-w="w2"><span class="cstep" aria-hidden="true">2</span><span class="rmain"><span class="rname">글렌드로낙 21년</span><span class="rstory">같은 DNA가 9년 더 잠들면. 다크프루츠·스파이스가 층층이.</span></span><span class="rabv">48%</span></button><button type="button" class="radd" data-w="w2" aria-label="글렌드로낙 21년 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>
+  <div class="row"><button type="button" class="rtap" data-w="w2"><span class="cstep" aria-hidden="true">1</span><span class="rmain"><span class="rname">글렌드로낙 12년</span><span class="rstory">셰리 캐스크의 교과서. 다크초콜릿·건포도의 밑그림.</span></span><span class="rabv">43%</span></button><button type="button" class="radd" data-w="w2" aria-label="글렌드로낙 12년 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>
+  <div class="row"><button type="button" class="rtap" data-w="w5"><span class="cstep" aria-hidden="true">2</span><span class="rmain"><span class="rname">글렌드로낙 21년</span><span class="rstory">같은 DNA가 9년 더 잠들면. 다크프루츠·스파이스가 층층이.</span></span><span class="rabv">48%</span></button><button type="button" class="radd" data-w="w5" aria-label="글렌드로낙 21년 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>
   </div>
   <div class="clight">🥂 <b>2잔 라이트</b> · 이미 2잔 코스입니다.</div>
   <div class="cbridge">→ <b>페스티벌 브릿지</b> · 하우스 위스키·조니워커 그린으로 부드럽게 착지.</div>
 </section>
 <section class="course">
   <div class="chead">
-    <span class="cid">B</span><span class="cname">켄터키 버번 로드</span>
-    <span class="ctag">저 → 중 → 고</span>
+    <span class="cid">B</span><span class="cname">버번 매니아</span>
+    <span class="ctag">켄터키 버번 사다리 · 저→중→고</span>
   </div>
   <p class="clead">도수와 희소성이 한 계단씩 올라가는 버번 사다리.</p>
   <div class="list">
-  <div class="row"><button type="button" class="rtap" data-w="w3"><span class="cstep" aria-hidden="true">1</span><span class="rmain"><span class="rname">이글레어 10년</span><span class="rstory">버팔로트레이스의 프리미엄 엔트리. 정석 바닐라·오크.</span></span><span class="rabv">45%</span></button><button type="button" class="radd" data-w="w3" aria-label="이글레어 10년 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>
-  <div class="row"><button type="button" class="rtap" data-w="w4"><span class="cstep" aria-hidden="true">2</span><span class="rmain"><span class="rname">러셀 리저브 싱글배럴</span><span class="rstory">버번 매니아들의 지지. 싱글배럴의 진한 개성.</span></span><span class="rabv">55%</span></button><button type="button" class="radd" data-w="w4" aria-label="러셀 리저브 싱글배럴 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>
-  <div class="row"><button type="button" class="rtap" data-w="w5"><span class="cstep" aria-hidden="true">3</span><span class="rmain"><span class="rname">스테그 (Stagg)</span><span class="rstory">구하기 힘든 프리미엄 CS 버번. 압도적 타격감.</span></span><span class="rabv">63~65%</span></button><button type="button" class="radd" data-w="w5" aria-label="스테그 (Stagg) 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>
+  <div class="row"><button type="button" class="rtap" data-w="w7"><span class="cstep" aria-hidden="true">1</span><span class="rmain"><span class="rname">이글레어 10년</span><span class="rstory">버팔로트레이스의 프리미엄 엔트리. 정석 바닐라·오크.</span></span><span class="rabv">45%</span></button><button type="button" class="radd" data-w="w7" aria-label="이글레어 10년 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>
+  <div class="row"><button type="button" class="rtap" data-w="w1"><span class="cstep" aria-hidden="true">2</span><span class="rmain"><span class="rname">러셀 리저브 싱글배럴</span><span class="rstory">버번 매니아들의 지지. 싱글배럴의 진한 개성.</span></span><span class="rabv">55%</span></button><button type="button" class="radd" data-w="w1" aria-label="러셀 리저브 싱글배럴 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>
+  <div class="row"><button type="button" class="rtap" data-w="w4"><span class="cstep" aria-hidden="true">3</span><span class="rmain"><span class="rname">스테그 (Stagg)</span><span class="rstory">구하기 힘든 프리미엄 CS 버번. 압도적 타격감.</span></span><span class="rabv">63~65%</span></button><button type="button" class="radd" data-w="w4" aria-label="스테그 (Stagg) 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>
   </div>
   <div class="clight">🥂 <b>2잔 라이트</b> · 이글레어 10년 → 스테그 (Stagg)</div>
   <div class="cbridge">→ <b>페스티벌 브릿지</b> · 놉크릭 9년·엔젤스 엔비로 여운의 버번 프리플로우.</div>
 </section>
 <section class="course">
   <div class="chead">
-    <span class="cid">C</span><span class="cname">피트의 강도 여행</span>
-    <span class="ctag">아일라 → 옥토모어</span>
+    <span class="cid">C</span><span class="cname">피트 매니아</span>
+    <span class="ctag">피트의 강도 여행 · 아일라→옥토모어</span>
   </div>
   <p class="clead">스모크가 낮은 데서 세계 최고 수치까지. PPM 사다리.</p>
   <div class="list">
-  <div class="row"><button type="button" class="rtap" data-w="w6"><span class="cstep" aria-hidden="true">1</span><span class="rmain"><span class="rname">탈리스커 10년</span><span class="rstory">해안 후추·바다향. 접근하기 좋은 피트 입문.</span></span><span class="rabv">45.8%</span></button><button type="button" class="radd" data-w="w6" aria-label="탈리스커 10년 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>
-  <div class="row"><button type="button" class="rtap" data-w="w7"><span class="cstep" aria-hidden="true">2</span><span class="rmain"><span class="rname">아드벡 10년</span><span class="rstory">강렬한 아일라 스모크의 대명사.</span></span><span class="rabv">46%</span></button><button type="button" class="radd" data-w="w7" aria-label="아드벡 10년 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>
-  <div class="row"><button type="button" class="rtap" data-w="w8"><span class="cstep" aria-hidden="true">3</span><span class="rmain"><span class="rname">옥토모어 15.1</span><span class="rstory">108.2 PPM, 세계 최고 수준 피트의 정점.</span></span><span class="rabv">59.1%</span></button><button type="button" class="radd" data-w="w8" aria-label="옥토모어 15.1 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>
+  <div class="row"><button type="button" class="rtap" data-w="w3"><span class="cstep" aria-hidden="true">1</span><span class="rmain"><span class="rname">탈리스커 10년</span><span class="rstory">해안 후추·바다향. 접근하기 좋은 피트 입문.</span></span><span class="rabv">45.8%</span></button><button type="button" class="radd" data-w="w3" aria-label="탈리스커 10년 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>
+  <div class="row"><button type="button" class="rtap" data-w="w8"><span class="cstep" aria-hidden="true">2</span><span class="rmain"><span class="rname">아드벡 10년</span><span class="rstory">강렬한 아일라 스모크의 대명사.</span></span><span class="rabv">46%</span></button><button type="button" class="radd" data-w="w8" aria-label="아드벡 10년 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>
+  <div class="row"><button type="button" class="rtap" data-w="w6"><span class="cstep" aria-hidden="true">3</span><span class="rmain"><span class="rname">옥토모어 15.1</span><span class="rstory">108.2 PPM, 세계 최고 수준 피트의 정점.</span></span><span class="rabv">59.1%</span></button><button type="button" class="radd" data-w="w6" aria-label="옥토모어 15.1 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>
   </div>
   <div class="clight">🥂 <b>2잔 라이트</b> · 탈리스커 10년 → 옥토모어 15.1</div>
   <div class="cbridge">→ <b>페스티벌 브릿지</b> · 몽키숄더·닛카 프론티어 하이볼로 입을 식히며 마무리.</div>
@@ -370,8 +394,8 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
 </section>
 <section class="course">
   <div class="chead">
-    <span class="cid">G</span><span class="cname">셰리 폭탄 사다리</span>
-    <span class="ctag">보너스 · CS 셰리 마니아</span>
+    <span class="cid">G</span><span class="cname">셰리 매니아</span>
+    <span class="ctag">셰리 폭탄 사다리 · CS 셰리</span>
   </div>
   <p class="clead">진득한 셰리에서 꾸덕한 CS 폭탄까지. 셰리 러버 특화 코스.</p>
   <div class="list">
@@ -385,7 +409,7 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
 
 <p class="note">위스키를 탭하면 상세·구글 이미지 검색이 열리고, 옆의 ＋ 를 누르면 그날 마신 목록에 담깁니다 · 📒 내 기록에서 ✏️ 로 메모도 남길 수 있어요</p>
 
-<footer>합정 위마카세 · 테마 코스 v2026.08.19 &nbsp;·&nbsp; CaskCode<br>메뉴는 수시로 업데이트됩니다 — 버전을 확인하세요 🥃<br>상세 정보는 위키피디아 등 공개 자료를 요약한 참고용입니다 · 수집 2026-08-16<br><span style="color:#3b414b;font-size:.68rem">build v2026.08.19-c1</span></footer>
+<footer>합정 위마카세 · 테마 코스 v2026.08.19 &nbsp;·&nbsp; CaskCode<br>메뉴는 수시로 업데이트됩니다 — 버전을 확인하세요 🥃<br>상세 정보는 위키피디아 등 공개 자료를 요약한 참고용입니다 · 수집 2026-08-16<br><span style="color:#3b414b;font-size:.68rem">build v2026.08.19-c3</span></footer>
 </div>
 
 <div class="mask" id="mask" role="dialog" aria-modal="true" aria-label="위스키 상세">
@@ -413,7 +437,7 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
   </div>
 </div>
 
-<script>window.__WIMAKASE__={"w1": {"name": "글렌드로낙 12년", "cat": "싱글 몰트 스카치", "abv": "43%", "notes": "입문~중급용 셰리 캐스크의 교과서", "tier": "웰컴", "distillery": "글렌드로낙 (GlenDronach)", "region": "스코틀랜드 하이랜드", "cask": "PX & 올로로소 셰리 캐스크", "story": "1826년 설립된 셰리 캐스크 전문 증류소의 엔트리급 12년으로, 셰리 캐스크 위스키의 교과서로 통한다. 부드러운 건포도·초콜릿 풍미가 입문에 좋다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w2": {"name": "글렌드로낙 21년", "cat": "싱글 몰트 스카치", "abv": "48%", "notes": "고숙성 셰리 캐스크의 대표 주자", "tier": "하이라이트", "distillery": "글렌드로낙 (GlenDronach)", "region": "스코틀랜드 하이랜드", "cask": "올로로소 & 페드로 히메네즈(PX) 셰리 캐스크", "story": "1826년 설립된 하이랜드 증류소로, 셰리 캐스크 숙성에 특화돼 있다. 'Parliament(팔러먼트)'는 증류소 인근 나무에 무리 지어 사는 까마귀 떼를 부르는 영어 표현(a parliament of rooks)에서 따온 이름이다. 21년은 진한 다크 프루츠와 초콜릿, 스파이스가 층층이 쌓인 고숙성 셰리 몰트의 대표격이다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w3": {"name": "이글레어 10년", "cat": "버번 위스키", "abv": "45%", "notes": "버팔로트레이스 증류소의 프리미엄 라인", "tier": "페스티벌", "distillery": "버팔로 트레이스 (Buffalo Trace)", "region": "미국 켄터키", "cask": "새 그을린 아메리칸 화이트 오크 (싱글 배럴)", "story": "버팔로 트레이스 증류소의 프리미엄 싱글 배럴 버번으로, 10년 숙성이다. 바닐라·오크·토피의 부드러운 균형으로 이름난 스테디셀러다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w4": {"name": "러셀 리저브 싱글배럴", "cat": "버번 위스키", "abv": "55%", "notes": "버번 매니아들의 열렬한 지지를 받는 훌륭한 바틀", "tier": "웰컴", "distillery": "와일드 터키 (Wild Turkey)", "region": "미국 켄터키", "cask": "새 그을린 아메리칸 화이트 오크 (싱글 배럴)", "story": "와일드 터키의 전설적 마스터 디스틸러 부자(父子) 지미 러셀·에디 러셀의 이름을 딴 라인이다. 단일 배럴에서 병입해 진한 풍미와 타격감으로 버번 매니아들의 지지를 받는다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w5": {"name": "스테그 (Stagg)", "cat": "버번 위스키", "abv": "63~65%", "notes": "구하기 매우 힘든 프리미엄 CS 버번", "tier": "하이라이트", "distillery": "버팔로 트레이스 (Buffalo Trace)", "region": "미국 켄터키", "cask": "새 그을린 아메리칸 화이트 오크", "story": "19세기 위스키 사업가 조지 T. 스태그(George T. Stagg)의 이름을 딴 언컷·언필터드 캐스크 스트렝스 버번이다. 물을 타지 않고 여과도 최소화해 높은 도수와 진한 풍미를 그대로 담으며, 물량이 적어 구하기 매우 어렵다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w6": {"name": "탈리스커 10년", "cat": "싱글 몰트 스카치(피트)", "abv": "45.8%", "notes": "바다향과 후추향이 일품인 대표 피트 위스키", "tier": "웰컴", "distillery": "탈리스커 (Talisker)", "region": "스코틀랜드 스카이 섬", "cask": "", "story": "1830년 설립된, 오랫동안 스카이 섬 유일의 증류소였다. '바다가 빚은 위스키'라는 말처럼 짭조름한 바다향과 후추 같은 스파이시함이 상징이다. 10년은 그 캐릭터의 정석이다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w7": {"name": "아드벡 10년", "cat": "싱글 몰트 스카치(피트)", "abv": "46%", "notes": "스모키하고 강렬한 아일라 피트 위스키", "tier": "웰컴", "distillery": "아드벡 (Ardbeg)", "region": "스코틀랜드 아일라", "cask": "버번 캐스크 (논칠필터)", "story": "1815년 설립된 아일라의 대표 피트 증류소다. 강한 피트에도 시트러스·바닐라의 균형이 좋아 '가장 완성도 높은 피트 위스키' 중 하나로 꼽힌다. 논칠필터로 병입한다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w8": {"name": "옥토모어 15.1", "cat": "싱글 몰트 스카치(피트)", "abv": "59.1%", "notes": "108.2 PPM의 세계 최고 수준의 강력한 피트 수치, 압도적인 스모키함", "tier": "하이라이트", "distillery": "브룩라디 (Bruichladdich)", "region": "스코틀랜드 아일라", "cask": "아메리칸 위스키 캐스크", "story": "옥토모어는 브룩라디 증류소가 만드는 '세계에서 가장 강하게 피트한 위스키' 시리즈다. 15.1은 108.2 PPM의 압도적인 피트 수치를 지니면서도, 비교적 짧은 숙성으로 강렬한 스모크와 젊은 힘을 동시에 낸다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w9": {"name": "LOT 40", "cat": "캐네디언 라이", "abv": "43%", "notes": "호밀빵, 허브 등 라이 특유의 화사함", "tier": "페스티벌", "distillery": "하이람 워커 (Hiram Walker) · 코비", "region": "캐나다", "cask": "", "story": "100% 호밀(라이)을 단식 증류기로 내린 캐네디언 라이의 대표작이다. 호밀빵·허브 같은 라이 특유의 화사함이 또렷하다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w10": {"name": "사가모어 라이 CS", "cat": "라이 위스키", "abv": "56%", "notes": "CS 특유의 강렬한 타격감과 진한 화사함", "tier": "웰컴", "distillery": "사가모어 스피릿 (Sagamore Spirit)", "region": "미국 메릴랜드 볼티모어", "cask": "새 그을린 아메리칸 화이트 오크 (캐스크 스트렝스)", "story": "메릴랜드 스타일 라이의 부활을 이끄는 볼티모어 증류소다. 캐스크 스트렝스 버전은 강렬한 타격감과 진한 화사함이 특징이다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w11": {"name": "와일드터키 레어브리드 라이", "cat": "라이 위스키", "abv": "56.1%", "notes": "타격감과 풍미가 일품인 배럴 프루프 라이", "tier": "웰컴", "distillery": "와일드 터키 (Wild Turkey)", "region": "미국 켄터키", "cask": "새 그을린 아메리칸 화이트 오크 (배럴 프루프)", "story": "여러 숙성년수의 라이를 섞어 물을 거의 타지 않고 배럴 프루프로 병입한다. 라이 특유의 스파이스와 높은 도수의 타격감, 풍미가 일품이다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w12": {"name": "발베니 12년 더블우드", "cat": "싱글 몰트 스카치", "abv": "40%", "notes": "화사하고 달달한 꿀/바닐라 풍미의 정석", "tier": "웰컴", "distillery": "발베니 (The Balvenie)", "region": "스코틀랜드 스페이사이드 (더프타운)", "cask": "전통 오크 숙성 후 올로로소 셰리 캐스크 마감", "story": "윌리엄 그랜트 앤 선즈가 운영하며, 지금도 자체 몰팅(플로어 몰팅)을 유지하는 몇 안 되는 증류소다. 몰트 마스터 데이비드 스튜어트가 정립한 '캐스크 피니시' 기법의 상징이 바로 더블우드로, 버번 오크에서 숙성 후 셰리 캐스크로 옮겨 꿀·바닐라의 화사한 단맛을 얹는다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w13": {"name": "에버펠디 16년", "cat": "싱글 몰트 스카치", "abv": "40%", "notes": "부드럽고 꿀 같은 달콤함", "tier": "웰컴", "distillery": "에버펠디 (Aberfeldy)", "region": "스코틀랜드 하이랜드 (퍼스셔)", "cask": "", "story": "1896년 존 듀어 앤 선즈가 세워 듀어스 블렌드의 심장부 역할을 해 온 증류소다. 꿀 같은 달콤함으로 '골든 드램'이라 불리며, 16년은 부드럽고 원숙한 편이다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w14": {"name": "글렌피딕 18년", "cat": "싱글 몰트 스카치", "abv": "48%", "notes": "고숙성 및 48도 특별 에디션", "tier": "웰컴", "distillery": "글렌피딕 (Glenfiddich)", "region": "스코틀랜드 스페이사이드 (더프타운)", "cask": "올로로소 셰리 & 버번 오크", "story": "1886년 윌리엄 그랜트가 세운 가족 경영 증류소로, 게일어로 '사슴의 계곡(Valley of the Deer)'을 뜻한다. 전 세계에서 가장 많이 팔리는 싱글 몰트 중 하나다. 18년은 셰리와 버번 오크에서 오래 숙성해 잘 익은 사과와 오크 스파이스의 균형이 좋다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w15": {"name": "글렌알라키 15년", "cat": "싱글 몰트 스카치", "abv": "46%", "notes": "진득한 셰리 풍미로 최근 가장 인기 있는 바틀", "tier": "웰컴", "distillery": "글렌알라키 (GlenAllachie)", "region": "스코틀랜드 스페이사이드", "cask": "PX & 올로로소 셰리 캐스크", "story": "1967년 설립됐고, 2017년 마스터 디스틸러 빌리 워커가 인수한 뒤 셰리 중심의 캐릭터로 크게 주목받았다. 15년은 진득한 셰리 풍미로 근래 가장 인기 있는 바틀 중 하나다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w16": {"name": "카발란 올로로소", "cat": "타이완 싱글 몰트", "abv": "55%", "notes": "대만 특유의 진한 열대 숙성 셰리 (CS)", "tier": "하이라이트", "distillery": "카발란 (Kavalan)", "region": "대만 이란현", "cask": "올로로소 셰리 캐스크 (싱글 캐스크·캐스크 스트렝스)", "story": "2005년 킹카 그룹이 세운 대만의 대표 증류소다. 아열대 기후에서 빠르게 숙성해 짧은 기간에도 진한 풍미를 낸다. 'Solist' 시리즈는 단일 캐스크·캐스크 스트렝스로 병입하며, 올로로소는 진한 건과일과 열대 과일 뉘앙스가 특징이다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w17": {"name": "아벨라워 아브나흐", "cat": "싱글 몰트 스카치", "abv": "61%", "notes": "꾸덕한 셰리 폭탄, 강력한 타격감의 CS", "tier": "하이라이트", "distillery": "아벨라워 (Aberlour)", "region": "스코틀랜드 스페이사이드", "cask": "올로로소 셰리 벗 (논칠필터·캐스크 스트렝스)", "story": "'A'bunadh(아브나흐)'는 게일어로 '원래의, 근원'을 뜻한다. 올로로소 셰리 벗에서만 숙성해 배치별로 캐스크 스트렝스·논칠필터로 병입하며, 숙성년수 표기가 없는(NAS) 진한 셰리 폭탄이다. 배치마다 도수가 조금씩 다르다.", "source": "위키피디아 · 증류소 공식", "noimg": false}};window.__WM_COLLECTED__="2026-08-16";</script>
+<script>window.__WIMAKASE__={"w1": {"name": "러셀 리저브 싱글배럴", "cat": "버번 위스키", "abv": "55%", "notes": "버번 매니아들의 열렬한 지지를 받는 훌륭한 바틀", "tier": "웰컴", "distillery": "와일드 터키 (Wild Turkey)", "region": "미국 켄터키", "cask": "새 그을린 아메리칸 화이트 오크 (싱글 배럴)", "story": "와일드 터키의 전설적 마스터 디스틸러 부자(父子) 지미 러셀·에디 러셀의 이름을 딴 라인이다. 단일 배럴에서 병입해 진한 풍미와 타격감으로 버번 매니아들의 지지를 받는다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w2": {"name": "글렌드로낙 12년", "cat": "싱글 몰트 스카치", "abv": "43%", "notes": "입문~중급용 셰리 캐스크의 교과서", "tier": "웰컴", "distillery": "글렌드로낙 (GlenDronach)", "region": "스코틀랜드 하이랜드", "cask": "PX & 올로로소 셰리 캐스크", "story": "1826년 설립된 셰리 캐스크 전문 증류소의 엔트리급 12년으로, 셰리 캐스크 위스키의 교과서로 통한다. 부드러운 건포도·초콜릿 풍미가 입문에 좋다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w3": {"name": "탈리스커 10년", "cat": "싱글 몰트 스카치(피트)", "abv": "45.8%", "notes": "바다향과 후추향이 일품인 대표 피트 위스키", "tier": "웰컴", "distillery": "탈리스커 (Talisker)", "region": "스코틀랜드 스카이 섬", "cask": "", "story": "1830년 설립된, 오랫동안 스카이 섬 유일의 증류소였다. '바다가 빚은 위스키'라는 말처럼 짭조름한 바다향과 후추 같은 스파이시함이 상징이다. 10년은 그 캐릭터의 정석이다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w4": {"name": "스테그 (Stagg)", "cat": "버번 위스키", "abv": "63~65%", "notes": "구하기 매우 힘든 프리미엄 CS 버번", "tier": "하이라이트", "distillery": "버팔로 트레이스 (Buffalo Trace)", "region": "미국 켄터키", "cask": "새 그을린 아메리칸 화이트 오크", "story": "19세기 위스키 사업가 조지 T. 스태그(George T. Stagg)의 이름을 딴 언컷·언필터드 캐스크 스트렝스 버번이다. 물을 타지 않고 여과도 최소화해 높은 도수와 진한 풍미를 그대로 담으며, 물량이 적어 구하기 매우 어렵다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w5": {"name": "글렌드로낙 21년", "cat": "싱글 몰트 스카치", "abv": "48%", "notes": "고숙성 셰리 캐스크의 대표 주자", "tier": "하이라이트", "distillery": "글렌드로낙 (GlenDronach)", "region": "스코틀랜드 하이랜드", "cask": "올로로소 & 페드로 히메네즈(PX) 셰리 캐스크", "story": "1826년 설립된 하이랜드 증류소로, 셰리 캐스크 숙성에 특화돼 있다. 'Parliament(팔러먼트)'는 증류소 인근 나무에 무리 지어 사는 까마귀 떼를 부르는 영어 표현(a parliament of rooks)에서 따온 이름이다. 21년은 진한 다크 프루츠와 초콜릿, 스파이스가 층층이 쌓인 고숙성 셰리 몰트의 대표격이다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w6": {"name": "옥토모어 15.1", "cat": "싱글 몰트 스카치(피트)", "abv": "59.1%", "notes": "108.2 PPM의 세계 최고 수준의 강력한 피트 수치, 압도적인 스모키함", "tier": "하이라이트", "distillery": "브룩라디 (Bruichladdich)", "region": "스코틀랜드 아일라", "cask": "아메리칸 위스키 캐스크", "story": "옥토모어는 브룩라디 증류소가 만드는 '세계에서 가장 강하게 피트한 위스키' 시리즈다. 15.1은 108.2 PPM의 압도적인 피트 수치를 지니면서도, 비교적 짧은 숙성으로 강렬한 스모크와 젊은 힘을 동시에 낸다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w7": {"name": "이글레어 10년", "cat": "버번 위스키", "abv": "45%", "notes": "버팔로트레이스 증류소의 프리미엄 라인", "tier": "페스티벌", "distillery": "버팔로 트레이스 (Buffalo Trace)", "region": "미국 켄터키", "cask": "새 그을린 아메리칸 화이트 오크 (싱글 배럴)", "story": "버팔로 트레이스 증류소의 프리미엄 싱글 배럴 버번으로, 10년 숙성이다. 바닐라·오크·토피의 부드러운 균형으로 이름난 스테디셀러다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w8": {"name": "아드벡 10년", "cat": "싱글 몰트 스카치(피트)", "abv": "46%", "notes": "스모키하고 강렬한 아일라 피트 위스키", "tier": "웰컴", "distillery": "아드벡 (Ardbeg)", "region": "스코틀랜드 아일라", "cask": "버번 캐스크 (논칠필터)", "story": "1815년 설립된 아일라의 대표 피트 증류소다. 강한 피트에도 시트러스·바닐라의 균형이 좋아 '가장 완성도 높은 피트 위스키' 중 하나로 꼽힌다. 논칠필터로 병입한다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w9": {"name": "LOT 40", "cat": "캐네디언 라이", "abv": "43%", "notes": "호밀빵, 허브 등 라이 특유의 화사함", "tier": "페스티벌", "distillery": "하이람 워커 (Hiram Walker) · 코비", "region": "캐나다", "cask": "", "story": "100% 호밀(라이)을 단식 증류기로 내린 캐네디언 라이의 대표작이다. 호밀빵·허브 같은 라이 특유의 화사함이 또렷하다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w10": {"name": "사가모어 라이 CS", "cat": "라이 위스키", "abv": "56%", "notes": "CS 특유의 강렬한 타격감과 진한 화사함", "tier": "웰컴", "distillery": "사가모어 스피릿 (Sagamore Spirit)", "region": "미국 메릴랜드 볼티모어", "cask": "새 그을린 아메리칸 화이트 오크 (캐스크 스트렝스)", "story": "메릴랜드 스타일 라이의 부활을 이끄는 볼티모어 증류소다. 캐스크 스트렝스 버전은 강렬한 타격감과 진한 화사함이 특징이다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w11": {"name": "와일드터키 레어브리드 라이", "cat": "라이 위스키", "abv": "56.1%", "notes": "타격감과 풍미가 일품인 배럴 프루프 라이", "tier": "웰컴", "distillery": "와일드 터키 (Wild Turkey)", "region": "미국 켄터키", "cask": "새 그을린 아메리칸 화이트 오크 (배럴 프루프)", "story": "여러 숙성년수의 라이를 섞어 물을 거의 타지 않고 배럴 프루프로 병입한다. 라이 특유의 스파이스와 높은 도수의 타격감, 풍미가 일품이다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w12": {"name": "발베니 12년 더블우드", "cat": "싱글 몰트 스카치", "abv": "40%", "notes": "화사하고 달달한 꿀/바닐라 풍미의 정석", "tier": "웰컴", "distillery": "발베니 (The Balvenie)", "region": "스코틀랜드 스페이사이드 (더프타운)", "cask": "전통 오크 숙성 후 올로로소 셰리 캐스크 마감", "story": "윌리엄 그랜트 앤 선즈가 운영하며, 지금도 자체 몰팅(플로어 몰팅)을 유지하는 몇 안 되는 증류소다. 몰트 마스터 데이비드 스튜어트가 정립한 '캐스크 피니시' 기법의 상징이 바로 더블우드로, 버번 오크에서 숙성 후 셰리 캐스크로 옮겨 꿀·바닐라의 화사한 단맛을 얹는다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w13": {"name": "에버펠디 16년", "cat": "싱글 몰트 스카치", "abv": "40%", "notes": "부드럽고 꿀 같은 달콤함", "tier": "웰컴", "distillery": "에버펠디 (Aberfeldy)", "region": "스코틀랜드 하이랜드 (퍼스셔)", "cask": "", "story": "1896년 존 듀어 앤 선즈가 세워 듀어스 블렌드의 심장부 역할을 해 온 증류소다. 꿀 같은 달콤함으로 '골든 드램'이라 불리며, 16년은 부드럽고 원숙한 편이다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w14": {"name": "글렌피딕 18년", "cat": "싱글 몰트 스카치", "abv": "48%", "notes": "고숙성 및 48도 특별 에디션", "tier": "웰컴", "distillery": "글렌피딕 (Glenfiddich)", "region": "스코틀랜드 스페이사이드 (더프타운)", "cask": "올로로소 셰리 & 버번 오크", "story": "1886년 윌리엄 그랜트가 세운 가족 경영 증류소로, 게일어로 '사슴의 계곡(Valley of the Deer)'을 뜻한다. 전 세계에서 가장 많이 팔리는 싱글 몰트 중 하나다. 18년은 셰리와 버번 오크에서 오래 숙성해 잘 익은 사과와 오크 스파이스의 균형이 좋다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w15": {"name": "글렌알라키 15년", "cat": "싱글 몰트 스카치", "abv": "46%", "notes": "진득한 셰리 풍미로 최근 가장 인기 있는 바틀", "tier": "웰컴", "distillery": "글렌알라키 (GlenAllachie)", "region": "스코틀랜드 스페이사이드", "cask": "PX & 올로로소 셰리 캐스크", "story": "1967년 설립됐고, 2017년 마스터 디스틸러 빌리 워커가 인수한 뒤 셰리 중심의 캐릭터로 크게 주목받았다. 15년은 진득한 셰리 풍미로 근래 가장 인기 있는 바틀 중 하나다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w16": {"name": "카발란 올로로소", "cat": "타이완 싱글 몰트", "abv": "55%", "notes": "대만 특유의 진한 열대 숙성 셰리 (CS)", "tier": "하이라이트", "distillery": "카발란 (Kavalan)", "region": "대만 이란현", "cask": "올로로소 셰리 캐스크 (싱글 캐스크·캐스크 스트렝스)", "story": "2005년 킹카 그룹이 세운 대만의 대표 증류소다. 아열대 기후에서 빠르게 숙성해 짧은 기간에도 진한 풍미를 낸다. 'Solist' 시리즈는 단일 캐스크·캐스크 스트렝스로 병입하며, 올로로소는 진한 건과일과 열대 과일 뉘앙스가 특징이다.", "source": "위키피디아 · 증류소 공식", "noimg": false}, "w17": {"name": "아벨라워 아브나흐", "cat": "싱글 몰트 스카치", "abv": "61%", "notes": "꾸덕한 셰리 폭탄, 강력한 타격감의 CS", "tier": "하이라이트", "distillery": "아벨라워 (Aberlour)", "region": "스코틀랜드 스페이사이드", "cask": "올로로소 셰리 벗 (논칠필터·캐스크 스트렝스)", "story": "'A'bunadh(아브나흐)'는 게일어로 '원래의, 근원'을 뜻한다. 올로로소 셰리 벗에서만 숙성해 배치별로 캐스크 스트렝스·논칠필터로 병입하며, 숙성년수 표기가 없는(NAS) 진한 셰리 폭탄이다. 배치마다 도수가 조금씩 다르다.", "source": "위키피디아 · 증류소 공식", "noimg": false}};window.__WM_COLLECTED__="2026-08-16";</script>
 <script>
 (function(){
  var data=window.__WIMAKASE__||{};

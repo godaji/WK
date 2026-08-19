@@ -42,6 +42,24 @@ COLLECTED = menu.COLLECTED
 # bridge  = '→ 페스티벌 브릿지' 한 줄.
 COURSES = [
     {
+        # CMPA-1329 신설(보드 필수): '내 취향 찾아보기' — 웰컴에서 스타일별 한 모금씩 탐색한 뒤
+        # 끌린 갈래로 하이라이트 1잔을 고르는 분기형(choice) 게이트웨이 코스.
+        # 고정 glasses 대신 welcome(3잔)+choice(버번/셰리/피트 3안) 스키마를 쓴다.
+        "id": "★", "name": "내 취향 찾아보기", "tag": "스타일 탐색 → 하이라이트 선택",
+        "lead": "버번·셰리·피트를 한 모금씩 맛본 뒤, 가장 끌리는 스타일로 한 잔 더 깊이 들어갑니다. 어디서부터 시작할지 모르겠다면 여기부터.",
+        "welcome": [
+            ("러셀 리저브 싱글배럴", "버번 갈래 · 바닐라·오크의 미국 위스키 원형."),
+            ("글렌드로낙 12년", "셰리 갈래 · 다크초콜릿·건포도, 셰리 캐스크 교과서."),
+            ("탈리스커 10년", "피트 갈래 · 해안 스모크·후추의 입문 피트."),
+        ],
+        "choice": [
+            ("🥃 버번이 끌렸다면", "스테그 (Stagg)", "프리미엄 CS 버번의 압도적 타격감. → 버번 매니아 코스로."),
+            ("🍇 셰리가 끌렸다면", "글렌드로낙 21년", "웰컴의 12년과 수직으로 잇는 고숙성 셰리. → 셰리 매니아 코스로."),
+            ("🔥 피트가 끌렸다면", "옥토모어 15.1", "108.2 PPM, 피트의 정점. → 피트 매니아 코스로."),
+        ],
+        "bridge": "하우스 위스키·조니워커 그린으로 페스티벌 프리플로우.",
+    },
+    {
         "id": "A", "name": "셰리의 시간여행", "tag": "글렌드로낙 수직 시음",
         "lead": "같은 증류소가 오래 잠들수록 어떻게 깊어지는가. 12년과 21년을 나란히 비교하는 수직 시음.",
         "glasses": [
@@ -53,7 +71,7 @@ COURSES = [
         "bridge": "하우스 위스키·조니워커 그린으로 부드럽게 착지.",
     },
     {
-        "id": "B", "name": "켄터키 버번 로드", "tag": "저 → 중 → 고",
+        "id": "B", "name": "버번 매니아", "tag": "켄터키 버번 사다리 · 저→중→고",
         "lead": "도수와 희소성이 한 계단씩 올라가는 버번 사다리.",
         "glasses": [
             ("이글레어 10년", "버팔로트레이스의 프리미엄 엔트리. 정석 바닐라·오크."),
@@ -64,7 +82,7 @@ COURSES = [
         "bridge": "놉크릭 9년·엔젤스 엔비로 여운의 버번 프리플로우.",
     },
     {
-        "id": "C", "name": "피트의 강도 여행", "tag": "아일라 → 옥토모어",
+        "id": "C", "name": "피트 매니아", "tag": "피트의 강도 여행 · 아일라→옥토모어",
         "lead": "스모크가 낮은 데서 세계 최고 수치까지. PPM 사다리.",
         "glasses": [
             ("탈리스커 10년", "해안 후추·바다향. 접근하기 좋은 피트 입문."),
@@ -97,7 +115,7 @@ COURSES = [
         "bridge": "조니워커 그린·몽키숄더로 무난하게 프리플로우.",
     },
     {
-        "id": "G", "name": "셰리 폭탄 사다리", "tag": "보너스 · CS 셰리 마니아",
+        "id": "G", "name": "셰리 매니아", "tag": "셰리 폭탄 사다리 · CS 셰리",
         "lead": "진득한 셰리에서 꾸덕한 CS 폭탄까지. 셰리 러버 특화 코스.",
         "glasses": [
             ("글렌알라키 15년", "진득한 셰리. 최근 최고 인기 바틀."),
@@ -115,14 +133,22 @@ for _t in menu.TIERS:
     for _it in _t["items"]:
         _BY_NAME[_it[0]] = _it
 
+def _course_names(course: dict) -> list[str]:
+    """코스에 등장하는 모든 위스키명(검증·key 생성용, 등장 순서 보존)."""
+    if course.get("welcome") is not None:  # 분기형(내 취향 찾아보기)
+        names = [g[0] for g in course["welcome"]]
+        names += [c[1] for c in course["choice"]]
+        return names
+    names = [g[0] for g in course["glasses"]]
+    names += course["light"]
+    return names
+
+
 # 코스에 등장하는 모든 위스키를 검증(오탈자·미보유 조기 발견).
 for _c in COURSES:
-    for _g in _c["glasses"]:
-        if _g[0] not in _BY_NAME:
-            raise KeyError(f"코스 {_c['id']} 위스키 미매칭(TIERS 에 없음): {_g[0]}")
-    for _n in _c["light"]:
+    for _n in _course_names(_c):
         if _n not in _BY_NAME:
-            raise KeyError(f"코스 {_c['id']} 라이트 위스키 미매칭: {_n}")
+            raise KeyError(f"코스 {_c['id']} 위스키 미매칭(TIERS 에 없음): {_n}")
 
 
 # ── 코스 페이지 전용 추가 CSS (기존 PAGE_CSS 룩앤필에 얹는다) ────────────────────
@@ -162,17 +188,27 @@ COURSE_CSS = """
 .cbridge{margin:10px 0 0;color:#cdbf9a;font-size:.8rem;line-height:1.55;
  border-top:1px solid #2a2413;padding-top:9px;word-break:keep-all;overflow-wrap:anywhere}
 .cbridge b{color:#e0a84e;font-weight:700}
+/* 내 취향 찾아보기(분기형) — 웰컴/하이라이트 소제목 + 선택지 블록 */
+.csub{color:#e0a84e;font-size:.82rem;font-weight:800;margin:12px 0 4px;
+ word-break:keep-all;overflow-wrap:anywhere}
+.cchoice{margin:7px 0 0;padding:8px 10px 6px;background:#0f0e08;border:1px solid #241f10;
+ border-radius:11px;min-width:0}
+.cbranch{color:#cdbf9a;font-size:.79rem;font-weight:800;margin:0 0 2px;
+ word-break:keep-all;overflow-wrap:anywhere}
+.cchoice .row{border-bottom:none}
 """
 
 
-def _glass_row(key: str, item: tuple[str, str, str, str], step: int, story: str) -> str:
-    """코스 잔 한 줄 — 탭하면 상세 팝업(MODAL_JS), ＋ 누르면 기록(LOG_JS). 기존 .row 구조 재사용."""
+def _glass_row(key: str, item: tuple[str, str, str, str], marker, story: str) -> str:
+    """코스 잔 한 줄 — 탭하면 상세 팝업(MODAL_JS), ＋ 누르면 기록(LOG_JS). 기존 .row 구조 재사용.
+    marker: 순서 배지에 넣을 문자(숫자 스텝 또는 '→' 등). 빈 문자면 배지 생략."""
     name, cat, abv, _notes = item
     e = html.escape
+    badge = f'<span class="cstep" aria-hidden="true">{e(str(marker))}</span>' if marker else ""
     return (
         '<div class="row">'
         f'<button type="button" class="rtap" data-w="{e(key)}">'
-        f'<span class="cstep" aria-hidden="true">{step}</span>'
+        f'{badge}'
         '<span class="rmain">'
         f'<span class="rname">{e(name)}</span>'
         f'<span class="rstory">{e(story)}</span></span>'
@@ -183,7 +219,40 @@ def _glass_row(key: str, item: tuple[str, str, str, str], step: int, story: str)
     )
 
 
+def _choice_course_section(course: dict, keys: dict) -> str:
+    """분기형 코스(내 취향 찾아보기) — 웰컴 탐색 3잔 + 하이라이트 선택 3안."""
+    e = html.escape
+    wrows = "\n  ".join(
+        _glass_row(keys[name], _BY_NAME[name], i, story)
+        for i, (name, story) in enumerate(course["welcome"], start=1)
+    )
+    choices = []
+    for label, name, story in course["choice"]:
+        row = _glass_row(keys[name], _BY_NAME[name], "→", story)
+        choices.append(
+            f'<div class="cchoice"><div class="cbranch">{e(label)}</div>'
+            f'<div class="list">{row}</div></div>'
+        )
+    choices_html = "\n  ".join(choices)
+    return f"""<section class="course">
+  <div class="chead">
+    <span class="cid">{e(course['id'])}</span><span class="cname">{e(course['name'])}</span>
+    <span class="ctag">{e(course['tag'])}</span>
+  </div>
+  <p class="clead">{e(course['lead'])}</p>
+  <div class="csub">① 웰컴 탐색 · 종류별로 한 모금씩</div>
+  <div class="list">
+  {wrows}
+  </div>
+  <div class="csub">② 하이라이트 · 끌린 스타일로 한 잔 더</div>
+  {choices_html}
+  <div class="cbridge">→ <b>페스티벌 브릿지</b> · {e(course['bridge'])}</div>
+</section>"""
+
+
 def _course_section(course: dict, keys: dict) -> str:
+    if course.get("welcome") is not None:
+        return _choice_course_section(course, keys)
     e = html.escape
     rows = []
     for i, (name, story) in enumerate(course["glasses"], start=1):
@@ -257,7 +326,7 @@ def render(build: int) -> str:
     # 위스키명 → 안정 key(w1..) — 같은 위스키가 여러 코스에 나와도 key 하나로 공유.
     keys: dict[str, str] = {}
     for c in COURSES:
-        for name, _story in c["glasses"]:
+        for name in _course_names(c):
             if name not in keys:
                 keys[name] = f"w{len(keys) + 1}"
     courses_html = "\n".join(_course_section(c, keys) for c in COURSES)
@@ -356,7 +425,11 @@ def build() -> tuple[list[Path], int]:
 
 if __name__ == "__main__":
     paths, build_no = build()
-    n_glass = sum(len(c["glasses"]) for c in COURSES)
+    n_glass = sum(
+        len(c["welcome"]) + len(c["choice"]) if c.get("welcome") is not None
+        else len(c["glasses"])
+        for c in COURSES
+    )
     print(f"built 위마카세 테마 코스 {VERSION}-c{build_no} — {len(COURSES)}코스 · {n_glass}잔")
     for p in paths:
         print(f"  {p.relative_to(ROOT)}")
