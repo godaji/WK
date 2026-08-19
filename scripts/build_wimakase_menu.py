@@ -145,33 +145,35 @@ NO_IMAGE_SEARCH = {
     "하우스 위스키 피티드 CS",  # CMPA-1321: 두 번째 하우스 블렌드도 구글 이미지 검색 숨김.
 }
 
-# ── 탭 내 인라인 추천(CMPA-1326 · 보드 opt1 확정 2026-08-19) ──────────────────────
-# 보드 지적(2026-08-19): 추천 코스가 웰컴↔하이라이트↔페스티벌 탭을 왕복해 바 서빙이 불편.
-# → 추천을 '그 탭 안에서 즐기는 2~3잔'으로 인라인화(서빙 중 탭 이동 0). 태생적으로 탭을 넘는
-#   여정형 테마 코스(글렌드로낙 12→21 수직시음 등)는 별도 '테마 코스' 페이지(wimakase-course.html)에
-#   남겨 두고, 메뉴 탭에서는 각 탭 안에서 완결되는 추천만 노출한다.
-# 웰컴=내 취향 찾기(버번/셰리/피트 한 모금씩), 하이라이트=끌린 스타일 심화(CMPA-1329 분기 유지).
-# 잔은 모두 해당 탭 소속이라 이름으로만 참조 — 탭에 없으면 조용히 생략(위장 금지, CLAUDE.md).
-TAB_RECOS = {
-    "tier2": {  # 웰컴
-        "title": "🧭 이 탭 추천 — 내 취향 찾기",
-        "desc": "버번·셰리·피트를 한 모금씩. 끌리는 스타일을 하이라이트에서 이어가세요.",
-        "picks": [
-            ("러셀 리저브 싱글배럴", "🥃 버번"),
-            ("글렌드로낙 12년", "🍇 셰리"),
-            ("탈리스커 10년", "🔥 피트"),
-        ],
+# ── 테마별 추천(CMPA-1331 · 보드 확정 2026-08-19) ─────────────────────────────────
+# 보드 요청: 우측하단 '테마코스' 플로팅 버튼을 없애고, 각 탭(웰컴/하이라이트/페스티벌) 우측
+# 상단의 '추천보기' 버튼으로 테마별 그루핑 추천을 한 모달에서 보여준다. 그룹은 4개:
+# 버번 매니아 3종 / 셰리 매니아 3종 / 피트 매니아 3종 / 취향 찾아보기 3종.
+# (이전 CMPA-1326 탭 인라인 추천 TAB_RECOS 를 대체 — 추천을 버튼 뒤 모달로 모음.)
+# 잔은 이름으로 참조하고, TIERS 어느 탭에 있든 무관하게 추천 모달에서 함께 노출한다.
+# 탭에 없는 이름은 조용히 생략(위장 금지, CLAUDE.md). 데이터 정본은 build_wimakase_course.COURSES.
+THEME_RECOS = [
+    {
+        "id": "B", "title": "🥃 버번 매니아",
+        "tag": "켄터키 버번 사다리 · 저→중→고",
+        "picks": ["이글레어 10년", "러셀 리저브 싱글배럴", "스테그 (Stagg)"],
     },
-    "tier1": {  # 하이라이트
-        "title": "🥃 이 탭 추천 — 취향대로 심화",
-        "desc": "웰컴에서 끌린 스타일 그대로, 이 탭 안에서 한 단계 위로.",
-        "picks": [
-            ("스테그 (Stagg)", "🥃 버번"),
-            ("글렌드로낙 21년", "🍇 셰리"),
-            ("옥토모어 15.1", "🔥 피트"),
-        ],
+    {
+        "id": "G", "title": "🍇 셰리 매니아",
+        "tag": "셰리 폭탄 사다리 · CS 셰리",
+        "picks": ["글렌알라키 15년", "카발란 올로로소", "아벨라워 아브나흐"],
     },
-}
+    {
+        "id": "C", "title": "🔥 피트 매니아",
+        "tag": "피트 강도 여행 · 아일라→옥토모어",
+        "picks": ["탈리스커 10년", "아드벡 10년", "옥토모어 15.1"],
+    },
+    {
+        "id": "★", "title": "🧭 취향 찾아보기",
+        "tag": "버번·셰리·피트 한 모금씩",
+        "picks": ["러셀 리저브 싱글배럴", "글렌드로낙 12년", "탈리스커 10년"],
+    },
+]
 
 
 def _abv_value(abv: str) -> float:
@@ -513,11 +515,20 @@ h1 .gold{color:#e0a84e}
 .tab.active{border-color:#e0a84e;background:#1a1508;color:#e0a84e}
 .tier{display:none;margin-top:8px;scroll-margin-top:8px}
 .tier.active{display:block}
-.thead{border-bottom:1px solid #2a2e37;padding-bottom:.35em;margin-bottom:2px}
+/* 탭 헤더 — 좌: 제목/서빙안내, 우: '추천보기' 버튼(CMPA-1331). flex 자식 min-width:0 로 카톡 웹뷰 넘침 차단 */
+.thead{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
+ border-bottom:1px solid #2a2e37;padding-bottom:.35em;margin-bottom:2px}
+.thmain{flex:1;min-width:0}
 .tname{color:#e0a84e;font-size:1rem;font-weight:700}
 .tsub{color:#9aa0aa;font-size:.78rem;margin-top:.1em}
 .tserve{color:#9aa0aa;font-size:.75rem;margin-top:.3em}
 .tcount{color:#6b7280;font-size:.76rem;font-weight:600}
+/* 우측 상단 '추천보기' 버튼 — 테마별 추천 모달 열기(CMPA-1331) */
+.recobtn{flex:none;align-self:flex-start;background:#141a12;color:#bfe0a0;border:1px solid #2b3a24;
+ border-radius:999px;padding:7px 13px;font:inherit;font-weight:800;font-size:.8rem;cursor:pointer;
+ white-space:nowrap;-webkit-tap-highlight-color:transparent;transition:transform .1s,background .12s}
+.recobtn:active{transform:scale(.96)}
+.recobtn:hover{background:#1b241a}
 /* ── 한 줄 목록 (이름 + 도수) · 탭하면 상세 팝업, ＋ 누르면 기록 ── */
 .list{display:flex;flex-direction:column}
 .row{display:flex;align-items:center;gap:8px;border-bottom:1px solid #1c202a}
@@ -530,20 +541,24 @@ h1 .gold{color:#e0a84e}
  cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .1s,background .12s,color .12s}
 .radd:active{transform:scale(.84)}
 .radd.added{background:#e0a84e;color:#1a1508;transform:scale(1.05)}
+/* '내 기록'에 담긴 위스키 = 선택됨 표시(CMPA-1331 req4). 행에 금색 틴트 + ＋버튼이 ✓(채운 금색)으로 */
+.row.picked{background:#181206}
+.row.picked .rname{color:#f0c877}
+.radd.on{background:#e0a84e;color:#1a1508;border-color:#e0a84e}
 .rmain{display:flex;flex-direction:column;gap:1px;min-width:0}
 .rname{font-weight:600;font-size:.95rem;line-height:1.3;word-break:keep-all}
 .rcat{color:#8a909a;font-size:.72rem;line-height:1.3}
 .rabv{color:#e0a84e;font-size:.85rem;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;flex:none}
-/* ── 탭 내 인라인 추천(CMPA-1326 · 보드 opt1 2026-08-19) — 서빙 중 탭 이동 없이 이 탭에서 즐기는 2~3잔.
+/* ── 테마별 추천 모달 그룹(CMPA-1331) — '추천보기' 버튼으로 여는 모달 안, 버번/셰리/피트/취향 4그룹.
    카톡 웹뷰 원칙: flex 자식 min-width:0·word-break:keep-all 로 가로 넘침 차단, 100vw/blur 미사용. */
-.reco{margin:0 0 14px;padding:12px 12px 4px;background:#141a12;border:1px solid #2b3a24;border-radius:14px}
-.recohd{margin-bottom:4px;min-width:0}
-.recott{display:block;color:#bfe0a0;font-weight:800;font-size:.94rem;word-break:keep-all}
-.recods{display:block;color:#8a9a82;font-size:.78rem;line-height:1.45;margin-top:2px;word-break:keep-all}
-.reco .row{border-bottom:1px solid #20281a}
-.reco .rmain{flex-direction:row;align-items:center;gap:6px;flex-wrap:wrap}
-.recotag{flex:none;background:#20281a;border:1px solid #3a4a2e;color:#bfe0a0;border-radius:999px;
- padding:2px 8px;font-size:.72rem;font-weight:700;white-space:nowrap}
+.recointro{color:#cdd2da;font-size:.86rem;line-height:1.6;margin:10px 0 4px;
+ word-break:keep-all;overflow-wrap:anywhere}
+.rcgroup{margin:14px 0 0;padding:12px 12px 4px;background:#141a12;border:1px solid #2b3a24;border-radius:14px}
+.rchd{margin-bottom:4px;min-width:0}
+.rctt{display:block;color:#bfe0a0;font-weight:800;font-size:.98rem;word-break:keep-all}
+.rctag{display:block;color:#8a9a82;font-size:.78rem;line-height:1.45;margin-top:2px;word-break:keep-all}
+.rcgroup .row{border-bottom:1px solid #20281a}
+.rcgroup .row:last-child{border-bottom:none}
 .note{margin:20px 0 0;color:#8a909a;font-size:.78rem;text-align:center;line-height:1.6}
 footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-height:1.6}
 /* ── 상세 팝업(모달) — 모바일 우선 바텀시트, 데스크톱에선 가운데 카드 ── */
@@ -587,15 +602,8 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
  box-shadow:0 6px 20px rgba(0,0,0,.45);-webkit-tap-highlight-color:transparent}
 .fab .cnt{background:#0f1115;color:#e0a84e;border-radius:999px;padding:1px 8px;min-width:22px;
  text-align:center;font-size:.82rem;font-variant-numeric:tabular-nums}
-/* ── 플로팅 '테마 코스' 링크(CMPA-1325 뼈대 → CMPA-1326 opt1) — '내 기록' 바로 위 스택 ──
-   보드 opt1(2026-08-19): 메뉴 안 추천은 각 탭 인라인(.reco)으로 옮기고, 이 버튼은 여정형
-   테마 코스 전체 페이지(wimakase-course.html)로 가는 링크로 전환(CMPA-1329 코스 보존).
-   높이는 vh 금지·safe-area 방어조합(max(env(...),Npx)) 유지. '내 기록'(약 40px) 위 여백 확보. */
-.fabcourse{position:fixed;right:14px;bottom:calc(64px + max(env(safe-area-inset-bottom), 12px));z-index:40;
- display:flex;align-items:center;gap:8px;background:#1a1508;color:#e0a84e;border:1px solid #3a2f1a;
- border-radius:999px;padding:11px 16px;font:inherit;font-weight:800;font-size:.9rem;cursor:pointer;
- text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.45);-webkit-tap-highlight-color:transparent}
-.fabcourse:active{transform:scale(.97)}
+/* (CMPA-1331 보드: 우측하단 플로팅 '테마 코스' 버튼(.fabcourse) 제거 — 추천은 각 탭 우측상단
+   '추천보기' 버튼 → 테마별 추천 모달로 대체.) */
 .toast{position:fixed;left:50%;bottom:calc(74px + max(env(safe-area-inset-bottom), 12px));
  transform:translateX(-50%) translateY(10px);background:#1a1508;color:#e0a84e;border:1px solid #3a2f1a;
  border-radius:10px;padding:9px 16px;font-size:.86rem;font-weight:600;white-space:nowrap;
@@ -735,35 +743,34 @@ def _tabs() -> str:
     return '<div class="tabs" role="tablist">' + "".join(btns) + "</div>"
 
 
-def _tier_recos(tier: dict, keys: dict) -> str:
-    """탭 내 인라인 추천 블록(CMPA-1326 opt1). 추천 잔은 모두 이 탭 소속이라 tier['items']에서
-    이름으로 찾는다 — 없으면 조용히 생략(위장 금지). 카드/기록(＋)은 기존 rtap/radd JS 재사용."""
-    reco = TAB_RECOS.get(tier["id"])
-    if not reco:
-        return ""
+def _reco_modal(keys: dict) -> str:
+    """테마별 추천 모달 본문(CMPA-1331). 버번/셰리/피트 매니아 + 취향 찾아보기 4그룹 × 3잔.
+    잔은 이름으로 TIERS 전체에서 찾아 어느 탭 소속이든 함께 노출한다(없으면 조용히 생략).
+    행은 기존 _card 를 재사용 — 탭/기록(＋)·선택표시 JS 가 그대로 붙는다."""
     e = html.escape
-    by_name = {it[0]: it for it in tier["items"]}
-    rows = []
-    for name, tag in reco["picks"]:
-        it = by_name.get(name)
-        if not it:
+    by_name = {it[0]: it for t in TIERS for it in t["items"]}
+    groups = []
+    for g in THEME_RECOS:
+        rows = []
+        for name in g["picks"]:
+            it = by_name.get(name)
+            if not it:
+                continue
+            rows.append(_card(keys[id(it)], it))
+        if not rows:
             continue
-        key = keys[id(it)]
-        rows.append(
-            f'<div class="row"><button type="button" class="rtap" data-w="{e(key)}">'
-            f'<span class="rmain"><span class="recotag">{e(tag)}</span>'
-            f'<span class="rname">{e(name)}</span></span>'
-            f'<span class="rabv">{e(it[2])}</span></button>'
-            f'<button type="button" class="radd" data-w="{e(key)}" '
-            f'aria-label="{e(name)} 마신 목록에 담기" title="마신 목록에 담기">＋</button></div>'
+        groups.append(
+            '<div class="rcgroup"><div class="rchd">'
+            f'<span class="rctt">{e(g["title"])}</span>'
+            f'<span class="rctag">{e(g["tag"])}</span></div>'
+            '<div class="list">\n  ' + "\n  ".join(rows) + '\n</div></div>'
         )
-    if not rows:
-        return ""
     return (
-        '<div class="reco"><div class="recohd">'
-        f'<span class="recott">{e(reco["title"])}</span>'
-        f'<span class="recods">{e(reco["desc"])}</span></div>\n  '
-        + "\n  ".join(rows) + "\n</div>"
+        '<div class="mtop"><div class="mname">🍸 테마별 추천</div>'
+        '<button type="button" class="mx" aria-label="닫기" onclick="__wmCloseReco()">✕</button></div>'
+        '<p class="recointro">버번·셰리·피트 매니아 코스와 \'취향 찾아보기\'. '
+        '마음에 드는 잔을 탭해 상세를 보고 ＋ 로 기록에 담으세요.</p>\n'
+        + "\n".join(groups)
     )
 
 
@@ -772,13 +779,14 @@ def _tier_section(tier: dict, keys: dict, active: bool) -> str:
     cards = "\n  ".join(_card(keys[id(x)], x) for x in tier["items"])
     n = len(tier["items"])
     cls = "tier active" if active else "tier"
-    recos = _tier_recos(tier, keys)
     return f"""<section class="{cls}" id="{e(tier['id'])}" role="tabpanel">
   <div class="thead">
-    <div class="tname">{e(tier['medal'])} {e(tier['name'])} <span class="tcount">· {n}종</span></div>
-    <div class="tserve">{e(tier['serve'])}</div>
+    <div class="thmain">
+      <div class="tname">{e(tier['medal'])} {e(tier['name'])} <span class="tcount">· {n}종</span></div>
+      <div class="tserve">{e(tier['serve'])}</div>
+    </div>
+    <button type="button" class="recobtn" onclick="__wmOpenReco()" aria-label="테마별 추천 보기">🍸 추천보기</button>
   </div>
-  {recos}
   <div class="list">
   {cards}
   </div>
@@ -854,6 +862,18 @@ TAB_JS = """(function(){
 })();"""
 
 
+# ── 테마별 추천 모달 — 각 탭 '추천보기' 버튼(__wmOpenReco)으로 열고 닫는다(CMPA-1331) ──
+RECO_JS = """(function(){
+ var mask=document.getElementById('recomask');if(!mask)return;
+ window.__wmOpenReco=function(){mask.classList.add('open');document.body.style.overflow='hidden';
+  var md=mask.querySelector('.modal');if(md)md.scrollTop=0;};
+ window.__wmCloseReco=function(){mask.classList.remove('open');document.body.style.overflow='';};
+ mask.addEventListener('click',function(e){if(e.target===mask)window.__wmCloseReco();});
+ document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'&&mask.classList.contains('open'))window.__wmCloseReco();});
+})();"""
+
+
 # ── '내가 마신 목록' — ＋ 버튼으로 그날 마신 술을 날짜와 함께 localStorage에 기록 ──
 LOG_JS = """(function(){
  var LS='wm_log_v1';
@@ -896,7 +916,20 @@ LOG_JS = """(function(){
  function durtxt(min){if(min<=0)return '';var h=Math.floor(min/60),m=min%60;
   return (h?h+'시간 ':'')+m+'분';}
  function esc(s){var x=document.createElement('div');x.textContent=s==null?'':s;return x.innerHTML;}
- function updateFab(){cnt.textContent=load().length;}
+ // '내 기록'에 담긴 위스키 = 목록/추천에서 선택됨 표시(CMPA-1331 req4). 이름 기준(구버전 기록 호환).
+ function loggedNames(){var a=load(),s={};a.forEach(function(e){if(e&&e.name)s[e.name]=1;});return s;}
+ function refreshPicked(){
+  var names=loggedNames();
+  document.querySelectorAll('.row').forEach(function(row){
+   var b=row.querySelector('.radd');if(!b)return;
+   var d=data[b.getAttribute('data-w')];
+   var on=!!(d&&names[d.name]);
+   row.classList.toggle('picked',on);
+   b.classList.toggle('on',on);
+   b.textContent=on?'✓':'＋';
+  });
+ }
+ function updateFab(){cnt.textContent=load().length;refreshPicked();}
  function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');
   if(toastT)clearTimeout(toastT);toastT=setTimeout(function(){toastEl.classList.remove('show');},1400);}
  function add(key){
@@ -1062,6 +1095,7 @@ def render(build: int) -> str:
     tabs_html = _tabs()
     # 1~3티어는 기본 비활성(0티어가 첫 탭). CMPA-1304. 추천은 각 탭 안에 인라인(CMPA-1326 opt1).
     tiers_html = "\n".join(_tier_section(t, keys, False) for t in TIERS)
+    reco_html = _reco_modal(keys)  # 테마별 추천 모달 본문(CMPA-1331)
     data_json = json.dumps(_build_data(keys), ensure_ascii=False)
     collected_json = json.dumps(COLLECTED, ensure_ascii=False)
     total = sum(len(t["items"]) for t in TIERS)
@@ -1106,11 +1140,15 @@ def render(build: int) -> str:
   <div class="modal"><div class="mgrip"></div><div id="mbody"></div></div>
 </div>
 
-<a class="fabcourse" id="fabcourse" href="wimakase-course.html?v={e(cache_tag)}" aria-label="테마 코스 전체 보기 — 별도 페이지">🥃 테마 코스</a>
 <button type="button" class="fab" id="fab" aria-label="내가 마신 목록 열기">📒 내 기록 <span class="cnt" id="fabcnt">0</span></button>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="mask" id="logmask" role="dialog" aria-modal="true" aria-label="내가 마신 목록">
   <div class="modal"><div class="mgrip"></div><div id="logbody"></div></div>
+</div>
+
+<!-- 테마별 추천 모달(CMPA-1331) — 각 탭 '추천보기' 버튼으로 열림 -->
+<div class="mask" id="recomask" role="dialog" aria-modal="true" aria-label="테마별 추천">
+  <div class="modal"><div class="mgrip"></div><div id="recobody">{reco_html}</div></div>
 </div>
 
 <div class="kkomask" id="kkomask" role="dialog" aria-modal="true" aria-label="다른 브라우저로 열기 안내">
@@ -1132,6 +1170,7 @@ def render(build: int) -> str:
 <script>
 {MODAL_JS}
 {TAB_JS}
+{RECO_JS}
 {LOG_JS}
 {EXT_JS}
 </script>

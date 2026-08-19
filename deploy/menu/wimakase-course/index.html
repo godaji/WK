@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<!-- 캐시버스트(CMPA-1285 패턴): 카톡/iOS 웹뷰가 옛 버전을 붙잡지 않게 no-cache 신호 + 빌드 라벨 v2026.08.19-c3 -->
+<!-- 캐시버스트(CMPA-1285 패턴): 카톡/iOS 웹뷰가 옛 버전을 붙잡지 않게 no-cache 신호 + 빌드 라벨 v2026.08.19-c4 -->
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="build" content="v2026.08.19-c3">
-<link rel="canonical" href="wimakase-course.html?v=v2026.08.19-c3">
+<meta name="build" content="v2026.08.19-c4">
+<link rel="canonical" href="wimakase-course.html?v=v2026.08.19-c4">
 <!-- 카톡 인앱 → 강제 외부 브라우저 리다이렉트(CMPA-1286). 깨진 렌더 전에 즉시 실행하려 head에 둔다. -->
 <script>(function(){
  var ua=navigator.userAgent||'';
@@ -103,11 +103,20 @@ h1 .gold{color:#e0a84e}
 .tab.active{border-color:#e0a84e;background:#1a1508;color:#e0a84e}
 .tier{display:none;margin-top:8px;scroll-margin-top:8px}
 .tier.active{display:block}
-.thead{border-bottom:1px solid #2a2e37;padding-bottom:.35em;margin-bottom:2px}
+/* 탭 헤더 — 좌: 제목/서빙안내, 우: '추천보기' 버튼(CMPA-1331). flex 자식 min-width:0 로 카톡 웹뷰 넘침 차단 */
+.thead{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
+ border-bottom:1px solid #2a2e37;padding-bottom:.35em;margin-bottom:2px}
+.thmain{flex:1;min-width:0}
 .tname{color:#e0a84e;font-size:1rem;font-weight:700}
 .tsub{color:#9aa0aa;font-size:.78rem;margin-top:.1em}
 .tserve{color:#9aa0aa;font-size:.75rem;margin-top:.3em}
 .tcount{color:#6b7280;font-size:.76rem;font-weight:600}
+/* 우측 상단 '추천보기' 버튼 — 테마별 추천 모달 열기(CMPA-1331) */
+.recobtn{flex:none;align-self:flex-start;background:#141a12;color:#bfe0a0;border:1px solid #2b3a24;
+ border-radius:999px;padding:7px 13px;font:inherit;font-weight:800;font-size:.8rem;cursor:pointer;
+ white-space:nowrap;-webkit-tap-highlight-color:transparent;transition:transform .1s,background .12s}
+.recobtn:active{transform:scale(.96)}
+.recobtn:hover{background:#1b241a}
 /* ── 한 줄 목록 (이름 + 도수) · 탭하면 상세 팝업, ＋ 누르면 기록 ── */
 .list{display:flex;flex-direction:column}
 .row{display:flex;align-items:center;gap:8px;border-bottom:1px solid #1c202a}
@@ -120,10 +129,24 @@ h1 .gold{color:#e0a84e}
  cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .1s,background .12s,color .12s}
 .radd:active{transform:scale(.84)}
 .radd.added{background:#e0a84e;color:#1a1508;transform:scale(1.05)}
+/* '내 기록'에 담긴 위스키 = 선택됨 표시(CMPA-1331 req4). 행에 금색 틴트 + ＋버튼이 ✓(채운 금색)으로 */
+.row.picked{background:#181206}
+.row.picked .rname{color:#f0c877}
+.radd.on{background:#e0a84e;color:#1a1508;border-color:#e0a84e}
 .rmain{display:flex;flex-direction:column;gap:1px;min-width:0}
 .rname{font-weight:600;font-size:.95rem;line-height:1.3;word-break:keep-all}
 .rcat{color:#8a909a;font-size:.72rem;line-height:1.3}
 .rabv{color:#e0a84e;font-size:.85rem;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;flex:none}
+/* ── 테마별 추천 모달 그룹(CMPA-1331) — '추천보기' 버튼으로 여는 모달 안, 버번/셰리/피트/취향 4그룹.
+   카톡 웹뷰 원칙: flex 자식 min-width:0·word-break:keep-all 로 가로 넘침 차단, 100vw/blur 미사용. */
+.recointro{color:#cdd2da;font-size:.86rem;line-height:1.6;margin:10px 0 4px;
+ word-break:keep-all;overflow-wrap:anywhere}
+.rcgroup{margin:14px 0 0;padding:12px 12px 4px;background:#141a12;border:1px solid #2b3a24;border-radius:14px}
+.rchd{margin-bottom:4px;min-width:0}
+.rctt{display:block;color:#bfe0a0;font-weight:800;font-size:.98rem;word-break:keep-all}
+.rctag{display:block;color:#8a9a82;font-size:.78rem;line-height:1.45;margin-top:2px;word-break:keep-all}
+.rcgroup .row{border-bottom:1px solid #20281a}
+.rcgroup .row:last-child{border-bottom:none}
 .note{margin:20px 0 0;color:#8a909a;font-size:.78rem;text-align:center;line-height:1.6}
 footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-height:1.6}
 /* ── 상세 팝업(모달) — 모바일 우선 바텀시트, 데스크톱에선 가운데 카드 ── */
@@ -167,14 +190,8 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
  box-shadow:0 6px 20px rgba(0,0,0,.45);-webkit-tap-highlight-color:transparent}
 .fab .cnt{background:#0f1115;color:#e0a84e;border-radius:999px;padding:1px 8px;min-width:22px;
  text-align:center;font-size:.82rem;font-variant-numeric:tabular-nums}
-/* ── 플로팅 '추천 코스' 버튼(CMPA-1325) — '내 기록' 바로 위에 세로로 겹치지 않게 스택 ──
-   높이는 vh 금지·safe-area 방어조합(max(env(...),Npx)) 유지. '내 기록'(약 40px) 위 여백 확보. */
-.fabcourse{position:fixed;right:14px;bottom:calc(64px + max(env(safe-area-inset-bottom), 12px));z-index:40;
- display:flex;align-items:center;gap:8px;background:#1a1508;color:#e0a84e;border:1px solid #3a2f1a;
- border-radius:999px;padding:11px 16px;font:inherit;font-weight:800;font-size:.9rem;cursor:pointer;
- box-shadow:0 6px 20px rgba(0,0,0,.45);-webkit-tap-highlight-color:transparent}
-.fabcourse:active{transform:scale(.97)}
-/* 추천 코스 시트 본문(코스 카드) 스타일은 build_wimakase_course.COURSE_CSS 를 재사용해 주입한다(CMPA-1326). */
+/* (CMPA-1331 보드: 우측하단 플로팅 '테마 코스' 버튼(.fabcourse) 제거 — 추천은 각 탭 우측상단
+   '추천보기' 버튼 → 테마별 추천 모달로 대체.) */
 .toast{position:fixed;left:50%;bottom:calc(74px + max(env(safe-area-inset-bottom), 12px));
  transform:translateX(-50%) translateY(10px);background:#1a1508;color:#e0a84e;border:1px solid #3a2f1a;
  border-radius:10px;padding:9px 16px;font-size:.86rem;font-weight:600;white-space:nowrap;
@@ -409,7 +426,7 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
 
 <p class="note">위스키를 탭하면 상세·구글 이미지 검색이 열리고, 옆의 ＋ 를 누르면 그날 마신 목록에 담깁니다 · 📒 내 기록에서 ✏️ 로 메모도 남길 수 있어요</p>
 
-<footer>합정 위마카세 · 테마 코스 v2026.08.19 &nbsp;·&nbsp; CaskCode<br>메뉴는 수시로 업데이트됩니다 — 버전을 확인하세요 🥃<br>상세 정보는 위키피디아 등 공개 자료를 요약한 참고용입니다 · 수집 2026-08-16<br><span style="color:#3b414b;font-size:.68rem">build v2026.08.19-c3</span></footer>
+<footer>합정 위마카세 · 테마 코스 v2026.08.19 &nbsp;·&nbsp; CaskCode<br>메뉴는 수시로 업데이트됩니다 — 버전을 확인하세요 🥃<br>상세 정보는 위키피디아 등 공개 자료를 요약한 참고용입니다 · 수집 2026-08-16<br><span style="color:#3b414b;font-size:.68rem">build v2026.08.19-c4</span></footer>
 </div>
 
 <div class="mask" id="mask" role="dialog" aria-modal="true" aria-label="위스키 상세">
@@ -514,7 +531,20 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
  function durtxt(min){if(min<=0)return '';var h=Math.floor(min/60),m=min%60;
   return (h?h+'시간 ':'')+m+'분';}
  function esc(s){var x=document.createElement('div');x.textContent=s==null?'':s;return x.innerHTML;}
- function updateFab(){cnt.textContent=load().length;}
+ // '내 기록'에 담긴 위스키 = 목록/추천에서 선택됨 표시(CMPA-1331 req4). 이름 기준(구버전 기록 호환).
+ function loggedNames(){var a=load(),s={};a.forEach(function(e){if(e&&e.name)s[e.name]=1;});return s;}
+ function refreshPicked(){
+  var names=loggedNames();
+  document.querySelectorAll('.row').forEach(function(row){
+   var b=row.querySelector('.radd');if(!b)return;
+   var d=data[b.getAttribute('data-w')];
+   var on=!!(d&&names[d.name]);
+   row.classList.toggle('picked',on);
+   b.classList.toggle('on',on);
+   b.textContent=on?'✓':'＋';
+  });
+ }
+ function updateFab(){cnt.textContent=load().length;refreshPicked();}
  function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');
   if(toastT)clearTimeout(toastT);toastT=setTimeout(function(){toastEl.classList.remove('show');},1400);}
  function add(key){
