@@ -448,16 +448,6 @@ h1 .gold{color:#e0a84e}
  font:inherit;font-weight:700;font-size:.82rem;padding:6px 12px;cursor:pointer;
  -webkit-tap-highlight-color:transparent}
 .extbar button:active{transform:scale(.96)}
-/* ── 테마 코스 페이지로 가는 CTA (CMPA-1323) — 별도 wimakase-course.html 링크 ── */
-.coursecta{display:flex;align-items:center;gap:10px;width:100%;box-sizing:border-box;
- background:#12100a;border:1px solid #3a2f1a;border-radius:12px;padding:11px 13px;
- margin:8px 0 2px;text-decoration:none;min-width:0;-webkit-tap-highlight-color:transparent}
-.coursecta:active{transform:scale(.99)}
-.ccicon{font-size:1.15rem;line-height:1;flex:none}
-.cctxt{display:flex;flex-direction:column;min-width:0}
-.cctxt b{color:#e0a84e;font-size:.9rem;font-weight:800;line-height:1.3;word-break:keep-all}
-.ccsub{color:#cdbf9a;font-size:.74rem;margin-top:2px;word-break:keep-all;overflow-wrap:anywhere}
-.ccarrow{flex:none;color:#e0a84e;font-size:1.05rem;font-weight:800}
 /* ── 운영 프로그램(The Night's Journey) · 상단 흐름 + 웰컴 하이볼 + 서빙 가이드 (CMPA-1303) ──
    카톡 웹뷰 원칙: 100vw/blur 금지, 긴 문구 word-break:keep-all·min-width:0 로 가로 넘침 차단. */
 .loctitle{color:#8fe0a6;font-size:.86rem;font-weight:800;margin:10px 0 2px;
@@ -559,6 +549,19 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
  box-shadow:0 6px 20px rgba(0,0,0,.45);-webkit-tap-highlight-color:transparent}
 .fab .cnt{background:#0f1115;color:#e0a84e;border-radius:999px;padding:1px 8px;min-width:22px;
  text-align:center;font-size:.82rem;font-variant-numeric:tabular-nums}
+/* ── 플로팅 '추천 코스' 버튼(CMPA-1325) — '내 기록' 바로 위에 세로로 겹치지 않게 스택 ──
+   높이는 vh 금지·safe-area 방어조합(max(env(...),Npx)) 유지. '내 기록'(약 40px) 위 여백 확보. */
+.fabcourse{position:fixed;right:14px;bottom:calc(64px + max(env(safe-area-inset-bottom), 12px));z-index:40;
+ display:flex;align-items:center;gap:8px;background:#1a1508;color:#e0a84e;border:1px solid #3a2f1a;
+ border-radius:999px;padding:11px 16px;font:inherit;font-weight:800;font-size:.9rem;cursor:pointer;
+ box-shadow:0 6px 20px rgba(0,0,0,.45);-webkit-tap-highlight-color:transparent}
+.fabcourse:active{transform:scale(.97)}
+/* 추천 코스 시트 — 지금은 플레이스홀더(뼈대)만. 실제 코스는 후속 이슈에서 채운다. */
+.courseph{margin-top:14px;background:#12100a;border:1px solid #2e2712;border-radius:12px;
+ padding:18px 15px;text-align:center;min-width:0}
+.courseph .cpicon{font-size:2rem;line-height:1}
+.courseph b{display:block;color:#e0a84e;font-size:1rem;font-weight:800;margin-top:8px;word-break:keep-all}
+.courseph p{color:#cdbf9a;font-size:.88rem;line-height:1.6;margin:8px 0 0;word-break:keep-all;overflow-wrap:anywhere}
 .toast{position:fixed;left:50%;bottom:calc(74px + max(env(safe-area-inset-bottom), 12px));
  transform:translateX(-50%) translateY(10px);background:#1a1508;color:#e0a84e;border:1px solid #3a2f1a;
  border-radius:10px;padding:9px 16px;font-size:.86rem;font-weight:600;white-space:nowrap;
@@ -923,6 +926,20 @@ EXT_JS = """(function(){
 })();"""
 
 
+# 추천 코스 시트 열고 닫기(CMPA-1325) — 기존 mask/modal 패턴 재사용. 지금은 플레이스홀더만.
+COURSE_JS = """(function(){
+ var btn=document.getElementById('fabcourse');var mask=document.getElementById('coursemask');
+ if(!btn||!mask)return;
+ function open(){mask.classList.add('open');document.body.style.overflow='hidden';
+  var md=mask.querySelector('.modal');if(md)md.scrollTop=0;}
+ window.__wmCloseCourse=function(){mask.classList.remove('open');document.body.style.overflow='';};
+ btn.addEventListener('click',open);
+ mask.addEventListener('click',function(e){if(e.target===mask)window.__wmCloseCourse();});
+ document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'&&mask.classList.contains('open'))window.__wmCloseCourse();});
+})();"""
+
+
 # 카톡 인앱 브라우저 → 강제 외부 브라우저 리다이렉트 + 플랜 B 안내 레이어(CMPA-1286, 보드 요청).
 # <head>에서 즉시 실행 — 깨진 페이지가 렌더되기 전에 크롬/사파리로 튕긴다.
 #  · kakaotalk UA에서만 동작(크롬/사파리 직접 접속엔 무영향).
@@ -1022,12 +1039,6 @@ def render(build: int) -> str:
   <button type="button" id="extbtn">🔗 새 창(기본 브라우저)에서 열기</button>
 </div>
 
-<a class="coursecta" href="wimakase-course.html" aria-label="테마 코스 보기">
-  <span class="ccicon" aria-hidden="true">🎭</span>
-  <span class="cctxt"><b>오늘의 테마 코스</b><span class="ccsub">스토리형 3잔 플라이트 → 페스티벌로. 셰리·버번·피트·라이·입문 등</span></span>
-  <span class="ccarrow" aria-hidden="true">→</span>
-</a>
-
 {tabs_html}
 {program_html}
 {tiers_html}
@@ -1041,10 +1052,23 @@ def render(build: int) -> str:
   <div class="modal"><div class="mgrip"></div><div id="mbody"></div></div>
 </div>
 
+<button type="button" class="fabcourse" id="fabcourse" aria-label="추천 코스 열기">🥃 추천 코스</button>
 <button type="button" class="fab" id="fab" aria-label="내가 마신 목록 열기">📒 내 기록 <span class="cnt" id="fabcnt">0</span></button>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="mask" id="logmask" role="dialog" aria-modal="true" aria-label="내가 마신 목록">
   <div class="modal"><div class="mgrip"></div><div id="logbody"></div></div>
+</div>
+
+<div class="mask" id="coursemask" role="dialog" aria-modal="true" aria-label="추천 코스">
+  <div class="modal"><div class="mgrip"></div>
+    <div class="mtop"><div class="mname">🥃 추천 코스</div>
+      <button type="button" class="mx" aria-label="닫기" onclick="__wmCloseCourse()">✕</button></div>
+    <div class="courseph">
+      <div class="cpicon" aria-hidden="true">🥃</div>
+      <b>추천 코스는 곧 제공됩니다</b>
+      <p>취향에 맞춘 테이스팅 코스를 준비 중입니다.<br>조금만 기다려 주세요.</p>
+    </div>
+  </div>
 </div>
 
 <div class="kkomask" id="kkomask" role="dialog" aria-modal="true" aria-label="다른 브라우저로 열기 안내">
@@ -1068,6 +1092,7 @@ def render(build: int) -> str:
 {TAB_JS}
 {LOG_JS}
 {EXT_JS}
+{COURSE_JS}
 </script>
 </body>
 </html>
