@@ -44,8 +44,9 @@ SUPABASE_ANON_KEY = (
 # 기부 안내(보드 지시 CMPA-1340, 2026-08-20). 계좌 수령을 없애고 네이버 해피빈으로 직접
 # 기부하도록 전환 — 위마카세(운영자)는 돈을 받지 않는다. 해피빈은 기부 시 네이버 로그인이
 # 필요하지만 대부분 이미 계정이 있어 진입장벽이 낮고, 투명성(제3자 모금 플랫폼)이 장점.
+# 보드 지시(2026-08-20): 정기(월정액) 후원은 부담스러우니 반드시 1회성(일시) 기부로 유도한다.
 HAPPYBEAN_URL = "https://happybean.naver.com/donation"
-DONATION_NOTICE = "기부는 네이버 해피빈에서 직접 해주세요. 위마카세는 돈을 받지 않습니다. 방명록에 이름을 남겨주시면 함께 응원할게요."
+DONATION_NOTICE = "기부는 네이버 해피빈에서 1회성(일시)으로 부담 없이 해주세요. 위마카세는 돈을 받지 않습니다. 방명록에 이름을 남겨주시면 함께 응원할게요."
 
 # ── 운영 프로그램 (The Night's Journey) ──────────────────────────────────────
 # CMPA-1303: 상단 흐름을 '웰컴 하이볼(예열) → Tier 1·2 니트 → Tier 3 프리플로우'로 노출.
@@ -880,8 +881,8 @@ def _guestbook_modal() -> str:
   </div>
   <p class="gbnotice">💚 {e(DONATION_NOTICE)}</p>
   <a class="gbdonate" href="{e(HAPPYBEAN_URL)}" target="_blank" rel="noopener noreferrer"
-     aria-label="네이버 해피빈으로 기부하기 (새 창)">💚 네이버 해피빈으로 기부하기</a>
-  <p class="gbdonatehint">네이버 로그인 후 바로 기부할 수 있어요. 위마카세는 돈을 받지 않습니다.</p>
+     aria-label="네이버 해피빈으로 1회성 기부하기 (새 창)">💚 네이버 해피빈으로 1회성 기부하기</a>
+  <p class="gbdonatehint">네이버 로그인 후 바로 기부할 수 있어요. <b>1회성(일시) 기부</b>로 부담 없이 — 매달 빠져나가는 정기후원이 아니에요. 위마카세는 돈을 받지 않습니다.</p>
   <form class="gbform" id="gbform" onsubmit="return false">
     <input class="gbinput" id="gbname" type="text" maxlength="40" placeholder="이름" autocomplete="name">
     <textarea class="gbinput gbcontent" id="gbcontent" maxlength="500" placeholder="남기실 말씀을 적어주세요"></textarea>
