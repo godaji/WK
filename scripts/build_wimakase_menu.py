@@ -878,8 +878,11 @@ def _tier_section(tier: dict, keys: dict, active: bool) -> str:
     cards = "\n  ".join(_card(keys[id(x)], x) for x in tier["items"])
     n = len(tier["items"])
     cls = "tier active" if active else "tier"
-    # 페스티벌(tier3) 탭 하단에만 '방명록 & 기부하기' 버튼 노출(CMPA-1340 보드 지시).
-    guestbook_html = _guestbook_cta() if tier["id"] == "tier3" else ""
+    # 방명록 & 기부하기 진입 버튼 숨김(CMPA-1340 보드 지시 2026-08-20): 기부 요소가
+    # 게스트에게 압박을 줄 수 있어 "일단은 버튼만 숨겨서" 압박 요소를 완전히 제거한다.
+    # 모달·백엔드(_guestbook_modal / GUESTBOOK_JS / guestbook 테이블)는 나중에 순수
+    # 방명록으로 되살릴 수 있게 그대로 보존하고, 진입 CTA만 렌더하지 않는다.
+    guestbook_html = ""  # 버튼 숨김 (되살릴 땐: _guestbook_cta() if tier["id"]=="tier3" else "")
     return f"""<section class="{cls}" id="{e(tier['id'])}" role="tabpanel">
   <div class="thead">
     <div class="thmain">
