@@ -32,6 +32,19 @@ TITLE = "합정 두다지 위마카세"
 # 상세(증류소·스토리) 메타 수집일 — CLAUDE.md 데이터 관리 원칙(수집 날짜 메타 필수, CMPA-1284).
 COLLECTED = "2026-08-16"
 
+# ── 방명록 & 기부하기 (CMPA-1340) ────────────────────────────────────────────
+# DreamJar와 동일한 Supabase 프로젝트 재사용. anon key만 프론트 노출(RLS로 보호).
+# service_role 키는 절대 프론트 금지. 정본 스키마 = apps/wimakase/guestbook.sql
+SUPABASE_URL = "https://odtivpszffoufyiufqwy.supabase.co"
+SUPABASE_ANON_KEY = (
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9."
+    "eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9kdGl2cHN6ZmZvdWZ5aXVmcXd5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2ODkzMTYsImV4cCI6MjA5OTI2NTMxNn0."
+    "XrXsMLtRCUbAJvFdWz_JMZ3VwFWwGBsP2YqQ0NO7m7I"
+)
+# 기부 계좌 안내(보드 지시). 독자에게 그대로 노출.
+DONATION_ACCOUNT = "529401-01-212856 국민 홍석환"
+DONATION_NOTICE = "연말에 방명록에 남겨주신 이름과 함께 기부합니다."
+
 # ── 운영 프로그램 (The Night's Journey) ──────────────────────────────────────
 # CMPA-1303: 상단 흐름을 '웰컴 하이볼(예열) → Tier 1·2 니트 → Tier 3 프리플로우'로 노출.
 PROGRAM = {
@@ -679,6 +692,47 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
  -webkit-tap-highlight-color:transparent}
 .kkoclose:active{background:#171c26}
 .kkofoot{color:#5b616b;font-size:.74rem;margin-top:14px}
+/* ── 방명록 & 기부하기(CMPA-1340) — 페스티벌 탭 하단 CTA + 모달 폼/목록 ──
+   카톡 웹뷰 원칙: 100vw/blur 금지, flex 자식 min-width:0, 입력창 font-size 16px(iOS 확대 방지). */
+.gbcta{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;box-sizing:border-box;
+ margin:18px 0 4px;background:#1a1508;border:1px solid #3a2f1a;color:#e0a84e;border-radius:12px;
+ padding:14px;font:inherit;font-weight:800;font-size:.95rem;cursor:pointer;
+ -webkit-tap-highlight-color:transparent;transition:background .12s,transform .1s}
+.gbcta:hover{background:#221a0a}
+.gbcta:active{transform:scale(.98)}
+.gbnotice{margin:12px 0 10px;color:#f0d69a;font-size:.9rem;line-height:1.6;
+ word-break:keep-all;overflow-wrap:anywhere}
+.gbacct{display:flex;flex-direction:column;gap:3px;background:#101a12;border:1px solid #23402b;
+ border-radius:12px;padding:11px 13px;margin:0 0 14px;min-width:0}
+.gbacctlabel{color:#8fe0a6;font-size:.72rem;font-weight:800;letter-spacing:.02em}
+.gbacctno{color:#e8eaed;font-size:.98rem;font-weight:700;word-break:break-all;
+ font-variant-numeric:tabular-nums}
+.gbform{display:flex;flex-direction:column;gap:8px;margin:0 0 6px}
+/* ⚠️ font-size 16px 필수 — iOS/카톡 웹뷰가 16px 미만 입력창 포커스 시 자동 확대→모달 폭 깨짐(CMPA-1285) */
+.gbinput{width:100%;box-sizing:border-box;max-width:100%;min-width:0;background:#0f1115;
+ border:1px solid #2a2e37;border-radius:10px;color:#e8eaed;font:inherit;font-size:16px;
+ padding:11px 12px;display:block}
+.gbinput:focus{outline:none;border-color:#e0a84e}
+.gbcontent{resize:vertical;min-height:76px}
+.gbsubmit{width:100%;background:#e0a84e;color:#1a1508;border:none;border-radius:10px;padding:13px;
+ font:inherit;font-weight:800;font-size:.95rem;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ transition:transform .1s,opacity .12s}
+.gbsubmit:active{transform:scale(.98)}
+.gbsubmit:disabled{opacity:.6;cursor:default}
+.gbmsg{font-size:.84rem;line-height:1.5;min-height:1.2em;word-break:keep-all}
+.gbmsg.ok{color:#8fe0a6}
+.gbmsg.err{color:#e88}
+.gblisthd{margin:18px 0 6px;color:#e0a84e;font-size:.9rem;font-weight:700;
+ border-top:1px solid #24242e;padding-top:14px}
+.gblist{display:flex;flex-direction:column;gap:10px}
+.gbloading,.gbempty{color:#8a909a;font-size:.86rem;text-align:center;line-height:1.7;margin:20px 0}
+.gbitem{background:#0f1115;border:1px solid #20242e;border-radius:12px;padding:11px 13px;min-width:0}
+.gbhead{display:flex;align-items:baseline;justify-content:space-between;gap:10px;min-width:0}
+.gbname{color:#f0d69a;font-size:.92rem;font-weight:700;min-width:0;word-break:break-word;flex:1}
+.gbdate{flex:none;color:#8a909a;font-size:.74rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.gbcont{margin-top:6px;color:#cdd2da;font-size:.9rem;line-height:1.6;white-space:pre-wrap;
+ word-break:break-word;overflow-wrap:anywhere}
+.gbdon{margin-top:7px;color:#e0a84e;font-size:.82rem;font-weight:700}
 @media(min-width:600px){.mask{align-items:center}.modal{border-radius:18px}.mgrip{display:none}}"""
 
 
@@ -784,6 +838,8 @@ def _tier_section(tier: dict, keys: dict, active: bool) -> str:
     cards = "\n  ".join(_card(keys[id(x)], x) for x in tier["items"])
     n = len(tier["items"])
     cls = "tier active" if active else "tier"
+    # 페스티벌(tier3) 탭 하단에만 '방명록 & 기부하기' 버튼 노출(CMPA-1340 보드 지시).
+    guestbook_html = _guestbook_cta() if tier["id"] == "tier3" else ""
     return f"""<section class="{cls}" id="{e(tier['id'])}" role="tabpanel">
   <div class="thead">
     <div class="thmain">
@@ -794,8 +850,40 @@ def _tier_section(tier: dict, keys: dict, active: bool) -> str:
   </div>
   <div class="list">
   {cards}
-  </div>
+  </div>{guestbook_html}
 </section>"""
+
+
+def _guestbook_cta() -> str:
+    """페스티벌 탭 하단 '방명록 & 기부하기' 진입 버튼(CMPA-1340)."""
+    return """
+  <button type="button" class="gbcta" onclick="__wmOpenGuest()" aria-label="방명록 & 기부하기 열기">
+    ✍️ 방명록 &amp; 기부하기
+  </button>"""
+
+
+def _guestbook_modal() -> str:
+    """방명록 & 기부하기 모달 본문(CMPA-1340) — 안내·계좌·입력폼·목록 컨테이너.
+    입력창 font-size는 CSS에서 16px 이상(iOS/카톡 웹뷰 포커스 시 자동 확대 방지)."""
+    e = html.escape
+    return f"""<div class="mtop">
+    <div class="mname">✍️ 방명록 &amp; 기부하기</div>
+    <button type="button" class="mx" aria-label="닫기" onclick="__wmCloseGuest()">✕</button>
+  </div>
+  <p class="gbnotice">💛 {e(DONATION_NOTICE)}</p>
+  <div class="gbacct">
+    <span class="gbacctlabel">기부 계좌</span>
+    <span class="gbacctno">{e(DONATION_ACCOUNT)}</span>
+  </div>
+  <form class="gbform" id="gbform" onsubmit="return false">
+    <input class="gbinput" id="gbname" type="text" maxlength="40" placeholder="이름" autocomplete="name">
+    <textarea class="gbinput gbcontent" id="gbcontent" maxlength="500" placeholder="남기실 말씀을 적어주세요"></textarea>
+    <input class="gbinput" id="gbdonation" type="number" inputmode="numeric" min="0" step="1000" placeholder="기부금 (원, 선택)">
+    <button type="submit" class="gbsubmit" id="gbsubmit">✍️ 방명록 남기기</button>
+    <div class="gbmsg" id="gbmsg" role="status" aria-live="polite"></div>
+  </form>
+  <div class="gblisthd">📖 남겨주신 방명록</div>
+  <div class="gblist" id="gblist"><p class="gbloading">방명록을 불러오는 중…</p></div>"""
 
 
 def _build_data(keys: dict) -> dict:
@@ -1032,6 +1120,109 @@ EXT_JS = """(function(){
 })();"""
 
 
+# ── 방명록 & 기부하기(CMPA-1340) — Supabase guestbook 테이블에 공개 insert/select ──
+# anon key만 사용(RLS로 보호). 페스티벌 탭 하단 버튼 → 모달 → 이름·내용·기부금 입력 →
+# insert 후 목록(날짜·이름·내용·기부금, 최신순) 표시. 입력 모달이라 키보드+position:fixed
+# 케이스를 LOG_JS와 동일하게 VisualViewport로 보정(카톡 웹뷰 원칙).
+GUESTBOOK_JS = """(function(){
+ var cfg=window.__WM_SB__||{};
+ var mask=document.getElementById('guestmask');
+ if(!mask)return;
+ var listEl=document.getElementById('gblist');
+ var msgEl=document.getElementById('gbmsg');
+ var form=document.getElementById('gbform');
+ var nameEl=document.getElementById('gbname');
+ var contentEl=document.getElementById('gbcontent');
+ var donEl=document.getElementById('gbdonation');
+ var submitEl=document.getElementById('gbsubmit');
+ var sb=null;
+ function client(){
+  if(sb)return sb;
+  if(!cfg.url||!cfg.key||!window.supabase||!window.supabase.createClient)return null;
+  sb=window.supabase.createClient(cfg.url,cfg.key);return sb;
+ }
+ function esc(s){var d=document.createElement('div');d.textContent=s==null?'':s;return d.innerHTML;}
+ function won(n){var v=parseInt(n,10);if(!v||v<0)return '';return v.toLocaleString('ko-KR')+'원';}
+ function fmtDate(iso){
+  if(!iso)return '';
+  var d=new Date(iso);if(isNaN(d.getTime()))return esc(String(iso).slice(0,10));
+  var m=('0'+(d.getMonth()+1)).slice(-2),dd=('0'+d.getDate()).slice(-2);
+  return d.getFullYear()+'-'+m+'-'+dd;
+ }
+ // 키보드+position:fixed 보정(LOG_JS와 동일 접근) — 입력 포커스 시 바텀시트가 키보드에 안 가리게.
+ var vv=window.visualViewport;
+ function vvReset(){mask.style.top='';mask.style.bottom='';mask.style.height='';}
+ function vvFit(){
+  if(!vv){return;}
+  if(!mask.classList.contains('open')){vvReset();return;}
+  var winH=window.innerHeight||vv.height||0;
+  var h=vv.height||winH;var top=vv.offsetTop||0;
+  if(top<0){top=0;}
+  if(!(h>0)||h>=winH-80){vvReset();return;}
+  if(top+h>winH){top=Math.max(0,winH-h);}
+  mask.style.top=top+'px';mask.style.bottom='auto';mask.style.height=h+'px';
+ }
+ if(vv){vv.addEventListener('resize',vvFit);vv.addEventListener('scroll',vvFit);}
+ function renderList(rows){
+  if(!rows||!rows.length){
+   listEl.innerHTML='<p class="gbempty">아직 방명록이 없습니다.<br>첫 방명록을 남겨주세요 🥃</p>';return;
+  }
+  var h='';
+  rows.forEach(function(r){
+   var d=won(r.donation);
+   h+='<div class="gbitem"><div class="gbhead">'+
+      '<span class="gbname">'+esc(r.name)+'</span>'+
+      '<span class="gbdate">'+fmtDate(r.created_at)+'</span></div>'+
+      '<div class="gbcont">'+esc(r.content)+'</div>'+
+      (d?'<div class="gbdon">💛 기부 '+esc(d)+'</div>':'')+'</div>';
+  });
+  listEl.innerHTML=h;
+ }
+ function loadList(){
+  var c=client();
+  if(!c){listEl.innerHTML='<p class="gbempty">방명록을 불러올 수 없습니다.<br>네트워크를 확인해주세요.</p>';return;}
+  listEl.innerHTML='<p class="gbloading">방명록을 불러오는 중…</p>';
+  c.from('guestbook').select('name,content,donation,created_at')
+   .order('created_at',{ascending:false}).limit(200)
+   .then(function(res){
+    if(res.error){listEl.innerHTML='<p class="gbempty">불러오기 실패: '+esc(res.error.message)+'</p>';return;}
+    renderList(res.data||[]);
+   });
+ }
+ function setMsg(text,ok){msgEl.textContent=text||'';msgEl.className='gbmsg'+(text?(ok?' ok':' err'):'');}
+ function submit(){
+  var c=client();
+  if(!c){setMsg('연결 오류로 저장할 수 없습니다.',false);return;}
+  var name=(nameEl.value||'').trim();
+  var content=(contentEl.value||'').trim();
+  var don=parseInt(donEl.value,10);if(!don||don<0)don=0;
+  if(!name){setMsg('이름을 입력해주세요.',false);nameEl.focus();return;}
+  if(!content){setMsg('내용을 입력해주세요.',false);contentEl.focus();return;}
+  submitEl.disabled=true;setMsg('저장 중…',true);
+  c.from('guestbook').insert({name:name,content:content,donation:don}).select()
+   .then(function(res){
+    submitEl.disabled=false;
+    if(res.error){setMsg('저장 실패: '+res.error.message,false);return;}
+    setMsg('방명록을 남겼습니다. 감사합니다 🙏',true);
+    contentEl.value='';donEl.value='';
+    loadList();
+   });
+ }
+ if(form){form.addEventListener('submit',function(e){e.preventDefault();submit();});}
+ if(submitEl){submitEl.addEventListener('click',function(e){e.preventDefault();submit();});}
+ window.__wmOpenGuest=function(){
+  setMsg('',true);
+  mask.classList.add('open');document.body.style.overflow='hidden';
+  var md=mask.querySelector('.modal');if(md)md.scrollTop=0;
+  loadList();vvFit();
+ };
+ window.__wmCloseGuest=function(){mask.classList.remove('open');document.body.style.overflow='';vvFit();};
+ mask.addEventListener('click',function(e){if(e.target===mask)window.__wmCloseGuest();});
+ document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'&&mask.classList.contains('open'))window.__wmCloseGuest();});
+})();"""
+
+
 # 카톡 인앱 브라우저 → 강제 외부 브라우저 리다이렉트 + 플랜 B 안내 레이어(CMPA-1286, 보드 요청).
 # <head>에서 즉시 실행 — 깨진 페이지가 렌더되기 전에 크롬/사파리로 튕긴다.
 #  · kakaotalk UA에서만 동작(크롬/사파리 직접 접속엔 무영향).
@@ -1101,8 +1292,11 @@ def render(build: int) -> str:
     # 1~3티어는 기본 비활성(0티어가 첫 탭). CMPA-1304. 추천은 각 탭 안에 인라인(CMPA-1326 opt1).
     tiers_html = "\n".join(_tier_section(t, keys, False) for t in TIERS)
     reco_html = _reco_modal(keys)  # 테마별 추천 모달 본문(CMPA-1331)
+    guestbook_html = _guestbook_modal()  # 방명록 & 기부하기 모달 본문(CMPA-1340)
     data_json = json.dumps(_build_data(keys), ensure_ascii=False)
     collected_json = json.dumps(COLLECTED, ensure_ascii=False)
+    supabase_url_json = json.dumps(SUPABASE_URL, ensure_ascii=False)
+    supabase_key_json = json.dumps(SUPABASE_ANON_KEY, ensure_ascii=False)
     total = sum(len(t["items"]) for t in TIERS)
     return f"""<!DOCTYPE html>
 <html lang="ko">
@@ -1156,6 +1350,13 @@ def render(build: int) -> str:
   <div class="modal"><div class="mgrip"></div><div id="recobody">{reco_html}</div></div>
 </div>
 
+<!-- 방명록 & 기부하기 모달(CMPA-1340) — 페스티벌 탭 하단 버튼으로 열림 -->
+<div class="mask" id="guestmask" role="dialog" aria-modal="true" aria-label="방명록 & 기부하기">
+  <div class="modal"><div class="mgrip"></div><div id="guestbody">
+{guestbook_html}
+  </div></div>
+</div>
+
 <div class="kkomask" id="kkomask" role="dialog" aria-modal="true" aria-label="다른 브라우저로 열기 안내">
   <div class="kkobox">
     <div class="kkoicon">🔗</div>
@@ -1172,12 +1373,16 @@ def render(build: int) -> str:
 </div>
 
 <script>window.__WIMAKASE__={data_json};window.__WM_COLLECTED__={collected_json};</script>
+<!-- 방명록 & 기부하기 백엔드(CMPA-1340) — Supabase JS SDK(CDN) + anon 설정. anon key만 노출(RLS 보호). -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>window.__WM_SB__={{url:{supabase_url_json},key:{supabase_key_json}}};</script>
 <script>
 {MODAL_JS}
 {TAB_JS}
 {RECO_JS}
 {LOG_JS}
 {EXT_JS}
+{GUESTBOOK_JS}
 </script>
 </body>
 </html>
