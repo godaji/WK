@@ -41,12 +41,20 @@ SUPABASE_ANON_KEY = (
     "eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9kdGl2cHN6ZmZvdWZ5aXVmcXd5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2ODkzMTYsImV4cCI6MjA5OTI2NTMxNn0."
     "XrXsMLtRCUbAJvFdWz_JMZ3VwFWwGBsP2YqQ0NO7m7I"
 )
-# 기부 안내(보드 지시 CMPA-1340, 2026-08-20). 계좌 수령을 없애고 네이버 해피빈으로 직접
-# 기부하도록 전환 — 위마카세(운영자)는 돈을 받지 않는다. 해피빈은 기부 시 네이버 로그인이
-# 필요하지만 대부분 이미 계정이 있어 진입장벽이 낮고, 투명성(제3자 모금 플랫폼)이 장점.
-# 보드 지시(2026-08-20): 정기(월정액) 후원은 부담스러우니 반드시 1회성(일시) 기부로 유도한다.
+# 기부 안내(보드 지시 CMPA-1340, 2026-08-20).
+#  · 해피빈: 제3자 모금 플랫폼(1회성/일시). 이 돈은 위마카세가 받지 않고 모금함으로 간다.
+#  · 토스·카카오페이·은행앱: 운영자 계좌로 직접 응원(보드 지시 2026-08-20 — "토스, 카카오도
+#    넣어줘"). 토스/카카오페이 '송금'은 모두 은행 계좌로 보내지므로 계좌를 다시 노출해
+#    한 곳으로 통일한다. 개인 toss.me/카카오페이 QR 링크가 생기면 원탭 버튼으로 교체 가능.
+# 보드 지시(2026-08-20): 정기(월정액) 후원은 부담스러우니 반드시 1회성(일시)으로 유도한다.
+# 보드 지시(2026-08-20): "도네이션 안 하더라도 기분 안 나쁘게" — 기부는 순수 선택, 방명록만
+#   남겨도 환영이라는 톤을 전면에 둔다(압박 X).
 HAPPYBEAN_URL = "https://happybean.naver.com/donation"
-DONATION_NOTICE = "기부는 네이버 해피빈에서 1회성(일시)으로 부담 없이 해주세요. 위마카세는 돈을 받지 않습니다. 방명록에 이름을 남겨주시면 함께 응원할게요."
+# 토스·카카오페이·모든 은행 앱의 '송금'에서 이 계좌로 보내면 된다. 독자에게 그대로 노출.
+DONATION_ACCOUNT_BANK = "국민"
+DONATION_ACCOUNT_NO = "529401-01-212856"
+DONATION_ACCOUNT_HOLDER = "홍석환"
+DONATION_NOTICE = "방명록은 누구나 편하게 남겨주세요. 기부는 순수하게 마음이 내키실 때만 — 안 하셔도 하나도 이상하지 않아요. 이렇게 들러주신 것만으로 이미 고맙습니다. 😊"
 
 # ── 운영 프로그램 (The Night's Journey) ──────────────────────────────────────
 # CMPA-1303: 상단 흐름을 '웰컴 하이볼(예열) → Tier 1·2 니트 → Tier 3 프리플로우'로 노출.
@@ -713,7 +721,31 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
  -webkit-tap-highlight-color:transparent;transition:background .12s,transform .1s}
 .gbdonate:hover{background:#04b152}
 .gbdonate:active{transform:scale(.98)}
-.gbdonatehint{margin:0 0 14px;color:#8a909a;font-size:.78rem;line-height:1.5;text-align:center;
+.gbdonatehint{margin:0 0 6px;color:#8a909a;font-size:.78rem;line-height:1.5;text-align:center;
+ word-break:keep-all;overflow-wrap:anywhere}
+/* 기부 방법 묶음(CMPA-1340) — 해피빈 + 토스·카카오페이·계좌. 카톡 웹뷰: blur/100vw 금지, min-width:0 */
+.gbmethods{margin:12px 0 10px;padding:12px;background:#141108;border:1px solid #2a2312;border-radius:12px;min-width:0}
+.gbmhd{margin:0 0 10px;color:#f0d69a;font-size:.86rem;font-weight:800;text-align:center;word-break:keep-all}
+/* 구분선 — '또는 토스·카카오페이·은행 앱으로' */
+.gbmethsep{display:flex;align-items:center;gap:10px;margin:12px 0 10px;color:#8a909a;font-size:.76rem;
+ word-break:keep-all;text-align:center}
+.gbmethsep::before,.gbmethsep::after{content:"";flex:1 1 auto;height:1px;background:#2a2e37}
+.gbmethsep span{flex:0 1 auto;min-width:0}
+/* 계좌(토스·카카오페이·은행앱 송금 대상) */
+.gbacct{min-width:0}
+.gbacctrow{display:flex;align-items:center;gap:10px;min-width:0;
+ background:#0f1115;border:1px solid #2a2e37;border-radius:10px;padding:11px 12px;margin:0 0 8px}
+.gbacctinfo{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.gbacctlabel{color:#8a909a;font-size:.72rem;line-height:1.4;word-break:keep-all}
+.gbacctno{color:#f0d69a;font-size:.95rem;font-weight:800;min-width:0;
+ word-break:break-all;font-variant-numeric:tabular-nums}
+.gbcopy{flex:none;background:#e0a84e;color:#1a1508;border:none;border-radius:9px;padding:9px 12px;
+ font:inherit;font-weight:800;font-size:.8rem;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ white-space:nowrap;transition:transform .1s,background .12s}
+.gbcopy:active{transform:scale(.96)}
+.gbcopy.copied{background:#8fe0a6}
+/* 압박 없는 안심 문구 */
+.gbreassure{margin:0 0 14px;color:#cdd2da;font-size:.82rem;line-height:1.6;text-align:center;
  word-break:keep-all;overflow-wrap:anywhere}
 .gbform{display:flex;flex-direction:column;gap:8px;margin:0 0 6px}
 /* ⚠️ font-size 16px 필수 — iOS/카톡 웹뷰가 16px 미만 입력창 포커스 시 자동 확대→모달 폭 깨짐(CMPA-1285) */
@@ -871,22 +903,40 @@ def _guestbook_cta() -> str:
 
 
 def _guestbook_modal() -> str:
-    """방명록 & 기부하기 모달 본문(CMPA-1340) — 안내·해피빈 기부 버튼·입력폼·목록 컨테이너.
-    보드 지시(2026-08-20): 계좌 수령을 없애고 네이버 해피빈으로 직접 기부하도록 전환.
-    입력창 font-size는 CSS에서 16px 이상(iOS/카톡 웹뷰 포커스 시 자동 확대 방지)."""
+    """방명록 & 기부하기 모달 본문(CMPA-1340) — 안내·기부방법(해피빈+토스/카카오/계좌)·입력폼·목록.
+    보드 지시(2026-08-20): ① 해피빈에 더해 토스·카카오페이도 넣는다(계좌 송금으로 통일).
+    ② 기부 안 해도 기분 나쁘지 않게 — 압박 없는 톤. 입력창 font-size는 CSS 16px 이상."""
     e = html.escape
+    acct = f"{e(DONATION_ACCOUNT_BANK)} {e(DONATION_ACCOUNT_NO)} {e(DONATION_ACCOUNT_HOLDER)}"
+    acct_plain = f"{DONATION_ACCOUNT_BANK} {DONATION_ACCOUNT_NO} {DONATION_ACCOUNT_HOLDER}"
     return f"""<div class="mtop">
     <div class="mname">✍️ 방명록 &amp; 기부하기</div>
     <button type="button" class="mx" aria-label="닫기" onclick="__wmCloseGuest()">✕</button>
   </div>
-  <p class="gbnotice">💚 {e(DONATION_NOTICE)}</p>
-  <a class="gbdonate" href="{e(HAPPYBEAN_URL)}" target="_blank" rel="noopener noreferrer"
-     aria-label="네이버 해피빈으로 1회성 기부하기 (새 창)">💚 네이버 해피빈으로 1회성 기부하기</a>
-  <p class="gbdonatehint">네이버 로그인 후 바로 기부할 수 있어요. <b>1회성(일시) 기부</b>로 부담 없이 — 매달 빠져나가는 정기후원이 아니에요. 위마카세는 돈을 받지 않습니다.</p>
+  <p class="gbnotice">{e(DONATION_NOTICE)}</p>
+  <div class="gbmethods">
+    <div class="gbmhd">💚 마음이 내키실 때, 편한 방법으로</div>
+    <a class="gbdonate" href="{e(HAPPYBEAN_URL)}" target="_blank" rel="noopener noreferrer"
+       aria-label="네이버 해피빈으로 1회성 기부하기 (새 창)">💚 네이버 해피빈 · 1회성 기부</a>
+    <p class="gbdonatehint">네이버 로그인 후 바로 가능해요. <b>1회성(일시)</b>이라 매달 빠져나가는 정기후원이 아니에요. 이 기부는 위마카세가 아니라 해피빈 모금함으로 갑니다.</p>
+    <div class="gbmethsep"><span>또는 토스 · 카카오페이 · 은행 앱으로</span></div>
+    <div class="gbacct">
+      <div class="gbacctrow">
+        <div class="gbacctinfo">
+          <span class="gbacctlabel">토스·카카오페이 ‘송금’으로 아래 계좌에</span>
+          <span class="gbacctno" id="gbacctno">{acct}</span>
+        </div>
+        <button type="button" class="gbcopy" id="gbcopybtn"
+          data-acct="{e(DONATION_ACCOUNT_NO)}" aria-label="계좌번호 복사">📋 복사</button>
+      </div>
+      <p class="gbdonatehint">토스·카카오페이·은행 앱의 ‘송금’에서 이 계좌({acct_plain})로 보내주시면 위마카세로 직접 전해집니다.</p>
+    </div>
+  </div>
+  <p class="gbreassure">기부는 순수하게 선택이에요. 안 하셔도 방명록은 언제나 환영이고, 들러주신 마음이 제일 고맙습니다. 🙏</p>
   <form class="gbform" id="gbform" onsubmit="return false">
     <input class="gbinput" id="gbname" type="text" maxlength="40" placeholder="이름" autocomplete="name">
-    <textarea class="gbinput gbcontent" id="gbcontent" maxlength="500" placeholder="남기실 말씀을 적어주세요"></textarea>
-    <input class="gbinput" id="gbdonation" type="number" inputmode="numeric" min="0" step="1000" placeholder="해피빈에 기부한 금액 (원, 선택)">
+    <textarea class="gbinput gbcontent" id="gbcontent" maxlength="500" placeholder="남기실 말씀을 적어주세요 (기부 안 하셔도 좋아요)"></textarea>
+    <input class="gbinput" id="gbdonation" type="number" inputmode="numeric" min="0" step="1000" placeholder="기부하셨다면 금액 (원, 선택 — 비워두셔도 돼요)">
     <button type="submit" class="gbsubmit" id="gbsubmit">✍️ 방명록 남기기</button>
     <div class="gbmsg" id="gbmsg" role="status" aria-live="polite"></div>
   </form>
@@ -1218,6 +1268,19 @@ GUESTBOOK_JS = """(function(){
  }
  if(form){form.addEventListener('submit',function(e){e.preventDefault();submit();});}
  if(submitEl){submitEl.addEventListener('click',function(e){e.preventDefault();submit();});}
+ // 계좌번호 복사(토스·카카오페이·은행앱 송금용). clipboard API 실패 시 execCommand 폴백(카톡 웹뷰).
+ var copyBtn=document.getElementById('gbcopybtn');
+ if(copyBtn){copyBtn.addEventListener('click',function(){
+   var acct=copyBtn.getAttribute('data-acct')||'';
+   function done(){var t=copyBtn.textContent;copyBtn.textContent='✅ 복사됨';copyBtn.classList.add('copied');
+     setTimeout(function(){copyBtn.textContent=t;copyBtn.classList.remove('copied');},1600);}
+   function fallback(){try{var ta=document.createElement('textarea');ta.value=acct;
+     ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.focus();ta.select();
+     document.execCommand('copy');document.body.removeChild(ta);done();}catch(e){}}
+   if(navigator.clipboard&&navigator.clipboard.writeText){
+     navigator.clipboard.writeText(acct).then(done,fallback);
+   }else{fallback();}
+ });}
  window.__wmOpenGuest=function(){
   setMsg('',true);
   mask.classList.add('open');document.body.style.overflow='hidden';
