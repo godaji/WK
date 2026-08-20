@@ -41,9 +41,11 @@ SUPABASE_ANON_KEY = (
     "eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9kdGl2cHN6ZmZvdWZ5aXVmcXd5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2ODkzMTYsImV4cCI6MjA5OTI2NTMxNn0."
     "XrXsMLtRCUbAJvFdWz_JMZ3VwFWwGBsP2YqQ0NO7m7I"
 )
-# 기부 계좌 안내(보드 지시). 독자에게 그대로 노출.
-DONATION_ACCOUNT = "529401-01-212856 국민 홍석환"
-DONATION_NOTICE = "연말에 방명록에 남겨주신 이름과 함께 기부합니다."
+# 기부 안내(보드 지시 CMPA-1340, 2026-08-20). 계좌 수령을 없애고 네이버 해피빈으로 직접
+# 기부하도록 전환 — 위마카세(운영자)는 돈을 받지 않는다. 해피빈은 기부 시 네이버 로그인이
+# 필요하지만 대부분 이미 계정이 있어 진입장벽이 낮고, 투명성(제3자 모금 플랫폼)이 장점.
+HAPPYBEAN_URL = "https://happybean.naver.com/donation"
+DONATION_NOTICE = "기부는 네이버 해피빈에서 직접 해주세요. 위마카세는 돈을 받지 않습니다. 방명록에 이름을 남겨주시면 함께 응원할게요."
 
 # ── 운영 프로그램 (The Night's Journey) ──────────────────────────────────────
 # CMPA-1303: 상단 흐름을 '웰컴 하이볼(예열) → Tier 1·2 니트 → Tier 3 프리플로우'로 노출.
@@ -702,11 +704,16 @@ footer{margin-top:18px;text-align:center;color:#5b616b;font-size:.73rem;line-hei
 .gbcta:active{transform:scale(.98)}
 .gbnotice{margin:12px 0 10px;color:#f0d69a;font-size:.9rem;line-height:1.6;
  word-break:keep-all;overflow-wrap:anywhere}
-.gbacct{display:flex;flex-direction:column;gap:3px;background:#101a12;border:1px solid #23402b;
- border-radius:12px;padding:11px 13px;margin:0 0 14px;min-width:0}
-.gbacctlabel{color:#8fe0a6;font-size:.72rem;font-weight:800;letter-spacing:.02em}
-.gbacctno{color:#e8eaed;font-size:.98rem;font-weight:700;word-break:break-all;
- font-variant-numeric:tabular-nums}
+/* 네이버 해피빈 기부 버튼(CMPA-1340 2026-08-20) — 네이버 그린. 새 창(외부 브라우저)에서 열어
+   기존 네이버 세션/로그인이 잘 붙게 한다(카톡 인앱 웹뷰 내 네이버 로그인 이슈 회피). */
+.gbdonate{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;box-sizing:border-box;
+ background:#03c75a;color:#fff;border:none;border-radius:12px;padding:14px;margin:0 0 6px;min-width:0;
+ font:inherit;font-weight:800;font-size:.98rem;text-decoration:none;cursor:pointer;
+ -webkit-tap-highlight-color:transparent;transition:background .12s,transform .1s}
+.gbdonate:hover{background:#04b152}
+.gbdonate:active{transform:scale(.98)}
+.gbdonatehint{margin:0 0 14px;color:#8a909a;font-size:.78rem;line-height:1.5;text-align:center;
+ word-break:keep-all;overflow-wrap:anywhere}
 .gbform{display:flex;flex-direction:column;gap:8px;margin:0 0 6px}
 /* ⚠️ font-size 16px 필수 — iOS/카톡 웹뷰가 16px 미만 입력창 포커스 시 자동 확대→모달 폭 깨짐(CMPA-1285) */
 .gbinput{width:100%;box-sizing:border-box;max-width:100%;min-width:0;background:#0f1115;
@@ -863,22 +870,22 @@ def _guestbook_cta() -> str:
 
 
 def _guestbook_modal() -> str:
-    """방명록 & 기부하기 모달 본문(CMPA-1340) — 안내·계좌·입력폼·목록 컨테이너.
+    """방명록 & 기부하기 모달 본문(CMPA-1340) — 안내·해피빈 기부 버튼·입력폼·목록 컨테이너.
+    보드 지시(2026-08-20): 계좌 수령을 없애고 네이버 해피빈으로 직접 기부하도록 전환.
     입력창 font-size는 CSS에서 16px 이상(iOS/카톡 웹뷰 포커스 시 자동 확대 방지)."""
     e = html.escape
     return f"""<div class="mtop">
     <div class="mname">✍️ 방명록 &amp; 기부하기</div>
     <button type="button" class="mx" aria-label="닫기" onclick="__wmCloseGuest()">✕</button>
   </div>
-  <p class="gbnotice">💛 {e(DONATION_NOTICE)}</p>
-  <div class="gbacct">
-    <span class="gbacctlabel">기부 계좌</span>
-    <span class="gbacctno">{e(DONATION_ACCOUNT)}</span>
-  </div>
+  <p class="gbnotice">💚 {e(DONATION_NOTICE)}</p>
+  <a class="gbdonate" href="{e(HAPPYBEAN_URL)}" target="_blank" rel="noopener noreferrer"
+     aria-label="네이버 해피빈으로 기부하기 (새 창)">💚 네이버 해피빈으로 기부하기</a>
+  <p class="gbdonatehint">네이버 로그인 후 바로 기부할 수 있어요. 위마카세는 돈을 받지 않습니다.</p>
   <form class="gbform" id="gbform" onsubmit="return false">
     <input class="gbinput" id="gbname" type="text" maxlength="40" placeholder="이름" autocomplete="name">
     <textarea class="gbinput gbcontent" id="gbcontent" maxlength="500" placeholder="남기실 말씀을 적어주세요"></textarea>
-    <input class="gbinput" id="gbdonation" type="number" inputmode="numeric" min="0" step="1000" placeholder="기부금 (원, 선택)">
+    <input class="gbinput" id="gbdonation" type="number" inputmode="numeric" min="0" step="1000" placeholder="해피빈에 기부한 금액 (원, 선택)">
     <button type="submit" class="gbsubmit" id="gbsubmit">✍️ 방명록 남기기</button>
     <div class="gbmsg" id="gbmsg" role="status" aria-live="polite"></div>
   </form>
