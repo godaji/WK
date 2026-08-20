@@ -5,23 +5,23 @@ date: "2026-08-17 09:00:00 +0900"
 categories: ["price"]
 kind: "patch"
 cadence: "weekly"
-breakthroughs: 1
+breakthroughs: 4
 prev_date: "2026-08-16"
 latest_date: "2026-08-20"
 weekly_start: "2026-08-17"
 weekly_end: "2026-08-23"
 days: 4
-hotdeals: ["보모어 22년 700ml — 면세 ₩293,605 · 76%↓", "벤리악 트리플 디스틸드 25년 700ml — 면세 ₩342,270 · 55%↓", "보모어 14년 700ml — 면세 ₩52,916 · 48%↓", "보모어 16년 700ml — 면세 ₩85,599 · 46%↓", "발베니 Balvenie 18년 Sherry Cask 700ml — 면세 ₩235,190 · 40%↓"]
-hotdeals_count: 11
+hotdeals: ["보모어 22년 700ml — 면세 ₩293,605 · 76%↓", "벤리악 트리플 디스틸드 25년 700ml — 면세 ₩342,270 · 55%↓", "보모어 19년 700ml — 면세 ₩149,778 · 49%↓", "보모어 14년 700ml — 면세 ₩52,916 · 48%↓", "보모어 16년 700ml — 면세 ₩85,599 · 46%↓"]
+hotdeals_count: 14
 rare_drops: []
 rare_drops_count: 0
-description: "면세 위스키 가격 주간 로그 8/17~8/23 — 이번주 핫딜 11종 · 오랜만의 큰 인하 0종 · 최신 2026-08-20. CaskCode"
+description: "면세 위스키 가격 주간 로그 8/17~8/23 — 이번주 핫딜 14종 · 오랜만의 큰 인하 0종 · 최신 2026-08-20. CaskCode"
 robots: "noindex,nofollow"
 ---
 
 이 글은 신라면세 위스키 가격변동을 **하루 단위로 아래에 쌓는 주간 로그**입니다. 위에 이번주 핫딜을 모았고, 아래는 날짜별 상세(최신이 맨 위) · 기간 2026-08-17 ~ 2026-08-23.
 
-## 🔥 이번주 핫딜 (11종)
+## 🔥 이번주 핫딜 (14종)
 
 _이번 주 면세가가 국내최저가보다 싼 위스키를 모았습니다. 각 항목은 그 주 최신 관측가 기준 · 절약률 높은 순._
 
@@ -29,6 +29,7 @@ _이번 주 면세가가 국내최저가보다 싼 위스키를 모았습니다.
 |---|---|
 | 보모어 22년 700ml | 면세 **₩293,605** · 국내최저 [₩1,200,000 🔗](https://dailyshot.co/m/item/19707)<br>절약 **−₩906,395 (76%↓)** · 할인 45%→48% |
 | 벤리악 트리플 디스틸드 25년 700ml | 면세 **₩342,270** · 국내최저 [₩760,000 🔗](https://dailyshot.co/m/item/9889)<br>절약 **−₩417,730 (55%↓)** · 할인 35%→36% |
+| 보모어 19년 700ml | 면세 **₩149,778** · 국내최저 [₩295,000 🔗](https://dailyshot.co/m/item/25813)<br>절약 **−₩145,222 (49%↓)** · 할인 45%→48% |
 | 보모어 14년 700ml | 면세 **₩52,916** · 국내최저 [₩102,000 🔗](https://dailyshot.co/m/item/25811)<br>절약 **−₩49,084 (48%↓)** · 할인 50%→45% |
 | 보모어 16년 700ml | 면세 **₩85,599** · 국내최저 [₩159,000 🔗](https://dailyshot.co/m/item/25812)<br>절약 **−₩73,401 (46%↓)** · 할인 50%→45% |
 | 발베니 Balvenie 18년 Sherry Cask 700ml | 면세 **₩235,190** · 국내최저 [₩389,000 🔗](https://dailyshot.co/m/item/6323)<br>절약 **−₩153,810 (40%↓)** · 할인 39%→40% |
@@ -38,10 +39,12 @@ _이번 주 면세가가 국내최저가보다 싼 위스키를 모았습니다.
 | 발베니 21년 포트우드 700ml | 면세 **₩357,331** · 국내최저 [₩509,000 🔗](https://dailyshot.co/m/item/3222)<br>절약 **−₩151,669 (30%↓)** · 할인 32%→30% |
 | 글렌알라키 12년 (24RB) 700ml | 면세 **₩75,899** · 국내최저 [₩102,000 🔗](https://dailyshot.co/m/item/21702)<br>절약 **−₩26,101 (26%↓)** · 할인 51%→50% |
 | 글렌알라키 15년 (24RB) 700ml | 면세 **₩121,909** · 국내최저 [₩163,000 🔗](https://dailyshot.co/m/item/21704)<br>절약 **−₩41,091 (25%↓)** · 할인 50%→49% |
+| 우드포드 리저브 더블 오크 1000ml | 면세 **₩52,312** · 국내최저 [₩58,000 🔗](https://dailyshot.co/m/item/10438)<br>절약 **−₩5,688 (10%↓)** · 할인 45%→51% |
+| 조니워커 더블 블랙 1000ml | 면세 **₩46,354** · 국내최저 [₩48,000 🔗](https://dailyshot.co/m/item/3249)<br>절약 **−₩1,646 (3%↓)** · 할인 52%→51% |
 
 ---
 
-## 📅 8월 20일 (목) — 돌파 1건
+## 📅 8월 20일 (목) — 돌파 4건
 
 *직전 2026-08-19 → 최신 2026-08-20* · *환율 ₩1,411.93 (기준일 2026-08-19)*
 
@@ -49,22 +52,42 @@ _이번 주 면세가가 국내최저가보다 싼 위스키를 모았습니다.
 
 _각 위스키 이름을 누르면 도수·맛·스토리 설명이 펼쳐집니다._
 
-<details style="margin:8px 0"><summary><strong>미세조정(할증)</strong> 1건 · 10%p 미만 (펼치기)</summary><div style="margin-top:6px"><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">발베니 21년 포트우드 700ml: 32%→30% (₩357,331)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 발베니 (The Balvenie) · 윌리엄 그랜트 앤 선즈 · 더프타운 · 스페이사이드 (Speyside)<br><b>도수</b> 47.6% (면세/트래블리테일 논칠필터 버전 · 국내소매 40% · 미국 43% 칠필터)<br><b>캐스크</b> 엑스-버번 오크 캐스크 21년 숙성 후 포트 파이프(포트와인 담았던 캐스크)에서 수개월 피니시 · 몰트 마스터 데이비드 스튜어트의 캐스크 피니시 시그니처<br><b>맛</b> 잘 익은 건포도·라즈베리·블랙베리 과일향에 꿀·허니콤·비즈왁스, 넛티한 드라이함. 크리미하고 실키한 입안에 과일·꿀·스파이스, 포트 유래 발사믹·건포도·체리콜라. 길고 부드러운 넛티 피니시.<br><b>스토리</b> 발베니 21년 포트우드는 엑스-버번에서 21년 숙성한 원액을 포트와인을 담았던 포트 파이프에서 추가 피니시한 발베니 대표 장기 숙성 표현. 캐스크 피니시를 창안한 몰트 마스터 데이비드 스튜어트의 시그니처 라인이다. 신라면세 취급분은 면세(트래블 리테일) 버전으로 47.6% 논칠필터라 국내 소매판(40%)·미국판(43% 칠필터)보다 도수·질감이 진하다(라벨 확인 권장).<br><span style="color:#8a8f98">출처: The Balvenie 공식 · Whisky Advocate · Malt and Oak · Flaviar (2026-08-20 리서치) · 수집일 2026-08-20</span></div></details></div></details>
+**🔺 할증 심화 — 할인 축소·가격 상승 (10%p↑)**
+
+<div style="margin:5px 0">조니워커 엑스오디네어 750ml: 45%→35% (₩238,972)</div>
+
+<details style="margin:8px 0"><summary><strong>미세조정(할인)</strong> 10건 · 10%p 미만 (펼치기)</summary><div style="margin-top:6px"><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">우드포드 리저브 더블 오크 1000ml: 45%→51% (₩52,312)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 우드포드 리저브 (Woodford Reserve) · 미국 켄터키<br><b>도수</b> 45.2%<br><b>캐스크</b> 1차 차콜 처리 오크 배럴 숙성 후 딥 토스트·라이트 차 2차 오크 배럴 추가 숙성 (Double Oaked)<br><b>맛</b> 다크 프루트·카라멜·꿀·초콜릿·마지판의 달콤한 아로마. 풀바디의 바닐라·다크 카라멜·헤이즐넛·사과·스파이스가 어우러지고 길고 크리미하며 꿀사과 향의 피니시.<br><b>스토리</b> 우드포드 리저브 증류소는 1812년 가동을 시작해 Brown-Forman이 소유한 켄터키 버사이유 소재 증류소다. 더블 오크는 두 번의 서로 다른 오크 배럴을 거쳐 기존 버번보다 풍부하고 부드러운 오크 캐릭터를 구현한 익스프레션으로 2023년 샌프란시스코 세계 스피리츠 경연대회 더블 골드 메달을 수상했다.<br><span style="color:#8a8f98">출처: 공식 woodfordreserve.com · en.wikipedia.org (Woodford Reserve) (2026-07-06 리서치) · 수집일 2026-07-06</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">Old Pulteney 10 Years Old 1000ml: 35%→40% (₩49,857)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 올드 풀트니 (Old Pulteney) · 스코틀랜드 하이랜드<br><b>도수</b> 40%<br><b>캐스크</b> 세컨드필 아메리칸 오크 엑스-버번 캐스크<br><b>맛</b> 바닐라 토피·시트러스·아삭한 사과의 향이 코를 자극한다. 팔레트는 은은한 스파이스와 꿀에 잠긴 잘 익은 과일이 따뜻함을 주며, 해안 증류소 특유의 가벼운 미네랄·소금기가 느껴진다. 가볍고 접근하기 쉬운 스타일이다.<br><b>스토리</b> 올드 풀트니는 스코틀랜드 최북단 케이스네스 위크의 해안 증류소로 '메리타임 몰트'로 불린다. 10년은 엄선한 세컨드필 아메리칸 오크 엑스-버번 캐스크에서 숙성한 입문급 코어 표현이다.<br><span style="color:#8a8f98">출처: 공식 사이트 · Whiskybase · Master of Malt (2026-06-20 리서치) · 수집일 2026-06-20</span></div></details><div style="margin:5px 0">Old Pulteney 13 Years Old 1000ml: 35%→40% (₩73,519)</div><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">Old Pulteney 16 Years Old 700ml: 35%→40% (₩101,405)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 올드 풀트니 (Old Pulteney) · 하이랜드 (노던 하이랜드, Wick)<br><b>도수</b> 43% (트래블러스 익스클루시브 · 일부 릴리스 46%)<br><b>캐스크</b> 엑스-버번 배럴 숙성 후 올로로소 셰리 시즌드 스패니시 오크 피니시 · 16년<br><b>맛</b> 블랙체리·오렌지·복숭아·노란사과 향에 진저브레드·가죽·얼그레이·바닐라 커스터드. 입안은 꿀·골든시럽·애플파이·캐러멜의 단맛에 화이트페퍼·생강 스파이스, 초콜릿 케이크의 벨벳 같은 피니시. 짭조름한 해안가 캐릭터.<br><b>스토리</b> 올드 풀트니는 스코틀랜드 본토 최북단에 가까운 윅(Wick)의 증류소로 1826년 설립됐다. '해양의 몰트(The Maritime Malt)'로 불린다. 16년은 면세(트래블러스 익스클루시브) 라인업으로 버번 배럴에서 숙성한 뒤 올로로소 셰리 스패니시 오크로 피니시했다.<br><span style="color:#8a8f98">출처: Whisky Advocate · WhiskyNotes · Master of Malt (2026-08-15 리서치) · 수집일 2026-08-15</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">TAMDHU Gran Reserva 700ml: 37%→41% (₩223,708)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 탐듀 (Tamdhu) · 스페이사이드<br><b>도수</b> 46%<br><b>캐스크</b> 퍼스트필 올로로소 셰리 캐스크 숙성 (비냉각여과·무착색)<br><b>맛</b> 코: 체리, 시럽에 절인 딸기, 단맥아, 망고와 멜론 등 과실향. 입안: 풍부한 셰리 단맛에 크림과 가루낸 향신료, 약한 오크의 쓴맛. 피니시: 부드럽고 달콤하며 향신료가 길게 남는다.<br><b>스토리</b> 탐듀는 1897년 스페이강 인근에 세워진 스페이사이드 증류소로, 거의 모든 원액을 올로로소 셰리 캐스크에서만 숙성하는 셰리 중심 스타일로 유명하다(현재 Ian Macleod Distillers 소유). Gran Reserva는 면세점(트래블 리테일) 라인업으로, 퍼스트필 올로로소 셰리 캐스크 숙성을 강조해 짙은 셰리 캐릭터와 46% 도수·비냉각여과·무착색을 내세운 에디션이다.<br><span style="color:#8a8f98">출처: tamdhu.com 공식, Whiskybase, Whisky.com, IWSC, finedrams.com 리테일 (2026-06-09 리서치) · 수집일 2026-06-09</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">TAMDHU 14yo Ambar Vintage 2009 700ml: 46%→49% (₩100,092)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 탐듀 (Tamdhu) · 스페이사이드<br><b>도수</b> 43% (공식 Ambar 14년 표준 보틀링 기준; 2009 빈티지 단일 캐스크 별도 릴리스는 캐스크별 도수가 달라 58.7% 등으로 다를 수 있음 — 과신 주의)<br><b>캐스크</b> 리필 올로로소 셰리 캐스크 숙성 (Ambar=스페인어 '호박색', 셰리 영향에 의한 색을 지칭)<br><b>맛</b> 코: 셰리에서 온 말린 과일, 호박색을 떠올리게 하는 따뜻한 과실향. 입안: 부드러운 셰리 단맛과 향신료. 피니시: 매끄럽고 셰리 캐릭터가 길게 이어진다. (Ambar 14년 표준 보틀링 기준)<br><b>스토리</b> 탐듀는 올로로소 셰리 캐스크 일변도로 숙성하는 스페이사이드 증류소다. Ambar('호박색')는 셰리 캐스크가 부여하는 짙은 색과 풍미를 강조한 면세 채널 한정 라인으로, 14년 숙성·43% 도수의 트래블 리테일 익스클루시브로 출시됐다. 2009 빈티지를 표기한 릴리스로, 숙성연수를 명시한 한정 보틀링 계열이다.<br><span style="color:#8a8f98">출처: tamdhu.com 공식, Whisky.com, Whisky Magazine, Whiskybase, thewhiskyworld.com 리테일 (2026-06-09 리서치) · 수집일 2026-06-09</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">로얄브라클라 12년 1000ml: 47%→50% (₩68,479)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 로얄브라클라 (Royal Brackla) · 하이랜드<br><b>도수</b> 46%<br><b>캐스크</b> 버번 캐스크 숙성 후 올로로소 셰리 캐스크 피니시 · 논칠필터<br><b>맛</b> 토피·무화과·프루트케이크 향에 육두구·계피·호두. 입안엔 잘 익은 복숭아·블랙체리·초콜릿·아몬드, 무스코바도 설탕의 따뜻한 단맛 피니시.<br><b>스토리</b> 1812년 설립, 1835년 윌리엄 4세에게 'The King's Own Whisky' 칭호를 받은 첫 증류소. 현재 듀어스(바카디) 소유. 12년은 올로로소 셰리 피니시 코어레인지.<br><span style="color:#8a8f98">출처: 공식 royalbrackla.com · Master of Malt · The Whiskey Wash (2026-06-12 리서치) · 수집일 2026-06-12</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">로얄브라클라 21년 700ml: 48%→51% (₩240,762)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 로얄브라클라 증류소 · 스코틀랜드 하이랜드<br><b>도수</b> 46%<br><b>캐스크</b> 올로로소·팔로 코르타도·PX 셰리 캐스크 피니시<br><b>맛</b> 크렘 브륄레와 신선한 베리, 바닐라 빈의 향. 크리미하고 매끄러운 입안에 잉글리시 토피·잘 익은 무화과·가죽·정향. 코냑과 초콜릿 케이크를 연상시키는 길고 진한 피니시.<br><b>스토리</b> 나폴레옹 시대 윌리엄 4세로부터 'Royal' 칭호를 받은 하이랜드 증류소. 21년은 세 가지 셰리 캐스크(올로로소·팔로 코르타도·PX)로 피니시한 셰리 풍미 중심 표현으로, 무착색·논칠필터.<br><span style="color:#8a8f98">출처: TheWhiskeyWash·Whisky Magazine·Drinkhacker (2026-06-09 리서치) · 수집일 2026-06-09</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">보모어 19년 700ml: 45%→48% (₩149,778)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 보모어 (Bowmore) · 아일라 (Islay)<br><b>도수</b> 43%<br><b>캐스크</b> 엑스-버번 숙성 후 피노누아(부르고뉴) 캐스크 피니시 · GTR 면세 전용(Appellations)<br><b>맛</b> 피노누아의 우아한 붉은베리·체리에 보모어의 부드러운 피트 스모크, 트로피컬 프루트의 긴 여운.<br><b>스토리</b> Appellations 컬렉션의 19년 표현으로 부르고뉴 피노누아 캐스크 피니시. 보모어는 1779년 설립된 아일라 最古 증류소.<br><span style="color:#8a8f98">출처: 공식 bowmore.com · Moodie Davitt Report · Whisky Advocate (2026-06-12 리서치) · 수집일 2026-06-12</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">로얄브라클라 18년 700ml: 50%→51% (₩151,514)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 로얄브라클라 (Royal Brackla) · 하이랜드<br><b>도수</b> 46%<br><b>캐스크</b> 팔로 코르타도 셰리 캐스크 피니시 · 논칠필터<br><b>맛</b> 파인애플·구아바·꿀 시리얼·라이트 시트러스 향. 부드럽고 크리미한 입안에 바닐라·캔디드 프루트·밀크 초콜릿·아니스·카시아. 데메라라 슈거에서 루바브·구스베리 타르트와 스파이스의 상큼한 피니시.<br><b>스토리</b> 1812년 설립, 윌리엄 4세로부터 최초의 'Royal' 칭호를 받은 하이랜드 증류소. 18년은 팔로 코르타도 셰리 캐스크로 피니시해 트로피컬·꿀·크리미한 풍미를 더한 코어레인지 표현. 무착색·논칠필터.<br><span style="color:#8a8f98">출처: Whisky Advocate · The Whiskey Wash · Whisky Magazine (2026-07-20 리서치) · 수집일 2026-07-20</span></div></details></div></details>
+
+<details style="margin:8px 0"><summary><strong>미세조정(할증)</strong> 4건 · 10%p 미만 (펼치기)</summary><div style="margin-top:6px"><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">조니워커 킹조지 5세 500ml: 42%→35% (₩403,812)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 조니워커 (Johnnie Walker) · 블렌디드(스코틀랜드)<br><b>도수</b> 43%<br><b>캐스크</b> 다양한 캐스크(킹조지 5세 시대 가동 증류소 원액 블렌드)<br><b>맛</b> 옅은 스모크에 신선한 과일·맥아·건포도·무화과·시나몬, 그리고 바닐라·잘 익은 사과·구운 아몬드·밀크초콜릿이 더해진 향. 팔레트는 다크초콜릿·샌달우드·절제된 피트 스모크·단 말린 과일이 층층이 쌓이고 후추·생강·넛맥 스파이스가 따른다. 벨벳처럼 풍성한 질감, 메이플 시럽 뉘앙스의 길고 따뜻한 피니시.<br><b>스토리</b> 블루라벨 프레스티지 라인(500ml). 조지 5세가 조니워커에 로열 워런트를 수여한 1934년을 기려 그 시대 가동 증류소들의 희소 원액으로 블렌딩한다.<br><span style="color:#8a8f98">출처: 공식 사이트 · Difford's Guide · Whiskybase · 수집일 2026-06-20</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">싱글톤 가든스 오브 어번던스 - 래디언트 스프링 가든 1000ml: 54%→51% (₩47,046)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 글렌둘란 (Glendullan) — 싱글톤 라인 · 스페이사이드 (Speyside)<br><b>도수</b> 확인 불가 — 출처 간 불일치(40% vs 42.8%로 보도됨). NAS(숙성연수 미표기). 정확한 병 표기 ABV는 미확정.<br><b>캐스크</b> 엄선된 아메리칸 화이트 오크 캐스크 단독 숙성<br><b>맛</b> 밝고 과일 중심의 캐릭터로, 풋사과·살구·시트러스 노트가 특징. 꽃향, 신선한 허브, 잘 익은 과일의 아로마.<br><b>스토리</b> 디아지오가 2024년 여름 출시한 싱글톤의 약 10년 만의 트래블 리테일(면세) 독점 컬렉션 '가든스 오브 어번던스'의 4종 중 하나다(나머지: Golden Autumn Orchard, Exotic Spice Grove, Deep Forest Riches). 컬렉션 전체가 스페이사이드의 글렌둘란 증류소에서 증류되며, 증류소 주변의 떼루아(terroir)를 감각적으로 표현한다는 콘셉트다. 마스터 블렌더는 크레이그 윌슨(Dr. Craig Wilson) 박사.<br><span style="color:#8a8f98">출처: Whisky Magazine, Moodie Davitt Report, Whisky For Everyone 리뷰 (2026-06-09 리서치) · 수집일 2026-06-09</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">발베니 21년 포트우드 700ml: 32%→30% (₩357,331)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 발베니 (The Balvenie) · 윌리엄 그랜트 앤 선즈 · 더프타운 · 스페이사이드 (Speyside)<br><b>도수</b> 47.6% (면세/트래블리테일 논칠필터 버전 · 국내소매 40% · 미국 43% 칠필터)<br><b>캐스크</b> 엑스-버번 오크 캐스크 21년 숙성 후 포트 파이프(포트와인 담았던 캐스크)에서 수개월 피니시 · 몰트 마스터 데이비드 스튜어트의 캐스크 피니시 시그니처<br><b>맛</b> 잘 익은 건포도·라즈베리·블랙베리 과일향에 꿀·허니콤·비즈왁스, 넛티한 드라이함. 크리미하고 실키한 입안에 과일·꿀·스파이스, 포트 유래 발사믹·건포도·체리콜라. 길고 부드러운 넛티 피니시.<br><b>스토리</b> 발베니 21년 포트우드는 엑스-버번에서 21년 숙성한 원액을 포트와인을 담았던 포트 파이프에서 추가 피니시한 발베니 대표 장기 숙성 표현. 캐스크 피니시를 창안한 몰트 마스터 데이비드 스튜어트의 시그니처 라인이다. 신라면세 취급분은 면세(트래블 리테일) 버전으로 47.6% 논칠필터라 국내 소매판(40%)·미국판(43% 칠필터)보다 도수·질감이 진하다(라벨 확인 권장).<br><span style="color:#8a8f98">출처: The Balvenie 공식 · Whisky Advocate · Malt and Oak · Flaviar (2026-08-20 리서치) · 수집일 2026-08-20</span></div></details><details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">조니워커 더블 블랙 1000ml: 52%→51% (₩46,354)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 조니워커 (Johnnie Walker) · 블렌디드 스카치 · 블렌디드(스코틀랜드)<br><b>도수</b> 40%<br><b>캐스크</b> 강하게 그을린(차링) 오크 캐스크 비중을 높인 원액 블렌드 · 피티드 몰트 강조<br><b>맛</b> 블랙라벨보다 짙은 스모크·피트. 그을린 오크·정향·후추 스파이스에 말린 과일 단맛, 풍부하고 강렬한 스모키 피니시.<br><b>스토리</b> 조니워커 더블 블랙은 블랙라벨의 더 스모키·강렬한 버전으로, 피티드 몰트 비중과 깊게 차링한 캐스크 숙성 원액을 늘려 만든다. 면세·여행 소매에서 흔한 1L 포맷.<br><span style="color:#8a8f98">출처: 공식 Johnnie Walker · Master of Malt (2026-06-08 리서치) · 수집일 2026-06-08</span></div></details></div></details>
 
 ### 🏆 국내최저가(데일리샷·트레이더스·코스트코) 대비 핫딜
 
 | 🏆 위스키 | 상세 |
 |---|---|
 | 발베니 21년 포트우드 700ml | 면세 **₩357,331** · 국내최저 [₩509,000 🔗](https://dailyshot.co/m/item/3222)<br>절약 **−₩151,669 (30%↓)** · 할인 32%→30% |
+| 보모어 19년 700ml | 면세 **₩149,778** · 국내최저 [₩295,000 🔗](https://dailyshot.co/m/item/25813)<br>절약 **−₩145,222 (49%↓)** · 할인 45%→48% |
+| 우드포드 리저브 더블 오크 1000ml | 면세 **₩52,312** · 국내최저 [₩58,000 🔗](https://dailyshot.co/m/item/10438)<br>절약 **−₩5,688 (10%↓)** · 할인 45%→51% |
+| 조니워커 더블 블랙 1000ml | 면세 **₩46,354** · 국내최저 [₩48,000 🔗](https://dailyshot.co/m/item/3249)<br>절약 **−₩1,646 (3%↓)** · 할인 52%→51% |
 
-### 🆕 신규 입고 (1)
+### 🆕 신규 입고 (2)
 
 | 위스키 | 현재 KRW |
 |---|--:|
+| 더 패밀리 캐스크스 2002_S24 700ml | ₩501,659 |
 | 이에이치 테일러 스몰배치 750ml | ₩74,364 |
+
+### 📦 품절/내림 (4)
+
+| 위스키 |
+|---|
+| 듀어스 더블더블 21년 스톤 토스티드 1.5L (아메리칸 오크 & 프렌치 오크) |
+| 듀어스 더블더블 27년 500ml |
+| 듀어스 더블더블 26년 500ml |
+| 듀어스 더블더블 21년 미즈나라캐스크 500ml |
 
 ### 🆕 신규 술 설명 — 이름을 눌러 펼치기
 
+<details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">🥃 더 패밀리 캐스크스 2002_S24 700ml · 50.8% (내추럴 캐스크 스트렝스 · 단일 캐스크 #3327 실측치)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 글렌파클라스 (Glenfarclas) · 스페이사이드<br><b>도수</b> 50.8% (내추럴 캐스크 스트렝스 · 단일 캐스크 #3327 실측치)<br><b>캐스크</b> 싱글 셰리 혹스헤드 #3327 · 2002-09-04 증류 21년 숙성 · 2024년 여름 'S24' 배치 병입 · 비냉각여과 · 무착색 · 총 301병<br><b>맛</b> 건포도 브리오슈·히더 꿀·오렌지 제스트의 향에 이어 당밀 토피·몰트 로프·다크초콜릿과 정향 캐러멜이 실키하게 이어진다. 피니시는 길고 따뜻하며 셰리에 절인 과일케이크와 오크 탄닌이 은은하게 마른다.<br><b>스토리</b> 글렌파클라스는 1836년 이래 그랜트(Grant) 가문이 6대째 직접 운영하는 스페이사이드 증류소로, 셰리 캐스크 숙성과 가문 소유 던니지 창고로 유명하다. '더 패밀리 캐스크스'는 단일 빈티지·단일 캐스크를 그대로 병입하는 시리즈이며, 이 제품은 2002년 증류 원액을 셰리 혹스헤드 #3327에서 숙성해 2024년 여름('S24') 301병만 출시한 것.<br><span style="color:#8a8f98">출처: The Whisky Barrel · Whiskybase · Craft Cellars (2026-06-24 리서치) · 수집일 2026-06-24</span></div></details>
 <details style="margin:5px 0;border:1px solid #2a2f3a;border-radius:8px;padding:5px 10px"><summary style="cursor:pointer;font-weight:600">🥃 이에이치 테일러 스몰배치 750ml · 50% (100 proof · Bottled-in-Bond)</summary><div style="margin-top:6px;font-size:13px;line-height:1.6"><b>증류소</b> 버팔로 트레이스 (Buffalo Trace) · 미국 켄터키<br><b>도수</b> 50% (100 proof · Bottled-in-Bond)<br><b>캐스크</b> 신축 차링 아메리칸 화이트 오크 버번 캐스크 · 테일러가 지은 100년 된 워런하우스 C 숙성 · 칠필터 · 단일 증류시즌 4년 이상(BiB)<br><b>맛</b> 캐러멜콘·버터스카치 향. 입안은 말린 과일·은은한 리코리스에 부드러운 질감, 후추·담뱃잎의 절제된 스파이스. 바닐라 파운드케이크·블랙체리·다크 레드프루트가 이어지고, 혀끝의 크리미함이 입 뒤쪽으로 퍼지는 스파이스와 가슴이 따뜻해지는 긴 피니시로 마무리.<br><b>스토리</b> 버번 산업의 '아버지'로 불리는 에드먼드 헤인스 테일러 주니어 대령(Col. E.H. Taylor Jr.)을 기리는 버팔로 트레이스의 프리미엄 라인. 테일러가 직접 지은 100년 된 석조 워런하우스에서 숙성하고, 단일 증류시즌·단일 증류자가 만든 술만 100proof로 병입하는 Bottled-in-Bond(1897년 보틀드인본드법) 켄터키 스트레이트 버번. 통상 7~8년 숙성분으로 알려져 있으며 병입 전 칠필터.<br><span style="color:#8a8f98">출처: 공식 buffalotracedistillery.com · Sazerac · The Bourbon Culture (2026-06-29 리서치) · 수집일 2026-06-29</span></div></details>
 
 *국내최저가 = 데일리샷·트레이더스·코스트코 국내 소매가 중 최저(면세·해외 제외) 브랜드+숙성 근사매칭 · 매칭 실패/인디·싱글캐스크는 비움.*
