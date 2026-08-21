@@ -10,14 +10,19 @@
 셀러가(item_page_price, 면세/해외 제외 — CMPA-321/344)를 가져와 캐시에 누적한다.
 build_compare 가 이 캐시를 '데일리샷(온라인)' 국내 소스로 병합한다.
 
-- 멱등/재개: 캐시(`data/whisky-prices/_dailyshot_compare_<date>.csv`)에 이미 있으면 건너뜀.
-  중간에 끊겨도 다음 실행이 이어서 채운다(행 단위 즉시 flush).
+- 날짜별 스냅샷: `data/whisky-prices/_dailyshot_compare_<date>.csv`(기본=KST 오늘). 매 실행이
+  직전 최신 스냅샷을 seed-forward 로 이월(CMPA-156)한 뒤 그 위에서 신규·stale 행만 갱신한다.
+  파일명 날짜가 매일 전진하므로 build_compare 의 최신 스냅샷 탐색이 stale 되지 않는다(CMPA-1345).
+- 멱등/재개: 이미 있는 최신 행은 건너뜀. 크래시 대비 25건마다 전체 재작성(원자적 rename).
 - 매칭 가드: 이름 정규화 부분일치 + 용량(±) + CMPA-177 토큰(년수/CS/피티드/셰리/버번) 비대칭 제외.
 - 면세 제외는 item_page_price(_walk_page_price, price_usd>0 제외)가 보장.
 """
 import argparse
 import csv
+import datetime
+import glob
 import os
+import re as _re2
 import sys
 import time
 
@@ -30,9 +35,37 @@ from build_compare import (                          # noqa: E402  매칭 가드
     norm, extract_volume_ml, _cmpa177_ok, _make_key,
 )
 
-CACHE = os.path.join(ROOT, "data", "whisky-prices", "_dailyshot_compare_2026-06-28.csv")
+CACHE_DIR = os.path.join(ROOT, "data", "whisky-prices")
+CACHE_GLOB = os.path.join(CACHE_DIR, "_dailyshot_compare_????-??-??.csv")
 FIELDS = ["제품명", "_k1", "ds_price_krw", "ds_seller", "ds_vol_ml", "ds_item_id",
           "ds_name", "looked_up_at"]
+
+
+def kst_today() -> str:
+    """KST 오늘 날짜(YYYY-MM-DD). 스냅샷 파일명·looked_up_at 기본값."""
+    return ((datetime.datetime.now(datetime.timezone.utc)
+             + datetime.timedelta(hours=9)).date()).isoformat()
+
+
+def cache_path(date: str) -> str:
+    """해당 날짜의 보강 스냅샷 경로. CMPA-1345: 날짜별 파일로 슬롯 최신성을 보장한다.
+
+    과거엔 파일명이 2026-06-28 로 하드코딩돼 매 실행이 같은 파일을 덮어써서 build_compare 의
+    최신 스냅샷 탐색(_latest_snapshot)이 영원히 06-28 로 stale 판정났다(STALE 경고 원인)."""
+    return os.path.join(CACHE_DIR, f"_dailyshot_compare_{date}.csv")
+
+
+def latest_prior_cache(before_date: str):
+    """before_date 이전 날짜의 가장 최신 보강 스냅샷 경로(누적 데이터 seed 용). 없으면 None.
+
+    CMPA-156(데이터 3원칙): 매 실행은 백지에서 시작하지 않고, 직전 스냅샷을 가져와 그 위에서
+    갱신한다. 각 행의 looked_up_at(항목별 실제 수집일)은 그대로 보존한다."""
+    dated = []
+    for fp in glob.glob(CACHE_GLOB):
+        m = _re2.search(r"(\d{4}-\d{2}-\d{2})", os.path.basename(fp))
+        if m and m.group(1) < before_date:
+            dated.append((m.group(1), fp))
+    return max(dated)[1] if dated else None
 
 
 def _vol_ok(a, b):
@@ -79,19 +112,64 @@ def best_ds(name, cands):
     return best[1:] if best else None
 
 
-def load_cache():
-    if not os.path.exists(CACHE):
+def load_cache(path):
+    if not path or not os.path.exists(path):
         return {}
-    with open(CACHE, encoding="utf-8-sig") as f:
+    with open(path, encoding="utf-8-sig") as f:
         return {r["_k1"]: r for r in csv.DictReader(f)}
+
+
+def _write_cache(path, cache):
+    """전체 캐시 dict → 파일(원자적 rename). seed-forward·stale 갱신으로 행을 덮어쓰므로
+    append 가 아니라 전체 재작성한다. FIELDS 외 여분 키는 버린다."""
+    tmp = path + ".tmp"
+    with open(tmp, "w", newline="", encoding="utf-8-sig") as f:
+        w = csv.DictWriter(f, fieldnames=FIELDS, extrasaction="ignore")
+        w.writeheader()
+        for r in cache.values():
+            w.writerow(r)
+    os.replace(tmp, path)
+
+
+def _is_stale(row, today, days):
+    """행의 looked_up_at 이 days 일 이상 오래됐으면 True(재조회 대상). days<=0 이면 항상 False."""
+    if days <= 0:
+        return False
+    lu = (row.get("looked_up_at") or "").strip()
+    try:
+        d = datetime.date.fromisoformat(lu)
+    except (ValueError, TypeError):
+        return True  # 날짜 불량/누락 → 갱신 대상
+    return (datetime.date.fromisoformat(today) - d).days >= days
+
+
+def _lookup_row(nm, k1, date, pace):
+    """데일리샷 검색+제품페이지가 1건 조회 → 캐시 행. (면세/해외 제외는 item_page_price 가 보장)."""
+    row = {"제품명": nm, "_k1": k1, "looked_up_at": date,
+           "ds_price_krw": "", "ds_seller": "", "ds_vol_ml": "",
+           "ds_item_id": "", "ds_name": ""}
+    cands = ed.search(ed.kw_of(nm) or nm)
+    m = best_ds(nm, cands)
+    if m:
+        tpid, dsname, dvol = m
+        time.sleep(pace)
+        pp = ed.item_page_price(tpid)
+        if pp and pp.get("price"):
+            row.update(ds_price_krw=pp["price"], ds_seller=pp.get("seller", ""),
+                       ds_vol_ml=dvol or "", ds_item_id=tpid, ds_name=dsname)
+    return row
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--limit", type=int, default=0, help="이번 실행 최대 신규 조회 수(0=무제한)")
+    ap.add_argument("--limit", type=int, default=0,
+                    help="이번 실행 최대 조회 수(신규+stale재조회, 0=무제한)")
     ap.add_argument("--pace", type=float, default=0.6)
-    ap.add_argument("--date", default="2026-06-28")
+    ap.add_argument("--date", default=None, help="스냅샷 날짜(기본=KST 오늘). 파일명·looked_up_at 에 사용")
+    ap.add_argument("--refresh-stale-days", type=int, default=0,
+                    help="looked_up_at 이 N일 이상 오래된 행을 재조회(0=끔, seed-forward+신규만)")
     args = ap.parse_args()
+    date = args.date or kst_today()
 
     # 비교 대상 제품명 = build_compare 의 both + 단독(전체 면세 제품)
     from build_compare import build_rows
@@ -105,47 +183,46 @@ def main():
             seen.add(k1)
             names.append(nm)
 
-    cache = load_cache()
-    new_file = not os.path.exists(CACHE)
-    f = open(CACHE, "a", newline="", encoding="utf-8-sig")
-    w = csv.DictWriter(f, fieldnames=FIELDS)
-    if new_file:
-        w.writeheader()
-        f.flush()
+    target = cache_path(date)
+    # 오늘 스냅샷을 seed: 이미 있으면 이어서, 없으면 직전 최신 스냅샷을 가져와 그 위에서 갱신(CMPA-156).
+    cache = load_cache(target)
+    if not cache:
+        prior = latest_prior_cache(date)
+        if prior:
+            cache = load_cache(prior)
+            print(f"seed-forward: {os.path.basename(prior)} → {os.path.basename(target)} "
+                  f"({len(cache)}행 이월, looked_up_at 보존)", flush=True)
+    # 즉시 오늘자 파일을 만들어 슬롯 날짜를 전진시킨다(신규 조회가 0건이어도 stale 해소).
+    _write_cache(target, cache)
 
-    done = 0
-    hit = 0
+    done = hit = refreshed = 0
     for nm in names:
         k1 = norm(nm)
-        if k1 in cache:
+        existing = cache.get(k1)
+        needs = existing is None or _is_stale(existing, date, args.refresh_stale_days)
+        if not needs:
             continue
         if args.limit and done >= args.limit:
             break
         done += 1
         try:
             time.sleep(args.pace)
-            cands = ed.search(ed.kw_of(nm) or nm)
-            m = best_ds(nm, cands)
-            row = {"제품명": nm, "_k1": k1, "looked_up_at": args.date,
-                   "ds_price_krw": "", "ds_seller": "", "ds_vol_ml": "",
-                   "ds_item_id": "", "ds_name": ""}
-            if m:
-                tpid, dsname, dvol = m
-                time.sleep(args.pace)
-                pp = ed.item_page_price(tpid)
-                if pp and pp.get("price"):
-                    row.update(ds_price_krw=pp["price"], ds_seller=pp.get("seller", ""),
-                               ds_vol_ml=dvol or "", ds_item_id=tpid, ds_name=dsname)
-                    hit += 1
-            w.writerow(row)
-            f.flush()
+            row = _lookup_row(nm, k1, date, args.pace)
+            if row.get("ds_price_krw"):
+                hit += 1
+            if existing is not None:
+                refreshed += 1
             cache[k1] = row
+            if done % 25 == 0:
+                _write_cache(target, cache)   # 크래시 대비 주기적 flush
         except Exception as e:
             print(f"ERR {nm}: {e}", flush=True)
-    f.close()
-    total = len(load_cache())
-    priced = sum(1 for r in load_cache().values() if r.get("ds_price_krw"))
-    print(f"이번 실행 신규 조회 {done} (가격확보 {hit}) · 캐시 누적 {total} (가격보유 {priced})",
+    _write_cache(target, cache)
+
+    total = len(cache)
+    priced = sum(1 for r in cache.values() if r.get("ds_price_krw"))
+    print(f"스냅샷 {date}: 조회 {done}(신규+재조회, 그중 갱신 {refreshed}) · 가격확보 {hit} "
+          f"· 캐시 누적 {total}(가격보유 {priced}) → {os.path.basename(target)}",
           flush=True)
 
 

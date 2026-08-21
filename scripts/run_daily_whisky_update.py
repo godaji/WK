@@ -8,6 +8,8 @@
 직렬 체인:
   STAGE 0  데이터 수집(best-effort·에러격리)  → 롯데·신세계·데일리샷·신라(크롤+변동감지)·트레이더스OCR
   STAGE 1  normalize_dataset.py            → normalized_prices.csv (국내최저 floor 갱신)
+  STAGE 1.5 enrich_online_dailyshot.py     → _dailyshot_compare_<date>.csv(데일리샷 온라인 보강
+                                              스냅샷; seed-forward+stale 롤링 갱신, CMPA-1345)
   STAGE 2  build_compare.py --blog --date  → dutyfree-whisky-compare.md(면세 비교 주간 로그)
                                               + mart-cheaper-whisky.md(마트에서 구매할 때/면세보다 싼)
   STAGE 3  build_blog_md.py --latest-only  → 신라 price-patch 이번주 로그 재빌드(멱등; 크롤·메일은
@@ -55,6 +57,7 @@ PY = sys.executable
 
 NORMALIZE = os.path.join(ROOT, "scripts", "normalize_dataset.py")
 BUILD_COMPARE = os.path.join(ROOT, "pipelines", "dutyfree_compare", "build_compare.py")
+ENRICH_ONLINE = os.path.join(ROOT, "pipelines", "dutyfree_compare", "enrich_online_dailyshot.py")
 BUILD_BLOG = os.path.join(ROOT, "pipelines", "shilla_dutyfree", "build_blog_md.py")
 BUILD_CHANGELOG = os.path.join(ROOT, "pipelines", "changelog", "build_changelog.py")
 POSTS_DIR = os.path.join(ROOT, "blog-md", "_posts")
@@ -282,6 +285,8 @@ def main():
     ap.add_argument("--skip-collect", action="store_true",
                     help="STAGE0(데이터 수집) 생략 — 기존 스냅샷으로 빌드만")
     ap.add_argument("--skip-normalize", action="store_true", help="STAGE1(정규화) 생략")
+    ap.add_argument("--skip-enrich", action="store_true",
+                    help="STAGE1.5(데일리샷 온라인 보강 스냅샷 갱신) 생략")
     ap.add_argument("--no-publish", action="store_true", help="빌드만(STAGE4 발행·curl 생략)")
     ap.add_argument("--dry-run", action="store_true", help="발행 미리보기(push 없음)")
     ap.add_argument("--force", action="store_true",
@@ -313,6 +318,22 @@ def main():
         run("STAGE1 normalize", [PY, NORMALIZE], cwd=ROOT)
     else:
         print("STAGE1 정규화 생략(--skip-normalize)", flush=True)
+
+    # STAGE 1.5 — 데일리샷 온라인 보강 스냅샷 갱신(CMPA-1345). build_compare 가 최신
+    #   _dailyshot_compare_<date>.csv 를 읽으므로 build_compare(STAGE2) 선행. 직전 스냅샷을
+    #   seed-forward(CMPA-156)해 오늘자 파일을 만들어 슬롯 날짜를 전진시키고(→ STALE 해소),
+    #   30일↑ 오래된 행을 슬라이스로 재조회해 가격을 롤링 갱신한다. best-effort·에러격리
+    #   (네트워크/데일리샷 장애가 핵심 비교 페이지 발행을 막지 않게). --skip-enrich 로 생략.
+    if not args.skip_enrich:
+        try:
+            run("STAGE1.5 enrich_online", [PY, ENRICH_ONLINE, "--date", date_str,
+                                           "--limit", "120", "--refresh-stale-days", "30"],
+                cwd=ROOT)
+        except SystemExit as e:
+            print(f"⚠️ STAGE1.5 best-effort 실패(무시하고 계속 — build_compare 는 직전 "
+                  f"보강 스냅샷으로 진행): {e}", file=sys.stderr, flush=True)
+    else:
+        print("STAGE1.5 데일리샷 보강 생략(--skip-enrich)", flush=True)
 
     # STAGE 2 — 면세 비교 + 마트(면세보다 싼) 페이지 빌드(동적 스냅샷 날짜·staleness 가드).
     run("STAGE2 build_compare", [PY, BUILD_COMPARE, "--blog", "--date", date_str], cwd=ROOT)
