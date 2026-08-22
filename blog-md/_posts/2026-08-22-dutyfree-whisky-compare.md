@@ -1,0 +1,177 @@
+---
+layout: post
+title: "면세 위스키 가격 비교 주간 로그 (신라·롯데·신세계, 2026년 08월)"
+date: 2026-08-22
+categories: [wprice]
+kind: wprice
+data_date: "2026-08-22"
+robots: "index,follow"
+carousel_date: "2026-08-22"
+carousel:
+  - text: "🟢 와일드무어 30년 트로피칼 코스트 — 국내 소매가 72만원인데 면세 29.4만원, 약 42.6만원 싸요 (59% 할인) · 8/22"
+    url: "/2026/08/22/dutyfree-whisky-compare/"
+  - text: "🟢 더 글렌리벳 21년 — 국내 소매가 62만원인데 면세 25.7만원, 약 36.3만원 싸요 (59% 할인) · 8/22"
+    url: "/2026/08/22/dutyfree-whisky-compare/"
+  - text: "🟢 글렌모렌지 시그넷 — 국내 소매가 52만원인데 면세 23.5만원, 약 28.5만원 싸요 (55% 할인) · 8/22"
+    url: "/2026/08/22/dutyfree-whisky-compare/"
+  - text: "🟢 더 글렌그란트 21년 — 국내 소매가 48.5만원인데 면세 24.3만원, 약 24.2만원 싸요 (50% 할인) · 8/22"
+    url: "/2026/08/22/dutyfree-whisky-compare/"
+  - text: "🟢 로얄살루트 25년 더 트레저드 블렌드 — 국내 소매가 49만원인데 면세 26.8만원, 약 22.2만원 싸요 (45% 할인) · 8/22"
+    url: "/2026/08/22/dutyfree-whisky-compare/"
+  - text: "🔴 에버펠디 16년 마데이라 캐스크 — 면세 9.6만원인데 국내가 7.6만원, 약 2만원 더 싸요 · 8/22"
+    url: "/2026/08/22/dutyfree-whisky-compare/"
+  - text: "🔴 로얄살루트 21년 빈티지 — 면세 20.5만원인데 국내가 18.5만원, 약 2만원 더 싸요 · 8/22"
+    url: "/2026/08/22/dutyfree-whisky-compare/"
+  - text: "🔴 발렌타인 21년 말본 에디션 — 면세 19.5만원인데 국내가 18.3만원, 약 1.2만원 더 싸요 · 8/22"
+    url: "/2026/08/22/dutyfree-whisky-compare/"
+  - text: "🔀 블라드녹 알린타, 국내값이 올라 면세가 상대적으로 더 이득이 됐어요 · 8/22"
+    url: "/2026/08/22/dutyfree-whisky-compare/"
+  - text: "🔀 블라드녹 삼사라, 국내값이 올라 면세가 상대적으로 더 이득이 됐어요 · 8/22"
+    url: "/2026/08/22/dutyfree-whisky-compare/"
+  - text: "🔀 글렌드로낙 10년, 국내값이 올라 면세가 상대적으로 더 이득이 됐어요 · 8/22"
+    url: "/2026/08/22/dutyfree-whisky-compare/"
+  - text: "🏆 오늘 면세 최저가가 가장 많은 곳은 신라예요 (54종) · 8/22"
+    url: "/2026/08/22/dutyfree-whisky-compare/"
+  - text: "✈️ 와일드터키 마스터스 킵 트라이엄프 — 오늘 면세 이득 순위권 새로 진입, 국내보다 약 20.5만원 싸요 · 8/22"
+    url: "/2026/08/22/dutyfree-whisky-compare/"
+  - text: "✈️ 글렌피딕 21년 그랑 리제르바 — 오늘 면세 이득 순위권 새로 진입, 국내보다 약 12.9만원 싸요 · 8/22"
+    url: "/2026/08/22/dutyfree-whisky-compare/"
+  - text: "🆕 가쿠빈 (코스트코 / 트레이더스) 신규 입고, 3.8만원 · 8/22"
+    url: "/2026/08/17/wprice-2026-08/"
+  - text: "🆕 글렌리벳 17년 스몰배치 (트레이더스) 신규 입고, 25.5만원 · 8/22"
+    url: "/2026/08/17/wprice-2026-08/"
+  - text: "🆕 글렌리벳 19년 스몰배치 (트레이더스) 신규 입고, 38만원 · 8/22"
+    url: "/2026/08/17/wprice-2026-08/"
+  - text: "📉 탈리스커 9년 (트레이더스) 가격 하락, 26.5만원→0.2만원 (99% 하락) · 8/22"
+    url: "/2026/08/17/wprice-2026-08/"
+  - text: "📉 잭다니엘 애플 (코스트코 / 트레이더스) 가격 하락, 11.5만원→0.2만원 (98% 하락) · 8/22"
+    url: "/2026/08/17/wprice-2026-08/"
+  - text: "📉 로얄 살루트 21년 (트레이더스) 가격 하락, 21만원→19.5만원 (7% 하락) · 8/22"
+    url: "/2026/08/17/wprice-2026-08/"
+  - text: "🚚 트레이더스 현장가 5개 업데이트 · 7/3"
+    url: "/2026/06/23/youtube-traders-prices/"
+  - text: "🆕 글렌모렌지 12년 (코스트코) 신규 입고, 8만원 · 7/3"
+    url: "/2026/06/23/youtube-traders-prices/"
+  - text: "🆕 로얄 브라클라 12년 (코스트코) 신규 입고, 10.4만원 · 7/3"
+    url: "/2026/06/23/youtube-traders-prices/"
+---
+
+이 글은 신라·롯데·신세계 세 면세점의 위스키 가격을 **주기적으로 수집해 아래에 쌓는 로그**입니다. 가격대별 Top 10은 매 수집 시 갱신되고, 아래 수집 로그는 최신이 맨 위입니다.
+
+> **면세 조건**: 1인 출국 시 2병/2L/$400 한도. 가격은 USD 표시가 기준.
+> **100ml당 USD**로 비교해 같은 기준으로 면세점을 비교합니다.
+
+---
+
+## 💰 가격대별 Top 10 — 면세 vs 국내 100ml당 절약 큰 순
+
+> **최저가(면세점)** = 세 면세점 중 가장 싼 곳·가격 (볼드).
+> **절약(100ml당)** = (국내 소매가 − 면세 최저가)를 **100ml당 금액(원)**으로 환산한 값 — **양수면 면세가 그만큼 더 싸다.** 이 값이 큰 순서로 가격대별 Top 10. 국내 소매가가 없으면 `—`.
+> **국내 소매가** = 데일리샷·트레이더스·코스트코 중 **100ml당 최저가의 실제 판매가**(괄호=출처). 국내 판매 용량이 면세 용량과 다르면 `·750ml`처럼 용량을 함께 표기합니다(가짜 환산가 대신 실가격). 절약(100ml당)은 용량을 100ml로 맞춰 공정 비교합니다. 없으면 `—`. 출처가 **(데일리샷)**이면 눌러서 해당 상품 페이지를 새 창으로 볼 수 있습니다.
+> 💡 **제품명을 누르면** 스토리·맛 노트가 있는 경우 펼쳐집니다.
+> 국내 소매가 수집일: 2026-05-27 · 2026-06-16 · 2026-06-30 · 2026-07-03 · 2026-08-22. 환율 1 USD = 1,545원 단일 적용.
+
+
+### 10만원 이하
+
+<table><thead><tr><th>제품</th><th>최저가 (면세점)</th><th>절약(100ml당)</th><th>국내 소매가</th><th>신라</th><th>롯데</th><th>신세계</th><th>용량</th></tr></thead><tbody><tr><td>블라드녹 알린타 700ml</td><td><strong>$59.28 / ₩91,605</strong> (롯데면세)</td><td>+₩16,057</td><td>₩204,000 <a href="https://dailyshot.co/m/item/4830" target="_blank" rel="noopener">(데일리샷)</a></td><td>—</td><td><strong>$59.28</strong></td><td>$78.00</td><td>700ml</td></tr><tr><td>조니워커 18년 750ml</td><td><strong>$54.14 / ₩83,662</strong> (롯데면세)</td><td>+₩12,988</td><td>₩169,000 <a href="https://dailyshot.co/m/item/21753" target="_blank" rel="noopener">(데일리샷)</a></td><td>$56.00</td><td><strong>$54.14</strong></td><td>$59.36</td><td>750ml</td></tr><tr><td><details><summary style="cursor:pointer">보모어 16년 700ml</summary><div style="font-weight:400;font-size:.92em;line-height:1.55;padding:6px 2px 2px;white-space:normal;max-width:min(78vw,440px)"><b>보모어 (Bowmore) · 아일라 (Islay) · 43% · 엑스-버번 숙성 후 루비 포트(도루 밸리) 캐스크 피니시 · GTR 면세 전용(Appellations)</b><br>🥃 루비 포트가 더한 잘 익은 베리·건자두·다크초콜릿 단맛에 보모어의 아일라 피트 스모크와 짭조름한 해풍.<br>📖 Appellations 컬렉션의 16년 표현으로 포르투갈 도루 밸리 루비 포트 캐스크 피니시. 보모어는 1779년 설립된 아일라 最古 증류소.<br><small>출처: 공식 bowmore.com · Moodie Davitt Report · Whisky Advocate (2026-06-12 리서치)</small></div></details></td><td><strong>$55.00 / ₩84,991</strong> (신라면세)</td><td>+₩10,572</td><td>₩159,000 <a href="https://dailyshot.co/m/item/25812" target="_blank" rel="noopener">(데일리샷)</a></td><td><strong>$55.00</strong></td><td>$77.33</td><td>$58.52</td><td>700ml</td></tr><tr><td><details><summary style="cursor:pointer">탈리스커 써지 700ml</summary><div style="font-weight:400;font-size:.92em;line-height:1.55;padding:6px 2px 2px;white-space:normal;max-width:min(78vw,440px)"><b>탈리스커 (Talisker) · 스카이섬 · 45.8% · 아메리칸 엑스버번 캐스크 숙성 (NAS)</b><br>🥃 노즈는 숲속 베리, 크렘 브륄레, 바나나 스플릿, 버터스카치에 칠리의 힌트가 어우러진다. 팔레트는 브리오슈 같은 단맛, 바노피 파이, 통조림 복숭아의 달콤한 해양 풍미에 생강의 알싸함과 오크 스모크, 후추 스파이스가 따른다. 피니시는 짭조름한 스모크와 페퍼리한 여운.<br>📖 탈리스커는 1830년 설립된 스카이섬 유일의 증류소로, 해양적이고 페퍼리한 스모키 캐릭터로 유명하다. 써지(Surge)는 2022년 8월 출시된 트래블 리테일(면세) 전용 NAS 에디션으로, 영국·유럽·미국 주요 공항에서 70cl 병으로 판매되었다. 이름처럼 파도가 밀려드는 듯한 에너지를 표현한 표현이다.<br><small>출처: Words of Whisky (wordsofwhisky.com), Dramface, Moodie Davitt Report, The Whiskey Wash (2026-06-09 리서치)</small></div></details></td><td><strong>$51.66 / ₩79,830</strong> (신라면세)</td><td>+₩9,882</td><td>₩149,000 <a href="https://dailyshot.co/m/item/22988" target="_blank" rel="noopener">(데일리샷)</a></td><td><strong>$51.66</strong></td><td>$70.84</td><td>—</td><td>700ml</td></tr><tr><td>블라드녹 리오라 700ml</td><td><strong>$51.07 / ₩78,918</strong> (롯데면세)</td><td>+₩8,440</td><td>₩138,000 <a href="https://dailyshot.co/m/item/11269" target="_blank" rel="noopener">(데일리샷)</a></td><td>—</td><td><strong>$51.07</strong></td><td>$66.00</td><td>700ml</td></tr><tr><td><details><summary style="cursor:pointer">화이트헤더 15년 700ml</summary><div style="font-weight:400;font-size:.92em;line-height:1.55;padding:6px 2px 2px;white-space:normal;max-width:min(78vw,440px)"><b>블렌디드(빌리 워커) · 스코틀랜드 · 46% · 노스 하이랜드·스페이사이드·아일라 몰트 + 그레인 블렌드</b><br>🥃 히더 꿀·버터스카치의 향에 오렌지 껍질·파인애플·민트, 옅은 피트. 당밀·히더 꿀·버터스카치에 오렌지·자몽·아몬드, 모카·생강과 옅은 피트 스모크 피니시.<br>📖 글렌알라키·글렌드로낙으로 유명한 마스터 블렌더 빌리 워커가 2021년 부활시킨 블렌디드 스카치 '화이트 헤더'의 15년. 그레인 53%에 노스 하이랜드·스페이사이드·소량 아일라 몰트 47% 블렌드, 46%. IWSC 골드(95점).<br><small>출처: HTFW·abbeywhisky.com·wordsofwhisky.com (2026-06-09 리서치)</small></div></details></td><td><strong>$59.22 / ₩91,512</strong> (신라면세)</td><td>+₩8,198</td><td>₩148,900 <a href="https://dailyshot.co/m/item/8241" target="_blank" rel="noopener">(데일리샷)</a></td><td><strong>$59.22</strong></td><td>—</td><td>$75.60</td><td>700ml</td></tr><tr><td>블라드녹 삼사라 700ml</td><td><strong>$59.28 / ₩91,605</strong> (롯데면세)</td><td>+₩8,057</td><td>₩148,000 <a href="https://dailyshot.co/m/item/11268" target="_blank" rel="noopener">(데일리샷)</a></td><td>—</td><td><strong>$59.28</strong></td><td>$78.00</td><td>700ml</td></tr><tr><td><details><summary style="cursor:pointer">탈리스커 다크 스톰 1000ml</summary><div style="font-weight:400;font-size:.92em;line-height:1.55;padding:6px 2px 2px;white-space:normal;max-width:min(78vw,440px)"><b>탈리스커 (Talisker) · 스카이섬 · 45.8% · 강하게 차링(heavily charred)한 오크 캐스크 숙성 (NAS)</b><br>🥃 노즈는 스모키 베이컨, 블랙 페퍼, 레드 칠리에 과수원 과일과 골든 몰트의 힌트. 팔레트는 강한 오크 영향과 함께 입에 닿는 순간 큰 스모크가 터지고 그 뒤로 붉은 과일, 시트러스, 신선한 꿀이 드러난다. 피니시는 매우 길며 허니로스트 너트의 여운이 남는다.<br>📖 스카이섬 유일의 증류소 탈리스커가 만든 다크 스톰은 본래 트래블 리테일 시장용으로 출시된 NAS 표현으로, 1L 용량으로도 유통되었다. 강하게 차링한 오크 캐스크를 사용해 이미 강렬한 탈리스커의 스모크와 스파이스를 한층 더 끌어올린 것이 특징이다. 표준 강도인 45.8%로 병입되며 연수 표기가 없어 비교적 어린 원액으로 추정된다.<br><small>출처: Master of Malt, The Whisky Exchange, Whisky Magazine, 1001Spirits (2026-06-09 리서치)</small></div></details></td><td><strong>$57.15 / ₩88,313</strong> (신라면세)</td><td>+₩7,969</td><td>₩168,000 <a href="https://dailyshot.co/m/item/4575" target="_blank" rel="noopener">(데일리샷)</a></td><td><strong>$57.15</strong></td><td>$65.66</td><td>$66.29</td><td>1000ml</td></tr><tr><td>글렌드로낙 10년 1000ml</td><td><strong>$41.40 / ₩63,975</strong> (신세계면세)</td><td>+₩7,502</td><td>₩139,000 <a href="https://dailyshot.co/m/item/5138" target="_blank" rel="noopener">(데일리샷)</a></td><td>$47.88</td><td>$43.20</td><td><strong>$41.40</strong></td><td>1000ml</td></tr><tr><td><details><summary style="cursor:pointer">엘리먼츠오브아일라 버번캐스크 700ml</summary><div style="font-weight:400;font-size:.92em;line-height:1.55;padding:6px 2px 2px;white-space:normal;max-width:min(78vw,440px)"><b>엘릭서 디스틸러스 (Elixir Distillers, Islay blended malt) · 스코틀랜드 아일라 · 54.5% · 퍼스트필·리필 버번 배럴 숙성 (논칠필터·내추럴 컬러)</b><br>🥃 바닐라 꼬투리·설탕·열대과일의 달콤한 향에 굴뚝 석탄 같은 옅은 훈연, 입에서는 초콜릿 카푸치노·바닐라 커스터드 브리오슈·메이플시럽에 절인 과일과 함께 강렬한 피트 파이어가 터진다.<br>📖 런던 기반 독립 보틀러 엘릭서 디스틸러스의 아일라 블렌디드 몰트로, 라프로익 약 65%·쿨일라 약 35%를 버번 캐스크에서 숙성한 NAS·캐스크 스트랭스 표현.<br><small>출처: The Whisky Wash · WhiskyCast · Whiskynotes (2026-06-10 리서치)</small></div></details></td><td><strong>$49.05 / ₩75,796</strong> (신라/신세계)</td><td>+₩7,315</td><td>₩127,000 <a href="https://dailyshot.co/m/item/18118" target="_blank" rel="noopener">(데일리샷)</a></td><td>$49.05</td><td>—</td><td>$49.05</td><td>700ml</td></tr></tbody></table>
+
+### 10~15만원
+
+<table><thead><tr><th>제품</th><th>최저가 (면세점)</th><th>절약(100ml당)</th><th>국내 소매가</th><th>신라</th><th>롯데</th><th>신세계</th><th>용량</th></tr></thead><tbody><tr><td><details><summary style="cursor:pointer">부쉬밀 18년 트리플 캐스크 700ml</summary><div style="font-weight:400;font-size:.92em;line-height:1.55;padding:6px 2px 2px;white-space:normal;max-width:min(78vw,440px)"><b>부쉬밀(Bushmills) · 아일랜드(북아일랜드) · 46% · 버번 배럴+올로로소 셰리 버트 숙성 후 콜레이타 포트 캐스크 피니시</b><br>🥃 바닐라와 아몬드의 단맛에 말린 과일의 깊이가 더해지고, 포트 캐스크가 신선한 과일향과 크렘브륄레 같은 실키한 단맛을 입힌다.<br>📖 부쉬밀은 1608년 증류 면허를 받은 세계에서 가장 오래된 아이리시 위스키 증류소다. 18년은 100% 맥아 보리로 3회 증류 후 17년 이상 버번·셰리 캐스크에서 숙성하고 희귀한 콜레이타 포트 캐스크에서 마무리한 싱글몰트다.<br><small>출처: moodiedavittreport.com·bushmills.com (2026-06-09 리서치)</small></div></details></td><td><strong>$75.60 / ₩116,824</strong> (롯데면세)</td><td>+₩20,311</td><td>₩259,000 <a href="https://dailyshot.co/m/item/31981" target="_blank" rel="noopener">(데일리샷)</a></td><td>$77.00</td><td><strong>$75.60</strong></td><td>$84.00</td><td>700ml</td></tr><tr><td>더 글렌그란트 18년 700ml</td><td><strong>$74.12 / ₩114,537</strong> (신라면세)</td><td>+₩16,923</td><td>₩233,000 <a href="https://dailyshot.co/m/item/2350" target="_blank" rel="noopener">(데일리샷)</a></td><td><strong>$74.12</strong></td><td>—</td><td>$75.54</td><td>700ml</td></tr><tr><td><details><summary style="cursor:pointer">몰트락 네버바운드 700ml</summary><div style="font-weight:400;font-size:.92em;line-height:1.55;padding:6px 2px 2px;white-space:normal;max-width:min(78vw,440px)"><b>몰트락 (Mortlach) · 스코틀랜드-스페이사이드 · 50.8% · 코냑 지역산 프렌치 오크 캐스크 피니시 (NAS)</b><br>🥃 붉은 과일에 간장·훈제육 같은 세이버리 뉘앙스가 깔린 향, 데메라라 설탕의 단맛으로 열려 고기 같은 복합미로 이어지고 스파이시·세이버리한 피니시로 끝난다.<br>📖 몰트락이 연령 표기 코어 레인지를 벗어나 캐스크 실험과 강한 풍미를 탐구하는 신규 연간 시리즈 'Neverbound'의 Release 01. 최대 4년 자연건조한 코냑 프렌치 오크로 마무리한 브랜드 최초 시도로, 글로벌 면세 및 아시아 일부 시장에 출시됐다.<br><small>출처: Mortlach/Malts 공식·Whiskybase·The Rakyat Post·88 Bamboo (2026-08-11 리서치)</small></div></details></td><td><strong>$85.50 / ₩132,123</strong> (신라면세)</td><td>+₩15,411</td><td>₩240,000 <a href="https://dailyshot.co/m/item/31980" target="_blank" rel="noopener">(데일리샷)</a></td><td><strong>$85.50</strong></td><td>—</td><td>$102.00</td><td>700ml</td></tr><tr><td><details><summary style="cursor:pointer">아벨라워 아부나흐 700ml</summary><div style="font-weight:400;font-size:.92em;line-height:1.55;padding:6px 2px 2px;white-space:normal;max-width:min(78vw,440px)"><b>아벨라워 (Aberlour) · 스페이사이드 (Speyside) · 캐스크 스트렝스 (배치별 상이 · 통상 59~61%) · 100% 퍼스트필 올로로소 셰리 버트 단독 숙성 · NAS · 비냉각여과 · 무착색</b><br>🥃 진한 셰리 폭탄 — 건포도·무화과·다크초콜릿·크리스마스 케이크·오렌지필에 정향 등 스파이스. 풀바디에 캐스크 스트렝스 특유의 강렬하고 오일리한 질감, 길고 진한 셰리 여운.<br>📖 아벨라워는 1879년 스페이사이드에 설립된 증류소다. 아부나흐(A'bunadh, 게일어로 '기원')는 19세기 방식대로 퍼스트필 올로로소 셰리 버트에서만 숙성해 물을 타지 않고 캐스크 스트렝스로 병입하는 NAS 배치 릴리스로, 배치마다 도수·풍미가 조금씩 다르다.<br><small>출처: Aberlour 공식 · Master of Malt · Whiskybase (2026-08-15 리서치)</small></div></details></td><td><strong>$68.83 / ₩106,362</strong> (신라면세)</td><td>+₩13,376</td><td>₩200,000 <a href="https://dailyshot.co/m/search/result?q=%EC%95%84%EB%B2%A8%EB%9D%BC%EC%9B%8C%20%EC%95%84%EB%B6%80%EB%82%98%ED%9D%90%20700ml" target="_blank" rel="noopener">(데일리샷)</a></td><td><strong>$68.83</strong></td><td>$80.73</td><td>$77.28</td><td>700ml</td></tr><tr><td>노아스 밀 750ml</td><td><strong>$66.69 / ₩103,056</strong> (롯데면세)</td><td>+₩11,459</td><td>₩189,000 <a href="https://dailyshot.co/m/item/3203" target="_blank" rel="noopener">(데일리샷)</a></td><td>—</td><td><strong>$66.69</strong></td><td>$73.71</td><td>750ml</td></tr><tr><td>아드벡 우거다일 700ml</td><td><strong>$64.84 / ₩100,197</strong> (신라면세)</td><td>+₩9,673</td><td>₩179,900·750ml <a href="https://dailyshot.co/m/item/20935" target="_blank" rel="noopener">(데일리샷)</a></td><td><strong>$64.84</strong></td><td>$68.25</td><td>$72.80</td><td>700ml</td></tr><tr><td><details><summary style="cursor:pointer">카미키 사쿠라 750ml</summary><div style="font-weight:400;font-size:.92em;line-height:1.55;padding:6px 2px 2px;white-space:normal;max-width:min(78vw,440px)"><b>카미키 (Kamiki · 나라) 블렌디드 몰트 · 일본 나라 · 48% · 오크 숙성 후 일본 삼나무(시더) 캐스크 → 사쿠라(벚나무) 캐스크 마무리 (오크·시더·사쿠라 트리플 캐스크)</b><br>🥃 벚꽃·시더 스파이스·꿀·백단·은은한 과수원 과일 향. 실키한 입안에 꽃향 단맛·바닐라 크림·토스티드 시더·자두·섬세한 베이킹 스파이스, 길고 우아한 벚꽃·우디 스파이스·따뜻한 단맛의 피니시.<br>📖 카미키는 나라(일본 '신들의 도시')의 블렌디드 몰트로, 일본 몰트와 해외 몰트를 블렌딩한다. 사쿠라는 세계 최초로 벚나무 캐스크에 마무리한 표현으로 오크·삼나무·벚나무 트리플 캐스크가 특징(48%). 2022 Sunset International Best Whisky 등 수상.<br><small>출처: 공식 kamikiwhisky.com · Master of Malt · dekantā (2026-06-12 리서치)</small></div></details></td><td><strong>$67.83 / ₩104,817</strong> (신세계면세)</td><td>+₩8,881</td><td>₩160,000 <a href="https://dailyshot.co/m/item/16348" target="_blank" rel="noopener">(데일리샷)</a></td><td>$71.40</td><td>—</td><td><strong>$67.83</strong></td><td>750ml</td></tr><tr><td>라프로익 포트우드 2023 700ml</td><td><strong>$86.94 / ₩134,348</strong> (신라면세)</td><td>+₩8,521</td><td>₩194,000 <a href="https://dailyshot.co/m/item/32858" target="_blank" rel="noopener">(데일리샷)</a></td><td><strong>$86.94</strong></td><td>—</td><td>$96.80</td><td>700ml</td></tr><tr><td>1792 풀프루프 싱글배럴셀렉트 750ml</td><td><strong>$74.80 / ₩115,588</strong> (신세계면세)</td><td>+₩5,874</td><td>₩149,000 <a href="https://dailyshot.co/m/item/4160" target="_blank" rel="noopener">(데일리샷)</a></td><td>—</td><td>$79.20</td><td><strong>$74.80</strong></td><td>750ml</td></tr><tr><td><details><summary style="cursor:pointer">레드브레스트 15년 700ml</summary><div style="font-weight:400;font-size:.92em;line-height:1.55;padding:6px 2px 2px;white-space:normal;max-width:min(78vw,440px)"><b>레드브레스트 (Redbreast) · 아일랜드 · 46% · 버번 배럴 + 올로로소 셰리 캐스크</b><br>🥃 과일 콤포트·복숭아·오렌지의 향에 시나몬·정향이 더해지고, 레드브레스트 특유의 견과류 드라이함이 느껴진다. 팔레트는 망고·파인애플·바닐라·캐러멜로 부드럽고 버터 같은 질감이며, 오크와 스파이스가 자리잡는다. 피니시엔 붉은 베리와 바닐라·너트멕이 남는다.<br>📖 레드브레스트 15년은 버번 배럴과 올로로소 셰리 캐스크에서 15년 숙성한 싱글 포트 스틸 표현으로, 12년보다 셰리 영향과 도수(46%)가 강화된 버전이다.<br><small>출처: 공식 사이트 · The Whisky Exchange · The Whiskey Wash (2026-06-20 리서치)</small></div></details></td><td><strong>$71.40 / ₩110,334</strong> (신세계면세)</td><td>+₩5,667</td><td>₩150,000 <a href="https://dailyshot.co/m/item/5296" target="_blank" rel="noopener">(데일리샷)</a></td><td>$72.68</td><td>—</td><td><strong>$71.40</strong></td><td>700ml</td></tr></tbody></table>
+
+### 15~20만원
+
+<table><thead><tr><th>제품</th><th>최저가 (면세점)</th><th>절약(100ml당)</th><th>국내 소매가</th><th>신라</th><th>롯데</th><th>신세계</th><th>용량</th></tr></thead><tbody><tr><td>토마틴 21년 700ml</td><td><strong>$126.14 / ₩194,924</strong> (신세계면세)</td><td>+₩24,297</td><td>₩365,000 <a href="https://dailyshot.co/m/item/11354" target="_blank" rel="noopener">(데일리샷)</a></td><td>$128.52</td><td>—</td><td><strong>$126.14</strong></td><td>700ml</td></tr><tr><td><details><summary style="cursor:pointer">와일드무어 23년 웨이킹 포레스트 700ml</summary><div style="font-weight:400;font-size:.92em;line-height:1.55;padding:6px 2px 2px;white-space:normal;max-width:min(78vw,440px)"><b>와일드무어 (Wildmoor) · 윌리엄 그랜트 앤 선즈 (블렌디드 스카치) · 스코틀랜드 (블렌디드 · 리저널리티 초월 콘셉트) · 42% · 버진 오크 + 셰리 오크 숙성 · 23년 · 글로벌 트래블 리테일 전용</b><br>🥃 셰리 유래 과일·은은한 그레인·카라멜에 복숭아·건포도·담뱃잎의 힌트. 버진 오크가 더한 부드러운 바닐라와 풍부한 단맛, 왁시(waxy)한 질감에 세이보리한 셰리 단맛의 피니시.<br>📖 윌리엄 그랜트 앤 선즈가 2024년 4월 선보인 고숙성 울트라 럭셔리 블렌디드 스카치 브랜드 '와일드무어'의 트래블 리테일 전용 라인이다. 스코틀랜드의 야생 풍경에서 영감을 받아 '유리잔 속 스코틀랜드의 풍미 지도'를 표방하며 지역성(리저널리티)을 초월한다는 콘셉트를 내세운다. 웨이킹 포레스트 23년은 스코틀랜드의 숲에서 영감을 받은 표현으로, 버진 오크와 셰리 오크 숙성을 통해 부드러운 바닐라와 풍부한 단맛을 강조한다. 싱가포르 창이 공항에서 면세 시장에 데뷔했다.<br><small>출처: Whisky Magazine · Moodie Davitt Report · IWSC · Master of Malt (2026-08-21 리서치)</small></div></details></td><td><strong>$97.76 / ₩151,068</strong> (롯데면세)</td><td>+₩19,848</td><td>₩290,000 <a href="https://dailyshot.co/m/item/24903" target="_blank" rel="noopener">(데일리샷)</a></td><td>$107.16</td><td><strong>$97.76</strong></td><td>—</td><td>700ml</td></tr><tr><td><details><summary style="cursor:pointer">보모어 19년 700ml</summary><div style="font-weight:400;font-size:.92em;line-height:1.55;padding:6px 2px 2px;white-space:normal;max-width:min(78vw,440px)"><b>보모어 (Bowmore) · 아일라 (Islay) · 43% · 엑스-버번 숙성 후 피노누아(부르고뉴) 캐스크 피니시 · GTR 면세 전용(Appellations)</b><br>🥃 피노누아의 우아한 붉은베리·체리에 보모어의 부드러운 피트 스모크, 트로피컬 프루트의 긴 여운.<br>📖 Appellations 컬렉션의 19년 표현으로 부르고뉴 피노누아 캐스크 피니시. 보모어는 1779년 설립된 아일라 最古 증류소.<br><small>출처: 공식 bowmore.com · Moodie Davitt Report · Whisky Advocate (2026-06-12 리서치)</small></div></details></td><td><strong>$106.08 / ₩163,925</strong> (신라면세)</td><td>+₩18,725</td><td>₩295,000 <a href="https://dailyshot.co/m/item/25813" target="_blank" rel="noopener">(데일리샷)</a></td><td><strong>$106.08</strong></td><td>$143.41</td><td>$108.53</td><td>700ml</td></tr><tr><td>더 글렌그란트 18년 1000ml</td><td><strong>$115.78 / ₩178,914</strong> (신라면세)</td><td>+₩17,538</td><td>₩248,000 <a href="https://dailyshot.co/m/item/2350" target="_blank" rel="noopener">(데일리샷)</a></td><td><strong>$115.78</strong></td><td>—</td><td>$163.20</td><td>1000ml</td></tr><tr><td><details><summary style="cursor:pointer">로얄브라클라 18년 700ml</summary><div style="font-weight:400;font-size:.92em;line-height:1.55;padding:6px 2px 2px;white-space:normal;max-width:min(78vw,440px)"><b>로얄브라클라 (Royal Brackla) · 하이랜드 · 46% · 팔로 코르타도 셰리 캐스크 피니시 · 논칠필터</b><br>🥃 파인애플·구아바·꿀 시리얼·라이트 시트러스 향. 부드럽고 크리미한 입안에 바닐라·캔디드 프루트·밀크 초콜릿·아니스·카시아. 데메라라 슈거에서 루바브·구스베리 타르트와 스파이스의 상큼한 피니시.<br>📖 1812년 설립, 윌리엄 4세로부터 최초의 'Royal' 칭호를 받은 하이랜드 증류소. 18년은 팔로 코르타도 셰리 캐스크로 피니시해 트로피컬·꿀·크리미한 풍미를 더한 코어레인지 표현. 무착색·논칠필터.<br><small>출처: Whisky Advocate · The Whiskey Wash · Whisky Magazine (2026-07-20 리서치)</small></div></details></td><td><strong>$107.31 / ₩165,826</strong> (신라면세)</td><td>+₩7,740</td><td>₩220,000 <a href="https://dailyshot.co/m/item/11632" target="_blank" rel="noopener">(데일리샷)</a></td><td><strong>$107.31</strong></td><td>$152.64</td><td>$110.38</td><td>700ml</td></tr><tr><td>달모어 트리오 1000ml</td><td><strong>$99.75 / ₩154,143</strong> (신라/신세계)</td><td>+₩5,086</td><td>₩205,000 <a href="https://dailyshot.co/m/item/4981" target="_blank" rel="noopener">(데일리샷)</a></td><td>$99.75</td><td>—</td><td>$99.75</td><td>1000ml</td></tr><tr><td>달모어 시가몰트 리저브 700ml</td><td><strong>$118.75 / ₩183,504</strong> (신라/신세계)</td><td>+₩3,071</td><td>₩205,000 <a href="https://dailyshot.co/m/item/3169" target="_blank" rel="noopener">(데일리샷)</a></td><td>$118.75</td><td>—</td><td>$118.75</td><td>700ml</td></tr><tr><td>로얄살루트 21년 루나 뉴이어 2026 700ml</td><td><strong>$123.23 / ₩190,427</strong> (신라면세)</td><td>+₩2,796</td><td>₩210,000 <a href="https://dailyshot.co/m/item/3208" target="_blank" rel="noopener">(데일리샷)</a></td><td><strong>$123.23</strong></td><td>—</td><td>$140.80</td><td>700ml</td></tr><tr><td><details><summary style="cursor:pointer">NEW 올트모어 21년 (깔바도스) 500ml</summary><div style="font-weight:400;font-size:.92em;line-height:1.55;padding:6px 2px 2px;white-space:normal;max-width:min(78vw,440px)"><b>올트모어 (Aultmore) · 독립 스페이사이드 · 스페이사이드 · 46% (논칠필터·천연색) · 리필/버번 숙성 후 세컨드필 깔바도스(사과 브랜디) 캐스크 피니시</b><br>🥃 사과꽃 만발한 과수원의 상큼한 향에 아몬드·섬세한 오크. 세컨드필 깔바도스가 사과·토스티드 아몬드의 과실 단맛과 부드러운 스파이스를 더한다. 균형 잡힌 스페이사이드 몰트.<br>📖 올트모어는 1896년 스페이사이드에 설립, 현재 듀어스(바카디) 소유의 '숨은 보석' 증류소로 깨끗하고 꽃향 나는 스피릿으로 유명하다. 2024년 출시된 Cask Finish Collection(트래블 리테일 면세 전용) 4종 중 하나로, 21년 원액을 깔바도스 캐스크로 피니시했다. 컬렉션 전 제품이 46%·논칠필터·천연색.<br><small>출처: moodiedavittreport.com · dutyfreehunter.com · whiskyintelligence.com (2026-08-18 리서치)</small></div></details></td><td><strong>$103.98 / ₩160,680</strong> (신라면세)</td><td>+₩2,435</td><td>₩242,000 <a href="https://dailyshot.co/m/item/6909" target="_blank" rel="noopener">(데일리샷)</a></td><td><strong>$103.98</strong></td><td>—</td><td>$103.98</td><td>500ml</td></tr><tr><td><details><summary style="cursor:pointer">조니워커 블루라벨 500ml</summary><div style="font-weight:400;font-size:.92em;line-height:1.55;padding:6px 2px 2px;white-space:normal;max-width:min(78vw,440px)"><b>조니워커 (Johnnie Walker) · 블렌디드(스코틀랜드) · 40% · 다양한 캐스크(엄선된 희소 원액 블렌드)</b><br>🥃 바닐라·꿀·오렌지 껍질·꽃 향에 오크 스파이스와 배경의 옅은 스모크가 은은히 더해진다. 팔레트는 오크·바닐라·꿀·오렌지 시트러스에 말린 과일·헤이즐넛·다크초콜릿·캐러멜이 어우러진다. 질감은 매우 부드럽고 기름지며 길게 이어진다.<br>📖 조니워커 블루 라벨은 디아지오의 울트라 프리미엄 블렌디드 스카치로, 희소하고 잘 숙성된 원액을 엄선해 블렌딩한다.<br><small>출처: 공식 정보 · The Whiskey Wash · 마스터 블렌더 노트 (2026-06-20 리서치)</small></div></details></td><td><strong>$103.36 / ₩159,722</strong> (신라면세)</td><td>+₩723</td><td>₩245,000·750ml <a href="https://dailyshot.co/m/item/3183" target="_blank" rel="noopener">(데일리샷)</a></td><td><strong>$103.36</strong></td><td>$103.68</td><td>$104.00</td><td>500ml</td></tr></tbody></table>
+
+### 20~30만원
+
+<table><thead><tr><th>제품</th><th>최저가 (면세점)</th><th>절약(100ml당)</th><th>국내 소매가</th><th>신라</th><th>롯데</th><th>신세계</th><th>용량</th></tr></thead><tbody><tr><td>더 글렌리벳 21년 700ml</td><td><strong>$184.19 / ₩284,628</strong> (신라면세)</td><td>+₩47,910</td><td>₩620,000 <a href="https://dailyshot.co/m/item/5429" target="_blank" rel="noopener">(데일리샷)</a></td><td><strong>$184.19</strong></td><td>—</td><td>$196.50</td><td>700ml</td></tr><tr><td>글렌모렌지 시그넷 700ml</td><td><strong>$168.30 / ₩260,073</strong> (신라/롯데/신세계)</td><td>+₩37,133</td><td>₩520,000 <a href="https://dailyshot.co/m/item/24394" target="_blank" rel="noopener">(데일리샷)</a></td><td>$168.30</td><td>$168.30</td><td>$168.30</td><td>700ml</td></tr><tr><td><details><summary style="cursor:pointer">더 글렌그란트 21년 700ml</summary><div style="font-weight:400;font-size:.92em;line-height:1.55;padding:6px 2px 2px;white-space:normal;max-width:min(78vw,440px)"><b>글렌그란트 (Glen Grant) · 스페이사이드 · 46% · 엑스-올로로소 셰리 + 버번 배럴 매링 · 논칠필터 · 천연색</b><br>🥃 잘 익은 복숭아·토피·건포도 향. 부드러운 입안에서 트로피컬 프루트와 크리미 버터, 카라멜라이즈드 크렘브륄레의 긴 피니시.<br>📖 1840년 스페이사이드 로시스에 설립. 키 큰 슬림 증류기와 정류기(purifier)로 가볍고 깨끗한 꽃향 스피릿을 만드는 스페이사이드 대표 증류소. 마스터 디스틸러 데니스 말콤이 캐스크를 직접 선별해 소규모 배치로 매링한 코어레인지 21년 표현.<br><small>출처: 공식 theglengrant.com · Berry Bros & Rudd · Whisky Magazine (2026-06-07 리서치)</small></div></details></td><td><strong>$174.08 / ₩269,005</strong> (신라면세)</td><td>+₩30,857</td><td>₩485,000 <a href="https://dailyshot.co/m/item/9807" target="_blank" rel="noopener">(데일리샷)</a></td><td><strong>$174.08</strong></td><td>$211.14</td><td>$178.50</td><td>700ml</td></tr><tr><td>로얄살루트 25년 더 트레저드 블렌드 700ml</td><td><strong>$192.45 / ₩297,392</strong> (롯데면세)</td><td>+₩27,515</td><td>₩490,000 <a href="https://dailyshot.co/m/item/5997" target="_blank" rel="noopener">(데일리샷)</a></td><td>—</td><td><strong>$192.45</strong></td><td>$198.00</td><td>700ml</td></tr><tr><td><details><summary style="cursor:pointer">듀어스 25년 750ml</summary><div style="font-weight:400;font-size:.92em;line-height:1.55;padding:6px 2px 2px;white-space:normal;max-width:min(78vw,440px)"><b>듀어스 (Dewar's) · 블렌디드(스코틀랜드) · 40% · 오크 캐스크 25년+ 숙성 후 로얄 브래클라 싱글몰트 캐스크 피니시</b><br>🥃 꿀·허니콤·카라멜에 잘 익은 사과·백도·구운 파인애플·과일 케이크가 더해진 향. 팔레트는 꿀 카라멜·허니서클·붉은 사과·천도복숭아에 시나몬·화이트 초콜릿·옅은 후추. 피니시는 부드럽고 벨벳 같으며 옅은 스모크가 은은히 남는다.<br>📖 'The Signature'. 마스터 블렌더 스테파니 맥레오드가 25년 이상 숙성 원액을 블렌딩한 뒤 로얄 브래클라 싱글몰트 캐스크에서 마무리한 듀어스의 더블 에이지드 프레스티지 블렌드.<br><small>출처: 공식 사이트 · The Whisky Exchange · Adventures In Whiskey</small></div></details></td><td><strong>$154.76 / ₩239,150</strong> (신라면세)</td><td>+₩26,646</td><td>₩439,000 <a href="https://dailyshot.co/m/item/6772" target="_blank" rel="noopener">(데일리샷)</a></td><td><strong>$154.76</strong></td><td>$248.82</td><td>$213.70</td><td>750ml</td></tr><tr><td>와일드터키 마스터스 킵 트라이엄프 750ml</td><td><strong>$148.75 / ₩229,863</strong> (신세계면세)</td><td>+₩24,352</td><td>₩385,000 <a href="https://dailyshot.co/m/item/25132" target="_blank" rel="noopener">(데일리샷)</a></td><td>—</td><td>$166.25</td><td><strong>$148.75</strong></td><td>750ml</td></tr><tr><td>화이트헤더 21년 700ml</td><td><strong>$131.22 / ₩202,774</strong> (신라면세)</td><td>+₩19,989</td><td>₩342,700 <a href="https://dailyshot.co/m/item/3565" target="_blank" rel="noopener">(데일리샷)</a></td><td><strong>$131.22</strong></td><td>—</td><td>$166.80</td><td>700ml</td></tr><tr><td>글렌피딕 21년 그랑 리제르바 700ml</td><td><strong>$144.14 / ₩222,739</strong> (롯데면세)</td><td>+₩15,323</td><td>₩330,000 <a href="https://dailyshot.co/m/item/3165" target="_blank" rel="noopener">(데일리샷)</a></td><td>$145.20</td><td><strong>$144.14</strong></td><td>—</td><td>700ml</td></tr><tr><td>글렌피딕 21년 CNY 2026 리미티드 에디션 700ml</td><td><strong>$145.20 / ₩224,377</strong> (신라면세)</td><td>+₩15,089</td><td>₩330,000 <a href="https://dailyshot.co/m/item/3165" target="_blank" rel="noopener">(데일리샷)</a></td><td><strong>$145.20</strong></td><td>—</td><td>$171.60</td><td>700ml</td></tr><tr><td>로얄살루트 21년 해리스 리드 에디션 700ml</td><td><strong>$159.38 / ₩246,289</strong> (롯데면세)</td><td>+₩13,959</td><td>₩344,000 <a href="https://dailyshot.co/m/item/27288" target="_blank" rel="noopener">(데일리샷)</a></td><td>$160.33</td><td><strong>$159.38</strong></td><td>$160.30</td><td>700ml</td></tr></tbody></table>
+
+### 30~50만원
+
+<table><thead><tr><th>제품</th><th>최저가 (면세점)</th><th>절약(100ml당)</th><th>국내 소매가</th><th>신라</th><th>롯데</th><th>신세계</th><th>용량</th></tr></thead><tbody><tr><td>와일드무어 30년 트로피칼 코스트 700ml</td><td><strong>$211.07 / ₩326,166</strong> (롯데면세)</td><td>+₩56,262</td><td>₩720,000 <a href="https://dailyshot.co/m/item/25251" target="_blank" rel="noopener">(데일리샷)</a></td><td>$248.32</td><td><strong>$211.07</strong></td><td>—</td><td>700ml</td></tr><tr><td><details><summary style="cursor:pointer">글렌파클라스 25년 700ml</summary><div style="font-weight:400;font-size:.92em;line-height:1.55;padding:6px 2px 2px;white-space:normal;max-width:min(78vw,440px)"><b>글렌파클라스 (Glenfarclas) · 스페이사이드 · 43% · 올로로소 셰리 캐스크 장기 숙성 · 천연색</b><br>🥃 진한 올로로소 셰리의 건포도·무화과·다크초콜릿·오렌지필·몰트 토피 향. 풀바디에 크리스마스 케이크·가죽·오크 스파이스, 길고 따뜻한 셰리 피니시.<br>📖 글렌파클라스는 1836년 설립, 그랜트 가문이 6대째 독립 운영하는 스페이사이드의 대표 셰리 몰트 증류소. 25년은 장기 셰리 숙성 코어레인지로 가성비 셰리 위스키의 기준으로 꼽힌다.<br><small>출처: 공식 glenfarclas.com · Whisky Magazine (2026-06-08 리서치)</small></div></details></td><td><strong>$226.80 / ₩350,474</strong> (신라면세)</td><td>+₩52,646</td><td>₩719,000 <a href="https://dailyshot.co/m/item/20293" target="_blank" rel="noopener">(데일리샷)</a></td><td><strong>$226.80</strong></td><td>—</td><td>$227.56</td><td>700ml</td></tr><tr><td><details><summary style="cursor:pointer">올트모어 25년 700ml</summary><div style="font-weight:400;font-size:.92em;line-height:1.55;padding:6px 2px 2px;white-space:normal;max-width:min(78vw,440px)"><b>올트모어 (Aultmore) · 스코틀랜드 스페이사이드 · 46% · 엑스-버번 위주(올트모어 특유의 클린 스타일)</b><br>🥃 바나나·배·사과·건포도가 크리미한 카라멜 소스에 덮인 듯한 풍성한 과일 향. 팔레트는 단 맥아·말린 과일·토피에 은은한 스파이스와 우아한 오크가 균형을 이룬다. 피니시는 길고 정제되어 단맛·부드러운 스파이스·매끈한 오크가 남는다.<br>📖 올트모어의 가장 오래되고 프레스티지한 표현. 25년 숙성에도 풀·깨끗함의 시그니처 신선함을 유지한다.<br><small>출처: 공식 사이트 · The Cask Connoisseur · GreatDrams</small></div></details></td><td><strong>$322.91 / ₩498,992</strong> (롯데면세)</td><td>+₩50,144</td><td>₩850,000 <a href="https://dailyshot.co/m/item/13771" target="_blank" rel="noopener">(데일리샷)</a></td><td>$354.68</td><td><strong>$322.91</strong></td><td>$404.46</td><td>700ml</td></tr><tr><td><details><summary style="cursor:pointer">시바스리갈 25년 700ml</summary><div style="font-weight:400;font-size:.92em;line-height:1.55;padding:6px 2px 2px;white-space:normal;max-width:min(78vw,440px)"><b>시바스 브라더스 · 스코틀랜드 스페이사이드 · 40% · 최소 25년 숙성 · 아메리칸·유러피언 오크 캐스크</b><br>🥃 몰트와 베리·감초·라즈베리·달콤한 오트밀 향에 오렌지·복숭아·마지팬·견과류가 어우러진 풍성한 향. 입에서는 부드럽게 시작해 우아한 토피와 버터, 초콜릿 오렌지, 퐁당 크림 같은 부드러움이 빌드업되고, 버터스카치의 둥글고 호화로운 여운으로 마무리된다.<br>📖 1909년 처음 선보인 시바스 25년은 시바스 리갈 명성의 출발점이 된 럭셔리 블렌드로, 2007년 마스터 블렌더 콜린 스콧이 옛 레시피를 복원해 재출시했다. 최소 25년 이상 숙성한 몰트·그레인만을 결혼시킨 한정 수량 프레스티지 보틀로, 짐 머리 위스키 바이블에서 블렌디드 스카치 부문 올해의 술로 선정된 이력이 있다.<br><small>출처: Chivas 공식·The Whisky Exchange·Caskers (2026-06-25 리서치)</small></div></details></td><td><strong>$270.74 / ₩418,374</strong> (롯데면세)</td><td>+₩38,803</td><td>₩690,000 <a href="https://dailyshot.co/m/item/5990" target="_blank" rel="noopener">(데일리샷)</a></td><td>$272.36</td><td><strong>$270.74</strong></td><td>$291.75</td><td>700ml</td></tr><tr><td>로얄살루트 32년 500ml</td><td><strong>$312.90 / ₩483,524</strong> (신세계면세)</td><td>+₩33,295</td><td>₩650,000 <a href="https://dailyshot.co/m/item/6594" target="_blank" rel="noopener">(데일리샷)</a></td><td>$312.97</td><td>$313.79</td><td><strong>$312.90</strong></td><td>500ml</td></tr><tr><td>NEW 올트모어 25년 (1st Fill 올로로소 쉐리) 500ml</td><td><strong>$231.47 / ₩357,690</strong> (신라면세)</td><td>+₩21,176</td><td>₩649,000 <a href="https://dailyshot.co/m/item/13771" target="_blank" rel="noopener">(데일리샷)</a></td><td><strong>$231.47</strong></td><td>—</td><td>$231.47</td><td>500ml</td></tr><tr><td>발렌타인 30년 700ml</td><td><strong>$312.90 / ₩483,524</strong> (신세계면세)</td><td>+₩3,458</td><td>₩544,000·750ml <a href="https://dailyshot.co/m/item/18618" target="_blank" rel="noopener">(데일리샷)</a></td><td>—</td><td>$313.79</td><td><strong>$312.90</strong></td><td>700ml</td></tr><tr><td>조니워커 블루 1000ml</td><td><strong>$195.09 / ₩301,472</strong> (신라면세)</td><td>+₩2,520</td><td>₩245,000·750ml <a href="https://dailyshot.co/m/item/3183" target="_blank" rel="noopener">(데일리샷)</a></td><td><strong>$195.09</strong></td><td>$195.69</td><td>$196.30</td><td>1000ml</td></tr><tr><td>달모어 킹 알렉산더 3세 TRX 700ml</td><td><strong>$297.35 / ₩459,494</strong> (롯데/신세계)</td><td>−₩12,928</td><td>₩369,000 <a href="https://dailyshot.co/m/item/3170" target="_blank" rel="noopener">(데일리샷)</a></td><td>—</td><td>$297.35</td><td>$297.35</td><td>700ml</td></tr><tr><td><details><summary style="cursor:pointer">패터캐른 25년 700ml</summary><div style="font-weight:400;font-size:.92em;line-height:1.55;padding:6px 2px 2px;white-space:normal;max-width:min(78vw,440px)"><b>패터캐른 (Fettercairn) · 스코틀랜드 하이랜드 · 46.3% · 엑스버번 배럴 중심의 장기 숙성(25년), 자연색·논칠필터 경향</b><br>🥃 열대 과일과 바나나케이크·패션프루트·메이플시럽·달콤한 시나몬으로 이어지는 패터캐른 특유의 부드럽고 과일 풍부한 하우스 스타일.<br>📖 증류 시 구리 냉각 링(쿨링 링)으로 환류·순도를 높이는 독특한 방식으로 알려진 하이랜드 증류소 패터캐른의 25년 장기 숙성 싱글몰트.<br><small>출처: Heinemann · Frankfurt Airport Shop · Fettercairn 공식 (2026-06-10 리서치)</small></div></details></td><td><strong>$266.47 / ₩411,776</strong> (신세계면세)</td><td>—</td><td>—</td><td>$349.30</td><td>—</td><td><strong>$266.47</strong></td><td>700ml</td></tr></tbody></table>
+
+---
+
+## 📋 수집 로그 (최신이 맨 위)
+
+---
+
+
+## 📅 2026-08-22 — 수집 (2026-08-22 신라 · 2026-08-22 롯데 · 2026-08-22 신세계)
+
+### 수집 결과
+
+| 면세점 | 수집 종수 | 수집일 |
+|---|---|---|
+| 신라면세 | 661종 | 2026-08-22 |
+| 롯데면세 | 403종 | 2026-08-22 |
+| 신세계면세 | 727종 | 2026-08-22 |
+
+- 세 면세점 동시 비교 가능: **336종** (3곳 모두 있는 제품: 116종)
+- 가격차 10% 초과 제품: 위 가격대별 Top 10 표 참고
+
+**🔼 Top 10 새 진입 (직전: 2026-08-21)**
+
+- [10만원 이하] 글렌드로낙 10년 1000ml
+- [10만원 이하] 블라드녹 삼사라 700ml
+- [10만원 이하] 블라드녹 알린타 700ml
+- [10만원 이하] 탈리스커 다크 스톰 1000ml
+- [10~15만원] 카미키 사쿠라 750ml
+- [15~20만원] 로얄살루트 21년 루나 뉴이어 2026 700ml
+- [20~30만원] 글렌피딕 21년 그랑 리제르바 700ml
+- [20~30만원] 와일드터키 마스터스 킵 트라이엄프 750ml
+- [30~50만원] 패터캐른 25년 700ml
+
+**🔽 Top 10 아웃 (직전: 2026-08-21)**
+
+- [10만원 이하] 듀어스 18년 1000ml
+- [10만원 이하] 라가불린 16년 700ml
+- [10만원 이하] 보모어 14년 700ml
+- [10만원 이하] 블라드녹 비나야 700ml
+- [10~15만원] 달위니 15년 1000ml
+- [15~20만원] 글렌드로낙 16년 700ml
+- [20~30만원] 달모어 15년 1000ml
+- [20~30만원] 조니워커 블루 750ml
+- [30~50만원] 보모어 22년 700ml
+*by Dram · CaskCode*
+
+
+## 📅 2026-08-21 — 과거 로그
+
+**🔼 Top 10 새 진입 (직전: 2026-08-20)**
+
+- [20~30만원] 조니워커 블루 750ml
+
+**🔽 Top 10 아웃 (직전: 2026-08-20)**
+
+- [20~30만원] 듀어스 더블더블 27년 500ml
+
+
+## 📅 2026-08-19 — 과거 로그
+
+**🔼 Top 10 새 진입 (직전: 2026-08-18)**
+
+- [10만원 이하] 라가불린 16년 700ml
+- [10~15만원] NEW 올트모어 18년 (마데이라) 500ml
+- [30~50만원] 보모어 22년 700ml
+
+**🔽 Top 10 아웃 (직전: 2026-08-18)**
+
+- [10만원 이하] NEW 올트모어 18년 (마데이라) 500ml
+- [10~15만원] 카미키 사쿠라 750ml
+- [30~50만원] 패터캐른 25년 700ml
+
+
+## 📅 2026-08-18 — 과거 로그
+
+**🔼 Top 10 새 진입 (직전: 2026-08-17)**
+
+- [10만원 이하] NEW 올트모어 18년 (마데이라) 500ml
+- [10~15만원] 카미키 사쿠라 750ml
+
+**🔽 Top 10 아웃 (직전: 2026-08-17)**
+
+- [10만원 이하] 라가불린 16년 700ml
+- [10~15만원] NEW 올트모어 18년 (마데이라) 500ml
