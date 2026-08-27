@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<!-- 모바일 우선 · 카톡 인앱 웹뷰 안전: viewport-fit=cover + safe-area -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#14202b">
+<meta name="description" content="라이언 딸의 재수술 비용을 돕기 위한 위스키 나눔·기부 문의 페이지.">
+<title>라이언과 함께 — 위스키 나눔 기부</title>
+<link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+<link rel="manifest" href="./manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="라이언과 함께">
+<link rel="stylesheet" href="./style.css?v=20260827a">
+</head>
+<body>
+
+<main class="wrap">
+
+  <!-- ===== 스토리 / 랜딩 ===== -->
+  <header class="hero">
+    <p class="hero-kicker">위스키 나눔 · 기부 문의</p>
+    <h1 class="hero-title">라이언의 딸,<br>다시 심장 수술을 앞두고 있습니다</h1>
+    <p class="hero-lead">
+      남은 위스키를 지인들과 나누고, 그 뜻을 모아 수술 비용에 보탭니다.
+    </p>
+  </header>
+
+  <section class="card story">
+    <p>
+      라이언은 호주 출신의 PGA 골프 선수이자, 오랜 친구입니다.
+      그의 딸은 어릴 때부터 심장이 좋지 않아 페이스메이커(심박기)를
+      넣는 수술을 받았습니다.
+    </p>
+    <p>
+      보통 10년마다 교체하면 되는 기기가 3년 만에 고장 나,
+      재수술이 필요해졌습니다. 호주에서는 보험으로 해결되지만,
+      지금 있는 베트남 호치민에서 수술을 받아야 해
+      약 <strong>1,000만 원</strong>의 비용이 듭니다.
+    </p>
+    <p>
+      직접 돕겠다는 제안은 친구가 한사코 사양했습니다.
+      그래서 방법을 바꿨습니다. <strong>가지고 있던 위스키를 지인들에게
+      나누고</strong>, 거기서 모인 금액에 부족분을 보태
+      수술 비용에 힘을 보태려 합니다.
+    </p>
+    <p class="story-sign">— CaskCode</p>
+  </section>
+
+  <!-- ===== 위스키 구매 문의 폼 ===== -->
+  <section class="card" id="formCard">
+    <h2 class="card-title">위스키 구매 문의하기</h2>
+    <p class="card-sub">
+      찾으시는 위스키와 수량을 적어주세요. 재고를 확인한 뒤 개별적으로
+      안내드립니다. 제출만으로 결제가 진행되지는 않습니다.
+    </p>
+
+    <form id="inquiryForm" novalidate>
+
+      <label class="field-label">구매하고 싶은 위스키</label>
+      <div id="itemList" class="item-list"><!-- 라인 아이템 --></div>
+      <button type="button" id="addItemBtn" class="btn-ghost">＋ 위스키 추가</button>
+
+      <label class="field-label" for="amount">총 입금 예정 금액 (원)</label>
+      <input id="amount" name="amount" class="input" type="text" inputmode="numeric"
+        autocomplete="off" placeholder="예: 300,000">
+      <p id="lessonBadge" class="lesson-badge" hidden>
+        🏌️ 30만 원 이상 — 호치민 방문 시 <strong>라이언 코치의 원포인트 레슨</strong> 혜택 대상입니다.
+      </p>
+
+      <label class="field-label" for="depositor">입금자 이름</label>
+      <input id="depositor" name="depositor" class="input" type="text"
+        autocomplete="name" placeholder="입금하실 분 성함" maxlength="40">
+
+      <label class="field-label" for="address">배송지 주소</label>
+      <textarea id="address" name="address" class="input textarea"
+        placeholder="받으실 주소를 적어주세요" maxlength="300"></textarea>
+
+      <label class="field-label" for="contact">연락처 <span class="opt">(선택)</span></label>
+      <input id="contact" name="contact" class="input" type="text"
+        inputmode="tel" autocomplete="tel" placeholder="연락 가능한 번호 또는 카톡 ID" maxlength="60">
+
+      <p id="formError" class="form-error" hidden></p>
+      <button type="submit" id="submitBtn" class="btn-primary">문의 보내기</button>
+    </form>
+
+    <!-- 제출 성공 메시지 -->
+    <div id="thanks" class="thanks" hidden>
+      <div class="thanks-mark">🙏</div>
+      <h3 class="thanks-title">문의가 접수되었습니다</h3>
+      <p class="thanks-desc">
+        마음 내주셔서 감사합니다. 재고 확인 후 개별적으로 안내드리겠습니다.
+        아래 계좌로 입금해 주시면 확인 후 연락드립니다.
+      </p>
+      <p id="thanksLesson" class="thanks-lesson" hidden>
+        🏌️ 원포인트 레슨 혜택 대상입니다. 호치민 방문 일정이 생기면 함께 안내드릴게요.
+      </p>
+      <button type="button" id="againBtn" class="btn-ghost">다른 문의 남기기</button>
+    </div>
+  </section>
+
+  <!-- ===== 입금 계좌 안내 ===== -->
+  <section class="card account">
+    <h2 class="card-title">입금 계좌</h2>
+    <div class="account-row">
+      <div class="account-info">
+        <div class="account-bank">국민은행</div>
+        <div class="account-num" id="accountNum">043902-04-127524</div>
+      </div>
+      <button type="button" id="copyBtn" class="btn-copy" aria-label="계좌번호 복사">복사</button>
+    </div>
+    <p class="account-note">입금자 성함을 문의 시 적어주신 이름과 같게 해주시면 확인이 빠릅니다.</p>
+  </section>
+
+  <!-- ===== 원포인트 레슨 안내 ===== -->
+  <section class="card lesson">
+    <h2 class="card-title">🏌️ 원포인트 레슨 혜택</h2>
+    <p>
+      <strong>30만 원 이상</strong> 나눔에 함께해 주신 분께는,
+      베트남 호치민 방문 시 <strong>라이언 코치의 원포인트 골프 레슨</strong>을
+      받으실 수 있는 자리를 마련합니다. 라이언은 호주 출신 PGA 선수입니다.
+    </p>
+  </section>
+
+  <footer class="foot">
+    <p>이 페이지는 지인 나눔을 위한 비공개 안내입니다.</p>
+    <p class="foot-sign">CaskCode</p>
+  </footer>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./supabase/supabase.js?v=20260827a"></script>
+<script src="./app.js?v=20260827a"></script>
+</body>
+</html>

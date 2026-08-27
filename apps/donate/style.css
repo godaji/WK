@@ -1,0 +1,270 @@
+/* donate — CMPA-1358
+   모바일 우선(≈360px) · 카톡 인앱 웹뷰 안전:
+   - 폭은 100vw 금지 → 100% / max-width
+   - 전체높이 100vh 금지 → dvh
+   - flex/grid 자식 min-width:0 로 넘침 방지
+   - backdrop-filter: blur() 미사용 (반투명 rgba 로 대체) */
+
+:root {
+  --bg:        #0f1922;
+  --bg2:       #14202b;
+  --card:      #1b2a37;
+  --card-line: #263a4a;
+  --ink:       #e8eef3;
+  --ink-soft:  #a9bccb;
+  --ink-mute:  #7d94a6;
+  --accent:    #d9a441;   /* 위스키 앰버 */
+  --accent-ink:#2a1e06;
+  --ok:        #4caf8f;
+  --danger:    #e5806f;
+  --safe-bot:  env(safe-area-inset-bottom, 0px);
+  --read:      560px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+  line-height: 1.65;
+  -webkit-text-size-adjust: 100%;
+  word-break: keep-all;
+}
+
+body {
+  min-height: 100dvh;
+  background:
+    radial-gradient(120% 60% at 50% 0%, #17303f 0%, var(--bg) 60%) no-repeat;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--read);
+  margin: 0 auto;
+  padding: 20px 16px calc(40px + var(--safe-bot));
+}
+
+/* ── 히어로 ─────────────────────────────────────────── */
+.hero { padding: 12px 4px 4px; }
+.hero-kicker {
+  margin: 0 0 10px;
+  font-size: 13px;
+  letter-spacing: .04em;
+  color: var(--accent);
+  font-weight: 600;
+}
+.hero-title {
+  margin: 0 0 14px;
+  font-size: 26px;
+  line-height: 1.35;
+  font-weight: 800;
+  letter-spacing: -.01em;
+}
+.hero-lead {
+  margin: 0;
+  font-size: 16px;
+  color: var(--ink-soft);
+}
+
+/* ── 카드 공통 ──────────────────────────────────────── */
+.card {
+  margin-top: 16px;
+  padding: 18px 16px;
+  background: var(--card);
+  border: 1px solid var(--card-line);
+  border-radius: 16px;
+}
+.card-title {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 700;
+}
+.card-sub {
+  margin: 0 0 16px;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.story p { margin: 0 0 12px; font-size: 15.5px; color: var(--ink-soft); }
+.story p:last-child { margin-bottom: 0; }
+.story strong { color: var(--ink); }
+.story-sign {
+  margin-top: 16px !important;
+  text-align: right;
+  color: var(--ink-mute) !important;
+  font-size: 14px !important;
+}
+
+/* ── 폼 ─────────────────────────────────────────────── */
+.field-label {
+  display: block;
+  margin: 16px 0 7px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.field-label .opt { color: var(--ink-mute); font-weight: 400; }
+
+.input {
+  width: 100%;
+  min-width: 0;
+  padding: 12px 13px;
+  font-size: 16px;               /* iOS 확대 방지 */
+  color: var(--ink);
+  background: #101c25;
+  border: 1px solid var(--card-line);
+  border-radius: 11px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.input:focus { border-color: var(--accent); }
+.input::placeholder { color: var(--ink-mute); }
+.textarea { resize: vertical; min-height: 74px; line-height: 1.5; }
+
+/* 라인 아이템 */
+.item-list { display: flex; flex-direction: column; gap: 8px; }
+.item-row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+.item-row .item-name { flex: 1 1 auto; min-width: 0; }
+.item-row .item-qty  { flex: 0 0 68px; width: 68px; min-width: 0; text-align: center; }
+.item-del {
+  flex: 0 0 auto;
+  width: 40px;
+  min-width: 0;
+  border: 1px solid var(--card-line);
+  background: #101c25;
+  color: var(--ink-mute);
+  border-radius: 11px;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+}
+.item-del:active { background: #17242e; }
+
+/* 레슨 뱃지(금액 30만+) */
+.lesson-badge {
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  font-size: 13.5px;
+  color: var(--accent);
+  background: rgba(217, 164, 65, .12);
+  border: 1px solid rgba(217, 164, 65, .35);
+  border-radius: 11px;
+}
+.lesson-badge strong { color: var(--accent); }
+
+.form-error {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: var(--danger);
+  background: rgba(229, 128, 111, .1);
+  border: 1px solid rgba(229, 128, 111, .35);
+  border-radius: 11px;
+}
+
+/* ── 버튼 ───────────────────────────────────────────── */
+.btn-primary {
+  width: 100%;
+  min-width: 0;
+  margin-top: 18px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.btn-primary:disabled { opacity: .6; cursor: default; }
+.btn-ghost {
+  width: 100%;
+  min-width: 0;
+  margin-top: 10px;
+  padding: 11px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  background: transparent;
+  border: 1px dashed var(--card-line);
+  border-radius: 11px;
+  cursor: pointer;
+}
+.btn-ghost:active { background: #17242e; }
+
+/* ── 감사 메시지 ────────────────────────────────────── */
+.thanks { text-align: center; padding: 8px 4px; }
+.thanks-mark { font-size: 40px; }
+.thanks-title { margin: 8px 0 8px; font-size: 19px; font-weight: 700; }
+.thanks-desc { margin: 0; font-size: 15px; color: var(--ink-soft); }
+.thanks-lesson {
+  margin: 14px 0 0;
+  padding: 10px 12px;
+  font-size: 13.5px;
+  color: var(--accent);
+  background: rgba(217, 164, 65, .12);
+  border: 1px solid rgba(217, 164, 65, .35);
+  border-radius: 11px;
+}
+.thanks .btn-ghost { margin-top: 18px; }
+
+/* ── 계좌 ───────────────────────────────────────────── */
+.account-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.account-info { flex: 1 1 auto; min-width: 0; }
+.account-bank { font-size: 13px; color: var(--ink-mute); }
+.account-num {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: .01em;
+  overflow-wrap: anywhere;
+}
+.btn-copy {
+  flex: 0 0 auto;
+  min-width: 0;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.btn-copy.copied { background: var(--ok); color: #06231b; }
+.account-note {
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: var(--ink-mute);
+}
+
+/* ── 레슨 안내 카드 ─────────────────────────────────── */
+.lesson p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+.lesson strong { color: var(--accent); }
+
+/* ── 푸터 ───────────────────────────────────────────── */
+.foot {
+  margin-top: 24px;
+  text-align: center;
+  color: var(--ink-mute);
+  font-size: 12.5px;
+}
+.foot-sign { margin-top: 4px; color: var(--accent); letter-spacing: .04em; }
+
+/* 아주 좁은 화면(≈320px) 보정 */
+@media (max-width: 340px) {
+  .hero-title { font-size: 23px; }
+  .item-row .item-qty { flex-basis: 56px; width: 56px; }
+}

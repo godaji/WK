@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "name": "라이언과 함께 — 위스키 나눔 기부",
+  "short_name": "라이언과 함께",
+  "description": "라이언 딸의 재수술 비용을 돕기 위한 위스키 나눔·기부 문의 페이지.",
+  "lang": "ko",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f1922",
+  "theme_color": "#14202b",
+  "icons": [
+    { "src": "./icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
