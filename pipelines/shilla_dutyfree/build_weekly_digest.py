@@ -833,7 +833,15 @@ def build(date, days=7):
     return "\n".join(L)
 
 
+# CMPA-1360 (부모 CMPA-1359): 위스키 가격 블로그 폐쇄 — 주간 다이제스트(weekly-digest) 블로그
+# 발행을 no-op 로 막는다. reports/주간리포트_*.md 데이터 산출은 유지(누적 기록·CMPA-156).
+PRICE_BLOG_DISABLED = True
+
+
 def publish_blog(date, md, days=7, out_dir=None):
+    if PRICE_BLOG_DISABLED:
+        print("  [CMPA-1360] 주간 다이제스트 블로그 발행 비활성화 — no-op")
+        return None
     """주간 리포트 md → Jekyll 블로그 포스트(front matter + 본문). CMPA-334 보드 승인.
 
     카테고리=price(면세 가성비 스트림·렌더 버킷), kind=weekly. H1 은 front matter title 로

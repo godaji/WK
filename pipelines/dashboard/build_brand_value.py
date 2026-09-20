@@ -813,7 +813,15 @@ def build():
     return doc, meta, summary
 
 
+# CMPA-1360 (부모 CMPA-1359): 위스키 가격 대시보드 폐쇄 — 브랜드별 구매팁(/dashboard/brands/)
+# 재생성을 no-op 로 막는다.
+DASHBOARD_DISABLED = True
+
+
 def main():
+    if DASHBOARD_DISABLED:
+        print("  [CMPA-1360] 브랜드 가치 대시보드 생성 비활성화 — no-op")
+        return
     ap = argparse.ArgumentParser(description="브랜드 가치 추천 deep-dive 대시보드 (CMPA-521)")
     ap.add_argument("--out", default=OUT_DEFAULT, help="출력 HTML 경로")
     args = ap.parse_args()

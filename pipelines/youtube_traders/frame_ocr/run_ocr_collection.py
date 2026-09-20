@@ -548,10 +548,18 @@ def notify_email(changes, to_addrs, kst_date, accepted_rows=None):
         return False
 
 
+# CMPA-1360 (부모 CMPA-1359): 위스키 가격 블로그 폐쇄 — 유튜브 트레이더스 현장가 블로그
+# (youtube-traders-prices, wprice) 발행 no-op. OCR 수집 데이터 산출은 유지(누적 기록).
+PRICE_BLOG_DISABLED = True
+
+
 def write_blog_md(changes, kst_date, accepted_rows=None):
     """변경사항 → content/external-posts/ 마크다운 1개(wprice 버킷). 실제 라이브 발행은
     deploy_external_post.py 가 담당(검증+surgical push). 작성 경로 반환(없으면 None).
     accepted_rows 가 있으면 변동 표 아래 '이번 수집 위스키 현재가' 표를 함께 쓴다(CMPA-484)."""
+    if PRICE_BLOG_DISABLED:
+        sys.stderr.write("  [CMPA-1360] 유튜브 트레이더스 현장가 블로그 발행 비활성화 — no-op\n")
+        return None
     if not changes:
         return None
     os.makedirs(EXTERNAL_POSTS_DIR, exist_ok=True)

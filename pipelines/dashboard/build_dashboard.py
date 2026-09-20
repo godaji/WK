@@ -1465,7 +1465,15 @@ code{word-break:break-all;overflow-wrap:anywhere}
     return html_doc
 
 
+# CMPA-1360 (부모 CMPA-1359): 위스키 가격 대시보드 폐쇄(보드 결정). 대시보드 HTML
+# (/dashboard/) 재생성을 no-op 로 막는다. 되돌리려면 이 플래그만 False.
+DASHBOARD_DISABLED = True
+
+
 def main():
+    if DASHBOARD_DISABLED:
+        print("  [CMPA-1360] 위스키 가격 대시보드 생성 비활성화 — no-op")
+        return
     ap = argparse.ArgumentParser(description="위스키 가격 대시보드 초안 HTML 생성기 (CMPA-507)")
     ap.add_argument("--out", default=OUT_DEFAULT, help="출력 HTML 경로")
     ap.add_argument("--no-snapshot", action="store_true",

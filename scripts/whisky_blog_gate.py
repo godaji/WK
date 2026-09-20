@@ -334,7 +334,14 @@ def wprice_post_path(blog_dir, data, gen_date):
     return os.path.join(blog_dir, "_posts", f"{gen_date}-wprice-{month}.md")
 
 
+# CMPA-1360 (부모 CMPA-1359): 위스키 가격 블로그 폐쇄 — wprice 가격리포트 블로그 발행 no-op.
+PRICE_BLOG_DISABLED = True
+
+
 def write_wprice_post(blog_dir, data, gen_date):
+    if PRICE_BLOG_DISABLED:
+        print("  [CMPA-1360] wprice 가격리포트 블로그 발행 비활성화 — no-op")
+        return None
     path = wprice_post_path(blog_dir, data, gen_date)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:

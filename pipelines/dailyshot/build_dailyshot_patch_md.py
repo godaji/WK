@@ -248,7 +248,15 @@ def _date_from_label(label):
     return d
 
 
+# CMPA-1360 (부모 CMPA-1359): 위스키 가격 블로그 폐쇄 — 데일리샷 가격변동 패치 블로그 md
+# 생성을 no-op 로 막는다. 되돌리려면 이 플래그만 False.
+PRICE_BLOG_DISABLED = True
+
+
 def main():
+    if PRICE_BLOG_DISABLED:
+        print("  [CMPA-1360] 데일리샷 가격변동 패치 블로그 생성 비활성화 — no-op")
+        return
     ap = argparse.ArgumentParser(description="데일리샷 가격변동 블로그 패치 md (CMPA-390)")
     ap.add_argument("--prev", required=True, help="직전 스냅샷 CSV")
     ap.add_argument("--latest", required=True, help="최신 스냅샷 CSV")

@@ -1885,6 +1885,14 @@ def _write(path, content):
         fh.write(content)
 
 
+# CMPA-1360 (부모 CMPA-1359): 보드가 CaskCode를 블로그 글 + DreamJar 위주로 남기기로
+# 결정 → 위스키 가격 수집/자동발행 기능 전면 폐쇄. 관련 루틴은 모두 archived 이며,
+# 이 생성기가 만들던 신라면세 base/patch/weekly·면세비교·마트비교 블로그 포스트도 제거됐다.
+# 수동 재실행으로 되돌아오지 않도록 build() 를 no-op 로 비활성화한다(로직·데이터는 보존 —
+# 되돌리려면 이 플래그만 False 로).
+PRICE_BLOG_DISABLED = True
+
+
 def build(out_dir=DEFAULT_OUT, report_dir=REPORT_DIR, latest_only=False):
     """self-contained Jekyll 블로그를 out_dir 에 결정론적으로 (재)생성.
 
@@ -1897,6 +1905,10 @@ def build(out_dir=DEFAULT_OUT, report_dir=REPORT_DIR, latest_only=False):
     재생성을 하지 않아 매 루틴 실행마다 과거 글 수십 개를 반복 재작성·재발행하던
     낭비를 없앤다. 기본값(latest_only=False)은 현행 full rebuild 그대로(수동 전체
     재생성 경로 보존, 회귀 0)."""
+    if PRICE_BLOG_DISABLED:
+        # CMPA-1360: 가격 블로그 폐쇄 — 아무 것도 생성/삭제하지 않고 빈 결과 반환.
+        print("  [CMPA-1360] 가격 블로그 생성 비활성화 — no-op (신라면세 가격 포스트 미생성)")
+        return {"out": out_dir, "base": None, "patches": [], "written": []}
     written = []
     os.makedirs(out_dir, exist_ok=True)
 

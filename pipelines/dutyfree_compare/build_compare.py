@@ -1605,7 +1605,20 @@ def _rolling_entry_exit(date_str, outdir, rolling_days=7):
     return result
 
 
+# CMPA-1360 (부모 CMPA-1359): 위스키 가격 블로그 폐쇄. 면세비교(dutyfree-whisky-compare)·
+# 마트비교(mart-cheaper-whisky) 블로그 포스트는 더 이상 생성하지 않는다. reports/·xlsx/csv
+# 데이터 산출은 유지(누적 기록·CMPA-156)하되 블로그 MD 작성만 no-op 로 막는다.
+PRICE_BLOG_DISABLED = True
+
+
 def build_blog_md(both, date_str, blog_dir=None, crawl_stats=None):
+    if PRICE_BLOG_DISABLED:
+        print("  [CMPA-1360] 면세비교 블로그 생성 비활성화 — no-op")
+        return None
+    return _build_blog_md_impl(both, date_str, blog_dir=blog_dir, crawl_stats=crawl_stats)
+
+
+def _build_blog_md_impl(both, date_str, blog_dir=None, crawl_stats=None):
     """면세 가격 비교 주간 로그 MD 생성.
 
     Args:
@@ -1868,6 +1881,13 @@ robots: "index,follow"
 
 
 def build_mart_blog_md(both, date_str, blog_dir=None, crawl_stats=None):
+    if PRICE_BLOG_DISABLED:
+        print("  [CMPA-1360] 마트비교 블로그 생성 비활성화 — no-op")
+        return None
+    return _build_mart_blog_md_impl(both, date_str, blog_dir=blog_dir, crawl_stats=crawl_stats)
+
+
+def _build_mart_blog_md_impl(both, date_str, blog_dir=None, crawl_stats=None):
     """'마트에서 구매할 때' 페이지 — 면세점보다 싸거나 비슷하게 국내(마트·온라인)에서 살 수 있는
     위스키 (CMPA-666 보드 확장). dutyfree-compare 와 같은 데이터(build_rows)·셀 렌더를 재사용.
 
