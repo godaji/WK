@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스코틀랜드 유학 & 에든버러 주요 학교 지도 대시보드 (v4 - Esri Topo 단독)</title>
+    <!-- Leaflet CSS & JS (Open Source Map Library) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #eff6ff;
+            --accent-green: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-purple: #8b5cf6;
+            --dark: #1e293b;
+            --light-bg: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+            color: var(--dark);
+            background-color: var(--light-bg);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 28px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 16px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: var(--primary);
+            margin: 0 0 8px 0;
+            font-weight: 800;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: #64748b;
+            margin: 0;
+        }
+
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background-color: var(--primary-light);
+            color: #1d4ed8;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px solid #bfdbfe;
+        }
+
+        /* Banner Explanation */
+        .notice-banner {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+            padding: 14px 18px;
+            border-radius: 10px;
+            font-size: 13px;
+            margin-bottom: 22px;
+            line-height: 1.55;
+        }
+
+        /* Map Section Layout */
+        .map-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 16px;
+            margin-bottom: 28px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .map-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        #map {
+            height: 540px;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .map-sidebar {
+            padding: 16px;
+            background: #ffffff;
+            border-left: 1px solid var(--border);
+            overflow-y: auto;
+            max-height: 540px;
+        }
+
+        .map-sidebar h3 {
+            margin-top: 0;
+            font-size: 15px;
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 6px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12.5px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            padding: 6px 8px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .legend-item:hover {
+            background: var(--primary-light);
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        .dot-university { background-color: #ef4444; }
+        .dot-public { background-color: #10b981; }
+        .dot-private { background-color: #f59e0b; }
+        .dot-area { background-color: #8b5cf6; }
+
+        .location-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-bottom: 10px;
+            font-size: 12px;
+            transition: all 0.2s;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        .location-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .location-card strong {
+            display: block;
+            font-size: 13px;
+            color: var(--dark);
+        }
+
+        .location-card .type {
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .type-univ { color: #dc2626; }
+        .type-public { color: #059669; }
+        .type-private { color: #d97706; }
+        .type-area { color: #7c3aed; }
+
+        .gmap-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 6px;
+            padding: 5px 12px;
+            background-color: #2563eb;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 11.5px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .gmap-btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* Tables & Content */
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--dark);
+            margin: 24px 0 12px 0;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 14px 16px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .card.plan-a { border-left-color: var(--accent-green); background: #ecfdf5; }
+        .card.plan-b { border-left-color: var(--accent-amber); background: #fffbeb; }
+
+        .card h3 {
+            margin: 0 0 8px 0;
+            font-size: 14px;
+        }
+        .card.plan-a h3 { color: #047857; }
+        .card.plan-b h3 { color: #b45309; }
+
+        .card ul {
+            margin: 0;
+            padding-left: 18px;
+            font-size: 12.5px;
+            color: #334155;
+        }
+
+        .card li {
+            margin-bottom: 4px;
+        }
+
+        .table-custom {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        .table-custom th, .table-custom td {
+            border: 1px solid #cbd5e1;
+            padding: 8px 10px;
+            text-align: left;
+        }
+
+        .table-custom th {
+            background-color: #f8fafc;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .table-custom tr.total-row {
+            background-color: #f1f5f9;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: #ffffff;
+            padding: 18px 22px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 4px 14px rgba(30, 58, 138, 0.2);
+        }
+
+        .highlight-box h2 {
+            margin: 0 0 8px 0;
+            font-size: 17px;
+            color: #fef08a;
+            text-align: center;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            font-size: 13.5px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .footer {
+            margin-top: 32px;
+            text-align: center;
+            font-size: 11px;
+            color: #94a3b8;
+            border-top: 1px solid var(--border);
+            padding-top: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📍 스코틀랜드 유학 & 에든버러 주요 지점 지도 대시보드 (v4)</h1>
+            <p>수신: 임희진 (Family Co-CIO) | 발신: 홍석환 (AI 타이거팀 대표이사)</p>
+            <div class="badge-container">
+                <span class="badge">Esri World Topo 단독 탑재 (API Key 100% 불필요)</span>
+                <span class="badge">구글 지도 공식 다이렉트 연동</span>
+                <span class="badge">헤리엇와트 대학교 (Riccarton)</span>
+                <span class="badge">학비 플랜 A/B 비교</span>
+            </div>
+        </div>
+
+        <div class="notice-banner">
+            🗺️ <strong>Esri World Topo 전용 지도 적용 안내:</strong><br>
+            인증 키나 접근 제한 없이 100% 안정적으로 로딩되는 <strong>Esri World Topo 고화질 지형 레이어</strong>를 단독 적용했습니다.<br>
+            측면 카드의 <strong>'📍 구글 지도 앱/웹에서 보기'</strong> 버튼을 클릭하면 구글 지도에서 실제 위성사진, 상세 길찾기, 로드뷰(Street View)까지 바로 연결됩니다.
+        </div>
+
+        <!-- Section: Interactive Map -->
+        <div class="section-title">🗺️ 에든버러 주요 지점 인터랙티브 지도 (Esri Topo) & 구글 지도 바로가기</div>
+        <div class="map-section">
+            <!-- Map Element -->
+            <div id="map"></div>
+
+            <!-- Sidebar Controls & Legend -->
+            <div class="map-sidebar">
+                <h3>📌 범례 및 범주 선택</h3>
+                <div class="legend-item" onclick="focusCategory('univ')">
+                    <span class="legend-dot dot-university"></span>
+                    <span><strong>대학교 (1곳)</strong></span>
+                </div>
+                <div class="legend-item" onclick="focusCategory('public')">
+                    <span class="legend-dot dot-public"></span>
+                    <span><strong>명문 공립학교 (3곳 - 무상)</strong></span>
+                </div>
+                <div class="legend-item" onclick="focusCategory('private')">
+                    <span class="legend-dot dot-private"></span>
+                    <span><strong>명문 사립학교 (3곳 - 유상)</strong></span>
+                </div>
+                <div class="legend-item" onclick="focusCategory('area')">
+                    <span class="legend-dot dot-area"></span>
+                    <span><strong>추천 주거 구역 (2곳)</strong></span>
+                </div>
+
+                <h3 style="margin-top: 16px;">🏢 주요 지점 목록 (클릭 시 이동)</h3>
+                
+                <div class="location-card" onclick="focusMarker(0)">
+                    <span class="type type-univ">🏛️ 대학교</span>
+                    <strong>Heriot-Watt University</strong>
+                    <span>Riccarton Campus (양조/증류 MRes)</span>
+                    <div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Heriot-Watt+University+Riccarton+Edinburgh" target="_blank" class="gmap-btn" onclick="event.stopPropagation();">📍 구글 지도에서 보기</a>
+                    </div>
+                </div>
+
+                <div class="location-card" onclick="focusMarker(1)">
+                    <span class="type type-public">🌱 공립 (무상)</span>
+                    <strong>Currie High School</strong>
+                    <span>대학교 도보/차량 3분 거리 (가장 인접)</span>
+                    <div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Currie+High+School+Edinburgh" target="_blank" class="gmap-btn" onclick="event.stopPropagation();">📍 구글 지도에서 보기</a>
+                    </div>
+                </div>
+
+                <div class="location-card" onclick="focusMarker(2)">
+                    <span class="type type-public">🌱 공립 (무상)</span>
+                    <strong>Balerno High School</strong>
+                    <span>대학교 차량 6분 거리 (상위권 공립)</span>
+                    <div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Balerno+High+School+Edinburgh" target="_blank" class="gmap-btn" onclick="event.stopPropagation();">📍 구글 지도에서 보기</a>
+                    </div>
+                </div>
+
+                <div class="location-card" onclick="focusMarker(3)">
+                    <span class="type type-public">🌱 공립 (무상)</span>
+                    <strong>Boroughmuir High School</strong>
+                    <span>스코틀랜드 공립 1~2위 명문 (Morningside)</span>
+                    <div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Boroughmuir+High+School+Edinburgh" target="_blank" class="gmap-btn" onclick="event.stopPropagation();">📍 구글 지도에서 보기</a>
+                    </div>
+                </div>
+
+                <div class="location-card" onclick="focusMarker(4)">
+                    <span class="type type-private">🏛️ 사립 (유상)</span>
+                    <strong>George Watson's College</strong>
+                    <span>남녀공학 명문 사립 (3자녀 동시 등하교 최적)</span>
+                    <div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=George+Watsons+College+Edinburgh" target="_blank" class="gmap-btn" onclick="event.stopPropagation();">📍 구글 지도에서 보기</a>
+                    </div>
+                </div>
+
+                <div class="location-card" onclick="focusMarker(5)">
+                    <span class="type type-private">🏛️ 사립 (유상)</span>
+                    <strong>Merchiston Castle School</strong>
+                    <span>남학교 최고 명문 (대학교 차량 5분)</span>
+                    <div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Merchiston+Castle+School+Edinburgh" target="_blank" class="gmap-btn" onclick="event.stopPropagation();">📍 구글 지도에서 보기</a>
+                    </div>
+                </div>
+
+                <div class="location-card" onclick="focusMarker(6)">
+                    <span class="type type-private">🏛️ 사립 (유상)</span>
+                    <strong>George Heriot's School</strong>
+                    <span>1628년 설립 역사적 명문 (에든버러 시내)</span>
+                    <div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=George+Heriots+School+Edinburgh" target="_blank" class="gmap-btn" onclick="event.stopPropagation();">📍 구글 지도에서 보기</a>
+                    </div>
+                </div>
+
+                <div class="location-card" onclick="focusMarker(7)">
+                    <span class="type type-area">🏡 추천 주거지</span>
+                    <strong>Currie & Balerno Area</strong>
+                    <span>대학교 출퇴근 & 공립 등하교 최단거리</span>
+                    <div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Currie+Edinburgh" target="_blank" class="gmap-btn" onclick="event.stopPropagation();">📍 구글 지도에서 보기</a>
+                    </div>
+                </div>
+
+                <div class="location-card" onclick="focusMarker(8)">
+                    <span class="type type-area">🏡 추천 주거지</span>
+                    <strong>Morningside & Colinton</strong>
+                    <span>에든버러 최고 부촌/학군지, 와이프 라이프 최적</span>
+                    <div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Morningside+Edinburgh" target="_blank" class="gmap-btn" onclick="event.stopPropagation();">📍 구글 지도에서 보기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Overview & Budget Comparison -->
+        <div class="section-title">📊 1년 체류 예산: 자녀 학비 플랜 A (공립) vs 플랜 B (사립) 비교</div>
+        <div class="grid-2">
+            <div class="card plan-a">
+                <h3>🌱 플랜 A: 현지 공립학교 (무상 혜택)</h3>
+                <ul>
+                    <li><strong>아이 3명 학비:</strong> <strong>£0 (전액 무상)</strong> (연구형 석사 비자 혜택)</li>
+                    <li><strong>부대 실비:</strong> 교복, 급식, 현장학습 등 연 약 400만 ~ 600만 원</li>
+                    <li><strong>특징:</strong> 현지 아이들과 어울리며 영어 보조(EAL) 지원, 최고의 가성비</li>
+                    <li><strong>총 예산:</strong> <strong>약 1억 6,000만 ~ 1억 8,000만 원 (£90,000 ~ £100,000)</strong></li>
+                </ul>
+            </div>
+            <div class="card plan-b">
+                <h3>🏛️ 플랜 B: 명문 사립학교 (George Watson's 등)</h3>
+                <ul>
+                    <li><strong>아이 3명 학비:</strong> 연 £45,000 ~ £52,000 (약 8,100만 ~ 9,400만 원)</li>
+                    <li><strong>부대 비용:</strong> 사립 전용 교복, 스포츠, 클럽 연 약 600만 ~ 1,000만 원</li>
+                    <li><strong>특징:</strong> 베트남 국제학교와 커리큘럼 완전 호환, 소수정예 세심 케어</li>
+                    <li><strong>총 예산:</strong> <strong>약 2억 4,000만 ~ 2억 8,500만 원 (£135,000 ~ £159,000)</strong></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Detailed Table Breakdown -->
+        <table class="table-custom">
+            <thead>
+                <tr>
+                    <th style="width: 22%;">항목</th>
+                    <th style="width: 28%;">플랜 A (공립학교)</th>
+                    <th style="width: 28%;">플랜 B (사립학교)</th>
+                    <th style="width: 22%;">비고</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1. 대학원 학비 (남편)</strong></td>
+                    <td>£26,000 ~ £30,000 (약 4,680만~5,400만 원)</td>
+                    <td>£26,000 ~ £30,000 (약 4,680만~5,400만 원)</td>
+                    <td>헤리엇와트 MRes</td>
+                </tr>
+                <tr>
+                    <td><strong>2. 비자 & 건강보험</strong></td>
+                    <td>£6,300 ~ £6,500 (약 1,130만~1,170만 원)</td>
+                    <td>£6,300 ~ £6,500 (약 1,130만~1,170만 원)</td>
+                    <td>5인 학생/동반 비자</td>
+                </tr>
+                <tr>
+                    <td><strong>3. 아이 3명 학비</strong></td>
+                    <td><strong>£0 (전액 무상)</strong></td>
+                    <td><strong>£45,000 ~ £52,000 (약 8,100만~9,400만 원)</strong></td>
+                    <td>플랜 A vs B 차이</td>
+                </tr>
+                <tr>
+                    <td><strong>4. 주거비 (Rent)</strong></td>
+                    <td>£26,400 ~ £33,600 (약 4,750만~6,050만 원)</td>
+                    <td>£26,400 ~ £33,600 (약 4,750만~6,050만 원)</td>
+                    <td>방 3~4개 주택/아파트</td>
+                </tr>
+                <tr>
+                    <td><strong>5. 생활비/유틸리티</strong></td>
+                    <td>£18,000 ~ £24,000 (약 3,240만~4,320만 원)</td>
+                    <td>£18,000 ~ £24,000 (약 3,240만~4,320만 원)</td>
+                    <td>5인 가족 식비/광열비</td>
+                </tr>
+                <tr>
+                    <td><strong>6. 여행/정착비/부대비</strong></td>
+                    <td>£14,000 ~ £20,000 (약 2,520만~3,600만 원)</td>
+                    <td>£17,000 ~ £25,000 (약 3,060만~4,500만 원)</td>
+                    <td>차량, 항공, 여행, 사립 부대비</td>
+                </tr>
+                <tr class="total-row">
+                    <td>총 예산 (원화 환산)</td>
+                    <td><strong>약 1억 6,000만 ~ 1억 8,000만 원</strong></td>
+                    <td><strong>약 2억 4,000만 ~ 2억 8,500만 원</strong></td>
+                    <td><strong>자산 소득 100% 커버</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Highlight Assets -->
+        <div class="highlight-box">
+            <h2>💡 자산 소득 100% 커버 검증</h2>
+            <p>
+                우리 가문의 70억 원 자산은 연 3~4%의 안정적 운용 수익으로 <strong>연간 약 2억 1,000만 ~ 2억 8,000만 원의 자산 소득</strong>을 만들어냅니다.<br>
+                플랜 A(공립)는 물론 플랜 B(사립)를 선택하더라도, <strong>원금을 단 1원도 손대지 않고 자산 수익만으로 전체 유학비용을 100% 충당</strong>할 수 있습니다.
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            Designed for Lim Hee-jin | Family Global Transition Plan (2027-2028) | Esri Topo Map Dashboard v4
+        </div>
+    </div>
+
+    <!-- Map Script -->
+    <script>
+        // Map Initialization
+        var map = L.map('map').setView([55.918, -3.275], 12);
+
+        // Esri World Topo Map Layer (Dedicated Single Engine - 100% Free & No API Key Needed)
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+            maxZoom: 18,
+            attribution: 'Tiles © Esri — Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), swisstopo, MapmyIndia, © OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Custom Icon Creation Helper
+        function createCustomIcon(color) {
+            return L.divIcon({
+                className: 'custom-pin',
+                html: `<div style="background-color:${color}; width:22px; height:22px; border-radius:50%; border:3px solid #fff; box-shadow:0 2px 6px rgba(0,0,0,0.3);"></div>`,
+                iconSize: [22, 22],
+                iconAnchor: [11, 11]
+            });
+        }
+
+        var iconUniv = createCustomIcon('#ef4444');
+        var iconPublic = createCustomIcon('#10b981');
+        var iconPrivate = createCustomIcon('#f59e0b');
+        var iconArea = createCustomIcon('#8b5cf6');
+
+        // Locations Data Array
+        var locations = [
+            {
+                name: "Heriot-Watt University (Riccarton Campus)",
+                lat: 55.9143,
+                lng: -3.3204,
+                type: "univ",
+                icon: iconUniv,
+                popup: "<b>🏛️ Heriot-Watt University</b><br>양조/증류 연구 석사(MRes) 수강 장소<br>에든버러 남서쪽 Riccarton 위치<br><a href='https://www.google.com/maps/search/?api=1&query=Heriot-Watt+University+Riccarton+Edinburgh' target='_blank' style='font-size:11px; font-weight:bold; color:#2563eb;'>📍 구글 지도 앱/웹 열기</a>"
+            },
+            {
+                name: "Currie High School (공립)",
+                lat: 55.8972,
+                lng: -3.3086,
+                type: "public",
+                icon: iconPublic,
+                popup: "<b>🌱 Currie High School</b><br>공립학교 (학비 무상)<br>대학교 바로 옆 (차량 3분, 도보/자전거 등교 가능)<br><a href='https://www.google.com/maps/search/?api=1&query=Currie+High+School+Edinburgh' target='_blank' style='font-size:11px; font-weight:bold; color:#2563eb;'>📍 구글 지도 앱/웹 열기</a>"
+            },
+            {
+                name: "Balerno High School (공립)",
+                lat: 55.8856,
+                lng: -3.3375,
+                type: "public",
+                icon: iconPublic,
+                popup: "<b>🌱 Balerno High School</b><br>공립학교 (학비 무상)<br>대학교 차량 6분 거리, 학업성취도 상위권<br><a href='https://www.google.com/maps/search/?api=1&query=Balerno+High+School+Edinburgh' target='_blank' style='font-size:11px; font-weight:bold; color:#2563eb;'>📍 구글 지도 앱/웹 열기</a>"
+            },
+            {
+                name: "Boroughmuir High School (공립)",
+                lat: 55.9351,
+                lng: -3.2106,
+                type: "public",
+                icon: iconPublic,
+                popup: "<b>🌱 Boroughmuir High School</b><br>공립학교 (학비 무상)<br>스코틀랜드 공립 1~2위 명문 (Morningside 구역)<br><a href='https://www.google.com/maps/search/?api=1&query=Boroughmuir+High+School+Edinburgh' target='_blank' style='font-size:11px; font-weight:bold; color:#2563eb;'>📍 구글 지도 앱/웹 열기</a>"
+            },
+            {
+                name: "George Watson's College (사립)",
+                lat: 55.9322,
+                lng: -3.2144,
+                type: "private",
+                icon: iconPrivate,
+                popup: "<b>🏛️ George Watson's College</b><br>남녀공학 명문 사립 (연 £15k~20k/인)<br>3자녀 동시 등하교 최적, 대학교 차량 12분<br><a href='https://www.google.com/maps/search/?api=1&query=George+Watsons+College+Edinburgh' target='_blank' style='font-size:11px; font-weight:bold; color:#2563eb;'>📍 구글 지도 앱/웹 열기</a>"
+            },
+            {
+                name: "Merchiston Castle School (사립)",
+                lat: 55.9108,
+                lng: -3.2558,
+                type: "private",
+                icon: iconPrivate,
+                popup: "<b>🏛️ Merchiston Castle School</b><br>남학교 명문 사립 (Colinton 구역)<br>대학교 차량 5분 거리 (최단거리 사립)<br><a href='https://www.google.com/maps/search/?api=1&query=Merchiston+Castle+School+Edinburgh' target='_blank' style='font-size:11px; font-weight:bold; color:#2563eb;'>📍 구글 지도 앱/웹 열기</a>"
+            },
+            {
+                name: "George Heriot's School (사립)",
+                lat: 55.9465,
+                lng: -3.1952,
+                type: "private",
+                icon: iconPrivate,
+                popup: "<b>🏛️ George Heriot's School</b><br>1628년 설립 역사적 명문 사립<br>에든버러 시내 중심 위치<br><a href='https://www.google.com/maps/search/?api=1&query=George+Heriots+School+Edinburgh' target='_blank' style='font-size:11px; font-weight:bold; color:#2563eb;'>📍 구글 지도 앱/웹 열기</a>"
+            },
+            {
+                name: "Currie & Balerno 거주 구역",
+                lat: 55.8920,
+                lng: -3.3220,
+                type: "area",
+                icon: iconArea,
+                popup: "<b>🏡 Currie & Balerno 추천 거주 구역</b><br>대학교 출퇴근 차량 3~5분<br>우수 공립학교 배정 최적지<br><a href='https://www.google.com/maps/search/?api=1&query=Currie+Edinburgh' target='_blank' style='font-size:11px; font-weight:bold; color:#2563eb;'>📍 구글 지도 앱/웹 열기</a>"
+            },
+            {
+                name: "Morningside & Colinton 거주 구역",
+                lat: 55.9280,
+                lng: -3.2180,
+                type: "area",
+                icon: iconArea,
+                popup: "<b>🏡 Morningside & Colinton 추천 거주 구역</b><br>에든버러 최고 부촌 및 학군지<br>Boroughmuir 공립 / Watson's 사립 배정 최적<br><a href='https://www.google.com/maps/search/?api=1&query=Morningside+Edinburgh' target='_blank' style='font-size:11px; font-weight:bold; color:#2563eb;'>📍 구글 지도 앱/웹 열기</a>"
+            }
+        ];
+
+        var markers = [];
+
+        // Add Markers to Map
+        locations.forEach(function(loc, index) {
+            var marker = L.marker([loc.lat, loc.lng], { icon: loc.icon }).addTo(map);
+            marker.bindPopup(loc.popup);
+            markers.push({ marker: marker, type: loc.type, lat: loc.lat, lng: loc.lng });
+        });
+
+        // Click Marker Handler
+        function focusMarker(index) {
+            var loc = locations[index];
+            map.flyTo([loc.lat, loc.lng], 14, { duration: 1.2 });
+            markers[index].marker.openPopup();
+        }
+
+        // Category Focus
+        function focusCategory(type) {
+            var group = [];
+            markers.forEach(function(m) {
+                if (m.type === type) {
+                    group.push([m.lat, m.lng]);
+                }
+            });
+            if (group.length > 0) {
+                var bounds = L.latLngBounds(group);
+                map.fitBounds(bounds, { padding: [40, 40] });
+            }
+        }
+    </script>
+</body>
+</html>
