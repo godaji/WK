@@ -14,23 +14,26 @@ CLAUDE.md 준수:
 - 카피 톤 담백하게. 독자용 저자 필명은 CaskCode(내부 호칭 "보드" 노출 금지).
 - 버전 v2026.08.16 을 헤더·푸터에 명확히 노출.
 
-메뉴 정본 = CMPA-1282 본문 마크다운. 갱신 시 아래 TIERS 데이터 + VERSION 을 고친다.
+위스키 메뉴 정본 = data/wimakase/위마카세_위스키.csv (CMPA-1376).
+메뉴를 바꿀 때는 CSV를 수정하고 이 생성기를 다시 실행한다.
 """
 from __future__ import annotations
 
+import csv
 import html
 import json
 import re
+from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
 # 발행마다 자동 증가하는 빌드 카운터 — 캐시버스트 신호(CMPA-1285). 사이드카 파일에 누적 저장.
 BUILD_FILE = Path(__file__).resolve().parent / "wimakase_build.txt"
+MENU_CSV = ROOT / "data" / "wimakase" / "위마카세_위스키.csv"
+RECO_CSV = ROOT / "data" / "wimakase" / "위마카세_추천.csv"
 VERSION = "v2026.08.19"
 TITLE = "합정 두다지 위마카세"
-# 상세(증류소·스토리) 메타 수집일 — CLAUDE.md 데이터 관리 원칙(수집 날짜 메타 필수, CMPA-1284).
-COLLECTED = "2026-08-16"
 
 # ── 방명록 & 기부하기 (CMPA-1340) ────────────────────────────────────────────
 # DreamJar와 동일한 Supabase 프로젝트 재사용. anon key만 프론트 노출(RLS로 보호).
@@ -86,80 +89,122 @@ LOCATION = {
 }
 
 # ── 3티어 메뉴 데이터 ─────────────────────────────────────────────────────────
-# 각 항목: (제품명, 분류, 도수 ABV, 비고 특징)
-TIERS = [
+# 탭 표시 설정만 코드에 두고, 위스키 항목은 MENU_CSV를 단일 정본으로 읽는다.
+_TIER_META = [
     {
-        # CMPA-1321 보드 확정: 탭 순서 웰컴 → 하이라이트 → 페스티벌. 옛 tier2 = 웰컴.
-        "id": "tier2",
-        "medal": "🥈",
-        "name": "웰컴",
-        "sub": "클래식 & 매니아픽",
+        "id": "tier2", "medal": "🥈", "name": "웰컴", "sub": "클래식 & 매니아픽",
         "serve": "고객이 고른 3잔을 한 번에 제공 · 저도수 → 고도수 순 권장",
-        "items": [
-            ("글렌알라키 15년", "싱글 몰트 스카치", "46%", "진득한 셰리 풍미로 최근 가장 인기 있는 바틀"),
-            ("매캘란 더블우드 12년", "싱글 몰트 스카치", "40%", "싱글 몰트의 절대 강자, 훌륭한 밸런스"),
-            ("에버펠디 16년", "싱글 몰트 스카치", "40%", "부드럽고 꿀 같은 달콤함"),
-            ("로얄 브라크라 12년", "싱글 몰트 스카치", "46%", "올로로소 셰리 피니시, 고급스럽고 우아한 맛"),
-            ("부나하벤 12년", "싱글 몰트 스카치", "46.3%", "논칠필터, 훌륭한 바디감의 아일라 몰트"),
-            ("러셀 리저브 싱글배럴", "버번 위스키", "55%", "버번 매니아들의 열렬한 지지를 받는 훌륭한 바틀"),
-            ("와일드터키 레어브리드 라이", "라이 위스키", "56.1%", "타격감과 풍미가 일품인 배럴 프루프 라이"),
-            ("사가모어 라이 CS", "라이 위스키", "56%", "CS 특유의 강렬한 타격감과 진한 화사함"),
-            ("탈리스커 10년", "싱글 몰트 스카치(피트)", "45.8%", "바다향과 후추향이 일품인 대표 피트 위스키"),
-            ("아드벡 10년", "싱글 몰트 스카치(피트)", "46%", "스모키하고 강렬한 아일라 피트 위스키"),
-            ("라프로익 쿼터 캐스크", "싱글 몰트 스카치(피트)", "48%", "작은 오크통 숙성으로 강렬하게 농축된 나무/피트 향"),
-            ("스카라버스 CS 피티드", "싱글 몰트 스카치(피트)", "57%", "강력한 도수의 가성비 아일라 피트"),
-            ("글렌피딕 18년", "싱글 몰트 스카치", "48%", "고숙성 및 48도 특별 에디션"),
-            ("발베니 12년 더블우드", "싱글 몰트 스카치", "40%", "화사하고 달달한 꿀/바닐라 풍미의 정석"),
-            ("글렌드로낙 12년", "싱글 몰트 스카치", "43%", "입문~중급용 셰리 캐스크의 교과서"),
-        ],
     },
     {
-        # 옛 tier1 = 하이라이트 (하이엔드 & 한정판).
-        "id": "tier1",
-        "medal": "🥇",
-        "name": "하이라이트",
-        "sub": "하이엔드 & 한정판",
+        "id": "tier1", "medal": "🥇", "name": "하이라이트", "sub": "하이엔드 & 한정판",
         "serve": "고객이 고른 3잔을 한 번에 제공 · 저도수 → 고도수 순 권장",
-        "items": [
-            ("글렌드로낙 21년", "싱글 몰트 스카치", "48%", "고숙성 셰리 캐스크의 대표 주자"),
-            ("글렌리벳 19년", "싱글 몰트 스카치", "48%", "정규 라인을 벗어난 고숙성/고도수 바틀"),
-            ("올트모어 18년", "싱글 몰트 스카치", "46%", "깔끔하고 우아한 고숙성 스페이사이드 몰트"),
-            ("글렌파클라스 25년", "싱글 몰트 스카치", "43%", "고숙성 셰리 캐스크의 정석, 부드럽고 진한 스페이사이드 클래식"),
-            ("아벨라워 아브나흐", "싱글 몰트 스카치", "61%", "꾸덕한 셰리 폭탄, 강력한 타격감의 CS"),
-            ("옥토모어 15.1", "싱글 몰트 스카치(피트)", "59.1%",
-             "108.2 PPM의 세계 최고 수준의 강력한 피트 수치, 압도적인 스모키함"),
-            ("스테그 (Stagg)", "버번 위스키", "63~65%", "구하기 매우 힘든 프리미엄 CS 버번"),
-            ("스테그 배럴 프루프", "버번 위스키", "70%", "언컷·언필터드 배럴 프루프, 초고도수의 강렬한 타격감"),
-            ("일라이저 크레이그 18년", "버번 위스키", "45%", "초고숙성 버번, 높은 희소성"),
-            ("카발란 올로로소", "타이완 싱글 몰트", "55%", "대만 특유의 진한 열대 숙성 셰리 (CS)"),
-            ("기원 타이거 (Tiger)", "코리안 싱글 몰트", "46%", "쓰리소사이어티스 한정판, 수집 가치 높음"),
-            ("폴존 피티드 CS", "인디안 싱글 몰트(피트)", "55.5%", "열대 기후 숙성 특유의 진한 피트와 자극"),
-            # CMPA-1321 신규: '하우스 위스키'(페스티벌 프리플로우)와 별개인 두 번째 하우스 블렌드.
-            ("하우스 위스키 피티드 CS", "블렌디드 위스키(하우스 블렌드·피트)", "60%",
-             "합정 위마카세 두 번째 하우스 블렌딩 · CS 고도수 피티드"),
-        ],
     },
     {
-        # 옛 tier3 = 페스티벌 (프리플로우 · 무제한).
-        "id": "tier3",
-        "medal": "🥉",
-        "name": "페스티벌",
-        "sub": "프리플로우 · 무제한",
+        "id": "tier3", "medal": "🥉", "name": "페스티벌", "sub": "프리플로우 · 무제한",
         "serve": "웰컴·하이라이트 코스 완료 후 니트, 온더락, 하이볼 등으로 무제한 제공",
-        "items": [
-            ("하우스 위스키", "블렌디드 위스키 (하우스 블렌드)", "??", "합정 위마카세 자체 블렌딩 (배치마다 상이)"),
-            ("조니워커 그린", "블렌디드 몰트", "43%", "가성비와 퀄리티를 모두 잡은 15년 숙성 블렌딩"),
-            ("이글레어 10년", "버번 위스키", "45%", "버팔로트레이스 증류소의 프리미엄 라인"),
-            ("엔젤스 엔비 스몰배치", "버번 위스키", "50%", "포트 캐스크 피니시의 달콤함과 스몰배치의 타격감"),
-            ("놉크릭 9년", "버번 위스키", "50%", "짐빔 가문 스몰배치, 묵직하고 진한 땅콩/견과류 풍미"),
-            ("일라이저 크레이그 스몰배치", "버번 위스키", "47%", "우디함과 바닐라의 정석적인 밸런스"),
-            ("LOT 40", "캐네디언 라이", "43%", "호밀빵, 허브 등 라이 특유의 화사함"),
-            ("몽키숄더", "블렌디드 몰트", "40%", "달콤하고 부드러워 하이볼 및 입문용으로 최적"),
-            ("닛카 프론티어", "재패니즈 블렌디드", "48%", "요이치 몰트 베이스, 피트감과 48도의 탄탄한 하이볼 기주"),
-            ("제임슨", "아이리시 위스키", "40%", "깔끔한 맛, 전 세계에서 가장 대중적인 아이리시"),
-        ],
     },
 ]
+_REQUIRED_MENU_COLUMNS = ("구분", "위스키이름", "도수", "분류", "비고", "수집일")
+_TIER_ALIASES = {"패스티발": "페스티벌", "패스티벌": "페스티벌"}
+
+
+def _load_tiers(path: Path = MENU_CSV) -> tuple[list[dict], str]:
+    """CSV 메뉴를 읽고 렌더러가 쓰는 티어 구조와 최신 수집일을 반환한다."""
+    try:
+        source = path.open("r", encoding="utf-8-sig", newline="")
+    except OSError as exc:
+        raise RuntimeError(f"위마카세 메뉴 CSV를 읽을 수 없음: {path}") from exc
+
+    tiers = [{**meta, "items": []} for meta in _TIER_META]
+    by_name = {tier["name"]: tier for tier in tiers}
+    seen: set[str] = set()
+    collected_dates: list[str] = []
+    with source:
+        reader = csv.DictReader(source)
+        missing = [column for column in _REQUIRED_MENU_COLUMNS if column not in (reader.fieldnames or [])]
+        if missing:
+            raise ValueError(f"위마카세 메뉴 CSV 필수 컬럼 누락: {', '.join(missing)}")
+        for line_no, raw in enumerate(reader, start=2):
+            row = {key: (raw.get(key) or "").strip() for key in _REQUIRED_MENU_COLUMNS}
+            empty = [key for key, value in row.items() if not value]
+            if empty:
+                raise ValueError(f"위마카세 메뉴 CSV {line_no}행 빈 값: {', '.join(empty)}")
+            tier_name = _TIER_ALIASES.get(row["구분"], row["구분"])
+            if tier_name not in by_name:
+                raise ValueError(f"위마카세 메뉴 CSV {line_no}행 잘못된 구분: {row['구분']}")
+            name = row["위스키이름"]
+            if name in seen:
+                raise ValueError(f"위마카세 메뉴 CSV {line_no}행 중복 위스키: {name}")
+            try:
+                date.fromisoformat(row["수집일"])
+            except ValueError as exc:
+                raise ValueError(
+                    f"위마카세 메뉴 CSV {line_no}행 수집일은 YYYY-MM-DD 형식이어야 함: {row['수집일']}"
+                ) from exc
+            seen.add(name)
+            collected_dates.append(row["수집일"])
+            by_name[tier_name]["items"].append((name, row["분류"], row["도수"], row["비고"]))
+
+    empty_tiers = [tier["name"] for tier in tiers if not tier["items"]]
+    if empty_tiers:
+        raise ValueError(f"위마카세 메뉴 CSV에 항목이 없는 구분: {', '.join(empty_tiers)}")
+    return tiers, max(collected_dates)
+
+
+TIERS, COLLECTED = _load_tiers()
+
+
+_REQUIRED_RECO_COLUMNS = ("추천그룹", "설명", "순서", "위스키이름")
+
+
+def _load_recommendations(path: Path = RECO_CSV, tiers: list[dict] = TIERS) -> list[dict]:
+    """추천 CSV를 읽고 메뉴에 존재하는 위스키만 순서대로 그룹화한다."""
+    try:
+        source = path.open("r", encoding="utf-8-sig", newline="")
+    except OSError as exc:
+        raise RuntimeError(f"위마카세 추천 CSV를 읽을 수 없음: {path}") from exc
+
+    menu_names = {item[0] for tier in tiers for item in tier["items"]}
+    groups: dict[str, dict] = {}
+    with source:
+        reader = csv.DictReader(source)
+        missing = [column for column in _REQUIRED_RECO_COLUMNS if column not in (reader.fieldnames or [])]
+        if missing:
+            raise ValueError(f"위마카세 추천 CSV 필수 컬럼 누락: {', '.join(missing)}")
+        for line_no, raw in enumerate(reader, start=2):
+            row = {key: (raw.get(key) or "").strip() for key in _REQUIRED_RECO_COLUMNS}
+            empty = [key for key, value in row.items() if not value]
+            if empty:
+                raise ValueError(f"위마카세 추천 CSV {line_no}행 빈 값: {', '.join(empty)}")
+            try:
+                order = int(row["순서"])
+            except ValueError as exc:
+                raise ValueError(f"위마카세 추천 CSV {line_no}행 순서는 정수여야 함: {row['순서']}") from exc
+            if order < 1:
+                raise ValueError(f"위마카세 추천 CSV {line_no}행 순서는 1 이상이어야 함: {order}")
+            name = row["위스키이름"]
+            if name not in menu_names:
+                raise ValueError(f"위마카세 추천 CSV {line_no}행 메뉴에 없는 위스키: {name}")
+
+            title = row["추천그룹"]
+            group = groups.setdefault(title, {"title": title, "tag": row["설명"], "items": []})
+            if group["tag"] != row["설명"]:
+                raise ValueError(f"위마카세 추천 CSV {line_no}행 그룹 설명 불일치: {title}")
+            if any(existing_order == order for existing_order, _ in group["items"]):
+                raise ValueError(f"위마카세 추천 CSV {line_no}행 그룹 내 순서 중복: {title} {order}")
+            if any(existing_name == name for _, existing_name in group["items"]):
+                raise ValueError(f"위마카세 추천 CSV {line_no}행 그룹 내 위스키 중복: {title} {name}")
+            group["items"].append((order, name))
+
+    if not groups:
+        raise ValueError("위마카세 추천 CSV에 추천 항목이 없음")
+    return [
+        {"title": group["title"], "tag": group["tag"], "picks": [name for _, name in sorted(group["items"])]}
+        for group in groups.values()
+    ]
+
+
+THEME_RECOS = _load_recommendations()
 
 # CMPA-1310 보드: '하우스 위스키'는 실제 상용 제품이 아닌 '하우스 블렌드'라
 # 구글 이미지 검색이 무의미하다. 상세 팝업은 다른 위스키와 동일하게 열되(b19 예외 되돌림),
@@ -168,37 +213,6 @@ NO_IMAGE_SEARCH = {
     "하우스 위스키",
     "하우스 위스키 피티드 CS",  # CMPA-1321: 두 번째 하우스 블렌드도 구글 이미지 검색 숨김.
 }
-
-# ── 테마별 추천(CMPA-1331 · 보드 확정 2026-08-19) ─────────────────────────────────
-# 보드 요청: 우측하단 '테마코스' 플로팅 버튼을 없애고, 각 탭(웰컴/하이라이트/페스티벌) 우측
-# 상단의 '추천보기' 버튼으로 테마별 그루핑 추천을 한 모달에서 보여준다. 그룹은 4개:
-# 버번 매니아 3종 / 셰리 매니아 3종 / 피트 매니아 3종 / 취향 찾아보기 3종.
-# (이전 CMPA-1326 탭 인라인 추천 TAB_RECOS 를 대체 — 추천을 버튼 뒤 모달로 모음.)
-# 잔은 이름으로 참조하고, TIERS 어느 탭에 있든 무관하게 추천 모달에서 함께 노출한다.
-# 탭에 없는 이름은 조용히 생략(위장 금지, CLAUDE.md). 데이터 정본은 build_wimakase_course.COURSES.
-THEME_RECOS = [
-    {
-        "id": "B", "title": "🥃 버번 매니아",
-        "tag": "켄터키 버번 사다리 · 저→중→고",
-        "picks": ["이글레어 10년", "러셀 리저브 싱글배럴", "스테그 (Stagg)"],
-    },
-    {
-        "id": "G", "title": "🍇 셰리 매니아",
-        "tag": "셰리 폭탄 사다리 · CS 셰리",
-        "picks": ["글렌알라키 15년", "카발란 올로로소", "아벨라워 아브나흐"],
-    },
-    {
-        "id": "C", "title": "🔥 피트 매니아",
-        "tag": "피트 강도 여행 · 아일라→옥토모어",
-        "picks": ["탈리스커 10년", "아드벡 10년", "옥토모어 15.1"],
-    },
-    {
-        "id": "★", "title": "🧭 취향 찾아보기",
-        "tag": "버번·셰리·피트 한 모금씩",
-        "picks": ["러셀 리저브 싱글배럴", "글렌드로낙 12년", "탈리스커 10년"],
-    },
-]
-
 
 def _abv_value(abv: str) -> float:
     """도수 문자열에서 정렬 기준값(하한)을 뽑는다. 예: '48%'→48, '63~65%'→63,
@@ -844,7 +858,7 @@ def _tabs() -> str:
 
 def _reco_modal(keys: dict) -> str:
     """테마별 추천 모달 본문(CMPA-1331). 버번/셰리/피트 매니아 + 취향 찾아보기 4그룹 × 3잔.
-    잔은 이름으로 TIERS 전체에서 찾아 어느 탭 소속이든 함께 노출한다(없으면 조용히 생략).
+    잔은 이름으로 TIERS 전체에서 찾아 어느 탭 소속이든 함께 노출한다. CSV 로드시 메뉴와 대조한다.
     행은 기존 _card 를 재사용 — 탭/기록(＋)·선택표시 JS 가 그대로 붙는다."""
     e = html.escape
     by_name = {it[0]: it for t in TIERS for it in t["items"]}
@@ -852,12 +866,8 @@ def _reco_modal(keys: dict) -> str:
     for g in THEME_RECOS:
         rows = []
         for name in g["picks"]:
-            it = by_name.get(name)
-            if not it:
-                continue
+            it = by_name[name]
             rows.append(_card(keys[id(it)], it))
-        if not rows:
-            continue
         groups.append(
             '<div class="rcgroup"><div class="rchd">'
             f'<span class="rctt">{e(g["title"])}</span>'
