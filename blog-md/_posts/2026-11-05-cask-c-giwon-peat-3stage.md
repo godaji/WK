@@ -14,6 +14,8 @@ description: "기원 피트 원액을 세 종류의 오크통에 차례로 옮�
 > 이 글은 그중 **'오크통C'** 의 기록입니다. 정답을 아는 글이 아니라, 그날그날 본 것을
 > 적어두는 관찰 일기입니다.
 
+![기원 피트 원액 — Ki One, The First Korean Single Malt Spirit]({{ '/assets/img/2026-11-05-cask-c-giwon-peat-3stage/kione-peat-bottle.png' | relative_url }})
+
 [이전 글]({{ '/2026/06/21/cask-c-giwon-peat/' | relative_url }})에서 루비 포트 시즈닝 후
 기원 피트를 넣고 숙성을 시작했습니다. 그 뒤로 통을 두 번 더 바꿨습니다. 지금까지
 **세 번의 오크통**을 거친 여정을 정리합니다.
@@ -72,6 +74,8 @@ description: "기원 피트 원액을 세 종류의 오크통에 차례로 옮�
 ---
 
 ## 3차 — 엑스럼 유러피언 오크 (10/12 ~ 진행 중)
+
+![오크통C — 세 번의 통을 거치며 진한 호박색으로 변한 기원 피트]({{ '/assets/img/2026-11-05-cask-c-giwon-peat-3stage/cask-c-aging.jpg' | relative_url }})
 
 세 번째이자 현재 마무리 숙성 중인 통은 **유러피언 오크** 인데, 직전에 럼을
 숙성했던 통입니다. 럼 캐스크는 당밀(몰라시스) 특유의 진한 단맛과 열대과일
